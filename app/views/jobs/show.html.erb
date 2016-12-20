@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @job.type_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @job.try(:job_status).try(:name) %>
+</p>
+
+<p>
+  <strong>Entered by:</strong>
+  <%= @job.entered_by_id %>
+</p>
+
+<p>
+  <strong>Franchise:</strong>
+  <%= @job.franchise.name %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @job.details %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @job.notes %>
+</p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= link_to @job.customer.id, customer_path(@job.customer.id) %>
+</p>
+
+<p>
+  <strong>Referral type:</strong>
+  <%= @job.referral_type.name %>
+</p>
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', jobs_path %>

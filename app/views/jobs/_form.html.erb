@@ -1,0 +1,72 @@
+<%= form_for(@job) do |f| %>
+  <% if @job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% @job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- <div class="field">
+    <%= f.label :type_id %><br>
+    <%= f.number_field :type_id %>
+  </div> -->
+  <div class="field">
+    <%= f.label :status_id %><br>
+    <%= f.collection_select :status_id, JobStatus.all, :id, :name, prompt: true %>
+  </div>
+  <!-- <div class="field">
+    <%= f.label :entered_by_id %><br>
+    <%= f.number_field :entered_by_id %>
+  </div> -->
+  <div class="field">
+    <%= f.label :franchise_id %><br>
+    <%= f.collection_select :franchise_id, Franchise.all, :id, :name, prompt: true %>
+  </div>
+  <div class="field">
+    <%= f.label :details %><br>
+    <%= f.text_area :details %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  <%= f.fields_for(@customer) do |g| %>
+      <div class="field">
+        <%= label_tag :address_1 %><br>
+        <%= text_field_tag "customer[address_1]", @customer.address_1  %>
+      </div>
+      <div class="field">
+        <%= label_tag :address_2 %><br>
+        <%= text_field_tag "customer[address_2]", @customer.address_2 %>
+      </div>
+      <div class="field">
+        <%= label_tag :zip %><br>
+        <%= number_field_tag "customer[zip]", @customer.zip  %>
+      </div>
+      <div class="field">
+        <%= label_tag :city %><br>
+        <%= text_field_tag "customer[city]", @customer.city  %>
+      </div>
+      <div class="field">
+        <%= label_tag :state_id %><br>
+        <%= number_field_tag "customer[state_id]", @customer.state_id  %>
+      </div>
+      <div class="field">
+        <%= label_tag :county %><br>
+        <%= text_field_tag "customer[county]", @customer.county  %>
+      </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :referral_type_id %><br>
+    <%= f.collection_select :referral_type_id, ReferralType.all, :id, :name, prompt: true %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

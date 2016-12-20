@@ -1,0 +1,1 @@
+json.partial! "referral_types/referral_type", referral_type: @referral_type

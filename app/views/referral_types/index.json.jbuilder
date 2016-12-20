@@ -1,0 +1,1 @@
+json.array! @referral_types, partial: 'referral_types/referral_type', as: :referral_type
