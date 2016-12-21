@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Callrail:</strong>
+  <%= @call.callrail_id %>
+</p>
+
+<p>
+  <strong>Recording:</strong>
+  <%= @call.recording %>
+</p>
+
+<p>
+  <strong>Callrail user:</strong>
+  <%= @call.callrail_user %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @call.user_id %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @call.start_time %>
+</p>
+
+<p>
+  <strong>Customer phone number:</strong>
+  <%= @call.customer_phone_number %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @call.duration %>
+</p>
+
+<%= link_to 'Edit', edit_call_path(@call) %> |
+<%= link_to 'Back', calls_path %>

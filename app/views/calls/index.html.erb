@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Calls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Callrail</th>
+      <th>Recording</th>
+      <th>Callrail user</th>
+      <th>User</th>
+      <th>Start time</th>
+      <th>Customer phone number</th>
+      <th>Duration</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @calls.each do |call| %>
+      <tr>
+        <td><%= call.callrail_id %></td>
+        <td><%= call.recording %></td>
+        <td><%= call.callrail_user %></td>
+        <td><%= call.user_id %></td>
+        <td><%= call.start_time %></td>
+        <td><%= call.customer_phone_number %></td>
+        <td><%= call.duration %></td>
+        <td><%= link_to 'Show', call %></td>
+        <td><%= link_to 'Edit', edit_call_path(call) %></td>
+        <td><%= link_to 'Destroy', call, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Call', new_call_path %>
