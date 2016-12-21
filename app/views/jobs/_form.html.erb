@@ -1,72 +1,139 @@
 <%= form_for(@job) do |f| %>
-  <% if @job.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+<% if @job.errors.any? %>
+<div id="error_explanation">
+    <h3><%= pluralize(@job.errors.count, "error") %>
+        prohibited this job from being saved:</h3>
 
-      <ul>
-      <% @job.errors.full_messages.each do |message| %>
+    <ul>
+        <% @job.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+<% if @customer.errors.any? %>
+<div id="error_explanation">
+    <h3><%= pluralize(@customer.errors.count, "error") %>
+        prohibited this job from being saved:</h3>
 
-  <!-- <div class="field">
+    <ul>
+        <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<!-- <div class="form-group">
     <%= f.label :type_id %><br>
     <%= f.number_field :type_id %>
   </div> -->
-  <div class="field">
-    <%= f.label :status_id %><br>
-    <%= f.collection_select :status_id, JobStatus.all, :id, :name, prompt: true %>
-  </div>
-  <!-- <div class="field">
+<div class="col-xs-4">
+    <div class="form-group">
+        <%= f.label :status_id %><br>
+        <%= f.collection_select :status_id, JobStatus.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+    </div>
+</div>
+<!-- <div class="form-group">
     <%= f.label :entered_by_id %><br>
     <%= f.number_field :entered_by_id %>
   </div> -->
-  <div class="field">
-    <%= f.label :franchise_id %><br>
-    <%= f.collection_select :franchise_id, Franchise.all, :id, :name, prompt: true %>
-  </div>
-  <div class="field">
-    <%= f.label :details %><br>
-    <%= f.text_area :details %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
-  </div>
-  <%= f.fields_for(@customer) do |g| %>
-      <div class="field">
+<div class="col-xs-4">
+    <div class="form-group">
+        <%= f.label :franchise_id %><br>
+        <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+    </div>
+</div>
+<div class="col-xs-4">
+    <div class="form-group">
+        <%= f.label :referral_type_id %><br>
+        <%= f.collection_select :referral_type_id, ReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        <%= f.label :details %><br>
+        <%= f.text_area :details, class: "form-control" %>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        <%= f.label :notes %><br>
+        <%= f.text_area :notes, class: "form-control" %>
+    </div>
+</div>
+<div class="col-xs-12 text-center">
+    <h1>Customer Information</h1>
+</div>
+<%= f.fields_for(@customer) do |g| %>
+<div class="col-xs-4">
+    <div class="form-group">
+        <%= label_tag :first_name %><br>
+        <%= text_field_tag "customer[first_name]", @customer.first_name, class: "form-control"  %>
+    </div>
+</div>
+<div class="col-xs-4">
+    <div class="form-group">
+        <%= label_tag :last_name %><br>
+        <%= text_field_tag "customer[last_name]", @customer.last_name, class: "form-control"  %>
+    </div>
+</div>
+<div class="col-xs-4">
+    <div class="form-group">
+        <%= label_tag :email %><br>
+        <%= text_field_tag "customer[email]", @customer.email, class: "form-control"  %>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
         <%= label_tag :address_1 %><br>
-        <%= text_field_tag "customer[address_1]", @customer.address_1  %>
-      </div>
-      <div class="field">
+        <%= text_field_tag "customer[address_1]", @customer.address_1, class: "form-control"  %>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
         <%= label_tag :address_2 %><br>
-        <%= text_field_tag "customer[address_2]", @customer.address_2 %>
-      </div>
-      <div class="field">
-        <%= label_tag :zip %><br>
-        <%= number_field_tag "customer[zip]", @customer.zip  %>
-      </div>
-      <div class="field">
-        <%= label_tag :city %><br>
-        <%= text_field_tag "customer[city]", @customer.city  %>
-      </div>
-      <div class="field">
-        <%= label_tag :state_id %><br>
-        <%= number_field_tag "customer[state_id]", @customer.state_id  %>
-      </div>
-      <div class="field">
-        <%= label_tag :county %><br>
-        <%= text_field_tag "customer[county]", @customer.county  %>
-      </div>
-  <% end %>
+        <%= text_field_tag "customer[address_2]", @customer.address_2, class: "form-control" %>
+    </div>
+</div>
 
-  <div class="field">
-    <%= f.label :referral_type_id %><br>
-    <%= f.collection_select :referral_type_id, ReferralType.all, :id, :name, prompt: true %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+<div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-3">
+          <div class="form-group">
+              <%= label_tag :zip %><br>
+              <%= number_field_tag "customer[zip]", @customer.zip, class: "form-control"  %>
+          </div>
+      </div>
+        <div class="col-xs-3">
+            <label>Zip Code Lookup</label>
+            <button id="zipLookup" type="button" class="btn btn-primary">Lookup</button>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :city %><br>
+        <%= text_field_tag "customer[city]", @customer.city, class: "form-control"  %>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :state_id %><br>
+        <%= select_tag("customer[state_id]", options_for_select(State.all.map{|p| [p.name, p.id]}, selected: @customer.state_id), class: "form-control") %>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :county %><br>
+        <%= text_field_tag "customer[county]", @customer.county, class: "form-control"  %>
+    </div>
+</div>
+<% end %>
+<div class="col-xs-12 text-center">
+    <div class="actions">
+        <%= f.submit class: "btn btn-primary" %>
+    </div>
+</div>
 <% end %>

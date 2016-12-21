@@ -1,3 +1,8 @@
 class Customer < ActiveRecord::Base
-  has_many :phones
+    has_many :phones
+    belongs_to :state
+    validates :email, presence: true, format: {
+        with: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/i,
+        message: 'Invalid email format.'
+    }
 end

@@ -61,6 +61,14 @@ class CustomersController < ApplicationController
     end
   end
 
+  def geolocate
+    if request.xhr?
+      @response = Geocoder.search(params[:data])
+
+      render json: @response
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
@@ -69,6 +77,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:address_1, :address_2, :zip, :city, :state_id, :county)
+      params.require(:customer).permit(:first_name, :last_name, :email, :address_1, :address_2, :zip, :city, :state_id, :county)
     end
 end
