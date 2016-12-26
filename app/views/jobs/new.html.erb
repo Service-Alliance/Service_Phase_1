@@ -14,32 +14,3 @@
 
 
 <%= link_to 'Back', jobs_path %>
-
-
-<script>
-$(document).ready(function(){
-  $("#zipLookup").on('click', function(event){
-    event.preventDefault();
-    var zip = $("#customer_zip").val();
-    console.log(zip)
-
-    $.ajax({
-      method: "POST",
-      url: '/customers/geolocate',
-      data: {'data': zip},
-      dataType: 'json'
-    })
-    .success(function(response){
-      console.log(response[0])
-      var city = response[0]['data']['address_components'][1].long_name
-      var county = response[0]['data']['address_components'][2].long_name
-      var state = response[0]['data']['address_components'][3].short_name
-      $("#customer_city").val(city)
-      $("#customer_county").val(county)
-      console.log(state)
-      var state_val = $('#customer_state_id option').filter(function () { return $(this).html() == state; }).val();
-      $("#customer_state_id").val(state_val)
-    })
-  });
-});
-</script>

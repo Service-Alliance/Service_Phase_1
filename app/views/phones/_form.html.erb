@@ -16,16 +16,24 @@
     <%= f.text_field :number %>
   </div>
   <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
+    <%= f.label :type_id %><br>
+    <%= f.number_field :type_id %>
+  </div>
+  <div class="field">
+    <%= f.label :occupant_id %><br>
+    <%= f.number_field :occupant_id %>
+  </div>
+  <div class="field">
+    <%= f.label :caller_id %><br>
+    <%= f.number_field :caller_id %>
+  </div>
+  <div class="field">
+    <%= f.label :customer_id %><br>
+    <%= f.number_field :customer_id %>
   </div>
   <div class="field">
     <%= f.label :extension %><br>
     <%= f.text_field :extension %>
-  </div>
-  <div class="field">
-    <%= f.label :customer_id %><br>
-    <%= f.text_field :customer_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

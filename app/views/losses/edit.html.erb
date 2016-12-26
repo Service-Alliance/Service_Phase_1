@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h1>Editing Loss</h1>
+        </div>
+        <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+flatpickr(".datePicker", {
+	enableTime: true,
+
+	// create an extra input solely for display purposes
+	altInput: true,
+	altFormat: "F j, Y h:i K"
+});
+</script>

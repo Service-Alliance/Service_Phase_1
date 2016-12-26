@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Occupants</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Job</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @occupants.each do |occupant| %>
+      <tr>
+        <td><%= occupant.first_name %></td>
+        <td><%= occupant.last_name %></td>
+        <td><%= occupant.email %></td>
+        <td><%= occupant.address_id %></td>
+        <td><%= occupant.job_id %></td>
+        <td><%= link_to 'Show', occupant %></td>
+        <td><%= link_to 'Edit', edit_occupant_path(occupant) %></td>
+        <td><%= link_to 'Destroy', occupant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Occupant', new_occupant_path %>

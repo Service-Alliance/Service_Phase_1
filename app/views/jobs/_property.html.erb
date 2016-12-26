@@ -1,0 +1,92 @@
+<div class="panel panel-info">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <a data-toggle="collapse" href="#collapseProperty">Job Property Information:</a>
+            <% unless @property %>
+              <%= link_to new_job_property_path(@job), class: "pull-right" do %>
+                <i class="glyphicon glyphicon-plus"></i>
+              <% end %>
+            <% end %>
+        </h3>
+
+    </div>
+    <% if @property %>
+    <div id="collapseProperty" class="panel-collapse collapse">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Property type:</td>
+                                <td><%= @property.try(:property_type).try(:name) %></td>
+                            </tr>
+                            <tr>
+                                <td>Structure Type:</td>
+                                <td><%= @property.try(:structure_type).try(:name) %></td>
+                            </tr>
+                            <tr>
+                                <td>Year Built</td>
+                                <td><%= @property.try(:year_built) %></td>
+                            </tr>
+                            <tr>
+                                <td>Floors Affected</td>
+                                <td><%= @property.try(:floors_affected) %></td>
+                            </tr>
+                            <tr>
+                                <td>Rooms Affected</td>
+                                <td><%= @property.try(:rooms_affected) %></td>
+                            </tr>
+                            <tr>
+                                <td>Occured Level</td>
+                                <td><%= @property.try(:occured_level) %></td>
+                            </tr>
+                            <tr>
+                                <td>Is Multi-unit (T/F)</td>
+                                <td><%= @property.try(:multi_unit) %></td>
+                            </tr>
+                            <tr>
+                                <td>Ceiling Affected</td>
+                                <td><%= @property.try(:ceiling_affected).try(:name) %></td>
+                            </tr>
+                            <tr>
+                                <td>Walls Affected</td>
+                                <td><%= @property.try(:walls_affected).try(:name) %></td>
+                            </tr>
+                            <tr>
+                                <td>Attic Affected</td>
+                                <td><%= @property.try(:attic_affected).try(:name) %></td>
+                            </tr>
+                            <tr>
+                                <td>Contents Affected</td>
+                                <td><%= @property.try(:contents_affected).try(:name) %></td>
+                            </tr>
+                            <tr>
+                                <td>Property Flooring Types</td>
+                                <td>
+                                  <% if @property && @property.flooring_types %>
+                                    <% @property.flooring_types.each do |flooring_type| %>
+                                    <%= flooring_type.name %>
+                                    <% end %>
+                                  <% end %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+
+            <span class="pull-right">
+                <%= link_to edit_job_property_path(@job, @property), class: "btn btn-sm btn-warning", type: "button" do %>
+                <i class="glyphicon glyphicon-edit"></i>
+                <% end %>
+            </span>
+        </div>
+    </div>
+    <% end %>
+</div>

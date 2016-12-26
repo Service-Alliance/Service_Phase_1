@@ -4,5 +4,6 @@ class Job < ActiveRecord::Base
   belongs_to :franchise
   belongs_to :referral_type
   belongs_to :customer
+  belongs_to :call
 
 end

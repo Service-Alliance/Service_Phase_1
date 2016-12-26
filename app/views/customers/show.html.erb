@@ -23,27 +23,27 @@
                                     </tr>
                                     <tr>
                                         <td>Address 1:</td>
-                                        <td><%= @customer.address_1 %></td>
+                                        <td><%= @customer.try(:address).try(:address_1) %></td>
                                     </tr>
                                     <tr>
                                         <td>Address 2</td>
-                                        <td><%= @customer.address_2 %></td>
+                                        <td><%= @customer.try(:address).try(:address_2) %></td>
                                     </tr>
                                     <tr>
                                         <td>City</td>
-                                        <td><%= @customer.city %></td>
+                                        <td><%= @customer.try(:address).try(:city) %></td>
                                     </tr>
                                     <tr>
                                         <td>Zip</td>
-                                        <td><%= @customer.zip %></td>
+                                        <td><%= @customer.try(:address).try(:zip_code) %></td>
                                     </tr>
                                     <tr>
                                         <td>State</td>
-                                        <td><%= @customer.state.name %></td>
+                                        <td><%= @customer.try(:address).try(:state).try(:name) %></td>
                                     </tr>
                                     <tr>
                                         <td>County</td>
-                                        <td><%= @customer.county %></td>
+                                        <td><%= @customer.try(:address).try(:county) %></td>
                                     </tr>
                                 </tbody>
                             </table>

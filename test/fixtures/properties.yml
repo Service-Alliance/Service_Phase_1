@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  property_type_id: 1
+  structure_type_id: 1
+  year_built: 1
+  floors_affected: 1
+  rooms_affected: 1
+  occured_level: 1
+  multi_unit: false
+  ceiling_affected: 1
+  walls_affected: 1
+  attic_affected: 1
+  contents_affected: 1
+
+two:
+  property_type_id: 1
+  structure_type_id: 1
+  year_built: 1
+  floors_affected: 1
+  rooms_affected: 1
+  occured_level: 1
+  multi_unit: false
+  ceiling_affected: 1
+  walls_affected: 1
+  attic_affected: 1
+  contents_affected: 1

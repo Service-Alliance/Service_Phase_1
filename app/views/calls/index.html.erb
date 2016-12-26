@@ -2,13 +2,11 @@
 
 <h1>Listing Calls</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Callrail</th>
       <th>Recording</th>
-      <th>Callrail user</th>
-      <th>User</th>
       <th>Start time</th>
       <th>Customer phone number</th>
       <th>Duration</th>
@@ -20,9 +18,7 @@
     <% @calls.each do |call| %>
       <tr>
         <td><%= call.callrail_id %></td>
-        <td><%= call.recording %></td>
-        <td><%= call.callrail_user %></td>
-        <td><%= call.user_id %></td>
+        <td><%= link_to "Listen to Call", call.recording %></td>
         <td><%= call.start_time %></td>
         <td><%= call.customer_phone_number %></td>
         <td><%= call.duration %></td>

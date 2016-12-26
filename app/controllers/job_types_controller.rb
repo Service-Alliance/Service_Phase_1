@@ -10,6 +10,7 @@ class JobTypesController < ApplicationController
   # GET /job_types/1
   # GET /job_types/1.json
   def show
+    
   end
 
   # GET /job_types/new

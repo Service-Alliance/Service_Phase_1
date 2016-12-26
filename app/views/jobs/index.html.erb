@@ -2,40 +2,62 @@
 
 <h1>Listing Jobs</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Status</th>
-      <th>Entered by</th>
-      <th>Franchise</th>
-      <th>Details</th>
-      <th>Notes</th>
-      <th>Customer</th>
-      <th>Referral type</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- <%= select_tag("filter", options_for_select(JobStatus.all.map{|p| [p.name, p.id]}, class: "form-control")) %> -->
 
-  <tbody>
-    <% @jobs.each do |job| %>
-      <tr>
-        <td><%= job.try(:job_type).try(:name) %></td>
-        <td><%= job.try(:job_status).try(:name) %></td>
-        <td><%= job.entered_by_id %></td>
-        <td><%= job.try(:franchise).try(:name) %></td>
-        <td><%= job.details %></td>
-        <td><%= job.notes %></td>
-        <td><%= job.customer_id %></td>
-        <td><%= job.try(:referral_type).try(:name) %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Entered by</th>
+            <th>Franchise</th>
+            <th>Details</th>
+            <th>Notes</th>
+            <th>Customer</th>
+            <th>Referral type</th>
+            <th colspan="3"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @jobs.each do |job| %>
+        <tr>
+            <td><%= job.try(:job_type).try(:name) %></td>
+            <td><%= job.try(:job_status).try(:name) %></td>
+            <td><%= job.entered_by_id %></td>
+            <td><%= job.try(:franchise).try(:name) %></td>
+            <td><%= job.details %></td>
+            <td><%= job.notes %></td>
+            <td><%= job.customer_id %></td>
+            <td><%= job.try(:referral_type).try(:name) %></td>
+            <td><%= link_to 'Show', job %></td>
+            <td><%= link_to 'Edit', edit_job_path(job) %></td>
+            <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+    </tbody>
 </table>
 
 <br>
 
 <%= link_to 'New Job', new_job_path %>
+
+<script>
+    $('#filter').live('change', function () {
+        searching_new_data()
+    }).change();
+
+    function searching_new_data() {
+        $.ajax({
+            url: "/jobs/filter",
+            data: {
+                data: {status: $('filter').val()}
+
+                success: function (html) {
+
+                    $('table').empty();
+                    $('table').append(html);
+                }
+            })})
+    }
+</script>

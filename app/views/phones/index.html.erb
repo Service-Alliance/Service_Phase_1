@@ -7,6 +7,9 @@
     <tr>
       <th>Number</th>
       <th>Type</th>
+      <th>Occupant</th>
+      <th>Caller</th>
+      <th>Customer</th>
       <th>Extension</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +19,10 @@
     <% @phones.each do |phone| %>
       <tr>
         <td><%= phone.number %></td>
-        <td><%= phone.type %></td>
+        <td><%= phone.type_id %></td>
+        <td><%= phone.occupant_id %></td>
+        <td><%= phone.caller_id %></td>
+        <td><%= phone.customer_id %></td>
         <td><%= phone.extension %></td>
         <td><%= link_to 'Show', phone %></td>
         <td><%= link_to 'Edit', edit_phone_path(phone) %></td>

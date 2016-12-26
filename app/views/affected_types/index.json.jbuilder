@@ -1,0 +1,1 @@
+json.array! @affected_types, partial: 'affected_types/affected_type', as: :affected_type

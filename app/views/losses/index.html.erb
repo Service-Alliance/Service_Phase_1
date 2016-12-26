@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Losses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Recieved by</th>
+      <th>Loss occured</th>
+      <th>Fnol recieved</th>
+      <th>Customer called</th>
+      <th>Loss type</th>
+      <th>Loss cause</th>
+      <th>Standing water</th>
+      <th>Water available</th>
+      <th>Electricity available</th>
+      <th>Source off</th>
+      <th>Visible mold</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @losses.each do |loss| %>
+      <tr>
+        <td><%= loss.recieved_by %></td>
+        <td><%= loss.loss_occured %></td>
+        <td><%= loss.fnol_recieved %></td>
+        <td><%= loss.customer_called %></td>
+        <td><%= loss.loss_type_id %></td>
+        <td><%= loss.loss_cause_id %></td>
+        <td><%= loss.standing_water_id %></td>
+        <td><%= loss.water_available_id %></td>
+        <td><%= loss.electricity_available_id %></td>
+        <td><%= loss.source_off_id %></td>
+        <td><%= loss.visible_mold_id %></td>
+        <td><%= link_to 'Show', loss %></td>
+        <td><%= link_to 'Edit', edit_loss_path(loss) %></td>
+        <td><%= link_to 'Destroy', loss, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Loss', new_loss_path %>

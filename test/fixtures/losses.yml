@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recieved_by: MyString
+  loss_occured: 2016-12-21 21:29:15
+  fnol_recieved: 2016-12-21 21:29:15
+  customer_called: 2016-12-21
+  loss_type_id: 1
+  loss_cause_id: 1
+  standing_water_id: 1
+  water_available_id: 1
+  electricity_available_id: 1
+  source_off_id: 1
+  visible_mold_id: 1
+
+two:
+  recieved_by: MyString
+  loss_occured: 2016-12-21 21:29:15
+  fnol_recieved: 2016-12-21 21:29:15
+  customer_called: 2016-12-21
+  loss_type_id: 1
+  loss_cause_id: 1
+  standing_water_id: 1
+  water_available_id: 1
+  electricity_available_id: 1
+  source_off_id: 1
+  visible_mold_id: 1

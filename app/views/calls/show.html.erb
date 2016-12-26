@@ -1,39 +1,59 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
 
-<p>
-  <strong>Callrail:</strong>
-  <%= @call.callrail_id %>
-</p>
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Phone Call Record
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Recording:</td>
+                                        <td><a href="<%= @call.recording %>">Listen to Call</a></td>
+                                    </tr>
+                                    <% if @call.job_id %>
+                                    <tr>
+                                        <td>Associate Job:</td>
+                                        <td><%= link_to @call.job_id, job_path(@call.job_id) %></td>
+                                    </tr>
+                                    <% end %>
+                                    <tr>
+                                        <td>Call Start Time</td>
+                                        <td><%= @call.start_time %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Customer Phone Number</td>
+                                        <td><%= @call.customer_phone_number %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Call Duration</td>
+                                        <td><%= @call.duration %></td>
+                                    </tr>
 
-<p>
-  <strong>Recording:</strong>
-  <%= @call.recording %>
-</p>
+                                </tbody>
+                            </table>
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
 
-<p>
-  <strong>Callrail user:</strong>
-  <%= @call.callrail_user %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @call.user_id %>
-</p>
-
-<p>
-  <strong>Start time:</strong>
-  <%= @call.start_time %>
-</p>
-
-<p>
-  <strong>Customer phone number:</strong>
-  <%= @call.customer_phone_number %>
-</p>
-
-<p>
-  <strong>Duration:</strong>
-  <%= @call.duration %>
-</p>
-
-<%= link_to 'Edit', edit_call_path(@call) %> |
-<%= link_to 'Back', calls_path %>
+                    <span class="pull-right">
+                        <%= link_to edit_call_path(@call), class: "btn btn-sm btn-warning", type: "button" do %>
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <% end %>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @caller.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @caller.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @caller.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @caller.address_id %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @caller.job_id %>
+</p>
+
+<%= link_to 'Edit', edit_job_caller_path(@job, @caller) %> |
+<%= link_to 'Back', job_callers_path %>

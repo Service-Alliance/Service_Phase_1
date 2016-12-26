@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @occupant.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @occupant.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @occupant.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @occupant.address_id %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @occupant.job_id %>
+</p>
+
+<%= link_to 'Edit', edit_occupant_path(@occupant) %> |
+<%= link_to 'Back', occupants_path %>

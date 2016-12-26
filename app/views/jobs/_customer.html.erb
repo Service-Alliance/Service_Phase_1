@@ -1,0 +1,73 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#collapseCustomer">Customer Information:</a>
+          <% unless @customer %>
+            <%= link_to new_customer_path(job_id: @job.id), class: "pull-right" do %>
+              <i class="glyphicon glyphicon-plus"></i>
+            <% end %>
+          <% end %>
+        </h3>
+    </div>
+    <div id="collapseCustomer" class="panel-collapse collapse">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table">
+                    <tbody>
+                      <tr>
+                          <td>First Name:</td>
+                          <td><%= @customer.try(:first_name) %></td>
+                      </tr>
+                      <tr>
+                          <td>Last Name:</td>
+                          <td><%= @customer.try(:last_name) %></td>
+                      </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td><%= @customer.try(:email) %></td>
+                        </tr>
+                        <tr>
+                            <td>Address 1:</td>
+                            <td><%= @customer.try(:address).try(:address_1) %></td>
+                        </tr>
+                        <tr>
+                            <td>Address 2</td>
+                            <td><%= @customer.try(:address).try(:address_2) %></td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td><%= @customer.try(:address).try(:city) %></td>
+                        </tr>
+                        <tr>
+                            <td>Zip</td>
+                            <td><%= @customer.try(:address).try(:zip_code) %></td>
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td><%= @customer.try(:address).try(:state).try(:name) %></td>
+                        </tr>
+                        <tr>
+                            <td>County</td>
+                            <td><%= @customer.try(:address).try(:county) %></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <a href="mailto:<%= @customer.try(:email) %>" type="button" class="btn btn-sm btn-primary">
+            <i class="glyphicon glyphicon-envelope"></i>
+        </a>
+        <span class="pull-right">
+          <% if @customer %>
+            <%= link_to edit_customer_path(@customer), class: "btn btn-sm btn-warning", type: "button" do %>
+            <i class="glyphicon glyphicon-edit"></i>
+            <% end %>
+          <% end %>
+        </span>
+    </div>
+  </div>
+</div>

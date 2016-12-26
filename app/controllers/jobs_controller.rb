@@ -11,12 +11,21 @@ class JobsController < ApplicationController
     # GET /jobs/1
     # GET /jobs/1.json
     def show
+        @property = Property.find_by(job_id: @job)
+        @phone = Call.find_by(job_id: @job.id)
+        @loss = Loss.find_by(job_id: @job.id)
+        @caller = Caller.find_by(job_id: @job.id)
+        @address = @caller.address
+        @customer = @job.customer
+        @occupants = Occupant.where(job_id: @job.id)
     end
 
     # GET /jobs/new
     def new
         @job = Job.new
-        @customer = Customer.new
+        @caller = Caller.new
+        @property = Property.new
+        @address = Address.new
     end
 
     # GET /jobs/1/edit
@@ -27,17 +36,22 @@ class JobsController < ApplicationController
     # POST /jobs.json
     def create
         @job = Job.new(job_params)
-        @customer = Customer.new(customer_params)
+        @job.entered_by_id = 1
+        @caller = Caller.new(caller_params)
+        @address = Address.new(address_params)
 
-        if @customer.save
-            @job.customer_id = @customer.id
+        if @caller.save
+            @address.save
             if @job.save
+                @caller.job_id = @job.id
+                @caller.address_id = @address.id
+                @caller.save
                 redirect_to @job, notice: 'Job was successfully created.'
             else
                 render :new
             end
         else
-          render :new
+            render :new
         end
     end
 
@@ -82,7 +96,15 @@ class JobsController < ApplicationController
         params.require(:job).permit(:type_id, :status_id, :entered_by_id, :franchise_id, :details, :notes, :customer_id, :referral_type_id, customer: [:address_1, :address_2, :zip, :city, :state_id, :county])
     end
 
-    def customer_params
-        params.require(:customer).permit(:first_name, :last_name, :email, :address_1, :address_2, :zip, :city, :state_id, :county)
+    def caller_params
+        params.require(:caller).permit(:first_name, :last_name, :email, :address_1, :address_2, :zip, :city, :state_id, :county)
+    end
+
+    def address_params
+        params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
+    end
+
+    def property_params
+        params.require(:property).permit(:structure_type, :year_built, :floors_affected, :rooms_affected, :occured_level, :multi_unit, :ceiling_affected_id, :walls_affected_id, :attic_affected_id, :contents_affected_id, flooring_types: [])
     end
 end

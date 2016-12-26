@@ -1,0 +1,2 @@
+json.extract! loss, :id, :recieved_by, :loss_occured, :fnol_recieved, :customer_called, :loss_type_id, :loss_cause_id, :standing_water_id, :water_available_id, :electricity_available_id, :source_off_id, :visible_mold_id, :created_at, :updated_at
+json.url loss_url(loss, format: :json)

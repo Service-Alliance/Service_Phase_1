@@ -18,7 +18,7 @@ class PhonesControllerTest < ActionController::TestCase
 
   test "should create phone" do
     assert_difference('Phone.count') do
-      post :create, phone: { extension: @phone.extension, number: @phone.number, type: @phone.type }
+      post :create, phone: { caller_id: @phone.caller_id, customer_id: @phone.customer_id, extension: @phone.extension, number: @phone.number, occupant_id: @phone.occupant_id, type_id: @phone.type_id }
     end
 
     assert_redirected_to phone_path(assigns(:phone))
@@ -35,7 +35,7 @@ class PhonesControllerTest < ActionController::TestCase
   end
 
   test "should update phone" do
-    patch :update, id: @phone, phone: { extension: @phone.extension, number: @phone.number, type: @phone.type }
+    patch :update, id: @phone, phone: { caller_id: @phone.caller_id, customer_id: @phone.customer_id, extension: @phone.extension, number: @phone.number, occupant_id: @phone.occupant_id, type_id: @phone.type_id }
     assert_redirected_to phone_path(assigns(:phone))
   end
 

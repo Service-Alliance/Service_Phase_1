@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Properties</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Property type</th>
+      <th>Structure type</th>
+      <th>Year built</th>
+      <th>Floors affected</th>
+      <th>Rooms affected</th>
+      <th>Occured level</th>
+      <th>Multi unit</th>
+      <th>Ceiling affected</th>
+      <th>Walls affected</th>
+      <th>Attic affected</th>
+      <th>Contents affected</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @properties.each do |property| %>
+      <tr>
+        <td><%= property.property_type_id %></td>
+        <td><%= property.structure_type_id %></td>
+        <td><%= property.year_built %></td>
+        <td><%= property.floors_affected %></td>
+        <td><%= property.rooms_affected %></td>
+        <td><%= property.occured_level %></td>
+        <td><%= property.multi_unit %></td>
+        <td><%= property.ceiling_affected %></td>
+        <td><%= property.walls_affected %></td>
+        <td><%= property.attic_affected %></td>
+        <td><%= property.contents_affected %></td>
+        <td><%= link_to 'Show', property %></td>
+        <td><%= link_to 'Edit', edit_property_path(property) %></td>
+        <td><%= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Property', new_property_path %>

@@ -4,12 +4,8 @@ class CreateCustomers < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.string :email
-      t.string :address_1
-      t.string :address_2
-      t.integer :zip
-      t.string :city
-      t.integer :state_id
-      t.string :county
+      t.integer :address_id
+    
 
       t.timestamps null: false
     end

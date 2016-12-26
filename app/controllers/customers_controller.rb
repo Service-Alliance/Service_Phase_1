@@ -15,19 +15,35 @@ class CustomersController < ApplicationController
   # GET /customers/new
   def new
     @customer = Customer.new
+    @address = Address.new
+    @job = Job.find_by(id: params[:job_id])
   end
 
   # GET /customers/1/edit
   def edit
+    @address = Address.find_by(id: @customer.address_id) || @address = Address.new
   end
 
   # POST /customers
   # POST /customers.json
   def create
+    # TODO: If address is same as caller address, do not recreate.
     @customer = Customer.new(customer_params)
+    @address = Address.new(address_params)
+    @job = Job.find_by(id: job_param[:job_id])
 
     respond_to do |format|
       if @customer.save
+        if @job
+          @job.customer_id = @customer.id
+          if @job.save
+            redirect_to @customer, notice: 'Customer was successfully created.'
+            return
+          else
+            render :new
+            return
+          end
+        end
         format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
         format.json { render :show, status: :created, location: @customer }
       else
@@ -41,6 +57,14 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1.json
   def update
     respond_to do |format|
+      if @address = Address.find_by(id: @customer.address_id)
+        if @address.update(address_params)
+        end
+      else
+        @address = Address.new(address_params)
+        @address.save
+        @customer.address_id = @address.id
+      end
       if @customer.update(customer_params)
         format.html { redirect_to @customer, notice: 'Customer was successfully updated.' }
         format.json { render :show, status: :ok, location: @customer }
@@ -77,6 +101,14 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :address_1, :address_2, :zip, :city, :state_id, :county)
+      params.require(:customer).permit(:first_name, :last_name, :email, :job_id)
+    end
+
+    def job_param
+      params.require(:job).permit(:job_id)
+    end
+
+    def address_params
+        params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
     end
 end

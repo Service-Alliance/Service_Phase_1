@@ -1,0 +1,2 @@
+module AffectedTypesHelper
+end
