@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Adjusters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Job</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @adjusters.each do |adjuster| %>
+      <tr>
+        <td><%= adjuster.job_id %></td>
+        <td><%= adjuster.first_name %></td>
+        <td><%= adjuster.last_name %></td>
+        <td><%= adjuster.email %></td>
+        <td><%= adjuster.address_id %></td>
+        <td><%= link_to 'Show', adjuster %></td>
+        <td><%= link_to 'Edit', edit_adjuster_path(adjuster) %></td>
+        <td><%= link_to 'Destroy', adjuster, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Adjuster', new_adjuster_path %>

@@ -9,6 +9,8 @@ class CreateJobs < ActiveRecord::Migration
       t.text :notes
       t.integer :customer_id
       t.integer :referral_type_id
+      t.integer :billing_address_id
+      t.integer :billing_type_id
 
       t.timestamps null: false
     end

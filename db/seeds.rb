@@ -1,3 +1,13 @@
+user = User.create(:email => 'callrep@aol.com', :password => 'password', :password_confirmation => 'password', call_rep: true)
+user = User.create(:email => 'jobcoordinator@aol.com', :password => 'password', :password_confirmation => 'password', job_coordinator: true)
+user = User.create(:email => 'admin@aol.com', :password => 'password', :password_confirmation => 'password', admin: true)
+
+Job.create(type_id: 1, status_id: 1, entered_by_id: 1, franchise_id: 1, details: "This is a really good detail", notes: "This is an even better note.", customer_id: nil, referral_type_id: 1)
+
+Caller.create(first_name: "David Heinemeier", last_name: "Hansson", email: "dhh@aol.com", address_id: 1, job_id: 1)
+Phone.create(number: "911", type_id: 1, caller_id: 1)
+Address.create(address_1: "123 Anywhere Ln", address_2: "Suite 2017", zip_code: "60622", city: "Chicago", state_id: "36", county: "Cook County")
+
 JobStatus.create(name: "Active")
 JobStatus.create(name: "Cancelled")
 JobStatus.create(name: "Drybook")
@@ -245,3 +255,16 @@ State.create(name: "WA")
 State.create(name: "WV")
 State.create(name: "WI")
 State.create(name: "WY")
+
+InsuranceCompany.create(name: "AAA Missouri Insurance Company")
+InsuranceCompany.create(name: "AAA of Carolina Group")
+InsuranceCompany.create(name: "AAA of Northern New England")
+InsuranceCompany.create(name: "AAA Southern California")
+InsuranceCompany.create(name: "Acadia Insurance Company")
+InsuranceCompany.create(name: "Acceptance Casualty Ins. Co. (subsidiary of Wellington Claim Service, Inc.)")
+InsuranceCompany.create(name: "ACE Private Risk Services (APRS) - Residential Water Mitigation")
+InsuranceCompany.create(name: "ACE Private Risk Services (APRS) - Residential Fire & Smoke Mitigation Program")
+
+PhoneType.create(name: "Cell")
+PhoneType.create(name: "Work")
+PhoneType.create(name: "Home")

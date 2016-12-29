@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @agent.job_id %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @agent.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @agent.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @agent.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @agent.address_id %>
+</p>
+
+<%= link_to 'Edit', edit_job_agent_path(@job, @agent) %> |

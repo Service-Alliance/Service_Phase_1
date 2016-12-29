@@ -1,0 +1,83 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#collapseAdjuster">Adjuster Information:</a>
+
+          <% unless @adjuster %>
+            <%= link_to new_job_adjuster_path(job_id: @job.id), class: "pull-right" do %>
+              <i class="glyphicon glyphicon-plus"></i>
+            <% end %>
+
+            <%= link_to job_adjusters_samecaller_path(@job.id), method: :post, class: "pull-right margin-right-25px" do %>
+              Same As Caller
+            <% end %>
+          <% end %>
+        </h3>
+    </div>
+    <div id="collapseAdjuster" class="panel-collapse collapse">
+      <% if @adjuster %>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table">
+                    <tbody>
+                      <tr>
+                          <td>First Name:</td>
+                          <td><%= @adjuster.try(:first_name) %></td>
+                      </tr>
+                      <tr>
+                          <td>Last Name:</td>
+                          <td><%= @adjuster.try(:last_name) %></td>
+                      </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td><%= @adjuster.try(:email) %></td>
+                        </tr>
+                        <tr>
+                            <td>Address 1:</td>
+                            <td><%= @adjuster.try(:address).try(:address_1) %></td>
+                        </tr>
+                        <tr>
+                            <td>Address 2</td>
+                            <td><%= @adjuster.try(:address).try(:address_2) %></td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td><%= @adjuster.try(:address).try(:city) %></td>
+                        </tr>
+                        <tr>
+                            <td>Zip</td>
+                            <td><%= @adjuster.try(:address).try(:zip_code) %></td>
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td><%= @adjuster.try(:address).try(:state).try(:name) %></td>
+                        </tr>
+                        <tr>
+                            <td>County</td>
+                            <td><%= @adjuster.try(:address).try(:county) %></td>
+                        </tr>
+                        <% @adjuster.phones.each do |phone| %>
+                        <tr>
+                          <td>Phone - <%= phone.try(:type).try(:name) %></td>
+                          <td>Number: <%= phone.number %>, Ext: <%= phone.extension %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer">
+
+        <span class="pull-right">
+            <%= link_to edit_job_adjuster_path(@job, @adjuster), class: "btn btn-sm btn-warning", type: "button" do %>
+            <i class="glyphicon glyphicon-edit"></i>
+            <% end %>
+        </span>
+    </div>
+    <% end %>
+  </div>
+</div>

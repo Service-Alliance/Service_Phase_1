@@ -46,6 +46,12 @@
                             <td>County</td>
                             <td><%= @caller.try(:address).try(:county) %></td>
                         </tr>
+                        <% @caller.phones.each do |phone| %>
+                        <tr>
+                          <td>Phone - <%= phone.try(:type).try(:name) %></td>
+                          <td>Number: <%= phone.number %>, Ext: <%= phone.extension %></td>
+                        </tr>
+                        <% end %>
                     </tbody>
                 </table>
 

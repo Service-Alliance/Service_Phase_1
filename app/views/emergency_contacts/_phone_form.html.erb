@@ -1,0 +1,23 @@
+<%= f.fields_for(@phone) do |g| %>
+
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :number %><br>
+        <%= text_field_tag "phone[number]", @phone.try(:number), class: "form-control"  %>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :type_id %><br>
+        <%= select_tag("phone[type_id]", options_for_select(PhoneType.all.map{|p| [p.name, p.id]}, selected: @phone.type_id), class: "form-control") %>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :extension %><br>
+        <%= text_field_tag "phone[extension]", @phone.try(:extension), class: "form-control"  %>
+    </div>
+</div>
+
+
+<% end %>

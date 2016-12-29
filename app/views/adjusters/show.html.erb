@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @adjuster.job_id %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @adjuster.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @adjuster.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @adjuster.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @adjuster.address_id %>
+</p>
+
+<%= link_to 'Edit', edit_job_adjuster_path(@job, @adjuster) %> |

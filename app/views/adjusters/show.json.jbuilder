@@ -1,0 +1,1 @@
+json.partial! "adjusters/adjuster", adjuster: @adjuster

@@ -1,11 +1,12 @@
-$(document).ready(function(){
-  $("#zipLookup").on('click', function(event){
+var ready;
+ready = function() {
+  $(document).on('click', '#zipLookup', function(event){
     event.preventDefault();
     var zip = $("#address_zip_code").val();
 
     $.ajax({
       method: "POST",
-      url: '/customers/geolocate',
+      url: '/addresses/geolocate',
       data: {'data': zip},
       dataType: 'json'
     })
@@ -19,4 +20,7 @@ $(document).ready(function(){
       $("#address_state_id").val(state_val)
     })
   });
-});
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

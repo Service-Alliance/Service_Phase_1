@@ -1,0 +1,41 @@
+<%= form_for [@job, @adjuster] do |f| %>
+  <% if @adjuster.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@adjuster.errors.count, "error") %> prohibited this adjuster from being saved:</h2>
+
+      <ul>
+      <% @adjuster.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-xs-6">
+      <div class="form-group">
+          <%= f.label :first_name %><br>
+          <%= f.text_field :first_name, class:"form-control" %>
+      </div>
+  </div>
+  <div class="col-xs-6">
+      <div class="form-group">
+          <%= f.label :last_name %><br>
+          <%= f.text_field :last_name, class:"form-control" %>
+      </div>
+  </div>
+  <div class="col-xs-6">
+      <div class="form-group">
+          <%= f.label :email %><br>
+          <%= f.text_field :email, class:"form-control" %>
+      </div>
+  </div>
+
+  <%= render 'address_form', f: f %>
+  <%= render 'phone_form', f: f %>
+
+  <div class="col-xs-12 text-center">
+      <div class="actions">
+          <%= f.submit class:"btn btn-primary" %>
+      </div>
+  </div>
+  <% end %>

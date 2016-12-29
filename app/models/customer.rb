@@ -5,4 +5,8 @@ class Customer < ActiveRecord::Base
         with: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/i,
         message: 'Invalid email format.'
     }
+
+    def phones
+      Phone.where(customer_id: self.id)
+    end
 end

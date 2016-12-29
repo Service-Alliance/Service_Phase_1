@@ -1,0 +1,42 @@
+<%= form_for @job do |f| %>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        <%= f.label :bill_to_customer_address %><br>
+        <%= radio_button "billing_address[type]", nil, "1", checked: @job.billing_type_id == 1 %>
+    </div>
+    <div class="form-group">
+        <%= f.label :bill_to_adjuster_address %><br>
+        <%= radio_button "billing_address[type]", nil, "2", checked: @job.billing_type_id == 2 %>
+    </div>
+    <div class="form-group">
+        <%= f.label :bill_to_other_address %><br>
+        <%= radio_button "billing_address[type]", nil, "3", checked: @job.billing_type_id == 3 %>
+    </div>
+
+    <%= render 'billing_address_form', f: f %>
+
+
+</div>
+<div class="col-xs-12 text-center">
+    <div class="actions">
+        <%= f.submit class: "btn btn-primary" %>
+    </div>
+</div>
+<% end %>
+
+
+<script>
+$(document).ready(function() {
+    $('input[type=radio]').change(function() {
+        if (this.value == '3') {
+            $('#billingForm').find('input').val('');
+            $("#billingForm").removeClass('hidden')
+        }
+        else if (this.value == '1' || this.value == '2') {
+            $("#billingForm").addClass('hidden')
+            $('#billingForm').find('input').val('');
+        }
+    });
+});
+</script>

@@ -5,5 +5,7 @@ class Job < ActiveRecord::Base
   belongs_to :referral_type
   belongs_to :customer
   belongs_to :call
+  belongs_to :user, foreign_key: :entered_by_id
+  belongs_to :billing_address, foreign_key: :billing_address_id, class_name: "Address"
 
 end

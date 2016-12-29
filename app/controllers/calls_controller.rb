@@ -1,4 +1,5 @@
 class CallsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_call, only: [:show, :edit, :update, :destroy]
 
   # GET /calls

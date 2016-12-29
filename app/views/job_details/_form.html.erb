@@ -1,0 +1,90 @@
+<%= form_for [@job, @job_detail] do |f| %>
+<% if @job_detail.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@job_detail.errors.count, "error") %>
+        prohibited this job_detail from being saved:</h2>
+
+    <ul>
+        <% @job_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="col-xs-6">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :insurance_company_id %><br>
+            <%= f.collection_select :insurance_company_id, InsuranceCompany.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :claim_number %><br>
+            <%= f.text_field :claim_number, class: "form-control" %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :policy_number %><br>
+            <%= f.text_field :policy_number, class: "form-control" %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :coverage_type_id %><br>
+            <%= f.number_field :coverage_type_id, class: "form-control" %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :deductible_amount %><br>
+            <%= f.number_field :deductible_amount, class: "form-control" %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :self_pay_id %><br>
+            <%= f.collection_radio_buttons(:self_pay_id, AffectedType.all, :id, :name) %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :deductible_id %><br>
+            <%= f.collection_radio_buttons(:deductible_id, AffectedType.all, :id, :name) %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :esl_nst_amount_id %><br>
+            <%= f.collection_radio_buttons(:esl_nst_amount_id, AffectedType.all, :id, :name) %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :emergency_service_amount %><br>
+            <%= f.number_field :emergency_service_amount, class: "form-control"%>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <%= f.submit class:"btn btn-primary" %>
+</div>
+<% end %>

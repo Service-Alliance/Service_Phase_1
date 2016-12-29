@@ -61,6 +61,15 @@ class AddressesController < ApplicationController
     end
   end
 
+
+  def geolocate
+    if request.xhr?
+      @response = Geocoder.search(params[:data])
+
+      render json: @response
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_address

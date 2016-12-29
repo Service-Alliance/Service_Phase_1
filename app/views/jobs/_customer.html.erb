@@ -6,10 +6,15 @@
             <%= link_to new_customer_path(job_id: @job.id), class: "pull-right" do %>
               <i class="glyphicon glyphicon-plus"></i>
             <% end %>
+
+            <%= link_to job_customers_samecaller_path(@job.id), method: :post, class: "pull-right margin-right-25px" do %>
+              Same As Caller
+            <% end %>
           <% end %>
         </h3>
     </div>
     <div id="collapseCustomer" class="panel-collapse collapse">
+    <% if @customer %>
     <div class="panel-body">
         <div class="row">
             <div class="col-xs-12">
@@ -51,6 +56,14 @@
                             <td>County</td>
                             <td><%= @customer.try(:address).try(:county) %></td>
                         </tr>
+                        <% if @customer.phones %>
+                        <% @customer.phones.each do |phone| %>
+                        <tr>
+                          <td>Phone - <%= phone.try(:type).try(:name) %></td>
+                          <td>Number: <%= phone.number %>, Ext: <%= phone.extension %></td>
+                        </tr>
+                        <% end %>
+                        <% end %>
                     </tbody>
                 </table>
 
@@ -63,11 +76,12 @@
         </a>
         <span class="pull-right">
           <% if @customer %>
-            <%= link_to edit_customer_path(@customer), class: "btn btn-sm btn-warning", type: "button" do %>
+            <%= link_to edit_customer_path(@customer, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
             <i class="glyphicon glyphicon-edit"></i>
             <% end %>
           <% end %>
         </span>
     </div>
+    <% end %>
   </div>
 </div>

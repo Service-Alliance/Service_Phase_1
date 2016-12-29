@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223192054) do
+ActiveRecord::Schema.define(version: 20161227215445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,8 +34,28 @@ ActiveRecord::Schema.define(version: 20161223192054) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "adjusters", force: :cascade do |t|
+    t.integer  "job_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.integer  "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "affected_types", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "agents", force: :cascade do |t|
+    t.integer  "job_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -80,6 +100,16 @@ ActiveRecord::Schema.define(version: 20161223192054) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "emergency_contacts", force: :cascade do |t|
+    t.integer  "job_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.integer  "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "flooring_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -90,6 +120,27 @@ ActiveRecord::Schema.define(version: 20161223192054) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "insurance_companies", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "job_details", force: :cascade do |t|
+    t.integer  "insurance_company_id"
+    t.string   "claim_number"
+    t.string   "policy_number"
+    t.integer  "coverage_type_id"
+    t.integer  "deductible_amount"
+    t.integer  "self_pay_id"
+    t.integer  "deductible_id"
+    t.integer  "esl_nst_amount_id"
+    t.integer  "emergency_service_amount"
+    t.integer  "job_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "job_statuses", force: :cascade do |t|
@@ -113,8 +164,10 @@ ActiveRecord::Schema.define(version: 20161223192054) do
     t.text     "notes"
     t.integer  "customer_id"
     t.integer  "referral_type_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.integer  "billing_address_id"
+    t.integer  "billing_type_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "loss_cause_types", force: :cascade do |t|
@@ -163,15 +216,24 @@ ActiveRecord::Schema.define(version: 20161223192054) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "phone_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "phones", force: :cascade do |t|
     t.string   "number"
     t.integer  "type_id"
     t.integer  "occupant_id"
     t.integer  "caller_id"
     t.integer  "customer_id"
+    t.integer  "agent_id"
+    t.integer  "adjuster_id"
+    t.integer  "emergency_contact_id"
     t.string   "extension"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "properties", force: :cascade do |t|
@@ -226,15 +288,17 @@ ActiveRecord::Schema.define(version: 20161223192054) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "access_level"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.boolean  "admin",                  default: false, null: false
+    t.boolean  "call_rep",               default: false, null: false
+    t.boolean  "job_coordinator",        default: false, null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"

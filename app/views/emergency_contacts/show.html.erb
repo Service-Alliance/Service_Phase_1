@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @emergency_contact.job_id %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @emergency_contact.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @emergency_contact.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @emergency_contact.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @emergency_contact.address_id %>
+</p>
+
+<%= link_to 'Edit', edit_job_emergency_contact_path(@job, @emergency_contact) %>

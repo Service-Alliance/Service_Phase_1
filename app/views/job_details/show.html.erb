@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Insurance company:</strong>
+  <%= @job_detail.insurance_company_id %>
+</p>
+
+<p>
+  <strong>Claim number:</strong>
+  <%= @job_detail.claim_number %>
+</p>
+
+<p>
+  <strong>Policy number:</strong>
+  <%= @job_detail.policy_number %>
+</p>
+
+<p>
+  <strong>Coverage type:</strong>
+  <%= @job_detail.coverage_type_id %>
+</p>
+
+<p>
+  <strong>Deductible amount:</strong>
+  <%= @job_detail.deductible_amount %>
+</p>
+
+<p>
+  <strong>Self pay:</strong>
+  <%= @job_detail.self_pay_id %>
+</p>
+
+<p>
+  <strong>Deductible:</strong>
+  <%= @job_detail.deductible_id %>
+</p>
+
+<p>
+  <strong>Esl nst amount:</strong>
+  <%= @job_detail.esl_nst_amount_id %>
+</p>
+
+<p>
+  <strong>Emergency service amount:</strong>
+  <%= @job_detail.emergency_service_amount %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @job_detail.job_id %>
+</p>
+
+<%= link_to 'Edit', edit_job_job_detail_path(@job, @job_detail) %> |

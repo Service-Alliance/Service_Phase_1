@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_job, only: [:show, :edit, :update, :destroy]
-    before_action :set_customer, only: [:edit, :update]
+    before_action :authorize_policy
 
     # GET /jobs
     # GET /jobs.json
@@ -11,6 +12,7 @@ class JobsController < ApplicationController
     # GET /jobs/1
     # GET /jobs/1.json
     def show
+
         @property = Property.find_by(job_id: @job)
         @phone = Call.find_by(job_id: @job.id)
         @loss = Loss.find_by(job_id: @job.id)
@@ -18,18 +20,31 @@ class JobsController < ApplicationController
         @address = @caller.address
         @customer = @job.customer
         @occupants = Occupant.where(job_id: @job.id)
+        @job_detail = JobDetail.find_by(job_id: @job.id)
+        @agent = Agent.find_by(job_id: @job.id)
+        @adjuster = Adjuster.find_by(job_id: @job.id)
+        @emergency_contact = EmergencyContact.find_by(job_id: @job.id)
     end
 
     # GET /jobs/new
     def new
         @job = Job.new
         @caller = Caller.new
-        @property = Property.new
         @address = Address.new
+        @phone = Phone.new
     end
 
     # GET /jobs/1/edit
     def edit
+      @caller = Caller.find_by(job_id: @job.id)
+      @address = @caller.address
+      @phone = Phone.find_by(caller_id: @caller.id)
+
+      if params[:billing] == "true"
+
+        @billing_address = @job.billing_address || @billing_address = Address.new
+        render template: "jobs/billing_form"
+      end
     end
 
     # POST /jobs
@@ -39,6 +54,7 @@ class JobsController < ApplicationController
         @job.entered_by_id = 1
         @caller = Caller.new(caller_params)
         @address = Address.new(address_params)
+        @phone = Phone.new(phone_params)
 
         if @caller.save
             @address.save
@@ -46,6 +62,8 @@ class JobsController < ApplicationController
                 @caller.job_id = @job.id
                 @caller.address_id = @address.id
                 @caller.save
+                @phone.caller_id = @caller.id
+                @phone.save
                 redirect_to @job, notice: 'Job was successfully created.'
             else
                 render :new
@@ -58,9 +76,30 @@ class JobsController < ApplicationController
     # PATCH/PUT /jobs/1
     # PATCH/PUT /jobs/1.json
     def update
+      if billing_params
+        if billing_params[:type][0] == "1"
+          @job.billing_type_id = 1
+          @job.billing_address_id = @job.customer.address_id
+        elsif billing_params[:type][0] == "2"
+          @job.billing_type_id = 2
+          @job.billing_address_id = Adjuster.find_by(job_id: @job.id).address_id
+        elsif billing_params[:type][0] == "3"
+          @job.billing_type_id = 3
+          @billing_address = Address.create(address_1: address_params[:address_1], address_2:  address_params[:address_2], city:  address_params[:city], zip_code: address_params[:zip_code], county:  address_params[:county])
+          @billing_address.save
+          @job.billing_address_id = @billing_address.id
+        end
+        @job.save
+        return redirect_to @job, notice: 'Job was successfully updated.'
+      end
+
+      @caller = Caller.find_by(job_id: @job.id)
+      @address = @caller.address
         respond_to do |format|
             if @job.update(job_params)
-                @customer.update(customer_params)
+                @caller.update(caller_params)
+                @address.update(address_params)
+
                 format.html { redirect_to @job, notice: 'Job was successfully updated.' }
                 format.json { render :show, status: :ok, location: @job }
             else
@@ -87,13 +126,14 @@ class JobsController < ApplicationController
         @job = Job.find(params[:id])
     end
 
-    def set_customer
-        @customer = Customer.find(@job.customer_id)
+    def authorize_policy
+      authorize Job
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-        params.require(:job).permit(:type_id, :status_id, :entered_by_id, :franchise_id, :details, :notes, :customer_id, :referral_type_id, customer: [:address_1, :address_2, :zip, :city, :state_id, :county])
+        params.require(:job).permit(:type_id, :status_id, :entered_by_id, :franchise_id, :details, :notes, :customer_id, :referral_type_id, :billing_address_id, customer: [:address_1, :address_2, :zip, :city, :state_id, :county])
     end
 
     def caller_params
@@ -104,7 +144,15 @@ class JobsController < ApplicationController
         params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
     end
 
+    def billing_params
+        params.require(:billing_address).permit( type: [])
+    end
+
     def property_params
         params.require(:property).permit(:structure_type, :year_built, :floors_affected, :rooms_affected, :occured_level, :multi_unit, :ceiling_affected_id, :walls_affected_id, :attic_affected_id, :contents_affected_id, flooring_types: [])
+    end
+
+    def phone_params
+        params.require(:phone).permit(:number, :extension, :type_id)
     end
 end

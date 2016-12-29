@@ -1,0 +1,2 @@
+json.extract! job_detail, :id, :insurance_company_id, :claim_number, :policy_number, :coverage_type_id, :deductible_amount, :self_pay_id, :deductible_id, :esl_nst_amount_id, :emergency_service_amount, :job_id, :created_at, :updated_at
+json.url job_detail_url(job_detail, format: :json)

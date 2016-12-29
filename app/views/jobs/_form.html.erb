@@ -52,8 +52,13 @@
 </div>
 <div class="col-xs-12">
     <div class="form-group">
-        <%= f.label :details %><br>
+        <%= f.label :details %>
+        <a data-toggle="tooltip" class="tooltipLink" data-original-title="Tooltip text goes here">
+            <span class="glyphicon glyphicon-info-sign"></span>
+        </a>
+        <br>
         <%= f.text_area :details, class: "form-control" %>
+
     </div>
 </div>
 <div class="col-xs-12">
@@ -64,7 +69,7 @@
 </div>
 
 <%= render 'callers_form', f: f %>
-
+<%= render 'phone_form', f: f %>
 
 <div class="col-xs-12 text-center">
     <div class="actions">
@@ -72,3 +77,9 @@
     </div>
 </div>
 <% end %>
+
+
+
+<script>
+$("a.tooltipLink").tooltip();
+</script>

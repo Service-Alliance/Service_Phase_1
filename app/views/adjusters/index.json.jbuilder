@@ -1,0 +1,1 @@
+json.array! @adjusters, partial: 'adjusters/adjuster', as: :adjuster

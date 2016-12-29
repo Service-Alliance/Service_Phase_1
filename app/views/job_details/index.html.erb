@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Job Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Insurance company</th>
+      <th>Claim number</th>
+      <th>Policy number</th>
+      <th>Coverage type</th>
+      <th>Deductible amount</th>
+      <th>Self pay</th>
+      <th>Deductible</th>
+      <th>Esl nst amount</th>
+      <th>Emergency service amount</th>
+      <th>Job</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @job_details.each do |job_detail| %>
+      <tr>
+        <td><%= job_detail.insurance_company_id %></td>
+        <td><%= job_detail.claim_number %></td>
+        <td><%= job_detail.policy_number %></td>
+        <td><%= job_detail.coverage_type_id %></td>
+        <td><%= job_detail.deductible_amount %></td>
+        <td><%= job_detail.self_pay_id %></td>
+        <td><%= job_detail.deductible_id %></td>
+        <td><%= job_detail.esl_nst_amount_id %></td>
+        <td><%= job_detail.emergency_service_amount %></td>
+        <td><%= job_detail.job_id %></td>
+        <td><%= link_to 'Show', job_job_detail %></td>
+        <td><%= link_to 'Edit', edit_job_job_detail_path(@job, job_detail) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Job detail', new_job_job_detail_path(@job) %>
