@@ -1,10 +1,10 @@
-user = User.create(:email => 'callrep@aol.com', :password => 'password', :password_confirmation => 'password', call_rep: true)
-user = User.create(:email => 'jobcoordinator@aol.com', :password => 'password', :password_confirmation => 'password', job_coordinator: true)
-user = User.create(:email => 'admin@aol.com', :password => 'password', :password_confirmation => 'password', admin: true)
+user = User.create(:email => 'callrep@test.com', :password => 'password', :password_confirmation => 'password', call_rep: true)
+user = User.create(:email => 'jobcoordinator@test.com', :password => 'password', :password_confirmation => 'password', job_coordinator: true)
+user = User.create(:email => 'admin@test.com', :password => 'password', :password_confirmation => 'password', admin: true)
 
 Job.create(type_id: 1, status_id: 1, entered_by_id: 1, franchise_id: 1, details: "This is a really good detail", notes: "This is an even better note.", customer_id: nil, referral_type_id: 1)
 
-Caller.create(first_name: "David Heinemeier", last_name: "Hansson", email: "dhh@aol.com", address_id: 1, job_id: 1)
+Caller.create(first_name: "David Heinemeier", last_name: "Hansson", email: "dhh@test.com", address_id: 1, job_id: 1)
 Phone.create(number: "911", type_id: 1, caller_id: 1)
 Address.create(address_1: "123 Anywhere Ln", address_2: "Suite 2017", zip_code: "60622", city: "Chicago", state_id: "36", county: "Cook County")
 
