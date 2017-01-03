@@ -12,7 +12,6 @@ class JobsController < ApplicationController
     # GET /jobs/1
     # GET /jobs/1.json
     def show
-
         @property = Property.find_by(job_id: @job)
         @phone = Call.find_by(job_id: @job.id)
         @loss = Loss.find_by(job_id: @job.id)
@@ -36,15 +35,15 @@ class JobsController < ApplicationController
 
     # GET /jobs/1/edit
     def edit
-      @caller = Caller.find_by(job_id: @job.id)
-      @address = @caller.address
-      @phone = Phone.find_by(caller_id: @caller.id)
+        @caller = Caller.find_by(job_id: @job.id)
+        @address = @caller.address
+        @phone = Phone.find_by(caller_id: @caller.id)
 
-      if params[:billing] == "true"
+        if params[:billing] == 'true'
 
-        @billing_address = @job.billing_address || @billing_address = Address.new
-        render template: "jobs/billing_form"
-      end
+            @billing_address = @job.billing_address || @billing_address = Address.new
+            render template: 'jobs/billing_form'
+        end
     end
 
     # POST /jobs
@@ -55,15 +54,15 @@ class JobsController < ApplicationController
         @caller = Caller.new(caller_params)
         @address = Address.new(address_params)
         @phone = Phone.new(phone_params)
-        p call_params
-        p call_params[:id]
-        @call = Call.find_by(id: call_params[:id])
+        @call = Call.find_by(id: call_params[:id]) if call_params[:id]
 
         if @caller.save
             @address.save
             if @job.save
+              if @call
                 @call.job_id = @job.id
                 @call.save
+              end
                 @caller.job_id = @job.id
                 @caller.address_id = @address.id
                 @caller.save
@@ -81,25 +80,25 @@ class JobsController < ApplicationController
     # PATCH/PUT /jobs/1
     # PATCH/PUT /jobs/1.json
     def update
-      if billing_params
-        if billing_params[:type][0] == "1"
-          @job.billing_type_id = 1
-          @job.billing_address_id = @job.customer.address_id
-        elsif billing_params[:type][0] == "2"
-          @job.billing_type_id = 2
-          @job.billing_address_id = Adjuster.find_by(job_id: @job.id).address_id
-        elsif billing_params[:type][0] == "3"
-          @job.billing_type_id = 3
-          @billing_address = Address.create(address_1: address_params[:address_1], address_2:  address_params[:address_2], city:  address_params[:city], zip_code: address_params[:zip_code], county:  address_params[:county])
-          @billing_address.save
-          @job.billing_address_id = @billing_address.id
+        if billing_params
+            if billing_params[:type][0] == '1'
+                @job.billing_type_id = 1
+                @job.billing_address_id = @job.customer.address_id
+            elsif billing_params[:type][0] == '2'
+                @job.billing_type_id = 2
+                @job.billing_address_id = Adjuster.find_by(job_id: @job.id).address_id
+            elsif billing_params[:type][0] == '3'
+                @job.billing_type_id = 3
+                @billing_address = Address.create(address_1: address_params[:address_1], address_2:  address_params[:address_2], city:  address_params[:city], zip_code: address_params[:zip_code], county:  address_params[:county])
+                @billing_address.save
+                @job.billing_address_id = @billing_address.id
+            end
+            @job.save
+            return redirect_to @job, notice: 'Job was successfully updated.'
         end
-        @job.save
-        return redirect_to @job, notice: 'Job was successfully updated.'
-      end
 
-      @caller = Caller.find_by(job_id: @job.id)
-      @address = @caller.address
+        @caller = Caller.find_by(job_id: @job.id)
+        @address = @caller.address
         respond_to do |format|
             if @job.update(job_params)
                 @caller.update(caller_params)
@@ -132,9 +131,8 @@ class JobsController < ApplicationController
     end
 
     def authorize_policy
-      authorize Job
+        authorize Job
     end
-
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
@@ -154,7 +152,7 @@ class JobsController < ApplicationController
     end
 
     def billing_params
-        params.require(:billing_address).permit( type: [])
+        params.require(:billing_address).permit(type: [])
     end
 
     def property_params
