@@ -55,10 +55,15 @@ class JobsController < ApplicationController
         @caller = Caller.new(caller_params)
         @address = Address.new(address_params)
         @phone = Phone.new(phone_params)
+        p call_params
+        p call_params[:id]
+        @call = Call.find_by(id: call_params[:id])
 
         if @caller.save
             @address.save
             if @job.save
+                @call.job_id = @job.id
+                @call.save
                 @caller.job_id = @job.id
                 @caller.address_id = @address.id
                 @caller.save
@@ -142,6 +147,10 @@ class JobsController < ApplicationController
 
     def address_params
         params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
+    end
+
+    def call_params
+        params.require(:call).permit(:id)
     end
 
     def billing_params

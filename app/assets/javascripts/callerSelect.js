@@ -17,7 +17,6 @@ ready = function() {
       customer_zip = response.customer_zip;
       customer_state = response.customer_state;
       customer_phone_number = response.customer_phone_number;
-
       $("#caller_first_name").val(customer_array[0]);
       $("#caller_last_name").val(customer_array[1]);
       $("#address_city").val(customer_city);
