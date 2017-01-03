@@ -21,4 +21,12 @@ class Call < ActiveRecord::Base
       end
     end
   end
+
+  def self.precall_parse(json_body)
+
+  end
+
+  def self.postcall_parse(json_body)
+
+  end
 end

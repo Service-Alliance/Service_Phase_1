@@ -2,6 +2,8 @@ Rails.application.routes.draw do
     resources :phones
     resources :addresses
     resources :calls
+    post 'calls/precall-webook' => 'calls#precall'
+    post 'calls/postcall-webook' => 'calls#postcall'
     devise_for :users
     resources :users
 
@@ -17,7 +19,6 @@ Rails.application.routes.draw do
         post 'adjusters/samecaller' => 'adjusters#samecaller'
         resources :emergency_contacts
         post 'emergency_contacts/samecaller' => 'emergency_contacts#samecaller'
-        
         post 'customers/samecaller' => 'customers#samecaller'
     end
 
