@@ -62,6 +62,15 @@ class CallsController < ApplicationController
     end
   end
 
+  def precall_lookup
+    if request.xhr?
+      @id = Call.find_by(id: params[:id])
+
+      render json: @id
+    end
+  end
+
+
   def precall
     Call.precall_parse(params)
   end

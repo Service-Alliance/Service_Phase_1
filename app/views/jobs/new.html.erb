@@ -5,6 +5,11 @@
                 <div class="col-xs-12 text-center">
                     <h1>New Job</h1>
                 </div>
+                <div class="col-xs-12">
+                  <%= form_for(:call) do |f| %>
+                  <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
+                  <% end %>
+                </div>
               <%= render 'form' %>
             </div>
         </div>

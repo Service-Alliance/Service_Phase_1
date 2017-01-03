@@ -11,7 +11,7 @@ class CreateCalls < ActiveRecord::Migration
       t.string :customer_city
       t.string :customer_state
       t.string :customer_zip
-      t.string :customer_county
+      t.string :customer_country
       t.string :keywords
       t.string :referrer
       t.string :referrermedium
@@ -36,6 +36,7 @@ class CreateCalls < ActiveRecord::Migration
       t.boolean :answered
       t.integer :user_id
       t.integer :job_id
+      t.boolean :inprogress
 
       t.integer :duration
 
