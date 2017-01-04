@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
     resources :phones
     resources :addresses
     resources :calls
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
         resources :emergency_contacts
         post 'emergency_contacts/samecaller' => 'emergency_contacts#samecaller'
         post 'customers/samecaller' => 'customers#samecaller'
+        resources :images
     end
 
     resources :customers

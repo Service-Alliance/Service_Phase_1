@@ -9,6 +9,7 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#job" aria-controls="job" role="tab" data-toggle="tab">Job Information</a></li>
         <li role="presentation"><a href="#client" aria-controls="client" role="tab" data-toggle="tab">Client Information</a></li>
+        <li role="presentation"><a href="#images" aria-controls="client" role="tab" data-toggle="tab">Images</a></li>
       </ul>
 
       <!-- Tab panes -->
@@ -93,11 +94,10 @@
                 <%= render 'billing_address' %>
               </div>
           </div>
-
-
-
         </div>
-        <div role="tabpanel" class="tab-pane" id="messages">...</div>
+        <div role="tabpanel" class="tab-pane" id="images">
+          <%= render 'images' %>
+        </div>
         <div role="tabpanel" class="tab-pane" id="settings">...</div>
       </div>
 

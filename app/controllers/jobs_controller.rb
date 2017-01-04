@@ -23,6 +23,7 @@ class JobsController < ApplicationController
         @agent = Agent.find_by(job_id: @job.id)
         @adjuster = Adjuster.find_by(job_id: @job.id)
         @emergency_contact = EmergencyContact.find_by(job_id: @job.id)
+        @images = Image.where(job_id: @job.id)
     end
 
     # GET /jobs/new
