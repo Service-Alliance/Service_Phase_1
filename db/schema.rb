@@ -237,6 +237,11 @@ ActiveRecord::Schema.define(version: 20170104165927) do
     t.integer  "electricity_available_id"
     t.integer  "source_off_id"
     t.integer  "visible_mold_id"
+    t.text     "source_cause"
+    t.integer  "previous_water_damage_id"
+    t.text     "cleaning_type"
+    t.string   "affected_square_footage"
+    t.text     "notes"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -284,6 +289,7 @@ ActiveRecord::Schema.define(version: 20170104165927) do
     t.integer  "walls_affected_id"
     t.integer  "attic_affected_id"
     t.integer  "contents_affected_id"
+    t.boolean  "basement_finished"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end

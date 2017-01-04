@@ -13,6 +13,7 @@ class CreateProperties < ActiveRecord::Migration
       t.integer :walls_affected_id
       t.integer :attic_affected_id
       t.integer :contents_affected_id
+      t.boolean :basement_finished
 
       t.timestamps null: false
     end

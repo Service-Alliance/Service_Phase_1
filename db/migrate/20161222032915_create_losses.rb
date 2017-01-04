@@ -13,6 +13,12 @@ class CreateLosses < ActiveRecord::Migration
       t.integer :electricity_available_id
       t.integer :source_off_id
       t.integer :visible_mold_id
+      t.text :source_cause
+      t.integer :previous_water_damage_id
+      t.text :cleaning_type
+      t.string :affected_square_footage
+      
+      t.text :notes
 
       t.timestamps null: false
     end

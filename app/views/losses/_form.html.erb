@@ -56,7 +56,7 @@
     <div class="form-group">
         <div class="field">
             <%= f.label :loss_cause_id %><br>
-            <%= f.collection_select :loss_cause_id, LossCause.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+            <%= f.grouped_collection_select :loss_cause_id, LossType.all, :loss_causes, :name, :id, :name, {prompt: true},  { class: 'form-control'} %>
         </div>
     </div>
 </div>
@@ -100,6 +100,46 @@
         </div>
     </div>
 </div>
+
+<div id="sourceCause" class="col-xs-12 hidden">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :source_cause %><br>
+            <%= f.text_area :source_cause, class:"form-control" %>
+        </div>
+    </div>
+</div>
+
+<div id="cleaningType" class="col-xs-12 hidden">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :cleaning_type %><br>
+            <%= f.text_area :cleaning_type, class:"form-control" %>
+        </div>
+    </div>
+</div>
+
+<div id="squareFootage" class="col-xs-4 hidden">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :affected_square_footage %><br>
+            <%= f.text_field :affected_square_footage, class:"form-control" %>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :notes %><br>
+            <%= f.text_area :notes, class:"form-control" %>
+        </div>
+    </div>
+</div>
+
+
+
+
 <div class="col-xs-12 text-center">
     <div class="actions">
         <%= f.submit class: 'btn btn-primary' %>
