@@ -2,8 +2,14 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             <a data-toggle="collapse" href="#collapseLoss">Job Loss Information:</a>
+            <% unless @loss %>
+              <%= link_to new_job_loss_path(@job), class: "pull-right" do %>
+                <i class="glyphicon glyphicon-plus"></i>
+              <% end %>
+            <% end %>
         </h3>
     </div>
+    <% if @loss %>
     <div id="collapseLoss" class="panel-collapse collapse">
         <div class="panel-body">
             <div class="row">
@@ -70,4 +76,5 @@
             </span>
         </div>
     </div>
+    <% end %>
 </div>
