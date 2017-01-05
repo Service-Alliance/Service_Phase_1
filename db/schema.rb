@@ -283,13 +283,15 @@ ActiveRecord::Schema.define(version: 20170104165927) do
     t.integer  "year_built"
     t.integer  "floors_affected"
     t.integer  "rooms_affected"
-    t.integer  "occured_level"
+    t.string   "occured_level"
     t.boolean  "multi_unit"
     t.integer  "ceiling_affected_id"
     t.integer  "walls_affected_id"
     t.integer  "attic_affected_id"
     t.integer  "contents_affected_id"
     t.boolean  "basement_finished"
+    t.boolean  "ownership"
+    t.boolean  "condo"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -303,9 +305,9 @@ ActiveRecord::Schema.define(version: 20170104165927) do
 
   create_table "property_types", force: :cascade do |t|
     t.string   "name"
-    t.integer  "structure_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "structure_type_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "referral_types", force: :cascade do |t|

@@ -7,13 +7,15 @@ class CreateProperties < ActiveRecord::Migration
       t.integer :year_built
       t.integer :floors_affected
       t.integer :rooms_affected
-      t.integer :occured_level
+      t.string :occured_level
       t.boolean :multi_unit
       t.integer :ceiling_affected_id
       t.integer :walls_affected_id
       t.integer :attic_affected_id
       t.integer :contents_affected_id
       t.boolean :basement_finished
+      t.boolean :ownership
+      t.boolean :condo
 
       t.timestamps null: false
     end

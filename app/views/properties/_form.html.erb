@@ -25,7 +25,10 @@
     <div class="form-group">
         <div class="field">
             <%= f.label :property_type_id %><br>
-            <%= f.collection_select :property_type_id, PropertyType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+
+            <%= f.grouped_collection_select :property_type_id, StructureType.all, :property_types, :name, :id, :name, {prompt: true},  { class: 'form-control'} %>
+
+
         </div>
     </div>
 </div>
@@ -35,15 +38,6 @@
         <div class="field">
             <%= f.label :year_built %><br>
             <%= f.number_field :year_built, class: 'form-control' %>
-        </div>
-    </div>
-</div>
-
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :basement_finished %><br>
-            <%= f.check_box :basement_finished %>
         </div>
     </div>
 </div>
@@ -68,15 +62,39 @@
     <div class="form-group">
         <div class="field">
             <%= f.label :occured_level %><br>
-            <%= f.number_field :occured_level, class: 'form-control' %>
+            <%= f.text_field :occured_level, class: 'form-control' %>
         </div>
     </div>
 </div>
 <div class="col-xs-4">
     <div class="form-group">
         <div class="field">
-            <%= f.label :multi_unit %><br>
+            <%= f.label :basement_finished %><br>(Check if yes)
+            <%= f.check_box :basement_finished %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-4">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :multi_unit %><br>(Check if yes)
             <%= f.check_box :multi_unit %>
+        </div>
+    </div>
+</div>
+<div class="col-xs-4">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :ownership %><br>(Check if yes)
+            <%= f.check_box :ownership %>
+        </div>
+    </div>
+</div>
+<div id="condo" class="col-xs-4 hidden">
+    <div class="form-group">
+        <div class="field">
+            <%= f.label :condo %><br>(Check if yes)
+            <%= f.check_box :condo %>
         </div>
     </div>
 </div>
@@ -113,8 +131,9 @@
     </div>
 </div>
 <div class="col-xs-4">
+    <%= f.label :flooring_types %><br>
     <%= f.collection_check_boxes(:flooring_type_ids, FlooringType.all, :id, :name) %>
-  </div>
+</div>
 <div class="col-xs-12 text-center">
     <div class="form-group">
         <div class="actions">
