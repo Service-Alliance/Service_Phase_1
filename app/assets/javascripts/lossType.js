@@ -3,8 +3,7 @@ ready = function() {
 
     // $("#loss_loss_cause_id").parent().hide();
     var lossCauses = $("#loss_loss_cause_id").html();
-    console.log(lossCauses);
-    // $("#loss_loss_cause_id").empty();
+    $("#loss_loss_cause_id").empty();
     $(document).on('change', '#loss_loss_type_id', function(event) {
         var lossType = $("#loss_loss_type_id :selected").text();
         var escaped_lossTypes = lossType.replace(/([ #/.?*+^$[\]\\(){}|-])/g, "\\$1");

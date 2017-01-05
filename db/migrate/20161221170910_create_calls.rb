@@ -37,6 +37,7 @@ class CreateCalls < ActiveRecord::Migration
       t.integer :user_id
       t.integer :job_id
       t.boolean :inprogress
+      t.integer :franchise_id
 
       t.integer :duration
 

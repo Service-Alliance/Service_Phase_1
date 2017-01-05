@@ -29,7 +29,7 @@ class LossesController < ApplicationController
 
     respond_to do |format|
       if @loss.save
-        format.html { redirect_to job_loss_path(@job, @loss), notice: 'Loss was successfully created.' }
+        format.html { redirect_to new_job_property_path(@job), notice: 'Loss was successfully created.' }
         format.json { render :show, status: :created, location: @loss }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class LossesController < ApplicationController
   def update
     respond_to do |format|
       if @loss.update(loss_params)
-        format.html { redirect_to job_loss_path(@job, @loss), notice: 'Loss was successfully updated.' }
+        format.html { redirect_to job_path(@job), notice: 'Loss was successfully updated.' }
         format.json { render :show, status: :ok, location: @loss }
       else
         format.html { render :edit }
@@ -79,6 +79,6 @@ class LossesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loss_params
-      params.require(:loss).permit(:recieved_by, :loss_occured, :fnol_recieved, :customer_called, :loss_type_id, :loss_cause_id, :standing_water_id, :water_available_id, :electricity_available_id, :source_off_id, :visible_mold_id)
+      params.require(:loss).permit(:recieved_by, :loss_occured, :fnol_recieved, :customer_called, :loss_type_id, :loss_cause_id, :standing_water_id, :water_available_id, :electricity_available_id, :source_off_id, :visible_mold_id, :affected_square_footage, :cleaning_type, :previous_water_damage_id, :source_cause)
     end
 end

@@ -57,8 +57,10 @@
         <div class="field">
             <%= f.label :self_pay_id %><br>
             <%= f.collection_radio_buttons(:self_pay_id, AffectedType.all, :id, :name) %>
+            <span id="50" class="hidden alert">Please advise that we will collect 50% upon start of job</span>
         </div>
     </div>
+
 </div>
 <div class="col-xs-6">
     <div class="form-group">
@@ -84,7 +86,9 @@
         </div>
     </div>
 </div>
-<div class="actions">
-    <%= f.submit class:"btn btn-primary" %>
+<div class="col-xs-12 text-center">
+    <div class="actions">
+        <%= f.submit class:"btn btn-primary" %>
+    </div>
 </div>
 <% end %>

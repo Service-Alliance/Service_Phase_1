@@ -29,7 +29,7 @@ class PropertiesController < ApplicationController
     @property.job_id = @job.id
     respond_to do |format|
       if @property.save
-        format.html {  redirect_to job_path(@job), notice: 'Property was successfully created.' }
+        format.html {  redirect_to new_job_job_detail_path(@job), notice: 'Property was successfully created.' }
         format.json { render :show, status: :created, location: @property }
       else
         format.html { render :new }

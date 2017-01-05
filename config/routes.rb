@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     resources :addresses
     resources :calls
     post 'calls/precall-lookup' => 'calls#precall_lookup'
-    post 'calls/precall-webook' => 'calls#precall'
-    post 'calls/postcall-webook' => 'calls#postcall'
+    post 'calls/precall-webook/:franchise' => 'calls#precall'
+    post 'calls/postcall-webook/:franchise' => 'calls#postcall'
     devise_for :users
     resources :users
 
