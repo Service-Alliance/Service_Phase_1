@@ -1,7 +1,5 @@
 var ready;
 ready = function() {
-
-    // $("#loss_loss_cause_id").parent().hide();
     var lossCauses = $("#property_property_type_id").html();
     $("#property_property_type_id").empty();
     $(document).on('change', '#property_structure_type_id', function(event) {
