@@ -72,7 +72,7 @@ class CallsController < ApplicationController
 
 
   def precall
-    Call.precall_parse(params)
+    p Call.precall_parse(params)
   end
 
   def postcall
