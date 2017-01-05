@@ -1,6 +1,6 @@
 class CallsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:precall, :postcall]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index, :show, :new, :edit, :create, :update, :destroy]
   before_action :set_call, only: [:show, :edit, :update, :destroy]
 
   # GET /calls
