@@ -6,8 +6,12 @@ class JobPolicy < ApplicationPolicy
     @job = job
   end
 
+  def new?
+    user.admin? || user.job_coordinator? || user.call_rep?
+  end
+
   def create?
-    user.admin? || user.job_coordinator?
+    user.admin? || user.job_coordinator? || user.call_rep?
   end
 
   def index?
