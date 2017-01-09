@@ -73,6 +73,8 @@ class CallsController < ApplicationController
 
 
   def precall
+    p "PRECALL WEBHOOK HIT"
+    p params
     p Call.precall_parse(params)
   end
 
