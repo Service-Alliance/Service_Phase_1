@@ -52,7 +52,7 @@ class JobsController < ApplicationController
     # POST /jobs.json
     def create
         @job = Job.new(job_params)
-        @job.entered_by_id = 1
+        @job.entered_by_id = current_user.id
         @caller = Caller.new(caller_params)
         @address = Address.new(address_params)
         @phone = Phone.new(phone_params)
