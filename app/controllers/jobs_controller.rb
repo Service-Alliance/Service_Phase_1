@@ -88,7 +88,7 @@ class JobsController < ApplicationController
     # PATCH/PUT /jobs/1
     # PATCH/PUT /jobs/1.json
     def update
-        if billing_params
+        if billing_params != {}
             if billing_params[:type][0] == '1'
                 @job.billing_type_id = 1
                 @job.billing_address_id = @job.customer.address_id
@@ -111,8 +111,21 @@ class JobsController < ApplicationController
             if @job.update(job_params)
                 @caller.update(caller_params)
                 @address.update(address_params)
+                format.html {
+                if params[:commit] == "Save and Move to Job Loss"
+                  if @loss = Loss.find_by(job_id: @job.id)
+                    redirect_to edit_job_loss_path(@job, @loss), notice: 'Job was successfully updated.'
+                  else
+                    redirect_to new_job_loss_path(@job), notice: 'Job was successfully updated.'
+                  end
+                elsif params[:commit] == "Save"
+                  redirect_to edit_job_path(@job), notice: 'Job was saved successfully.'
+                else
+                  redirect_to @job, notice: 'Job was successfully updated.'
+                end
+              }
 
-                format.html { redirect_to @job, notice: 'Job was successfully updated.' }
+
                 format.json { render :show, status: :ok, location: @job }
             else
                 format.html { render :edit }
@@ -160,7 +173,7 @@ class JobsController < ApplicationController
     end
 
     def billing_params
-        params.require(:billing_address).permit(type: [])
+        params.fetch(:billing_address, {}).permit(type: [])
     end
 
     def property_params
