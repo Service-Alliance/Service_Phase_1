@@ -42,7 +42,6 @@ class JobsController < ApplicationController
         @phone = Phone.find_by(caller_id: @caller.id)
 
         if params[:billing] == 'true'
-
             @billing_address = @job.billing_address || @billing_address = Address.new
             render template: 'jobs/billing_form'
         end
@@ -70,7 +69,14 @@ class JobsController < ApplicationController
                 @caller.save
                 @phone.caller_id = @caller.id
                 @phone.save
-                redirect_to @job, notice: 'Job was successfully created.'
+
+                if params[:commit] == "Save and Move to Job Loss"
+                  redirect_to new_job_loss_path(@job), notice: 'Job was successfully created.'
+                elsif params[:commit] == "Save"
+                  redirect_to edit_job_path(@job), notice: 'Job was saved successfully.'
+                else
+                  redirect_to @job, notice: 'Job was successfully created.'
+                end
             else
                 render :new
             end
