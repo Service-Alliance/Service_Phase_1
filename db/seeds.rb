@@ -2,6 +2,47 @@ user = User.create(:email => 'callrep@test.com', :password => 'password', :passw
 user = User.create(:email => 'jobcoordinator@test.com', :password => 'password', :password_confirmation => 'password', job_coordinator: true)
 user = User.create(:email => 'admin@test.com', :password => 'password', :password_confirmation => 'password', admin: true)
 
+
+# Employee Notes
+# Name:
+# Department:
+# Title:
+# Additional Title:
+# Location:
+# Email:
+# Background Check: Date
+# Online Physical: Date
+# Fit Test: Date 
+# Hep B:
+# Lead:
+# MOLD CERTIFICATIONS
+# NYS Mold:
+# NYS Mold Exp:
+# NYS Mold License #:
+ 
+# Bio-Rec/BBP
+# Hartford
+# Pet/Water
+# Pet/Fire 
+# OSHA
+# IICRC REG #:
+# CEC's Due:
+# IICRC WRT:
+
+
+# Department Names
+# Administrative
+# Accounting
+# Consultant
+# Collections
+# Construction
+# Operations
+# Marketing
+
+
+
+
+
 Job.create(type_id: 1, status_id: 1, entered_by_id: 1, franchise_id: 1, details: "This is a really good detail", notes: "This is an even better note.", customer_id: nil, referral_type_id: 1)
 
 Caller.create(first_name: "David Heinemeier", last_name: "Hansson", email: "dhh@test.com", address_id: 1, job_id: 1)
@@ -15,14 +56,19 @@ Call.create(inprogress: true, customer_phone_number: "+18473375371", customer_na
 
 Call.create(inprogress: true, customer_phone_number: "+17703334444", customer_name: "Olivia Rodriguez", customer_state: "IL", customer_city: "Chicago", customer_country: "USA", customer_zip: "60622")
 
+
+# Job Status
+JobStatus.create(name: "Lead")
 JobStatus.create(name: "Active")
-JobStatus.create(name: "Cancelled")
-JobStatus.create(name: "Drybook")
-JobStatus.create(name: "Complete")
-JobStatus.create(name: "Job Complete")
+JobStatus.create(name: "Invoiced")
+JobStatus.create(name: "Dead")
+
+
+
 
 JobType.create(name: "General Cleaning")
 
+# Franchise Names
 Franchise.create(name: "Central Manhattan")
 Franchise.create(name: "East Windsor")
 Franchise.create(name: "Medford")
@@ -30,13 +76,31 @@ Franchise.create(name: "Oakdale/North Bay Shore")
 Franchise.create(name: "Old Bridge/Cranbury")
 Franchise.create(name: "Southwest Brooklyn")
 
-ReferralType.create(name: "Ad/TV")
-ReferralType.create(name: "Friend")
+# Referral Types
+ReferralType.create(name: "Servpro Corporate")
+ReferralType.create(name: "Internet")
+ReferralType.create(name: "TV")
+ReferralType.create(name: "Yellowpages")
 ReferralType.create(name: "Other")
+ReferralType.create(name: "Refused")
+ReferralType.create(name: "IAC Dispatch")
+ReferralType.create(name: "Friend")
+ReferralType.create(name: "Insurance Adjuster")
+ReferralType.create(name: "Insurance Agent")
+ReferralType.create(name: "Neighbor")
+ReferralType.create(name: "Plumber")
+ReferralType.create(name: "Previous Customer")
+ReferralType.create(name: "Servpro Franchise")
+ReferralType.create(name: "Sub-Contractor")
+ReferralType.create(name: "Property Manager")
+ReferralType.create(name: "Realtor")
+ReferralType.create(name: "Relative")
 
+# Structure Types
 residential = StructureType.create(name: "Residential")
 commercial = StructureType.create(name: "Commercial")
 
+# Commercial Property Types
 PropertyType.create(name: "Church", structure_type_id: commercial.id)
 PropertyType.create(name: "Factory", structure_type_id: commercial.id)
 PropertyType.create(name: "Historic", structure_type_id: commercial.id)
@@ -44,6 +108,7 @@ PropertyType.create(name: "Office Building", structure_type_id: commercial.id)
 PropertyType.create(name: "Retail Space", structure_type_id: commercial.id)
 PropertyType.create(name: "School", structure_type_id: commercial.id)
 PropertyType.create(name: "Warehouse", structure_type_id: commercial.id)
+# Residential Property Types
 PropertyType.create(name: "Apartment", structure_type_id: residential.id)
 PropertyType.create(name: "Condo", structure_type_id: residential.id)
 PropertyType.create(name: "Duplex", structure_type_id: residential.id)
@@ -51,10 +116,12 @@ PropertyType.create(name: "High Rise", structure_type_id: residential.id)
 PropertyType.create(name: "House - Single", structure_type_id: residential.id)
 PropertyType.create(name: "Family", structure_type_id: residential.id)
 
+# Affected Type
 AffectedType.create(name: "Yes")
 AffectedType.create(name: "No")
 AffectedType.create(name: "Unkown")
 
+# Flooring Type
 FlooringType.create(name: "Carpet")
 FlooringType.create(name: "Concrete/Masonry")
 FlooringType.create(name: "Hardwood")
@@ -62,6 +129,7 @@ FlooringType.create(name: "Other")
 FlooringType.create(name: "Tile")
 FlooringType.create(name: "Vinyl")
 
+# Type of Loss
 content_inventory = LossType.create(name: "Content Inventory")
 fire = LossType.create(name: "Fire")
 fire_water = LossType.create(name: "Fire/Water")
@@ -73,7 +141,9 @@ sewage = LossType.create(name: "Sewage")
 smoke = LossType.create(name: "Smoke")
 vandalism = LossType.create(name: "Vandalism")
 water = LossType.create(name: "Water")
+tree_removal = LossType.create(name "Tree Removal")
 
+# Loss Causes
 lc_fire = LossCause.create(name: "Fire")
 lc_other = LossCause.create(name: "Other")
 lc_sewage = LossCause.create(name: "Sewage")
@@ -85,7 +155,7 @@ lc_electrical_malfunction = LossCause.create(name: "Electrical Malfunction")
 lc_grease = LossCause.create(name: "Grease")
 lc_lightning = LossCause.create(name: "Lightning")
 lc_other_appliance = LossCause.create(name: "Other Appliance")
-lc_pullback = LossCause.create(name: "Pullback-Furnace")
+lc_puffback = LossCause.create(name: "Puffback-Furnace")
 lc_refrigerator = LossCause.create(name: "Refrigerator")
 lc_stove = LossCause.create(name: "Stove/Oven")
 lc_unknown = LossCause.create(name: "Unknown")
@@ -109,11 +179,16 @@ lc_sewage_back_up = LossCause.create(name: "Sewage Back-Up")
 lc_stain = LossCause.create(name: "Stain on Carpet")
 lc_blank = LossCause.create(name: "")
 
+# Loss Cause by Type
+
+# Content Inventory
 LossCauseType.create(loss_type_id: content_inventory.id, loss_cause_id: lc_fire.id)
 LossCauseType.create(loss_type_id: content_inventory.id, loss_cause_id: lc_other.id)
 LossCauseType.create(loss_type_id: content_inventory.id, loss_cause_id: lc_sewage.id)
 LossCauseType.create(loss_type_id: content_inventory.id, loss_cause_id: lc_smoke.id)
 LossCauseType.create(loss_type_id: content_inventory.id, loss_cause_id: lc_water.id)
+
+# Fire
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_candle.id)
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_dishwasher.id)
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_electrical_malfunction.id)
@@ -121,11 +196,12 @@ LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_grease.id)
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_lightning.id)
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_other.id)
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_other_appliance.id)
-LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_pullback.id)
+LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_puffback.id)
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_refrigerator.id)
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_stove.id)
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_unknown.id)
 LossCauseType.create(loss_type_id: fire.id, loss_cause_id: lc_washing_machine.id)
+# Fire/Water
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_candle.id)
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_dishwasher.id)
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_electrical_malfunction.id)
@@ -133,12 +209,14 @@ LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_grease.id)
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_lightning.id)
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_other.id)
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_other_appliance.id)
-LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_pullback.id)
+LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_puffback.id)
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_refrigerator.id)
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_stove.id)
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_unknown.id)
 LossCauseType.create(loss_type_id: fire_water.id, loss_cause_id: lc_washing_machine.id)
+# General Cleaning
 LossCauseType.create(loss_type_id: general_cleaning.id, loss_cause_id: lc_other.id)
+# Liability
 LossCauseType.create(loss_type_id: liability.id, loss_cause_id: lc_ac_leak.id)
 LossCauseType.create(loss_type_id: liability.id, loss_cause_id: lc_water_heater.id)
 LossCauseType.create(loss_type_id: liability.id, loss_cause_id: lc_other.id)
@@ -146,6 +224,7 @@ LossCauseType.create(loss_type_id: liability.id, loss_cause_id: lc_other_applian
 LossCauseType.create(loss_type_id: liability.id, loss_cause_id: lc_refrigerator.id)
 LossCauseType.create(loss_type_id: liability.id, loss_cause_id: lc_stove.id)
 LossCauseType.create(loss_type_id: liability.id, loss_cause_id: lc_washing_machine.id)
+# Mold
 LossCauseType.create(loss_type_id: mold.id, loss_cause_id: lc_ac_leak.id)
 LossCauseType.create(loss_type_id: mold.id, loss_cause_id: lc_flood.id)
 LossCauseType.create(loss_type_id: mold.id, loss_cause_id: lc_water_heater.id)
@@ -162,6 +241,7 @@ LossCauseType.create(loss_type_id: mold.id, loss_cause_id: lc_toilet.id)
 LossCauseType.create(loss_type_id: mold.id, loss_cause_id: lc_tornado.id)
 LossCauseType.create(loss_type_id: mold.id, loss_cause_id: lc_unknown.id)
 LossCauseType.create(loss_type_id: mold.id, loss_cause_id: lc_wind.id)
+# Odor
 LossCauseType.create(loss_type_id: odor.id, loss_cause_id: lc_animal.id)
 LossCauseType.create(loss_type_id: odor.id, loss_cause_id: lc_electrical_malfunction.id)
 LossCauseType.create(loss_type_id: odor.id, loss_cause_id: lc_grease.id)
@@ -170,6 +250,7 @@ LossCauseType.create(loss_type_id: odor.id, loss_cause_id: lc_other.id)
 LossCauseType.create(loss_type_id: odor.id, loss_cause_id: lc_sewage_back_up.id)
 LossCauseType.create(loss_type_id: odor.id, loss_cause_id: lc_stain.id)
 LossCauseType.create(loss_type_id: odor.id, loss_cause_id: lc_unknown.id)
+# Sewage
 LossCauseType.create(loss_type_id: sewage.id, loss_cause_id: lc_ac_leak.id)
 LossCauseType.create(loss_type_id: sewage.id, loss_cause_id: lc_flood.id)
 LossCauseType.create(loss_type_id: sewage.id, loss_cause_id: lc_water_heater.id)
@@ -182,6 +263,7 @@ LossCauseType.create(loss_type_id: sewage.id, loss_cause_id: lc_toilet.id)
 LossCauseType.create(loss_type_id: sewage.id, loss_cause_id: lc_tornado.id)
 LossCauseType.create(loss_type_id: sewage.id, loss_cause_id: lc_unknown.id)
 LossCauseType.create(loss_type_id: sewage.id, loss_cause_id: lc_wind.id)
+# Smoke
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_candle.id)
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_dishwasher.id)
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_electrical_malfunction.id)
@@ -189,12 +271,14 @@ LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_grease.id)
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_lightning.id)
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_other.id)
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_other_appliance.id)
-LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_pullback.id)
+LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_puffback.id)
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_refrigerator.id)
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_stove.id)
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_unknown.id)
 LossCauseType.create(loss_type_id: smoke.id, loss_cause_id: lc_washing_machine.id)
+# Vandalism
 LossCauseType.create(loss_type_id: vandalism.id, loss_cause_id: lc_blank.id)
+# Water
 LossCauseType.create(loss_type_id: water.id, loss_cause_id: lc_ac_leak.id)
 LossCauseType.create(loss_type_id: water.id, loss_cause_id: lc_flood.id)
 LossCauseType.create(loss_type_id: water.id, loss_cause_id: lc_water_heater.id)
@@ -212,6 +296,7 @@ LossCauseType.create(loss_type_id: water.id, loss_cause_id: lc_tornado.id)
 LossCauseType.create(loss_type_id: water.id, loss_cause_id: lc_unknown.id)
 LossCauseType.create(loss_type_id: water.id, loss_cause_id: lc_wind.id)
 
+# States
 State.create(name: "AL")
 State.create(name: "AK")
 State.create(name: "AZ")
@@ -263,6 +348,7 @@ State.create(name: "WV")
 State.create(name: "WI")
 State.create(name: "WY")
 
+# Insurance Company Names
 InsuranceCompany.create(name: "AAA Missouri Insurance Company")
 InsuranceCompany.create(name: "AAA of Carolina Group")
 InsuranceCompany.create(name: "AAA of Northern New England")
