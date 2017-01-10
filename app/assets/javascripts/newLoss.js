@@ -1,9 +1,11 @@
 
 var ready;
 ready = function() {
-  $(document).on('change', '#loss_loss_type_id', function(event){
+  $('input[type=radio][name=loss\\[loss_type_id\\]]').change(function() {
 
-    var lossType =  $( "#loss_loss_type_id option:selected" ).text();
+    var $input = $('input[type=radio][name=loss\\[loss_type_id\\]]:checked');
+    var lossType = $('label[for=' + $input.attr('id') + ']').text();
+
 
     if (lossType === "General Cleaning") {
         $("#cleaningType").removeClass("hidden");

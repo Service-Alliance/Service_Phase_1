@@ -48,7 +48,14 @@
     <div class="form-group">
         <div class="field">
             <%= f.label :loss_type_id %><br>
-            <%= f.collection_select :loss_type_id, LossType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+            <%= f.collection_radio_buttons(:loss_type_id, LossType.all, :id, :name) do |b| %>
+             <%= b.label(:"data-value" => b.value, :"name" => "loss_type_id") { b.radio_button + b.text } %>
+             <a data-toggle="tooltip" class="tooltipLink" data-original-title="<%= b.object.tooltip %>">
+                 <span class="glyphicon glyphicon-info-sign"></span>
+             </a>
+             <br>
+            <% end %>
+            <% f.collection_select :loss_type_id, LossType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
         </div>
     </div>
 </div>
@@ -155,3 +162,6 @@
     </div>
 </div>
 <% end %>
+<script>
+$("a.tooltipLink").tooltip();
+</script>
