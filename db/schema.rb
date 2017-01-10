@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20170104165927) do
     t.integer  "user_id"
     t.integer  "job_id"
     t.boolean  "inprogress"
+    t.integer  "franchise_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end

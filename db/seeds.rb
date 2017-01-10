@@ -3,42 +3,6 @@ user = User.create(:email => 'jobcoordinator@test.com', :password => 'password',
 user = User.create(:email => 'admin@test.com', :password => 'password', :password_confirmation => 'password', admin: true)
 
 
-# Employee Notes
-# Name:
-# Department:
-# Title:
-# Additional Title:
-# Location:
-# Email:
-# Background Check: Date
-# Online Physical: Date
-# Fit Test: Date 
-# Hep B:
-# Lead:
-# MOLD CERTIFICATIONS
-# NYS Mold:
-# NYS Mold Exp:
-# NYS Mold License #:
- 
-# Bio-Rec/BBP
-# Hartford
-# Pet/Water
-# Pet/Fire 
-# OSHA
-# IICRC REG #:
-# CEC's Due:
-# IICRC WRT:
-
-
-# Department Names
-# Administrative
-# Accounting
-# Consultant
-# Collections
-# Construction
-# Operations
-# Marketing
-
 
 
 
@@ -141,7 +105,7 @@ sewage = LossType.create(name: "Sewage")
 smoke = LossType.create(name: "Smoke")
 vandalism = LossType.create(name: "Vandalism")
 water = LossType.create(name: "Water")
-tree_removal = LossType.create(name "Tree Removal")
+tree_removal = LossType.create(name: "Tree Removal")
 
 # Loss Causes
 lc_fire = LossCause.create(name: "Fire")
