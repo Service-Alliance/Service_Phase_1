@@ -1,1 +1,1 @@
-PublicActivity.enabled = true
+PublicActivity.enabled = ENV['PUBLIC_ACTIVITY_ENABLED']
