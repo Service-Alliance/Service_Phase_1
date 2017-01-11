@@ -11,6 +11,7 @@ class CreateJobs < ActiveRecord::Migration
       t.integer :referral_type_id
       t.integer :billing_address_id
       t.integer :billing_type_id
+      t.boolean :emergency
 
       t.timestamps null: false
     end

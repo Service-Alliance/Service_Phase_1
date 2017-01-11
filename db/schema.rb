@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104165927) do
+ActiveRecord::Schema.define(version: 20170111163314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,12 @@ ActiveRecord::Schema.define(version: 20170104165927) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "departments", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "emergency_contacts", force: :cascade do |t|
     t.integer  "job_id"
     t.string   "first_name"
@@ -202,6 +208,7 @@ ActiveRecord::Schema.define(version: 20170104165927) do
     t.integer  "referral_type_id"
     t.integer  "billing_address_id"
     t.integer  "billing_type_id"
+    t.boolean  "emergency"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
@@ -336,6 +343,39 @@ ActiveRecord::Schema.define(version: 20170104165927) do
     t.boolean  "admin",                  default: false, null: false
     t.boolean  "call_rep",               default: false, null: false
     t.boolean  "job_coordinator",        default: false, null: false
+    t.string   "notes"
+    t.integer  "department_id"
+    t.string   "title"
+    t.integer  "location_id"
+    t.date     "background_check"
+    t.date     "online_physical"
+    t.date     "fitness_test"
+    t.string   "hep_b"
+    t.boolean  "lead"
+    t.date     "lead_expiration"
+    t.string   "nys_mold"
+    t.date     "nys_mold_expiration"
+    t.string   "nys_mold_license"
+    t.string   "bio_rec_bbp"
+    t.date     "hartford"
+    t.date     "pet_water"
+    t.date     "pet_fire"
+    t.string   "osha"
+    t.string   "iicrc_reg"
+    t.date     "iicrc_expiration"
+    t.date     "cec_due"
+    t.integer  "number_cec_due"
+    t.string   "iicrc_wrt"
+    t.string   "iicrc_amrt"
+    t.string   "iicrc_asd"
+    t.string   "iicrc_srt"
+    t.string   "iicrc_hst"
+    t.string   "iicrc_uft"
+    t.string   "iicrc_odor"
+    t.string   "iicrc_cds"
+    t.date     "sub_1"
+    t.date     "sub_2"
+    t.string   "dry_book"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "email",                  default: "",    null: false

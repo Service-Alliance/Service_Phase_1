@@ -30,6 +30,13 @@
     <% end %>
 </div>
 
+<div class="col-xs-12">
+    <div class="form-group">
+      <label for="job_emergency">Is this an emergency?</label><br> Check if yes
+      <%= f.check_box :emergency %>
+    </div>
+</div>
+
 <!-- <div class="form-group">
     <%= f.label :type_id %><br>
     <%= f.number_field :type_id %>
@@ -40,6 +47,7 @@
         <%= f.collection_select :status_id, JobStatus.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
     </div>
 </div>
+
 <!-- <div class="form-group">
     <%= f.label :entered_by_id %><br>
     <%= f.number_field :entered_by_id %>

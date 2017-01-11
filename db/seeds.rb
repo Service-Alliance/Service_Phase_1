@@ -1,9 +1,15 @@
-user = User.create(:email => 'callrep@test.com', :password => 'password', :password_confirmation => 'password', call_rep: true)
+user = User.create(:email => 'callrep@test.com', :password => 'password', :password_confirmation => 'password', call_rep: true, first_name: "Call", last_name: "Rep", department_id: 1)
 user = User.create(:email => 'jobcoordinator@test.com', :password => 'password', :password_confirmation => 'password', job_coordinator: true)
 user = User.create(:email => 'admin@test.com', :password => 'password', :password_confirmation => 'password', admin: true)
 
-
-
+# Departments
+Department.create(name: "Administrative")
+Department.create(name: "Accounting")
+Department.create(name: "Consultant")
+Department.create(name: "Collections")
+Department.create(name: "Construction")
+Department.create(name: "Operations")
+Department.create(name: "Marketing")
 
 
 

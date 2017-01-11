@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     post 'calls/precall-lookup' => 'calls#precall_lookup'
     post 'calls/precall-webhook' => 'calls#precall'
     post 'calls/postcall-webhook' => 'calls#postcall'
+    get 'users/list' => 'users#list'
     devise_for :users
     resources :users
     resources :states

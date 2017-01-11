@@ -7,6 +7,12 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def list
+    @users = User.all
+    render :json => @users.to_json(include: [:department])
+  end
+
+
   # GET /users/1
   # GET /users/1.json
   def show
