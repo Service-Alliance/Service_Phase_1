@@ -209,8 +209,9 @@ ActiveRecord::Schema.define(version: 20170111163314) do
     t.integer  "billing_address_id"
     t.integer  "billing_type_id"
     t.boolean  "emergency"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "referral_employee_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "loss_cause_types", force: :cascade do |t|

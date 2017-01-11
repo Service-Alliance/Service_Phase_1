@@ -5,4 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :department
+
+  def full_name
+    first = first_name || " "
+    last = last_name || " "
+    return "#{first+ " " + last}"
+  end
 end
