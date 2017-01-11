@@ -61,6 +61,7 @@ class JobsController < ApplicationController
         @address = Address.new(address_params)
         @phone = Phone.new(phone_params)
         @call = Call.find_by(id: call_params[:id]) if call_params[:id]
+        @job.referral_type_id = nil if @job.referral_type.name != "Servpro Employee"
 
         if @caller.save
             @address.save
@@ -114,6 +115,7 @@ class JobsController < ApplicationController
         @address = @caller.address
         respond_to do |format|
             if @job.update(job_params)
+                @job.referral_type_id = nil if @job.referral_type.name != "Servpro Employee"
                 @caller.update(caller_params)
                 @address.update(address_params)
                 format.html {
