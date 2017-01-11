@@ -8,4 +8,14 @@ class Job < ActiveRecord::Base
   belongs_to :user, foreign_key: :entered_by_id
   belongs_to :billing_address, foreign_key: :billing_address_id, class_name: "Address"
 
+
+  def job_loss_type
+    return Loss.find_by(job_id: id).try(:loss_type)
+  end
+
+  # def job_loss_type
+  #   return job_loss.name
+  # end
+
+
 end

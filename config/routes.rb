@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     post 'calls/postcall-webhook' => 'calls#postcall'
     devise_for :users
     resources :users
-
+    resources :states
+    get 'jobs/list' => 'jobs#list'
     resources :jobs do
         resources :properties
         resources :losses

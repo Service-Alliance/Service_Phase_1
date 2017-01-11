@@ -1,12 +1,17 @@
 class JobsController < ApplicationController
     before_action :authenticate_user!
     before_action :set_job, only: [:show, :edit, :update, :destroy]
-    before_action :authorize_policy
+    # before_action :authorize_policy
 
     # GET /jobs
     # GET /jobs.json
     def index
         @jobs = Job.all
+    end
+
+    def list
+      @jobs = Job.all
+      render :json => @jobs.to_json(include: [:job_status, :job_type, :franchise, :job_loss_type])
     end
 
     # GET /jobs/1
