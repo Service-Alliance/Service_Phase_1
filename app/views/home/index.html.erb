@@ -1,98 +1,120 @@
+<div class="col-sm-12 col-lg-12 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">
+					<svg class="glyph stroked home">
+						<use xlink:href="#stroked-home"></use>
+					</svg>
+				</a>
+			</li>
+			<li class="active">Dashboard</li>
+		</ol>
+	</div>
+	<!--/.row-->
 
-	<div class="col-sm-12 col-lg-12 main">
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-				<li class="active">Dashboard</li>
-			</ol>
-		</div><!--/.row-->
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Dashboard</h1>
+		</div>
+	</div>
+	<!--/.row-->
 
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="page-header">Dashboard</h1>
-			</div>
-		</div><!--/.row-->
-
-		<div class="row">
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="panel panel-blue panel-widget ">
-					<div class="row no-padding">
-						<div class="col-sm-3 col-lg-5 widget-left">
-							<svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg>
-						</div>
-						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large"><%= @active_leads.count %></div>
-							<div class="text-muted">Active Leads</div>
-						</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-6 col-lg-3">
+			<div class="panel panel-blue panel-widget ">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<i class="glyph-dash glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large"><%= @active_leads.count %></div>
+						<div class="text-muted">Active Leads</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="panel panel-orange panel-widget">
-					<div class="row no-padding">
-						<div class="col-sm-3 col-lg-5 widget-left">
-							<svg class="glyph stroked empty-message"><use xlink:href="#stroked-empty-message"></use></svg>
-						</div>
-						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large"><%= @active_jobs.count %></div>
-							<div class="text-muted">Active Jobs</div>
-						</div>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-3">
+			<div class="panel panel-orange panel-widget">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<i class="glyph-dash glyphicon glyphicon-star" aria-hidden="true"></i>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large"><%= @active_jobs.count %></div>
+						<div class="text-muted">Active Jobs</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="panel panel-teal panel-widget">
-					<div class="row no-padding">
-						<div class="col-sm-3 col-lg-5 widget-left">
-							<svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>
-						</div>
-						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large"><%= @month_calls %></div>
-							<div class="text-muted">Calls (Monthly)</div>
-						</div>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-3">
+			<div class="panel panel-teal panel-widget">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<i class="glyph-dash glyphicon glyphicon-earphone" aria-hidden="true"></i>
+					</div>
+					<div class="col-sm-9 col-lg-7 widget-right">
+						<div class="large"><%= @month_calls %></div>
+						<div class="text-muted">Calls (Monthly)</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="panel panel-red panel-widget">
-					<div class="row no-padding">
-						<div class="col-sm-3 col-lg-5 widget-left">
-							<svg class="glyph stroked app-window-with-content"><use xlink:href="#stroked-app-window-with-content"></use></svg>
-						</div>
-						<!-- <div class="col-sm-9 col-lg-7 widget-right"> -->
-							<!-- <div class="large">25.2k</div> -->
-							<!-- <div class="text-muted">Page Views</div> -->
-						<!-- </div> -->
+		</div>
+		<!-- <div class="col-xs-12 col-md-6 col-lg-3">
+			<div class="panel panel-red panel-widget">
+				<div class="row no-padding">
+					<div class="col-sm-3 col-lg-5 widget-left">
+						<svg class="glyph stroked app-window-with-content">
+							<use xlink:href="#stroked-app-window-with-content"></use>
+						</svg>
 					</div>
+					<!-- <div class="col-sm-9 col-lg-7 widget-right"> -->
+					<!-- <div class="large">25.2k</div> -->
+					<!-- <div class="text-muted">Page Views</div> -->
+					<!-- </div> -->
 				</div>
 			</div>
-		</div><!--/.row-->
+		</div>
+	</div>
+	<!--/.row-->
 
-    <div class="row">
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">Jobs Table</div>
-					<div class="panel-body">
-						<table data-toggle="table" data-url="jobs/list"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-flat="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-						    <thead>
-						    <tr>
-						        <th data-field="state" data-checkbox="true" >Item ID</th>
-						        <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Item ID</th>
-										<th data-field="job_status.name" data-sortable="true">Status</th>
-						        <th data-field="franchise.name"  data-sortable="true">Franchise</th>
-						        <th data-field="details" data-sortable="true">Details</th>
-										<th data-field="notes" data-sortable="true">Notes</th>
-										<th data-field="job_loss_type.name" data-sortable="true">Job Loss Type</th>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Jobs Table</div>
+				<div class="panel-body">
+					<table
+						data-toggle="table"
+						data-url="jobs/list"
+						data-show-refresh="true"
+						data-show-toggle="true"
+						data-show-columns="true"
+						data-search="true"
+						data-flat="true"
+						data-select-item-name="toolbar1"
+						data-pagination="true"
+						data-sort-name="name"
+						data-sort-order="desc">
+						<thead>
+							<tr>
+								<th data-field="state" data-checkbox="true">Item ID</th>
+								<th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Item ID</th>
+								<th data-field="job_status.name" data-sortable="true">Status</th>
+								<th data-field="franchise.name" data-sortable="true">Franchise</th>
+								<th data-field="details" data-sortable="true">Details</th>
+								<th data-field="notes" data-sortable="true">Notes</th>
+								<th data-field="job_loss_type.name" data-sortable="true">Job Loss Type</th>
 
-						    </tr>
-						    </thead>
-						</table>
-					</div>
+							</tr>
+						</thead>
+					</table>
 				</div>
 			</div>
-		</div><!--/.row-->
+		</div>
+	</div>
+	<!--/.row-->
 
-		<!-- <div class="row">
+	<!-- <div class="row">
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
 					<div class="panel-body easypiechart-panel">
@@ -131,7 +153,7 @@
 			</div>
 		</div><!--/.row-->
 
-		<!-- <div class="row">
+	<!-- <div class="row">
 			<div class="col-md-8">
 
 				<div class="panel panel-default chat">
@@ -192,9 +214,9 @@
 
 			</div><!--/.col-->
 
-			<div class="col-md-4">
+	<div class="col-md-4">
 
-				<!-- <div class="panel panel-blue">
+		<!-- <div class="panel panel-blue">
 					<div class="panel-heading dark-overlay"><svg class="glyph stroked clipboard-with-paper"><use xlink:href="#stroked-clipboard-with-paper"></use></svg>To-do List</div>
 					<div class="panel-body">
 						<ul class="todo-list">
@@ -276,12 +298,15 @@
 					</div>
 				</div> -->
 
-			</div><!--/.col-->
-		</div><!--/.row-->
-	</div>	<!--/.main-->
+	</div>
+	<!--/.col-->
+</div>
+<!--/.row-->
+</div>
+<!--/.main-->
 
-	<script>
-	function LinkFormatter(value, row, index) {
-  return "<a href='jobs/"+row.id+"'>"+value+"</a>";
+<script>
+function LinkFormatter(value, row, index) {
+	return "<a href='jobs/" + row.id + "'>" + value + "</a>";
 }
-	</script>
+</script>
