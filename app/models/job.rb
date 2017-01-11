@@ -8,9 +8,16 @@ class Job < ActiveRecord::Base
   belongs_to :user, foreign_key: :entered_by_id
   belongs_to :billing_address, foreign_key: :billing_address_id, class_name: "Address"
 
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
 
   def job_loss_type
     return Loss.find_by(job_id: id).try(:loss_type)
+  end
+
+  def insurance_details
+    return JobDetail.find_by(job_id: id).try(:insurance_company)
   end
 
   # def job_loss_type

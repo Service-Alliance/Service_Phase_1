@@ -11,7 +11,7 @@ class JobsController < ApplicationController
 
     def list
       @jobs = Job.all
-      render :json => @jobs.to_json(include: [:job_status, :job_type, :franchise, :job_loss_type])
+      render :json => @jobs.to_json(include: [:job_status, :job_type, :franchise, :job_loss_type, :insurance_details])
     end
 
     # GET /jobs/1
@@ -61,7 +61,7 @@ class JobsController < ApplicationController
         @address = Address.new(address_params)
         @phone = Phone.new(phone_params)
         @call = Call.find_by(id: call_params[:id]) if call_params[:id]
-        @job.referral_type_id = nil if @job.referral_type.name != "Servpro Employee"
+        @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != "Servpro Employee"
 
         if @caller.save
             @address.save
@@ -75,6 +75,9 @@ class JobsController < ApplicationController
                 @caller.save
                 @phone.caller_id = @caller.id
                 @phone.save
+
+
+                # @job.create_activity action: 'Created a new Job', job_id: @job.id, owner: current_user
 
                 if params[:commit] == "Save and Move to Job Loss"
                   redirect_to new_job_loss_path(@job), notice: 'Job was successfully created.'
@@ -108,6 +111,7 @@ class JobsController < ApplicationController
                 @job.billing_address_id = @billing_address.id
             end
             @job.save
+
             return redirect_to @job, notice: 'Job was successfully updated.'
         end
 
@@ -115,9 +119,10 @@ class JobsController < ApplicationController
         @address = @caller.address
         respond_to do |format|
             if @job.update(job_params)
-                @job.referral_type_id = nil if @job.referral_type.name != "Servpro Employee"
+                @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != "Servpro Employee"
                 @caller.update(caller_params)
                 @address.update(address_params)
+
                 format.html {
                 if params[:commit] == "Save and Move to Job Loss"
                   if @loss = Loss.find_by(job_id: @job.id)

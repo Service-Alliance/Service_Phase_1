@@ -11,4 +11,7 @@ class Loss < ActiveRecord::Base
   belongs_to :job
   has_one :customer, through: :job
 
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
 end
