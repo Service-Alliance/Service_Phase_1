@@ -67,7 +67,7 @@
         <% end %>
     </div>
 </div>
-<div id="referral_employee" class="col-xs-12 <%= "hidden" if @job.referral_type.name != "Servpro Employee" %>">
+<div id="referral_employee" class="col-xs-12 <%= "hidden" if @job.try(:referral_type).try(:name) != "Servpro Employee" %>">
     <div class="form-group">
         <%= f.label :referral_employee_id %><br>
         <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
