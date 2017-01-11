@@ -39,6 +39,7 @@ class CreateUsers < ActiveRecord::Migration
       t.date :sub_1
       t.date :sub_2
       t.string :dry_book
+      t.integer :login_count
 
 
       t.timestamps null: false
