@@ -9,9 +9,13 @@ class Job < ActiveRecord::Base
   belongs_to :user, foreign_key: :entered_by_id
   belongs_to :billing_address, foreign_key: :billing_address_id,
                                class_name: 'Address'
+  belongs_to :agent
+  belongs_to :adjuster
   has_one :property
   has_one :caller
   has_one :loss
+  has_one :job_detail
+  has_one :emergency_contact
 
   # Activity Tracking activated
   include PublicActivity::Model

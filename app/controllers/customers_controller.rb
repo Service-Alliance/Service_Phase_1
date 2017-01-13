@@ -26,13 +26,11 @@ class CustomersController < ApplicationController
     @address = Address.find_by(id: @customer.address_id) || @address = Address.new
     @phone = Phone.find_by(customer_id: @customer.id) || @phone = Phone.new
     @job = Job.find_by(id: params[:job_id])
-
   end
 
   # POST /customers
   # POST /customers.json
   def create
-    # TODO: If address is same as caller address, do not recreate.
     @customer = Customer.new(customer_params)
     @address = Address.new(address_params)
     @job = Job.find_by(id: job_param[:job_id])

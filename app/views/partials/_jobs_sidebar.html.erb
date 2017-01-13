@@ -1,12 +1,12 @@
-<div id='jobs-sidebar' class="row">
+<div id='jobs-sidebar'>
     <div class="col-md-2">
         <div class="sidebar content-box" style="display: block;">
             <ul class="nav">
                 <!-- Main menu -->
                 <li class="current">
                     <%= link_to job_path(@job)  do %>
-                        <i class="<%= @job ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                        Job Information
+                    <i class="<%= @job ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Job Information
                     <% end %>
                 </li>
                 <li>
@@ -17,14 +17,38 @@
                 </li>
                 <li>
                     <%= link_to new_or_view_job_property_path(@job, @job.property)  do %>
-                        <i class="<%= @job.property ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                        Property Information
+                    <i class="<%= @job.property ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Property Information
                     <% end %>
                 </li>
                 <li>
                     <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
-                        <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                        Caller Information
+                    <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Caller Information
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_detail_path(@job, @job.job_detail)  do %>
+                    <i class="<%= @job.job_detail ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Job Details
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_agent_path(@job, @job.agent)  do %>
+                    <i class="<%= @job.agent ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Agent Details
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_adjuster_path(@job, @job.adjuster)  do %>
+                    <i class="<%= @job.adjuster ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Adjuster Details
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_emergency_contact_path(@job, @job.emergency_contact)  do %>
+                    <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Emergency Contacts Details
                     <% end %>
                 </li>
                 <li>
@@ -33,18 +57,7 @@
                         Call Rail Information
                     </a>
                 </li>
-                <li>
-                    <a href="editors.html">
-                        <i class="<%= @job ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                        Editors
-                    </a>
-                </li>
-                <li>
-                    <a href="forms.html">
-                        <i class="<%= @job ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                        Forms
-                    </a>
-                </li>
+
                 <li class="submenu">
                     <a href="#">
                         <i class="glyphicon glyphicon-list"></i>
@@ -64,3 +77,4 @@
             </ul>
         </div>
     </div>
+</div>

@@ -5,79 +5,78 @@
 
     <%= render partial: "partials/jobs_sidebar" %>
     <div class="col-xs-8">
+        <h1 class="text-center">Caller Information:</h1>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">
                     <a data-toggle="collapse" href="#collapseCaller">Caller Information:</a>
                 </h3>
             </div>
-            <div id="collapseCaller" class="panel-collapse">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>First Name:</td>
-                                        <td><%= @caller.try(:first_name) %></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Last Name:</td>
-                                        <td><%= @caller.try(:last_name) %></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email:</td>
-                                        <td><%= @caller.try(:email) %></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Address 1:</td>
-                                        <td><%= @caller.try(:address).try(:address_1) %></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Address 2</td>
-                                        <td><%= @caller.try(:address).try(:address_2) %></td>
-                                    </tr>
-                                    <tr>
-                                        <td>City</td>
-                                        <td><%= @caller.try(:address).try(:city) %></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Zip</td>
-                                        <td><%= @caller.try(:address).try(:zip_code) %></td>
-                                    </tr>
-                                    <tr>
-                                        <td>State</td>
-                                        <td><%= @caller.try(:address).try(:state).try(:name) %></td>
-                                    </tr>
-                                    <tr>
-                                        <td>County</td>
-                                        <td><%= @caller.try(:address).try(:county) %></td>
-                                    </tr>
-                                    <% @caller.phones.each do |phone| %>
-                                    <tr>
-                                        <td>Phone -
-                                            <%= phone.try(:type).try(:name) %></td>
-                                        <td>Number:
-                                            <%= phone.number %>, Ext:
-                                            <%= phone.extension %></td>
-                                    </tr>
-                                    <% end %>
-                                </tbody>
-                            </table>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>First Name:</td>
+                                    <td><%= @caller.try(:first_name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name:</td>
+                                    <td><%= @caller.try(:last_name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td><%= @caller.try(:email) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Address 1:</td>
+                                    <td><%= @caller.try(:address).try(:address_1) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Address 2</td>
+                                    <td><%= @caller.try(:address).try(:address_2) %></td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td><%= @caller.try(:address).try(:city) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Zip</td>
+                                    <td><%= @caller.try(:address).try(:zip_code) %></td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td><%= @caller.try(:address).try(:state).try(:name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>County</td>
+                                    <td><%= @caller.try(:address).try(:county) %></td>
+                                </tr>
+                                <% @caller.phones.each do |phone| %>
+                                <tr>
+                                    <td>Phone -
+                                        <%= phone.try(:type).try(:name) %></td>
+                                    <td>Number:
+                                        <%= phone.number %>, Ext:
+                                        <%= phone.extension %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
 
-                        </div>
                     </div>
                 </div>
-                <div class="panel-footer">
-                    <a href="mailto:<%= @caller.email %>" type="button" class="btn btn-sm btn-primary">
-                        <i class="glyphicon glyphicon-envelope"></i>
-                    </a>
-                    <span class="pull-right">
-                        <%= link_to edit_job_caller_path(@job, @caller), class: "btn btn-sm btn-warning", type: "button" do %>
-                        <i class="glyphicon glyphicon-edit"></i>
-                        <% end %>
-                    </span>
-                </div>
+            </div>
+            <div class="panel-footer">
+                <a href="mailto:<%= @caller.email %>" type="button" class="btn btn-sm btn-primary">
+                    <i class="glyphicon glyphicon-envelope"></i>
+                </a>
+                <span class="pull-right">
+                    <%= link_to edit_job_caller_path(@job, @caller), class: "btn btn-sm btn-warning", type: "button" do %>
+                    <i class="glyphicon glyphicon-edit"></i>
+                    <% end %>
+                </span>
             </div>
         </div>
     </div>

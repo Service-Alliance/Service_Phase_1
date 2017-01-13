@@ -1,28 +1,88 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
 
-<p>
-  <strong>Job:</strong>
-  <%= @adjuster.job_id %>
-</p>
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div class="col-xs-8">
+        <h1 class="text-center">Adjuster Information:</h1>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Adjuster Information:
 
-<p>
-  <strong>First name:</strong>
-  <%= @adjuster.first_name %>
-</p>
+                    <% link_to job_adjusters_samecaller_path(@job.id), method: :post, class: "pull-right margin-right-25px" do %>
+                    Same As Caller
+                    <% end %>
+                </h3>
+            </div>
+            <% if @adjuster %>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>First Name:</td>
+                                    <td><%= @adjuster.try(:first_name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name:</td>
+                                    <td><%= @adjuster.try(:last_name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td><%= @adjuster.try(:email) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Address 1:</td>
+                                    <td><%= @adjuster.try(:address).try(:address_1) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Address 2</td>
+                                    <td><%= @adjuster.try(:address).try(:address_2) %></td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td><%= @adjuster.try(:address).try(:city) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Zip</td>
+                                    <td><%= @adjuster.try(:address).try(:zip_code) %></td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td><%= @adjuster.try(:address).try(:state).try(:name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>County</td>
+                                    <td><%= @adjuster.try(:address).try(:county) %></td>
+                                </tr>
+                                <% @adjuster.phones.each do |phone| %>
+                                <tr>
+                                    <td>Phone -
+                                        <%= phone.try(:type).try(:name) %></td>
+                                    <td>Number:
+                                        <%= phone.number %>, Ext:
+                                        <%= phone.extension %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @adjuster.last_name %>
-</p>
+                    </div>
+                </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @adjuster.email %>
-</p>
+            </div>
+            <div class="panel-footer">
 
-<p>
-  <strong>Address:</strong>
-  <%= @adjuster.address_id %>
-</p>
-
-<%= link_to 'Edit', edit_job_adjuster_path(@job, @adjuster) %> |
+                <span>
+                    <%= link_to edit_adjuster_path(@adjuster, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
+                    <i class="glyphicon glyphicon-edit"></i>
+                    <% end %>
+                </span>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>

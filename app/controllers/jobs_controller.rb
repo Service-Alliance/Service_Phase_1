@@ -26,8 +26,6 @@ class JobsController < ApplicationController
     @customer = @job.customer
     @occupants = Occupant.where(job_id: @job.id)
     @job_detail = JobDetail.find_by(job_id: @job.id)
-    @agent = Agent.find_by(job_id: @job.id)
-    @adjuster = Adjuster.find_by(job_id: @job.id)
     @emergency_contact = EmergencyContact.find_by(job_id: @job.id)
     @images = Image.where(job_id: @job.id)
     @callrail = Call.find_by(job_id: @job.id)

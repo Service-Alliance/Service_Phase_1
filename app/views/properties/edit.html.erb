@@ -1,12 +1,14 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <h1>Editing Property</h1>
-                </div>
-              <%= render 'form' %>
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div class="col-xs-8">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1>Editing Property</h1>
             </div>
+            <%= render 'form' %>
         </div>
     </div>
 </div>

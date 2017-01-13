@@ -6,4 +6,10 @@ class Agent < ActiveRecord::Base
   def phones
     Phone.where(agent_id: self.id)
   end
+
+  def full_name
+    first = first_name || " "
+    last = last_name || " "
+    return "#{first+ " " + last}"
+  end
 end

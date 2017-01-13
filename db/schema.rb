@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170111191511) do
+ActiveRecord::Schema.define(version: 20170113185114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,13 +53,13 @@ ActiveRecord::Schema.define(version: 20170111191511) do
   end
 
   create_table "adjusters", force: :cascade do |t|
-    t.integer  "job_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
     t.integer  "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "insurance_company_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "affected_types", force: :cascade do |t|
@@ -69,13 +69,13 @@ ActiveRecord::Schema.define(version: 20170111191511) do
   end
 
   create_table "agents", force: :cascade do |t|
-    t.integer  "job_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
     t.integer  "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "insurance_company_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "callers", force: :cascade do |t|
@@ -228,6 +228,8 @@ ActiveRecord::Schema.define(version: 20170111191511) do
     t.integer  "billing_type_id"
     t.boolean  "emergency"
     t.integer  "referral_employee_id"
+    t.integer  "agent_id"
+    t.integer  "adjuster_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -395,6 +397,7 @@ ActiveRecord::Schema.define(version: 20170111191511) do
     t.date     "sub_1"
     t.date     "sub_2"
     t.string   "dry_book"
+    t.integer  "login_count"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "email",                  default: "",    null: false
@@ -411,5 +414,30 @@ ActiveRecord::Schema.define(version: 20170111191511) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vendor_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "vendors", force: :cascade do |t|
+    t.integer  "category_id"
+    t.string   "name"
+    t.string   "contact"
+    t.string   "phone"
+    t.string   "cellphone"
+    t.string   "fax"
+    t.string   "address"
+    t.date     "wc"
+    t.date     "liability"
+    t.date     "pollution"
+    t.date     "auto"
+    t.string   "w9"
+    t.string   "independent_contractor_agreement"
+    t.string   "email"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
 
 end

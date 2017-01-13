@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category_id: 
+  name: MyString
+  contact: MyString
+  phone: MyString
+  cellphone: MyString
+  fax: MyString
+  address: MyString
+  wc: 2017-01-13
+  liability: 2017-01-13
+  pollution: 2017-01-13
+  auto: 2017-01-13
+  w9: MyString
+  independent_contractor_agreement: MyString
+  email: MyString
+
+two:
+  category_id: 
+  name: MyString
+  contact: MyString
+  phone: MyString
+  cellphone: MyString
+  fax: MyString
+  address: MyString
+  wc: 2017-01-13
+  liability: 2017-01-13
+  pollution: 2017-01-13
+  auto: 2017-01-13
+  w9: MyString
+  independent_contractor_agreement: MyString
+  email: MyString

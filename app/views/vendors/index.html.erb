@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Vendors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>Phone</th>
+      <th>Cellphone</th>
+      <th>Fax</th>
+      <th>Address</th>
+      <th>Wc</th>
+      <th>Liability</th>
+      <th>Pollution</th>
+      <th>Auto</th>
+      <th>W9</th>
+      <th>Independent contractor agreement</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vendors.each do |vendor| %>
+      <tr>
+        <td><%= vendor.category_id %></td>
+        <td><%= vendor.name %></td>
+        <td><%= vendor.contact %></td>
+        <td><%= vendor.phone %></td>
+        <td><%= vendor.cellphone %></td>
+        <td><%= vendor.fax %></td>
+        <td><%= vendor.address %></td>
+        <td><%= vendor.wc %></td>
+        <td><%= vendor.liability %></td>
+        <td><%= vendor.pollution %></td>
+        <td><%= vendor.auto %></td>
+        <td><%= vendor.w9 %></td>
+        <td><%= vendor.independent_contractor_agreement %></td>
+        <td><%= vendor.email %></td>
+        <td><%= link_to 'Show', vendor %></td>
+        <td><%= link_to 'Edit', edit_vendor_path(vendor) %></td>
+        <td><%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Vendor', new_vendor_path %>

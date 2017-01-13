@@ -1,7 +1,7 @@
 class AgentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_agent, only: [:show, :edit, :update, :destroy]
-  before_action :set_job
+  # before_action :set_job, except: [:lookup]
 
   # GET /agents
   # GET /agents.json
@@ -13,6 +13,7 @@ class AgentsController < ApplicationController
   # GET /agents/1.json
   def show
     @address = Address.find_by(id: @agent.address_id)
+    @job = Job.find_by(id: params[:job_id])
   end
 
   # GET /agents/new
@@ -20,37 +21,46 @@ class AgentsController < ApplicationController
     @agent = Agent.new
     @address = Address.new
     @phone = Phone.new
+    @job = Job.find_by(id: params[:job_id])
   end
 
   # GET /agents/1/edit
   def edit
     @address = Address.find_by(id: @agent.address_id) || @address = Address.new
-
     @phone = Phone.find_by(agent_id: @agent.id) || @phone = Phone.new
   end
 
   # POST /agents
   # POST /agents.json
   def create
-    @agent = Agent.new(agent_params)
-    @address = Address.new(address_params)
-    @phone = Phone.new(phone_params)
+    @job = Job.find_by(id: agent_params[:job_id])
+    if agent_params[:agent_id] != ''
+      @job.agent_id = agent_params[:agent_id]
+      @job.save
+      return redirect_to job_path(@job), notice: 'Agent was successfully assigned.'
+    else
+      @agent = Agent.new(agent_params)
+      @address = Address.new(address_params)
+      @phone = Phone.new(phone_params)
+      @job = Job.find_by(id: job_param[:job_id])
 
-    respond_to do |format|
-      @address.save
-      @agent.address_id = @address.id
-      @agent.job_id = @job.id
+      respond_to do |format|
+        @address.save
+        @agent.address_id = @address.id
+        @job.agent_id = @job.id
+        @job.save
 
-      if @agent.save
-        @phone.agent_id = @agent.id
-        @phone.save
-        format.html { redirect_to job_path(@job), notice: 'Agent was successfully created.' }
-        format.json { render :show, status: :created, location: @agent }
-      else
-        format.html { render :new }
-        format.json { render json: @agent.errors, status: :unprocessable_entity }
+        if @agent.save
+          @phone.agent_id = @agent.id
+          @phone.save
+          format.html { redirect_to job_path(@job), notice: 'Agent was successfully created.' }
+          format.json { render :show, status: :created, location: @agent }
+        else
+          format.html { render :new }
+          format.json { render json: @agent.errors, status: :unprocessable_entity }
+        end
       end
-    end
+  end
   end
 
   # PATCH/PUT /agents/1
@@ -102,26 +112,37 @@ class AgentsController < ApplicationController
     redirect_to job_path(@job), notice: 'Adjuster was successfully replicated from caller.'
   end
 
+  def lookup
+    if request.xhr?
+      p params[:data]
+      @agent = Agent.find_by(id: params[:data])
+      @address = Address.find_by(id: @agent.address_id)
+      render json: [@agent, @address]
+    end
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_agent
-      @agent = Agent.find(params[:id])
-    end
 
-    def set_job
-        @job = Job.find(params[:job_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_agent
+    @agent = Agent.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def agent_params
-      params.require(:agent).permit(:job_id, :first_name, :last_name, :email, :address_id)
-    end
+  def set_job
+    @job = Job.find(params[:job_id])
+  end
 
-    def address_params
-        params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def agent_params
+    params.require(:agent).permit(:job_id, :first_name, :last_name, :email,
+                                  :address_id, :agent_id, :job_id)
+  end
 
-    def phone_params
-        params.require(:phone).permit(:number, :extension, :type_id)
-    end
+  def address_params
+    params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
+  end
+
+  def phone_params
+    params.require(:phone).permit(:number, :extension, :type_id)
+  end
 end

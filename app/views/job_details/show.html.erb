@@ -1,53 +1,74 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div class="col-xs-8">
+        <h1 class="text-center">Job Details</h1>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Status:
+                    <%= @job.try(:job_status).try(:name) %>
+                </h3>
+            </div>
+            <% if @job_detail %>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Insurance Company:</td>
+                                    <td><%= @job_detail.try(:insurance_company).try(:name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Claim Number:</td>
+                                    <td><%= @job_detail.try(:claim_number) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Policy Number:</td>
+                                    <td><%= @job_detail.try(:policy_number) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Coverage Type:</td>
+                                    <td><%= @job_detail.try(:coverage_type).try(:name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Deductible Amount</td>
+                                    <td><%= @job_detail.try(:deductible_amount) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Self Pay?</td>
+                                    <td><%= @job_detail.try(:self_pay).try(:name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Is there a deductible?</td>
+                                    <td><%= @job_detail.try(:deductible).try(:name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Is there an ESL/NSTE Amount?</td>
+                                    <td><%= @job_detail.try(:esl_nst_amount).try(:name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Emergency Services Amount?</td>
+                                    <td><%= @job_detail.try(:emergency_service_amount) %></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-<p>
-  <strong>Insurance company:</strong>
-  <%= @job_detail.insurance_company_id %>
-</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
 
-<p>
-  <strong>Claim number:</strong>
-  <%= @job_detail.claim_number %>
-</p>
-
-<p>
-  <strong>Policy number:</strong>
-  <%= @job_detail.policy_number %>
-</p>
-
-<p>
-  <strong>Coverage type:</strong>
-  <%= @job_detail.coverage_type_id %>
-</p>
-
-<p>
-  <strong>Deductible amount:</strong>
-  <%= @job_detail.deductible_amount %>
-</p>
-
-<p>
-  <strong>Self pay:</strong>
-  <%= @job_detail.self_pay_id %>
-</p>
-
-<p>
-  <strong>Deductible:</strong>
-  <%= @job_detail.deductible_id %>
-</p>
-
-<p>
-  <strong>Esl nst amount:</strong>
-  <%= @job_detail.esl_nst_amount_id %>
-</p>
-
-<p>
-  <strong>Emergency service amount:</strong>
-  <%= @job_detail.emergency_service_amount %>
-</p>
-
-<p>
-  <strong>Job:</strong>
-  <%= @job_detail.job_id %>
-</p>
-
-<%= link_to 'Edit', edit_job_job_detail_path(@job, @job_detail) %> |
+                <span class="pull-right">
+                    <%= link_to edit_job_job_detail_path(@job, @job_detail), class: "btn btn-sm btn-warning", type: "button" do %>
+                    <i class="glyphicon glyphicon-edit"></i>
+                    <% end %>
+                </span>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>
