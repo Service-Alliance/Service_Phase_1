@@ -3,12 +3,13 @@
     <div class="alert alert-success" role="alert"><%= notice %></div>
     <% end %>
 
+    <%= render partial: "partials/jobs_sidebar" %>
     <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
+        <div class="col-xs-8">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                      Job Property Information: 
+                      Job Property Information:
                         <%= @property.try(:customer).try(:first_name) %>
                         <%= @property.try(:customer).try(:last_name) %>
                     </h3>
@@ -78,7 +79,7 @@
                 </div>
                 <div class="panel-footer">
 
-                    <span class="pull-right">
+                    <span>
                         <%= link_to edit_job_property_path(@job, @property), class: "btn btn-sm btn-warning", type: "button" do %>
                         <i class="glyphicon glyphicon-edit"></i>
                         <% end %>
