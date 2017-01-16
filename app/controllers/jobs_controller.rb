@@ -63,6 +63,7 @@ class JobsController < ApplicationController
     @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
 
     if @caller.save
+      CustomerMailer.welcome_email(@caller).deliver_now
       @address.save
       if @job.save
         if @call
