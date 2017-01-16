@@ -171,8 +171,18 @@ ActiveRecord::Schema.define(version: 20170113185114) do
 
   create_table "franchises", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "franchise_number"
+    t.string   "legal_name"
+    t.string   "phone"
+    t.string   "fax"
+    t.string   "website"
+    t.integer  "address_id"
+    t.string   "general_license"
+    t.string   "residential_license"
+    t.string   "commercial_license"
+    t.string   "mold_remediation_license"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "images", force: :cascade do |t|
@@ -184,8 +194,18 @@ ActiveRecord::Schema.define(version: 20170113185114) do
 
   create_table "insurance_companies", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "bulletin_number"
+    t.date     "effective_date"
+    t.text     "states_involved"
+    t.string   "property_type"
+    t.text     "collect_deductible"
+    t.integer  "esl"
+    t.text     "estimating_software"
+    t.text     "pricing"
+    t.text     "customer_service_contacts"
+    t.text     "special_conditions"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "job_details", force: :cascade do |t|
@@ -195,6 +215,7 @@ ActiveRecord::Schema.define(version: 20170113185114) do
     t.integer  "coverage_type_id"
     t.integer  "deductible_amount"
     t.integer  "self_pay_id"
+    t.integer  "billing_type_id"
     t.integer  "deductible_id"
     t.integer  "esl_nst_amount_id"
     t.integer  "emergency_service_amount"
@@ -225,7 +246,6 @@ ActiveRecord::Schema.define(version: 20170113185114) do
     t.integer  "customer_id"
     t.integer  "referral_type_id"
     t.integer  "billing_address_id"
-    t.integer  "billing_type_id"
     t.boolean  "emergency"
     t.integer  "referral_employee_id"
     t.integer  "agent_id"

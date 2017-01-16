@@ -2,7 +2,7 @@ user = User.create(email: 'callrep@test.com', password: 'password', password_con
 user = User.create(email: 'jobcoordinator@test.com', password: 'password', password_confirmation: 'password', job_coordinator: true)
 user = User.create(email: 'admin@test.com', password: 'password', password_confirmation: 'password', admin: true)
 
-Address.create(address_1: "Address 1", address_2: "Address 2")
+Address.create(address_1: 'Address 1', address_2: 'Address 2')
 Agent.create(first_name: 'Jake', last_name: 'Cinninger', insurance_company_id: 1, email: 'jcinninger@gmail.com', address_id: 1)
 Adjuster.create(first_name: 'Brendan', last_name: 'Bayliss', insurance_company_id: 1, email: 'jcinninger@gmail.com', address_id: 1)
 
@@ -39,7 +39,8 @@ JobType.create(name: 'General Cleaning')
 # Franchise Names
 Franchise.create(name: 'Central Manhattan')
 Franchise.create(name: 'East Windsor')
-Franchise.create(name: 'Medford')
+medford_address = Address.create(address_1: "3090 Route 112", city: "Medford", state_id: 32, zip_code: "11763")
+Franchise.create(name: 'Medford', franchise_number: 9584, legal_name: "Restoration Services of Medford, LLC", phone: "(631) 732-4931", website: 'http://www.servpromedfordny.com/', address_id: medford_address.id, general_license: "", residential_license: "", commercial_license: "", mold_remediation_license: "")
 Franchise.create(name: 'Oakdale/North Bay Shore')
 Franchise.create(name: 'Old Bridge/Cranbury')
 Franchise.create(name: 'Southwest Brooklyn')
@@ -318,7 +319,15 @@ State.create(name: 'WI')
 State.create(name: 'WY')
 
 # Insurance Company Names
-InsuranceCompany.create(name: 'AAA Missouri Insurance Company')
+InsuranceCompany.create(name: 'AAA Missouri Insurance Company',
+                        bulletin_number: '4056-SF', effective_date: Date.new(2012,3,22),
+                        states_involved: 'U.S. Franchises in AL, AR, IL, IN, KS, LA, MO, and MS',
+                        property_type: 'Residential', collect_deductible: 'Yes',
+                        esl: 3000, estimating_software: 'Xactimate 27.5',
+                        pricing: 'Use the most current price list provided by Xactimate for your area.',
+                        customer_service_contacts: '1-800-222-7623',
+                        special_conditions: 'Dispatches for AAA Missouri will appear as AAA Northern New England...  Use Xactimate Profile ACSC.')
+
 InsuranceCompany.create(name: 'AAA of Carolina Group')
 InsuranceCompany.create(name: 'AAA of Northern New England')
 InsuranceCompany.create(name: 'AAA Southern California')
