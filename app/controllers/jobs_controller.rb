@@ -49,6 +49,11 @@ class JobsController < ApplicationController
       @billing_address = @job.billing_address || @billing_address = Address.new
       render template: 'jobs/billing_form'
     end
+
+    if params[:manager] == 'true'
+      @job_manager = @job.job_manager
+      render template: 'jobs/manager_form'
+    end
   end
 
   # POST /jobs
@@ -118,6 +123,8 @@ class JobsController < ApplicationController
       return redirect_to @job, notice: 'Job was successfully updated.'
     end
 
+
+
     @caller = Caller.find_by(job_id: @job.id)
     @address = @caller.address
     respond_to do |format|
@@ -125,6 +132,11 @@ class JobsController < ApplicationController
         @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
         @caller.update(caller_params)
         @address.update(address_params)
+
+        if job_params[:job_manager_id]
+          @user = User.find_by(id: job_params[:job_manager_id])
+          UserMailer.manager_assignment(@user, @job).deliver_now
+        end
 
         format.html do
           if params[:commit] == 'Save and Move to Job Loss'
@@ -175,23 +187,23 @@ class JobsController < ApplicationController
                                 :entered_by_id, :franchise_id, :details,
                                 :notes, :customer_id, :referral_type_id,
                                 :billing_address_id, :emergency,
-                                :referral_employee_id,
+                                :referral_employee_id, :job_manager_id,
                                 customer: [:address_1, :address_2, :zip, :city,
                                            :state_id, :county])
   end
 
   def caller_params
-    params.require(:caller).permit(:first_name, :last_name, :email, :address_1,
-                                   :address_2, :zip, :city, :state_id, :county)
+    params.fetch(:caller, {}).permit(:first_name, :last_name, :email, :address_1,
+                                     :address_2, :zip, :city, :state_id, :county)
   end
 
   def address_params
-    params.require(:address).permit(:address_1, :address_2, :zip_code, :city,
-                                    :state_id, :county)
+    params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city,
+                                      :state_id, :county)
   end
 
   def call_params
-    params.require(:call).permit(:id)
+    params.fetch(:call, {}).permit(:id)
   end
 
   def billing_params

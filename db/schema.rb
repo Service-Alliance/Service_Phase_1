@@ -230,6 +230,7 @@ ActiveRecord::Schema.define(version: 20170113185114) do
     t.integer  "referral_employee_id"
     t.integer  "agent_id"
     t.integer  "adjuster_id"
+    t.integer  "job_manager_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end

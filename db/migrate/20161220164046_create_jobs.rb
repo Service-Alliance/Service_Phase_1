@@ -15,6 +15,7 @@ class CreateJobs < ActiveRecord::Migration
       t.integer :referral_employee_id
       t.integer :agent_id
       t.integer :adjuster_id
+      t.integer :job_manager_id
 
       t.timestamps null: false
     end

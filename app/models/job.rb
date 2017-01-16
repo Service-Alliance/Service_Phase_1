@@ -17,6 +17,7 @@ class Job < ActiveRecord::Base
   has_one :job_detail
   has_one :emergency_contact
   has_many :images
+  belongs_to :job_manager, class_name: 'User'
 
   # Activity Tracking activated
   include PublicActivity::Model
