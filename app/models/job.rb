@@ -16,6 +16,7 @@ class Job < ActiveRecord::Base
   has_one :loss
   has_one :job_detail
   has_one :emergency_contact
+  has_many :images
 
   # Activity Tracking activated
   include PublicActivity::Model

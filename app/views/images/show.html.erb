@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Job:</strong>
-  <%= @image.job_id %>
-</p>
 
-<p>
-  <strong>Image:</strong>
-  <%= @image.image %>
-</p>
-
-<%= link_to 'Edit', edit_image_path(@image) %> |
-<%= link_to 'Back', images_path %>
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div class="col-xs-8">
+      <%= link_to "Upload a new image", new_job_image_path(@job) %><br>
+      <% if @images %>
+        <% @images.each do |image| %>
+          <a href="<%= image.image %>"><img class="image-thumb" src="<%= image.image %>"></a><br><br>
+        <% end %>
+      <% end %>
+    </div>
+</div>

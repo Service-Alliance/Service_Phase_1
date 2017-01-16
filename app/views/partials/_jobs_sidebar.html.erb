@@ -53,6 +53,12 @@
                     <% end %>
                 </li>
                 <li>
+                    <%= link_to job_images_path(@job)  do %>
+                    <i class="<%= @job.images ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Job Images
+                    <% end %>
+                </li>
+                <li>
                     <a href="buttons.html">
                         <i class="<%= @job.call ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                         Call Rail Information

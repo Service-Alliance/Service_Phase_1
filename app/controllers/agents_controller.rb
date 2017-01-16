@@ -114,7 +114,6 @@ class AgentsController < ApplicationController
 
   def lookup
     if request.xhr?
-      p params[:data]
       @agent = Agent.find_by(id: params[:data])
       @address = Address.find_by(id: @agent.address_id)
       render json: [@agent, @address]

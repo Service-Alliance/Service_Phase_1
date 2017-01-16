@@ -1,29 +1,15 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Images</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Job</th>
-      <th>Image</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @images.each do |image| %>
-      <tr>
-        <td><%= image.job_id %></td>
-        <td><%= image.image %></td>
-        <td><%= link_to 'Show', image %></td>
-        <td><%= link_to 'Edit', edit_image_path(image) %></td>
-        <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Image', new_image_path %>
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div class="col-xs-8">
+      <%= link_to "Upload a new image", new_job_image_path(@job) %><br>
+      <% if @images %>
+        <% @images.each do |image| %>
+          <a href="<%= image.image %>"><img class="image-thumb" src="<%= image.image %>"></a><br><br>
+        <% end %>
+      <% end %>
+    </div>
+</div>
