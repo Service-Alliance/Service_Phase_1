@@ -42,14 +42,13 @@ class AgentsController < ApplicationController
       @agent = Agent.new(agent_params)
       @address = Address.new(address_params)
       @phone = Phone.new(phone_params)
-      
+
       respond_to do |format|
         @address.save
         @agent.address_id = @address.id
-        @job.agent_id = @job.id
-        @job.save
-
         if @agent.save
+          @job.agent_id = @agent.id
+          @job.save
           @phone.agent_id = @agent.id
           @phone.save
           format.html { redirect_to job_path(@job), notice: 'Agent was successfully created.' }
@@ -133,7 +132,7 @@ class AgentsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def agent_params
     params.require(:agent).permit(:job_id, :first_name, :last_name, :email,
-                                  :address_id, :agent_id)
+                                  :address_id, :agent_id, :insurance_company_id)
   end
 
   def address_params

@@ -25,7 +25,7 @@ function ajaxAgent(selectedAgent){
           dataType: 'json'
       })
       .success(function(response) {
-          $("#agent_agent_id").val(response[0].id);
+          $("#same_agent_agent_id").val(response[0].id);
           $("#new-agent").addClass('hidden');
           $("#existing-agent").removeClass('hidden');
           var first_name = response[0].first_name;

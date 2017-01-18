@@ -46,6 +46,18 @@
                                     <td><%= @property.multi_unit %></td>
                                 </tr>
                                 <tr>
+                                    <td>Basement Finsihed (T/F)</td>
+                                    <td><%= @property.basement_finished %></td>
+                                </tr>
+                                <tr>
+                                    <td>Ownership (T/F)</td>
+                                    <td><%= @property.ownership %></td>
+                                </tr>
+                                <tr>
+                                    <td>Condo (T/F)</td>
+                                    <td><%= @property.condo %></td>
+                                </tr>
+                                <tr>
                                     <td>Ceiling Affected</td>
                                     <td><%= @property.try(:ceiling_affected).try(:name) %></td>
                                 </tr>

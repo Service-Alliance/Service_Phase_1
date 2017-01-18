@@ -61,6 +61,14 @@
                                     <td>Visible Mold</td>
                                     <td><%= @loss.try(:visible_mold).try(:name) %></td>
                                 </tr>
+                                <tr>
+                                    <td>Source Cause</td>
+                                    <td><%= @loss.source_cause %></td>
+                                </tr>
+                                <tr>
+                                    <td>Notes</td>
+                                    <td><%= @loss.notes %></td>
+                                </tr>
 
                             </tbody>
                         </table>

@@ -25,7 +25,7 @@ function ajaxAdjuster(selectedAdjuster){
           dataType: 'json'
       })
       .success(function(response) {
-          $("#adjuster_adjuster_id").val(response[0].id);
+          $("#same_adjuster_adjuster_id").val(response[0].id);
           $("#new-adjuster").addClass('hidden');
           $("#existing-adjuster").removeClass('hidden');
           var first_name = response[0].first_name;

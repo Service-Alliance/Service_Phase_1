@@ -127,8 +127,8 @@
     <%= render 'phone_form', f: f %>
     </div>
 
-    <%= hidden_field_tag "adjuster[adjuster_id]" %>
-    <%= hidden_field_tag "adjuster[job_id]", params[:job_id] %>
+    <%= hidden_field_tag "same_adjuster[adjuster_id]" %>
+    <%= hidden_field_tag "job[job_id]", params[:job_id] %>
     <div class="col-xs-12 text-center">
         <div class="actions">
             <%= f.submit class:"btn btn-primary" %>

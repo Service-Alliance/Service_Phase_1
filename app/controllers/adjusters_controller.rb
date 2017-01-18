@@ -33,9 +33,9 @@ class AdjustersController < ApplicationController
   # POST /adjusters
   # POST /adjusters.json
   def create
-    @job = Job.find_by(id: adjuster_params[:job_id])
-    if adjuster_params[:adjuster_id] != ''
-      @job.adjuster_id = adjuster_params[:adjuster_id]
+    @job = Job.find_by(id: job_params[:job_id])
+    if same_adjuster_params[:adjuster_id] != ''
+      @job.adjuster_id = same_adjuster_params[:adjuster_id]
       @job.save
       return redirect_to job_path(@job), notice: 'Adjuster was successfully assigned.'
     else
@@ -45,9 +45,10 @@ class AdjustersController < ApplicationController
 
       respond_to do |format|
         @address.save
-        @adjuster.job_id = @job.id
         @adjuster.address_id = @address.id
         if @adjuster.save
+          @job.adjuster_id = @adjuster.id
+          @job.save
           @phone.adjuster_id = @adjuster.id
           @phone.save
           format.html { redirect_to job_path(@job), notice: 'Adjuster was successfully created.' }
@@ -130,13 +131,21 @@ class AdjustersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def adjuster_params
-    params.require(:adjuster).permit(:job_id, :first_name, :last_name, :email,
-                                     :address_id, :adjuster_id)
+    params.require(:adjuster).permit(:first_name, :last_name, :email,
+                                     :address_id, :adjuster_id, :insurance_company_id)
   end
 
   def address_params
     params.require(:address).permit(:address_1, :address_2, :zip_code, :city,
                                     :state_id, :county)
+  end
+
+  def job_params
+    params.require(:job).permit(:job_id)
+  end
+
+  def same_adjuster_params
+    params.require(:same_adjuster).permit(:adjuster_id)
   end
 
   def phone_params

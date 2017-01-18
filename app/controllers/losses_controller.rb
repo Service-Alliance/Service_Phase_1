@@ -79,6 +79,6 @@ class LossesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loss_params
-      params.require(:loss).permit(:recieved_by, :loss_occured, :fnol_recieved, :customer_called, :loss_type_id, :loss_cause_id, :standing_water_id, :water_available_id, :electricity_available_id, :source_off_id, :visible_mold_id, :affected_square_footage, :cleaning_type, :previous_water_damage_id, :source_cause)
+      params.require(:loss).permit(:recieved_by, :loss_occured, :fnol_recieved, :customer_called, :loss_type_id, :loss_cause_id, :standing_water_id, :water_available_id, :electricity_available_id, :source_off_id, :visible_mold_id, :affected_square_footage, :cleaning_type, :previous_water_damage_id, :source_cause, :notes)
     end
 end
