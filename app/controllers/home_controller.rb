@@ -5,5 +5,11 @@ class HomeController < ApplicationController
     @month_calls = Call.where(created_at: Time.now.beginning_of_month..Time.now.end_of_month).count
 
     @activities = PublicActivity::Activity.all
+
+    if current_user.admin?
+      render template: 'home/admin'
+    elsif current_user.call_rep?
+      render template: 'home/call_rep'
+    end
   end
 end

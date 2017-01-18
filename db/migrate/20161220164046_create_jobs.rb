@@ -9,8 +9,6 @@ class CreateJobs < ActiveRecord::Migration
       t.text :notes
       t.integer :customer_id
       t.integer :referral_type_id
-      t.integer :billing_address_id
-      t.integer :billing_type_id
       t.boolean :emergency
       t.integer :referral_employee_id
       t.integer :agent_id

@@ -1,53 +1,79 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <strong>Name:</strong>
-  <%= @insurance_company.id %>
-</p>
-<p>
-  <strong>Name:</strong>
-  <%= @insurance_company.name %>
-</p>
-<p>
-  <strong>Bulletin Number:</strong>
-  <%= @insurance_company.bulletin_number %>
-</p>
-<p>
-  <strong>Effective Date:</strong>
-  <%= @insurance_company.effective_date %>
-</p>
-<p>
-  <strong>States Involved:</strong>
-  <%= @insurance_company.states_involved %>
-</p>
-<p>
-  <strong>Property Type:</strong>
-  <%= @insurance_company.property_type %>
-</p>
-<p>
-  <strong>Collect Deductible:</strong>
-  <%= @insurance_company.collect_deductible %>
-</p>
-<p>
-  <strong>ESL:</strong>
-  <%= @insurance_company.esl %>
-</p>
-<p>
-  <strong>Estimating Software:</strong>
-  <%= @insurance_company.estimating_software %>
-</p>
-<p>
-  <strong>Pricing:</strong>
-  <%= @insurance_company.pricing %>
-</p>
-<p>
-  <strong>Customer Service Contacts:</strong>
-  <%= @insurance_company.customer_service_contacts %>
-</p>
-<p>
-  <strong>Special Conditions:</strong>
-  <%= @insurance_company.special_conditions %>
-</p>
 
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+    <h1 class="text-center">Insurance Company:</h1>
+    <div class="col-xs-8 col-xs-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Insurance Company
+                </h3>
+            </div>
 
-<%= link_to 'Edit', edit_insurance_company_path(@insurance_company) %> |
-<%= link_to 'Back', insurance_companies_path %>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>ID:</td>
+                                    <td><%= @insurance_company.id %></td>
+                                </tr>
+                                <tr>
+                                    <td>Bulletin Number:</td>
+                                    <td><%= @insurance_company.bulletin_number %></td>
+                                </tr>
+                                <tr>
+                                    <td>Effective Date:</td>
+                                    <td><%= @insurance_company.effective_date %></td>
+                                </tr>
+                                <tr>
+                                    <td>States Involved:</td>
+                                    <td><%= @insurance_company.states_involved %></td>
+                                </tr>
+                                <tr>
+                                    <td>Property Type</td>
+                                    <td><%= @insurance_company.property_type %></td>
+                                </tr>
+                                <tr>
+                                    <td>Collect Deductible</td>
+                                    <td><%= @insurance_company.collect_deductible %></td>
+                                </tr>
+                                <tr>
+                                    <td>ESL</td>
+                                    <td><%= @insurance_company.esl %></td>
+                                </tr>
+                                <tr>
+                                    <td>Estimating Software</td>
+                                    <td><%= @insurance_company.estimating_software %></td>
+                                </tr>
+                                <tr>
+                                    <td>Pricing</td>
+                                    <td><%= @insurance_company.pricing %></td>
+                                </tr>
+                                <tr>
+                                    <td>Customer Service Contacts</td>
+                                    <td><%= @insurance_company.customer_service_contacts %></td>
+                                </tr>
+                                <tr>
+                                    <td>Special Conditions</td>
+                                    <td><%= @insurance_company.special_conditions %></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+
+                <%= link_to edit_insurance_company_path(@insurance_company), class: "btn btn-sm btn-warning", type: "button" do %>
+                <i class="glyphicon glyphicon-edit"></i>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

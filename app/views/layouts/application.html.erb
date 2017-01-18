@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Service Alliance Inc.</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+    <head>
+        <title>Service Alliance Inc.</title>
+        <%= stylesheet_link_tag    'application', media: 'all' %>
+        <%= javascript_include_tag 'application' %>
+        <%= csrf_meta_tags %>
+    </head>
+    <body>
+    <% if current_user.admin? %>
+        <%= render partial: "layouts/admin_navbar" %>
+    <% else %>
+        <%= render partial: "layouts/call_rep_navbar" %>
+    <% end %>
+    <%= yield %>
 
-<%= render partial: "layouts/navbar" %>
-<%= yield %>
-
-</body>
+    </body>
 </html>

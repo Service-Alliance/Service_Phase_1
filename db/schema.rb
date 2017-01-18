@@ -221,6 +221,8 @@ ActiveRecord::Schema.define(version: 20170117162717) do
     t.integer  "esl_nst_amount_id"
     t.integer  "emergency_service_amount"
     t.integer  "job_id"
+    t.integer  "billing_address_id"
+    t.integer  "billing_type_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -257,8 +259,6 @@ ActiveRecord::Schema.define(version: 20170117162717) do
     t.text     "notes"
     t.integer  "customer_id"
     t.integer  "referral_type_id"
-    t.integer  "billing_address_id"
-    t.integer  "billing_type_id"
     t.boolean  "emergency"
     t.integer  "referral_employee_id"
     t.integer  "agent_id"

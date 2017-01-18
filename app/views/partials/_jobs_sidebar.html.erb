@@ -10,31 +10,6 @@
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
-                    <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Caller Information
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to new_or_view_job_loss_path(@job, @job.loss)  do %>
-                    <i class="<%= @job.loss ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Loss Information
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to new_or_view_job_property_path(@job, @job.property)  do %>
-                    <i class="<%= @job.property ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Property Information
-                    <% end %>
-                </li>
-
-                <li>
-                    <%= link_to new_or_view_job_detail_path(@job, @job.job_detail)  do %>
-                    <i class="<%= @job.job_detail ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Job Details
-                    <% end %>
-                </li>
-                <li>
                     <%= link_to new_or_view_agent_path(@job, @job.agent)  do %>
                     <i class="<%= @job.agent ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Agent Details

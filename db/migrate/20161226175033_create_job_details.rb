@@ -11,6 +11,8 @@ class CreateJobDetails < ActiveRecord::Migration
       t.integer :esl_nst_amount_id
       t.integer :emergency_service_amount
       t.integer :job_id
+      t.integer :billing_address_id
+      t.integer :billing_type_id
 
       t.timestamps null: false
     end

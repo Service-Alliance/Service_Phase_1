@@ -7,8 +7,7 @@ class Job < ActiveRecord::Base
   belongs_to :customer
   has_one :call
   belongs_to :user, foreign_key: :entered_by_id
-  belongs_to :billing_address, foreign_key: :billing_address_id,
-                               class_name: 'Address'
+  
   belongs_to :agent
   belongs_to :adjuster
   has_one :property

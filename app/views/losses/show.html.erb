@@ -77,14 +77,11 @@
                 </div>
             </div>
             <div class="panel-footer">
-
-                <span class="pull-right">
-                    <%= link_to edit_job_loss_path(@job, @loss), class: "btn btn-sm btn-warning", type: "button" do %>
-                    <i class="glyphicon glyphicon-edit"></i>
-                    <% end %>
-                </span>
+                <%= link_to edit_job_loss_path(@job, @loss), class: "btn btn-sm btn-warning", type: "button" do %>
+                <i class="glyphicon glyphicon-edit"></i>
+                <% end %>
             </div>
         </div>
+        <%= render partial: "partials/jobs_bottom_bar" %>
     </div>
-</div>
 </div>

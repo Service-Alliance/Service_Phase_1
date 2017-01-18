@@ -25,11 +25,10 @@ class InsuranceCompaniesController < ApplicationController
   # POST /insurance_companies.json
   def create
     @insurance_company = InsuranceCompany.new(insurance_company_params)
-    @insurance_company.job_id = @job.id
 
     respond_to do |format|
       if @insurance_company.save
-        format.html {  redirect_to job_path(@job), notice: 'Job detail was successfully created.' }
+        format.html {  redirect_to insurance_company_path(@insurance_company), notice: 'Insurance Company was successfully created.' }
         format.json { render :show, status: :created, location: @insurance_company }
       else
         format.html { render :new }
@@ -43,7 +42,7 @@ class InsuranceCompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @insurance_company.update(insurance_company_params)
-        format.html {  redirect_to job_path(@job), notice: 'Job detail was successfully updated.' }
+        format.html {  redirect_to insurance_company_path(@insurance_company), notice: 'Insurance Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @insurance_company }
       else
         format.html { render :edit }
@@ -57,7 +56,7 @@ class InsuranceCompaniesController < ApplicationController
   def destroy
     @insurance_company.destroy
     respond_to do |format|
-      format.html { redirect_to insurance_companies_url, notice: 'Job detail was successfully destroyed.' }
+      format.html { redirect_to insurance_companies_url, notice: 'Insurance Company was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

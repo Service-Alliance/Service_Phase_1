@@ -16,10 +16,12 @@ class JobDetailsController < ApplicationController
   # GET /job_details/new
   def new
     @job_detail = JobDetail.new
+    @billing_address = @job.billing_address, {} || @billing_address = Address.new
   end
 
   # GET /job_details/1/edit
   def edit
+    @billing_address = @job.try(:billing_address) || @billing_address = Address.new
   end
 
   # POST /job_details
@@ -27,6 +29,26 @@ class JobDetailsController < ApplicationController
   def create
     @job_detail = JobDetail.new(job_detail_params)
     @job_detail.job_id = @job.id
+
+    if billing_params != {}
+      if billing_params[:type][0] == '1'
+        @job.billing_type_id = 1
+        @job.billing_address_id = @job.customer.address_id
+      elsif billing_params[:type][0] == '2'
+        @job.billing_type_id = 2
+        @job.billing_address_id = Adjuster.find_by(job_id: @job.id).address_id
+      elsif billing_params[:type][0] == '3'
+        @job.billing_type_id = 3
+        @billing_address = Address.create(address_1: address_params[:address_1],
+                                          address_2:  address_params[:address_2],
+                                          city:  address_params[:city],
+                                          zip_code: address_params[:zip_code],
+                                          county:  address_params[:county])
+        @billing_address.save
+        @job_detail.billing_address_id = @billing_address.id
+        end
+      @job.save
+    end
 
     respond_to do |format|
       if @job_detail.save
@@ -42,6 +64,27 @@ class JobDetailsController < ApplicationController
   # PATCH/PUT /job_details/1
   # PATCH/PUT /job_details/1.json
   def update
+    if billing_params != {}
+      if billing_params[:type][0] == '1'
+        @job_detail.billing_type_id = 1
+        @job_detail.billing_address_id = @job_detail.customer.address_id
+      elsif billing_params[:type][0] == '2'
+        @job_detail.billing_type_id = 2
+        @job_detail.billing_address_id = Adjuster.find_by(job_id: @job.id).address_id
+      elsif billing_params[:type][0] == '3'
+        @job_detail.billing_type_id = 3
+        @billing_address = Address.create(address_1: address_params[:address_1],
+                                          address_2:  address_params[:address_2],
+                                          city:  address_params[:city],
+                                          zip_code: address_params[:zip_code],
+                                          county:  address_params[:county])
+        @billing_address.save
+        @job_detail.billing_address_id = @billing_address.id
+        end
+      @job.save
+
+      return redirect_to @job, notice: 'Job was successfully updated.'
+    end
     respond_to do |format|
       if @job_detail.update(job_detail_params)
         format.html {  redirect_to job_path(@job), notice: 'Job detail was successfully updated.' }
@@ -75,5 +118,12 @@ class JobDetailsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_detail_params
       params.require(:job_detail).permit(:insurance_company_id, :claim_number, :policy_number, :coverage_type_id, :deductible_amount, :self_pay_id, :deductible_id, :esl_nst_amount_id, :emergency_service_amount, :job_id, :billing_type_id)
+    end
+    def address_params
+      params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city,
+                                        :state_id, :county)
+    end
+    def billing_params
+      params.fetch(:billing_address, {}).permit(type: [])
     end
 end

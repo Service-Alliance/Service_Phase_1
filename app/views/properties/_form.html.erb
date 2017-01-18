@@ -1,144 +1,148 @@
-<%= form_for [@job, @property] do |f| %>
-<% if @property.errors.any? %>
-<div id="error_explanation">
-    <h2><%= pluralize(@property.errors.count, "error") %>
-        prohibited this property from being saved:</h2>
+<div class="col-xs-12">
+    <div class="row content-box">
+        <%= form_for [@job, @property] do |f| %>
+        <% if @property.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@property.errors.count, "error") %>
+                prohibited this property from being saved:</h2>
 
-    <ul>
-        <% @property.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+                <% @property.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
         <% end %>
-    </ul>
-</div>
-<% end %>
 
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :structure_type_id %><br>
-            <%= f.collection_select :structure_type_id, StructureType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :structure_type_id %><br>
+                    <%= f.collection_select :structure_type_id, StructureType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :property_type_id %><br>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :property_type_id %><br>
 
-            <%= f.grouped_collection_select :property_type_id, StructureType.all, :property_types, :name, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                    <%= f.grouped_collection_select :property_type_id, StructureType.all, :property_types, :name, :id, :name, {prompt: true},  { class: 'form-control'} %>
 
+                </div>
+            </div>
+        </div>
 
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :year_built %><br>
+                    <%= f.number_field :year_built, class: 'form-control' %>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :year_built %><br>
-            <%= f.number_field :year_built, class: 'form-control' %>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :floors_affected %><br>
+                    <%= f.number_field :floors_affected, class: 'form-control' %>
+                </div>
+            </div>
         </div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :rooms_affected %><br>
+                    <%= f.number_field :rooms_affected, class: 'form-control' %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :occured_level %><br>
+                    <%= f.text_field :occured_level, class: 'form-control' %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :basement_finished %><br>(Check if yes)
+                    <%= f.check_box :basement_finished %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :multi_unit %><br>(Check if yes)
+                    <%= f.check_box :multi_unit %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :ownership %><br>(Check if yes)
+                    <%= f.check_box :ownership %>
+                </div>
+            </div>
+        </div>
+        <div id="condo" class="col-xs-4 hidden">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :condo %><br>(Check if yes)
+                    <%= f.check_box :condo %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :ceiling_affected %><br>
+                    <%= f.collection_radio_buttons(:ceiling_affected_id, AffectedType.all, :id, :name) %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :walls_affected %><br>
+                    <%= f.collection_radio_buttons(:walls_affected_id, AffectedType.all, :id, :name) %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :attic_affected %><br>
+                    <%= f.collection_radio_buttons(:attic_affected_id, AffectedType.all, :id, :name) %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :contents_affected %><br>
+                    <%= f.collection_radio_buttons(:contents_affected_id, AffectedType.all, :id, :name) %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <%= f.label :flooring_types %><br>
+            <%= f.collection_check_boxes(:flooring_type_ids, FlooringType.all, :id, :name) %>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="form-group">
+                <div class="actions">
+                    <%= f.submit class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+        <% end %>
     </div>
 </div>
-
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :floors_affected %><br>
-            <%= f.number_field :floors_affected, class: 'form-control' %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :rooms_affected %><br>
-            <%= f.number_field :rooms_affected, class: 'form-control' %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :occured_level %><br>
-            <%= f.text_field :occured_level, class: 'form-control' %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :basement_finished %><br>(Check if yes)
-            <%= f.check_box :basement_finished %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :multi_unit %><br>(Check if yes)
-            <%= f.check_box :multi_unit %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :ownership %><br>(Check if yes)
-            <%= f.check_box :ownership %>
-        </div>
-    </div>
-</div>
-<div id="condo" class="col-xs-4 hidden">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :condo %><br>(Check if yes)
-            <%= f.check_box :condo %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :ceiling_affected %><br>
-            <%= f.collection_radio_buttons(:ceiling_affected_id, AffectedType.all, :id, :name) %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :walls_affected %><br>
-            <%= f.collection_radio_buttons(:walls_affected_id, AffectedType.all, :id, :name) %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :attic_affected %><br>
-            <%= f.collection_radio_buttons(:attic_affected_id, AffectedType.all, :id, :name) %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <div class="form-group">
-        <div class="field">
-            <%= f.label :contents_affected %><br>
-            <%= f.collection_radio_buttons(:contents_affected_id, AffectedType.all, :id, :name) %>
-        </div>
-    </div>
-</div>
-<div class="col-xs-4">
-    <%= f.label :flooring_types %><br>
-    <%= f.collection_check_boxes(:flooring_type_ids, FlooringType.all, :id, :name) %>
-</div>
-<div class="col-xs-12 text-center">
-    <div class="form-group">
-        <div class="actions">
-            <%= f.submit class: "btn btn-primary" %>
-        </div>
-    </div>
-</div>
-<% end %>
+<%= render partial: "partials/jobs_bottom_bar" %>

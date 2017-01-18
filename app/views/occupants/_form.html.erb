@@ -1,37 +1,42 @@
-<%= form_for(@occupant) do |f| %>
-  <% if @occupant.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@occupant.errors.count, "error") %> prohibited this occupant from being saved:</h2>
+<div class="col-xs-12">
+    <div class="row content-box">
+        <%= form_for(@occupant) do |f| %>
+        <% if @occupant.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@occupant.errors.count, "error") %>
+                prohibited this occupant from being saved:</h2>
 
-      <ul>
-      <% @occupant.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+            <ul>
+                <% @occupant.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+
+        <div class="field">
+            <%= f.label :first_name %><br>
+            <%= f.text_field :first_name %>
+        </div>
+        <div class="field">
+            <%= f.label :last_name %><br>
+            <%= f.text_field :last_name %>
+        </div>
+        <div class="field">
+            <%= f.label :email %><br>
+            <%= f.text_field :email %>
+        </div>
+        <div class="field">
+            <%= f.label :address_id %><br>
+            <%= f.number_field :address_id %>
+        </div>
+        <div class="field">
+            <%= f.label :job_id %><br>
+            <%= f.number_field :job_id %>
+        </div>
+        <div class="actions">
+            <%= f.submit %>
+        </div>
+        <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :address_id %><br>
-    <%= f.number_field :address_id %>
-  </div>
-  <div class="field">
-    <%= f.label :job_id %><br>
-    <%= f.number_field :job_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

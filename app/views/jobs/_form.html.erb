@@ -1,109 +1,118 @@
-<%= form_for(@job) do |f| %>
-<% if @job.errors.any? %>
-<div id="error_explanation">
-    <h3><%= pluralize(@job.errors.count, "error") %>
-        prohibited this job from being saved:</h3>
-
-    <ul>
-        <% @job.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-        <% end %>
-    </ul>
-</div>
-<% end %>
-<% if @caller.errors.any? %>
-<div id="error_explanation">
-    <h3><%= pluralize(@caller.errors.count, "error") %>
-        prohibited this job from being saved:</h3>
-    <ul>
-        <% @caller.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-        <% end %>
-    </ul>
-</div>
-<% end %>
-
 <div class="col-xs-12">
-    <%= fields_for(:call) do |f| %>
-    <%= f.label :current_active_calls %>
-    <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
-    <% end %>
-</div>
+    <div class="row content-box">
+        <%= form_for(@job) do |f| %>
+        <% if @job.errors.any? %>
+        <div id="error_explanation">
+            <h3><%= pluralize(@job.errors.count, "error") %>
+                prohibited this job from being saved:</h3>
 
-<div class="col-xs-12">
-    <div class="form-group">
-      <label for="job_emergency">Is this an emergency?</label><br> Check if yes
-      <%= f.check_box :emergency %>
-    </div>
-</div>
+            <ul>
+                <% @job.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+        <% if @caller.errors.any? %>
+        <div id="error_explanation">
+            <h3><%= pluralize(@caller.errors.count, "error") %>
+                prohibited this job from being saved:</h3>
+            <ul>
+                <% @caller.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
 
-<!-- <div class="form-group">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="job_emergency">Is this an emergency?</label><br>
+                Check if yes
+                <%= f.check_box :emergency %>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <%= fields_for(:call) do |f| %>
+            <%= f.label :current_active_calls %>
+            <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
+            <% end %>
+        </div>
+
+
+
+        <!-- <div class="form-group">
     <%= f.label :type_id %><br>
     <%= f.number_field :type_id %>
   </div> -->
-<div class="col-xs-6">
-    <div class="form-group">
-        <%= f.label :status_id %><br>
-        <%= f.collection_select :status_id, JobStatus.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
-    </div>
-</div>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <%= f.label :status_id %><br>
+                <%= f.collection_select :status_id, JobStatus.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+            </div>
+        </div>
 
-<!-- <div class="form-group">
+        <!-- <div class="form-group">
     <%= f.label :entered_by_id %><br>
     <%= f.number_field :entered_by_id %>
   </div> -->
-<div class="col-xs-6">
-    <div class="form-group">
-        <%= f.label :franchise_id %><br>
-        <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
-    </div>
-</div>
-<div class="col-xs-12">
-    <div class="form-group">
-        <%= f.label :referral_type_id %><br>
-        <% f.collection_select :referral_type_id, ReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
-        <%= f.collection_radio_buttons(:referral_type_id, ReferralType.all, :id, :name) do |b| %>
-         <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
+        <div class="col-xs-4">
+            <div class="form-group">
+                <%= f.label :franchise_id %><br>
+                <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group">
+                <%= f.label :referral_type_id %><br>
+                <% f.collection_select :referral_type_id, ReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                <%= f.collection_radio_buttons(:referral_type_id, ReferralType.all, :id, :name) do |b| %>
+                <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
+                <% end %>
+            </div>
+        </div>
+        <div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != " Servpro Employee" %>">
+            <div class="form-group">
+                <%= f.label :referral_employee_id %><br>
+                <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
+            </div>
+        </div>
+
+
+        <%= render 'callers_form', f: f %>
+        <%= render 'phone_form', f: f %>
+
+        <div class="col-xs-12">
+            <div class="form-group">
+                <%= f.label :details %>
+                <a data-toggle="tooltip" class="tooltipLink" data-original-title="Tooltip text goes here">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                </a>
+                <br>
+                <%= f.text_area :details, class: "form-control" %>
+
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group">
+                <%= f.label :notes %><br>
+                <%= f.text_area :notes, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="col-xs-12 text-center">
+
+            <div class="actions">
+                <%= f.submit class: "btn btn-primary" %>
+                <%= f.submit "Save", class: "btn btn-primary" %>
+                <%= f.submit "Save and Move to Job Loss", class: "btn btn-primary" %>
+            </div>
+
+        </div>
         <% end %>
     </div>
 </div>
-<div id="referral_employee" class="col-xs-12 <%= "hidden" if @job.try(:referral_type).try(:name) != "Servpro Employee" %>">
-    <div class="form-group">
-        <%= f.label :referral_employee_id %><br>
-        <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
-    </div>
-</div>
-<div class="col-xs-12">
-    <div class="form-group">
-        <%= f.label :details %>
-        <a data-toggle="tooltip" class="tooltipLink" data-original-title="Tooltip text goes here">
-            <span class="glyphicon glyphicon-info-sign"></span>
-        </a>
-        <br>
-        <%= f.text_area :details, class: "form-control" %>
-
-    </div>
-</div>
-<div class="col-xs-12">
-    <div class="form-group">
-        <%= f.label :notes %><br>
-        <%= f.text_area :notes, class: "form-control" %>
-    </div>
-</div>
-
-<%= render 'callers_form', f: f %>
-<%= render 'phone_form', f: f %>
-
-<div class="col-xs-12 text-center">
-
-    <div class="actions">
-        <%= f.submit class: "btn btn-primary" %>
-        <%= f.submit "Save", class: "btn btn-primary" %>
-        <%= f.submit "Save and Move to Job Loss", class: "btn btn-primary" %>
-    </div>
-
-</div>
-<% end %>
 
 <script>
     $("a.tooltipLink").tooltip();

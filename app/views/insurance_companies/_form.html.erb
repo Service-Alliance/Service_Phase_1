@@ -1,87 +1,92 @@
-<%= form_for(@insurance_company) do |f| %>
-  <% if @insurance_company.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@insurance_company.errors.count, "error") %> prohibited this insurance company from being saved:</h2>
+<div class="col-xs-12">
+    <div class="row content-box">
+        <%= form_for(@insurance_company) do |f| %>
+        <% if @insurance_company.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@insurance_company.errors.count, "error") %>
+                prohibited this insurance company from being saved:</h2>
 
-      <ul>
-      <% @insurance_company.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+            <ul>
+                <% @insurance_company.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :name %><br>
+                <%= f.text_field :name, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :bulletin_number %><br>
+                <%= f.text_field :bulletin_number, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :effective_date %><br>
+                <%= f.text_field :effective_date, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :states_involved %><br>
+                <%= f.text_area :states_involved, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :property_type %><br>
+                <%= f.text_field :property_type, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :collect_deductible %><br>
+                <%= f.text_field :collect_deductible, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :esl %><br>
+                <%= f.text_field :esl, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :estimating_software %><br>
+                <%= f.text_area :estimating_software, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :pricing %><br>
+                <%= f.text_area :pricing, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :customer_service_contacts %><br>
+                <%= f.text_area :customer_service_contacts, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :special_conditions %><br>
+                <%= f.text_area :special_conditions, class:"form-control" %>
+            </div>
+        </div>
+
+        <div class="col-xs-12 text-center">
+            <div class="actions">
+                <%= f.submit class: "btn btn-primary" %>
+            </div>
+        </div>
+
+        <% end %>
     </div>
-  <% end %>
-
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :name %><br>
-          <%= f.text_field :name, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :bulletin_number %><br>
-          <%= f.text_field :bulletin_number, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :effective_date %><br>
-          <%= f.text_field :effective_date, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :states_involved %><br>
-          <%= f.text_field :states_involved, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :property_type %><br>
-          <%= f.text_field :property_type, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :collect_deductible %><br>
-          <%= f.text_field :collect_deductible, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :esl %><br>
-          <%= f.text_field :esl, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :estimating_software %><br>
-          <%= f.text_field :estimating_software, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :pricing %><br>
-          <%= f.text_field :pricing, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :customer_service_contacts %><br>
-          <%= f.text_field :customer_service_contacts, class:"form-control" %>
-      </div>
-  </div>
-  <div class="col-xs-6">
-      <div class="form-group">
-          <%= f.label :special_conditions %><br>
-          <%= f.text_field :special_conditions, class:"form-control" %>
-      </div>
-  </div>
-
-<div class="col-xs-12 text-center">
-  <div class="actions">
-    <%= f.submit class: "btn btn-primary" %>
-  </div>
 </div>
-
-<% end %>

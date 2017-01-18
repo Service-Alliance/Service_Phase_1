@@ -12,7 +12,9 @@ class JobsController < ApplicationController
   def list
     @jobs = Job.last(500)
     render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
-                                         :job_loss_type, :insurance_details])
+                                         :job_loss_type, :insurance_details,
+                                         :job_detail, :customer
+                                         ])
   end
 
   # GET /jobs/1
@@ -107,38 +109,16 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
-    if billing_params != {}
-      if billing_params[:type][0] == '1'
-        @job.billing_type_id = 1
-        @job.billing_address_id = @job.customer.address_id
-      elsif billing_params[:type][0] == '2'
-        @job.billing_type_id = 2
-        @job.billing_address_id = Adjuster.find_by(job_id: @job.id).address_id
-      elsif billing_params[:type][0] == '3'
-        @job.billing_type_id = 3
-        @billing_address = Address.create(address_1: address_params[:address_1],
-                                          address_2:  address_params[:address_2],
-                                          city:  address_params[:city],
-                                          zip_code: address_params[:zip_code],
-                                          county:  address_params[:county])
-        @billing_address.save
-        @job.billing_address_id = @billing_address.id
-        end
-      @job.save
-
-      return redirect_to @job, notice: 'Job was successfully updated.'
-    end
-
-
-
-    @caller = Caller.find_by(job_id: @job.id)
-    @address = @caller.address
     respond_to do |format|
       if @job.update(job_params)
         @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
-        @caller.update(caller_params)
-        @address.update(address_params)
 
+        @caller = Caller.find_by(job_id: @job.id)
+        if @caller
+          @address = @caller.address
+          @caller.update(caller_params)
+          @address.update(address_params)
+        end
         if job_params[:job_manager_id]
           @user = User.find_by(id: job_params[:job_manager_id])
           UserMailer.manager_assignment(@user, @job).deliver_now
@@ -166,6 +146,7 @@ class JobsController < ApplicationController
     end
   end
 
+
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
@@ -174,6 +155,9 @@ class JobsController < ApplicationController
       format.html { redirect_to jobs_url, notice: 'Job was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
   end
 
   private
@@ -212,9 +196,7 @@ class JobsController < ApplicationController
     params.fetch(:call, {}).permit(:id)
   end
 
-  def billing_params
-    params.fetch(:billing_address, {}).permit(type: [])
-  end
+
 
   def property_params
     params.require(:property).permit(:structure_type, :year_built,
