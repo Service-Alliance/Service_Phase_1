@@ -17,7 +17,7 @@
         <%= select_tag :adjuster_select, options_from_collection_for_select(Adjuster.all, :id, :full_name), prompt: "Select an Adjuster", class: "form-control" %>
     </div>
 </div>
-<div class="hidden" id="existing-adjuster">
+<div class="hidden col-xs-12" id="existing-adjuster">
     <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title">

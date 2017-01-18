@@ -65,9 +65,9 @@
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to job_images_path(@job)  do %>
-                    <i class="<%= @job.images ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Job Images
+                    <%= link_to job_uploads_path(@job)  do %>
+                    <i class="<%= @job.uploads ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Files/Uploads
                     <% end %>
                 </li>
                 <li>

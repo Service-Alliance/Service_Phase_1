@@ -27,7 +27,7 @@ class JobsController < ApplicationController
     @occupants = Occupant.where(job_id: @job.id)
     @job_detail = JobDetail.find_by(job_id: @job.id)
     @emergency_contact = EmergencyContact.find_by(job_id: @job.id)
-    @images = Image.where(job_id: @job.id)
+    @uploads = Upload.where(job_id: @job.id)
     @callrail = Call.find_by(job_id: @job.id)
   end
 
@@ -42,8 +42,14 @@ class JobsController < ApplicationController
   # GET /jobs/1/edit
   def edit
     @caller = Caller.find_by(job_id: @job.id)
-    @address = @caller.address
-    @phone = Phone.find_by(caller_id: @caller.id)
+    if @caller
+      @address = @caller.address
+      @phone = Phone.find_by(caller_id: @caller.id)
+    else
+      @address = Address.new
+      @phone = Phone.new
+    end
+
 
     if params[:billing] == 'true'
       @billing_address = @job.billing_address || @billing_address = Address.new

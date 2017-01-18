@@ -17,7 +17,7 @@
         <%= select_tag :agent_select, options_from_collection_for_select(Agent.all, :id, :full_name), prompt: "Select an Agent", class: "form-control" %>
     </div>
 </div>
-<div class="hidden" id="existing-agent">
+<div class="hidden col-xs-12" id="existing-agent">
     <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title">

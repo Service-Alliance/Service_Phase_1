@@ -16,7 +16,7 @@ class Job < ActiveRecord::Base
   has_one :loss
   has_one :job_detail
   has_one :emergency_contact
-  has_many :images
+  has_many :uploads
   belongs_to :job_manager, class_name: 'User'
   has_many :job_forms
 

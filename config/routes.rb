@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :emergency_contacts
     post 'emergency_contacts/samecaller' => 'emergency_contacts#samecaller'
     post 'customers/samecaller' => 'customers#samecaller'
-    resources :images
+    resources :uploads
 
     get 'job_forms/dowload/:id' => 'job_forms#download'
     resources :job_forms

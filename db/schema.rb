@@ -194,13 +194,6 @@ ActiveRecord::Schema.define(version: 20170117162717) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "images", force: :cascade do |t|
-    t.integer  "job_id"
-    t.string   "image"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "insurance_companies", force: :cascade do |t|
     t.string   "name"
     t.string   "bulletin_number"
@@ -396,6 +389,13 @@ ActiveRecord::Schema.define(version: 20170117162717) do
 
   create_table "structure_types", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.integer  "job_id"
+    t.string   "upload"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
