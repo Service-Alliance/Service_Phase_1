@@ -340,18 +340,21 @@ PhoneType.create(name: 'Cell')
 PhoneType.create(name: 'Work')
 PhoneType.create(name: 'Home')
 
-VendorCategory.create(name: 'ALARM INSTALLATION/SECURITY SYSTEM')
-Vendor.create(category_id: 1, name: 'FALCON ENGINEERED SECURITY SOLUTIONS, INC',
-              contact: 'Jessica', phone: '917-631-9500', fax: '917-631-9502',
-              address: '695 EAST 132ND STREET BRONX, NY 10454', wc: '12/2/16',
-              liability: '12/2/16', auto: '12/2/15', w9: 'Yes',
-              independent_contractor_agreement: 'Yes',
-              pollution: '12/2/16', email: 'JCASTRO1FES@GMAIL.COM')
 
 
 Form.create(package_id: "amUqRrobcTQo3uoRTIoVA7Y1M34=", transaction_id: "ad08384325cf474bf4c4075e63e38399aec3d93836c1030e", name: "Payment Authorization", signer_id: "e7901eca-87bb-4891-9f93-51a8e44258c4")
 
+csv_text = File.read("db/files/vendor_list.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  Vendor.create!(row.to_hash)
+end
 
+csv_text = File.read("db/files/insurance_list.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  InsuranceCompany.create(row.to_hash)
+end
 csv_text = File.read("db/files/customer_seed.csv")
 csv = CSV.parse(csv_text, :headers => true)
 csv.each do |row|

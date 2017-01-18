@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <p id="notice"><%= notice %></p>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Insurance Companies</div>
+                <div class="panel-body">
+                    <table
+                        data-toggle="table"
+                        data-url="insurance_companies"
+                        data-show-refresh="true"
+                        data-show-toggle="true"
+                        data-show-columns="true"
+                        data-search="true"
+                        data-flat="true"
+                        data-select-item-name="toolbar1"
+                        data-pagination="true"
+                        data-sort-name="name"
+                        data-sort-order="desc">
+                        <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true">Insurance Company ID</th>
+                                <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Insurance Company ID</th>
+                                <th data-field="name" data-sortable="true">Name</th>
+                                <th data-field="bulletin_number" data-sortable="true">Bulletin Number</th>
+                                <th data-field="effective_date" data-sortable="true">Effective Date</th>
+                                <th data-field="states_involved" data-sortable="true">States Involved</th>
+                                <th data-field="property_type" data-sortable="true">Property Type</th>
+                                <th data-field="collect_deductible" data-sortable="true">Collect Deductible</th>
+                                <th data-field="esl" data-sortable="true">ESL Amount</th>
+                                <th data-field="estimating_software" data-sortable="true">Estimating Software</th>
+                                <th data-field="pricing" data-sortable="true">Pricing</th>
+                                <th data-field="customer_service_contacts" data-sortable="true">Customer Service Contacts</th>
+                                <th data-field="special_conditions" data-sortable="true">Special Conditions</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%= link_to 'New Insurance Company', new_insurance_company_path %>
+
+<script>
+    function LinkFormatter(value, row, index) {
+        return "<a href='insurance_companies/" + row.id + "'>" + value + "</a>";
+    }
+</script>

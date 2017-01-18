@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :agents
   resources :adjusters
   get 'jobs/list' => 'jobs#list'
+  resources :insurance_companies
 
   resources :jobs do
     resources :properties
