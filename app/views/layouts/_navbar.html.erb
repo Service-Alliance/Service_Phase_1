@@ -17,7 +17,6 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "New Job", new_job_path %></li>
         <li><%= link_to "Vendors", vendors_path %></li>
-        <li><%= link_to "Insurance Companies", insurance_companies_path %></li>
         <% if user_signed_in? %>
           <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
         <% else %>
