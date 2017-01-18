@@ -7,7 +7,7 @@
         <%= csrf_meta_tags %>
     </head>
     <body>
-    <% if current_user.admin? %>
+    <% if current_user && current_user.admin? %>
         <%= render partial: "layouts/admin_navbar" %>
     <% else %>
         <%= render partial: "layouts/call_rep_navbar" %>
