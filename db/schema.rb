@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113185114) do
+ActiveRecord::Schema.define(version: 20170117162717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,15 @@ ActiveRecord::Schema.define(version: 20170113185114) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "forms", force: :cascade do |t|
+    t.string   "name"
+    t.string   "package_id"
+    t.string   "transaction_id"
+    t.string   "signer_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "franchises", force: :cascade do |t|
     t.string   "name"
     t.integer  "franchise_number"
@@ -215,13 +224,23 @@ ActiveRecord::Schema.define(version: 20170113185114) do
     t.integer  "coverage_type_id"
     t.integer  "deductible_amount"
     t.integer  "self_pay_id"
-    t.integer  "billing_type_id"
     t.integer  "deductible_id"
     t.integer  "esl_nst_amount_id"
     t.integer  "emergency_service_amount"
     t.integer  "job_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "job_forms", force: :cascade do |t|
+    t.string   "document_id"
+    t.boolean  "signed"
+    t.string   "name"
+    t.string   "link"
+    t.integer  "form_id"
+    t.integer  "job_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "job_statuses", force: :cascade do |t|
@@ -246,11 +265,13 @@ ActiveRecord::Schema.define(version: 20170113185114) do
     t.integer  "customer_id"
     t.integer  "referral_type_id"
     t.integer  "billing_address_id"
+    t.integer  "billing_type_id"
     t.boolean  "emergency"
     t.integer  "referral_employee_id"
     t.integer  "agent_id"
     t.integer  "adjuster_id"
     t.integer  "job_manager_id"
+    t.date     "recieved"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end

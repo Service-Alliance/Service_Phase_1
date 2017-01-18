@@ -33,17 +33,16 @@ class AgentsController < ApplicationController
   # POST /agents
   # POST /agents.json
   def create
-    @job = Job.find_by(id: agent_params[:job_id])
-    if agent_params[:agent_id] != ''
-      @job.agent_id = agent_params[:agent_id]
+    @job = Job.find_by(id: job_params[:job_id])
+    if same_agent_params[:agent_id] != ''
+      @job.agent_id = same_agent_params[:agent_id]
       @job.save
       return redirect_to job_path(@job), notice: 'Agent was successfully assigned.'
     else
       @agent = Agent.new(agent_params)
       @address = Address.new(address_params)
       @phone = Phone.new(phone_params)
-      @job = Job.find_by(id: job_param[:job_id])
-
+      
       respond_to do |format|
         @address.save
         @agent.address_id = @address.id
@@ -134,11 +133,19 @@ class AgentsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def agent_params
     params.require(:agent).permit(:job_id, :first_name, :last_name, :email,
-                                  :address_id, :agent_id, :job_id)
+                                  :address_id, :agent_id)
   end
 
   def address_params
     params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
+  end
+
+  def job_params
+    params.require(:job).permit(:job_id)
+  end
+
+  def same_agent_params
+    params.require(:same_agent).permit(:agent_id)
   end
 
   def phone_params

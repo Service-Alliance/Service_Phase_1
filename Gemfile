@@ -32,6 +32,9 @@ gem 'httparty'
 gem 'rails_12factor', group: :production
 gem 'carrierwave', '~> 1.0'
 gem "fog-aws"
+gem "prawn"
+gem 'combine_pdf'
+gem 'will_paginate', '~> 3.1.0'
 
 gem 'public_activity'
 

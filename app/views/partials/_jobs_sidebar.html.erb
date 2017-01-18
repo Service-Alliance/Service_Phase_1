@@ -47,6 +47,12 @@
                     <% end %>
                 </li>
                 <li>
+                    <%= link_to new_or_view_customer_path(@job, @job.customer)  do %>
+                    <i class="<%= @job.customer ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Customer Details
+                    <% end %>
+                </li>
+                <li>
                     <%= link_to new_or_view_job_emergency_contact_path(@job, @job.emergency_contact)  do %>
                     <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Emergency Contacts Details
@@ -68,6 +74,12 @@
                     <%= link_to new_or_view_job_emergency_contact_path(@job, @job.emergency_contact)  do %>
                     <i class="<%= @job.job_manager ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Emergency Contacts Details
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to job_job_forms_path(@job)  do %>
+                    <i class="<%= @job.job_manager ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Form Details
                     <% end %>
                 </li>
                 <li>

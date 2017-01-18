@@ -1,0 +1,48 @@
+
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div class="col-xs-8">
+        <h1 class="text-center">Form Information:</h1>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <%= @job_form.form.name %>
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Signed?</td>
+                                    <td><%= @job_form.signed %></td>
+                                </tr>
+                                <tr>
+                                    <td>Form Name:</td>
+                                    <td><%= @job_form.form.name %></td>
+                                </tr>
+                                <tr>
+                                    <td>View/Download:</td>
+                                    <td><a href="/jobs/<%= @job.id %>/job_forms/dowload/<%= @job_form.id %>">Download</a></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+
+                    <%= link_to edit_job_job_form_path(@job, @job_form), class: "btn btn-sm btn-warning", type: "button" do %>
+                    <i class="glyphicon glyphicon-edit"></i>
+                    <% end %>
+            </div>
+        </div>
+    </div>
+</div>

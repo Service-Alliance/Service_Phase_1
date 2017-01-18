@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  resources :forms
   resources :vendor_categories
   resources :vendors
   resources :phones
@@ -27,6 +29,10 @@ Rails.application.routes.draw do
     post 'emergency_contacts/samecaller' => 'emergency_contacts#samecaller'
     post 'customers/samecaller' => 'customers#samecaller'
     resources :images
+
+    get 'job_forms/dowload/:id' => 'job_forms#download'
+    resources :job_forms
+    get 'job_forms/new/:id' => 'job_forms#new_form', as: :create_form
   end
 
   resources :customers

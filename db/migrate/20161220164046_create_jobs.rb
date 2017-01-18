@@ -16,6 +16,7 @@ class CreateJobs < ActiveRecord::Migration
       t.integer :agent_id
       t.integer :adjuster_id
       t.integer :job_manager_id
+      t.date :recieved
 
       t.timestamps null: false
     end

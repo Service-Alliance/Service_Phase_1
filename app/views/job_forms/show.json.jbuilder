@@ -1,0 +1,1 @@
+json.partial! "job_forms/job_form", job_form: @job_form

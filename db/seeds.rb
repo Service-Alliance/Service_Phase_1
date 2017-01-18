@@ -31,7 +31,7 @@ Call.create(inprogress: true, customer_phone_number: '+17703334444', customer_na
 # Job Status
 JobStatus.create(name: 'Lead')
 JobStatus.create(name: 'Active')
-JobStatus.create(name: 'Invoiced')
+invoiced = JobStatus.create(name: 'Invoiced')
 JobStatus.create(name: 'Dead')
 
 JobType.create(name: 'General Cleaning')
@@ -347,3 +347,33 @@ Vendor.create(category_id: 1, name: 'FALCON ENGINEERED SECURITY SOLUTIONS, INC',
               liability: '12/2/16', auto: '12/2/15', w9: 'Yes',
               independent_contractor_agreement: 'Yes',
               pollution: '12/2/16', email: 'JCASTRO1FES@GMAIL.COM')
+
+
+Form.create(package_id: "amUqRrobcTQo3uoRTIoVA7Y1M34=", transaction_id: "ad08384325cf474bf4c4075e63e38399aec3d93836c1030e", name: "Payment Authorization", signer_id: "e7901eca-87bb-4891-9f93-51a8e44258c4")
+
+
+csv_text = File.read("db/files/customer_seed.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  hash = row.to_hash
+
+  last_name = hash["last_name"]
+  first_name = hash["first_name"]
+  zip_code = hash["zip"]
+  number = hash["number"]
+  notes = hash["notes"]
+  address_1 = hash["address_1"]
+  state = hash["state"]
+  recieved = hash["Received"]
+  scope = hash["Scope"]
+
+  loss_cause = LossCause.find_by(name: scope)
+  state_obj = State.find_by(name: state)
+
+  p address = Address.create(address_1: address_1, zip_code: zip_code, state_id: state_obj.try(:id))
+
+  p customer = Customer.create(first_name: first_name, last_name: last_name, address_id: address.id)
+  p job = Job.create(status_id: invoiced.id, customer_id: customer.id, notes: notes)
+  p Loss.create(job_id: job.id, loss_cause_id: loss_cause.try(:id))
+
+end

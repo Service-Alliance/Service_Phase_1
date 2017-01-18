@@ -6,11 +6,11 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    @jobs = Job.paginate(:page => params[:page], :per_page => 30)
   end
 
   def list
-    @jobs = Job.all
+    @jobs = Job.last(500)
     render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
                                          :job_loss_type, :insurance_details])
   end
@@ -22,7 +22,7 @@ class JobsController < ApplicationController
     @phone = Call.find_by(job_id: @job.id)
     @loss = Loss.find_by(job_id: @job.id)
     @caller = Caller.find_by(job_id: @job.id)
-    @address = @caller.address
+    @address = @caller.try(:address)
     @customer = @job.customer
     @occupants = Occupant.where(job_id: @job.id)
     @job_detail = JobDetail.find_by(job_id: @job.id)

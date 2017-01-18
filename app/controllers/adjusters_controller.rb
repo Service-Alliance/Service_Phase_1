@@ -131,7 +131,7 @@ class AdjustersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def adjuster_params
     params.require(:adjuster).permit(:job_id, :first_name, :last_name, :email,
-                                     :address_id, :adjuster_id, :job_id)
+                                     :address_id, :adjuster_id)
   end
 
   def address_params
