@@ -8,6 +8,11 @@ class JobForm < ActiveRecord::Base
       # Generate Hash to send in HTTP request
       @json = JobForm.create_form_hash(@job, @form)
 
+      p @json
+      p "Package ID"
+      p @form.package_id
+      p "#{ENV['ESIGN_LIVE']}"
+
       response = HTTParty.post("https://sandbox.esignlive.com/api/packages/#{@form.package_id}/clone", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json', "Authorization" => "Basic #{ENV['ESIGN_LIVE']}"}, body: @json)
 
       p response
