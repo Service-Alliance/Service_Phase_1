@@ -18,13 +18,13 @@ class EmergencyContactsController < ApplicationController
   def new
     @emergency_contact = EmergencyContact.new
     @address = Address.new
-    @phone = Phone.new
+    @phones = nil
   end
 
   # GET /emergency_contacts/1/edit
   def edit
     @address = Address.find_by(id: @emergency_contact.address_id) || @address = Address.new
-    @phone = Phone.find_by(emergency_contact_id: @emergency_contact.id) || @phone = Phone.new
+    @phones = @emergency_contact.phones
   end
 
   # POST /emergency_contacts
@@ -32,15 +32,22 @@ class EmergencyContactsController < ApplicationController
   def create
     @emergency_contact = EmergencyContact.new(emergency_contact_params)
     @address = Address.new(address_params)
-    @phone = Phone.new(phone_params)
 
     respond_to do |format|
       @address.save
       @emergency_contact.address_id = @address.id
       @emergency_contact.job_id = @job.id
       if @emergency_contact.save
-        @phone.emergency_contact_id =  @emergency_contact.id
-        @phone.save
+
+        @emergency_contact.phones.destroy_all
+        phone_count = phone_params['type_ids'].count
+
+        phone_count.times do |index|
+          unless phone_params['numbers'][index] == ''
+            @emergency_contact.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
+          end
+        end
+
         format.html { redirect_to job_path(@job), notice: 'Emergency contact was successfully created.' }
         format.json { render :show, status: :created, location: @emergency_contact }
       else
@@ -55,8 +62,15 @@ class EmergencyContactsController < ApplicationController
   def update
     respond_to do |format|
       if @emergency_contact.update(emergency_contact_params)
-        @phone = Phone.find_by(emergency_contact_id: @emergency_contact.id)
-        @phone.update(phone_params)
+        @emergency_contact.phones.destroy_all
+        phone_count = phone_params['type_ids'].count
+
+        phone_count.times do |index|
+          unless phone_params['numbers'][index] == ''
+            @emergency_contact.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
+          end
+        end
+
         format.html { redirect_to job_path(@job), notice: 'Emergency contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @emergency_contact }
       else
@@ -70,6 +84,7 @@ class EmergencyContactsController < ApplicationController
   # DELETE /emergency_contacts/1.json
   def destroy
     @emergency_contact.destroy
+    @emergency_contact.phones.destroy_all
     respond_to do |format|
       format.html { redirect_to emergency_contacts_url, notice: 'Emergency contact was successfully destroyed.' }
       format.json { head :no_content }
@@ -99,24 +114,26 @@ class EmergencyContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_emergency_contact
-      @emergency_contact = EmergencyContact.find(params[:id])
-    end
 
-    def set_job
-        @job = Job.find(params[:job_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_emergency_contact
+    @emergency_contact = EmergencyContact.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def emergency_contact_params
-      params.require(:emergency_contact).permit(:job_id, :first_name, :last_name, :email, :address_id)
-    end
+  def set_job
+    @job = Job.find(params[:job_id])
+  end
 
-    def address_params
-        params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
-    end
-    def phone_params
-        params.require(:phone).permit(:number, :extension, :type_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def emergency_contact_params
+    params.require(:emergency_contact).permit(:job_id, :first_name, :last_name, :email, :address_id)
+  end
+
+  def address_params
+    params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
+  end
+
+  def phone_params
+    params.require(:phones).permit(numbers: [], extensions: [], type_ids: [])
+  end
 end

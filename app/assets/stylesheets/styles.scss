@@ -30,10 +30,44 @@ body {
 .sidebar {
     margin-top: 73px;
 }
+
 .col-xs-8 {
-  & h1 {
-    margin-bottom: 30px;
-  }
+    & h1 {
+        margin-bottom: 30px;
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+#new-number {
+    & .remove-number-toggle {
+        display: none;
+    }
+
+    & .add-number-toggle {
+        display: block;
+    }
+
+}
+
+#number-container {
+    & .add-number-toggle {
+        display: none;
+    }
+
+    & .remove-number-toggle {
+        display: block;
+    }
+
+    & .add-label {
+        display: none;
+    }
+
+    & .delete-label {
+        display: block;
+    }
 }
 
 #bottom-nav {

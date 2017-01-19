@@ -20,14 +20,15 @@ class AgentsController < ApplicationController
   def new
     @agent = Agent.new
     @address = Address.new
-    @phone = Phone.new
+    @phones = nil
     @job = Job.find_by(id: params[:job_id])
   end
 
   # GET /agents/1/edit
   def edit
+    @job = Job.find_by(id: params[:job_id])
     @address = Address.find_by(id: @agent.address_id) || @address = Address.new
-    @phone = Phone.find_by(agent_id: @agent.id) || @phone = Phone.new
+    @phones = @agent.phones
   end
 
   # POST /agents
@@ -41,16 +42,23 @@ class AgentsController < ApplicationController
     else
       @agent = Agent.new(agent_params)
       @address = Address.new(address_params)
-      @phone = Phone.new(phone_params)
+
+
 
       respond_to do |format|
         @address.save
         @agent.address_id = @address.id
         if @agent.save
+          @agent.phones.destroy_all
+          phone_count = phone_params["type_ids"].count
+
+          phone_count.times do |index|
+            unless phone_params["numbers"][index] == ""
+              @agent.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+            end
+          end
           @job.agent_id = @agent.id
           @job.save
-          @phone.agent_id = @agent.id
-          @phone.save
           format.html { redirect_to job_path(@job), notice: 'Agent was successfully created.' }
           format.json { render :show, status: :created, location: @agent }
         else
@@ -64,11 +72,20 @@ class AgentsController < ApplicationController
   # PATCH/PUT /agents/1
   # PATCH/PUT /agents/1.json
   def update
+    @job = Job.find_by(id: params[:job_id])
     respond_to do |format|
+      @agent.phones.destroy_all
+      phone_count = phone_params["type_ids"].count
+
+      phone_count.times do |index|
+        unless phone_params["numbers"][index] == ""
+          @agent.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+        end
+      end
+
       if @agent.update(agent_params)
         @agent.address.update(address_params)
-        @phone = Phone.find_by(agent_id: @agent.id)
-        @phone.update(phone_params)
+
         format.html { redirect_to job_path(@job), notice: 'Agent was successfully updated.' }
         format.json { render :show, status: :ok, location: @agent }
       else
@@ -82,6 +99,7 @@ class AgentsController < ApplicationController
   # DELETE /agents/1.json
   def destroy
     @agent.destroy
+    @agent.phones.destroy_all
     respond_to do |format|
       format.html { redirect_to agents_url, notice: 'Agent was successfully destroyed.' }
       format.json { head :no_content }
@@ -148,6 +166,6 @@ class AgentsController < ApplicationController
   end
 
   def phone_params
-    params.require(:phone).permit(:number, :extension, :type_id)
+    params.require(:phones).permit(numbers:[], extensions:[], type_ids:[])
   end
 end

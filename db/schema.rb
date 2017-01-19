@@ -330,16 +330,14 @@ ActiveRecord::Schema.define(version: 20170117162717) do
   create_table "phones", force: :cascade do |t|
     t.string   "number"
     t.integer  "type_id"
-    t.integer  "occupant_id"
-    t.integer  "caller_id"
-    t.integer  "customer_id"
-    t.integer  "agent_id"
-    t.integer  "adjuster_id"
-    t.integer  "emergency_contact_id"
     t.string   "extension"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "phoneable_id"
+    t.string   "phoneable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
+
+  add_index "phones", ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id", using: :btree
 
   create_table "properties", force: :cascade do |t|
     t.integer  "job_id"

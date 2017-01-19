@@ -123,9 +123,11 @@
                 </div>
             </div>
 
-            <%= render 'address_form', f: f %>
-            <%= render 'phone_form', f: f %>
+
+
         </div>
+        <%= render 'address_form', f: f %>
+        <%= render 'partials/phone_form', f: f %>
 
         <%= hidden_field_tag "same_agent[agent_id]" %>
         <%= hidden_field_tag "job[job_id]", params[:job_id] %>

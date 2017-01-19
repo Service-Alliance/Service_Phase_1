@@ -13,21 +13,22 @@ class AdjustersController < ApplicationController
   def show
     @job = Job.find_by(id: params[:job_id])
     @address = Address.find_by(id: @adjuster.address_id)
-    @phone = Phone.find_by(adjuster_id: @adjuster.id)
+    @phones = @adjuster.phones
   end
 
   # GET /adjusters/new
   def new
     @adjuster = Adjuster.new
     @address = Address.new
-    @phone = Phone.new
+    @phones = nil
     @job = Job.find_by(id: params[:job_id])
   end
 
   # GET /adjusters/1/edit
   def edit
+    @job = Job.find_by(id: params[:job_id])
     @address = Address.find_by(id: @adjuster.address_id) || @address = Address.new
-    @phone = Phone.find_by(adjuster_id: @customer.id) || @phone = Phone.new
+    @phones = @adjuster.phones
   end
 
   # POST /adjusters
@@ -41,7 +42,6 @@ class AdjustersController < ApplicationController
     else
       @adjuster = Adjuster.new(adjuster_params)
       @address = Address.new(address_params)
-      @phone = Phone.new(phone_params)
 
       respond_to do |format|
         @address.save
@@ -49,8 +49,15 @@ class AdjustersController < ApplicationController
         if @adjuster.save
           @job.adjuster_id = @adjuster.id
           @job.save
-          @phone.adjuster_id = @adjuster.id
-          @phone.save
+
+          @adjuster.phones.destroy_all
+          phone_count = phone_params["type_ids"].count
+
+          phone_count.times do |index|
+            unless phone_params["numbers"][index] == ""
+              @adjuster.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+            end
+          end
           format.html { redirect_to job_path(@job), notice: 'Adjuster was successfully created.' }
           format.json { render :show, status: :created, location: @adjuster }
         else
@@ -67,8 +74,14 @@ class AdjustersController < ApplicationController
     respond_to do |format|
       if @adjuster.update(adjuster_params)
         @address.update(address_params)
-        @phone = Phone.find_by(adjuster_id: @adjuster.id)
-        @phone.update(phone_params)
+        @adjuster.phones.destroy_all
+        phone_count = phone_params["type_ids"].count
+
+        phone_count.times do |index|
+          unless phone_params["numbers"][index] == ""
+            @adjuster.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          end
+        end
         format.html { redirect_to job_path(@job), notice: 'Adjuster was successfully updated.' }
         format.json { render :show, status: :ok, location: @adjuster }
       else
@@ -149,6 +162,6 @@ class AdjustersController < ApplicationController
   end
 
   def phone_params
-    params.require(:phone).permit(:number, :extension, :type_id)
+    params.require(:phones).permit(numbers:[], extensions:[], type_ids:[])
   end
 end

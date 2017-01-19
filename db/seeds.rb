@@ -19,7 +19,7 @@ Job.create(type_id: 1, status_id: 1, entered_by_id: 1, franchise_id: 1, details:
 
 Caller.create(first_name: 'David Heinemeier', last_name: 'Hansson', email: 'dhh@test.com', address_id: 1, job_id: 1)
 
-Phone.create(number: '911', type_id: 1, caller_id: 1)
+Phone.create(number: '911', type_id: 1)
 Address.create(address_1: '123 Anywhere Ln', address_2: 'Suite 2017', zip_code: '60622', city: 'Chicago', state_id: '36', county: 'Cook County')
 
 Call.create(inprogress: true, customer_phone_number: '+17703334444', customer_name: 'Olivia Rodriguez', customer_state: 'IL', customer_city: 'Chicago', customer_country: 'USA', customer_zip: '60622')

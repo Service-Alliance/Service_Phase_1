@@ -38,7 +38,7 @@ class JobsController < ApplicationController
     @job = Job.new
     @caller = Caller.new
     @address = Address.new
-    @phone = Phone.new
+    @phones = nil
   end
 
   # GET /jobs/1/edit
@@ -46,10 +46,10 @@ class JobsController < ApplicationController
     @caller = Caller.find_by(job_id: @job.id)
     if @caller
       @address = @caller.address
-      @phone = Phone.find_by(caller_id: @caller.id)
+      @phones = @caller.phones
     else
       @address = Address.new
-      @phone = Phone.new
+      @phones = nil
     end
 
 
@@ -71,9 +71,11 @@ class JobsController < ApplicationController
     @job.entered_by_id = current_user.id
     @caller = Caller.new(caller_params)
     @address = Address.new(address_params)
-    @phone = Phone.new(phone_params)
+
     @call = Call.find_by(id: call_params[:id]) if call_params[:id]
     @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
+
+
 
     if @caller.save
       CustomerMailer.welcome_email(@caller).deliver_now
@@ -86,8 +88,15 @@ class JobsController < ApplicationController
         @caller.job_id = @job.id
         @caller.address_id = @address.id
         @caller.save
-        @phone.caller_id = @caller.id
-        @phone.save
+
+        @caller.phones.destroy_all
+        phone_count = phone_params["type_ids"].count
+
+        phone_count.times do |index|
+          unless phone_params["numbers"][index] == ""
+            @caller.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          end
+        end
 
         # @job.create_activity action: 'Created a new Job', job_id: @job.id, owner: current_user
 
@@ -119,6 +128,15 @@ class JobsController < ApplicationController
           @caller.update(caller_params)
           @address.update(address_params)
         end
+        @caller.phones.destroy_all
+        phone_count = phone_params["type_ids"].count
+
+        phone_count.times do |index|
+          unless phone_params["numbers"][index] == ""
+            @caller.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          end
+        end
+        
         if job_params[:job_manager_id]
           @user = User.find_by(id: job_params[:job_manager_id])
           UserMailer.manager_assignment(@user, @job).deliver_now
@@ -212,6 +230,6 @@ class JobsController < ApplicationController
   end
 
   def phone_params
-    params.require(:phone).permit(:number, :extension, :type_id)
+    params.require(:phones).permit(numbers:[], extensions:[], type_ids:[])
   end
 end

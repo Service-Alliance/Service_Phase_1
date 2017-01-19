@@ -19,13 +19,13 @@ class CustomersController < ApplicationController
     @customer = Customer.new
     @address = Address.new
     @job = Job.find_by(id: params[:job_id])
-    @phone = Phone.new
+    @phones = nil
   end
 
   # GET /customers/1/edit
   def edit
     @address = Address.find_by(id: @customer.address_id) || @address = Address.new
-    @phone = Phone.find_by(customer_id: @customer.id) || @phone = Phone.new
+    @phones = @customer.phones
     @job = Job.find_by(id: params[:job_id])
   end
 
@@ -35,15 +35,22 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
     @address = Address.new(address_params)
     @job = Job.find_by(id: job_param[:job_id])
-    @phone = Phone.new(phone_params)
+
 
     respond_to do |format|
       if @customer.save
         if @job
           @job.customer_id = @customer.id
           if @job.save
-            @phone.customer_id = @customer.id
-            @phone.save
+
+            @customer.phones.destroy_all
+            phone_count = phone_params["type_ids"].count
+
+            phone_count.times do |index|
+              unless phone_params["numbers"][index] == ""
+                @customer.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+              end
+            end
             redirect_to job_path(@job), notice: 'Customer was successfully created.'
             return
           else
@@ -66,7 +73,6 @@ class CustomersController < ApplicationController
     respond_to do |format|
       @job = Job.find_by(id: job_param[:job_id])
       if @address = Address.find_by(id: @customer.address_id)
-
         if @address.update(address_params)
         end
       else
@@ -75,8 +81,14 @@ class CustomersController < ApplicationController
         @customer.address_id = @address.id
       end
       if @customer.update(customer_params)
-        @phone = Phone.find_by(customer_id: @customer.id)
-        @phone.update(phone_params)
+        @customer.phones.destroy_all
+        phone_count = phone_params["type_ids"].count
+
+        phone_count.times do |index|
+          unless phone_params["numbers"][index] == ""
+            @customer.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          end
+        end
         format.html { redirect_to job_path(@job), notice: 'Customer was successfully updated.' }
         format.json { render :show, status: :ok, location: @customer }
       else
@@ -90,6 +102,7 @@ class CustomersController < ApplicationController
   # DELETE /customers/1.json
   def destroy
     @customer.destroy
+    @customer.phones.destroy_all
     respond_to do |format|
       format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
       format.json { head :no_content }
@@ -142,6 +155,6 @@ class CustomersController < ApplicationController
     end
 
     def phone_params
-        params.require(:phone).permit(:number, :extension, :type_id)
+      params.require(:phones).permit(numbers:[], extensions:[], type_ids:[])
     end
 end
