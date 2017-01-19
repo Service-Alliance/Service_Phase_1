@@ -5,6 +5,19 @@
 <%= f.fields_for(@billing_address) do |g| %>
 <div class="col-xs-6">
     <div class="form-group">
+        <%= label_tag :first_name %><br>
+        <%= text_field_tag "address[first_name]", @job_detail.try(:billing_address_first_name), class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-xs-6">
+      <div class="form-group">
+          <%= label_tag :last_name %><br>
+          <%= text_field_tag "address[last_name]", @job_detail.try(:billing_address_last_name), class: "form-control" %>
+      </div>
+    </div>
+
+<div class="col-xs-6">
+    <div class="form-group">
         <%= label_tag :address_1 %><br>
         <%= text_field_tag "address[address_1]", @job_detail.try(:billing_address).try(:address_1), class: "form-control"  %>
     </div>

@@ -57,7 +57,15 @@
                                 <tr>
                                     <td>Billing Address</td>
                                     <% if @job_detail.billing_address %>
-                                      <td><%= @job_detail.try(:emergency_service_amount) %></td>
+                                      <td>
+                                        First Name: <%= @job_detail.billing_address_first_name  %><br />
+                                        Last Name: <%= @job_detail.billing_address_last_name  %><br />
+                                        Address 1: <%= @job_detail.billing_address.address_1  %><br />
+                                        Address 2: <%= @job_detail.billing_address.address_2  %><br />
+                                        City: <%= @job_detail.billing_address.city  %><br />
+                                        State: <%= @job_detail.billing_address.try(:state).try(:name)  %><br />
+                                        Zip Code: <%= @job_detail.billing_address.zip_code  %><br />
+                                      </td>
                                     <% end %>
                                 </tr>
                             </tbody>

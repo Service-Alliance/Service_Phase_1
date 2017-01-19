@@ -221,10 +221,12 @@ ActiveRecord::Schema.define(version: 20170117162717) do
     t.integer  "esl_nst_amount_id"
     t.integer  "emergency_service_amount"
     t.integer  "job_id"
+    t.string   "billing_address_first_name"
+    t.string   "billing_address_last_name"
     t.integer  "billing_address_id"
     t.integer  "billing_type_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "job_forms", force: :cascade do |t|

@@ -16,12 +16,12 @@ class JobDetailsController < ApplicationController
   # GET /job_details/new
   def new
     @job_detail = JobDetail.new
-    @billing_address = @job.billing_address, {} || @billing_address = Address.new
+    @billing_address = Address.new
   end
 
   # GET /job_details/1/edit
   def edit
-    @billing_address = @job.try(:billing_address) || @billing_address = Address.new
+    @billing_address = @job_detail.try(:billing_address) || @billing_address = Address.new
   end
 
   # POST /job_details
@@ -32,13 +32,20 @@ class JobDetailsController < ApplicationController
 
     if billing_params != {}
       if billing_params[:type][0] == '1'
-        @job.billing_type_id = 1
-        @job.billing_address_id = @job.customer.address_id
+        @job_detail.billing_type_id = 1
+        @job_detail.billing_address_id = @job.customer.address_id
+        @job_detail.billing_address_first_name = @job.customer.first_name
+        @job_detail.billing_address_last_name = @job.customer.last_name
       elsif billing_params[:type][0] == '2'
-        @job.billing_type_id = 2
-        @job.billing_address_id = Adjuster.find_by(job_id: @job.id).address_id
+        adjuster = Adjuster.find_by(job_id: @job.id)
+        @job_detail.billing_type_id = 2
+        @job_detail.billing_address_id = adjuster.address_id
+        @job_detail.billing_address_first_name = adjuster.first_name
+        @job_detail.billing_address_last_name = adjuster.last_name
       elsif billing_params[:type][0] == '3'
-        @job.billing_type_id = 3
+        @job_detail.billing_type_id = 3
+        @job_detail.billing_address_first_name = address_params[:first_name]
+        @job_detail.billing_address_last_name = address_params[:last_name]
         @billing_address = Address.create(address_1: address_params[:address_1],
                                           address_2:  address_params[:address_2],
                                           city:  address_params[:city],
@@ -67,12 +74,19 @@ class JobDetailsController < ApplicationController
     if billing_params != {}
       if billing_params[:type][0] == '1'
         @job_detail.billing_type_id = 1
-        @job_detail.billing_address_id = @job_detail.customer.address_id
+        @job_detail.billing_address_id = @job.customer.address_id
+        @job_detail.billing_address_first_name = @job.customer.first_name
+        @job_detail.billing_address_last_name = @job.customer.last_name
       elsif billing_params[:type][0] == '2'
+        adjuster = Adjuster.find_by(job_id: @job.id)
         @job_detail.billing_type_id = 2
-        @job_detail.billing_address_id = Adjuster.find_by(job_id: @job.id).address_id
+        @job_detail.billing_address_id = adjuster.address_id
+        @job_detail.billing_address_first_name = adjuster.first_name
+        @job_detail.billing_address_last_name = adjuster.last_name
       elsif billing_params[:type][0] == '3'
         @job_detail.billing_type_id = 3
+        @job_detail.billing_address_first_name = address_params[:first_name]
+        @job_detail.billing_address_last_name = address_params[:last_name]
         @billing_address = Address.create(address_1: address_params[:address_1],
                                           address_2:  address_params[:address_2],
                                           city:  address_params[:city],
@@ -81,7 +95,7 @@ class JobDetailsController < ApplicationController
         @billing_address.save
         @job_detail.billing_address_id = @billing_address.id
         end
-      @job.save
+      @job_detail.save
 
       return redirect_to @job, notice: 'Job was successfully updated.'
     end
@@ -121,7 +135,7 @@ class JobDetailsController < ApplicationController
     end
     def address_params
       params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city,
-                                        :state_id, :county)
+                                        :state_id, :county, :first_name, :last_name)
     end
     def billing_params
       params.fetch(:billing_address, {}).permit(type: [])
