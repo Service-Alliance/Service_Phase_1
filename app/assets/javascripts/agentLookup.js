@@ -1,5 +1,4 @@
 $(function() {
-
     $('#agent_select').on('change', function(event) {
         selectedAgent = $("#agent_select").val();
         if (selectedAgent === ""){
@@ -10,7 +9,6 @@ $(function() {
         else {
           ajaxAgent(selectedAgent);
         }
-
     });
 });
 

@@ -1,11 +1,10 @@
-var ready;
-ready = function() {
+$(function() {
   $(document).on('click', '#zipLookup', function(event){
 
     event.preventDefault();
     zipLookup();
   });
-};
+});
 
 function zipLookup(){
   var zip = $("#address_zip_code").val();
@@ -26,6 +25,3 @@ function zipLookup(){
     $("#address_state_id").val(state_val)
   })
 }
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
