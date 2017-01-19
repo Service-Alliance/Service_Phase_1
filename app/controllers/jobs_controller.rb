@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :calls]
   # before_action :authorize_policy
 
   # GET /jobs
@@ -158,6 +158,10 @@ class JobsController < ApplicationController
   end
 
   def search
+  end
+
+  def calls
+    @calls = Call.where(job_id: @job.id)
   end
 
   private

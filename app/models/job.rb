@@ -5,9 +5,9 @@ class Job < ActiveRecord::Base
   belongs_to :franchise
   belongs_to :referral_type
   belongs_to :customer
-  has_one :call
+  has_many :calls
   belongs_to :user, foreign_key: :entered_by_id
-  
+
   belongs_to :agent
   belongs_to :adjuster
   has_one :property

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :adjusters
   get 'jobs/list' => 'jobs#list'
   get 'jobs/search' => 'jobs#search', as: :job_search
+  get 'jobs/:id/calls'=> 'jobs#calls', as: :job_calls
   resources :insurance_companies
 
   resources :jobs do

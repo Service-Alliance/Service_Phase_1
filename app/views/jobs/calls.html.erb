@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div class="col-xs-8">
+        <h1 class="text-center">Calls on Job</h1>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Calls:
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <tbody>
+                              <% @calls.each do |call| %>
+                                <tr>
+                                    <td>Call Rail Timeline:</td>
+                                    <td><a href="https://app.callrail.com/calls/"<%= call.callrail_id %>Timeline</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Call Info:</td>
+                                    <td><%= link_to "Call Info", call_path(call) %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+
+            </div>
+        </div>
+        <%= render partial: "partials/jobs_bottom_bar" %>
+    </div>
+    <%= render partial: "jobs/sidebar" %>
+</div>
