@@ -28,9 +28,9 @@ class Call < ActiveRecord::Base
 
   def self.postcall_parse(json_body)
     p json_body
-    call = Call.find_by(callrail_id: json_body[:id])
+    p call = Call.find_by(callrail_id: json_body[:id])
 
-    call.update(duration: json_body[:duration], recording: json_body[:recording], answered: json_body[:answered], inprogress: false)
+    p call.update(duration: json_body[:duration], recording: json_body[:recording], answered: json_body[:answered], inprogress: false)
     call.save
   end
 end
