@@ -339,6 +339,7 @@ InsuranceCompany.create(name: 'ACE Private Risk Services (APRS) - Residential Fi
 PhoneType.create(name: 'Cell')
 PhoneType.create(name: 'Work')
 PhoneType.create(name: 'Home')
+PhoneType.create(name: 'Fax')
 
 
 

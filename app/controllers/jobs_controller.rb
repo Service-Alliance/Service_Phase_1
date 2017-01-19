@@ -10,7 +10,7 @@ class JobsController < ApplicationController
   end
 
   def list
-    @jobs = Job.last(500)
+    @jobs = Job.last(200)
     render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
                                          :job_loss_type, :insurance_details,
                                          :job_detail, :customer
@@ -136,7 +136,7 @@ class JobsController < ApplicationController
             @caller.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
           end
         end
-        
+
         if job_params[:job_manager_id]
           @user = User.find_by(id: job_params[:job_manager_id])
           UserMailer.manager_assignment(@user, @job).deliver_now
