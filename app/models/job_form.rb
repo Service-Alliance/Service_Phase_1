@@ -8,19 +8,22 @@ class JobForm < ActiveRecord::Base
       # Generate Hash to send in HTTP request
       @json = JobForm.create_form_hash(@job, @form)
 
-      p response = HTTParty.post("https://sandbox.esignlive.com/api/packages/#{@form.package_id}/clone", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json', "Authorization" => "Basic #{ENV['ESIGN_LIVE']}"}, body: @json)
+      response = HTTParty.post("https://sandbox.esignlive.com/api/packages/#{@form.package_id}/clone", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json', "Authorization" => "Basic #{ENV['ESIGN_LIVE']}"}, body: @json)
+
+      p response
 
       id = response.parsed_response['id']
-      job_form = JobForm.create(document_id: id, signed: false, form_id: @form.id, job_id: @job.id)
-
-      return job_form
+      if id
+        job_form = JobForm.create(document_id: id, signed: false, form_id: @form.id, job_id: @job.id)
+        return job_form
+      end
   end
 
 
 
   def self.download_form(job_form)
     @job_form = job_form
-    p return response = HTTParty.get("https://sandbox.esignlive.com/api/packages/#{@job_form.document_id}/documents/#{@job_form.form.transaction_id}/pdf", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json', "Authorization" => "Basic #{ENV['ESIGN_LIVE']}"})
+    return response = HTTParty.get("https://sandbox.esignlive.com/api/packages/#{@job_form.document_id}/documents/#{@job_form.form.transaction_id}/pdf", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json', "Authorization" => "Basic #{ENV['ESIGN_LIVE']}"})
   end
 
   def check_status
@@ -35,7 +38,7 @@ class JobForm < ActiveRecord::Base
     @job = job
     @form = form
 
-    p return {
+     json = {
       "name": "#{@form.name}",
       "description":"",
       "emailMessage":"",
@@ -65,5 +68,9 @@ class JobForm < ActiveRecord::Base
       "language":"en",
       "status":"SENT"
     }.to_json
+
+    p json
+
+    return json
   end
 end
