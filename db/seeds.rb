@@ -375,9 +375,8 @@ csv.each do |row|
   state_obj = State.find_by(name: state)
 
   p address = Address.create(address_1: address_1, zip_code: zip_code, state_id: state_obj.try(:id))
-
-  p caller = Caller.create(first_name: first_name, last_name: last_name, address_id: address.id)
   p job = Job.create(status_id: invoiced.id, notes: notes)
+  caller = Caller.create(first_name: first_name, last_name: last_name, address_id: address.id, job_id: job.id)
   p Loss.create(job_id: job.id, loss_cause_id: loss_cause.try(:id))
 
 end
