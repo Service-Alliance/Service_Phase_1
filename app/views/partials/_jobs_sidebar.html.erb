@@ -34,8 +34,8 @@
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to edit_job_path(@job, manager: 'true')  do %>
-                    <i class="<%= @job.job_manager ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    <%= link_to new_or_view_job_manager_path(@job, @job.job_managers)  do %>
+                    <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Manager Assignment
                     <% end %>
                 </li>
@@ -47,13 +47,13 @@
                 </li>
                 <li>
                     <%= link_to new_or_view_job_emergency_contact_path(@job, @job.emergency_contact)  do %>
-                    <i class="<%= @job.job_manager ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Emergency Contacts Details
                     <% end %>
                 </li>
                 <li>
                     <%= link_to job_job_forms_path(@job)  do %>
-                    <i class="<%= @job.job_manager ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    <i class="<%= @job.job_forms ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Form Details
                     <% end %>
                 </li>

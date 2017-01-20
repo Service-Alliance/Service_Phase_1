@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :forms
   resources :vendor_categories
   resources :vendors
@@ -17,7 +16,7 @@ Rails.application.routes.draw do
   resources :adjusters
   get 'jobs/list' => 'jobs#list'
   get 'jobs/search' => 'jobs#search', as: :job_search
-  get 'jobs/:id/calls'=> 'jobs#calls', as: :job_calls
+  get 'jobs/:id/calls' => 'jobs#calls', as: :job_calls
   resources :insurance_companies
 
   resources :jobs do
@@ -26,13 +25,13 @@ Rails.application.routes.draw do
     resources :callers
     resources :occupants
     resources :job_details
+    resources :job_managers
     post 'agents/samecaller' => 'agents#samecaller'
     post 'adjusters/samecaller' => 'adjusters#samecaller'
     resources :emergency_contacts
     post 'emergency_contacts/samecaller' => 'emergency_contacts#samecaller'
     post 'customers/samecaller' => 'customers#samecaller'
     resources :uploads
-
     get 'job_forms/dowload/:id' => 'job_forms#download'
     resources :job_forms
     get 'job_forms/new/:id' => 'job_forms#new_form', as: :create_form

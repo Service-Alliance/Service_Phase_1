@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  job_manager_id: 1
+  schedule_datetime: 2017-01-20 15:28:33
+  note: MyText
+
+two:
+  job_manager_id: 1
+  schedule_datetime: 2017-01-20 15:28:33
+  note: MyText

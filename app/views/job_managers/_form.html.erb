@@ -1,0 +1,48 @@
+<div class="col-xs-12">
+    <div class="row content-box">
+        <%= form_for [@job, @job_manager] do |f| %>
+        <% if @job_manager.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@job_manager.errors.count, "error") %>
+                prohibited this job_manager from being saved:</h2>
+
+            <ul>
+                <% @job_manager.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="form-group">
+                <%= f.label :job_manager_id %>
+                <%= f.collection_select :job_manager_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
+            </div>
+
+        </div>
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :schedule_datetime %><br>
+                    <%= f.datetime_select :schedule_datetime %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :note %><br>
+                    <%= f.text_area :note, class: "form-control" %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+          <div class="actions">
+              <%= f.submit class: "btn btn-primary" %>
+          </div>
+        </div>
+
+        <% end %>
+    </div>
+</div>
