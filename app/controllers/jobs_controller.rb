@@ -50,6 +50,7 @@ class JobsController < ApplicationController
     else
       @address = Address.new
       @phones = nil
+      @caller = nil
     end
 
 
