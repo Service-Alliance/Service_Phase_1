@@ -18,14 +18,17 @@ Rails.application.routes.draw do
   get 'jobs/search' => 'jobs#search', as: :job_search
   get 'jobs/:id/calls' => 'jobs#calls', as: :job_calls
   resources :insurance_companies
+  resources :notes
 
   resources :jobs do
+    get 'notes' => 'notes#job_notes'
     resources :properties
     resources :losses
     resources :callers
     resources :occupants
     resources :job_details
     resources :job_managers
+    resources :vendor_assignments
     post 'agents/samecaller' => 'agents#samecaller'
     post 'adjusters/samecaller' => 'adjusters#samecaller'
     resources :emergency_contacts

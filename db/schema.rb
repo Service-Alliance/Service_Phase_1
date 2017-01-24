@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120212755) do
+ActiveRecord::Schema.define(version: 20170123145900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -267,7 +267,7 @@ ActiveRecord::Schema.define(version: 20170120212755) do
     t.integer  "entered_by_id"
     t.integer  "franchise_id"
     t.text     "details"
-    t.text     "notes"
+    t.text     "note"
     t.integer  "customer_id"
     t.integer  "referral_type_id"
     t.boolean  "emergency"
@@ -320,6 +320,17 @@ ActiveRecord::Schema.define(version: 20170120212755) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  create_table "notes", force: :cascade do |t|
+    t.text     "note"
+    t.integer  "noteable_id"
+    t.string   "noteable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "notes", ["noteable_type", "noteable_id"], name: "index_notes_on_noteable_type_and_noteable_id", using: :btree
 
   create_table "occupants", force: :cascade do |t|
     t.string   "first_name"
@@ -464,6 +475,14 @@ ActiveRecord::Schema.define(version: 20170120212755) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vendor_assignments", force: :cascade do |t|
+    t.integer  "vendor_id"
+    t.integer  "job_id"
+    t.integer  "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "vendors", force: :cascade do |t|
     t.string   "category_type"

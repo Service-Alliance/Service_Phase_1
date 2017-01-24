@@ -28,9 +28,15 @@
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to new_or_view_job_emergency_contact_path(@job, @job.emergency_contact)  do %>
+                    <%= link_to new_or_view_customer_path(@job, @job.customer)  do %>
+                    <i class="<%= @job.customer ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Customer Details
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_notes_path(@job, @job.notes)  do %>
                     <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Emergency Contacts Details
+                    Job Notes
                     <% end %>
                 </li>
                 <li>
@@ -61,6 +67,12 @@
                     <%= link_to job_calls_path(@job)  do %>
                         <i class="<%= @job.calls ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                         Call Rail Information
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_vendor_path(@job, @job.vendor_assignments)  do %>
+                    <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Vendor Assignment
                     <% end %>
                 </li>
 

@@ -1,0 +1,29 @@
+<div class="col-xs-12">
+    <div class="row content-box">
+<%= form_for(@note) do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+      <% @note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= hidden_field_tag "job[job_id]", @job.id %>
+
+  <div class="col-xs-12">
+      <div class="form-group">
+  <div class="field">
+    <%= f.label :note %><br>
+    <%= f.text_area :note, class: 'form-control' %>
+  </div>
+</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>
+</div>

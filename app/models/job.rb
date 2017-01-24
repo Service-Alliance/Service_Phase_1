@@ -7,7 +7,6 @@ class Job < ActiveRecord::Base
   belongs_to :customer
   has_many :calls
   belongs_to :user, foreign_key: :entered_by_id
-
   belongs_to :agent
   belongs_to :adjuster
   has_one :property
@@ -17,7 +16,9 @@ class Job < ActiveRecord::Base
   has_one :emergency_contact
   has_many :uploads
   has_many :job_managers
+  has_many :vendor_assignments
   has_many :job_forms
+  has_many :notes, as: :noteable
 
   # Activity Tracking activated
   include PublicActivity::Model

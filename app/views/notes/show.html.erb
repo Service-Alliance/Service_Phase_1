@@ -4,9 +4,9 @@
     <% end %>
     <%= render partial: "partials/jobs_sidebar" %>
     <div class="col-xs-8">
-        <h1 class="text-center">Job Assignments</h1>
-        <%= link_to "New Manager Assignment", new_job_job_manager_path(@job), class:"btn btn-primary new-manager-button"%>
-        <% @job_managers.each do |manager| %>
+        <h1 class="text-center">Job Notes</h1>
+        <%= link_to "New Note", new_note_path(job_id: @job.id), class:"btn btn-primary new-manager-button"%>
+        <% @job.notes.each do |note| %>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title"></h3>
@@ -17,17 +17,14 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td>Assignment:</td>
-                                    <td><%= manager.job_manager.full_name %></td>
-                                </tr>
-                                <tr>
-                                    <td>Date:</td>
-                                    <td><%= manager.schedule_datetime %></td>
-                                </tr>
-                                <tr>
                                     <td>Note:</td>
-                                    <td><%= manager.note %></td>
+                                    <td><%= note.note %></td>
                                 </tr>
+                                <tr>
+                                    <td>Create By:</td>
+                                    <td><%= note.user.full_name %></td>
+                                </tr>
+
                             </tbody>
                         </table>
 
@@ -35,7 +32,7 @@
                 </div>
             </div>
             <div class="panel-footer">
-                <%= link_to edit_job_job_manager_path(@job, manager), class: "btn btn-sm btn-warning", type: "button" do %>
+                <%= link_to edit_note_path(@note, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
                 <i class="glyphicon glyphicon-edit"></i>
                 <% end %>
             </div>

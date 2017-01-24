@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+    <div class="row">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div class="col-xs-8">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h1>New Vendor Assignment</h1>
+                </div>
+                <%= render 'form' %>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script>
+    function LinkFormatter(value, row, index) {
+        return "<a href='vendors/" + row.id + "'>" + value + "</a>";
+    }
+    function AddVendor(value, row, index) {
+        return "<a class='add-vendor' href='id=" + row.id + "&name=" + row.name + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
+    }
+</script>
+
+<%= link_to 'Back', job_vendor_assignments_path(@job) %>

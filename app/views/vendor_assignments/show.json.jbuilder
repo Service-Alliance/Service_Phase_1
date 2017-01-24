@@ -1,0 +1,1 @@
+json.partial! "vendor_assigments/vendor_assigment", vendor_assigment: @vendor_assigment
