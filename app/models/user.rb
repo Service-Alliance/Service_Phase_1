@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :department
+  has_many :jobs, foreign_key: :entered_by_id
 
   def full_name
     first = first_name || " "

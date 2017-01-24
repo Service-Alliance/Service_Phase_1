@@ -49,7 +49,7 @@
         <div class="col-xs-4">
             <div class="form-group">
                 <%= f.label :status_id %><br>
-                <%= f.collection_select :status_id, JobStatus.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                <%= f.collection_select :status_id, JobStatus.all, :id, :name, {selected: 1},  { class: 'form-control'} %>
             </div>
         </div>
 

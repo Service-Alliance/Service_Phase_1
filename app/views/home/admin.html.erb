@@ -134,8 +134,7 @@
 			data-sort-order="asc">
 			<thead>
 				<tr>
-					<th data-field="state" data-checkbox="true">User ID</th>
-					<th data-field="id" data-sortable="true" data-formatter="LinkFormatter">User ID</th>
+					<th data-field="id" data-sortable="true" data-formatter="UserLinkFormatter">User ID</th>
 					<th data-field="first_name" data-sortable="true">First Name</th>
 					<th data-field="last_name" data-sortable="true">Last Name</th>
 					<th data-field="department.name" data-sortable="true">Department</th>
@@ -359,5 +358,8 @@
 <script>
 function LinkFormatter(value, row, index) {
 	return "<a href='jobs/" + row.id + "'>" + value + "</a>";
+}
+function UserLinkFormatter(value, row, index) {
+	return "<a href='users/" + row.id + "'>" + value + "</a>";
 }
 </script>

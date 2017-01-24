@@ -26,10 +26,11 @@ class VendorAssignmentsController < ApplicationController
   # POST /vendor_assignments.json
   def create
     @vendor_assignment = VendorAssignment.new(vendor_assignment_params)
+    @vendor_assignment.job_id = @job.id
 
     respond_to do |format|
       if @vendor_assignment.save
-        format.html { redirect_to @vendor_assignment, notice: 'Vendor assigment was successfully created.' }
+        format.html { redirect_to job_vendor_assignment_path(@job, @vendor_assignment), notice: 'Vendor assigment was successfully created.' }
         format.json { render :show, status: :created, location: @vendor_assignment }
       else
         format.html { render :new }
@@ -74,6 +75,6 @@ class VendorAssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vendor_assignment_params
-      params.require(:vendor_assignment).permit(:vendor_id, :job_id, :note)
+      params.require(:vendor_assignment).permit(:vendor_id, :note)
     end
 end

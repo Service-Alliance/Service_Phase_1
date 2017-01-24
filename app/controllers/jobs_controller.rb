@@ -6,7 +6,11 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.paginate(:page => params[:page], :per_page => 30)
+    if params[:user_id]
+      @jobs = Job.where(entered_by_id: params[:user_id]).paginate(:page => params[:page], :per_page => 30)
+    else
+      @jobs = Job.paginate(:page => params[:page], :per_page => 30)
+    end
   end
 
   def list

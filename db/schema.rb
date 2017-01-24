@@ -479,7 +479,7 @@ ActiveRecord::Schema.define(version: 20170123145900) do
   create_table "vendor_assignments", force: :cascade do |t|
     t.integer  "vendor_id"
     t.integer  "job_id"
-    t.integer  "note"
+    t.text     "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
