@@ -15,7 +15,7 @@ Department.create(name: 'Construction')
 Department.create(name: 'Operations')
 Department.create(name: 'Marketing')
 
-Job.create(type_id: 1, status_id: 1, entered_by_id: 1, franchise_id: 1, details: 'This is a really good detail', note: 'This is an even better note.', customer_id: nil, referral_type_id: 1)
+Job.create(type_id: 1, status_id: 1, entered_by_id: 1, franchise_id: 1, details: 'This is a really good detail', job_note: 'This is an even better note.', customer_id: nil, referral_type_id: 1)
 
 Caller.create(first_name: 'David Heinemeier', last_name: 'Hansson', email: 'dhh@test.com', address_id: 1, job_id: 1)
 
@@ -375,7 +375,7 @@ csv.each do |row|
   state_obj = State.find_by(name: state)
 
   p address = Address.create(address_1: address_1, zip_code: zip_code, state_id: state_obj.try(:id))
-  p job = Job.create(status_id: invoiced.id, note: note)
+  p job = Job.create(status_id: invoiced.id, job_note: note)
   caller = Caller.create(first_name: first_name, last_name: last_name, address_id: address.id, job_id: job.id)
   p Loss.create(job_id: job.id, loss_cause_id: loss_cause.try(:id))
 
