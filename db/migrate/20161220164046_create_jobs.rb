@@ -6,7 +6,7 @@ class CreateJobs < ActiveRecord::Migration
       t.integer :entered_by_id
       t.integer :franchise_id
       t.text :details
-      t.text :note
+      t.text :job_note
       t.integer :customer_id
       t.integer :referral_type_id
       t.boolean :emergency
