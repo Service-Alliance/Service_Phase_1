@@ -44,7 +44,7 @@ class VendorAssignmentsController < ApplicationController
   def update
     respond_to do |format|
       if @vendor_assignment.update(vendor_assignment_params)
-        format.html { redirect_to @vendor_assignment, notice: 'Vendor assigment was successfully updated.' }
+        format.html { redirect_to job_vendor_assignment_path(@job), notice: 'Vendor assigment was successfully updated.' }
         format.json { render :show, status: :ok, location: @vendor_assignment }
       else
         format.html { render :edit }
