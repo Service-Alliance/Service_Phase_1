@@ -1,31 +1,40 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Oncalls</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Scheduled on</th>
-      <th>User</th>
-      <th>Priority</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div id="calendar">
 
-  <tbody>
-    <% @oncalls.each do |oncall| %>
-      <tr>
-        <td><%= oncall.scheduled_on %></td>
-        <td><%= oncall.user_id %></td>
-        <td><%= oncall.priority %></td>
-        <td><%= link_to 'Show', oncall %></td>
-        <td><%= link_to 'Edit', edit_oncall_path(oncall) %></td>
-        <td><%= link_to 'Destroy', oncall, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+</div>
 
 <%= link_to 'New Oncall', new_oncall_path %>
+
+<script>
+$(document).ready(function() {
+
+  // page is now ready, initialize the calendar...
+
+  $('#calendar').fullCalendar({
+      navLinks: true,
+      navLinkDayClick: function(date, jsEvent) {
+
+            console.log('day', date.format()); // date is a moment
+            console.log('coords', jsEvent.pageX, jsEvent.pageY);
+            console.log(<%= ENV["ROOT_URL"] %>)
+            window.location.href = "<%= ENV['ROOT_URL'] %>/oncalls?date=" + date.format();
+        },
+        events: [
+          {
+              title: 'My Event',
+              start: '2017-01-25',
+              description: 'This is a cool event'
+          }
+          // more events here
+      ],
+      eventRender: function(event, element) {
+          element.qtip({
+              content: event.description
+          });
+      }
+  })
+
+});
+</script>

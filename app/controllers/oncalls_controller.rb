@@ -4,7 +4,13 @@ class OncallsController < ApplicationController
   # GET /oncalls
   # GET /oncalls.json
   def index
-    @oncalls = Oncall.all
+    if params[:date]
+      @date = params[:date]
+      @oncalls = Oncall.where(scheduled_on: params[:date])
+      render :day_show, oncalls: @oncalls
+    else
+      @oncalls = Oncall.all
+    end
   end
 
   # GET /oncalls/1
