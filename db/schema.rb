@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123145900) do
+ActiveRecord::Schema.define(version: 20170125031644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -267,7 +267,7 @@ ActiveRecord::Schema.define(version: 20170123145900) do
     t.integer  "entered_by_id"
     t.integer  "franchise_id"
     t.text     "details"
-    t.text     "note"
+    t.text     "job_note"
     t.integer  "customer_id"
     t.integer  "referral_type_id"
     t.boolean  "emergency"
@@ -340,6 +340,14 @@ ActiveRecord::Schema.define(version: 20170123145900) do
     t.integer  "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "oncalls", force: :cascade do |t|
+    t.date     "scheduled_on"
+    t.integer  "user_id"
+    t.integer  "priority"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "phone_types", force: :cascade do |t|

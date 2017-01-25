@@ -1,0 +1,85 @@
+<div class="col-xs-12">
+    <div class="row content-box">
+        <%= form_for(@oncall) do |f| %>
+        <% if @oncall.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@oncall.errors.count, "error") %>
+                prohibited this oncall from being saved:</h2>
+
+            <ul>
+                <% @oncall.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+        <div class="col-xs-4 col-xs-offset-4 text-center">
+            <div class="field">
+                <%= f.label :scheduled_on %><br>
+                <%= f.text_field :scheduled_on, class:"form-control datePicker" %>
+            </div>
+        </div>
+        <div id="oncall-container">
+            <% if @oncalls %>
+            <% @oncalls.each do |oncall| %>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <%= label_tag :user_id %><br>
+                        <%= select_tag("oncall[user_ids][]", options_for_select(User.all.map{|p| [p.full_name, p.id]}, selected: oncall.user_id), class: "form-control") %>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <%= label_tag :priority %><br>
+                        <%= number_field_tag :priority, class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <%= label_tag :delete %><br>
+                    <a id="remove-oncall" href="" class="btn btn-danger full-width">Delete</a>
+                </div>
+            </div>
+            <% end %>
+            <% end %>
+        </div>
+        <div id="new-oncall">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="field">
+                        <%= f.label :user_id %><br>
+                        <%= select_tag("oncall[user_ids][]", options_for_select(User.all.map{|p| [p.full_name, p.id]}), class: "form-control") %>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="field">
+                        <%= f.label :priority %><br>
+                        <%= number_field_tag "oncall[priorities][]", class: 'form-control' %>
+                    </div>
+                </div>
+                <div class="col-xs-3 remove-oncall-toggle">
+                    <%= label_tag :delete %><br>
+                    <a id="remove-oncall" href="" class="btn btn-danger full-width">Delete</a>
+                </div>
+                <div class="col-xs-3 add-oncall-toggle">
+                    <%= label_tag :add %><br>
+                    <a id="add-oncall" href="" class="btn btn-primary full-width">Add</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 text-center">
+            <div class="actions">
+                <%= f.submit class:"btn btn-primary" %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+
+<script>
+flatpickr(".datePicker", {
+    // create an extra input solely for display purposes
+    altInput: true,
+    altFormat: "F j, Y"
+});
+</script>

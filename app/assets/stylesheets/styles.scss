@@ -72,6 +72,36 @@ body {
     }
 }
 
+
+#new-oncall {
+    & .remove-oncall-toggle {
+        display: none;
+    }
+
+    & .add-oncall-toggle {
+        display: block;
+    }
+
+}
+
+#oncall-container {
+    & .add-oncall-toggle {
+        display: none;
+    }
+
+    & .remove-oncall-toggle {
+        display: block;
+    }
+
+    & .add-label {
+        display: none;
+    }
+
+    & .delete-label {
+        display: block;
+    }
+}
+
 #bottom-nav {
     & ul {
         list-style-type: none;

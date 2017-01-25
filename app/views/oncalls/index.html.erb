@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Oncalls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scheduled on</th>
+      <th>User</th>
+      <th>Priority</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @oncalls.each do |oncall| %>
+      <tr>
+        <td><%= oncall.scheduled_on %></td>
+        <td><%= oncall.user_id %></td>
+        <td><%= oncall.priority %></td>
+        <td><%= link_to 'Show', oncall %></td>
+        <td><%= link_to 'Edit', edit_oncall_path(oncall) %></td>
+        <td><%= link_to 'Destroy', oncall, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Oncall', new_oncall_path %>

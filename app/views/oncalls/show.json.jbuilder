@@ -1,0 +1,1 @@
+json.partial! "oncalls/oncall", oncall: @oncall

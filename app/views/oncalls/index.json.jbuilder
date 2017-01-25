@@ -1,0 +1,1 @@
+json.array! @oncalls, partial: 'oncalls/oncall', as: :oncall

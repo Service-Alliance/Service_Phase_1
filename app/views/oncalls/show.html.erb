@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Scheduled on:</strong>
+  <%= @oncall.scheduled_on %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @oncall.user_id %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @oncall.priority %>
+</p>
+
+<%= link_to 'Edit', edit_oncall_path(@oncall) %> |
+<%= link_to 'Back', oncalls_path %>

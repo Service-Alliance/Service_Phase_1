@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :oncalls
   resources :forms
   resources :vendor_categories
   resources :vendors
