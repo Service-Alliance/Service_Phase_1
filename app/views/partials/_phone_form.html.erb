@@ -1,6 +1,6 @@
 <%= f.fields_for(:phones) do |g| %>
 
-<div id="oncall-container">
+<div id="call-container">
     <div class="col-xs-12">
         <% if @phones %>
         <% @phones.each do |phone| %>
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div id="new-oncall">
+<div id="new-call">
     <div class="col-xs-12">
         <div class="row">
             <div class="col-xs-3">
