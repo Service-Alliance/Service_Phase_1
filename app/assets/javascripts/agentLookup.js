@@ -23,6 +23,7 @@ function ajaxAgent(selectedAgent){
           dataType: 'json'
       })
       .success(function(response) {
+        console.log(response)
           $("#same_agent_agent_id").val(response[0].id);
           $("#new-agent").addClass('hidden');
           $("#existing-agent").removeClass('hidden');
@@ -35,6 +36,12 @@ function ajaxAgent(selectedAgent){
           var zip = response[1].zip;
           var state = response[1].state_id;
           var county = response[1].county;
+          var phones = response[2]
+          var phone_html = ""
+          for(var i = 0;i < phones.length; i++){
+            td = phones[i].number + "<br />"
+            phone_html = phone_html.concat(td)
+          }
           $("#first_name").html(first_name);
           $("#last_name").html(last_name);
           $("#email").html(email);
@@ -44,5 +51,6 @@ function ajaxAgent(selectedAgent){
           $("#zip").html(zip);
           $("#state").html(state);
           $("#county").html(county);
+          $("#phone").html(phone_html)
       });
 }

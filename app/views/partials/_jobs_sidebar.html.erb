@@ -28,12 +28,6 @@
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to new_or_view_customer_path(@job, @job.customer)  do %>
-                    <i class="<%= @job.customer ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Customer Details
-                    <% end %>
-                </li>
-                <li>
                     <%= link_to new_or_view_job_notes_path(@job, @job.notes)  do %>
                     <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Job Notes

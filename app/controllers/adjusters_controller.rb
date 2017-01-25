@@ -127,7 +127,8 @@ class AdjustersController < ApplicationController
     if request.xhr?
       @adjuster = Adjuster.find_by(id: params[:data])
       @address = Address.find_by(id: @adjuster.address_id)
-      render json: [@adjuster, @address]
+      @phones = @adjuster.phones
+      render json: [@adjuster, @address, @phones]
     end
   end
 

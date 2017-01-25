@@ -132,7 +132,8 @@ class AgentsController < ApplicationController
     if request.xhr?
       @agent = Agent.find_by(id: params[:data])
       @address = Address.find_by(id: @agent.address_id)
-      render json: [@agent, @address]
+      @phones = @agent.phones
+      render json: [@agent, @address, @phones]
     end
   end
 
