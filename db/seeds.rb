@@ -1,6 +1,6 @@
 user = User.create(email: 'callrep@test.com', password: 'password', password_confirmation: 'password', call_rep: true, first_name: 'Call', last_name: 'Rep', department_id: 1)
-user = User.create(email: 'jobcoordinator@test.com', password: 'password', password_confirmation: 'password', job_coordinator: true)
-user = User.create(email: 'admin@test.com', password: 'password', password_confirmation: 'password', admin: true)
+user = User.create(email: 'jobcoordinator@test.com', first_name: 'User', last_name: 'Two', password: 'password', password_confirmation: 'password', job_coordinator: true)
+user = User.create(email: 'admin@test.com', first_name: 'User', last_name: 'Three', password: 'password', password_confirmation: 'password', admin: true)
 
 Address.create(address_1: 'Address 1', address_2: 'Address 2')
 Agent.create(first_name: 'Jake', last_name: 'Cinninger', insurance_company_id: 1, email: 'jcinninger@gmail.com', address_id: 1)

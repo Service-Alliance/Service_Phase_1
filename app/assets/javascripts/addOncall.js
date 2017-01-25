@@ -8,8 +8,10 @@ $(function() {
 function addOncall(that) {
     var oncallContainer = $("#oncall-container");
     var newOncall = $("#new-oncall")
+    var selectedValue = $("#new-oncall").find("select").val()
 
-    cloned = newOncall.clone();
+    cloned = newOncall.children().clone();
+    $(cloned).find("select").val(selectedValue);
 
     oncallContainer.append(cloned);
 
@@ -17,8 +19,6 @@ function addOncall(that) {
         $(this).val('');
     });
 }
-
-
 
 $(function() {
     $(document).on('click', '#remove-oncall', function(event) {
