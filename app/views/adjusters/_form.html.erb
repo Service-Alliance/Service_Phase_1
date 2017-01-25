@@ -13,7 +13,7 @@
             </ul>
         </div>
         <% end %>
-        <div class="col-xs-12">
+        <div class="col-xs-6">
             <div class="form-group">
                 <%= f.label :select_adjuster %><br>
                 <%= select_tag :adjuster_select, options_from_collection_for_select(Adjuster.all, :id, :full_name), prompt: "Select an Adjuster", class: "form-control" %>
@@ -101,25 +101,25 @@
 
         </div>
         <div id="new-adjuster">
-            <div class="col-xs-12">
+            <div class="col-xs-6">
                 <div class="form-group">
                     <%= f.label :insurance_company_id %><br>
                     <%= f.collection_select :insurance_company_id, InsuranceCompany.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
                 </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <div class="form-group">
                     <%= f.label :first_name %><br>
                     <%= f.text_field :first_name, class:"form-control" %>
                 </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <div class="form-group">
                     <%= f.label :last_name %><br>
                     <%= f.text_field :last_name, class:"form-control" %>
                 </div>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <div class="form-group">
                     <%= f.label :email %><br>
                     <%= f.text_field :email, class:"form-control" %>

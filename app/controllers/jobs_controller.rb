@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :calls]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_call]
   # before_action :authorize_policy
 
   # GET /jobs
@@ -186,6 +186,20 @@ class JobsController < ApplicationController
     @calls = Call.where(job_id: @job.id)
   end
 
+  def add_call
+
+
+  end
+
+  def create_call
+    @call = Call.find_by(id: call_params[:id])
+    @call.job_id = @job.id
+    @call.save
+
+    redirect_to job_calls_path(@job)
+  end
+
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -221,8 +235,6 @@ class JobsController < ApplicationController
   def call_params
     params.fetch(:call, {}).permit(:id)
   end
-
-
 
   def property_params
     params.require(:property).permit(:structure_type, :year_built,

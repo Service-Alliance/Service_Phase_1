@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'jobs/list' => 'jobs#list'
   get 'jobs/search' => 'jobs#search', as: :job_search
   get 'jobs/:id/calls' => 'jobs#calls', as: :job_calls
+  get 'jobs/:id/calls/new' => 'jobs#add_call', as: :new_job_call
+  post 'jobs/:id/calls' => 'jobs#create_call', as: :create_job_call
   resources :insurance_companies
   resources :notes
 
