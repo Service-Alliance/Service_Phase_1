@@ -9,8 +9,12 @@ class Oncall < ActiveRecord::Base
     add_count = user_ids.count
     clear_oncalls(date)
 
+    p params
+
     add_count.times do |index|
       unless priorities[index] == ""
+        p priorities[index]
+        p user_ids[index]
         Oncall.create(user_id: user_ids[index], priority: priorities[index], scheduled_on: date)
       end
     end
