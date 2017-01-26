@@ -112,7 +112,7 @@ class CustomersController < ApplicationController
   def samecaller
     @job = Job.find_by(id: params[:job_id])
     @caller = Caller.find_by(job_id: @job.id)
-    @caller_phone = Phone.find_by(caller_id: @caller.id)
+    @caller_phones = @caller.phones
 
     @caller_address = Address.find_by(id: @caller.address_id)
 
@@ -125,12 +125,12 @@ class CustomersController < ApplicationController
 
     @job.customer_id = @customer.id
 
-
-    @phone = Phone.new(number: @caller_phone.number, extension: @caller_phone.extension, customer_id: @customer.id, type_id: @caller_phone.type_id)
-    @phone.save
+    @caller_phones.each do |phone|
+      @caller.phones.create(number: phone.number, extension: phone.extension, type_id: phone.type_id)
+    end
 
     @job.save
-    redirect_to job_path(@job), notice: 'Customer was successfully replicated from caller.'
+    redirect_to customer_path(@customer, job_id: @job.id), notice: 'Customer was successfully replicated from caller.'
   end
 
 

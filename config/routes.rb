@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     post 'adjusters/samecaller' => 'adjusters#samecaller'
     resources :emergency_contacts
     post 'emergency_contacts/samecaller' => 'emergency_contacts#samecaller'
-    post 'customers/samecaller' => 'customers#samecaller'
+    post 'customers/samecaller' => 'customers#samecaller', as: :customer_same_as_caller
     resources :uploads
     get 'job_forms/dowload/:id' => 'job_forms#download'
     resources :job_forms
