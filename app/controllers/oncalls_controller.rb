@@ -32,14 +32,8 @@ class OncallsController < ApplicationController
   def create
     Oncall.load_oncalls(oncall_params)
     respond_to do |format|
-      if @oncall.save
-
-        format.html { redirect_to @oncall, notice: 'Oncall was successfully created.' }
+        format.html { redirect_to oncalls_path, notice: 'Oncall was successfully created.' }
         format.json { render :show, status: :created, location: @oncall }
-      else
-        format.html { render :new }
-        format.json { render json: @oncall.errors, status: :unprocessable_entity }
-      end
     end
   end
 

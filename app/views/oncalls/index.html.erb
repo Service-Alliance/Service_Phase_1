@@ -1,40 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-
-<div id="calendar">
-
-</div>
+<div id="calendar"></div>
 
 <%= link_to 'New Oncall', new_oncall_path %>
 
 <script>
-$(document).ready(function() {
-
-  // page is now ready, initialize the calendar...
-
-  $('#calendar').fullCalendar({
-      navLinks: true,
-      navLinkDayClick: function(date, jsEvent) {
-
-            console.log('day', date.format()); // date is a moment
-            console.log('coords', jsEvent.pageX, jsEvent.pageY);
-            console.log(<%= ENV["ROOT_URL"] %>)
-            window.location.href = "<%= ENV['ROOT_URL'] %>/oncalls?date=" + date.format();
-        },
-        events: [
-          {
-              title: 'My Event',
-              start: '2017-01-25',
-              description: 'This is a cool event'
-          }
-          // more events here
-      ],
-      eventRender: function(event, element) {
-          element.qtip({
-              content: event.description
-          });
-      }
-  })
-
-});
+    $(document).ready(function () {
+        $('#calendar').fullCalendar({
+            navLinks: true,
+            navLinkDayClick: function (date, jsEvent) {
+                console.log('day', date.format());
+                window.location.href = "<%= ENV['ROOT_URL'] %>/oncalls?date=" + date.format();
+            }
+        })
+    });
 </script>
