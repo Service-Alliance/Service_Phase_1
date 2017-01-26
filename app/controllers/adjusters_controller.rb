@@ -58,7 +58,7 @@ class AdjustersController < ApplicationController
               @adjuster.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
             end
           end
-          format.html { redirect_to job_path(@job), notice: 'Adjuster was successfully created.' }
+          format.html { redirect_to adjuster_path(@adjuster, job_id: @job.id), notice: 'Adjuster was successfully created.' }
           format.json { render :show, status: :created, location: @adjuster }
         else
           format.html { render :new }
@@ -71,6 +71,7 @@ class AdjustersController < ApplicationController
   # PATCH/PUT /adjusters/1
   # PATCH/PUT /adjusters/1.json
   def update
+    @job = Job.find_by(id: job_params[:job_id])
     respond_to do |format|
       if @adjuster.update(adjuster_params)
         @address.update(address_params)
@@ -82,7 +83,7 @@ class AdjustersController < ApplicationController
             @adjuster.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
           end
         end
-        format.html { redirect_to job_path(@job), notice: 'Adjuster was successfully updated.' }
+        format.html { redirect_to adjuster_path(@adjuster, job_id: @job.id), notice: 'Adjuster was successfully updated.' }
         format.json { render :show, status: :ok, location: @adjuster }
       else
         format.html { render :edit }

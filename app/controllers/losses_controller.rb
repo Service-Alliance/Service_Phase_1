@@ -29,7 +29,7 @@ class LossesController < ApplicationController
 
     respond_to do |format|
       if @loss.save
-        format.html { redirect_to new_job_property_path(@job), notice: 'Loss was successfully created.' }
+        format.html { redirect_to job_loss_path(@job, @loss), notice: 'Loss was successfully created.' }
         format.json { render :show, status: :created, location: @loss }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class LossesController < ApplicationController
   def update
     respond_to do |format|
       if @loss.update(loss_params)
-        format.html { redirect_to job_path(@job), notice: 'Loss was successfully updated.' }
+        format.html { redirect_to job_loss_path(@job, @loss), notice: 'Loss was successfully updated.' }
         format.json { render :show, status: :ok, location: @loss }
       else
         format.html { render :edit }

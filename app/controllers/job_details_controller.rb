@@ -59,7 +59,7 @@ class JobDetailsController < ApplicationController
 
     respond_to do |format|
       if @job_detail.save
-        format.html {  redirect_to job_path(@job), notice: 'Job detail was successfully created.' }
+        format.html {  redirect_to job_job_detail_path(@job, @job_detail), notice: 'Job detail was successfully created.' }
         format.json { render :show, status: :created, location: @job_detail }
       else
         format.html { render :new }
@@ -101,7 +101,7 @@ class JobDetailsController < ApplicationController
     end
     respond_to do |format|
       if @job_detail.update(job_detail_params)
-        format.html {  redirect_to job_path(@job), notice: 'Job detail was successfully updated.' }
+        format.html { redirect_to job_job_detail_path(@job, @job_detail), notice: 'Job detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @job_detail }
       else
         format.html { render :edit }

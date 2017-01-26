@@ -144,6 +144,7 @@ class JobsController < ApplicationController
         if job_params[:job_manager_id]
           @user = User.find_by(id: job_params[:job_manager_id])
           UserMailer.manager_assignment(@user, @job).deliver_now
+          return redirect_to job_job_managers_path(@job)
         end
 
         format.html do

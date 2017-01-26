@@ -30,7 +30,9 @@ class JobManagersController < ApplicationController
 
     respond_to do |format|
       if @job_manager.save
-        format.html { redirect_to job_job_manager_path(@job, @job_manager), notice: 'Job manager was successfully created.' }
+        @user = @job_manager.job_manager
+        UserMailer.manager_assignment(@user, @job_manager).deliver_now
+        format.html { redirect_to job_job_managers_path(@job), notice: 'Job manager was successfully created.' }
         format.json { render :show, status: :created, location: @job_manager }
       else
         format.html { render :new }
@@ -44,7 +46,9 @@ class JobManagersController < ApplicationController
   def update
     respond_to do |format|
       if @job_manager.update(job_manager_params)
-        format.html { redirect_to @job_manager, notice: 'Job manager was successfully updated.' }
+        @user = @job_manager.job_manager
+        UserMailer.manager_assignment(@user, @job_manager).deliver_now
+        format.html { redirect_to job_job_managers_path(@job), notice: 'Job manager was successfully updated.' }
         format.json { render :show, status: :ok, location: @job_manager }
       else
         format.html { render :edit }

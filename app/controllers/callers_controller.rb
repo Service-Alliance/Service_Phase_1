@@ -24,7 +24,7 @@ class CallersController < ApplicationController
   # GET /callers/1/edit
   def edit
     @address = Address.find_by(id: @caller.address_id) || @address = Address.new
-    @phone = Phone.find_by(caller_id: @caller.id) || @phone = Phone.new
+    @phones = @caller.phones
   end
 
   # POST /callers
@@ -37,7 +37,7 @@ class CallersController < ApplicationController
       if @caller.save
         @phone.caller_id = @caller.id
         @phone.save
-        format.html { redirect_to job_path(@job), notice: 'Caller was successfully created.' }
+        format.html { redirect_to job_caller_path(@job, @caller), notice: 'Caller was successfully created.' }
         format.json { render :show, status: :created, location: @caller }
       else
         format.html { render :new }
@@ -50,10 +50,17 @@ class CallersController < ApplicationController
   # PATCH/PUT /callers/1.json
   def update
     respond_to do |format|
-      @phone = Phone.find_by(caller_id: @caller.id)
-      @phone.update(phone_params)
+
       if @caller.update(caller_params)
-        format.html { redirect_to job_path(@job), notice: 'Caller was successfully updated.' }
+        @caller.phones.destroy_all
+        phone_count = phone_params["type_ids"].count
+
+        phone_count.times do |index|
+          unless phone_params["numbers"][index] == ""
+            @caller.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          end
+        end
+        format.html { redirect_to job_caller_path(@job, @caller), notice: 'Caller was successfully updated.' }
         format.json { render :show, status: :ok, location: @caller }
       else
         format.html { render :edit }
@@ -95,6 +102,6 @@ class CallersController < ApplicationController
   end
 
   def phone_params
-    params.require(:phone).permit(:number, :extension, :type_id)
+    params.require(:phones).permit(numbers:[], extensions:[], type_ids:[])
   end
 end

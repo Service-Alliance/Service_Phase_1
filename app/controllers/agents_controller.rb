@@ -59,7 +59,7 @@ class AgentsController < ApplicationController
           end
           @job.agent_id = @agent.id
           @job.save
-          format.html { redirect_to job_path(@job), notice: 'Agent was successfully created.' }
+          format.html { redirect_to agent_path(@agent, job_id: @job.id), notice: 'Agent was successfully created.' }
           format.json { render :show, status: :created, location: @agent }
         else
           format.html { render :new }
@@ -72,7 +72,7 @@ class AgentsController < ApplicationController
   # PATCH/PUT /agents/1
   # PATCH/PUT /agents/1.json
   def update
-    @job = Job.find_by(id: params[:job_id])
+    @job = Job.find_by(id: job_params[:job_id])
     respond_to do |format|
       @agent.phones.destroy_all
       phone_count = phone_params["type_ids"].count
@@ -86,7 +86,7 @@ class AgentsController < ApplicationController
       if @agent.update(agent_params)
         @agent.address.update(address_params)
 
-        format.html { redirect_to job_path(@job), notice: 'Agent was successfully updated.' }
+        format.html { redirect_to agent_path(@agent, job_id: @job.id), notice: 'Agent was successfully updated.' }
         format.json { render :show, status: :ok, location: @agent }
       else
         format.html { render :edit }
