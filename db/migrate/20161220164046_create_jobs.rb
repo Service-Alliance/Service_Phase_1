@@ -13,6 +13,7 @@ class CreateJobs < ActiveRecord::Migration
       t.integer :referral_employee_id
       t.integer :agent_id
       t.integer :adjuster_id
+      t.integer :after_hours_assignment
       t.date :recieved
 
       t.timestamps null: false
