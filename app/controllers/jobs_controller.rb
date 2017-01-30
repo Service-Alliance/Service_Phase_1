@@ -240,7 +240,7 @@ class JobsController < ApplicationController
   def property_params
     params.require(:property).permit(:structure_type, :year_built,
                                      :floors_affected, :rooms_affected,
-                                     :occured_level, :multi_unit,
+                                     :occurred_level, :multi_unit,
                                      :ceiling_affected_id,
                                      :walls_affected_id, :attic_affected_id,
                                      :contents_affected_id, flooring_types: [])

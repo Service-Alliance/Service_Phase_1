@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :franchise_zipcodes
   resources :oncalls
   resources :forms
   resources :vendor_categories
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
 
   resources :jobs do
     get 'notes' => 'notes#job_notes'
+    get 'overview' => 'overview#index', as: :overview
     resources :properties
     resources :losses
     resources :callers

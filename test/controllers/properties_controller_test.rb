@@ -18,7 +18,7 @@ class PropertiesControllerTest < ActionController::TestCase
 
   test "should create property" do
     assert_difference('Property.count') do
-      post :create, property: { attic_affected: @property.attic_affected, ceiling_affected: @property.ceiling_affected, contents_affected: @property.contents_affected, floors_affected: @property.floors_affected, multi_unit: @property.multi_unit, occured_level: @property.occured_level, property_type_id: @property.property_type_id, rooms_affected: @property.rooms_affected, structure_type_id: @property.structure_type_id, walls_affected: @property.walls_affected, year_built: @property.year_built }
+      post :create, property: { attic_affected: @property.attic_affected, ceiling_affected: @property.ceiling_affected, contents_affected: @property.contents_affected, floors_affected: @property.floors_affected, multi_unit: @property.multi_unit, occurred_level: @property.occurred_level, property_type_id: @property.property_type_id, rooms_affected: @property.rooms_affected, structure_type_id: @property.structure_type_id, walls_affected: @property.walls_affected, year_built: @property.year_built }
     end
 
     assert_redirected_to property_path(assigns(:property))
@@ -35,7 +35,7 @@ class PropertiesControllerTest < ActionController::TestCase
   end
 
   test "should update property" do
-    patch :update, id: @property, property: { attic_affected: @property.attic_affected, ceiling_affected: @property.ceiling_affected, contents_affected: @property.contents_affected, floors_affected: @property.floors_affected, multi_unit: @property.multi_unit, occured_level: @property.occured_level, property_type_id: @property.property_type_id, rooms_affected: @property.rooms_affected, structure_type_id: @property.structure_type_id, walls_affected: @property.walls_affected, year_built: @property.year_built }
+    patch :update, id: @property, property: { attic_affected: @property.attic_affected, ceiling_affected: @property.ceiling_affected, contents_affected: @property.contents_affected, floors_affected: @property.floors_affected, multi_unit: @property.multi_unit, occurred_level: @property.occurred_level, property_type_id: @property.property_type_id, rooms_affected: @property.rooms_affected, structure_type_id: @property.structure_type_id, walls_affected: @property.walls_affected, year_built: @property.year_built }
     assert_redirected_to property_path(assigns(:property))
   end
 

@@ -1,0 +1,1 @@
+json.partial! "franchise_zipcodes/franchise_zipcode", franchise_zipcode: @franchise_zipcode

@@ -6,7 +6,7 @@ one:
   year_built: 1
   floors_affected: 1
   rooms_affected: 1
-  occured_level: 1
+  occurred_level: 1
   multi_unit: false
   ceiling_affected: 1
   walls_affected: 1
@@ -19,7 +19,7 @@ two:
   year_built: 1
   floors_affected: 1
   rooms_affected: 1
-  occured_level: 1
+  occurred_level: 1
   multi_unit: false
   ceiling_affected: 1
   walls_affected: 1

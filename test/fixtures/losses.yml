@@ -2,7 +2,7 @@
 
 one:
   recieved_by: MyString
-  loss_occured: 2016-12-21 21:29:15
+  loss_occurred: 2016-12-21 21:29:15
   fnol_recieved: 2016-12-21 21:29:15
   customer_called: 2016-12-21
   loss_type_id: 1
@@ -15,7 +15,7 @@ one:
 
 two:
   recieved_by: MyString
-  loss_occured: 2016-12-21 21:29:15
+  loss_occurred: 2016-12-21 21:29:15
   fnol_recieved: 2016-12-21 21:29:15
   customer_called: 2016-12-21
   loss_type_id: 1

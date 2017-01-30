@@ -10,4 +10,10 @@ class JobDetail < ActiveRecord::Base
 
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
+
+  def full_name
+    first = billing_address_first_name || " "
+    last = billing_address_last_name || " "
+    return "#{first+ " " + last}"
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125031644) do
+ActiveRecord::Schema.define(version: 20170127225724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,6 +178,13 @@ ActiveRecord::Schema.define(version: 20170125031644) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "franchise_zipcodes", force: :cascade do |t|
+    t.integer  "franchise_id"
+    t.integer  "zipcode"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "franchises", force: :cascade do |t|
     t.string   "name"
     t.integer  "franchise_number"
@@ -301,7 +308,7 @@ ActiveRecord::Schema.define(version: 20170125031644) do
 
   create_table "losses", force: :cascade do |t|
     t.string   "recieved_by"
-    t.datetime "loss_occured"
+    t.datetime "loss_occurred"
     t.datetime "fnol_recieved"
     t.date     "customer_called"
     t.integer  "job_id"
@@ -375,7 +382,7 @@ ActiveRecord::Schema.define(version: 20170125031644) do
     t.integer  "year_built"
     t.integer  "floors_affected"
     t.integer  "rooms_affected"
-    t.string   "occured_level"
+    t.string   "occurred_level"
     t.boolean  "multi_unit"
     t.integer  "ceiling_affected_id"
     t.integer  "walls_affected_id"

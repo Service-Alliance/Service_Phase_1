@@ -2,7 +2,7 @@ class CreateLosses < ActiveRecord::Migration
   def change
     create_table :losses do |t|
       t.string :recieved_by
-      t.datetime :loss_occured
+      t.datetime :loss_occurred
       t.datetime :fnol_recieved
       t.date :customer_called
       t.integer :job_id
@@ -17,7 +17,7 @@ class CreateLosses < ActiveRecord::Migration
       t.integer :previous_water_damage_id
       t.text :cleaning_type
       t.string :affected_square_footage
-      
+
       t.text :notes
 
       t.timestamps null: false

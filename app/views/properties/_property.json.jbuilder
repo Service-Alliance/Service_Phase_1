@@ -1,2 +1,2 @@
-json.extract! property, :id, :property_type_id, :structure_type_id, :year_built, :floors_affected, :rooms_affected, :occured_level, :multi_unit, :ceiling_affected, :walls_affected, :attic_affected, :contents_affected, :created_at, :updated_at
+json.extract! property, :id, :property_type_id, :structure_type_id, :year_built, :floors_affected, :rooms_affected, :occurred_level, :multi_unit, :ceiling_affected, :walls_affected, :attic_affected, :contents_affected, :created_at, :updated_at
 json.url property_url(property, format: :json)
