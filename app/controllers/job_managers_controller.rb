@@ -1,6 +1,6 @@
 class JobManagersController < ApplicationController
-  before_action :set_job_manager, only: [:show, :edit, :update, :destroy]
-  before_action :set_job
+  before_action :set_job_manager, only: [:show, :edit, :update, :destroy, :acknolwedge]
+  before_action :set_job, except: [:list]
 
   # GET /job_managers
   # GET /job_managers.json
@@ -65,6 +65,17 @@ class JobManagersController < ApplicationController
       format.html { redirect_to job_managers_url, notice: 'Job manager was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def acknolwedge
+    @job_manager.acknolwedge = true
+    @job_manager.save
+    redirect_to job_path(@job)
+  end
+
+  def list
+    @job_managers = JobManager.last(200)
+    render json: @job_managers.to_json(include: :job_manager)
   end
 
   private

@@ -1,0 +1,59 @@
+
+<%= form_for [@job, @ticsheet] do |f| %>
+  <% if @ticsheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ticsheet.errors.count, "error") %> prohibited this ticsheet from being saved:</h2>
+
+      <ul>
+      <% @ticsheet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-xs-2">
+        <%= f.label :key_code %>
+      </div>
+      <div class="col-xs-4">
+        <%= f.label :description %>
+      </div>
+      <div class="col-xs-2">
+        <%= f.label :uom %>
+      </div>
+      <div class="col-xs-2">
+        <%= f.label :percentage %>
+      </div>
+      <div class="col-xs-2">
+        <%= f.label :quantity %>
+      </div>
+    </div>
+  </div>
+
+<% Ticsheet.water_damage_list.each do |row| %>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-xs-2">
+        <%= text_field_tag "ticsheet[key_code][]", row[0], readonly: true, class: "form-control" %>
+      </div>
+      <div class="col-xs-4">
+        <%= text_field_tag "ticsheet[description][]", row[1], readonly: true, class: "form-control" %>
+      </div>
+      <div class="col-xs-2">
+        <%= text_field_tag "ticsheet[uom][]", row[2], readonly: true, class: "form-control"  %>
+      </div>
+      <div class="col-xs-2">
+        <%= text_field_tag "ticsheet[percentage][]", Ticsheet.find_by(job_id: @job.id, key_code: row[0], id: @ticksheet.try(:id)), class: "form-control" %>
+      </div>
+      <div class="col-xs-2">
+        <%= text_field_tag "ticsheet[quantity][]", nil, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

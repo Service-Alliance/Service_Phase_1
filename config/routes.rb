@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  resources :articles
   resources :franchise_zipcodes
   resources :oncalls
   resources :forms
@@ -23,16 +25,19 @@ Rails.application.routes.draw do
   post 'jobs/:id/calls' => 'jobs#create_call', as: :create_job_call
   resources :insurance_companies
   resources :notes
+  get 'job_managers' => 'job_managers#list'
 
   resources :jobs do
     get 'notes' => 'notes#job_notes'
     get 'overview' => 'overview#index', as: :overview
+    resources :ticsheets
     resources :properties
     resources :losses
     resources :callers
     resources :occupants
     resources :job_details
     resources :job_managers
+    get 'job_managers/:id/acknolwedge' => 'job_managers#acknolwedge'
     resources :vendor_assignments
     post 'agents/samecaller' => 'agents#samecaller'
     post 'adjusters/samecaller' => 'adjusters#samecaller'

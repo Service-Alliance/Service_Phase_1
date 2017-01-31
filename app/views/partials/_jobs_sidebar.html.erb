@@ -10,86 +10,29 @@
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to new_or_view_agent_path(@job, @job.agent)  do %>
-                    <i class="<%= @job.agent ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Agent Details
+                    <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
+                    <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Caller Information
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to new_or_view_adjuster_path(@job, @job.adjuster)  do %>
-                    <i class="<%= @job.adjuster ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Adjuster Details
+                    <%= link_to new_or_view_job_loss_path(@job, @job.loss)  do %>
+                    <i class="<%= @job.loss ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Loss Information
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to new_or_view_customer_path(@job, @job.customer)  do %>
-                    <i class="<%= @job.customer ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Customer Details
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to new_or_view_job_notes_path(@job, @job.notes)  do %>
-                    <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Job Notes
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to new_or_view_job_manager_path(@job, @job.job_managers)  do %>
-                    <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Manager Assignment
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to job_uploads_path(@job)  do %>
-                    <i class="<%= @job.uploads ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Files/Uploads
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to new_or_view_job_emergency_contact_path(@job, @job.emergency_contact)  do %>
-                    <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Emergency Contacts Details
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to job_job_forms_path(@job)  do %>
-                    <i class="<%= @job.job_forms ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Form Details
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to job_calls_path(@job)  do %>
-                        <i class="<%= @job.calls ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                        Call Rail Information
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to new_or_view_job_vendor_path(@job, @job.vendor_assignments)  do %>
-                    <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Vendor Assignment
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to job_overview_path(@job)  do %>
-                      Overview
+                    <%= link_to new_or_view_job_property_path(@job, @job.property)  do %>
+                    <i class="<%= @job.property ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Property Information
                     <% end %>
                 </li>
 
-                <li class="submenu">
-                    <a href="#">
-                        <i class="glyphicon glyphicon-list"></i>
-                        Resources
-                        <span class="caret pull-right"></span>
-                    </a>
-                    <!-- Sub menu -->
-                    <ul>
-                        <li>
-                            <a href="/">Resource 1</a>
-                        </li>
-                        <li>
-                            <a href="/">Resource 2</a>
-                        </li>
-                    </ul>
+                <li>
+                    <%= link_to new_or_view_job_detail_path(@job, @job.job_detail)  do %>
+                    <i class="<%= @job.job_detail ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Job Details
+                    <% end %>
                 </li>
             </ul>
         </div>

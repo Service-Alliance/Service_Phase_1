@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Key code:</strong>
+  <%= @ticsheet.key_code %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ticsheet.description %>
+</p>
+
+<p>
+  <strong>Uom:</strong>
+  <%= @ticsheet.uom %>
+</p>
+
+<p>
+  <strong>Percentage:</strong>
+  <%= @ticsheet.percentage %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @ticsheet.quantity %>
+</p>
+
+<%= link_to 'Edit', edit_job_ticsheet_path(@job, @ticsheet) %> |
+<%= link_to 'Back', job_ticsheets_path(@job) %>

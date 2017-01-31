@@ -1,0 +1,1 @@
+json.array! @ticsheets, partial: 'ticsheets/ticsheet', as: :ticsheet

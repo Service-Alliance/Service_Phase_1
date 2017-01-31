@@ -1,6 +1,11 @@
 body {
     background-color: #EDF0F5;
 }
+.v-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
 .margin-top-5 {
     margin-top: 5%;
@@ -336,4 +341,21 @@ body {
 .columns ul li:first-child
 {
     margin-top:0px;
+}
+
+
+#kbase-article {
+  & #header {
+    background-color: #16a085;
+    height: 200px;
+    color: #fff;
+    font-size: 52px;
+    line-height: 48px;
+    margin-top: -20px;
+  }
+
+  & .content {
+    font-size: 15px;
+    line-height: 25px;
+  }
 }

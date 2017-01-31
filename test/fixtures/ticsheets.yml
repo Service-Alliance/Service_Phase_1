@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  key_code: MyString
+  description: MyString
+  uom: MyString
+  percentage: 1
+  quantity: 1
+
+two:
+  key_code: MyString
+  description: MyString
+  uom: MyString
+  percentage: 1
+  quantity: 1

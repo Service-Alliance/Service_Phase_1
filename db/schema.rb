@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170127225724) do
+ActiveRecord::Schema.define(version: 20170131153305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 20170127225724) do
     t.integer  "insurance_company_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.text     "content"
+    t.string   "title"
+    t.integer  "author_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "callers", force: :cascade do |t|
@@ -251,9 +260,10 @@ ActiveRecord::Schema.define(version: 20170127225724) do
     t.integer  "job_manager_id"
     t.datetime "schedule_datetime"
     t.integer  "job_id"
+    t.boolean  "manager_confirmation", default: false
     t.text     "note"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "job_statuses", force: :cascade do |t|
@@ -425,6 +435,17 @@ ActiveRecord::Schema.define(version: 20170127225724) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "ticsheets", force: :cascade do |t|
+    t.integer  "key_code"
+    t.string   "description"
+    t.string   "uom"
+    t.integer  "percentage"
+    t.integer  "quantity"
+    t.integer  "job_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "uploads", force: :cascade do |t|

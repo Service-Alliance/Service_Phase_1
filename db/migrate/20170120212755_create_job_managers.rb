@@ -4,6 +4,7 @@ class CreateJobManagers < ActiveRecord::Migration
       t.integer :job_manager_id
       t.datetime :schedule_datetime
       t.integer :job_id
+      t.boolean :manager_confirmation, default: false
       t.text :note
 
       t.timestamps null: false

@@ -1,0 +1,22 @@
+<div id="kbase-article" class="container-fluid">
+  <div id="header" class="row">
+    <div class="col-sm-12 v-center">
+      Knowledge Base
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1><%= @article.title %></h1>
+    </div>
+    <div class="col-xs-12">
+      Created <%= @article.created_at %> | Author <%= @article.author.full_name %>| Category <%= @article.category_id %>
+    </div>
+
+  </div>
+  <div class="row">
+    <hr />
+    <div class="col-xs-12 content">
+      <%= raw @article.content %>
+    </div>
+  </div>
+</div>
