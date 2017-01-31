@@ -57,12 +57,7 @@
     <%= f.label :entered_by_id %><br>
     <%= f.number_field :entered_by_id %>
   </div> -->
-        <div class="col-xs-4">
-            <div class="form-group">
-                <%= f.label :franchise_id %><br>
-                <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
-            </div>
-        </div>
+        
         <div class="col-xs-12">
             <div class="form-group">
                 <%= f.label :referral_type_id %><br>

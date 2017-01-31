@@ -78,8 +78,8 @@ class JobsController < ApplicationController
 
     @call = Call.find_by(id: call_params[:id]) if call_params[:id]
     @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
-
-
+    franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
+    @job.franchise_id = franchise.id
 
     if @caller.save
       CustomerMailer.welcome_email(@caller).deliver_now
@@ -215,11 +215,11 @@ class JobsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def job_params
     params.require(:job).permit(:type_id, :status_id,
-                                :entered_by_id, :franchise_id, :details,
+                                :entered_by_id, :details,
                                 :job_note, :customer_id, :referral_type_id,
                                 :billing_address_id, :emergency,
                                 :referral_employee_id, :job_manager_id,
-                                customer: [:address_1, :address_2, :zip, :city,
+                                customer: [:address_1, :address_2, :zip_code, :city,
                                            :state_id, :county])
   end
 

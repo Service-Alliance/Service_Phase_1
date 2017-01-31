@@ -45,6 +45,26 @@ Franchise.create(name: 'Oakdale/North Bay Shore')
 Franchise.create(name: 'Old Bridge/Cranbury')
 Franchise.create(name: 'Southwest Brooklyn')
 
+csv_text = File.read("db/files/central_zips.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  FranchiseZipcode.create!(row.to_hash)
+end
+
+csv_text = File.read("db/files/medford_zips.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  FranchiseZipcode.create!(row.to_hash)
+end
+
+
+csv_text = File.read("db/files/old_bridge_zips.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  FranchiseZipcode.create!(row.to_hash)
+end
+
+
 # Referral Types
 ReferralType.create(name: 'Servpro Corporate')
 ReferralType.create(name: 'Internet')

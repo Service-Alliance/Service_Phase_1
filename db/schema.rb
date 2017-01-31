@@ -189,7 +189,7 @@ ActiveRecord::Schema.define(version: 20170131153305) do
 
   create_table "franchise_zipcodes", force: :cascade do |t|
     t.integer  "franchise_id"
-    t.integer  "zipcode"
+    t.integer  "zip_code"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
