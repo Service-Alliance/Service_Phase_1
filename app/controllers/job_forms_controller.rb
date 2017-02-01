@@ -38,6 +38,7 @@ class JobFormsController < ApplicationController
 
     respond_to do |format|
       if @job_form.save
+        @job.update_last_action
         format.html { redirect_to @job_form, notice: 'Job form was successfully created.' }
         format.json { render :show, status: :created, location: @job_form }
       else
@@ -52,6 +53,7 @@ class JobFormsController < ApplicationController
   def update
     respond_to do |format|
       if @job_form.update(job_form_params)
+        @job.update_last_action
         format.html { redirect_to @job_form, notice: 'Job form was successfully updated.' }
         format.json { render :show, status: :ok, location: @job_form }
       else

@@ -38,6 +38,7 @@ class EmergencyContactsController < ApplicationController
       @emergency_contact.address_id = @address.id
       @emergency_contact.job_id = @job.id
       if @emergency_contact.save
+        @job.update_last_action
 
         @emergency_contact.phones.destroy_all
         phone_count = phone_params['type_ids'].count
@@ -48,7 +49,7 @@ class EmergencyContactsController < ApplicationController
           end
         end
 
-        format.html { redirect_to job_path(@job), notice: 'Emergency contact was successfully created.' }
+        format.html { redirect_to job_emergency_contact_path(@job, @emergency_contact), notice: 'Emergency contact was successfully created.' }
         format.json { render :show, status: :created, location: @emergency_contact }
       else
         format.html { render :new }
@@ -61,7 +62,10 @@ class EmergencyContactsController < ApplicationController
   # PATCH/PUT /emergency_contacts/1.json
   def update
     respond_to do |format|
+      @address = Address.find_by(id: @emergency_contact.address_id)
+      @address.save if @address.update(address_params)
       if @emergency_contact.update(emergency_contact_params)
+        @job.update_last_action
         @emergency_contact.phones.destroy_all
         phone_count = phone_params['type_ids'].count
 
@@ -71,7 +75,7 @@ class EmergencyContactsController < ApplicationController
           end
         end
 
-        format.html { redirect_to job_path(@job), notice: 'Emergency contact was successfully updated.' }
+        format.html { redirect_to job_emergency_contact_path(@job, @emergency_contact), notice: 'Emergency contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @emergency_contact }
       else
         format.html { render :edit }

@@ -30,6 +30,7 @@ class JobManagersController < ApplicationController
 
     respond_to do |format|
       if @job_manager.save
+        @job.update_last_action
         @user = @job_manager.job_manager
         UserMailer.manager_assignment(@user, @job_manager).deliver_now
         format.html { redirect_to job_job_managers_path(@job), notice: 'Job manager was successfully created.' }
@@ -46,6 +47,7 @@ class JobManagersController < ApplicationController
   def update
     respond_to do |format|
       if @job_manager.update(job_manager_params)
+        @job.update_last_action
         @user = @job_manager.job_manager
         UserMailer.manager_assignment(@user, @job_manager).deliver_now
         format.html { redirect_to job_job_managers_path(@job), notice: 'Job manager was successfully updated.' }

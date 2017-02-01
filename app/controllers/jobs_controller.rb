@@ -92,6 +92,7 @@ class JobsController < ApplicationController
         @caller.job_id = @job.id
         @caller.address_id = @address.id
         @caller.save
+        @job.update_last_action
 
         @caller.phones.destroy_all
         phone_count = phone_params["type_ids"].count
@@ -124,6 +125,7 @@ class JobsController < ApplicationController
   def update
     respond_to do |format|
       if @job.update(job_params)
+        @job.update_last_action
         @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
 
         @caller = Caller.find_by(job_id: @job.id)

@@ -32,6 +32,11 @@ class Job < ActiveRecord::Base
     JobDetail.find_by(job_id: id).try(:insurance_company)
   end
 
+  def update_last_action
+    self.last_action = Date.today
+    save
+  end
+
 
 end
 

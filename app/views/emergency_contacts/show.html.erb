@@ -3,13 +3,13 @@
     <div class="alert alert-success" role="alert"><%= notice %></div>
     <% end %>
     <%= render partial: "partials/jobs_sidebar" %>
-    <h1 class="text-center">Emergency Contact Information:</h1>
     <div class="col-xs-8">
+        <h1 class="text-center">Emergency Contact Information:</h1>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                  Status:
-                  <%= @job.try(:job_status).try(:name) %>
+                    Status:
+                    <%= @job.try(:job_status).try(:name) %>
                 </h3>
             </div>
             <% if @emergency_contact %>
@@ -70,13 +70,11 @@
                 </div>
             </div>
             <div class="panel-footer">
-                <span class="pull-right">
                     <% if @emergency_contact %>
                     <%= link_to edit_job_emergency_contact_path(@job, @emergency_contact), class: "btn btn-sm btn-warning", type: "button" do %>
                     <i class="glyphicon glyphicon-edit"></i>
                     <% end %>
                     <% end %>
-                </span>
             </div>
             <% end %>
         </div>

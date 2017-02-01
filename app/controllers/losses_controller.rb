@@ -29,6 +29,7 @@ class LossesController < ApplicationController
 
     respond_to do |format|
       if @loss.save
+        @job.update_last_action
         format.html { redirect_to job_loss_path(@job, @loss), notice: 'Loss was successfully created.' }
         format.json { render :show, status: :created, location: @loss }
       else
@@ -43,6 +44,7 @@ class LossesController < ApplicationController
   def update
     respond_to do |format|
       if @loss.update(loss_params)
+        @job.update_last_action
         format.html { redirect_to job_loss_path(@job, @loss), notice: 'Loss was successfully updated.' }
         format.json { render :show, status: :ok, location: @loss }
       else

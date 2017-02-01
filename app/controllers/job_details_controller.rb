@@ -29,36 +29,43 @@ class JobDetailsController < ApplicationController
   def create
     @job_detail = JobDetail.new(job_detail_params)
     @job_detail.job_id = @job.id
-
-    if billing_params != {}
-      if billing_params[:type][0] == '1'
-        @job_detail.billing_type_id = 1
-        @job_detail.billing_address_id = @job.customer.address_id
-        @job_detail.billing_address_first_name = @job.customer.first_name
-        @job_detail.billing_address_last_name = @job.customer.last_name
-      elsif billing_params[:type][0] == '2'
-        adjuster = Adjuster.find_by(job_id: @job.id)
-        @job_detail.billing_type_id = 2
-        @job_detail.billing_address_id = adjuster.address_id
-        @job_detail.billing_address_first_name = adjuster.first_name
-        @job_detail.billing_address_last_name = adjuster.last_name
-      elsif billing_params[:type][0] == '3'
-        @job_detail.billing_type_id = 3
-        @job_detail.billing_address_first_name = address_params[:first_name]
-        @job_detail.billing_address_last_name = address_params[:last_name]
-        @billing_address = Address.create(address_1: address_params[:address_1],
-                                          address_2:  address_params[:address_2],
-                                          city:  address_params[:city],
-                                          zip_code: address_params[:zip_code],
-                                          county:  address_params[:county])
-        @billing_address.save
-        @job_detail.billing_address_id = @billing_address.id
-        end
-      @job.save
-    end
+    @job.update_last_action
 
     respond_to do |format|
       if @job_detail.save
+        if billing_params != {}
+          if billing_params[:type][0] == '1'
+            cust = @job.customer
+            if cust == nil
+              return redirect_to edit_job_job_detail_path(@job, @job_detail), notice: 'No customer was found.'
+            end
+            @job_detail.billing_type_id = 1
+            @job_detail.billing_address_id = @job.customer.address_id
+            @job_detail.billing_address_first_name = @job.customer.first_name
+            @job_detail.billing_address_last_name = @job.customer.last_name
+          elsif billing_params[:type][0] == '2'
+            adjuster = Adjuster.find_by(job_id: @job.id)
+            unless adjuster
+              return redirect_to edit_job_job_detail_path(@job, @job_detail), notice: 'No adjuster was found.'
+            end
+            @job_detail.billing_type_id = 2
+            @job_detail.billing_address_id = adjuster.address_id
+            @job_detail.billing_address_first_name = adjuster.first_name
+            @job_detail.billing_address_last_name = adjuster.last_name
+          elsif billing_params[:type][0] == '3'
+            @job_detail.billing_type_id = 3
+            @job_detail.billing_address_first_name = address_params[:first_name]
+            @job_detail.billing_address_last_name = address_params[:last_name]
+            @billing_address = Address.create(address_1: address_params[:address_1],
+                                              address_2:  address_params[:address_2],
+                                              city:  address_params[:city],
+                                              zip_code: address_params[:zip_code],
+                                              county:  address_params[:county])
+            @billing_address.save
+            @job_detail.billing_address_id = @billing_address.id
+            end
+          @job.save
+        end
         format.html {  redirect_to job_job_detail_path(@job, @job_detail), notice: 'Job detail was successfully created.' }
         format.json { render :show, status: :created, location: @job_detail }
       else
@@ -73,12 +80,19 @@ class JobDetailsController < ApplicationController
   def update
     if billing_params != {}
       if billing_params[:type][0] == '1'
+        cust = @job.customer
+        if cust == nil
+          return redirect_to edit_job_job_detail_path(@job, @job_detail), notice: 'No customer was found.'
+        end
         @job_detail.billing_type_id = 1
         @job_detail.billing_address_id = @job.customer.address_id
         @job_detail.billing_address_first_name = @job.customer.first_name
         @job_detail.billing_address_last_name = @job.customer.last_name
       elsif billing_params[:type][0] == '2'
         adjuster = Adjuster.find_by(job_id: @job.id)
+        unless adjuster
+          return redirect_to edit_job_job_detail_path(@job, @job_detail), notice: 'No adjuster was found.'
+        end
         @job_detail.billing_type_id = 2
         @job_detail.billing_address_id = adjuster.address_id
         @job_detail.billing_address_first_name = adjuster.first_name
@@ -95,9 +109,10 @@ class JobDetailsController < ApplicationController
         @billing_address.save
         @job_detail.billing_address_id = @billing_address.id
         end
+      @job.update_last_action
       @job_detail.save
 
-      return redirect_to @job, notice: 'Job was successfully updated.'
+      return redirect_to job_job_detail_path(@job, @job_detail), notice: 'Job was successfully updated.'
     end
     respond_to do |format|
       if @job_detail.update(job_detail_params)

@@ -32,6 +32,7 @@ class CallersController < ApplicationController
   def create
     @caller = Caller.new(caller_params)
     @phone = Phone.new(phone_params)
+    @job.update_last_action
 
     respond_to do |format|
       if @caller.save
@@ -50,8 +51,14 @@ class CallersController < ApplicationController
   # PATCH/PUT /callers/1.json
   def update
     respond_to do |format|
+      @address = Address.find_by(id: @caller.address_id)
 
+      if @address.update(address_params)
+        @job.update_last_action
+        @address.save
+      end
       if @caller.update(caller_params)
+        @job.update_last_action
         @caller.phones.destroy_all
         phone_count = phone_params["type_ids"].count
 
@@ -60,6 +67,7 @@ class CallersController < ApplicationController
             @caller.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
           end
         end
+
         format.html { redirect_to job_caller_path(@job, @caller), notice: 'Caller was successfully updated.' }
         format.json { render :show, status: :ok, location: @caller }
       else

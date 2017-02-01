@@ -35,6 +35,7 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
     @address = Address.new(address_params)
     @job = Job.find_by(id: job_param[:job_id])
+    @job.update_last_action
 
 
     respond_to do |format|
@@ -81,6 +82,7 @@ class CustomersController < ApplicationController
         @customer.address_id = @address.id
       end
       if @customer.update(customer_params)
+        @job.update_last_action
         @customer.phones.destroy_all
         phone_count = phone_params["type_ids"].count
 

@@ -37,8 +37,10 @@ class AgentsController < ApplicationController
     @job = Job.find_by(id: job_params[:job_id])
     if same_agent_params[:agent_id] != ''
       @job.agent_id = same_agent_params[:agent_id]
+      @job.last_action = Date.today
       @job.save
-      return redirect_to job_path(@job), notice: 'Agent was successfully assigned.'
+
+      return redirect_to agent_path(@agent, job_id: @job.id), notice: 'Agent was successfully assigned.'
     else
       @agent = Agent.new(agent_params)
       @address = Address.new(address_params)
@@ -85,6 +87,8 @@ class AgentsController < ApplicationController
 
       if @agent.update(agent_params)
         @agent.address.update(address_params)
+        @job.last_action = Date.today
+        @job.save
 
         format.html { redirect_to agent_path(@agent, job_id: @job.id), notice: 'Agent was successfully updated.' }
         format.json { render :show, status: :ok, location: @agent }
