@@ -101,13 +101,14 @@ class JobDetailsController < ApplicationController
         @job_detail.billing_type_id = 3
         @job_detail.billing_address_first_name = address_params[:first_name]
         @job_detail.billing_address_last_name = address_params[:last_name]
-        @billing_address = Address.create(address_1: address_params[:address_1],
+        @billing_address = Address.new(address_1: address_params[:address_1],
                                           address_2:  address_params[:address_2],
                                           city:  address_params[:city],
                                           zip_code: address_params[:zip_code],
                                           county:  address_params[:county])
         @billing_address.save
         @job_detail.billing_address_id = @billing_address.id
+        @job_detail.save
         end
       @job.update_last_action
       @job_detail.save

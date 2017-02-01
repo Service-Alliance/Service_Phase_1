@@ -8,6 +8,7 @@ $(function() {
 
 function zipLookup(){
   var zip = $("#address_zip_code").val();
+  console.log(zip)
 
   $.ajax({
     method: "POST",
@@ -16,6 +17,7 @@ function zipLookup(){
     dataType: 'json'
   })
   .success(function(response){
+    console.log(response)
     var city = response[0]['data']['address_components'][1].long_name
     var county = response[0]['data']['address_components'][2].long_name
     var state = response[0]['data']['address_components'][3].short_name
