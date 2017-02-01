@@ -3,12 +3,11 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :first_name
       t.string :last_name
-      t.boolean :admin, default: false, null: false
-      t.boolean :call_rep, default: false, null: false
-      t.boolean :job_coordinator, default: false, null: false
+      t.integer :role_id, default: 0
       t.string :notes
       t.integer :department_id
       t.string :title
+      t.string :additional_title
       t.integer :location_id
       t.date :background_check
       t.date :online_physical

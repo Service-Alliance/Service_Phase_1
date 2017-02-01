@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170131153305) do
+ActiveRecord::Schema.define(version: 20170201194745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -297,6 +297,12 @@ ActiveRecord::Schema.define(version: 20170131153305) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "loss_cause_types", force: :cascade do |t|
     t.integer  "loss_type_id"
     t.integer  "loss_cause_id"
@@ -426,6 +432,12 @@ ActiveRecord::Schema.define(version: 20170131153305) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "states", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -459,12 +471,11 @@ ActiveRecord::Schema.define(version: 20170131153305) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "admin",                  default: false, null: false
-    t.boolean  "call_rep",               default: false, null: false
-    t.boolean  "job_coordinator",        default: false, null: false
+    t.integer  "role_id",                default: 0
     t.string   "notes"
     t.integer  "department_id"
     t.string   "title"
+    t.string   "additional_title"
     t.integer  "location_id"
     t.date     "background_check"
     t.date     "online_physical"
@@ -496,14 +507,14 @@ ActiveRecord::Schema.define(version: 20170131153305) do
     t.date     "sub_2"
     t.string   "dry_book"
     t.integer  "login_count"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
