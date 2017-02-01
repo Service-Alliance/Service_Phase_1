@@ -15,12 +15,12 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    true if self.role_id = 1
+    self.role_id == 1 ? true : false
   end
   def job_manager?
-    true if self.role_id = 2
+    self.role_id == 2 ? true : false
   end
   def call_rep?
-    true if self.role_id = 3
+    self.role_id == 3 ? true : false
   end
 end
