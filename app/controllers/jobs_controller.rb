@@ -21,6 +21,14 @@ class JobsController < ApplicationController
                                          ])
   end
 
+  def no_activity
+    @jobs = Job.where("last_action < ? AND status_id = ?", 7.days.ago, 1)
+    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
+                                         :job_loss_type, :insurance_details,
+                                         :job_detail, :customer
+                                         ])
+  end
+
   # GET /jobs/1
   # GET /jobs/1.json
   def show

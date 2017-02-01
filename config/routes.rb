@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :agents
   resources :adjusters
   get 'jobs/list' => 'jobs#list'
+  get 'jobs/no-activity' => 'jobs#no_activity', as: :jobs_no_activity
   get 'jobs/search' => 'jobs#search', as: :job_search
   get 'jobs/:id/calls' => 'jobs#calls', as: :job_calls
   get 'jobs/:id/calls/new' => 'jobs#add_call', as: :new_job_call
