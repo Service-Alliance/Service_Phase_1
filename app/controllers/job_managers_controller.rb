@@ -70,9 +70,9 @@ class JobManagersController < ApplicationController
   end
 
   def acknolwedge
-    @job_manager.acknolwedge = true
+    @job_manager.manager_confirmation = true
     @job_manager.save
-    redirect_to job_path(@job)
+    redirect_to job_path(@job), notice: 'Job acknolwedged.'
   end
 
   def list

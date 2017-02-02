@@ -2,6 +2,9 @@ user = User.create(email: 'callrep@test.com', password: 'password', password_con
 user = User.create(email: 'jobcoordinator@test.com', first_name: 'User', last_name: 'Two', password: 'password', password_confirmation: 'password', role_id: 2)
 user = User.create(email: 'admin@test.com', first_name: 'User', last_name: 'Three', password: 'password', password_confirmation: 'password', role_id: 1)
 
+user = User.create(email: 'creaumond@gmail.com', password: 'password', password_confirmation: 'password', role_id: 1, first_name: 'Connor', last_name: 'Reaumond', department_id: 1)
+
+
 Role.create(name: "Admin")
 Role.create(name: "Job Coordinator")
 Role.create(name: "Call Rep")

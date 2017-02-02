@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   belongs_to :department
   has_many :jobs, foreign_key: :entered_by_id
   belongs_to :role
+  has_many :job_managers, foreign_key: :job_manager_id
 
   def full_name
     first = first_name || " "

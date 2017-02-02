@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :job_assignments_list]
 
   # GET /users
   # GET /users.json
@@ -66,6 +66,17 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def job_assignments
+
+  end
+
+  def job_assignments_list
+    @job_assignments = @user.job_managers
+
+    render json: @job_assignments
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
