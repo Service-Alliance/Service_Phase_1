@@ -2,6 +2,7 @@
     <% if notice %>
     <div class="alert alert-success" role="alert"><%= notice %></div>
     <% end %>
+
     <%= render partial: "partials/jobs_sidebar" %>
     <div class="col-xs-8">
         <div class="row">
@@ -11,4 +12,5 @@
             <%= render 'form' %>
         </div>
     </div>
+<%= render partial: "partials/jobs_right_sidebar" %>
 </div>
