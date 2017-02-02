@@ -6,7 +6,10 @@
   <body>
     <h1><%= @user.full_name %>, you have been assigned to a new job.</h1>
     <p>
-      Please click <a href="http://servcrm.herokuapp.com/jobs/<%= @job_manager.job_id %>">here</a> to view the job details.
+      Please acknowledge this assignment by clicking <a href="http://servcrm.herokuapp.com/jobs/<%= @job_manager.job_id %>/job_managers/<%= @job_manager.id %>/acknolwedge">here</a>.
+    </p>
+    <p>
+      Click <a href="http://servcrm.herokuapp.com/jobs/<%= @job_manager.job_id %>">here</a> to view the job details.
     </p>
   </body>
 </html>
