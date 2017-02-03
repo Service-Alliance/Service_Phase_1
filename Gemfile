@@ -35,6 +35,7 @@ gem "fog-aws"
 gem "prawn"
 gem 'combine_pdf'
 gem 'will_paginate', '~> 3.1.0'
+gem 'exception_notification'
 
 gem 'public_activity'
 
