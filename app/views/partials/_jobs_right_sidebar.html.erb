@@ -24,12 +24,7 @@
                     Customer Details
                     <% end %>
                 </li>
-                <li>
-                    <%= link_to new_or_view_job_notes_path(@job, @job.notes)  do %>
-                    <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                    Job Notes
-                    <% end %>
-                </li>
+                
                 <li>
                     <%= link_to new_or_view_job_manager_path(@job, @job.job_managers)  do %>
                     <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
