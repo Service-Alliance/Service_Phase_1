@@ -92,6 +92,6 @@ class CallsController < ApplicationController
   def call_params
     params.require(:call).permit(:callrail_id, :recording, :callrail_user, :user_id,
                                  :start_time, :customer_phone_number,
-                                 :duration, :job_id)
+                                 :duration, :job_id, :inprogres)
   end
 end
