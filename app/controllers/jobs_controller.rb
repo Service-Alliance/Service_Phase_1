@@ -90,7 +90,7 @@ class JobsController < ApplicationController
     @job.franchise_id = franchise.id if franchise
 
     if @caller.save
-      CustomerMailer.welcome_email(@caller).deliver_now
+      # CustomerMailer.welcome_email(@caller).deliver_now
       @address.save
       if @job.save
         if @call
