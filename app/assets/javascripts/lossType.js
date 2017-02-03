@@ -1,7 +1,9 @@
 $(function() {
     // $("#loss_loss_cause_id").parent().hide();
     var lossCauses = $("#loss_loss_cause_id").html();
-    $("#loss_loss_cause_id").empty();
+    if ($("#loss_loss_cause_id").val() == ""){
+        $("#loss_loss_cause_id").empty();
+    }
     $('input[type=radio][name=loss\\[loss_type_id\\]]').change(function() {
         var $input = $('input[type=radio][name=loss\\[loss_type_id\\]]:checked');
         var lossType = $('label[for=' + $input.attr('id') + ']').text();
