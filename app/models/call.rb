@@ -17,9 +17,10 @@ class Call < ActiveRecord::Base
       # Check to see if record exists before creating
       existing = Call.find_by(callrail_id: call['id'])
       if existing
-        existing.recording == call['recording_player']
+        existing.recording = call['recording_player']
+        existing.save
       end
-      existing.save
+
       # unless existing
       #   Call.create(callrail_id: call['id'], recording: call['recording_player'], duration: call['duration'], start_time: call['start_time'], customer_phone_number: call['caller_number'])
       # end
