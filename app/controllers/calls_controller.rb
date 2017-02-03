@@ -73,10 +73,12 @@ class CallsController < ApplicationController
 
   def precall
     Call.precall_parse(params)
+    head :no_content
   end
 
   def postcall
     Call.postcall_parse(params)
+    head :no_content
   end
 
   private
