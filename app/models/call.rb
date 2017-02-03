@@ -35,7 +35,7 @@ class Call < ActiveRecord::Base
     p json_body
     p call = Call.find_by(callrail_id: json_body[:id])
 
-    p call.update(duration: json_body[:duration], recording: json_body[:recording], answered: json_body[:answered], inprogress: false)
+    p call.update(duration: json_body[:duration], recording: json_body[:recording_player], answered: json_body[:answered], transcription: json_body[:transcription],inprogress: false)
     call.save
   end
 end
