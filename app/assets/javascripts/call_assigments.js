@@ -16,6 +16,5 @@ var getUrlParameter = function getUrlParameter(that) {
         vars.push(hash[0]);
         vars[hash[0]] = hash[1];
     }
-    console.log(vars)
     return vars;
 };

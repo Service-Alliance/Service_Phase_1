@@ -106,7 +106,7 @@
                 <div class="field">
                     <%= f.label :visible_mold_id %><br>
                     <%= f.collection_radio_buttons(:visible_mold_id, AffectedType.all, :id, :name) %>
-                    <span id="mold-alert" class="hidden alert">Please advise mold inspection is $150, which will come off the estimate if we do the work.</span>
+                    <div id="mold-alert" class="hidden alert">Please advise mold inspection is $150, which will come off the estimate if we do the work.</div>
                 </div>
             </div>
         </div>
