@@ -14,7 +14,7 @@ class JobsController < ApplicationController
   end
 
   def list
-    @jobs = Job.last(200)
+    @jobs = Job.where.not(status_id: nil).last(200)
     render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
                                          :job_loss_type, :insurance_details,
                                          :job_detail, :customer
@@ -47,7 +47,8 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.new
+    @job = Job.create
+    @loss = Loss.create(job_id: @job.id)
     @caller = Caller.new
     @address = Address.new
     @phones = nil
@@ -142,7 +143,7 @@ class JobsController < ApplicationController
           @caller.update(caller_params)
           @address.update(address_params)
         end
-        @caller.phones.destroy_all
+        @caller.phones.destroy_all if @caller && @caller.phones
         phone_count = phone_params["type_ids"].count
 
         phone_count.times do |index|

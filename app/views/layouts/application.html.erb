@@ -4,14 +4,18 @@
         <title>Service Alliance Inc.</title>
         <%= stylesheet_link_tag    'application', media: 'all' %>
         <%= javascript_include_tag 'application' %>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.3/metisMenu.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.3/metisMenu.min.js"></script>
         <%= csrf_meta_tags %>
     </head>
     <body>
+
     <% if current_user && (current_user.admin? || current_user.job_coordinator?) %>
         <%= render partial: "layouts/admin_navbar" %>
     <% else %>
         <%= render partial: "layouts/call_rep_navbar" %>
     <% end %>
+
     <%= yield %>
 
     </body>

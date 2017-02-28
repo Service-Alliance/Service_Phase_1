@@ -6,20 +6,218 @@
                     <h1>New Call</h1>
                 </div>
                 <div class="col-xs-12 new-call-script">
-                  New call script can be placed here.
+                    New call script can be placed here. File found in "app/views/jobs/new.html.erb"
 
-                  File found in "app/views/jobs/new.html.erb"
-
-                  <ul>
-                    <li>Sample item 1</li>
-                    <li>Sample item 2</li>
-                    <li>Sample item 3</li>
-                  </ul>
+                    <ul>
+                        <li>Sample item 1</li>
+                        <li>Sample item 2</li>
+                        <li>Sample item 3</li>
+                    </ul>
                 </div>
                 <%= render 'form' %>
+
             </div>
         </div>
     </div>
 </div>
 
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <%= form_for [@job, @loss] do |f| %>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Loss</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-xs-12">
+
+
+                        <% if @loss.errors.any? %>
+                        <div id="error_explanation">
+                            <h2><%= pluralize(@loss.errors.count, "error") %>
+                                prohibited this loss from being saved:</h2>
+
+                            <ul>
+                                <% @loss.errors.full_messages.each do |message| %>
+                                <li><%= message %></li>
+                                <% end %>
+                            </ul>
+                        </div>
+                        <% end %>
+
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :loss_occurred %><br>
+                                    <%= f.text_field :loss_occurred, class:"form-control datePicker" %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :fnol_recieved %><br>
+                                    <%= f.text_field :fnol_recieved, class:"form-control datePicker" %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :customer_called %><br>
+                                    <%= f.text_field :customer_called, class:"form-control datePicker" %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :loss_type_id %><br>
+                                    <%= f.collection_radio_buttons(:loss_type_id, LossType.all, :id, :name) do |b| %>
+                                    <%= b.label(:"data-value" => b.value, :"name" => "loss_type_id") { b.radio_button + b.text } %>
+                                    <a data-toggle="tooltip" class="tooltipLink" data-original-title="<%= b.object.tooltip %>">
+                                        <span class="glyphicon glyphicon-info-sign"></span>
+                                    </a>
+                                    <br>
+                                    <% end %>
+                                    <% f.collection_select :loss_type_id, LossType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :loss_cause_id %><br>
+                                    <%= f.grouped_collection_select :loss_cause_id, LossType.all, :loss_causes, :name, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :standing_water_id %><br>
+                                    <%= f.collection_radio_buttons(:standing_water_id, AffectedType.all, :id, :name) %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :water_available_id %><br>
+                                    <%= f.collection_radio_buttons(:water_available_id, AffectedType.all, :id, :name) %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :electricity_available_id %><br>
+                                    <%= f.collection_radio_buttons(:electricity_available_id, AffectedType.all, :id, :name) %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :source_off_id %><br>
+                                    <%= f.collection_radio_buttons(:source_off_id, AffectedType.all, :id, :name) %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :visible_mold_id %><br>
+                                    <%= f.collection_radio_buttons(:visible_mold_id, AffectedType.all, :id, :name) %>
+                                    <div id="mold-alert" class="hidden alert">Please advise mold inspection is $150, which will come off the estimate if we do the work.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="previousWater" class="col-xs-4 hidden">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :previous_water_damage_id %><br>
+                                    <%= f.collection_radio_buttons(:previous_water_damage_id, AffectedType.all, :id, :name) %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sourceCause" class="col-xs-12 hidden">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :source_cause %><br>
+                                    <%= f.text_area :source_cause, class:"form-control" %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="cleaningType" class="col-xs-12 hidden">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :cleaning_type %><br>
+                                    <%= f.text_area :cleaning_type, class:"form-control" %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="squareFootage" class="col-xs-4 hidden">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :affected_square_footage %><br>
+                                    <%= f.text_field :affected_square_footage, class:"form-control" %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="field">
+                                    <%= f.label :notes %><br>
+                                    <%= f.text_area :notes, class:"form-control" %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 text-center">
+                            <div class="actions">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <script>
+                    $("a.tooltipLink").tooltip();
+                </script>
+
+            </div>
+            <div class="modal-footer">
+                <%= f.submit "Save changes", class: 'btn btn-primary' %>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+
+    <% end %>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <%= link_to 'Back', jobs_path %>
+
+<script>
+flatpickr(".datePicker", {
+    enableTime: true,
+    defaultDate: new Date(),
+    // create an extra input solely for display purposes
+    altInput: true,
+    altFormat: "F j, Y h:i K"
+});
+</script>

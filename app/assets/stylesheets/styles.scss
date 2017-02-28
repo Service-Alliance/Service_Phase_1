@@ -47,6 +47,14 @@ body {
 .full-width {
     width: 100%;
 }
+body {
+  padding-top: 50px;
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 50px;
+  }
+}
 
 #new-number {
     & .remove-number-toggle {

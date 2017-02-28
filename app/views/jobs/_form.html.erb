@@ -73,7 +73,11 @@
                 <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
             </div>
         </div>
-
+        <div class="col-xs-12">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+              New Job Loss
+          </button>
+        </div>
 
         <%= render 'callers_form', f: f %>
         <%= render 'partials/phone_form', f: f %>
