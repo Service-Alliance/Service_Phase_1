@@ -11,7 +11,7 @@ class Job < ActiveRecord::Base
   belongs_to :adjuster
   has_one :property
   has_one :caller
-  has_one :loss
+  has_many :losses
   has_one :job_detail
   has_one :emergency_contact
   has_many :uploads

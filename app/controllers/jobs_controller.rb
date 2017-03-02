@@ -50,7 +50,9 @@ class JobsController < ApplicationController
     @job = Job.create
     @loss = Loss.create(job_id: @job.id)
     @caller = Caller.create(job_id: @job.id)
-    @address = Address.new
+    @address = Address.create
+    @caller.address_id = @address.id
+    @caller.save
     @phones = nil
   end
 

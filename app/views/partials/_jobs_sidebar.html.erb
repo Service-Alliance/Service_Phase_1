@@ -19,8 +19,8 @@
                   <% end %>
               </li>
               <li>
-                  <%= link_to new_or_view_job_loss_path(@job, @job.loss)  do %>
-                  <i class="<%= @job.loss ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                  <%= link_to new_or_view_job_loss_path(@job, @job.losses)  do %>
+                  <i class="<%= @job.losses ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                   Loss Information
                   <% end %>
               </li>
