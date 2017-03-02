@@ -1,47 +1,95 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
 
-<h1>Listing Losses</h1>
+            <div class="col-xs-12">
+                <h1 class="text-center">Job Loss Information:</h1>
+                <% @job.losses.each do |loss| %>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Status:
+                            <%= @job.try(:job_status).try(:name) %>
+                        </h3>
+                    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Recieved by</th>
-      <th>Loss occurred</th>
-      <th>Fnol recieved</th>
-      <th>Customer called</th>
-      <th>Loss type</th>
-      <th>Loss cause</th>
-      <th>Standing water</th>
-      <th>Water available</th>
-      <th>Electricity available</th>
-      <th>Source off</th>
-      <th>Visible mold</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Recieved By:</td>
+                                            <td><%= loss.recieved_by %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Loss occurred:</td>
+                                            <td><%= loss.loss_occurred %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>FNOL Recieved</td>
+                                            <td><%= loss.fnol_recieved %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customer Called</td>
+                                            <td><%= loss.customer_called %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Loss Type</td>
+                                            <td><%= loss.try(:loss_type).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Loss Cause</td>
+                                            <td><%= loss.try(:loss_cause).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Standing Water</td>
+                                            <td><%= loss.try(:standing_water).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Water available</td>
+                                            <td><%= loss.try(:water_available).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Electricity available</td>
+                                            <td><%= loss.try(:electricity_available).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Source Off</td>
+                                            <td><%= loss.try(:source_off).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Visible Mold</td>
+                                            <td><%= loss.try(:visible_mold).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Source Cause</td>
+                                            <td><%= loss.source_cause %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Notes</td>
+                                            <td><%= loss.notes %></td>
+                                        </tr>
 
-  <tbody>
-    <% @losses.each do |loss| %>
-      <tr>
-        <td><%= loss.recieved_by %></td>
-        <td><%= loss.loss_occurred %></td>
-        <td><%= loss.fnol_recieved %></td>
-        <td><%= loss.customer_called %></td>
-        <td><%= loss.loss_type_id %></td>
-        <td><%= loss.loss_cause_id %></td>
-        <td><%= loss.standing_water_id %></td>
-        <td><%= loss.water_available_id %></td>
-        <td><%= loss.electricity_available_id %></td>
-        <td><%= loss.source_off_id %></td>
-        <td><%= loss.visible_mold_id %></td>
-        <td><%= link_to 'Show', loss %></td>
-        <td><%= link_to 'Edit', edit_loss_path(loss) %></td>
-        <td><%= link_to 'Destroy', loss, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                                    </tbody>
+                                </table>
 
-<br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <%= link_to edit_job_loss_path(@job, loss), class: "btn btn-sm btn-warning", type: "button" do %>
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <% end %>
+                    </div>
 
-<%= link_to 'New Loss', new_loss_path %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

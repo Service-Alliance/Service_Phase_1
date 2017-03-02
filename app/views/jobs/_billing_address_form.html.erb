@@ -1,18 +1,31 @@
-<div id="billingForm" class="<%= "hidden" unless @job.billing_type_id && @job.billing_type_id  == 3 %>">
+<div id="billingForm" class="<%= "hidden" unless @job_detail.billing_type_id && @job_detail.billing_type_id  == 3 %>">
 <div class="col-xs-12 text-center">
     <h1>Billing Address</h1>
 </div>
 <%= f.fields_for(@billing_address) do |g| %>
 <div class="col-xs-6">
     <div class="form-group">
+        <%= label_tag :first_name %><br>
+        <%= text_field_tag "address[first_name]", @job_detail.try(:billing_address_first_name), class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-xs-6">
+      <div class="form-group">
+          <%= label_tag :last_name %><br>
+          <%= text_field_tag "address[last_name]", @job_detail.try(:billing_address_last_name), class: "form-control" %>
+      </div>
+    </div>
+
+<div class="col-xs-6">
+    <div class="form-group">
         <%= label_tag :address_1 %><br>
-        <%= text_field_tag "address[address_1]", @job.try(:billing_address).try(:address_1), class: "form-control"  %>
+        <%= text_field_tag "address[address_1]", @job_detail.try(:billing_address).try(:address_1), class: "form-control"  %>
     </div>
 </div>
 <div class="col-xs-6">
     <div class="form-group">
         <%= label_tag :address_2 %><br>
-        <%= text_field_tag "address[address_2]", @job.try(:billing_address).try(:address_2), class: "form-control" %>
+        <%= text_field_tag "address[address_2]", @job_detail.try(:billing_address).try(:address_2), class: "form-control" %>
     </div>
 </div>
 
@@ -22,7 +35,7 @@
       <div class="col-xs-3">
           <div class="form-group">
               <%= label_tag :zip %><br>
-              <%= number_field_tag "zip_code", @job.try(:billing_address).try(:zip_code), class: "form-control"  %>
+              <%= number_field_tag "address[zip_code]", @job_detail.try(:billing_address).try(:zip_code), class: "form-control"  %>
           </div>
       </div>
         <div class="col-xs-3">
@@ -34,19 +47,19 @@
 <div class="col-xs-6">
     <div class="form-group">
         <%= label_tag :city %><br>
-        <%= text_field_tag "city", @job.try(:billing_address).try(:city), class: "form-control"  %>
+        <%= text_field_tag "address[city]", @job_detail.try(:billing_address).try(:city), class: "form-control"  %>
     </div>
 </div>
 <div class="col-xs-6">
     <div class="form-group">
         <%= label_tag :state_id %><br>
-        <%= select_tag("state_id", options_for_select(State.all.map{|p| [p.name, p.id]}, selected: @job.try(:billing_address).try(:state).try(:name)), class: "form-control") %>
+        <%= select_tag("address[state_id]", options_for_select(State.all.map{|p| [p.name, p.id]}, selected: @job_detail.try(:billing_address).try(:state).try(:name)), class: "form-control") %>
     </div>
 </div>
 <div class="col-xs-6">
     <div class="form-group">
         <%= label_tag :county %><br>
-        <%= text_field_tag "county", @job.try(:billing_address).try(:county), class: "form-control"  %>
+        <%= text_field_tag "address[county]", @job_detail.try(:billing_address).try(:county), class: "form-control"  %>
     </div>
 </div>
 <% end %>

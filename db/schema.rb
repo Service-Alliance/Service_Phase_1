@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302025817) do
+ActiveRecord::Schema.define(version: 20170302183802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -294,9 +294,10 @@ ActiveRecord::Schema.define(version: 20170302025817) do
     t.integer  "adjuster_id"
     t.date     "recieved"
     t.date     "last_action"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.text     "referral_note"
+    t.boolean  "keep_record",          default: false
   end
 
   create_table "locations", force: :cascade do |t|

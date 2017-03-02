@@ -52,7 +52,9 @@ class JobsController < ApplicationController
     @caller = Caller.create(job_id: @job.id)
     @address = Address.create
     @caller.address_id = @address.id
+    @property = Property.create(job_id: @job.id)
     @caller.save
+    @job_detail = JobDetail.create(job_id: @job.id)
     @phones = nil
   end
 
@@ -136,6 +138,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1.json
   def update
     respond_to do |format|
+      @job.keep_record = true
       if @job.update(job_params)
         @job.update_last_action
         @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'

@@ -9,16 +9,16 @@ class Job < ActiveRecord::Base
   belongs_to :user, foreign_key: :entered_by_id
   belongs_to :agent
   belongs_to :adjuster
-  has_one :property
-  has_one :caller
-  has_many :losses
-  has_one :job_detail
-  has_one :emergency_contact
-  has_many :uploads
-  has_many :job_managers
+  has_one :property, dependent: :destroy
+  has_one :caller, dependent: :destroy
+  has_many :losses, dependent: :destroy
+  has_one :job_detail, dependent: :destroy
+  has_one :emergency_contact, dependent: :destroy
+  has_many :uploads, dependent: :destroy
+  has_many :job_managers, dependent: :destroy
   has_many :vendor_assignments
-  has_many :job_forms
-  has_many :notes, as: :noteable
+  has_many :job_forms, dependent: :destroy
+  has_many :notes, as: :noteable, dependent: :destroy
 
   # Activity Tracking activated
   include PublicActivity::Model

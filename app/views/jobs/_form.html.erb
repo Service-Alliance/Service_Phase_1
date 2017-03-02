@@ -4,7 +4,7 @@
       <%= f.label :current_active_calls %>
       <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
       <% end %>
-    <div class="row content-box">
+    <div class="row content-box margin-top-3">
 
         <% if @job.errors.any? %>
         <div id="error_explanation">
@@ -59,29 +59,39 @@
   </div> -->
 
 
-        <div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != " Servpro Employee" %>">
-            <div class="form-group">
-                <%= f.label :referral_employee_id %><br>
-                <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
-            </div>
-        </div>
+
         <div class="col-xs-12">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-              New Job Loss
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lossModal">
+              Loss Information
           </button>
         </div>
 
         <%= render 'callers_form', f: f %>
         <%= render 'partials/phone_form', f: f %>
+        <div class="col-xs-12 margin-top-2">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#propertyModal">
+              Property Information
+          </button>
 
-        <div class="col-xs-12">
-            <div class="form-group">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#billingModal">
+              Billing Information
+          </button>
+        </div>
+
+        <div class="col-xs-12 margin-top-2">
+            <div class="form-group referrals">
                 <%= f.label :referral_type_id %><br>
                 <% f.collection_select :referral_type_id, ReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
                 <%= f.collection_radio_buttons(:referral_type_id, ReferralType.all, :id, :name) do |b| %>
                 <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
                 <% end %> <br />
-              
+
+            </div>
+        </div>
+        <div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != " Servpro Employee" %>">
+            <div class="form-group">
+                <%= f.label :referral_employee_id %><br>
+                <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
             </div>
         </div>
 

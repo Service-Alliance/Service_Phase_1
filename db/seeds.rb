@@ -61,7 +61,7 @@ Call.create(inprogress: true, customer_phone_number: '+18473375371', customer_na
 Call.create(inprogress: true, customer_phone_number: '+17703334444', customer_name: 'Olivia Rodriguez', customer_state: 'IL', customer_city: 'Chicago', customer_country: 'USA', customer_zip: '60622')
 
 # Job Status
-JobStatus.create(name: 'Lead')
+JobStatus.create(name: 'Pending')
 JobStatus.create(name: 'Active')
 invoiced = JobStatus.create(name: 'Invoiced')
 JobStatus.create(name: 'Dead')

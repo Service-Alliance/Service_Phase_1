@@ -12,12 +12,7 @@
                   Job Information
                   <% end %>
               </li>
-              <li>
-                  <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
-                  <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Caller Information
-                  <% end %>
-              </li>
+
               <li>
                   <%= link_to new_or_view_job_loss_path(@job, @job.losses)  do %>
                   <i class="<%= @job.losses ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
@@ -34,6 +29,12 @@
                   <%= link_to new_or_view_job_detail_path(@job, @job.job_detail)  do %>
                   <i class="<%= @job.job_detail ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                   Job Details
+                  <% end %>
+              </li>
+              <li>
+                  <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
+                  <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                  Caller Information
                   <% end %>
               </li>
             </ul>
