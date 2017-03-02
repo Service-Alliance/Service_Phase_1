@@ -1,17 +1,18 @@
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
-
-    <%= render partial: "partials/jobs_sidebar" %>
-
-        <div class="col-xs-8">
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <h1>New Emergency Contact</h1>
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h1>New Emergency Contact</h1>
+                    </div>
+                    <%= render 'form' %>
                 </div>
-              <%= render 'form' %>
             </div>
         </div>
-        <%= render partial: "partials/jobs_right_sidebar" %>
     </div>
+</div>

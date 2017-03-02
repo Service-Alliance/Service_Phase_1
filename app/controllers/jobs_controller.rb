@@ -49,7 +49,7 @@ class JobsController < ApplicationController
   def new
     @job = Job.create
     @loss = Loss.create(job_id: @job.id)
-    @caller = Caller.new
+    @caller = Caller.create(job_id: @job.id)
     @address = Address.new
     @phones = nil
   end
@@ -63,6 +63,7 @@ class JobsController < ApplicationController
     else
       @address = Address.new
       @phones = nil
+      @caller = Caller.new
     end
 
 
@@ -227,7 +228,7 @@ class JobsController < ApplicationController
   def job_params
     params.require(:job).permit(:type_id, :status_id,
                                 :entered_by_id, :details,
-                                :job_note, :customer_id, :referral_type_id,
+                                :job_note, :customer_id, :referral_type_id, :referral_note,
                                 :billing_address_id, :emergency,
                                 :referral_employee_id, :job_manager_id,
                                 customer: [:address_1, :address_2, :zip_code, :city,

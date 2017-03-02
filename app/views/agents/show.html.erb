@@ -1,90 +1,91 @@
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="col-xs-12">
+                <h1 class="text-center">Agent Information:</h1>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Agent Information:
 
-    <%= render partial: "partials/jobs_sidebar" %>
-    <div class="col-xs-8">
-        <h1 class="text-center">Agent Information:</h1>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Agent Information:
+                            <% link_to job_agents_samecaller_path(@job.id), method: :post, class: "pull-right margin-right-25px" do %>
+                            Same As Caller
+                            <% end %>
+                        </h3>
+                    </div>
+                    <% if @agent %>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>First Name:</td>
+                                            <td><%= @agent.try(:first_name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name:</td>
+                                            <td><%= @agent.try(:last_name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td><%= @agent.try(:email) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address 1:</td>
+                                            <td><%= @agent.try(:address).try(:address_1) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address 2</td>
+                                            <td><%= @agent.try(:address).try(:address_2) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>City</td>
+                                            <td><%= @agent.try(:address).try(:city) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zip</td>
+                                            <td><%= @agent.try(:address).try(:zip_code) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>State</td>
+                                            <td><%= @agent.try(:address).try(:state).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>County</td>
+                                            <td><%= @agent.try(:address).try(:county) %></td>
+                                        </tr>
+                                        <% @agent.phones.each do |phone| %>
+                                        <tr>
+                                            <td>Phone -
+                                                <%= phone.try(:type).try(:name) %></td>
+                                            <td>Number:
+                                                <%= phone.number %>, Ext:
+                                                <%= phone.extension %></td>
+                                        </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
 
-                    <% link_to job_agents_samecaller_path(@job.id), method: :post, class: "pull-right margin-right-25px" do %>
-                    Same As Caller
-                    <% end %>
-                </h3>
-            </div>
-            <% if @agent %>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>First Name:</td>
-                                    <td><%= @agent.try(:first_name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Last Name:</td>
-                                    <td><%= @agent.try(:last_name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Email:</td>
-                                    <td><%= @agent.try(:email) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Address 1:</td>
-                                    <td><%= @agent.try(:address).try(:address_1) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Address 2</td>
-                                    <td><%= @agent.try(:address).try(:address_2) %></td>
-                                </tr>
-                                <tr>
-                                    <td>City</td>
-                                    <td><%= @agent.try(:address).try(:city) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Zip</td>
-                                    <td><%= @agent.try(:address).try(:zip_code) %></td>
-                                </tr>
-                                <tr>
-                                    <td>State</td>
-                                    <td><%= @agent.try(:address).try(:state).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>County</td>
-                                    <td><%= @agent.try(:address).try(:county) %></td>
-                                </tr>
-                                <% @agent.phones.each do |phone| %>
-                                <tr>
-                                    <td>Phone -
-                                        <%= phone.try(:type).try(:name) %></td>
-                                    <td>Number:
-                                        <%= phone.number %>, Ext:
-                                        <%= phone.extension %></td>
-                                </tr>
-                                <% end %>
-                            </tbody>
-                        </table>
+                            </div>
+                        </div>
 
                     </div>
-                </div>
+                    <div class="panel-footer">
 
-            </div>
-            <div class="panel-footer">
-
-                <span>
-                    <%= link_to edit_agent_path(@agent, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
-                    <i class="glyphicon glyphicon-edit"></i>
+                        <span>
+                            <%= link_to edit_agent_path(@agent, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <% end %>
+                        </span>
+                    </div>
                     <% end %>
-                </span>
+                </div>
             </div>
-            <% end %>
         </div>
-        <%= render partial: "partials/jobs_bottom_bar" %>
     </div>
-    <%= render partial: "partials/jobs_right_sidebar" %>
 </div>

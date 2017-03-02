@@ -1,102 +1,104 @@
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
-    <%= render partial: "partials/jobs_sidebar" %>
-    <div class="col-xs-8">
-        <h1 class="text-center">Property Information:</h1>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Status:
-                    <%= @job.try(:job_status).try(:name) %>
-                </h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>Property type:</td>
-                                    <td><%= @property.try(:property_type).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Structure Type:</td>
-                                    <td><%= @property.try(:structure_type).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Year Built</td>
-                                    <td><%= @property.year_built %></td>
-                                </tr>
-                                <tr>
-                                    <td>Floors Affected</td>
-                                    <td><%= @property.floors_affected %></td>
-                                </tr>
-                                <tr>
-                                    <td>Rooms Affected</td>
-                                    <td><%= @property.rooms_affected %></td>
-                                </tr>
-                                <tr>
-                                    <td>occurred Level</td>
-                                    <td><%= @property.occurred_level %></td>
-                                </tr>
-                                <tr>
-                                    <td>Is Multi-unit (T/F)</td>
-                                    <td><%= @property.multi_unit %></td>
-                                </tr>
-                                <tr>
-                                    <td>Basement Finsihed (T/F)</td>
-                                    <td><%= @property.basement_finished %></td>
-                                </tr>
-                                <tr>
-                                    <td>Ownership (T/F)</td>
-                                    <td><%= @property.ownership %></td>
-                                </tr>
-                                <tr>
-                                    <td>Condo (T/F)</td>
-                                    <td><%= @property.condo %></td>
-                                </tr>
-                                <tr>
-                                    <td>Ceiling Affected</td>
-                                    <td><%= @property.try(:ceiling_affected).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Walls Affected</td>
-                                    <td><%= @property.try(:walls_affected).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Attic Affected</td>
-                                    <td><%= @property.try(:attic_affected).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Contents Affected</td>
-                                    <td><%= @property.try(:contents_affected).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Property Flooring Types</td>
-                                    <td>
-                                        <% @property.flooring_types.each do |flooring_type| %>
-                                        <%= flooring_type.name %>
-                                        <% end %>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="col-xs-12">
+                <h1 class="text-center">Property Information:</h1>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Status:
+                            <%= @job.try(:job_status).try(:name) %>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Property type:</td>
+                                            <td><%= @property.try(:property_type).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Structure Type:</td>
+                                            <td><%= @property.try(:structure_type).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Year Built</td>
+                                            <td><%= @property.year_built %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Floors Affected</td>
+                                            <td><%= @property.floors_affected %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rooms Affected</td>
+                                            <td><%= @property.rooms_affected %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>occurred Level</td>
+                                            <td><%= @property.occurred_level %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Is Multi-unit (T/F)</td>
+                                            <td><%= @property.multi_unit %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Basement Finsihed (T/F)</td>
+                                            <td><%= @property.basement_finished %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ownership (T/F)</td>
+                                            <td><%= @property.ownership %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Condo (T/F)</td>
+                                            <td><%= @property.condo %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ceiling Affected</td>
+                                            <td><%= @property.try(:ceiling_affected).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Walls Affected</td>
+                                            <td><%= @property.try(:walls_affected).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Attic Affected</td>
+                                            <td><%= @property.try(:attic_affected).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contents Affected</td>
+                                            <td><%= @property.try(:contents_affected).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Property Flooring Types</td>
+                                            <td>
+                                                <% @property.flooring_types.each do |flooring_type| %>
+                                                <%= flooring_type.name %>
+                                                <% end %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+
+                        <span>
+                            <%= link_to edit_job_property_path(@job, @property), class: "btn btn-sm btn-warning", type: "button" do %>
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <% end %>
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
-
-                <span>
-                    <%= link_to edit_job_property_path(@job, @property), class: "btn btn-sm btn-warning", type: "button" do %>
-                    <i class="glyphicon glyphicon-edit"></i>
-                    <% end %>
-                </span>
-            </div>
         </div>
-        <%= render partial: "partials/jobs_bottom_bar" %>
     </div>
-    <%= render partial: "partials/jobs_right_sidebar" %>
 </div>

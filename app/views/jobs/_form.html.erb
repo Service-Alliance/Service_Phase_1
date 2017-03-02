@@ -1,6 +1,11 @@
+<%= form_for(@job) do |f| %>
 <div class="col-xs-12">
+      <%= fields_for(:call) do |f| %>
+      <%= f.label :current_active_calls %>
+      <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
+      <% end %>
     <div class="row content-box">
-        <%= form_for(@job) do |f| %>
+
         <% if @job.errors.any? %>
         <div id="error_explanation">
             <h3><%= pluralize(@job.errors.count, "error") %>
@@ -33,12 +38,7 @@
             </div>
         </div>
 
-        <div class="col-xs-4">
-            <%= fields_for(:call) do |f| %>
-            <%= f.label :current_active_calls %>
-            <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
-            <% end %>
-        </div>
+
 
 
 
@@ -58,15 +58,7 @@
     <%= f.number_field :entered_by_id %>
   </div> -->
 
-        <div class="col-xs-12">
-            <div class="form-group">
-                <%= f.label :referral_type_id %><br>
-                <% f.collection_select :referral_type_id, ReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
-                <%= f.collection_radio_buttons(:referral_type_id, ReferralType.all, :id, :name) do |b| %>
-                <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
-                <% end %>
-            </div>
-        </div>
+
         <div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != " Servpro Employee" %>">
             <div class="form-group">
                 <%= f.label :referral_employee_id %><br>
@@ -81,6 +73,18 @@
 
         <%= render 'callers_form', f: f %>
         <%= render 'partials/phone_form', f: f %>
+
+        <div class="col-xs-12">
+            <div class="form-group">
+                <%= f.label :referral_type_id %><br>
+                <% f.collection_select :referral_type_id, ReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                <%= f.collection_radio_buttons(:referral_type_id, ReferralType.all, :id, :name) do |b| %>
+                <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
+                <% end %> <br />
+                <%= f.label :referral_note %><br  />
+                <%= f.text_field :referral_note, class: 'form-control' %>
+            </div>
+        </div>
 
         <div class="col-xs-12">
             <div class="form-group">
@@ -109,9 +113,10 @@
             </div>
 
         </div>
-        <% end %>
+
     </div>
 </div>
+<% end %>
 
 <script>
     $("a.tooltipLink").tooltip();

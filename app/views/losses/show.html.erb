@@ -1,88 +1,91 @@
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
-    <%= render partial: "partials/jobs_sidebar" %>
-    <div class="col-xs-8">
-        <h1 class="text-center">Job Loss Information:</h1>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Status:
-                    <%= @job.try(:job_status).try(:name) %>
-                </h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>Recieved By:</td>
-                                    <td><%= @loss.recieved_by %></td>
-                                </tr>
-                                <tr>
-                                    <td>Loss occurred:</td>
-                                    <td><%= @loss.loss_occurred %></td>
-                                </tr>
-                                <tr>
-                                    <td>FNOL Recieved</td>
-                                    <td><%= @loss.fnol_recieved %></td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Called</td>
-                                    <td><%= @loss.customer_called %></td>
-                                </tr>
-                                <tr>
-                                    <td>Loss Type</td>
-                                    <td><%= @loss.try(:loss_type).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Loss Cause</td>
-                                    <td><%= @loss.try(:loss_cause).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Standing Water</td>
-                                    <td><%= @loss.try(:standing_water).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Water available</td>
-                                    <td><%= @loss.try(:water_available).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Electricity available</td>
-                                    <td><%= @loss.try(:electricity_available).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Source Off</td>
-                                    <td><%= @loss.try(:source_off).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Visible Mold</td>
-                                    <td><%= @loss.try(:visible_mold).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Source Cause</td>
-                                    <td><%= @loss.source_cause %></td>
-                                </tr>
-                                <tr>
-                                    <td>Notes</td>
-                                    <td><%= @loss.notes %></td>
-                                </tr>
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
 
-                            </tbody>
-                        </table>
+            <div class="col-xs-12">
+                <h1 class="text-center">Job Loss Information:</h1>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Status:
+                            <%= @job.try(:job_status).try(:name) %>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Recieved By:</td>
+                                            <td><%= @loss.recieved_by %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Loss occurred:</td>
+                                            <td><%= @loss.loss_occurred %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>FNOL Recieved</td>
+                                            <td><%= @loss.fnol_recieved %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customer Called</td>
+                                            <td><%= @loss.customer_called %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Loss Type</td>
+                                            <td><%= @loss.try(:loss_type).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Loss Cause</td>
+                                            <td><%= @loss.try(:loss_cause).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Standing Water</td>
+                                            <td><%= @loss.try(:standing_water).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Water available</td>
+                                            <td><%= @loss.try(:water_available).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Electricity available</td>
+                                            <td><%= @loss.try(:electricity_available).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Source Off</td>
+                                            <td><%= @loss.try(:source_off).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Visible Mold</td>
+                                            <td><%= @loss.try(:visible_mold).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Source Cause</td>
+                                            <td><%= @loss.source_cause %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Notes</td>
+                                            <td><%= @loss.notes %></td>
+                                        </tr>
 
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <%= link_to edit_job_loss_path(@job, @loss), class: "btn btn-sm btn-warning", type: "button" do %>
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <% end %>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
-                <%= link_to edit_job_loss_path(@job, @loss), class: "btn btn-sm btn-warning", type: "button" do %>
-                <i class="glyphicon glyphicon-edit"></i>
-                <% end %>
-            </div>
         </div>
-        <%= render partial: "partials/jobs_bottom_bar" %>
     </div>
-    <%= render partial: "partials/jobs_right_sidebar" %>
 </div>

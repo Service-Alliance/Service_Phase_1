@@ -1,79 +1,80 @@
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
-    <%= render partial: "partials/jobs_sidebar" %>
-
-    <div class="col-xs-8">
-      <h1 class="text-center">Customer Information:</h1>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    <%= @customer.first_name %>
-                    <%= @customer.last_name %>
-                </h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>First Name:</td>
-                                    <td><%= @customer.first_name %></td>
-                                </tr>
-                                <tr>
-                                    <td>Last Name:</td>
-                                    <td><%= @customer.last_name %></td>
-                                </tr>
-                                <tr>
-                                    <td>Email:</td>
-                                    <td><%= @customer.email %></td>
-                                </tr>
-                                <tr>
-                                    <td>Address 1:</td>
-                                    <td><%= @customer.try(:address).try(:address_1) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Address 2</td>
-                                    <td><%= @customer.try(:address).try(:address_2) %></td>
-                                </tr>
-                                <tr>
-                                    <td>City</td>
-                                    <td><%= @customer.try(:address).try(:city) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Zip</td>
-                                    <td><%= @customer.try(:address).try(:zip_code) %></td>
-                                </tr>
-                                <tr>
-                                    <td>State</td>
-                                    <td><%= @customer.try(:address).try(:state).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>County</td>
-                                    <td><%= @customer.try(:address).try(:county) %></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <a href="">
-                            <button class="btn btn-primary">View All Jobs</button>
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="col-xs-12">
+                <h1 class="text-center">Customer Information:</h1>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <%= @customer.first_name %>
+                            <%= @customer.last_name %>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>First Name:</td>
+                                            <td><%= @customer.first_name %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name:</td>
+                                            <td><%= @customer.last_name %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td><%= @customer.email %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address 1:</td>
+                                            <td><%= @customer.try(:address).try(:address_1) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address 2</td>
+                                            <td><%= @customer.try(:address).try(:address_2) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>City</td>
+                                            <td><%= @customer.try(:address).try(:city) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Zip</td>
+                                            <td><%= @customer.try(:address).try(:zip_code) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>State</td>
+                                            <td><%= @customer.try(:address).try(:state).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>County</td>
+                                            <td><%= @customer.try(:address).try(:county) %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <a href="">
+                                    <button class="btn btn-primary">View All Jobs</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <a href="mailto:<%= @customer.email %>" type="button" class="btn btn-sm btn-primary">
+                            <i class="glyphicon glyphicon-envelope"></i>
                         </a>
+                        <span class="pull-right">
+                            <%= link_to edit_customer_path(@customer, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <% end %>
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
-                <a href="mailto:<%= @customer.email %>" type="button" class="btn btn-sm btn-primary">
-                    <i class="glyphicon glyphicon-envelope"></i>
-                </a>
-                <span class="pull-right">
-                    <%= link_to edit_customer_path(@customer, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
-                    <i class="glyphicon glyphicon-edit"></i>
-                    <% end %>
-                </span>
-            </div>
         </div>
-        <%= render partial: "partials/jobs_bottom_bar" %>
     </div>
-    <%= render partial: "partials/jobs_right_sidebar" %>
 </div>

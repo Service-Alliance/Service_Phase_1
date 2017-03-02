@@ -1,17 +1,18 @@
-
-
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
-    <%= render partial: "partials/jobs_sidebar" %>
-    <div class="col-xs-8">
-      <%= link_to "Upload a new image", new_job_image_path(@job) %><br>
-      <% if @images %>
-        <% @images.each do |image| %>
-          <a href="<%= image.image %>"><img class="image-thumb" src="<%= image.image %>"></a><br><br>
-        <% end %>
-      <% end %>
-<%= render partial: "partials/jobs_bottom_bar" %>
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="col-xs-8">
+                <%= link_to "Upload a new image", new_job_image_path(@job) %><br>
+                <% if @images %>
+                <% @images.each do |image| %>
+                <a href="<%= image.image %>"><img class="image-thumb" src="<%= image.image %>"></a><br><br>
+                <% end %>
+                <% end %>
+            </div>
+        </div>
     </div>
 </div>

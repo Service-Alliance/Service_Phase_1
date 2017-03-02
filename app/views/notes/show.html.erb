@@ -1,43 +1,46 @@
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
-    <%= render partial: "partials/jobs_sidebar" %>
-    <div class="col-xs-8">
-        <h1 class="text-center">Job Notes</h1>
-        <%= link_to "New Note", new_note_path(job_id: @job.id), class:"btn btn-primary new-manager-button"%>
-        <% @job.notes.each do |note| %>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title"></h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>Note:</td>
-                                    <td><%= note.note %></td>
-                                </tr>
-                                <tr>
-                                    <td>Create By:</td>
-                                    <td><%= note.user.full_name %></td>
-                                </tr>
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="col-xs-12">
+                <h1 class="text-center">Job Notes</h1>
+                <%= link_to "New Note", new_note_path(job_id: @job.id), class:"btn btn-primary new-manager-button"%>
+                <% @job.notes.each do |note| %>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Note:</td>
+                                            <td><%= note.note %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Create By:</td>
+                                            <td><%= note.user.full_name %></td>
+                                        </tr>
 
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <%= link_to edit_note_path(@note, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <% end %>
                     </div>
                 </div>
-            </div>
-            <div class="panel-footer">
-                <%= link_to edit_note_path(@note, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
-                <i class="glyphicon glyphicon-edit"></i>
                 <% end %>
             </div>
         </div>
-        <% end %>
     </div>
-    <%= render partial: "partials/jobs_right_sidebar" %>
 </div>

@@ -1,90 +1,98 @@
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
-    <%= render partial: "partials/jobs_sidebar" %>
-    <div class="col-xs-8">
-        <h1 class="text-center">Job Details</h1>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Status:
-                    <%= @job.try(:job_status).try(:name) %>
-                </h3>
-            </div>
-            <% if @job_detail %>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>Insurance Company:</td>
-                                    <td><%= @job_detail.try(:insurance_company).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Claim Number:</td>
-                                    <td><%= @job_detail.try(:claim_number) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Policy Number:</td>
-                                    <td><%= @job_detail.try(:policy_number) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Coverage Type:</td>
-                                    <td><%= @job_detail.try(:coverage_type).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Deductible Amount</td>
-                                    <td><%= @job_detail.try(:deductible_amount) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Self Pay?</td>
-                                    <td><%= @job_detail.try(:self_pay).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Is there a deductible?</td>
-                                    <td><%= @job_detail.try(:deductible).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Is there an ESL/NSTE Amount?</td>
-                                    <td><%= @job_detail.try(:esl_nst_amount).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Emergency Services Amount?</td>
-                                    <td><%= @job_detail.try(:emergency_service_amount) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Billing Address</td>
-                                    <% if @job_detail.billing_address %>
-                                      <td>
-                                        First Name: <%= @job_detail.billing_address_first_name  %><br />
-                                        Last Name: <%= @job_detail.billing_address_last_name  %><br />
-                                        Address 1: <%= @job_detail.billing_address.address_1  %><br />
-                                        Address 2: <%= @job_detail.billing_address.address_2  %><br />
-                                        City: <%= @job_detail.billing_address.city  %><br />
-                                        State: <%= @job_detail.billing_address.try(:state).try(:name)  %><br />
-                                        Zip Code: <%= @job_detail.billing_address.zip_code  %><br />
-                                      </td>
-                                    <% end %>
-                                </tr>
-                            </tbody>
-                        </table>
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="col-xs-12">
+                <h1 class="text-center">Job Details</h1>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Status:
+                            <%= @job.try(:job_status).try(:name) %>
+                        </h3>
+                    </div>
+                    <% if @job_detail %>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Insurance Company:</td>
+                                            <td><%= @job_detail.try(:insurance_company).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Claim Number:</td>
+                                            <td><%= @job_detail.try(:claim_number) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Policy Number:</td>
+                                            <td><%= @job_detail.try(:policy_number) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Coverage Type:</td>
+                                            <td><%= @job_detail.try(:coverage_type).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Deductible Amount</td>
+                                            <td><%= @job_detail.try(:deductible_amount) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Self Pay?</td>
+                                            <td><%= @job_detail.try(:self_pay).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Is there a deductible?</td>
+                                            <td><%= @job_detail.try(:deductible).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Is there an ESL/NSTE Amount?</td>
+                                            <td><%= @job_detail.try(:esl_nst_amount).try(:name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Emergency Services Amount?</td>
+                                            <td><%= @job_detail.try(:emergency_service_amount) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Billing Address</td>
+                                            <% if @job_detail.billing_address %>
+                                            <td>
+                                                First Name:
+                                                <%= @job_detail.billing_address_first_name  %><br/>
+                                                Last Name:
+                                                <%= @job_detail.billing_address_last_name  %><br/>
+                                                Address 1:
+                                                <%= @job_detail.billing_address.address_1  %><br/>
+                                                Address 2:
+                                                <%= @job_detail.billing_address.address_2  %><br/>
+                                                City:
+                                                <%= @job_detail.billing_address.city  %><br/>
+                                                State:
+                                                <%= @job_detail.billing_address.try(:state).try(:name)  %><br/>
+                                                Zip Code:
+                                                <%= @job_detail.billing_address.zip_code  %><br/>
+                                            </td>
+                                            <% end %>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+
+                        <%= link_to edit_job_job_detail_path(@job, @job_detail), class: "btn btn-sm btn-warning", type: "button" do %>
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <% end %>
 
                     </div>
+                    <% end %>
                 </div>
             </div>
-            <div class="panel-footer">
-
-
-                    <%= link_to edit_job_job_detail_path(@job, @job_detail), class: "btn btn-sm btn-warning", type: "button" do %>
-                    <i class="glyphicon glyphicon-edit"></i>
-                    <% end %>
-
-            </div>
-            <% end %>
         </div>
-        <%= render partial: "partials/jobs_bottom_bar" %>
     </div>
-    <%= render partial: "partials/jobs_right_sidebar" %>
 </div>
