@@ -9,7 +9,9 @@ class JobsController < ApplicationController
     if params[:user_id]
       @jobs = Job.where(entered_by_id: params[:user_id]).paginate(:page => params[:page], :per_page => 30)
     else
-      @jobs = Job.paginate(:page => params[:page], :per_page => 30)
+      @search = Job.search(params[:q])
+      # @jobs = @search.result
+      @jobs = @search.result.paginate(:page => params[:page], :per_page => 30)
     end
   end
 

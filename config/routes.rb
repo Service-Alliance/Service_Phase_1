@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :articles
   resources :franchise_zipcodes
   resources :oncalls
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
   post 'calls/precall-webhook' => 'calls#precall'
   post 'calls/postcall-webhook' => 'calls#postcall'
   get 'users/list' => 'users#list'
-  devise_for :users
   resources :users
   resources :states
   resources :agents

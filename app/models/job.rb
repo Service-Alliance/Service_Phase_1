@@ -20,6 +20,7 @@ class Job < ActiveRecord::Base
   has_many :job_forms, dependent: :destroy
   has_many :notes, as: :noteable, dependent: :destroy
 
+
   # Activity Tracking activated
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
@@ -36,7 +37,6 @@ class Job < ActiveRecord::Base
     self.last_action = Date.today
     save
   end
-
 
 end
 
