@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     if current_user.admin?
       render template: 'home/admin'
     elsif current_user.job_coordinator?
-      render template: 'home/admin'
+      render template: 'home/job_coordinator'
     elsif current_user.call_rep?
       render template: 'home/call_rep'
     end

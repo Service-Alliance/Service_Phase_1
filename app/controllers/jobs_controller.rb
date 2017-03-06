@@ -49,7 +49,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.create
+    @job = Job.create(entered_by_id: current_user.id)
     @loss = Loss.create(job_id: @job.id)
     @caller = Caller.create(job_id: @job.id)
     @address = Address.create
@@ -140,7 +140,6 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1.json
   def update
     respond_to do |format|
-      @job.keep_record = true
       if @job.update(job_params)
         @job.update_last_action
         @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
