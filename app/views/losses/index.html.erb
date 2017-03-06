@@ -8,6 +8,7 @@
 
             <div class="col-xs-12">
                 <h1 class="text-center">Job Loss Information:</h1>
+                <%= link_to "New Loss", new_job_loss_path(@job), class:"btn btn-primary new-manager-button"%>
                 <% @job.losses.each do |loss| %>
                 <div class="panel panel-info">
                     <div class="panel-heading">

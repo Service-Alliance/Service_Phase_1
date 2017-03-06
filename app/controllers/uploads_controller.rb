@@ -31,7 +31,7 @@ class UploadsController < ApplicationController
     respond_to do |format|
       if @upload.save
         @job.update_last_action
-        format.html { redirect_to job_path(@job), notice: 'Upload was successfully uploaded.' }
+        format.html { redirect_to job_uploads_path(@job), notice: 'Upload was successfully uploaded.' }
         format.json { render :show, status: :created, location: @upload }
       else
         format.html { render :new }
@@ -46,7 +46,7 @@ class UploadsController < ApplicationController
     respond_to do |format|
       if @upload.update(upload_params)
         @job.update_last_action
-        format.html { redirect_to job_path(@job), notice: 'Upload was successfully updated.' }
+        format.html { redirect_to job_uploads_path(@job), notice: 'Upload was successfully updated.' }
         format.json { render :show, status: :ok, location: @upload }
       else
         format.html { render :edit }

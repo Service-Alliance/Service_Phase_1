@@ -73,13 +73,13 @@
 
               <li>
                   <%= link_to new_or_view_job_manager_path(@job, @job.job_managers)  do %>
-                  <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                  <i class="<%= @job.job_managers.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
                   Manager Assignment
                   <% end %>
               </li>
               <li>
                   <%= link_to job_uploads_path(@job)  do %>
-                  <i class="<%= @job.uploads ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                  <i class="<%= @job.uploads.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
                   Files/Uploads
                   <% end %>
               </li>

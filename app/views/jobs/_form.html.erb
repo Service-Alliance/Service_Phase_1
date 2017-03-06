@@ -88,6 +88,12 @@
 
             </div>
         </div>
+        <div class="col-xs-12 margin-top-2">
+            <div class="form-group">
+                <%= f.label :referral_note %><br>
+                <%= f.text_field :referral_note, class: "form-control" %><br>
+            </div>
+        </div>
         <div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != " Servpro Employee" %>">
             <div class="form-group">
                 <%= f.label :referral_employee_id %><br>

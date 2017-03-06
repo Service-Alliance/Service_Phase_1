@@ -21,7 +21,11 @@
                     <%= if @job_authorization
                     link_to "View form", job_job_form_path(@job, @job_authorization)
                   else
-                    link_to "Send forn", job_create_form_path(@job, 1)
+                    if @job.customer
+                      link_to "Send forn", job_create_form_path(@job, 1)
+                    else
+                      "Please create a customer before attempting to send form"
+                    end
                   end
                   %>
                     </div>
