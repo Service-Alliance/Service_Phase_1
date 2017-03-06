@@ -27,14 +27,14 @@
                     <tr>
                         <td><%= job.try(:job_type).try(:name) %></td>
                         <td><%= job.try(:job_status).try(:name) %></td>
-                        <td><%= job.entered_by_id %></td>
+                        <td><%= job.user.full_name %></td>
                         <td><%= job.try(:franchise).try(:name) %></td>
                         <td><%= job.details %></td>
                         <td><%= job.job_note %></td>
                         <td><%= job.customer_id %></td>
                         <td><%= job.try(:referral_type).try(:name) %></td>
                         <td><%= link_to 'Show', job %></td>
-                        
+
                     </tr>
                     <% end %>
                 </tbody>
