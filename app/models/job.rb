@@ -17,6 +17,7 @@ class Job < ActiveRecord::Base
   has_many :uploads, dependent: :destroy
   has_many :job_managers, dependent: :destroy
   has_many :vendor_assignments
+  has_many :contact_assignments
   has_many :job_forms, dependent: :destroy
   has_many :notes, as: :noteable, dependent: :destroy
 

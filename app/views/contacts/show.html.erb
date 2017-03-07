@@ -1,0 +1,91 @@
+
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+    <h1 class="text-center">Contact:</h1>
+    <div class="col-xs-8 col-xs-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Contact
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>ID:</td>
+                                    <td><%= @contact.id %></td>
+                                </tr>
+                                <tr>
+                                    <td>First Name:</td>
+                                    <td><%= @contact.first_name %></td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name:</td>
+                                    <td><%= @contact.last_name %></td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td><%= @contact.email %></td>
+                                </tr>
+                                <tr>
+                                    <td>Owner:</td>
+                                    <td><%= @contact.try(:user).try(:full_name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Address 1:</td>
+                                    <td><%= @contact.try(:address).try(:address_1) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Address 2</td>
+                                    <td><%= @contact.try(:address).try(:address_2) %></td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td><%= @contact.try(:address).try(:city) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Zip</td>
+                                    <td><%= @contact.try(:address).try(:zip_code) %></td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td><%= @contact.try(:address).try(:state).try(:name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>County</td>
+                                    <td><%= @contact.try(:address).try(:county) %></td>
+                                </tr>
+                                <tr>
+                                  <% @contact.phones.each do |phone| %>
+                                  <tr>
+                                      <td>Phone -
+                                          <%= phone.try(:type).try(:name) %></td>
+                                      <td>Number:
+                                          <%= phone.number %>, Ext:
+                                          <%= phone.extension %></td>
+                                  </tr>
+                                  <% end %>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+
+                <%= link_to edit_contact_path(@contact), class: "btn btn-sm btn-warning", type: "button" do %>
+                <i class="glyphicon glyphicon-edit"></i>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

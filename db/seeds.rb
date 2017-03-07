@@ -433,4 +433,3 @@ csv.each do |row|
   p Loss.create(job_id: job.id, loss_cause_id: loss_cause.try(:id))
 
 end
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

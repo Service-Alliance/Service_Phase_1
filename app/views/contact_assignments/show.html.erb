@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @contact_assignment.contact_id %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @contact_assignment.job_id %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @contact_assignment.note %>
+</p>
+
+<%= link_to 'Edit', edit_contact_assignment_path(@contact_assignment) %> |
+<%= link_to 'Back', contact_assignments_path %>

@@ -107,6 +107,12 @@
                   Vendor Assignment
                   <% end %>
               </li>
+              <li>
+                  <%= link_to new_or_view_job_contact_path(@job, @job.contact_assignments)  do %>
+                  <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                  Contact Assignment
+                  <% end %>
+              </li>
             </ul>
           </li>
 

@@ -37,8 +37,9 @@ gem "prawn"
 gem 'combine_pdf'
 gem 'exception_notification'
 gem 'public_activity'
-gem 'will_paginate', '~> 3.1.0'
+
 gem 'ransack'
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

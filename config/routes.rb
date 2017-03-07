@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  ActiveAdmin.routes(self)
+  resources :contacts
   devise_for :users
   resources :articles
   resources :franchise_zipcodes
@@ -43,6 +45,7 @@ Rails.application.routes.draw do
     resources :job_managers
     get 'job_managers/:id/acknolwedge' => 'job_managers#acknolwedge'
     resources :vendor_assignments
+    resources :contact_assignments
     post 'agents/samecaller' => 'agents#samecaller'
     post 'adjusters/samecaller' => 'adjusters#samecaller'
     resources :emergency_contacts
