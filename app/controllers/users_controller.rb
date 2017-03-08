@@ -86,6 +86,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :first_name, :last_name, :access_level, :username, :email, :password, :salt, :encrypted_password, :first_name, :role_id, :notes, :department_id, :title, :additional_title, :location_id, :background_check, :online_physical, :fitness_test, :hep_b, :lead, :lead_expiration, :nys_mold, :nys_mold_expiration, :nys_mold_license, :bio_rec_bbp, :hartford, :pet_water, :pet_fire, :osha, :iicrc_reg, :iicrc_expiration, :cec_due, :number_cec_due, :iicrc_wrt, :iicrc_amrt, :iicrc_asd, :iicrc_srt, :iicrc_hst, :iicrc_uft, :iicrc_odor, :iicrc_cds, :sub_1, :sub_2, :dry_book, :login_count)
+      params.require(:user).permit(:email, :first_name, :last_name, :access_level , :username, :email, :password, :salt, :encrypted_password, :first_name, :role_id, :notes, :department_id, :title, :additional_title, :location_id, :background_check, :online_physical, :fitness_test, :hep_b, :lead, :lead_expiration, :nys_mold, :nys_mold_expiration, :nys_mold_license, :bio_rec_bbp, :hartford, :pet_water, :pet_fire, :osha, :iicrc_reg, :iicrc_expiration, :cec_due, :number_cec_due, :iicrc_wrt, :iicrc_amrt, :iicrc_asd, :iicrc_srt, :iicrc_hst, :iicrc_uft, :iicrc_odor, :iicrc_cds, :sub_1, :sub_2, :dry_book, :login_count)
     end
 end

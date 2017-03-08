@@ -2,8 +2,7 @@ $(function() {
     $(document).on('click', '.add-contact', function(event) {
       event.preventDefault();
       var assignments = getUrlParameter(this);
-
-      $("#contact_name").val(assignments.name);
+      $("#contact_text_name").html(assignments.name)
       $("#contact_assignment_contact_id").val(assignments.id);
     });
 });

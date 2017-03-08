@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307162113) do
+ActiveRecord::Schema.define(version: 20170308145646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 20170307162113) do
   end
 
   create_table "contacts", force: :cascade do |t|
+    t.string   "company"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
@@ -584,6 +585,30 @@ ActiveRecord::Schema.define(version: 20170307162113) do
     t.string   "email"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+  end
+
+  create_table "work_orders", force: :cascade do |t|
+    t.integer  "job_id"
+    t.text     "to"
+    t.text     "name"
+    t.date     "date"
+    t.text     "typed_by"
+    t.datetime "job_start"
+    t.text     "job_name"
+    t.text     "job_location"
+    t.text     "telphone"
+    t.text     "contact"
+    t.text     "insurance"
+    t.text     "claim_number"
+    t.text     "crew"
+    t.time     "approx_time_on_loss"
+    t.text     "required"
+    t.text     "referral"
+    t.text     "franchise_location"
+    t.text     "scope_of_work"
+    t.text     "job_manager_contact_info"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
 end

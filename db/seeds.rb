@@ -433,3 +433,46 @@ csv.each do |row|
   p Loss.create(job_id: job.id, loss_cause_id: loss_cause.try(:id))
 
 end
+
+
+
+csv_text = File.read("db/files/dave_contacts.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  hash = row.to_hash
+  company = hash["company"]
+  email = hash["email"]
+  last_name = hash["last_name"]
+  first_name = hash["first_name"]
+  zip_code = hash["zip_code"]
+  state = hash["state_code"]
+  city = hash["city"]
+
+  state_obj = State.find_by(name: state)
+
+  address = Address.create(zip_code: zip_code, state_id: state_obj.try(:id), city: city)
+  Contact.create(first_name: first_name, last_name: last_name, company: company, email: email, address_id: address.id, owner_id: 29)
+
+end
+
+
+csv_text = File.read("db/files/donna_contacts.csv")
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  hash = row.to_hash
+  company = hash["company"]
+  email = hash["email"]
+  last_name = hash["last_name"]
+  first_name = hash["first_name"]
+  zip_code = hash["zip_code"]
+  address_1 = hash["address_1"]
+  address_2 = hash["address_2"]
+  state = hash["state_code"]
+  city = hash["city"]
+
+  state_obj = State.find_by(name: state)
+
+  address = Address.create(zip_code: zip_code, state_id: state_obj.try(:id), city: city, address_1: address_1, address_2: address_2)
+  Contact.create(first_name: first_name, last_name: last_name, company: company, email: email, address_id: address.id, owner_id: 25)
+
+end

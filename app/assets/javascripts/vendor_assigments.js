@@ -3,7 +3,7 @@ $(function() {
       event.preventDefault();
       var assignments = getUrlParameter(this);
 
-      $("#vendor_name").val(assignments.name);
+      $("#vendor_name").html(assignments.name);
       $("#vendor_assignment_vendor_id").val(assignments.id);
     });
 });
