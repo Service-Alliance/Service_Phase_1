@@ -9,7 +9,7 @@ class CreateWorkOrders < ActiveRecord::Migration
       t.datetime :job_start
       t.text :job_name
       t.text :job_location
-      t.text :telphone
+      t.text :telephone
       t.text :contact
       t.text :insurance
       t.text :claim_number

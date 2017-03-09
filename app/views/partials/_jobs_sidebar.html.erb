@@ -37,6 +37,12 @@
                   Caller Information
                   <% end %>
               </li>
+              <li>
+                  <%= link_to job_overview_path(@job)  do %>
+                <i class="glyph-done glyphicon glyphicon-ok"></i>
+                  Job Overview
+                  <% end %>
+              </li>
             </ul>
             <!-- /.nav-second-level -->
         </li>
@@ -89,6 +95,14 @@
                   Emergency Contacts
                   <% end %>
               </li>
+              <li>
+                  <%= link_to new_or_view_job_work_order_path(@job, @job.work_orders)  do %>
+                  <i class="<%= @job.work_orders.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
+                  Work Order
+                  <% end %>
+              </li>
+
+
               <li>
                   <%= link_to job_job_forms_path(@job)  do %>
                   <i class="<%= @job.job_forms ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>

@@ -20,6 +20,7 @@ class Job < ActiveRecord::Base
   has_many :contact_assignments
   has_many :job_forms, dependent: :destroy
   has_many :notes, as: :noteable, dependent: :destroy
+  has_many :work_orders
 
 
   # Activity Tracking activated

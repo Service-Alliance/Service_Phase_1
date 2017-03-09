@@ -27,9 +27,17 @@ class WorkOrdersController < ApplicationController
   # POST /work_orders.json
   def create
     @work_order = WorkOrder.new(work_order_params)
+    p @work_order.job_id = @job.id
+
 
     respond_to do |format|
       if @work_order.save
+        work_order_send_to_params[:send_to].each do |user|
+          unless user == ""
+            @user = User.find(user)
+            UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
+          end
+        end
         format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order was successfully created.' }
         format.json { render :show, status: :created, location: @work_order }
       else
@@ -44,6 +52,12 @@ class WorkOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @work_order.update(work_order_params)
+        work_order_send_to_params[:send_to].each do |user|
+          unless user == ""
+            @user = User.find(user)
+            UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
+          end
+        end
         format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @work_order }
       else
@@ -73,6 +87,10 @@ class WorkOrdersController < ApplicationController
   end
 
     def work_order_params
-      params.require(:work_order).permit(:job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telphone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info)
+      params.require(:work_order).permit(:job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telephone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info)
+    end
+
+    def work_order_send_to_params
+      params.require(:work_order_send_to).permit(send_to:[])
     end
 end

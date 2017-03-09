@@ -22,7 +22,7 @@
 
 <script>
     function LinkFormatter(value, row, index) {
-        return "<a href='contacts/" + row.id + "'>" + value + "</a>";
+        return "<a href='/contacts/" + row.id + "'>" + value + "</a>";
     }
     function AddContact(value, row, index) {
         return "<a class='add-contact' href='id=" + row.id + "&name=" + row.first_name + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";

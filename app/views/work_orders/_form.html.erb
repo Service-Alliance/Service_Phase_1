@@ -13,57 +13,63 @@
             </ul>
         </div>
         <% end %>
+        <hr/>
 
-        <div class="col-sm-3">
+        <div class="col-sm-6">
 
             <div class="form-group">
                 <%= f.label :to %><br>
                 <%= f.text_field :to, class: "form-control" %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <div class="form-group">
                 <%= f.label :name %><br>
                 <%= f.text_field :name, class: "form-control" %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <div class="form-group">
                 <%= f.label :date %><br>
                 <%= f.date_select :date %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <div class="form-group">
                 <%= f.label :typed_by %><br>
                 <%= f.text_field :typed_by, class: "form-control", value: current_user.full_name %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-xs-12">
+          <hr/>
+        </div>
+
+        <h2 class="text-center">Work Order</h2>
+        <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :job_start %><br>
-                <%= f.datetime_select :job_start, class: "form-control" %>
+                <%= f.datetime_select :job_start, class: "form-control", :ampm => true %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :job_name %><br>
                 <%= f.text_field :job_name, class: "form-control" %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :job_location %><br>
                 <%= f.text_field :job_location, class: "form-control" %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12">
             <div class="form-group">
-                <%= f.label :telphone %><br>
-                <%= f.text_field :telphone, class: "form-control" %>
+                <%= f.label :telephone %><br>
+                <%= f.text_field :telephone, class: "form-control" %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :contact %><br>
                 <%= f.text_field :contact, class: "form-control" %>
@@ -90,41 +96,66 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <%= f.label :approx_time_on_loss %><br>
-                <%= f.time_select :approx_time_on_loss, class: "form-control" %>
+                <%= f.time_select :approx_time_on_loss, class: "form-control", :ampm => true %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :required %><br>
                 <%= f.text_area :required, class: "form-control" %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :referral %><br>
                 <%= f.text_field :referral, class: "form-control" %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :franchise_location %><br>
                 <%= f.text_field :franchise_location, class: "form-control" %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :scope_of_work %><br>
                 <%= f.text_area :scope_of_work, class: "form-control" %>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :job_manager_contact_info %><br>
                 <%= f.text_field :job_manager_contact_info, class: "form-control" %>
             </div>
         </div>
-        <div class="actions">
-            <%= f.submit %>
+        <div class="col-xs-12">
+
+
+        <label>Send to:</label><br />
+      </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+            </div>
+        </div>
+        <div class="actions col-sm-12">
+            <%= f.submit class: "btn btn-primary" %>
         </div>
         <% end %>
     </div>

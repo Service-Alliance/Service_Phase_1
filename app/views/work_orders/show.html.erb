@@ -1,98 +1,110 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="col-xs-12">
+                <h1 class="text-center">Work Order Information:</h1>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Work Order:
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>To:</td>
+                                            <td><%= @work_order.to %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td><%= @work_order.name %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date:</td>
+                                            <td><%= @work_order.date %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Typed By:</td>
+                                            <td><%= @work_order.typed_by %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Job Start</td>
+                                            <td><%= @work_order.job_start %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Job Name</td>
+                                            <td><%= @work_order.job_name %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Job Location</td>
+                                            <td><%= @work_order.job_location %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Telephone</td>
+                                            <td><%= @work_order.telephone %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact</td>
+                                            <td><%= @work_order.contact %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Insurance</td>
+                                            <td><%= @work_order.insurance %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Claim Number</td>
+                                            <td><%= @work_order.claim_number %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Crew</td>
+                                            <td><%= @work_order.crew %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Approx Time On Loss</td>
+                                            <td><%= @work_order.approx_time_on_loss %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Required</td>
+                                            <td><%= @work_order.required %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Referral</td>
+                                            <td><%= @work_order.referral %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Franchise Location</td>
+                                            <td><%= @work_order.franchise_location %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Scope of Work</td>
+                                            <td><%= @work_order.scope_of_work %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Job Manager Contact Info</td>
+                                            <td><%= @work_order.job_manager_contact_info %></td>
+                                        </tr>
 
-<p>
-  <strong>Job:</strong>
-  <%= @work_order.job_id %>
-</p>
 
-<p>
-  <strong>To:</strong>
-  <%= @work_order.to %>
-</p>
+                                    </tbody>
+                                </table>
 
-<p>
-  <strong>Name:</strong>
-  <%= @work_order.name %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @work_order.date %>
-</p>
-
-<p>
-  <strong>Typed by:</strong>
-  <%= @work_order.typed_by %>
-</p>
-
-<p>
-  <strong>Job start:</strong>
-  <%= @work_order.job_start %>
-</p>
-
-<p>
-  <strong>Job name:</strong>
-  <%= @work_order.job_name %>
-</p>
-
-<p>
-  <strong>Job location:</strong>
-  <%= @work_order.job_location %>
-</p>
-
-<p>
-  <strong>Telphone:</strong>
-  <%= @work_order.telphone %>
-</p>
-
-<p>
-  <strong>Contact:</strong>
-  <%= @work_order.contact %>
-</p>
-
-<p>
-  <strong>Insurance:</strong>
-  <%= @work_order.insurance %>
-</p>
-
-<p>
-  <strong>Claim number:</strong>
-  <%= @work_order.claim_number %>
-</p>
-
-<p>
-  <strong>Crew:</strong>
-  <%= @work_order.crew %>
-</p>
-
-<p>
-  <strong>Approx time on loss:</strong>
-  <%= @work_order.approx_time_on_loss %>
-</p>
-
-<p>
-  <strong>Required:</strong>
-  <%= @work_order.required %>
-</p>
-
-<p>
-  <strong>Referral:</strong>
-  <%= @work_order.referral %>
-</p>
-
-<p>
-  <strong>Franchise location:</strong>
-  <%= @work_order.franchise_location %>
-</p>
-
-<p>
-  <strong>Scope of work:</strong>
-  <%= @work_order.scope_of_work %>
-</p>
-
-<p>
-  <strong>Job manager contact info:</strong>
-  <%= @work_order.job_manager_contact_info %>
-</p>
-
-<%= link_to 'Edit', edit_job_work_order_path(@job, @work_order) %> |
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                            <%= link_to edit_job_work_order_path(@job, @work_order), class: "btn btn-sm btn-warning", type: "button" do %>
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

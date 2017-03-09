@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @user.full_name %>, you have been sent a work order.</h1>
+    <p>
+      Click <a href="http://servicealliance.herokuapp.com/jobs/<%= @job.id %>/work_orders/<%= @work_order.id%>">here</a> to view the details.
+    </p>
+  </body>
+</html>

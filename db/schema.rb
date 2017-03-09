@@ -314,6 +314,7 @@ ActiveRecord::Schema.define(version: 20170308145646) do
   end
 
   create_table "jobs", force: :cascade do |t|
+    t.string   "name"
     t.integer  "type_id"
     t.integer  "status_id"
     t.integer  "entered_by_id"
@@ -596,7 +597,7 @@ ActiveRecord::Schema.define(version: 20170308145646) do
     t.datetime "job_start"
     t.text     "job_name"
     t.text     "job_location"
-    t.text     "telphone"
+    t.text     "telephone"
     t.text     "contact"
     t.text     "insurance"
     t.text     "claim_number"
