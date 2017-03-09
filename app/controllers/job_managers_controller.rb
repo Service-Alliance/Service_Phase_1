@@ -91,6 +91,6 @@ class JobManagersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_manager_params
-      params.require(:job_manager).permit(:job_manager_id, :schedule_datetime, :note)
+      params.require(:job_manager).permit(:job_manager_id, :schedule_date, :start_time, :end_time, :note)
     end
 end
