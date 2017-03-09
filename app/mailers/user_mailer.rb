@@ -12,7 +12,7 @@ class UserMailer < ApplicationMailer
     @job = job
     @work_order = work_order
 
-    mail(to: @user.email, subject: "#{@user.full_name}, you have been sent a work order.")
+    mail(to: @user.email, subject: "#{@user.full_name}, you have been sent a work order for job #{@job.id}.")
   end
 
 end
