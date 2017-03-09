@@ -71,11 +71,7 @@
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lossModal">
               Loss Information
           </button>
-        </div>
 
-        <%= render 'callers_form', f: f %>
-        <%= render 'partials/phone_form', f: f %>
-        <div class="col-xs-12 margin-top-2">
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#propertyModal">
               Property Information
           </button>
@@ -85,11 +81,25 @@
           </button>
         </div>
 
+        <%= render 'callers_form', f: f %>
+        <%= render 'partials/phone_form', f: f %>
+
+
         <div class="col-xs-12 margin-top-2">
             <div class="form-group referrals">
                 <%= f.label :referral_type_id %><br>
                 <% f.collection_select :referral_type_id, ReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
                 <%= f.collection_radio_buttons(:referral_type_id, ReferralType.all, :id, :name) do |b| %>
+                <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
+                <% end %> <br />
+
+            </div>
+        </div>
+        <div class="col-xs-12 margin-top-2">
+            <div class="form-group referrals">
+                <%= f.label :corporate_referral_type_id %><br>
+                <% f.collection_select :corporate_referral_type_id, CorporateReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                <%= f.collection_radio_buttons(:corporate_referral_type_id, CorporateReferralType.all, :id, :name) do |b| %>
                 <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
                 <% end %> <br />
 

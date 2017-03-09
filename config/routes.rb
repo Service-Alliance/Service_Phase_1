@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  resources :corporate_referral_types
   ActiveAdmin.routes(self)
   resources :contacts
   devise_for :users

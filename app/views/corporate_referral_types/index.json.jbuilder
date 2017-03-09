@@ -1,0 +1,1 @@
+json.array! @corporate_referral_types, partial: 'corporate_referral_types/corporate_referral_type', as: :corporate_referral_type

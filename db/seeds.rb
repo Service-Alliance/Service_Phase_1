@@ -68,6 +68,11 @@ JobStatus.create(name: 'Dead')
 
 JobType.create(name: 'General Cleaning')
 
+CorporateReferralType.create(name: "Xact Analysis")
+CorporateReferralType.create(name: "Nexxus")
+CorporateReferralType.create(name: "Contractor Connections")
+
+
 # Franchise Names
 Franchise.create(name: 'Central Manhattan')
 Franchise.create(name: 'East Windsor')
@@ -409,30 +414,30 @@ csv = CSV.parse(csv_text, :headers => true)
 csv.each do |row|
   InsuranceCompany.create(row.to_hash)
 end
-csv_text = File.read("db/files/customer_seed.csv")
-csv = CSV.parse(csv_text, :headers => true)
-csv.each do |row|
-  hash = row.to_hash
-
-  last_name = hash["last_name"]
-  first_name = hash["first_name"]
-  zip_code = hash["zip"]
-  number = hash["number"]
-  note = hash["notes"]
-  address_1 = hash["address_1"]
-  state = hash["state"]
-  recieved = hash["Received"]
-  scope = hash["Scope"]
-
-  loss_cause = LossCause.find_by(name: scope)
-  state_obj = State.find_by(name: state)
-
-  p address = Address.create(address_1: address_1, zip_code: zip_code, state_id: state_obj.try(:id))
-  p job = Job.create(status_id: invoiced.id, job_note: note)
-  caller = Caller.create(first_name: first_name, last_name: last_name, address_id: address.id, job_id: job.id)
-  p Loss.create(job_id: job.id, loss_cause_id: loss_cause.try(:id))
-
-end
+# csv_text = File.read("db/files/customer_seed.csv")
+# csv = CSV.parse(csv_text, :headers => true)
+# csv.each do |row|
+#   hash = row.to_hash
+#
+#   last_name = hash["last_name"]
+#   first_name = hash["first_name"]
+#   zip_code = hash["zip"]
+#   number = hash["number"]
+#   note = hash["notes"]
+#   address_1 = hash["address_1"]
+#   state = hash["state"]
+#   recieved = hash["Received"]
+#   scope = hash["Scope"]
+#
+#   loss_cause = LossCause.find_by(name: scope)
+#   state_obj = State.find_by(name: state)
+#
+#   p address = Address.create(address_1: address_1, zip_code: zip_code, state_id: state_obj.try(:id))
+#   p job = Job.create(status_id: invoiced.id, job_note: note)
+#   caller = Caller.create(first_name: first_name, last_name: last_name, address_id: address.id, job_id: job.id)
+#   p Loss.create(job_id: job.id, loss_cause_id: loss_cause.try(:id))
+#
+# end
 
 
 

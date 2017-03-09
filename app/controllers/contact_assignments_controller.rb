@@ -29,7 +29,7 @@ class ContactAssignmentsController < ApplicationController
     @contact_assignment.job_id = @job.id
 
     respond_to do |format|
-      if @contact_assignment.save
+      if @contact_assignment.contact_id && @contact_assignment.save
         format.html { redirect_to job_contact_assignments_path(@job), notice: 'Contact assignment was successfully created.' }
         format.json { render :show, status: :created, location: @contact_assignment }
       else

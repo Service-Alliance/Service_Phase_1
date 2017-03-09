@@ -42,6 +42,16 @@
                                             <td>Referral Type</td>
                                             <td><%= @job.try(:referral_type).try(:name) %></td>
                                         </tr>
+
+                                        <tr>
+                                            <td>Referral Note</td>
+                                            <td><%= @job.try(:referral_note) %></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Corporate Referral Type</td>
+                                            <td><%= @job.try(:corporate_referral_type).try(:name) %></td>
+                                        </tr>
                                     </tbody>
                                 </table>
 

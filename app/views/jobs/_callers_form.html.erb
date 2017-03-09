@@ -4,19 +4,27 @@
 <%= f.fields_for(@caller) do |g| %>
 <div class="col-xs-4">
     <div class="form-group">
-        <%= label_tag :first_name %>*<br>
+        <%= label_tag :first_name %><br>
         <%= text_field_tag "caller[first_name]", @caller.first_name, class: "form-control"  %>
     </div>
 </div>
 <div class="col-xs-4">
     <div class="form-group">
-        <%= label_tag :last_name %>*<br>
+        <%= label_tag :last_name %><br>
         <%= text_field_tag "caller[last_name]", @caller.last_name, class: "form-control"  %>
     </div>
 </div>
 <div class="col-xs-4">
     <div class="form-group">
-        <%= label_tag :email %>*<br>
+        <%= label_tag :email %><a data-toggle="tooltip" class="tooltipLink" data-original-title="A - Apple  H - Happy  O - Orange   V - Victor
+B - Boy      I - Ice            P - Paul        W - Work
+C - Cat      J - Jack        Q - Queen    X - X-Ray
+D - David  K - King       R - Rabbit    Y - Yes
+E - Eagle  L - Lion         S - Sam       Z - Zebra
+F - Frank  M - Mary     T - Tom
+G - Girl      N - Nancy   U - Universe">
+            <span class="glyphicon glyphicon-info-sign"></span>
+        </a><br>
         <%= text_field_tag "caller[email]", @caller.email, class: "form-control"  %>
     </div>
 </div>

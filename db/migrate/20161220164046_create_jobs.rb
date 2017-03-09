@@ -12,6 +12,7 @@ class CreateJobs < ActiveRecord::Migration
       t.integer :referral_type_id
       t.boolean :emergency
       t.integer :referral_employee_id
+      t.integer :corporate_referral_type_id
       t.integer :agent_id
       t.integer :adjuster_id
       t.date :recieved

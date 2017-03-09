@@ -6,7 +6,7 @@
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
             <div class="col-xs-12">
-                <h1 class="text-center">Job Contact Assignments</h1>
+                <h1 class="text-center">Job Referral Assignments</h1>
                 <%= link_to "Add Contact", new_job_contact_assignment_path(@job), class:"btn btn-primary new-manager-button"%>
                 <% @job.contact_assignments.each do |contact_assignment| %>
                 <div class="panel panel-info">

@@ -1,0 +1,2 @@
+module CorporateReferralTypesHelper
+end

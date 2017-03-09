@@ -16,7 +16,7 @@
         <div class="col-xs-6 col-xs-offset-3">
             <div class="form-group">
                 <label for="vendor_name">Vendor</label><br/>
-                <p id="vendor_name" ></p>
+                <p id="vendor_name"></p>
             </div>
         </div>
         <div class="field">
@@ -80,3 +80,13 @@
     </div>
 </div>
 </div>
+
+
+<script>
+    function LinkFormatter(value, row, index) {
+        return "<a href='/vendors/" + row.id + "'>" + value + "</a>";
+    }
+    function AddVendor(value, row, index) {
+        return "<a class='add-vendor' href='id=" + row.id + "&name=" + row.name + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
+    }
+</script>

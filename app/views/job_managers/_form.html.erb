@@ -24,8 +24,24 @@
         <div class="col-xs-6 col-xs-offset-3">
             <div class="form-group">
                 <div class="field">
-                    <%= f.label :schedule_datetime %><br>
-                    <%= f.datetime_select :schedule_datetime %>
+                    <%= f.label :schedule_date %><br>
+                    <%= f.date_select :schedule_date %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :start_time %><br>
+                    <%= f.time_select :start_time, {:ampm => true} %>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="form-group">
+                <div class="field">
+                    <%= f.label :end_time %><br>
+                    <%= f.time_select :end_time, {:ampm => true} %>
                 </div>
             </div>
         </div>

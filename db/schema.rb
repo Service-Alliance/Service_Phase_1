@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308145646) do
+ActiveRecord::Schema.define(version: 20170309173650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,6 +174,12 @@ ActiveRecord::Schema.define(version: 20170308145646) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "corporate_referral_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "customer_addresses", force: :cascade do |t|
     t.integer  "address_id"
     t.integer  "customer_id"
@@ -293,7 +299,9 @@ ActiveRecord::Schema.define(version: 20170308145646) do
 
   create_table "job_managers", force: :cascade do |t|
     t.integer  "job_manager_id"
-    t.datetime "schedule_datetime"
+    t.date     "schedule_date"
+    t.time     "start_time"
+    t.time     "end_time"
     t.integer  "job_id"
     t.boolean  "manager_confirmation", default: false
     t.text     "note"
@@ -325,12 +333,13 @@ ActiveRecord::Schema.define(version: 20170308145646) do
     t.integer  "referral_type_id"
     t.boolean  "emergency"
     t.integer  "referral_employee_id"
+    t.integer  "corporate_referral_type_id"
     t.integer  "agent_id"
     t.integer  "adjuster_id"
     t.date     "recieved"
     t.date     "last_action"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.text     "referral_note"
   end
 
