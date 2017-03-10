@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
     self.role_id == 3 ? true : false
   end
   def unassigned?
-    self.role_id == 0 ? true : false
+    self.role_id == 0 || self.role_id == nil  ? true : false
   end
+
 end
