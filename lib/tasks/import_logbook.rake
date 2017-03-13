@@ -1,7 +1,7 @@
 namespace :import do
     desc 'Import Logbook'
     task logbook: :environment do
-      csv_text = File.read("/lib/tasks/logbook_seed.csv")
+      csv_text = File.read("#{Rails.root}/lib/assets/logbook_seed.csv")
       csv = CSV.parse(csv_text, :headers => true)
       csv.each do |row|
         hash = row.to_hash
