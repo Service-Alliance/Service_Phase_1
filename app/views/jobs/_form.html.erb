@@ -55,6 +55,12 @@
 
           </div>
       </div>
+      <div class="col-xs-4">
+          <div class="form-group">
+              <%= f.label :franchise_id %><br>
+              <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {:prompt => 'Select a Franchise'},  { class: 'form-control'} %>
+          </div>
+      </div>
         <div class="col-xs-4">
             <div class="form-group">
                 <%= f.label :status_id %><br>

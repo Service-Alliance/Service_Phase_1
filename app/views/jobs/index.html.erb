@@ -34,6 +34,9 @@
                         <td><%= job.customer_id %></td>
                         <td><%= job.try(:referral_type).try(:name) %></td>
                         <td><%= link_to 'Show', job %></td>
+                        <% if current_user.admin?%>
+                        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <% end %>
 
                     </tr>
                     <% end %>
@@ -48,10 +51,19 @@
           <%= search_form_for @search do |f| %>
           <%= f.label :franchise_id %><br />
           <%= f.select :franchise_id_eq, options_from_collection_for_select(Franchise.all, "id", "name"), include_blank: true %><br />
-            <%= f.label :status_id_eq, "Job Status" %><br />
+
+          <%= f.label :insurance_company, "Common Insurance Companies" %><br />
+          <%= f.select :job_detail_insurance_company_id_eq, options_from_collection_for_select(InsuranceCompany.where(id: [94, 122, 125, 234]), "id", "name"), include_blank: true %><br />
+          <%= f.label :insurance_company %><br />
+          <%= f.select :job_detail_insurance_company_id_eq, options_from_collection_for_select(InsuranceCompany.all, "id", "name"), include_blank: true %><br />
+          <%= f.label :status_id_eq, "Job Status" %><br />
           <%= f.select :status_id_eq, options_from_collection_for_select(JobStatus.all, "id", "name"), include_blank: true %><br />
           <%= f.label :entered_by_id_eq, "Entered By" %><br />
           <%= f.select :entered_by_id_eq, options_from_collection_for_select(User.all, "id", "full_name"), include_blank: true %><br />
+          <%= f.label :customer_address_state_id, "Common Customer State" %><br />
+          <%= f.select :customer_address_state_id_eq, options_from_collection_for_select(State.where(id: [30, 32]), "id", "name"), include_blank: true %><br />
+          <%= f.label :customer_address_state_id, "Customer State" %><br />
+          <%= f.select :customer_address_state_id_eq, options_from_collection_for_select(State.all, "id", "name"), include_blank: true %><br />
           <%= f.label :referral_type_id_eq, "Referral Type" %><br />
           <%= f.select :referral_type_id_eq, options_from_collection_for_select(ReferralType.all, "id", "name"), include_blank: true %><br />
           <%= f.label :agent_id_eq, "Agent Name" %><br />
