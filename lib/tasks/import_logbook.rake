@@ -1,7 +1,7 @@
 namespace :import do
     desc 'Import Logbook'
     task logbook: :environment do
-      csv_text = File.expand_path('../logbook_seed.csv', __FILE__)
+      csv_text = File.read("logbook_seed.csv")
       csv = CSV.parse(csv_text, :headers => true)
       csv.each do |row|
         hash = row.to_hash
