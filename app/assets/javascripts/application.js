@@ -18,5 +18,8 @@
 
 $(function() {
     $("a.tooltipLink").tooltip();
-    $(".select-control").select2();
+    $(".select-control").select2({
+      placeholder: "Select an option",
+      allowClear: true
+    });
 });
