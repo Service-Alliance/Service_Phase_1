@@ -13,7 +13,10 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require select2-full
 //= require_tree .
 
-
-$("a.tooltipLink").tooltip();
+$(function() {
+    $("a.tooltipLink").tooltip();
+    $(".select-control").select2();
+});
