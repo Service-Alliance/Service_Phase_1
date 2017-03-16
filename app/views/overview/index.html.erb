@@ -91,7 +91,51 @@
                                     </li>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", edit_job_caller_path(@job, @job.caller) %>
+                            <%= link_to "Edit", new_or_view_job_caller_path(@job, @job.caller) %>
+                        </section>
+
+                        <section id="caller-information">
+                            <h2>Customer Information</h2>
+                            <div class="columns">
+                                <ul>
+                                    <li>
+                                        <span class="identifier">Name:
+                                        </span>
+                                        <span class="value"><%= @job.try(:customer).try(:full_name) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">Email:
+                                        </span>
+                                        <span class="value"><%= @job.try(:customer).try(:email) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">Address 1:
+                                        </span>
+                                        <span class="value"><%= @job.try(:customer).try(:address).try(:address_1) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">Address 2:
+                                        </span>
+                                        <span class="value"><%= @job.try(:customer).try(:address).try(:address_2) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">Zip Code:
+                                        </span>
+                                        <span class="value"><%= @job.try(:customer).try(:address).try(:zip_code) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">City:
+                                        </span>
+                                        <span class="value"><%= @job.try(:customer).try(:address).try(:city) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">County:
+                                        </span>
+                                        <span class="value"><%= @job.try(:customer).try(:address).try(:county) %></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <%= link_to "Edit", new_or_view_customer_path(@job, @job.customer) %>
                         </section>
 
                         <section id="loss-information">
@@ -451,6 +495,51 @@
                                 </ul>
                             </div>
                             <%= link_to "Edit", new_or_view_adjuster_path(@job, @job.adjuster) %>
+                        </section>
+
+
+                        <section id="manager-information">
+                            <h2>Manager Assignments</h2>
+                            <% unless @job.job_managers.empty? %>
+                            <% @job.job_managers.each do |manager| %>
+                            <div class="columns">
+                                <ul>
+                                    <li>
+                                        <span class="identifier">Name:
+                                        </span>
+                                        <span class="value"><%= manager.try(:job_manager).try(:full_name) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">Scheduled Date:
+                                        </span>
+                                        <span class="value"><%= manager.try(:schedule_date) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">Start Time:
+                                        </span>
+                                        <span class="value"><%= manager.try(:start_time) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">End Time:
+                                        </span>
+                                        <span class="value"><%= manager.try(:end_time) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">Manager Has Confirmed?:
+                                        </span>
+                                        <span class="value"><%= manager.try(:manager_confirmation) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">Notes:
+                                        </span>
+                                        <span class="value"><%= manager.try(:note) %></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <% end %>
+                            <% end %>
+                            <%= link_to "Edit", new_or_view_job_manager_path(@job, @job.job_managers) %>
+
                         </section>
                     </div>
                 </div>
