@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :assignment_types
   resources :corporate_referral_types
   ActiveAdmin.routes(self)
   resources :contacts

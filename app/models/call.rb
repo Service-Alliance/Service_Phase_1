@@ -1,5 +1,6 @@
 class Call < ActiveRecord::Base
   belongs_to :job
+  belongs_to :vendor
 
   def self.call_request
     response = HTTParty.get(

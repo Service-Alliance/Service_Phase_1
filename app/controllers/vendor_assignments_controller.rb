@@ -29,7 +29,7 @@ class VendorAssignmentsController < ApplicationController
     @vendor_assignment.job_id = @job.id
 
     respond_to do |format|
-      if @vendor_assignment.save
+      if @vendor_assignment.vendor_id && @vendor_assignment.save
         format.html { redirect_to job_vendor_assignments_path(@job), notice: 'Vendor assigment was successfully created.' }
         format.json { render :show, status: :created, location: @vendor_assignment }
       else
@@ -75,6 +75,6 @@ class VendorAssignmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vendor_assignment_params
-      params.require(:vendor_assignment).permit(:vendor_id, :note)
+      params.require(:vendor_assignment).permit(:vendor_id, :note, :assignment_type_id)
     end
 end

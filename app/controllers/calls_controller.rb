@@ -90,8 +90,6 @@ class CallsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def call_params
-    params.require(:call).permit(:callrail_id, :recording, :callrail_user, :user_id,
-                                 :start_time, :customer_phone_number,
-                                 :duration, :job_id, :inprogres)
+    params.require(:call).permit(:callrail_id, :callsource, :datetime, :trackingnum, :customer_phone_number, :destinationnum, :customer_name, :customer_city, :customer_state, :customer_zip, :customer_country, :keywords, :referrer, :referrermedium, :landingpage, :last_requested_url, :gclid, :ip, :utm_source, :utm_medium, :utm_term, :utm_content, :utm_campaign, :utma, :utmb, :utmv, :utmz, :utmx, :ga, :first_call, :recording, :duration, :answered, :user_id, :job_id, :inprogress, :franchise_id, :vendor_id, :duration)
   end
 end

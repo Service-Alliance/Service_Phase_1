@@ -24,6 +24,12 @@
         </div>
         <div class="col-xs-6 col-xs-offset-3">
             <div class="form-group">
+                <%= f.label :assignment_type_id %><br>
+                <%= f.collection_select :assignment_type_id, AssignmentType.all, :id, :name, {},  { class: 'form-control'} %>
+            </div>
+        </div>
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="form-group">
                 <div class="field">
                     <%= f.label :note %><br>
                     <%= f.text_area :note, class:"form-control" %>

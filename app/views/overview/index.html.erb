@@ -541,6 +541,30 @@
                             <%= link_to "Edit", new_or_view_job_manager_path(@job, @job.job_managers) %>
 
                         </section>
+
+                        <section id="vendor-information">
+                            <h2>Vendor Assignments</h2>
+                            <% unless @job.vendor_assignments.empty? %>
+                            <% @job.vendor_assignments.each do |vendor| %>
+                            <div class="columns">
+                                <ul>
+                                    <li>
+                                        <span class="identifier">Name:
+                                        </span>
+                                        <span class="value"><%= vendor.try(:name) %></span>
+                                    </li>
+                                    <li>
+                                        <span class="identifier">Assignment Category:
+                                        </span>
+                                        <span class="value"><%= vendor.try(:assignment_type).try(:name) %></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <% end %>
+                            <% end %>
+                            <%= link_to "Edit", new_or_view_job_vendor_path(@job, @job.vendor_assignments) %>
+
+                        </section>
                     </div>
                 </div>
             </div>

@@ -22,6 +22,10 @@
                                     <td><%= @call.id %></td>
                                 </tr>
                                 <tr>
+                                    <td>Vendor:</td>
+                                    <td><%= @call.try(:vendor).try(:name) %></td>
+                                </tr>
+                                <tr>
                                     <td>CallRail ID:</td>
                                     <td><%= @call.callrail_id %></td>
                                 </tr>
