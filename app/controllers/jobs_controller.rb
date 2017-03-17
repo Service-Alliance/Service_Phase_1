@@ -7,11 +7,11 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     if params[:user_id]
-      @jobs = Job.where(entered_by_id: params[:user_id]).paginate(:page => params[:page], :per_page => 30)
+      @jobs = Job.where(entered_by_id: params[:user_id]).paginate(page: params[:page], per_page: 30)
     else
       @search = Job.where.not(status_id: nil).search(params[:q])
       # @jobs = @search.result
-      @jobs = @search.result.paginate(:page => params[:page], :per_page => 30)
+      @jobs = @search.result.paginate(page: params[:page], per_page: 30)
     end
   end
 
@@ -19,16 +19,14 @@ class JobsController < ApplicationController
     @jobs = Job.where.not(status_id: nil).last(200)
     render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
                                          :job_loss_type, :insurance_details,
-                                         :job_detail, :customer
-                                         ])
+                                         :job_detail, :customer])
   end
 
   def no_activity
-    @jobs = Job.where("last_action < ? AND status_id = ?", 7.days.ago, 1)
+    @jobs = Job.where('last_action < ? AND status_id = ?', 7.days.ago, 1)
     render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
                                          :job_loss_type, :insurance_details,
-                                         :job_detail, :customer
-                                         ])
+                                         :job_detail, :customer])
   end
 
   # GET /jobs/1
@@ -72,7 +70,6 @@ class JobsController < ApplicationController
       @caller = Caller.new
     end
 
-
     if params[:billing] == 'true'
       @billing_address = @job.billing_address || @billing_address = Address.new
       render template: 'jobs/billing_form'
@@ -111,11 +108,11 @@ class JobsController < ApplicationController
         @job.update_last_action
 
         @caller.phones.destroy_all
-        phone_count = phone_params["type_ids"].count
+        phone_count = phone_params['type_ids'].count
 
         phone_count.times do |index|
-          unless phone_params["numbers"][index] == ""
-            @caller.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          unless phone_params['numbers'][index] == ''
+            @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
           end
         end
 
@@ -151,11 +148,11 @@ class JobsController < ApplicationController
           @address.update(address_params)
         end
         @caller.phones.destroy_all if @caller && @caller.phones
-        phone_count = phone_params["type_ids"].count
+        phone_count = phone_params['type_ids'].count
 
         phone_count.times do |index|
-          unless phone_params["numbers"][index] == ""
-            @caller.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          unless phone_params['numbers'][index] == ''
+            @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
           end
         end
 
@@ -187,7 +184,6 @@ class JobsController < ApplicationController
     end
   end
 
-
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
@@ -198,17 +194,13 @@ class JobsController < ApplicationController
     end
   end
 
-  def search
-  end
+  def search; end
 
   def calls
     @calls = Call.where(job_id: @job.id)
   end
 
-  def add_call
-
-
-  end
+  def add_call; end
 
   def create_call
     @call = Call.find_by(id: call_params[:id])
@@ -217,7 +209,6 @@ class JobsController < ApplicationController
 
     redirect_to job_calls_path(@job)
   end
-
 
   private
 
@@ -236,7 +227,7 @@ class JobsController < ApplicationController
                                 :entered_by_id, :details,
                                 :job_note, :customer_id, :referral_type_id, :referral_note, :corporate_referral_type_id,
                                 :billing_address_id, :emergency,
-                                :referral_employee_id, :job_manager_id, :franchise_id,
+                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id,
                                 customer: [:address_1, :address_2, :zip_code, :city,
                                            :state_id, :county])
   end
@@ -265,6 +256,6 @@ class JobsController < ApplicationController
   end
 
   def phone_params
-    params.require(:phones).permit(numbers:[], extensions:[], type_ids:[])
+    params.require(:phones).permit(numbers: [], extensions: [], type_ids: [])
   end
 end

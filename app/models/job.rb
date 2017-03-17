@@ -22,6 +22,8 @@ class Job < ActiveRecord::Base
   has_many :job_forms, dependent: :destroy
   has_many :notes, as: :noteable, dependent: :destroy
   has_many :work_orders
+  belongs_to :referral_vendor, foreign_key: :referral_vendor_id, class_name: 'Vendor'
+  belongs_to :referral_employee, foreign_key: :referral_employee_id, class_name: 'User'
 
 
   # Activity Tracking activated

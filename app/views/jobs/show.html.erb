@@ -42,6 +42,19 @@
                                             <td>Referral Type</td>
                                             <td><%= @job.try(:referral_type).try(:name) %></td>
                                         </tr>
+                                        <% if @job.try(:referral_vendor_id) %>
+                                        <tr>
+                                            <td>Vendor Referrer</td>
+                                            <td><%= @job.try(:referral_vendor).try(:name) %></td>
+                                        </tr>
+                                        <% end %>
+
+                                        <% if @job.try(:referral_employee_id) %>
+                                        <tr>
+                                            <td>Employee Referrer</td>
+                                            <td><%= @job.try(:referral_employee).try(:full_name) %></td>
+                                        </tr>
+                                        <% end %>
 
                                         <tr>
                                             <td>Referral Note</td>
