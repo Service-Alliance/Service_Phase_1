@@ -50,8 +50,9 @@
                                 <thead>
                                     <tr>
                                         <th data-field="id" data-sortable="true" data-formatter="AddVendor"></th>
-                                        <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Call ID/CallRail Link</th>
+                                        <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Call Link</th>
                                         <th data-field="callrail_id" data-sortable="true">CallRail ID</th>
+                                        <th data-field="datetime" data-sortable="true">Call Date/Time</th>
                                         <th data-field="customer_phone_number" data-sortable="true">Phone Number</th>
                                         <th data-field="customer_city" data-sortable="true">City</th>
                                         <th data-field="callrail_id" data-sortable="true" data-formatter="CallRailTimeline">CallRail Timeline</th>
@@ -72,12 +73,12 @@
 
 <script>
 function LinkFormatter(value, row, index) {
-    return "<a href='calls/" + row.id + "'>" + value + "</a>";
+    return "<a href='calls/" + row.id + "' target='_blank'>" + value + "</a>";
 }
 function AddVendor(value, row, index) {
     return "<a class='add-call' target='_blank' href='call_id=" + row.id + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
 }
-function LinkFormatter(value, row, index) {
+function CallRailTimeline(value, row, index) {
     return "<a href='https://app.callrail.com/calls/" + row.id + "'>" + value + "</a>";
 }
 </script>
