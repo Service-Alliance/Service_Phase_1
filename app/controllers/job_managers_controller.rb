@@ -29,7 +29,7 @@ class JobManagersController < ApplicationController
     @job_manager.job_id = @job.id
 
     respond_to do |format|
-      if @job_manager.save
+      if @job_manager.job_manager_id && @job_manager.save
         @job.update_last_action
         @user = @job_manager.job_manager
         UserMailer.manager_assignment(@user, @job_manager).deliver_now
