@@ -91,7 +91,27 @@
         <%= render 'partials/phone_form', f: f %>
 
 
-      
+        <div class="col-xs-12 margin-top-2">
+            <div class="form-group referrals">
+                <%= f.label :referral_type_id %><br>
+                <% f.collection_select :referral_type_id, ReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                <%= f.collection_radio_buttons(:referral_type_id, ReferralType.all, :id, :name) do |b| %>
+                <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
+                <% end %> <br />
+
+            </div>
+        </div>
+        <div class="col-xs-12 margin-top-2">
+            <div class="form-group referrals">
+                <%= f.label :corporate_referral_type_id %><br>
+                <% f.collection_select :corporate_referral_type_id, CorporateReferralType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                <%= f.collection_radio_buttons(:corporate_referral_type_id, CorporateReferralType.all, :id, :name) do |b| %>
+                <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
+                <% end %> <br />
+
+            </div>
+        </div>
+
         <div id="referral_vendor" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Vendor" %>">
             <div class="form-group">
                 <%= f.label :referral_vendor_id %><br>
