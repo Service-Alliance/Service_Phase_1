@@ -46,7 +46,15 @@
     <%= f.label :type_id %><br>
     <%= f.number_field :type_id %>
   </div> -->
-    
+      <div class="col-xs-12">
+          <div class="form-group">
+              <%= f.label :name %>
+
+              <br>
+              <%= f.text_field :name, class: "form-control" %>
+
+          </div>
+      </div>
       <div class="col-xs-4">
           <div class="form-group">
               <%= f.label :franchise_id %><br>
@@ -107,7 +115,7 @@
         <div id="referral_vendor" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Vendor" %>">
             <div class="form-group">
                 <%= f.label :referral_vendor_id %><br>
-                <%= f.collection_select :referral_vendor_id, Vendor.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                <%= f.collection_select :referral_vendor_id, Vendor.all, :id, :id, {prompt: true},  { class: 'form-control'} %>
             </div>
         </div>
         <div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Servpro Employee" %>">
