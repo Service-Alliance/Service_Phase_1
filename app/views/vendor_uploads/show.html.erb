@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @vendor_upload.vendor_id %>
+</p>
+
+<p>
+  <strong>Upload:</strong>
+  <%= @vendor_upload.upload %>
+</p>
+
+<p>
+  <strong>Vendor upload type:</strong>
+  <%= @vendor_upload.vendor_upload_type_id %>
+</p>
+
+<p>
+  <strong>Expiration date:</strong>
+  <%= @vendor_upload.expiration_date %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @vendor_upload.name %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @vendor_upload.notes %>
+</p>
+
+<%= link_to 'Edit', edit_vendor_upload_path(@vendor_upload) %> |
+<%= link_to 'Back', vendor_uploads_path %>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vendor_id: 1
+  upload: MyString
+  vendor_upload_type_id: 
+  expiration_date: 2017-03-17
+  name: MyText
+  notes: MyText
+
+two:
+  vendor_id: 1
+  upload: MyString
+  vendor_upload_type_id: 
+  expiration_date: 2017-03-17
+  name: MyText
+  notes: MyText

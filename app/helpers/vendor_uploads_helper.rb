@@ -1,0 +1,2 @@
+module VendorUploadsHelper
+end

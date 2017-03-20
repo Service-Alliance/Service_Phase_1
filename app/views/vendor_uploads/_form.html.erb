@@ -1,0 +1,41 @@
+<%= form_for(@vendor_upload) do |f| %>
+  <% if @vendor_upload.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vendor_upload.errors.count, "error") %> prohibited this vendor_upload from being saved:</h2>
+
+      <ul>
+      <% @vendor_upload.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :vendor_id %><br>
+    <%= f.number_field :vendor_id %>
+  </div>
+  <div class="field">
+    <%= f.label :upload %><br>
+    <%= f.text_field :upload %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_upload_type_id %><br>
+    <%= f.text_field :vendor_upload_type_id %>
+  </div>
+  <div class="field">
+    <%= f.label :expiration_date %><br>
+    <%= f.date_select :expiration_date %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_area :name %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -10,41 +10,55 @@
                             <h2>Job Information</h2>
                             <div class="columns">
                                 <ul>
+                                  <% if @job.try(:job_type).try(:name) %>
                                     <li>
                                         <span class="identifier">Job Type:
                                         </span>
                                         <span class="value"><%= @job.try(:job_type).try(:name) %></span>
                                     </li>
+                                  <% end %>
+                                  <% if @job.try(:user).try(:full_name) %>
                                     <li>
                                         <span class="identifier">Entered By:
                                         </span>
                                         <span class="value"><%= @job.try(:user).try(:full_name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:franchise).try(:name) %>
                                     <li>
                                         <span class="identifier">Franchise:
                                         </span>
                                         <span class="value"><%= @job.try(:franchise).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:details) %>
                                     <li>
                                         <span class="identifier">Details:
                                         </span>
                                         <span class="value"><%= @job.try(:details) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_note) %>
                                     <li>
                                         <span class="identifier">Notes:
                                         </span>
                                         <span class="value"><%= @job.try(:job_note) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:referral_type).try(:name) %>
                                     <li>
                                         <span class="identifier">Referral Type:
                                         </span>
                                         <span class="value"><%= @job.try(:referral_type).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:recieved) %>
                                     <li>
                                         <span class="identifier">Recieved:
                                         </span>
                                         <span class="value"><%= @job.try(:recieved) %></span>
                                     </li>
+                                    <% end %>
                                 </ul>
                             </div>
                             <%= link_to "Edit", edit_job_path(@job) %>
@@ -54,41 +68,55 @@
                             <h2>Caller Information</h2>
                             <div class="columns">
                                 <ul>
+                                  <% if @job.try(:caller).try(:full_name) %>
                                     <li>
                                         <span class="identifier">Name:
                                         </span>
                                         <span class="value"><%= @job.try(:caller).try(:full_name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:caller).try(:email) %>
                                     <li>
                                         <span class="identifier">Email:
                                         </span>
                                         <span class="value"><%= @job.try(:caller).try(:email) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:caller).try(:address).try(:address_1) %>
                                     <li>
                                         <span class="identifier">Address 1:
                                         </span>
                                         <span class="value"><%= @job.try(:caller).try(:address).try(:address_1) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:caller).try(:address).try(:address_2) %>
                                     <li>
                                         <span class="identifier">Address 2:
                                         </span>
                                         <span class="value"><%= @job.try(:caller).try(:address).try(:address_2) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:caller).try(:address).try(:zip_code) %>
                                     <li>
                                         <span class="identifier">Zip Code:
                                         </span>
                                         <span class="value"><%= @job.try(:caller).try(:address).try(:zip_code) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:caller).try(:address).try(:city) %>
                                     <li>
                                         <span class="identifier">City:
                                         </span>
                                         <span class="value"><%= @job.try(:caller).try(:address).try(:city) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:caller).try(:address).try(:county) %>
                                     <li>
                                         <span class="identifier">County:
                                         </span>
                                         <span class="value"><%= @job.try(:caller).try(:address).try(:county) %></span>
                                     </li>
+                                    <% end %>
                                 </ul>
                             </div>
                             <%= link_to "Edit", new_or_view_job_caller_path(@job, @job.caller) %>
@@ -98,41 +126,55 @@
                             <h2>Customer Information</h2>
                             <div class="columns">
                                 <ul>
+                                  <% if @job.try(:customer).try(:full_name) %>
                                     <li>
                                         <span class="identifier">Name:
                                         </span>
                                         <span class="value"><%= @job.try(:customer).try(:full_name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:customer).try(:email) %>
                                     <li>
                                         <span class="identifier">Email:
                                         </span>
                                         <span class="value"><%= @job.try(:customer).try(:email) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:customer).try(:address).try(:address_1) %>
                                     <li>
                                         <span class="identifier">Address 1:
                                         </span>
                                         <span class="value"><%= @job.try(:customer).try(:address).try(:address_1) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:customer).try(:address).try(:address_2) %>
                                     <li>
                                         <span class="identifier">Address 2:
                                         </span>
                                         <span class="value"><%= @job.try(:customer).try(:address).try(:address_2) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:customer).try(:address).try(:zip_code) %>
                                     <li>
                                         <span class="identifier">Zip Code:
                                         </span>
                                         <span class="value"><%= @job.try(:customer).try(:address).try(:zip_code) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:customer).try(:address).try(:city) %>
                                     <li>
                                         <span class="identifier">City:
                                         </span>
                                         <span class="value"><%= @job.try(:customer).try(:address).try(:city) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:customer).try(:address).try(:county) %>
                                     <li>
                                         <span class="identifier">County:
                                         </span>
                                         <span class="value"><%= @job.try(:customer).try(:address).try(:county) %></span>
                                     </li>
+                                    <% end %>
                                 </ul>
                             </div>
                             <%= link_to "Edit", new_or_view_customer_path(@job, @job.customer) %>
@@ -143,86 +185,118 @@
                             <% @job.losses.each do |loss| %>
                             <div class="columns">
                                 <ul>
+                                  <% if loss.try(:recieved_by) %>
                                     <li>
                                         <span class="identifier">Recieved By:
                                         </span>
                                         <span class="value"><%= loss.try(:recieved_by) %></span>
                                     </li>
+                                  <% end %>
+                                  <% if loss.try(:email) %>
                                     <li>
                                         <span class="identifier">Loss Occurred:
                                         </span>
                                         <span class="value"><%= loss.try(:email) %></span>
                                     </li>
+                                  <% end %>
+                                  <% if loss.try(:fnol_recieved) %>
                                     <li>
                                         <span class="identifier">FNOL Recieved:
                                         </span>
                                         <span class="value"><%= loss.try(:fnol_recieved) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:customer_called) %>
                                     <li>
                                         <span class="identifier">Customer Called:
                                         </span>
                                         <span class="value"><%= loss.try(:customer_called) %></span>
                                     </li>
+                                  <% end %>
+                                  <% if loss.try(:loss_type).try(:name) %>
                                     <li>
                                         <span class="identifier">Loss Type:
                                         </span>
                                         <span class="value"><%= loss.try(:loss_type).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:loss_cause).try(:name) %>
                                     <li>
                                         <span class="identifier">Loss Cause:
                                         </span>
                                         <span class="value"><%= loss.try(:loss_cause).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:standing_water).try(:name) %>
                                     <li>
                                         <span class="identifier">Standing Water:
                                         </span>
                                         <span class="value"><%= loss.try(:standing_water).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:water_available).try(:name) %>
                                     <li>
                                         <span class="identifier">Water Available:
                                         </span>
                                         <span class="value"><%= loss.try(:water_available).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:electricity_available).try(:name) %>
                                     <li>
                                         <span class="identifier">Electricity Available:
                                         </span>
                                         <span class="value"><%= loss.try(:electricity_available).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:source_off).try(:name) %>
                                     <li>
                                         <span class="identifier">Source Off:
                                         </span>
                                         <span class="value"><%= loss.try(:source_off).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:visible_mold).try(:name) %>
                                     <li>
                                         <span class="identifier">Visible Mold:
                                         </span>
                                         <span class="value"><%= loss.try(:visible_mold).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:source_Cause) %>
                                     <li>
                                         <span class="identifier">Source Cause:
                                         </span>
                                         <span class="value"><%= loss.try(:source_Cause) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:previous_water_damage).try(:name) %>
                                     <li>
                                         <span class="identifier">Previous Water Damage:
                                         </span>
                                         <span class="value"><%= loss.try(:previous_water_damage).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:cleaning_type) %>
                                     <li>
                                         <span class="identifier">Cleaning Type:
                                         </span>
                                         <span class="value"><%= loss.try(:cleaning_type) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:affected_square_footage) %>
                                     <li>
                                         <span class="identifier">Affected Square Footage:
                                         </span>
                                         <span class="value"><%= loss.try(:affected_square_footage) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if loss.try(:notes) %>
                                     <li>
                                         <span class="identifier">Notes:
                                         </span>
                                         <span class="value"><%= loss.try(:notes) %></span>
                                     </li>
+                                    <% end %>
                                 </ul>
                             </div>
                             <%= link_to "Edit", new_or_view_job_loss_path(@job, loss) %>
@@ -233,76 +307,104 @@
                             <h2>Property Information</h2>
                             <div class="columns">
                                 <ul>
+                                  <% if @job.try(:property).try(:property_type).try(:name) %>
                                     <li>
                                         <span class="identifier">Property Type:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:property_type).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:structure_type).try(:name) %>
                                     <li>
                                         <span class="identifier">Structure Type:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:structure_type).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:year_built) %>
                                     <li>
                                         <span class="identifier">Year Built:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:year_built) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:floors_affected) %>
                                     <li>
                                         <span class="identifier">Floor Affected:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:floors_affected) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:rooms_affected).try(:name) %>
                                     <li>
                                         <span class="identifier">Rooms Affected:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:rooms_affected).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:occurred_level) %>
                                     <li>
                                         <span class="identifier">Occurred Level:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:occurred_level) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:multi_unit)%>
                                     <li>
                                         <span class="identifier">Multi-level:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:multi_unit)%></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:ceiling_affected) %>
                                     <li>
                                         <span class="identifier">Ceiling Affected:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:ceiling_affected) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:walls_affected).try(:name) %>
                                     <li>
                                         <span class="identifier">Walls Affected:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:walls_affected).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:attic_affected).try(:name) %>
                                     <li>
                                         <span class="identifier">Attic Affected:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:attic_affected).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:contents_affected).try(:name) %>
                                     <li>
                                         <span class="identifier">Contents Affected:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:contents_affected).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:basement_finished) %>
                                     <li>
                                         <span class="identifier">Basement Finished:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:basement_finished) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:ownership) %>
                                     <li>
                                         <span class="identifier">Ownership:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:ownership) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:property).try(:condo) %>
                                     <li>
                                         <span class="identifier">Condo:
                                         </span>
                                         <span class="value"><%= @job.try(:property).try(:condo) %></span>
                                     </li>
+                                    <% end %>
 
                                 </ul>
                             </div>
@@ -313,81 +415,111 @@
                             <h2>Loss Information</h2>
                             <div class="columns">
                                 <ul>
+                                  <% if @job.try(:job_detail).try(:insurance_company).try(:name) %>
                                     <li>
                                         <span class="identifier">Insurance Company:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:insurance_company).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:claim_number).try(:name) %>
                                     <li>
                                         <span class="identifier">Claim Number:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:claim_number).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:policy_number) %>
                                     <li>
                                         <span class="identifier">Policy Number:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:policy_number) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:coverage_type) %>
                                     <li>
                                         <span class="identifier">Coverage Type:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:coverage_type) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:deductible_amount) %>
                                     <li>
                                         <span class="identifier">Deductible Amount:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:deductible_amount) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:self_pay).try(:name) %>
                                     <li>
                                         <span class="identifier">Self Pay:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:self_pay).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:deductible).try(:name) %>
                                     <li>
                                         <span class="identifier">Deductible:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:deductible).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:esl_nst_amount).try(:name) %>
                                     <li>
                                         <span class="identifier">ESL NST Amount:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:esl_nst_amount).try(:name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:emergency_service_amount) %>
                                     <li>
                                         <span class="identifier">Emergency Service Amount:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:emergency_service_amount) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:full_name) %>
                                     <li>
                                         <span class="identifier">Billing Name:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:full_name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:billing_address).try(:address_1) %>
                                     <li>
                                         <span class="identifier">Billing Address 1:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:billing_address).try(:address_1) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:billing_address).try(:address_2) %>
                                     <li>
                                         <span class="identifier">Billing Address 2:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:billing_address).try(:address_2) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:address).try(:zip_code) %>
                                     <li>
                                         <span class="identifier">Zip Code:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:address).try(:zip_code) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:address).try(:city) %>
                                     <li>
                                         <span class="identifier">City:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:address).try(:city) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:job_detail).try(:address).try(:county) %>
                                     <li>
                                         <span class="identifier">County:
                                         </span>
                                         <span class="value"><%= @job.try(:job_detail).try(:address).try(:county) %></span>
                                     </li>
+                                    <% end %>
                                 </ul>
                             </div>
                             <%= link_to "Edit", new_or_view_job_detail_path(@job, @job.property) %>
@@ -396,41 +528,55 @@
                             <h2>Agent Information</h2>
                             <div class="columns">
                                 <ul>
+                                  <% if @job.try(:agent).try(:full_name) %>
                                     <li>
                                         <span class="identifier">Name:
                                         </span>
                                         <span class="value"><%= @job.try(:agent).try(:full_name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.agent.try(:email) %>
                                     <li>
                                         <span class="identifier">Email:
                                         </span>
                                         <span class="value"><%= @job.agent.try(:email) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:agent).try(:address).try(:address_1) %>
                                     <li>
                                         <span class="identifier">Address 1:
                                         </span>
                                         <span class="value"><%= @job.try(:agent).try(:address).try(:address_1) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:agent).try(:address).try(:address_2) %>
                                     <li>
                                         <span class="identifier">Address 2:
                                         </span>
                                         <span class="value"><%= @job.try(:agent).try(:address).try(:address_2) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:agent).try(:address).try(:zip_code) %>
                                     <li>
                                         <span class="identifier">Zip Code:
                                         </span>
                                         <span class="value"><%= @job.try(:agent).try(:address).try(:zip_code) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:agent).try(:address).try(:city) %>
                                     <li>
                                         <span class="identifier">City:
                                         </span>
                                         <span class="value"><%= @job.try(:agent).try(:address).try(:city) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:agent).try(:address).try(:county) %>
                                     <li>
                                         <span class="identifier">County:
                                         </span>
                                         <span class="value"><%= @job.try(:agent).try(:address).try(:county) %></span>
                                     </li>
+                                    <% end %>
                                     <% if @job.agent.try(:phones) %>
                                     <% @job.agent.phones.each do |phone| %>
                                     <li>Phone:
@@ -448,41 +594,55 @@
                             <h2>Adjuster Information</h2>
                             <div class="columns">
                                 <ul>
+                                  <% if @job.try(:adjuster).try(:full_name) %>
                                     <li>
                                         <span class="identifier">Name:
                                         </span>
                                         <span class="value"><%= @job.try(:adjuster).try(:full_name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.adjuster.try(:email) %>
                                     <li>
                                         <span class="identifier">Email:
                                         </span>
                                         <span class="value"><%= @job.adjuster.try(:email) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:adjuster).try(:address).try(:address_1) %>
                                     <li>
                                         <span class="identifier">Address 1:
                                         </span>
                                         <span class="value"><%= @job.try(:adjuster).try(:address).try(:address_1) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:adjuster).try(:address).try(:address_2) %>
                                     <li>
                                         <span class="identifier">Address 2:
                                         </span>
                                         <span class="value"><%= @job.try(:adjuster).try(:address).try(:address_2) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:adjuster).try(:address).try(:zip_code) %>
                                     <li>
                                         <span class="identifier">Zip Code:
                                         </span>
                                         <span class="value"><%= @job.try(:adjuster).try(:address).try(:zip_code) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:adjuster).try(:address).try(:city) %>
                                     <li>
                                         <span class="identifier">City:
                                         </span>
                                         <span class="value"><%= @job.try(:adjuster).try(:address).try(:city) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if @job.try(:adjuster).try(:address).try(:county) %>
                                     <li>
                                         <span class="identifier">County:
                                         </span>
                                         <span class="value"><%= @job.try(:adjuster).try(:address).try(:county) %></span>
                                     </li>
+                                    <% end %>
                                     <% if @job.adjuster.try(:phones) %>
                                     <% @job.adjuster.phones.each do |phone| %>
                                     <li>Phone:
@@ -504,36 +664,48 @@
                             <% @job.job_managers.each do |manager| %>
                             <div class="columns">
                                 <ul>
+                                  <% if manager.try(:job_manager).try(:full_name) %>
                                     <li>
                                         <span class="identifier">Name:
                                         </span>
                                         <span class="value"><%= manager.try(:job_manager).try(:full_name) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if manager.try(:schedule_date) %>
                                     <li>
                                         <span class="identifier">Scheduled Date:
                                         </span>
                                         <span class="value"><%= manager.try(:schedule_date) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if manager.try(:start_time) %>
                                     <li>
                                         <span class="identifier">Start Time:
                                         </span>
                                         <span class="value"><%= manager.try(:start_time) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if manager.try(:end_time) %>
                                     <li>
                                         <span class="identifier">End Time:
                                         </span>
                                         <span class="value"><%= manager.try(:end_time) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if manager.try(:manager_confirmation) %>
                                     <li>
                                         <span class="identifier">Manager Has Confirmed?:
                                         </span>
                                         <span class="value"><%= manager.try(:manager_confirmation) %></span>
                                     </li>
+                                    <% end %>
+                                    <% if manager.try(:note) %>
                                     <li>
                                         <span class="identifier">Notes:
                                         </span>
                                         <span class="value"><%= manager.try(:note) %></span>
                                     </li>
+                                    <% end %>
                                 </ul>
                             </div>
                             <% end %>

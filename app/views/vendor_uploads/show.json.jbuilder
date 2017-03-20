@@ -1,0 +1,1 @@
+json.partial! "vendor_uploads/vendor_upload", vendor_upload: @vendor_upload
