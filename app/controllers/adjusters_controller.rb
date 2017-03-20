@@ -75,7 +75,8 @@ class AdjustersController < ApplicationController
     @job = Job.find_by(id: job_params[:job_id])
     respond_to do |format|
       if @adjuster.update(adjuster_params)
-        @address.update(address_params)
+        p address_params
+        @adjuster.address.update(address_params)
         @adjuster.phones.destroy_all
         phone_count = phone_params["type_ids"].count
 
@@ -154,7 +155,7 @@ class AdjustersController < ApplicationController
   end
 
   def address_params
-    params.require(:address).permit(:address_1, :address_2, :zip_code, :city,
+    params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city,
                                     :state_id, :county)
   end
 
