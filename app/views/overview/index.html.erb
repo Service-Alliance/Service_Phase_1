@@ -464,13 +464,7 @@
                                         <span class="value"><%= @job.try(:job_detail).try(:deductible).try(:name) %></span>
                                     </li>
                                     <% end %>
-                                    <% if @job.try(:job_detail).try(:esl_nst_amount).try(:name) %>
-                                    <li>
-                                        <span class="identifier">ESL NST Amount:
-                                        </span>
-                                        <span class="value"><%= @job.try(:job_detail).try(:esl_nst_amount).try(:name) %></span>
-                                    </li>
-                                    <% end %>
+                                  
                                     <% if @job.try(:job_detail).try(:emergency_service_amount) %>
                                     <li>
                                         <span class="identifier">Emergency Service Amount:

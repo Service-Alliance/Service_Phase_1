@@ -12,7 +12,7 @@
       <th>Deductible amount</th>
       <th>Self pay</th>
       <th>Deductible</th>
-      <th>Esl nst amount</th>
+      <!-- <th>Esl nst amount</th> -->
       <th>Emergency service amount</th>
       <th>Job</th>
       <th colspan="3"></th>
@@ -29,7 +29,7 @@
         <td><%= job_detail.deductible_amount %></td>
         <td><%= job_detail.self_pay_id %></td>
         <td><%= job_detail.deductible_id %></td>
-        <td><%= job_detail.esl_nst_amount_id %></td>
+        <td><% job_detail.esl_nst_amount_id %></td>
         <td><%= job_detail.emergency_service_amount %></td>
         <td><%= job_detail.job_id %></td>
         <td><%= link_to 'Show', job_job_detail %></td>

@@ -45,10 +45,7 @@
                             <td>Is there a deductible?</td>
                             <td><%= @job_detail.try(:deductible).try(:name) %></td>
                         </tr>
-                        <tr>
-                            <td>Is there an ESL/NSTE Amount?</td>
-                            <td><%= @job_detail.try(:esl_nst_amount).try(:name) %></td>
-                        </tr>
+                        
                         <tr>
                             <td>Emergency Services Amount?</td>
                             <td><%= @job_detail.try(:emergency_service_amount) %></td>
