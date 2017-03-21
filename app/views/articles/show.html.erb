@@ -18,5 +18,11 @@
     <div class="col-xs-12 content">
       <%= raw @article.content %>
     </div>
+    <div class="col-xs-12 margin-top-1">
+      <h2 classNme="text-center">Documents:</h2>
+      <% @article.uploads.each do |upload| %>
+        <a target="_blank" href=<%= upload.upload.url %>> <%= upload.upload.path.split('/').last %></a>
+      <% end %>
+    </div>
   </div>
 </div>

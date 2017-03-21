@@ -1,3 +1,3 @@
 class VendorUpload < ActiveRecord::Base
-  mount_uploader :upload, UploadUploader
+  belongs_to :uploadable, polymorphic: true
 end

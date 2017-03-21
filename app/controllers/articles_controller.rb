@@ -24,10 +24,11 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @article = Article.new(article_params)
+    @article = Article.new(content: article_params['content'], title: article_params['title'], author_id: current_user.id, category_id: article_params['category_id'])
 
     respond_to do |format|
       if @article.save
+        @article.uploads.create(upload: article_params['upload']) if article_params['upload']
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
@@ -69,6 +70,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:content, :title, :author_id, :category_id)
+      params.require(:article).permit(:content, :title, :author_id, :category_id, :upload)
     end
 end

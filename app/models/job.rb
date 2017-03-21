@@ -15,7 +15,8 @@ class Job < ActiveRecord::Base
   has_many :losses, dependent: :destroy
   has_one :job_detail, dependent: :destroy
   has_one :emergency_contact, dependent: :destroy
-  has_many :uploads, dependent: :destroy
+  # has_many :uploads, dependent: :destroy
+  has_many :uploads, as: :uploadable, dependent: :destroy
   has_many :job_managers, dependent: :destroy
   has_many :vendor_assignments
   has_many :contact_assignments

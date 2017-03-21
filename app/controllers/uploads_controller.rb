@@ -5,7 +5,7 @@ class UploadsController < ApplicationController
   # GET /uploads
   # GET /uploads.json
   def index
-    @uploads = Upload.where(job_id: @job.id)
+    @uploads = @job.uploads
   end
 
   # GET /uploads/1
@@ -25,8 +25,8 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-    @upload = Upload.new(upload_params)
-    @upload.job_id = @job.id
+    @upload = @job.uploads.new(upload_params)
+
 
     respond_to do |format|
       if @upload.save
