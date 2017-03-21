@@ -419,47 +419,6 @@
                                 </ul>
                             </div>
                             <% end %>
-
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <div class="field">
-                                        <%= f.label :insurance_company_id %><br>
-                                        <%= f.collection_select :insurance_company_id, InsuranceCompany.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <div class="field">
-                                        <%= f.label :claim_number %><br>
-                                        <%= f.text_field :claim_number, class: "form-control" %>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <div class="field">
-                                        <%= f.label :policy_number %><br>
-                                        <%= f.text_field :policy_number, class: "form-control" %>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <div class="field">
-                                        <%= f.label :coverage_type_id %><br>
-                                        <%= f.number_field :coverage_type_id, class: "form-control" %>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <div class="field">
-                                        <%= f.label :deductible_amount %><br>
-                                        <%= f.number_field :deductible_amount, class: "form-control" %>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <div class="field">
@@ -470,7 +429,49 @@
                                 </div>
 
                             </div>
-                            <div class="col-xs-6">
+
+                            <div class="col-xs-6 non-self">
+                                <div class="form-group">
+                                    <div class="field">
+                                        <%= f.label :insurance_company_id %><br>
+                                        <%= f.collection_select :insurance_company_id, InsuranceCompany.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 non-self">
+                                <div class="form-group">
+                                    <div class="field">
+                                        <%= f.label :claim_number %><br>
+                                        <%= f.text_field :claim_number, class: "form-control" %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 non-self">
+                                <div class="form-group">
+                                    <div class="field">
+                                        <%= f.label :policy_number %><br>
+                                        <%= f.text_field :policy_number, class: "form-control" %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 non-self">
+                                <div class="form-group">
+                                    <div class="field">
+                                        <%= f.label :coverage_type_id %><br>
+                                        <%= f.number_field :coverage_type_id, class: "form-control" %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 non-self">
+                                <div class="form-group">
+                                    <div class="field">
+                                        <%= f.label :deductible_amount %><br>
+                                        <%= f.number_field :deductible_amount, class: "form-control" %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 non-self">
                                 <div class="form-group">
                                     <div class="field">
                                         <%= f.label :deductible_id %><br>
@@ -486,7 +487,7 @@
                                     <!-- </div>
                                 </div>
                             </div> -->
-                            <div class="col-xs-6">
+                            <div class="col-xs-6 non-self">
                                 <div class="form-group">
                                     <div class="field">
                                         <%= f.label :emergency_service_amount %><br>

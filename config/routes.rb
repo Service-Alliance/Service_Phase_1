@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :vendor_uploads
   resources :assignment_types
   resources :corporate_referral_types
@@ -11,7 +12,9 @@ Rails.application.routes.draw do
   resources :oncalls
   resources :forms
   resources :vendor_categories
-  resources :vendors
+  resources :vendors do
+    resources :vendor_uploads
+  end
   resources :phones
   resources :addresses
   resources :calls

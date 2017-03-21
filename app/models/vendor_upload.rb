@@ -1,3 +1,4 @@
 class VendorUpload < ActiveRecord::Base
-  belongs_to :uploadable, polymorphic: true
+  has_many :uploads, as: :uploadable, dependent: :destroy
+  
 end
