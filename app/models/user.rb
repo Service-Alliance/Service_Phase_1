@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   def call_rep?
     self.role_id == 3 ? true : false
   end
+  def project_manager?
+    self.role_id == 4 ? true : false
+  end
   def unassigned?
     self.role_id == 0 || self.role_id == nil  ? true : false
   end

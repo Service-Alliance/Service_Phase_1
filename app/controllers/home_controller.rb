@@ -14,6 +14,8 @@ class HomeController < ApplicationController
       render template: 'home/job_coordinator'
     elsif current_user.call_rep?
       render template: 'home/call_rep'
+    elsif current_user.project_manager?
+      render template: 'home/project_manager'
     end
   end
 end

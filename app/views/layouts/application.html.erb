@@ -12,6 +12,8 @@
 
     <% if current_user && (current_user.admin? || current_user.job_coordinator? || current_user.unassigned?) %>
         <%= render partial: "layouts/admin_navbar" %>
+    <% elsif current_user && current_user.project_manager? %>
+      <%= render partial: "layouts/project_manager_navbar" %>
     <% else %>
         <%= render partial: "layouts/call_rep_navbar" %>
     <% end %>
