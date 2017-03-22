@@ -7,6 +7,10 @@ class Customer < ActiveRecord::Base
   # }
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
+  ransacker :full_name do |parent|
+  Arel::Nodes::InfixOperation.new('||',
+    parent.table[:first_name], parent.table[:last_name])
+  end
 
   def full_name
     first = first_name || " "

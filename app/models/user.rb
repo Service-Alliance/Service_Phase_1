@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_many :job_managers, foreign_key: :job_manager_id
 
+  
+
   def full_name
     first = first_name || " "
     last = last_name || " "

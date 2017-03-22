@@ -39,7 +39,7 @@ gem 'combine_pdf'
 gem 'exception_notification'
 gem 'public_activity'
 gem "select2-rails"
-  gem 'ransack'
+gem 'ransack'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

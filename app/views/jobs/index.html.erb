@@ -49,6 +49,10 @@
         </div>
         <div class="col-xs-2 margin-top-5">
             <%= search_form_for @search do |f| %>
+            <%= f.label :caller_full_name %><br />
+            <%= f.search_field :caller_full_name_cont, {class: "form-control"} %>
+            <%= f.label :customer_full_name_cont %><br />
+            <%= f.search_field :customer_full_name_cont, {class: "form-control"} %>
             <%= f.label :franchise_id %><br/>
             <%= f.select :franchise_id_eq, options_from_collection_for_select(Franchise.all, "id", "name"), {include_blank: true}, {class: "form-control select-control"} %><br/>
 
@@ -70,7 +74,10 @@
             <%= f.select :adjuster_id_eq, options_from_collection_for_select(Adjuster.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control"} %><br/>
             <%= f.label :job_managers_job_manager_id_eq, "Job Manager" %><br/>
             <%= f.select :job_managers_job_manager_id_eq, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control"} %><br/>
+
             <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-top-2" %></div>
+
+
 
             <% end %>
         </div>
