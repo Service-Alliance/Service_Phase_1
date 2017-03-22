@@ -7,4 +7,12 @@ class Customer < ActiveRecord::Base
   # }
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
+
+  def full_name
+    first = first_name || " "
+    last = last_name || " "
+    return "#{first+ " " + last}"
+  end
+
+
 end
