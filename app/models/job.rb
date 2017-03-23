@@ -47,7 +47,7 @@ class Job < ActiveRecord::Base
 
   def progress
     manager_assigned = self.job_managers.any?
-    manager_visited = self.job_managers.first && self.job_managers.first.schedule_date >= Date.today
+    manager_visited = self.job_managers.first && self.job_managers.first.schedule_date && self.job_managers.first.schedule_date >= Date.today
     estimate_created = self.estimate_created
     estimate_sent = self.estimate_sent
     contract_sent = self.contract_sent
