@@ -254,6 +254,9 @@
 	job_array = job.trackers.sort_by{|x| x.created_at}
 	%>
 <div class="panel panel-default">
+	<div class="panel-heading">
+		Job ID: <%= link_to job.id, job_path(job) %>
+	</div>
 	<div class="panel-body">
 		Progress:
 		<div class="progress">
