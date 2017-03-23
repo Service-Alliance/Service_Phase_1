@@ -229,7 +229,7 @@
 
 
 <div class="col-md-8 col-md-offset-2">
-	<% unless @job.empty? %>
+<% unless @jobs.empty? %>
 <% @jobs.each do |job| %>
 <%
 	job_array = job.trackers.sort_by{|x| x.created_at}
