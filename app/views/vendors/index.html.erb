@@ -1,7 +1,10 @@
 <div class="container-fluid">
     <p id="notice"><%= notice %></p>
+
     <div class="row">
+
         <div class="col-lg-12">
+          <%= link_to 'New Vendor', new_vendor_path, class: "btn btn-success margin-top-2 margin-bottom-2 margin-left-2" %>
             <div class="panel panel-default">
                 <div class="panel-heading">Vendors</div>
                 <div class="panel-body">
@@ -43,7 +46,7 @@
         </div>
     </div>
 </div>
-<%= link_to 'New Vendor', new_vendor_path %>
+
 
 <script>
     function LinkFormatter(value, row, index) {
