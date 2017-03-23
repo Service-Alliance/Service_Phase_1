@@ -481,3 +481,11 @@ csv.each do |row|
   Contact.create(first_name: first_name, last_name: last_name, company: company, email: email, address_id: address.id, owner_id: 25)
 
 end
+
+
+TrackerTask.create(name: "Job Created")
+TrackerTask.create(name: "Manager Assigned")
+TrackerTask.create(name: "Estimate Created")
+TrackerTask.create(name: "Estimate Sent")
+TrackerTask.create(name: "Contract Created")
+TrackerTask.create(name: "Contract Sent")

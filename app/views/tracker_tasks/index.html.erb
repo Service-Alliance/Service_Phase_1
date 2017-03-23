@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Tracker Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tracker_tasks.each do |tracker_task| %>
+      <tr>
+        <td><%= tracker_task.name %></td>
+        <td><%= link_to 'Show', tracker_task %></td>
+        <td><%= link_to 'Edit', edit_tracker_task_path(tracker_task) %></td>
+        <td><%= link_to 'Destroy', tracker_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tracker task', new_tracker_task_path %>

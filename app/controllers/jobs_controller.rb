@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_call]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
   # before_action :authorize_policy
 
   # GET /jobs
@@ -48,6 +48,7 @@ class JobsController < ApplicationController
   # GET /jobs/new
   def new
     @job = Job.create(entered_by_id: current_user.id)
+    @job.trackers.create(tracker_task_id: 1)
     @loss = Loss.create(job_id: @job.id)
     @caller = Caller.create(job_id: @job.id)
     @address = Address.create
@@ -194,7 +195,37 @@ class JobsController < ApplicationController
     end
   end
 
-  def search; end
+  def create_estimate
+    @job.estimate_created = true
+    @job.estimate_created_date = Date.today
+    @job.trackers.create(tracker_task_id: 3, child_id: @job_id)
+    @job.save
+    redirect_to '/', notice: 'Job Estimate Created.'
+  end
+
+  def create_estimate_sent
+    @job.estimate_sent = true
+    @job.estimate_sent_date = Date.today
+    @job.trackers.create(tracker_task_id: 4, child_id: @job_id)
+    @job.save
+    redirect_to '/', notice: 'Job Estimate Sent.'
+  end
+
+  def create_contract
+    @job.contract_created = true
+    @job.contract_created_date = Date.today
+    @job.trackers.create(tracker_task_id: 5, child_id: @job_id)
+    @job.save
+    redirect_to '/', notice: 'Job contract Created.'
+  end
+
+  def create_contract_sent
+    @job.contract_sent = true
+    @job.contract_sent_date = Date.today
+    @job.trackers.create(tracker_task_id: 6, child_id: @job_id)
+    @job.save
+    redirect_to '/', notice: 'Job contract Sent.'
+  end
 
   def calls
     @calls = Call.where(job_id: @job.id)

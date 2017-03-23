@@ -114,8 +114,7 @@
 							data-select-item-name="toolbar1"
 							data-pagination="true"
 							data-sort-name="id"
-							data-sort-order="desc"
-							>
+							data-sort-order="desc">
 							<thead>
 								<tr>
 									<th data-field="id" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
@@ -228,7 +227,7 @@
 			</div>
 		</div>
 
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-lg-12">
 				<h2>Activity Feed</h2>
 				<ol class="activity-feed">
@@ -236,8 +235,8 @@
 					<li class="feed-item">
 						<time class="date" datetime="9-25"><%= activity.created_at %></time>
 						<span class="text">
-							<%= link_to job_path(activity.trackable.id) do %>
-							<%= "#{activity.key + " " + activity.owner.full_name + activity.owner.email}" %>
+							<% link_to job_path(activity.trackable.id) do %>
+							<% "#{activity.key + " " + activity.owner.full_name + activity.owner.email}" %>
 							<% end %>
 						</span>
 					</li>
@@ -247,7 +246,60 @@
 		</div>
 	</div>
 </div>
-</section>
+</section> -->
+
+<div class="col-md-8 col-md-offset-2">
+<% @jobs.each do |job| %>
+<%
+	job_array = job.trackers.sort_by{|x| x.created_at}
+	%>
+<div class="panel panel-default">
+	<div class="panel-body">
+		Progress:
+		<div class="progress">
+			<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="<%= job.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= job.progress %>%"></div>
+		</div>
+		<div class="row">
+
+			<div class="timeline-centered">
+				<% job_array.each do |tracker| %>
+				<article class="timeline-entry">
+					<div class="timeline-entry-inner">
+						<div class="timeline-icon bg-success">
+							<i class="entypo-feather"></i>
+						</div>
+						<div class="timeline-label">
+							<h2>
+								<%= link_to tracker_link_to(tracker.tracker_task_id, tracker.trackable_id) do %>
+								<%= tracker.tracker_task.name %>
+								<% end %>
+							</span>
+						</h2>
+						<% if tracker.tracker_task_id == 2 %>
+							<% @job_manager = JobManager.find_by(id: tracker.child_id) %>
+								Manager: <%= @job_manager.try(:job_manager).try(:full_name) %><br />
+								Scheduled Date: <%= @job_manager.try(:schedule_date) %>
+						<% end %>
+						<p>Date:
+							<%= tracker.created_at %></p>
+					</div>
+
+				</div>
+			</article>
+			<% end %>
+			<div class="next-step text-center">
+
+
+			<% if job_array.last.try(:tracker_task_id) %>
+				<%= link_to job_array.last.try(:next_step_task),  next_step_link(job_array.last.tracker_task_id, job_array.last.trackable_id), class: "btn btn-primary" %>
+			<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<% end %>
+</div>
 
 </div>
 

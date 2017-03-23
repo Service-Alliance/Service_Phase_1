@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @tracker_task.name %>
+</p>
+
+<%= link_to 'Edit', edit_tracker_task_path(@tracker_task) %> |
+<%= link_to 'Back', tracker_tasks_path %>

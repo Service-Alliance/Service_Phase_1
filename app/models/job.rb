@@ -22,6 +22,7 @@ class Job < ActiveRecord::Base
   has_many :contact_assignments
   has_many :job_forms, dependent: :destroy
   has_many :notes, as: :noteable, dependent: :destroy
+  has_many :trackers, as: :trackable, dependent: :destroy
   has_many :work_orders
   belongs_to :referral_vendor, foreign_key: :referral_vendor_id, class_name: 'Vendor'
   belongs_to :referral_employee, foreign_key: :referral_employee_id, class_name: 'User'
@@ -43,6 +44,32 @@ class Job < ActiveRecord::Base
     self.last_action = Date.today
     save
   end
+
+  def progress
+    manager_assigned = self.job_managers.any?
+    manager_visited = self.job_managers.first && self.job_managers.first.schedule_date >= Date.today
+    estimate_created = self.estimate_created
+    estimate_sent = self.estimate_sent
+    contract_sent = self.contract_sent
+    contract_created = self.contract_created
+    if contract_sent == true
+      return '96'
+    elsif contract_created == true
+      return '84'
+    elsif estimate_sent == true
+      return '70'
+    elsif estimate_created == true
+      return '56'
+    elsif manager_visited == true
+      return '42'
+    elsif manager_assigned == true
+      return '28'
+    else
+      return '14'
+    end
+  end
+
+
 
 end
 

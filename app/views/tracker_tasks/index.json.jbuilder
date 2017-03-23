@@ -1,0 +1,1 @@
+json.array! @tracker_tasks, partial: 'tracker_tasks/tracker_task', as: :tracker_task

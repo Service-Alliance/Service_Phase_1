@@ -1,0 +1,1 @@
+json.partial! "tracker_tasks/tracker_task", tracker_task: @tracker_task

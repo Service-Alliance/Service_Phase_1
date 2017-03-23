@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :tracker_tasks
+  resources :trackers
   resources :vendor_uploads
   resources :assignment_types
   resources :corporate_referral_types
@@ -38,6 +40,10 @@ Rails.application.routes.draw do
 
   get 'users/:id/job-assignments' => 'users#job_assignments', as: :user_job_assignents
   get 'users/:id/job-assignments/list' => 'users#job_assignments_list', as: :user_job_assignents_list
+  get 'jobs/:id/create_estimate' => 'jobs#create_estimate', as: :create_estimate
+  get 'jobs/:id/create_estimate_sent' => 'jobs#create_estimate_sent', as: :create_estimate_sent
+  get 'jobs/:id/create_contract' => 'jobs#create_contract', as: :create_contract
+  get 'jobs/:id/create_contract_sent' => 'jobs#create_contract_sent', as: :create_contract_sent
 
   resources :jobs do
     get 'notes' => 'notes#job_notes'

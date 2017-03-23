@@ -9,7 +9,9 @@ class HomeController < ApplicationController
     @activities = PublicActivity::Activity.all
 
     if current_user.admin?
+      @jobs = Job.where("status_id= ? OR status_id= ? AND entered_by_id = ?", 1, 2, current_user.id)
       render template: 'home/admin'
+
     elsif current_user.job_coordinator? || current_user.unassigned?
       render template: 'home/job_coordinator'
     elsif current_user.call_rep?

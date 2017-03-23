@@ -32,6 +32,7 @@ class JobManagersController < ApplicationController
       if @job_manager.job_manager_id && @job_manager.save
         @job.update_last_action
         @user = @job_manager.job_manager
+        @job.trackers.create(tracker_task_id: 2, child_id: @job_manager.id)
         if @user.email
           UserMailer.manager_assignment(@user, @job_manager).deliver_now
         end
