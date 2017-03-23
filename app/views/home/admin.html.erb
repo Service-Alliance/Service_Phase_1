@@ -249,6 +249,7 @@
 </section> -->
 
 <div class="col-md-8 col-md-offset-2">
+	<% unless @job.empty? %>
 <% @jobs.each do |job| %>
 <%
 	job_array = job.trackers.sort_by{|x| x.created_at}
@@ -301,6 +302,7 @@
 	</div>
 </div>
 </div>
+<% end %>
 <% end %>
 </div>
 
