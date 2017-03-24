@@ -77,11 +77,12 @@
                                     <td><%= @vendor.email %></td>
                                 </tr>
                                 <tr>
-                                  <% @w9 = @vendor.vendor_uploads.where(vendor_upload_type_id: 1).sort_by(&:created_at).last %>
+                                  <% if @w9 %>
                                     <td>Most Recent W/9</td>
                                     <td>Exipration Date: <%= @w9.expiration_date %><br /> <%= link_to "View", vendor_vendor_upload_path(@vendor, @w9)%></td>
+                                  <% end %>
                                 </tr>
-                          
+
 
 
 
