@@ -47,7 +47,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.create(entered_by_id: current_user.id)
+    @job = Job.create(entered_by_id: current_user.id, coordinator_id: current_user.id)
     @job.trackers.create(tracker_task_id: 1)
     @loss = Loss.create(job_id: @job.id)
     @caller = Caller.create(job_id: @job.id)
