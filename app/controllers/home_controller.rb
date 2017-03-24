@@ -13,6 +13,7 @@ class HomeController < ApplicationController
       render template: 'home/admin'
 
     elsif current_user.job_coordinator? || current_user.unassigned?
+      @jobs = Job.where(entered_by_id: current_user.id).where("status_id= ? OR status_id= ?", 1, 2)
       render template: 'home/job_coordinator'
     elsif current_user.call_rep?
       render template: 'home/call_rep'

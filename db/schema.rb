@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323214214) do
+ActiveRecord::Schema.define(version: 20170324041757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -648,8 +648,9 @@ ActiveRecord::Schema.define(version: 20170323214214) do
     t.string   "w9"
     t.string   "independent_contractor_agreement"
     t.string   "email"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.boolean  "active",                           default: true
   end
 
   create_table "work_orders", force: :cascade do |t|
