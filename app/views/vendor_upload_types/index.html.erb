@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Vendor Upload Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vendor_upload_types.each do |vendor_upload_type| %>
+      <tr>
+        <td><%= vendor_upload_type.name %></td>
+        <td><%= link_to 'Show', vendor_upload_type %></td>
+        <td><%= link_to 'Edit', edit_vendor_upload_type_path(vendor_upload_type) %></td>
+        <td><%= link_to 'Destroy', vendor_upload_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Vendor upload type', new_vendor_upload_type_path %>

@@ -489,3 +489,8 @@ TrackerTask.create(name: "Estimate Created")
 TrackerTask.create(name: "Estimate Sent")
 TrackerTask.create(name: "Contract Created")
 TrackerTask.create(name: "Contract Sent")
+
+VendorUploadType.create(name: "W9")
+VendorUploadType.create(name: "W9")
+VendorUploadType.create(name: "W9")
+VendorUploadType.create(name: "W9")

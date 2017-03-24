@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
 
+  resources :vendor_upload_types
   resources :tracker_tasks
   resources :trackers
-  resources :vendor_uploads
   resources :assignment_types
   resources :corporate_referral_types
   ActiveAdmin.routes(self)

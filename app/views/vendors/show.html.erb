@@ -77,6 +77,8 @@
                                     <td><%= @vendor.email %></td>
                                 </tr>
 
+
+
                             </tbody>
                         </table>
 
@@ -87,6 +89,10 @@
 
                 <%= link_to edit_vendor_path(@vendor), class: "btn btn-sm btn-warning", type: "button" do %>
                 <i class="glyphicon glyphicon-edit"></i>
+                <% end %>
+
+                <%= link_to vendor_uploads_path(@vendor), class: "btn btn-sm btn-warning", type: "button" do %>
+                <i class="glyphicon glyphicon-file"></i>
                 <% end %>
             </div>
         </div>

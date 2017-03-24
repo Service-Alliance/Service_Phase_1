@@ -1,0 +1,1 @@
+json.array! @vendor_upload_types, partial: 'vendor_upload_types/vendor_upload_type', as: :vendor_upload_type

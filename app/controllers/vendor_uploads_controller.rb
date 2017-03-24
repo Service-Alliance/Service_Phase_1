@@ -25,13 +25,13 @@ class VendorUploadsController < InheritedResources::Base
   # POST /vendor_uploads
   # POST /vendor_uploads.json
   def create
-    @vendor_upload = VendorUpload.new(vendor_id: vendor_upload_params['vendor_id'], vendor_upload_type_id: vendor_upload_params['vendor_upload_type_id'], expiration_date: vendor_upload_params['expiration_date'], name: vendor_upload_params['name'], notes: vendor_upload_params['notes'])
+    @vendor_upload = VendorUpload.new(vendor_id: @vendor.id, vendor_upload_type_id: vendor_upload_params['vendor_upload_type_id'], expiration_date: vendor_upload_params['expiration_date'], name: vendor_upload_params['name'], notes: vendor_upload_params['notes'])
 
 
     respond_to do |format|
       if @vendor_upload.save
-        @vendor_upload.upload.create(upload: vendor_upload_params['upload'])
-        format.html { redirect_to @vendor_upload, notice: 'Vendor upload was successfully created.' }
+        @vendor_upload.uploads.create(upload: vendor_upload_params['upload'])
+        format.html { redirect_to @vendor, notice: 'Vendor upload was successfully created.' }
         format.json { render :show, status: :created, location: @vendor_upload }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class VendorUploadsController < InheritedResources::Base
   def update
     respond_to do |format|
       if @vendor_upload.update(vendor_upload_params)
-        format.html { redirect_to @vendor_upload, notice: 'Vendor upload was successfully updated.' }
+        format.html { redirect_to @vendor, notice: 'Vendor upload was successfully updated.' }
         format.json { render :show, status: :ok, location: @vendor_upload }
       else
         format.html { render :edit }
@@ -68,6 +68,9 @@ class VendorUploadsController < InheritedResources::Base
     # Use callbacks to share common setup or constraints between actions.
     def set_vendor_upload
       @vendor_upload = VendorUpload.find(params[:id])
+    end
+    def set_vendor
+      @vendor = Vendor.find(params[:vendor_id])
     end
     def vendor_upload_params
       params.require(:vendor_upload).permit(:vendor_id, :upload, :vendor_upload_type_id, :expiration_date, :name, :notes, :upload)

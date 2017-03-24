@@ -1,0 +1,1 @@
+json.partial! "vendor_upload_types/vendor_upload_type", vendor_upload_type: @vendor_upload_type
