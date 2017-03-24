@@ -5,7 +5,7 @@ class VendorUploadsController < InheritedResources::Base
   # GET /vendor_uploads
   # GET /vendor_uploads.json
   def index
-    @vendor_uploads = VendorUpload.all
+    @vendor_uploads = VendorUpload.where(vendor_id: @vendor.id)
   end
 
   # GET /vendor_uploads/1
@@ -30,8 +30,8 @@ class VendorUploadsController < InheritedResources::Base
 
     respond_to do |format|
       if @vendor_upload.save
-        @vendor_upload.uploads.create(upload: vendor_upload_params['upload'])
-        format.html { redirect_to @vendor, notice: 'Vendor upload was successfully created.' }
+        p @vendor_upload.uploads.create(upload: vendor_upload_params['upload'])
+        format.html { redirect_to vendor_url(@vendor_upload.id), notice: 'Vendor upload was successfully created.' }
         format.json { render :show, status: :created, location: @vendor_upload }
       else
         format.html { render :new }
@@ -59,7 +59,7 @@ class VendorUploadsController < InheritedResources::Base
   def destroy
     @vendor_upload.destroy
     respond_to do |format|
-      format.html { redirect_to vendor_uploads_url, notice: 'Vendor upload was successfully destroyed.' }
+      format.html { redirect_to vendor_vendor_uploads_url, notice: 'Vendor upload was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

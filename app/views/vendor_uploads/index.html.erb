@@ -2,10 +2,9 @@
 
 <h1>Listing Vendor Uploads</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Vendor</th>
       <th>Upload</th>
       <th>Vendor upload type</th>
       <th>Expiration date</th>
@@ -18,15 +17,14 @@
   <tbody>
     <% @vendor_uploads.each do |vendor_upload| %>
       <tr>
-        <td><%= vendor_upload.vendor_id %></td>
-        <td><%= vendor_upload.upload %></td>
-        <td><%= vendor_upload.vendor_upload_type_id %></td>
+        <td><a target="_blank" href="<%= vendor_upload.uploads.first.upload.url %>">Download</a></td>
+        <td><%= vendor_upload.try(:vendor_upload_type).try(:name) %></td>
         <td><%= vendor_upload.expiration_date %></td>
         <td><%= vendor_upload.name %></td>
         <td><%= vendor_upload.notes %></td>
-        <td><%= link_to 'Show', vendor_upload %></td>
-        <td><%= link_to 'Edit', edit_vendor_upload_path(vendor_upload) %></td>
-        <td><%= link_to 'Destroy', vendor_upload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', vendor_vendor_upload_path(@vendor, vendor_upload) %></td>
+        <td><%= link_to 'Edit', edit_vendor_vendor_upload_path(@vendor, vendor_upload) %></td>
+        <td><%= link_to 'Destroy', vendor_vendor_upload_path(@vendor, vendor_upload), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Vendor upload', new_vendor_upload_path %>
+<%= link_to 'New Vendor upload', new_vendor_vendor_upload_path(@vendor) %>

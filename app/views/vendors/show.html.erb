@@ -76,11 +76,20 @@
                                     <td>Email</td>
                                     <td><%= @vendor.email %></td>
                                 </tr>
+                                <tr>
+                                  <% @w9 = @vendor.vendor_uploads.where(vendor_upload_type_id: 1).sort_by(&:created_at).last %>
+                                    <td>Most Recent W/9</td>
+                                    <td>Exipration Date: <%= @w9.expiration_date %><br /> <%= link_to "View", vendor_vendor_upload_path(@vendor, @w9)%></td>
+                                </tr>
+                          
 
 
 
                             </tbody>
                         </table>
+                        <div class="uploads">
+
+                        </div>
 
                     </div>
                 </div>
@@ -91,7 +100,7 @@
                 <i class="glyphicon glyphicon-edit"></i>
                 <% end %>
 
-                <%= link_to vendor_endor_uploads_path(@vendor), class: "btn btn-sm btn-warning", type: "button" do %>
+                <%= link_to vendor_vendor_uploads_path(@vendor), class: "btn btn-sm btn-warning", type: "button" do %>
                 <i class="glyphicon glyphicon-file"></i>
                 <% end %>
             </div>
