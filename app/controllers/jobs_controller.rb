@@ -57,6 +57,15 @@ class JobsController < ApplicationController
     @caller.save
     @job_detail = JobDetail.create(job_id: @job.id)
     @phones = nil
+
+    # @grouped_people_options = Department.all.map do |department|
+    #   [department.name,
+    #    department.users.map do |user|
+    #      [user.full_name, user.id]
+    #    end]
+    # end
+
+
   end
 
   # GET /jobs/1/edit
