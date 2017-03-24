@@ -49,9 +49,9 @@
         </div>
         <div class="col-xs-2 margin-top-5">
             <%= search_form_for @search do |f| %>
-            <%= f.label :caller_full_name %><br />
+            <%= f.label :caller_full_name, "Caller Full Name" %><br />
             <%= f.search_field :caller_full_name_cont, {class: "form-control"} %>
-            <%= f.label :customer_full_name_cont %><br />
+            <%= f.label :customer_full_name_cont, "Customer Full Name" %><br />
             <%= f.search_field :customer_full_name_cont, {class: "form-control"} %>
             <%= f.label :franchise_id %><br/>
             <%= f.select :franchise_id_eq, options_from_collection_for_select(Franchise.all, "id", "name"), {include_blank: true}, {class: "form-control select-control"} %><br/>
