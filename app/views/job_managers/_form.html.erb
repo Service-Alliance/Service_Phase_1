@@ -34,10 +34,10 @@
               <span class="bold">Availability Window</span>
                 <div class="field">
                     <%= f.label :start_time %> :
-                    <%= f.time_select :start_time, {:ampm => true} %>
+                    <%= f.time_select :start_time, {:ampm => true, :minute_step => 15} %>
 
                     <%= f.label :end_time %> :
-                    <%= f.time_select :end_time, {:ampm => true} %>
+                    <%= f.time_select :end_time, {:ampm => true, :minute_step => 15} %>
                 </div>
             </div>
         </div>
