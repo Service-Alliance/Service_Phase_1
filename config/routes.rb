@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :images
   resources :vendor_upload_types
   resources :tracker_tasks
   resources :trackers

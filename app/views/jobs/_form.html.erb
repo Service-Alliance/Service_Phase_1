@@ -1,7 +1,7 @@
 <%= form_for(@job) do |f| %>
 <div class="col-xs-12">
       <%= fields_for(:call) do |f| %>
-      <%= f.label :current_active_calls %>
+      <%= f.label :current_active_calls, "Select Current Active Call" %>
       <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
       <% end %>
     <div class="row content-box margin-top-3">
@@ -46,15 +46,7 @@
     <%= f.label :type_id %><br>
     <%= f.number_field :type_id %>
   </div> -->
-      <div class="col-xs-12">
-          <div class="form-group">
-              <%= f.label :name %>
 
-              <br>
-              <%= f.text_field :name, class: "form-control" %>
-
-          </div>
-      </div>
       <div class="col-xs-4">
           <div class="form-group">
               <%= f.label :franchise_id %><br>
@@ -121,7 +113,7 @@
         <div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Servpro Employee" %>">
             <div class="form-group">
                 <%= f.label :referral_employee_id %><br>
-              
+
                 <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
             </div>
         </div>
@@ -147,6 +139,14 @@
             <div class="form-group">
                 <%= f.label :job_note %><br>
                 <%= f.text_area :job_note, class: "form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group">
+                <%= f.label :name, "Digital Job File Name" %>
+                <br>
+                <%= f.text_field :name, class: "form-control" %>
+
             </div>
         </div>
 
