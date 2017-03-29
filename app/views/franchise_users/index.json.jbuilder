@@ -1,0 +1,1 @@
+json.array! @franchise_users, partial: 'franchise_users/franchise_user', as: :franchise_user
