@@ -37,6 +37,10 @@ class WorkOrdersController < ApplicationController
             @user = User.find(user)
             UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
           end
+          if @job.status_id == 1
+            @job.status_id = 2
+            @job.save
+          end
         end
         format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order was successfully created.' }
         format.json { render :show, status: :created, location: @work_order }
