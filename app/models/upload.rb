@@ -6,7 +6,7 @@ class Upload < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
-  # def file_name
-  #   return upload.file.filename
-  # end
+  def file_name
+    return self.upload.file.path.split("/").last
+  end
 end
