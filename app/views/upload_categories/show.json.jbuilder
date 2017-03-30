@@ -1,0 +1,1 @@
+json.partial! "upload_categories/upload_category", upload_category: @upload_category

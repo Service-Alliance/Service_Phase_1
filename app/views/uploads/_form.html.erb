@@ -13,12 +13,18 @@
             </ul>
         </div>
         <% end %>
-        <div class="field">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="form-group">
+                <%= f.label :upload_category_id %><br>
+                <%= f.collection_select :upload_category_id, UploadCategory.all, :id, :name, {:prompt => 'Select an Upload Type'},  { class: 'form-control'} %>
+            </div>
+        </div>
+        <div class="col-sm-6 col-sm-offset-3">
             <%= f.label :upload %><br>
             <%= f.file_field :upload %>
         </div>
         <br>
-        <div class="actions">
+        <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
             <%= f.submit class: "btn btn-primary" %>
         </div>
         <% end %>

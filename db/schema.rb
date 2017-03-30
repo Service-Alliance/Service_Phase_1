@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329144715) do
+ActiveRecord::Schema.define(version: 20170330015109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -551,13 +551,20 @@ ActiveRecord::Schema.define(version: 20170329144715) do
 
   add_index "trackers", ["trackable_type", "trackable_id"], name: "index_trackers_on_trackable_type_and_trackable_id", using: :btree
 
+  create_table "upload_categories", force: :cascade do |t|
+    t.text     "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "uploads", force: :cascade do |t|
     t.integer  "job_id"
     t.string   "upload"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "uploadable_id"
     t.string   "uploadable_type"
+    t.integer  "upload_category_id"
   end
 
   add_index "uploads", ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable_type_and_uploadable_id", using: :btree

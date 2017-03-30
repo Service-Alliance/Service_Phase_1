@@ -1,0 +1,1 @@
+json.array! @upload_categories, partial: 'upload_categories/upload_category', as: :upload_category

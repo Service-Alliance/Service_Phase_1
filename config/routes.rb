@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :upload_categories
   resources :franchise_users
   resources :images
   resources :vendor_upload_types
