@@ -27,8 +27,7 @@ class WorkOrdersController < ApplicationController
   # POST /work_orders.json
   def create
     @work_order = WorkOrder.new(work_order_params)
-    p @work_order.job_id = @job.id
-
+    @work_order.job_id = @job.id
 
     respond_to do |format|
       if @work_order.save
