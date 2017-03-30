@@ -8,8 +8,9 @@ class User < ActiveRecord::Base
   has_many :jobs, foreign_key: :entered_by_id
   belongs_to :role
   has_many :job_managers, foreign_key: :job_manager_id
+  has_many :franchise_users
 
-  
+
 
   def full_name
     first = first_name || " "
