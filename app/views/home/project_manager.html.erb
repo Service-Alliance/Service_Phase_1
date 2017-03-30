@@ -1,35 +1,66 @@
 <div class="container-fluid">
+  <div class="row">
+		<div class="col-md-8 col-md-offset-2">
+		<% unless @jobs.empty? %>
+		<% @jobs.each do |job| %>
+		<%
+			job_array = job.trackers.sort_by{|x| x.created_at}
+			%>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Job ID: <%= link_to job.id, job_path(job) %>
+			</div>
+			<div class="panel-body">
+				Progress:
+				<div class="progress">
+					<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="<%= job.progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= job.progress %>%"></div>
+				</div>
+				<div class="row">
 
+					<div class="timeline-centered">
+						<% job_array.each do |tracker| %>
+						<article class="timeline-entry">
+							<div class="timeline-entry-inner">
+								<div class="timeline-icon bg-success">
+									<i class="entypo-feather"></i>
+								</div>
+								<div class="timeline-label">
+									<h2>
+										<%= link_to tracker_link_to(tracker.tracker_task_id, tracker.trackable_id) do %>
+										<%= tracker.tracker_task.name %>
+										<% end %>
+									</span>
+								</h2>
+								<% if tracker.tracker_task_id == 2 %>
+									<% @job_manager = JobManager.find_by(id: tracker.child_id) %>
+										Manager: <%= @job_manager.try(:job_manager).try(:full_name) %><br />
+										Scheduled Date: <%= @job_manager.try(:schedule_date) %>
+								<% end %>
+								<p>Date:
+									<%= tracker.created_at %></p>
+							</div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">Jobs Assignments</div>
-      <div class="panel-body">
-        <table
-          class="responsive"
-          data-toggle="table"
-          data-url="job-assignments/list"
-          data-show-refresh="true"
-          data-show-toggle="true"
-          data-show-columns="true"
-          data-search="true"
-          data-flat="true"
-          data-select-item-name="toolbar1"
-          data-pagination="true"
-          data-sort-name="id"
-          data-sort-order="desc">
-          <thead>
-            <tr>
-              <th data-field="id" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
-              <th data-field="schedule_datetime" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Scheduled</th>
-              <th data-field="job_id" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
-              <th data-field="manager_confirmation" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Confirmed?</th>
-              <th data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter"><a href="http://servicealliance.herokuapp.com/jobs/<%= @job_manager.job_id %>/job_managers/<%= @job_manager.id %>/acknolwedge"></th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-    </div>
-  </div>
+						</div>
+					</article>
+					<% end %>
+					<div class="next-step text-center">
+          <% job.job_managers.each do |manager| %>
+            <% if current_user.id == manager.job_manager_id %>
+              <% if manager.manager_confirmation == false  %>
+                <a class="btn btn-primary" href="/jobs/<%= job.id %>/job_managers/<%= manager.id %>/acknolwedge">Confirm</a>
+              <% elsif manager.manager_confirmation == true %>
+                    Job Confirmed
+              <% end %>
+            <% end %>
+          <% end %>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<% end %>
+		<% end %>
+		</div>
+	</div>
 </div>
