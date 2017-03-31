@@ -1,7 +1,7 @@
 class WorkOrdersController < ApplicationController
 
   before_action :set_work_order, only: [:show, :edit, :update, :destroy]
-  before_action :set_job
+  before_action :set_job, except: :list
 
   # GET /work_orders
   # GET /work_orders.json
@@ -78,6 +78,14 @@ class WorkOrdersController < ApplicationController
       format.html { redirect_to work_orders_url, notice: 'Work Order was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def list
+    @work_orders = WorkOrder.last(200)
+    render json: @work_orders.to_json
+    # (include: [:job_status, :job_type, :franchise,
+    #                                      :job_loss_type, :insurance_details,
+    #                                      :job_detail, :customer])
   end
 
   private
