@@ -244,7 +244,7 @@
 							data-sort-order="asc">
 							<thead>
 								<tr>
-									<th data-field="id" data-sortable="true" data-formatter="UserLinkFormatter">Word Order ID</th>
+									<th data-field="id" data-sortable="true">Word Order ID</th>
 									<th data-field="job_id" data-sortable="true">Job ID</th>
 									<th data-field="created_at" data-sortable="true">Created At<th>
 								</tr>
@@ -322,5 +322,8 @@ function LinkFormatter(value, row, index) {
 }
 function UserLinkFormatter(value, row, index) {
 	return "<a href='users/" + row.id + "'>" + value + "</a>";
+}
+function WorkOrderLinkFormatter(value, row, index) {
+	return "<a href='jobs/" + row.id + "'>" + value + "</a>";
 }
 </script>
