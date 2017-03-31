@@ -150,7 +150,7 @@ class JobsController < ApplicationController
       if @job.update(job_params)
         @job.update_last_action
         p franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
-        @job.franchise_id = franchise.id if franchise
+        @job.franchise_id = franchise.franchise_id if franchise
         @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
 
         @caller = Caller.find_by(job_id: @job.id)
