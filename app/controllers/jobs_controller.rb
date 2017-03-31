@@ -101,7 +101,7 @@ class JobsController < ApplicationController
 
     @call = Call.find_by(id: call_params[:id]) if call_params[:id]
     @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
-    franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
+    p franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
     @job.franchise_id = franchise.id if franchise
 
     if @caller.save
@@ -149,6 +149,8 @@ class JobsController < ApplicationController
     respond_to do |format|
       if @job.update(job_params)
         @job.update_last_action
+        p franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
+        @job.franchise_id = franchise.id if franchise
         @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
 
         @caller = Caller.find_by(job_id: @job.id)
@@ -171,6 +173,7 @@ class JobsController < ApplicationController
           UserMailer.manager_assignment(@user, @job).deliver_now
           return redirect_to job_job_managers_path(@job)
         end
+        @job.save
 
         format.html do
           if params[:commit] == 'Save and Move to Job Loss'
@@ -267,7 +270,7 @@ class JobsController < ApplicationController
                                 :entered_by_id, :details,
                                 :job_note, :customer_id, :referral_type_id, :referral_note, :corporate_referral_type_id,
                                 :billing_address_id, :emergency,
-                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id,
+                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id, :name,
                                 customer: [:address_1, :address_2, :zip_code, :city,
                                            :state_id, :county])
   end
