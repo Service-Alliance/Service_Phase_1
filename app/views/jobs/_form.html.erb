@@ -46,19 +46,20 @@
     <%= f.label :type_id %><br>
     <%= f.number_field :type_id %>
   </div> -->
-
-      <!-- <div class="col-xs-4"> -->
-          <!-- <div class="form-group"> -->
-              <% f.label :franchise_id %><br>
-              <% f.collection_select :franchise_id, Franchise.all, :id, :name, {:prompt => 'Select a Franchise'},  { class: 'form-control'} %>
-          <!-- </div> -->
-      <!-- </div> -->
+<% if current_page?(controller: 'jobs', action: 'edit', id: @job.id) %>
+      <div class="col-xs-4">
+          <div class="form-group">
+              <%= f.label :franchise_id %><br>
+              <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {:prompt => 'Select a Franchise'},  { class: 'form-control'} %>
+          </div>
+      </div>
         <div class="col-xs-4">
             <div class="form-group">
                 <%= f.label :status_id %><br>
                 <%= f.collection_select :status_id, JobStatus.all, :id, :name, {selected: 1},  { class: 'form-control'} %>
             </div>
         </div>
+    <% end %>
 
         <!-- <div class="form-group">
     <%= f.label :entered_by_id %><br>
