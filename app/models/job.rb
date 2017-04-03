@@ -8,6 +8,7 @@ class Job < ActiveRecord::Base
   # has_one :state, through: :customer
   has_many :calls
   belongs_to :user, foreign_key: :entered_by_id
+  belongs_to :coordinator, foreign_key: :coordinator_id
   belongs_to :agent
   belongs_to :adjuster
   has_one :property, dependent: :destroy

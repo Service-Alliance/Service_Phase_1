@@ -23,7 +23,11 @@
                                     <tbody>
                                         <tr>
                                             <td>Entered By:</td>
-                                            <td><%= @job.try(:user).try(:email) %></td>
+                                            <td><%= @job.try(:user).try(:full_name) %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Coorinator Assigned:</td>
+                                            <td><%= @job.try(:coordinator).try(:full_name) %></td>
                                         </tr>
                                         <tr>
                                             <td>Franchise</td>
