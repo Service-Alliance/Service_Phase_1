@@ -30,6 +30,7 @@
                                     <th data-field="id" data-sortable="true">Upload ID</th>
                                     <th data-field="file_name" data-sortable="true">Name</th>
                                     <th data-field="upload.url" data-formatter="LinkFormatter" data-sortable="true">Link</th>
+                                    <th data-field="id" data-formatter="DeleteUpload" data-sortable="true">Delete</th>
 
                                 </tr>
                             </thead>
@@ -42,6 +43,12 @@
 </div>
     <script>
         function LinkFormatter(value, row, index) {
+
             return "<a href=" + value + ">View/Download</a>";
+        }
+
+        function DeleteUpload(value, row, index) {
+            console.log(row)
+          return "<a data-method='delete' data-confirm='Are you sure?' href='/jobs/<%= @job.id %>/uploads/" + row.id + "'>Delete</a>";
         }
     </script>
