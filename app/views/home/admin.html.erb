@@ -246,6 +246,7 @@
 								<tr>
 									<th data-field="id" data-formatter="WorkOrderLinkFormatter" data-sortable="true">Word Order ID</th>
 									<th data-field="job_id" data-formatter="JobLinkFormatter" data-sortable="true">Job ID</th>
+									<th data-field="job_id" data-formatter="WorkOrderAcknowledge" data-sortable="true">Acknowledge Job</th>
 									<th data-field="created_at"  data-sortable="true">Created At<th>
 								</tr>
 							</thead>
@@ -328,5 +329,13 @@ function WorkOrderLinkFormatter(value, row, index) {
 }
 function JobLinkFormatter(value, row, index) {
 	return "<a href='jobs/" + row.job_id +"'>" + value + "</a>";
+}
+function WorkOrderAcknowledge(value, row, index) {
+	if (row.acknowledgement == true) {
+		return "Work Order Acknolwedged"
+	} else {
+		return "<a href='jobs/" + row.job_id +"/work_orders/" + row.id + "/acknolwedge'>Acknolwedge Work Order</a>";
+	}
+
 }
 </script>

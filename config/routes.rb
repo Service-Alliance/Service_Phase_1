@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     resources :job_details
     resources :job_managers
     get 'job_managers/:id/acknolwedge' => 'job_managers#acknolwedge'
+    get 'work_orders/:id/acknolwedge' => 'work_orders#acknowledge'
     resources :vendor_assignments
     resources :contact_assignments
     post 'agents/samecaller' => 'agents#samecaller'

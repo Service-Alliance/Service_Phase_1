@@ -1,6 +1,6 @@
 class WorkOrdersController < ApplicationController
 
-  before_action :set_work_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_work_order, only: [:show, :edit, :update, :destroy, :acknowledge]
   before_action :set_job, except: :list
 
   # GET /work_orders
@@ -92,6 +92,13 @@ class WorkOrdersController < ApplicationController
     #                                      :job_detail, :customer])
   end
 
+  def acknowledge
+    @work_order.acknowledgement = true
+    @work_order.acknowledged_by_id = current_user.id
+    @work_order.save
+    redirect_to "/", notice: 'Work Order Acknowledged.'
+  end
+
   private
   def set_work_order
     @work_order = WorkOrder.find(params[:id])
@@ -102,7 +109,7 @@ class WorkOrdersController < ApplicationController
   end
 
     def work_order_params
-      params.require(:work_order).permit(:job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telephone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info)
+      params.require(:work_order).permit(:job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telephone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info, :acknowledgement, :acknowledged_by_id)
     end
 
     def work_order_send_to_params
