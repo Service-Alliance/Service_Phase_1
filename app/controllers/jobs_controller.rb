@@ -149,9 +149,10 @@ class JobsController < ApplicationController
     respond_to do |format|
       if @job.update(job_params)
         @job.update_last_action
-        p franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
+        franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
         @job.franchise_id = franchise.franchise_id if franchise
-        @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
+        @job.referral_employee_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
+        @job.referral_vendor_id = nil if @job.try(:referral_type).try(:name) != 'Vendor'
 
         @caller = Caller.find_by(job_id: @job.id)
         if @caller
@@ -161,7 +162,6 @@ class JobsController < ApplicationController
         end
         @caller.phones.destroy_all if @caller && @caller.phones
         phone_count = phone_params['type_ids'].count
-
         phone_count.times do |index|
           unless phone_params['numbers'][index] == ''
             @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
@@ -173,7 +173,6 @@ class JobsController < ApplicationController
           UserMailer.manager_assignment(@user, @job).deliver_now
           return redirect_to job_job_managers_path(@job)
         end
-        @job.save
 
         format.html do
           if params[:commit] == 'Save and Move to Job Loss'
