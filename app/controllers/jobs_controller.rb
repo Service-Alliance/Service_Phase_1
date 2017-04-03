@@ -270,7 +270,7 @@ class JobsController < ApplicationController
                                 :entered_by_id, :details,
                                 :job_note, :customer_id, :referral_type_id, :referral_note, :corporate_referral_type_id,
                                 :billing_address_id, :emergency,
-                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id, :name,
+                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id, :coordinator_id, :name,
                                 customer: [:address_1, :address_2, :zip_code, :city,
                                            :state_id, :county])
   end
