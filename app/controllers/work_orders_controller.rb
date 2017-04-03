@@ -37,7 +37,9 @@ class WorkOrdersController < ApplicationController
             UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
           end
           sched_manager = User.find_by(email: "sgreer@servpro5933.com")
-          UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now
+          job_coordinator = User.find(@job.coordinator_id)
+          UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now if sched_manager
+          UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now if job_coordinator
           if @job.status_id == 1
             @job.status_id = 2
             @job.save
