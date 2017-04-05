@@ -36,6 +36,7 @@ class AgentsController < ApplicationController
   def create
     @job = Job.find_by(id: job_params[:job_id])
     if same_agent_params[:agent_id] != ''
+      @agent = Agent.find(same_agent_params[:agent_id])
       @job.agent_id = same_agent_params[:agent_id]
       @job.last_action = Date.today
       @job.save
