@@ -58,7 +58,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :job_name %><br>
-                <%= f.text_field :job_name, class: "form-control" %>
+                <%= f.text_field :job_name, class: "form-control", value: @job.name %>
             </div>
         </div>
         <div class="col-sm-12">
@@ -82,13 +82,13 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <%= f.label :insurance %><br>
-                <%= f.text_field :insurance, class: "form-control" %>
+                <%= f.text_field :insurance, value: "", class: "form-control", value: @job.try(:job_detail).try(:insurance_company).try(:name) %>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
                 <%= f.label :claim_number %><br>
-                <%= f.text_field :claim_number, class: "form-control" %>
+                <%= f.text_field :claim_number, class: "form-control", value: @job.try(:job_detail).try(:claim_number) %>
             </div>
         </div>
         <div class="col-sm-3">
@@ -118,7 +118,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :franchise_location %><br>
-                <%= f.text_field :franchise_location, class: "form-control" %>
+                <%= f.text_field :franchise_location, class: "form-control", value:  @job.try(:franchise).try(:name) %>
             </div>
         </div>
         <div class="col-sm-12">
@@ -130,7 +130,7 @@
         <div class="col-sm-12">
             <div class="form-group">
                 <%= f.label :job_manager_contact_info %><br>
-                <%= f.text_field :job_manager_contact_info, class: "form-control" %>
+                <%= f.text_field :job_manager_contact_info, class: "form-control", value: @job.job_managers.map{|manager| manager.job_manager.full_name} %>
             </div>
         </div>
         <div class="col-xs-12">
