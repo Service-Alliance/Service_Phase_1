@@ -82,6 +82,11 @@
                             <i class="glyphicon glyphicon-edit"></i>
                             <% end %>
                         </span>
+                        <span>
+                            <%= link_to job_remove_adjuster_path(@job.id), method: :post, class: "btn btn-sm btn-warning", type: "button" do %>
+                            <i class="glyphicon glyphicon-minus"></i>
+                            <% end %>
+                        </span>
                     </div>
                     <% end %>
                 </div>

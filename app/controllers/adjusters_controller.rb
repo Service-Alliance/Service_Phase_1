@@ -137,6 +137,13 @@ class AdjustersController < ApplicationController
     end
   end
 
+  def remove_from_job
+    @job = Job.find(params[:job_id])
+    @job.adjuster_id = nil
+    @job.save
+    redirect_to job_path(@job), notice: 'Adjuster was successfully removed from job.'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

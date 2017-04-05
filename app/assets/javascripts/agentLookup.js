@@ -4,7 +4,7 @@ $(function() {
         if (selectedAgent === ""){
           $("#existing-agent").addClass('hidden');
           $("#new-agent").removeClass('hidden');
-          $("#agent_agent_id").val('');
+          $("#same_agent_agent_id").val('');
         }
         else {
           ajaxAgent(selectedAgent);

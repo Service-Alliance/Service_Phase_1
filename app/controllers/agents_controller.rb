@@ -130,7 +130,14 @@ class AgentsController < ApplicationController
 
     @job.save
 
-    redirect_to job_path(@job), notice: 'Adjuster was successfully replicated from caller.'
+    redirect_to job_path(@job), notice: 'Agent was successfully replicated from caller.'
+  end
+
+  def remove_from_job
+    @job = Job.find(params[:job_id])
+    @job.agent_id = nil
+    @job.save
+    redirect_to job_path(@job), notice: 'Agent was successfully removed from job.'
   end
 
   def lookup
