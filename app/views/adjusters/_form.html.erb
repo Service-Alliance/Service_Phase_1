@@ -13,12 +13,14 @@
             </ul>
         </div>
         <% end %>
+        <% if current_page?(controller: 'adjuster', action: 'new') %>
         <div class="col-xs-6">
             <div class="form-group">
                 <%= f.label :select_adjuster %><br>
                 <%= select_tag :adjuster_select, options_from_collection_for_select(Adjuster.all, :id, :full_name), prompt: "Select an Adjuster", class: "form-control" %>
             </div>
         </div>
+        <% end %>
         <div class="hidden col-xs-12" id="existing-adjuster">
             <div class="panel panel-info">
                 <div class="panel-heading">

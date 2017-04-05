@@ -13,12 +13,14 @@
             </ul>
         </div>
         <% end %>
+        <% if current_page?(controller: 'agents', action: 'new') %>
         <div class="col-xs-6">
             <div class="form-group">
                 <%= f.label :select_agent %><br>
                 <%= select_tag :agent_select, options_from_collection_for_select(Agent.all, :id, :full_name), prompt: "Select an Agent", class: "form-control" %>
             </div>
         </div>
+        <% end %>
         <div class="hidden col-xs-12" id="existing-agent">
             <div class="panel panel-info">
                 <div class="panel-heading">
