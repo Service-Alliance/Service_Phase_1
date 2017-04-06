@@ -100,7 +100,7 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <%= f.label :approx_time_on_loss %><br>
-                <%= f.time_select :approx_time_on_loss, class: "form-control", :ampm => true, value: @job.losses.first.loss_occurred.time.strftime("%I:%m %p") %>
+                <%= f.time_select :approx_time_on_loss, class: "form-control", :ampm => true, value: @job.try(:losses).try(:first).try(:loss_occurred).try(:time).try)(:strftime("%I:%m %p")) %>
             </div>
         </div>
         <div class="col-sm-12">
