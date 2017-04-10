@@ -112,7 +112,7 @@
                                     <% end %>
                                     <% if @job.try(:caller).try(:address).try(:state) %>
                                     <li>
-                                        <span class="identifier">City:
+                                        <span class="identifier">State:
                                         </span>
                                         <span class="value"><%= @job.try(:caller).try(:address).try(:state).try(:name) %></span>
                                     </li>
@@ -177,7 +177,7 @@
                                     <% end %>
                                     <% if @job.try(:customer).try(:address).try(:state) %>
                                     <li>
-                                        <span class="identifier">City:
+                                        <span class="identifier">State:
                                         </span>
                                         <span class="value"><%= @job.try(:customer).try(:address).try(:state).try(:name) %></span>
                                     </li>
