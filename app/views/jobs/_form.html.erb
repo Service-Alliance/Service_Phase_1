@@ -57,9 +57,17 @@
       <div class="col-xs-4">
           <div class="form-group">
               <%= f.label :coordinator_id, "Assigned Job Coordinator" %><br>
-              <%= f.collection_select :coordinator_id, User.all, :id, :full_name, {:prompt => 'Select a Franchise'},  { class: 'form-control'} %>
+              <%= f.collection_select :coordinator_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
           </div>
       </div>
+  <% if current_user.admin? %>
+      <div class="col-xs-4">
+          <div class="form-group">
+              <%= f.label :entered_by_id, "Entered By (Admin override)" %><br>
+              <%= f.collection_select :entered_by_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
+          </div>
+      </div>
+    <% end %>
 <% end %>
         <div class="col-xs-4">
             <div class="form-group">
