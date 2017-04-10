@@ -110,6 +110,13 @@
                                         <span class="value"><%= @job.try(:caller).try(:address).try(:city) %></span>
                                     </li>
                                     <% end %>
+                                    <% if @job.try(:caller).try(:address).try(:state) %>
+                                    <li>
+                                        <span class="identifier">City:
+                                        </span>
+                                        <span class="value"><%= @job.try(:caller).try(:address).try(:state).try(:name) %></span>
+                                    </li>
+                                    <% end %>
                                     <% if @job.try(:caller).try(:address).try(:county) %>
                                     <li>
                                         <span class="identifier">County:
@@ -166,6 +173,13 @@
                                         <span class="identifier">City:
                                         </span>
                                         <span class="value"><%= @job.try(:customer).try(:address).try(:city) %></span>
+                                    </li>
+                                    <% end %>
+                                    <% if @job.try(:customer).try(:address).try(:state) %>
+                                    <li>
+                                        <span class="identifier">City:
+                                        </span>
+                                        <span class="value"><%= @job.try(:customer).try(:address).try(:state).try(:name) %></span>
                                     </li>
                                     <% end %>
                                     <% if @job.try(:customer).try(:address).try(:county) %>
@@ -464,7 +478,7 @@
                                         <span class="value"><%= @job.try(:job_detail).try(:deductible).try(:name) %></span>
                                     </li>
                                     <% end %>
-                                  
+
                                     <% if @job.try(:job_detail).try(:emergency_service_amount) %>
                                     <li>
                                         <span class="identifier">Emergency Service Amount:
