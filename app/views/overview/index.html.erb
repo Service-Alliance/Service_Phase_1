@@ -7,7 +7,9 @@
                 <div class="row panel">
                     <div class="col-xs-12">
                         <section id="job-information">
+                          <button class="btn btn-primary margin-top-1 margin-bottom-1 hidden-print pull-right" onclick="printPage()">Print this page</button>
                             <h2>Job Information</h2>
+
                             <div class="columns">
                                 <ul>
                                   <% if @job.try(:job_type).try(:name) %>
@@ -61,7 +63,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", edit_job_path(@job) %>
+                            <%= link_to "Edit", edit_job_path(@job), class: "hidden-print" %>
                         </section>
 
                         <section id="caller-information">
@@ -126,7 +128,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_job_caller_path(@job, @job.caller) %>
+                            <%= link_to "Edit", new_or_view_job_caller_path(@job, @job.caller), class: "hidden-print"  %>
                         </section>
 
                         <section id="caller-information">
@@ -191,7 +193,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_customer_path(@job, @job.customer) %>
+                            <%= link_to "Edit", new_or_view_customer_path(@job, @job.customer), class: "hidden-print"  %>
                         </section>
 
                         <section id="loss-information">
@@ -313,7 +315,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_job_loss_path(@job, loss) %>
+                            <%= link_to "Edit", new_or_view_job_loss_path(@job, loss), class: "hidden-print"  %>
                             <% end %>
                         </section>
 
@@ -422,7 +424,7 @@
 
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_job_property_path(@job, @job.property) %>
+                            <%= link_to "Edit", new_or_view_job_property_path(@job, @job.property), class: "hidden-print"  %>
                         </section>
 
                         <section id="loss-information">
@@ -530,7 +532,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_job_detail_path(@job, @job.property) %>
+                            <%= link_to "Edit", new_or_view_job_detail_path(@job, @job.property), class: "hidden-print"  %>
                         </section>
                         <section id="agent-information">
                             <h2>Agent Information</h2>
@@ -596,7 +598,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_agent_path(@job, @job.agent) %>
+                            <%= link_to "Edit", new_or_view_agent_path(@job, @job.agent), class: "hidden-print"  %>
                         </section>
                         <section id="agent-information">
                             <h2>Adjuster Information</h2>
@@ -662,7 +664,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_adjuster_path(@job, @job.adjuster) %>
+                            <%= link_to "Edit", new_or_view_adjuster_path(@job, @job.adjuster), class: "hidden-print"  %>
                         </section>
 
 
@@ -718,7 +720,7 @@
                             </div>
                             <% end %>
                             <% end %>
-                            <%= link_to "Edit", new_or_view_job_manager_path(@job, @job.job_managers) %>
+                            <%= link_to "Edit", new_or_view_job_manager_path(@job, @job.job_managers), class: "hidden-print"  %>
 
                         </section>
 
@@ -742,7 +744,7 @@
                             </div>
                             <% end %>
                             <% end %>
-                            <%= link_to "Edit", new_or_view_job_vendor_path(@job, @job.vendor_assignments) %>
+                            <%= link_to "Edit", new_or_view_job_vendor_path(@job, @job.vendor_assignments), class: "hidden-print"  %>
 
                         </section>
                     </div>
@@ -752,3 +754,9 @@
     </div>
   </div>
 </div>
+
+<script>
+function printPage() {
+    window.print();
+}
+</script>
