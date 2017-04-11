@@ -1,0 +1,1 @@
+json.partial! "pipeline_statuses/pipeline_status", pipeline_status: @pipeline_status

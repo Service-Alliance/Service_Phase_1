@@ -40,10 +40,11 @@ class WorkOrdersController < ApplicationController
           job_coordinator = User.find(@job.coordinator_id)
           UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now if sched_manager
           UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now if job_coordinator
+          @job.pipeline_status_id = 8
           if @job.status_id == 1
             @job.status_id = 2
-            @job.save
           end
+          @job.save
         end
         format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order was successfully created.' }
         format.json { render :show, status: :created, location: @work_order }

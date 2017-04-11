@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="pipeline">
+
+                <section class="list">
+                    <header>Captured</header>
+                    <% @jobs.where(pipeline_status_id: 1).each do |job| %>
+                    <%= link_to job_path(job.id) do %>
+                    <article class="card">
+                        <header><%= job.id %></header>
+                        <div class="detail"><%= job.name %></div>
+                    </article>
+                    <% end %>
+                    <% end %>
+                </section>
+
+                <section class="list">
+                    <header>Manager Assigned</header>
+                    <% @jobs.where(pipeline_status_id: 2).each do |job| %>
+                    <%= link_to job_path(job.id) do %>
+                    <article class="card">
+                        <header><%= job.id %></header>
+                        <div class="detail"><%= job.name %></div>
+                    </article>
+                    <% end %>
+                    <% end %>
+                </section>
+
+                <section class="list">
+                    <header>Manager Visited</header>
+                    <% @jobs.where(pipeline_status_id: 3).each do |job| %>
+                    <%= link_to job_path(job.id) do %>
+                    <article class="card">
+                        <header><%= job.id %></header>
+                        <div class="detail"><%= job.name %></div>
+                    </article>
+                    <% end %>
+                    <% end %>
+                </section>
+
+                <section class="list">
+                    <header>Estimate Created</header>
+                    <% @jobs.where(pipeline_status_id: 4).each do |job| %>
+                    <%= link_to job_path(job.id) do %>
+                    <article class="card">
+                        <header><%= job.id %></header>
+                        <div class="detail"><%= job.name %></div>
+                    </article>
+                    <% end %>
+                    <% end %>
+                </section>
+
+                <section class="list">
+                    <header>Estimate Sent</header>
+                    <% @jobs.where(pipeline_status_id: 5).each do |job| %>
+                    <%= link_to job_path(job.id) do %>
+                    <article class="card">
+                        <header><%= job.id %></header>
+                        <div class="detail"><%= job.name %></div>
+                    </article>
+                    <% end %>
+                    <% end %>
+                </section>
+
+                <section class="list">
+                    <header>Contract Created</header>
+                    <% @jobs.where(pipeline_status_id: 6).each do |job| %>
+                    <%= link_to job_path(job.id) do %>
+                    <article class="card">
+                        <header><%= job.id %></header>
+                        <div class="detail"><%= job.name %></div>
+                    </article>
+                    <% end %>
+                    <% end %>
+                </section>
+
+                <section class="list">
+                    <header>Contract Sent</header>
+                    <% @jobs.where(pipeline_status_id: 7).each do |job| %>
+                    <%= link_to job_path(job.id) do %>
+                    <article class="card">
+                        <header><%= job.id %></header>
+                        <div class="detail"><%= job.name %></div>
+                    </article>
+                    <% end %>
+                    <% end %>
+                </section>
+
+                <section class="list">
+                    <header>Work Order Created</header>
+                    <% @jobs.where(pipeline_status_id: 8).each do |job| %>
+                    <%= link_to job_path(job.id) do %>
+                    <article class="card">
+                        <header><%= job.id %></header>
+                        <div class="detail"><%= job.name %></div>
+                    </article>
+                    <% end %>
+                    <% end %>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :pipeline_statuses
   resources :upload_categories
   resources :franchise_users
   resources :images
@@ -48,6 +49,7 @@ Rails.application.routes.draw do
   get 'jobs/:id/create_estimate_sent' => 'jobs#create_estimate_sent', as: :create_estimate_sent
   get 'jobs/:id/create_contract' => 'jobs#create_contract', as: :create_contract
   get 'jobs/:id/create_contract_sent' => 'jobs#create_contract_sent', as: :create_contract_sent
+  get 'pipeline' => 'pipeline#index'
 
   resources :jobs do
     get 'notes' => 'notes#job_notes'

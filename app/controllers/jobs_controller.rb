@@ -103,6 +103,7 @@ class JobsController < ApplicationController
     @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
     p franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
     @job.franchise_id = franchise.id if franchise
+    @job.pipeline_status_id = 1
 
     if @caller.save
       # CustomerMailer.welcome_email(@caller).deliver_now
@@ -210,6 +211,7 @@ class JobsController < ApplicationController
     @job.estimate_created = true
     @job.estimate_created_date = Date.today
     @job.trackers.create(tracker_task_id: 3, child_id: @job_id)
+    @job.pipeline_status_id = 4
     @job.save
     redirect_to '/', notice: 'Job Estimate Created.'
   end
@@ -218,6 +220,7 @@ class JobsController < ApplicationController
     @job.estimate_sent = true
     @job.estimate_sent_date = Date.today
     @job.trackers.create(tracker_task_id: 4, child_id: @job_id)
+    @job.pipeline_status_id = 5
     @job.save
     redirect_to '/', notice: 'Job Estimate Sent.'
   end
@@ -226,6 +229,7 @@ class JobsController < ApplicationController
     @job.contract_created = true
     @job.contract_created_date = Date.today
     @job.trackers.create(tracker_task_id: 5, child_id: @job_id)
+    @job.pipeline_status_id = 6
     @job.save
     redirect_to '/', notice: 'Job contract Created.'
   end
@@ -234,6 +238,7 @@ class JobsController < ApplicationController
     @job.contract_sent = true
     @job.contract_sent_date = Date.today
     @job.trackers.create(tracker_task_id: 6, child_id: @job_id)
+    @job.pipeline_status_id = 7
     @job.save
     redirect_to '/', notice: 'Job contract Sent.'
   end
