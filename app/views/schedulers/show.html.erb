@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event date:</strong>
+  <%= @scheduler.event_date %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @scheduler.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @scheduler.end_time %>
+</p>
+
+<p>
+  <strong>Assigned to user:</strong>
+  <%= @scheduler.assigned_to_user_id %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @scheduler.job_id %>
+</p>
+
+<p>
+  <strong>Scheduler event type:</strong>
+  <%= @scheduler.scheduler_event_type_id %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @scheduler.notes %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @scheduler.title %>
+</p>
+
+<%= link_to 'Edit', edit_job_scheduler_path(@job, @scheduler) %> |
+<%= link_to 'Back', job_schedulers_path(@job) %>

@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event_date: 2017-04-12
+  start_time: 2017-04-12 14:59:37
+  end_time: 2017-04-12 14:59:37
+  assigned_to_user_id: 1
+  job_id: 1
+  scheduler_event_type_id: 1
+  notes: MyText
+  title: MyText
+
+two:
+  event_date: 2017-04-12
+  start_time: 2017-04-12 14:59:37
+  end_time: 2017-04-12 14:59:37
+  assigned_to_user_id: 1
+  job_id: 1
+  scheduler_event_type_id: 1
+  notes: MyText
+  title: MyText

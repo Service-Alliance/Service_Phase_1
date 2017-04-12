@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   resources :pipeline_statuses
   resources :upload_categories
   resources :franchise_users
@@ -77,6 +75,8 @@ Rails.application.routes.draw do
     resources :job_forms
     get 'job_forms/new/:id' => 'job_forms#new_form', as: :create_form
     resources :work_orders
+    resources :schedulers
+    resources :subscriptions
   end
 
   resources :customers

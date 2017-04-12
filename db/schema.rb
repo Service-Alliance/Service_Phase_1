@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411153748) do
+ActiveRecord::Schema.define(version: 20170412215936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -518,6 +518,19 @@ ActiveRecord::Schema.define(version: 20170411153748) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "schedulers", force: :cascade do |t|
+    t.date     "event_date"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.integer  "assigned_to_user_id"
+    t.integer  "job_id"
+    t.integer  "scheduler_event_type_id"
+    t.text     "notes"
+    t.text     "title"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "states", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -526,6 +539,13 @@ ActiveRecord::Schema.define(version: 20170411153748) do
 
   create_table "structure_types", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "job_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
