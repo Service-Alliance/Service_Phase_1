@@ -1,104 +1,166 @@
 <div class="container-fluid">
+
     <div class="row">
-        <div class="col-xs-12">
-            <div id="pipeline">
+        <div class="col-xs-12 margin-top-5">
 
-                <section class="list">
-                    <header>Captured</header>
-                    <% @jobs.where(pipeline_status_id: 1).each do |job| %>
-                    <%= link_to job_path(job.id) do %>
-                    <article class="card">
-                        <header><%= job.id %></header>
-                        <div class="detail"><%= job.name %></div>
-                    </article>
-                    <% end %>
-                    <% end %>
+
+                <%= search_form_for @search, url: "/pipeline" do |f| %>
+                <div class="pipeline-search">
+                <section class="inline-form">
+                    <%= f.label :caller_full_name, "Caller Full Name" %>
+                    <%= f.search_field :caller_full_name_cont, {class: "form-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :customer_full_name_cont, "Customer Full Name" %>
+                    <%= f.search_field :customer_full_name_cont, {class: "form-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :franchise_id %>
+                    <%= f.select :franchise_id_eq, options_from_collection_for_select(Franchise.all, "id", "name"), {include_blank: true}, {class: "form-control select-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :insurance_company %>
+                    <%= f.select :job_detail_insurance_company_id_eq, options_from_collection_for_select(InsuranceCompany.all, "id", "name"), {include_blank: true}, {class: "form-control select-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :status_id_eq, "Job Status" %>
+                    <%= f.select :status_id_eq, options_from_collection_for_select(JobStatus.all, "id", "name"), {include_blank: true}, {class: "form-control select-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :entered_by_id_eq, "Entered By" %>
+                    <%= f.select :entered_by_id_eq, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :customer_address_state_id, "Customer State" %>
+                    <%= f.select :customer_address_state_id_eq, options_from_collection_for_select(State.all, "id", "name"), {include_blank: true}, {class: "form-control select-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :referral_type_id_eq, "Referral Type" %>
+                    <%= f.select :referral_type_id_eq, options_from_collection_for_select(ReferralType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :agent_id_eq, "Agent Name" %>
+                    <%= f.select :agent_id_eq, options_from_collection_for_select(Agent.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :adjuster_id_eq, "Adjuster Name" %>
+                    <%= f.select :adjuster_id_eq, options_from_collection_for_select(Adjuster.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control"} %>
+                </section>
+                <section class="inline-form">
+                    <%= f.label :job_managers_job_manager_id_eq, "Job Manager" %>
+                    <%= f.select :job_managers_job_manager_id_eq, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control"} %>
+
+
+
+
+
                 </section>
 
-                <section class="list">
-                    <header>Manager Assigned</header>
-                    <% @jobs.where(pipeline_status_id: 2).each do |job| %>
-                    <%= link_to job_path(job.id) do %>
-                    <article class="card">
-                        <header><%= job.id %></header>
-                        <div class="detail"><%= job.name %></div>
-                    </article>
-                    <% end %>
-                    <% end %>
-                </section>
+                </div>
+                <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-bottom-1 center-block text-center" %></div>
+                <% end %>
 
-                <section class="list">
-                    <header>Manager Visited</header>
-                    <% @jobs.where(pipeline_status_id: 3).each do |job| %>
-                    <%= link_to job_path(job.id) do %>
-                    <article class="card">
-                        <header><%= job.id %></header>
-                        <div class="detail"><%= job.name %></div>
-                    </article>
-                    <% end %>
-                    <% end %>
-                </section>
 
-                <section class="list">
-                    <header>Estimate Created</header>
-                    <% @jobs.where(pipeline_status_id: 4).each do |job| %>
-                    <%= link_to job_path(job.id) do %>
-                    <article class="card">
-                        <header><%= job.id %></header>
-                        <div class="detail"><%= job.name %></div>
-                    </article>
-                    <% end %>
-                    <% end %>
-                </section>
+            <div class="col-xs-12">
 
-                <section class="list">
-                    <header>Estimate Sent</header>
-                    <% @jobs.where(pipeline_status_id: 5).each do |job| %>
-                    <%= link_to job_path(job.id) do %>
-                    <article class="card">
-                        <header><%= job.id %></header>
-                        <div class="detail"><%= job.name %></div>
-                    </article>
-                    <% end %>
-                    <% end %>
-                </section>
+                <div id="pipeline">
 
-                <section class="list">
-                    <header>Contract Created</header>
-                    <% @jobs.where(pipeline_status_id: 6).each do |job| %>
-                    <%= link_to job_path(job.id) do %>
-                    <article class="card">
-                        <header><%= job.id %></header>
-                        <div class="detail"><%= job.name %></div>
-                    </article>
-                    <% end %>
-                    <% end %>
-                </section>
+                    <section class="list">
+                        <header>Captured</header>
+                        <% @jobs.where(pipeline_status_id: 1).each do |job| %>
+                        <%= link_to job_path(job.id) do %>
+                        <article class="card">
+                            <header><%= job.id %></header>
+                            <div class="detail"><%= job.name %></div>
+                        </article>
+                        <% end %>
+                        <% end %>
+                    </section>
 
-                <section class="list">
-                    <header>Contract Sent</header>
-                    <% @jobs.where(pipeline_status_id: 7).each do |job| %>
-                    <%= link_to job_path(job.id) do %>
-                    <article class="card">
-                        <header><%= job.id %></header>
-                        <div class="detail"><%= job.name %></div>
-                    </article>
-                    <% end %>
-                    <% end %>
-                </section>
+                    <section class="list">
+                        <header>Manager Assigned</header>
+                        <% @jobs.where(pipeline_status_id: 2).each do |job| %>
+                        <%= link_to job_path(job.id) do %>
+                        <article class="card">
+                            <header><%= job.id %></header>
+                            <div class="detail"><%= job.name %></div>
+                        </article>
+                        <% end %>
+                        <% end %>
+                    </section>
 
-                <section class="list">
-                    <header>Work Order Created</header>
-                    <% @jobs.where(pipeline_status_id: 8).each do |job| %>
-                    <%= link_to job_path(job.id) do %>
-                    <article class="card">
-                        <header><%= job.id %></header>
-                        <div class="detail"><%= job.name %></div>
-                    </article>
-                    <% end %>
-                    <% end %>
-                </section>
+                    <section class="list">
+                        <header>Manager Visited</header>
+                        <% @jobs.where(pipeline_status_id: 3).each do |job| %>
+                        <%= link_to job_path(job.id) do %>
+                        <article class="card">
+                            <header><%= job.id %></header>
+                            <div class="detail"><%= job.name %></div>
+                        </article>
+                        <% end %>
+                        <% end %>
+                    </section>
+
+                    <section class="list">
+                        <header>Estimate Created</header>
+                        <% @jobs.where(pipeline_status_id: 4).each do |job| %>
+                        <%= link_to job_path(job.id) do %>
+                        <article class="card">
+                            <header><%= job.id %></header>
+                            <div class="detail"><%= job.name %></div>
+                        </article>
+                        <% end %>
+                        <% end %>
+                    </section>
+
+                    <section class="list">
+                        <header>Estimate Sent</header>
+                        <% @jobs.where(pipeline_status_id: 5).each do |job| %>
+                        <%= link_to job_path(job.id) do %>
+                        <article class="card">
+                            <header><%= job.id %></header>
+                            <div class="detail"><%= job.name %></div>
+                        </article>
+                        <% end %>
+                        <% end %>
+                    </section>
+
+                    <section class="list">
+                        <header>Contract Created</header>
+                        <% @jobs.where(pipeline_status_id: 6).each do |job| %>
+                        <%= link_to job_path(job.id) do %>
+                        <article class="card">
+                            <header><%= job.id %></header>
+                            <div class="detail"><%= job.name %></div>
+                        </article>
+                        <% end %>
+                        <% end %>
+                    </section>
+
+                    <section class="list">
+                        <header>Contract Sent</header>
+                        <% @jobs.where(pipeline_status_id: 7).each do |job| %>
+                        <%= link_to job_path(job.id) do %>
+                        <article class="card">
+                            <header><%= job.id %></header>
+                            <div class="detail"><%= job.name %></div>
+                        </article>
+                        <% end %>
+                        <% end %>
+                    </section>
+
+                    <section class="list">
+                        <header>Work Order Created</header>
+                        <% @jobs.where(pipeline_status_id: 8).each do |job| %>
+                        <%= link_to job_path(job.id) do %>
+                        <article class="card">
+                            <header><%= job.id %></header>
+                            <div class="detail"><%= job.name %></div>
+                        </article>
+                        <% end %>
+                        <% end %>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
-</div>

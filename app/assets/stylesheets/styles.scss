@@ -423,10 +423,25 @@ body {
     line-height: 25px;
   }
 }
+.pipeline-search {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  & .inline-form {
+    margin: 5px 5px;
+    padding: 10px;
+    width: 260px;
+  }
+}
 #pipeline {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+    flex-wrap: wrap;
+
+
+
   .list {
     background-color: #E3E3E3;
     border-radius: 3px;

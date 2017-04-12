@@ -9,6 +9,9 @@ class Property < ActiveRecord::Base
   belongs_to :walls_affected, foreign_key: :walls_affected_id, class_name: "AffectedType"
   belongs_to :attic_affected, foreign_key: :attic_affected_id, class_name: "AffectedType"
   belongs_to :contents_affected, foreign_key: :contents_affected_id, class_name: "AffectedType"
+  has_many :uploads, as: :uploadable, dependent: :destroy
+  mount_uploader :upload, UploadUploader
+
 
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
