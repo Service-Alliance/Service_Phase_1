@@ -43,6 +43,8 @@ class JobsController < ApplicationController
     @emergency_contact = EmergencyContact.find_by(job_id: @job.id)
     @uploads = Upload.where(job_id: @job.id)
     @callrail = Call.find_by(job_id: @job.id)
+    @scheduler = Scheduler.new
+    @upload = Upload.new
   end
 
   # GET /jobs/new
