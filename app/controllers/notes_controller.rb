@@ -30,13 +30,16 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
+    tracker_task = TrackerTask.find_by(name: "Note Created")
     @job = Job.find_by(id: job_params['job_id'])
+
     @note = @job.notes.new(note_params)
     @note.user_id = current_user.id
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to job_notes_path(@job), notice: 'Note was successfully created.' }
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
+        format.html { redirect_to job_path(@job), notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }
@@ -80,6 +83,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:note, :job_id)
+      params.require(:note).permit(:content, :job_id)
     end
 end

@@ -10,141 +10,249 @@
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
 
-            <div class="col-xs-12">
-                <div>
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Take Notes</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">Add Activity</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Upload Files</a>
-                        </li>
-
-                    </ul>
-
-                    <!-- Tab panes -->
+            <div class="col-xs-12 ">
+              <%= link_to  "Edit Job", edit_job_path(@job),class:"btn btn-primary" %>
+            <div class="panel with-nav-tabs panel-primary margin-top-2">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Take Notes</a></li>
+                            <li><a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">Add Activity</a></li>
+                            <li><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Upload Files</a></li>
+                        </ul>
+                </div>
+                <div class="panel-body">
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="notes">...</div>
-                        <div role="tabpanel" class="tab-pane" id="activity">
-                            <div class="col-xs-12">
-                                <%= form_for [@job, @scheduler], remote: true do |f| %>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        Calendar Integration
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <%= f.text_field :title, placeholder: "Description", class:"form-control" %>
-                                            </div>
-                                            <div class="col-xs-4 margin-top-2">
-                                                <%= f.label :event_date, "Date" %><br>
-                                                <%= f.text_field :event_date, class:"form-control datePicker" %>
-                                            </div>
-                                            <div class="col-xs-4 margin-top-2">
-                                                <%= f.label :start_time %><br>
-                                                <%= f.text_field :start_time, class:"form-control timepicker" %>
-                                            </div>
-                                            <div class="col-xs-4 margin-top-2">
-                                                <%= f.label :end_time %><br>
-                                                <%= f.text_field :end_time, class:"form-control timepicker" %>
-                                            </div>
+                        <div class="tab-pane fade in active" id="notes">
+                          <%= form_for @note do |f| %>
+                          <%= hidden_field_tag "job[job_id]", @job.id %>
+                          <% if @note.errors.any? %>
+                          <div id="error_explanation">
+                              <h2><%= pluralize(@note.errors.count, "error") %>
+                                  prohibited this note from being saved:</h2>
 
-                                            <div class="col-xs-12 margin-top-2">
-                                                <%= f.text_area :notes, class: "form-control", placeholder: "Notes" %>
-                                            </div>
-                                            <div class="col-xs-12 margin-top-2">
-                                                <%= f.label :assigned_to_user_id %><br>
-                                                <%= f.collection_select :assigned_to_user_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
-                                            </div>
-                                            <div class="col-xs-3 col-xs-offset-9">
-                                                <%= f.submit "Add", class: "btn btn-primary" %>
-                                            </div>
+                              <ul>
+                                  <% @note.errors.full_messages.each do |message| %>
+                                  <li><%= message %></li>
+                                  <% end %>
+                              </ul>
+                          </div>
+                          <% end %>
+
+                          <div class="col-xs-12">
+                              <div class="form-group">
+                                  <div class="field">
+                                      <%= f.text_area :content, class: 'form-control' %>
+                                  </div>
+                              </div>
+                              <div class="actions">
+                                  <%= f.submit class: "btn btn-primary" %>
+                              </div>
+
+                          </div>
+                          <% end %>
+                        </div>
+                        <div class="tab-pane fade" id="activity">
+
+                          <%= form_for [@job, @scheduler] do |f| %>
+
+                          <% if @scheduler.errors.any? %>
+                          <div id="error_explanation">
+                              <h2><%= pluralize(@scheduler.errors.count, "error") %>
+                                  prohibited this note from being saved:</h2>
+
+                              <ul>
+                                  <% @scheduler.errors.full_messages.each do |message| %>
+                                  <li><%= message %></li>
+                                  <% end %>
+                              </ul>
+                          </div>
+                          <% end %>
+                          <div class="row">
+                              <div class="col-sm-3">
+                                  Calendar (Coming Soon)
+                              </div>
+                              <div class="col-sm-9">
+                                  <div class="row">
+                                      <div class="col-xs-12 scheduler-icons">
+                                        <div class="btn-group" data-toggle="buttons">
+                                          <label class="btn btn-primary active">
+                                            <input type="radio" name="scheduler[scheduler_event_type_id]" value="1" id="scheduler_event_type_id_1" autocomplete="off" checked> <span class="glyphicon glyphicon-earphone" aria-hidden="true">Call</span>
+                                          </label>
+                                          <label class="btn btn-primary">
+                                            <input type="radio" name="scheduler[scheduler_event_type_id]" value="2" id="scheduler_event_type_id_2" autocomplete="off"> <span class="glyphicon glyphicon-user" aria-hidden="true">Meeting</span>
+                                          </label>
+                                          <label class="btn btn-primary">
+                                            <input type="radio" name="scheduler[scheduler_event_type_id]" value="3" id="scheduler_event_type_id_3" autocomplete="off"> <span class="glyphicon glyphicon-time" aria-hidden="true">Task</span>
+                                          </label>
+                                          <label class="btn btn-primary">
+                                            <input type="radio" name="scheduler[scheduler_event_type_id]" value="4" id="scheduler_event_type_id_4" autocomplete="off"> <span class="glyphicon glyphicon-cutlery" aria-hidden="true">Lunch</span>
+
+
+                                          </label>
                                         </div>
+                                      </div>
+                                      <div class="col-xs-12">
+                                          <%= f.text_field :title, placeholder: "Description", class:"form-control margin-top-2" %>
+                                      </div>
+                                      <div class="col-xs-4 margin-top-2">
+                                          <%= f.label :event_date, "Date (Required)" %><br>
+                                          <%= f.text_field :event_date, class:"form-control datePicker", required: true %>
+                                      </div>
+                                      <div class="col-xs-4 margin-top-2">
+                                          <%= f.label :start_time %><br>
+                                          <%= f.text_field :start_time, class:"form-control timepicker" %>
+                                      </div>
+                                      <div class="col-xs-4 margin-top-2">
+                                          <%= f.label :end_time %><br>
+                                          <%= f.text_field :end_time, class:"form-control timepicker" %>
+                                      </div>
 
-                                    </div>
+                                      <div class="col-xs-12 margin-top-2">
+                                          <%= f.text_area :notes, class: "form-control", placeholder: "Notes" %>
+                                      </div>
+                                      <div class="col-xs-12 margin-top-2">
+                                          <%= f.label :assigned_to_user_id %><br>
+                                          <%= f.collection_select :assigned_to_user_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
+                                      </div>
+                                      <div class="col-xs-3 col-xs-offset-9 margin-top-2">
+                                          <%= f.submit "Add", class: "btn btn-primary" %>
+                                      </div>
+                                  </div>
 
-                                </div>
-                                <% end %>
-                            </div>
+                              </div>
+
+                          </div>
+                          <% end %>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="upload">
-                            <div class="col-xs-12">
-                                <%= form_for [@job, @upload], remote: true do |f| %>
-                                <% if @upload.errors.any? %>
-                                <div id="error_explanation">
-                                    <h2><%= pluralize(@upload.errors.count, "error") %>
-                                        prohibited this upload from being saved:</h2>
+                        <div class="tab-pane fade" id="upload">
+                          <%= form_for [@job, @upload] do |f| %>
+                          <% if @upload.errors.any? %>
+                          <div id="error_explanation">
+                              <h2><%= pluralize(@upload.errors.count, "error") %>
+                                  prohibited this upload from being saved:</h2>
 
-                                    <ul>
-                                        <% @upload.errors.full_messages.each do |message| %>
-                                        <li><%= message %></li>
-                                        <% end %>
-                                    </ul>
-                                </div>
-                                <% end %>
-                                <div class="col-sm-6 col-sm-offset-3">
-                                    <div class="form-group">
-                                        <%= f.label :upload_category_id %><br>
-                                        <%= f.collection_select :upload_category_id, UploadCategory.all, :id, :name, {:prompt => 'Select an Upload Type'},  { class: 'form-control'} %>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-sm-offset-3">
-                                    <%= f.label :upload %><br>
-                                    <%= f.file_field :upload %>
-                                </div>
-                                <br>
-                                <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
-                                    <%= f.submit class: "btn btn-primary" %>
-                                </div>
-                                <% end %>
-                            </div>
+                              <ul>
+                                  <% @upload.errors.full_messages.each do |message| %>
+                                  <li><%= message %></li>
+                                  <% end %>
+                              </ul>
+                          </div>
+                          <% end %>
+                          <div class="col-sm-6 col-sm-offset-3">
+                              <div class="form-group">
+                                  <%= f.label :upload_category_id %><br>
+                                  <%= f.collection_select :upload_category_id, UploadCategory.all, :id, :name, {:prompt => 'Select an Upload Type'},  { class: 'form-control'} %>
+                              </div>
+                          </div>
+                          <div class="col-sm-6 col-sm-offset-3">
+                              <%= f.label :upload %><br>
+                              <%= f.file_field :upload %>
+                          </div>
+                          <br>
+                          <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
+                              <%= f.submit class: "btn btn-primary" %>
+                          </div>
+                          <% end %>
                         </div>
+
                     </div>
-
                 </div>
             </div>
 
-            <div class="col-xs-12 margin-top-5">
-                <h3 class="text-center">Planned</h3>
-                <% @job.schedulers.each do |scheduler| %>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><%= scheduler.title %></h3>
+
+                <div class="col-xs-12 margin-top-5">
+                    <h3 class="text-center">Planned</h3>
+                    <% @future_schedules.each do |scheduler| %>
+
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                          <h3 class="panel-title"><%= scheduler.title %></h3>
+                      </div>
+                      <div class="panel-body">
+                        Date: <%= scheduler.event_date %><br  />
+                        Event Type: <%= scheduler.scheduler_event %><br />
+                        Start Time: <%= scheduler.start_time.strftime("%I:%M %p") unless scheduler.start_time == nil %><br />
+                        End Time:  <%= scheduler.end_time.strftime("%I:%M %p") unless scheduler.end_time == nil %><br />
+                        Notes: <%= scheduler.notes %> <br />
+                        <%= scheduler.assigned_to_user.try(:full_name) %>
+                      </div>
                     </div>
-                    <div class="panel-body">
-                        <%= scheduler.start_time %> ~ <%= scheduler.assigned_to_user.try(:full_name) %>
-                    </div>
+                    <% end %>
+
                 </div>
-                <% end %>
+
+                <div class="col-xs-12 margin-top-5">
+                    <h3 class="text-center">Past</h3>
+                    <% @job.trackers.each do |tracker| %>
+
+                    <div class="panel panel-default">
+                      <% if tracker.tracker_task.name == "Note Created" %>
+                      <% noted = Note.find(tracker.child_id) %>
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Note</h3>
+                        </div>
+                        <div class="panel-body">
+                          <%= noted.content %>
+                        </div>
+
+                        <% elsif tracker.tracker_task.name == "File Uploaded" %>
+                        <% upload = Upload.find(tracker.child_id) %>
+                          <div class="panel-heading">
+                              <h3 class="panel-title">Upload</h3>
+                          </div>
+                          <div class="panel-body">
+                            <%= upload.try(:file_name) %>
+                            <a target="_blank" href="<%= upload.try(:upload).try(:url) %>">View/Download</a>
+                          </div>
+
+                          <% elsif tracker.tracker_task.name == "Scheduler Created" %>
+                          <% scheduler = Scheduler.find(tracker.child_id) %>
+                          <% if scheduler.event_date.past? %>
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><%= scheduler.title %></h3>
+                            </div>
+                            <div class="panel-body">
+                              Date: <%= scheduler.event_date %><br  />
+                              Event Type: <%= scheduler.scheduler_event %><br />
+                              Start Time: <%= scheduler.start_time.strftime("%I:%M %p") unless scheduler.start_time == nil %><br />
+                              End Time:  <%= scheduler.end_time.strftime("%I:%M %p") unless scheduler.end_time == nil %><br />
+                              Notes: <%= scheduler.notes %> <br />
+                              <%= scheduler.assigned_to_user.try(:full_name) %>
+                            </div>
+                          <% end %>
+                      <% end %>
+                    </div>
+                    <% end %>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
-<script>
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
 
-    flatpickr(".datePicker", {
-        enableTime: false,
-        // create an extra input solely for display purposes
-        altInput: true,
-        altFormat: "F j, Y"
-    });
+        flatpickr(".datePicker", {
+            enableTime: false,
+            // create an extra input solely for display purposes
+            altInput: true,
+            altFormat: "F j, Y"
+        });
 
-    $('.timepicker').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 30,
-        minTime: '5',
-        maxTime: '8:00pm',
-        dynamic: false,
-        dropdown: true,
-        scrollbar: true
-    });
-</script>
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '5',
+            maxTime: '8:00pm',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+        $('[data-toggle=tab]').click(function(){
+  if ($(this).parent().hasClass('active')){
+	$($(this).attr("href")).toggleClass('active');
+  }
+})
+    </script>

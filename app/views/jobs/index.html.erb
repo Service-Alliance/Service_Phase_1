@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-10">
+        <div class="col-xs-10 table-responsive">
             <h1>Listing Jobs</h1>
 
             <!-- <%= select_tag("filter", options_for_select(JobStatus.all.map{|p| [p.name, p.id]}, class: "form-control")) %> -->
@@ -8,31 +8,46 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Type</th>
-                        <th>Status</th>
+                        <th>Job Recieved</th>
+                        <th>Loss Type</th>
+                        <th>Customer Name</th>
+                        <th>Street Address</th>
+                        <th>City</th>
+                        <th>Zip</th>
+                        <th>Phone</th>
+                        <th>Referred By</th>
+                        <th>Insurance Company</th>
+                        <th>Coordinator</th>
                         <th>Entered by</th>
                         <th>Franchise</th>
-                        <th>Details</th>
-                        <th>Customer Name</th>
-                        <th>Caller Name</th>
-                        <th>Notes</th>
-                        <th>Referral type</th>
+                        <th>Job Status</th>
                         <th colspan="3"></th>
                     </tr>
                 </thead>
+                <!-- Sort by date entered -->
+                <!-- Sort by date ranmge -->
+                <!-- Full text search -->
+                <!--  Sorting -->
+                <!--  -->
 
                 <tbody>
                     <% @jobs.each do |job| %>
                     <tr>
-                        <td><%= job.try(:job_type).try(:name) %></td>
-                        <td><%= job.try(:job_status).try(:name) %></td>
+                        <td> <%= job.created_at %></td>
+                        <td><%= job.try(:losses).try(:first).try(:loss_type).try(:name) %></td>
+                        <td><%= job.try(:customer).try(:full_name) %></td>
+                        <td><%= job.try(:customer).try(:address).try(:address_1) %> <%= job.try(:customer).try(:address).try(:address_2) %></td>
+                        <td><%= job.try(:customer).try(:address).try(:city) %> </td>
+                        <td><%= job.try(:customer).try(:address).try(:zip_code) %> </td>
+                        <td><%= job.try(:customer).try(:phones).try(:first).try(:number) %> </td>
+                        <td><%= job.try(:referral_type).try(:name) %></td>
+                        <td><%= job.try(:job_detail).try(:insurance_company) %></td>
+                        <td><%= job.try(:job_detail).try(:job_coordinator).try(:full_name) %></td>
                         <td><%= job.try(:user).try(:full_name) %></td>
                         <td><%= job.try(:franchise).try(:name) %></td>
                         <td><%= job.details %></td>
-                        <td><%= job.try(:customer).try(:full_name) %></td>
-                        <td><%= job.try(:caller).try(:full_name) %></td>
-                        <td><%= job.job_note %></td>
-                        <td><%= job.try(:referral_type).try(:name) %></td>
+
+                        <td><%= job.try(:job_status).try(:name) %></td>
                         <td><%= link_to 'Show', job %></td>
                         <% if current_user.admin?%>
                         <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>

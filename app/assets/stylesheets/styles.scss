@@ -86,7 +86,7 @@ body {
     }
 }
 .nav-tabs {
-  background: #fff !important;
+  // background: #fff !important;
 }
 .new-manager-button {
   margin-bottom: 25px;
@@ -99,6 +99,14 @@ body {
   & label {
     margin-right: 10px;
   }
+}
+.scheduler-icons {
+  input[type='checkbox'].icon-checkbox{display:none}
+  input[type='checkbox'].icon-checkbox+label .unchecked{display:inline}
+  input[type='checkbox'].icon-checkbox+label .checked{display:none}
+  input[type='checkbox']:checked.icon-checkbox{display:none}
+  input[type='checkbox']:checked.icon-checkbox+label .unchecked{display:none}
+  input[type='checkbox']:checked.icon-checkbox+label .checked{display:inline}
 }
 body {
   padding-top: 50px;
@@ -406,7 +414,19 @@ body {
 {
     margin-top:0px;
 }
-
+.white-bg {
+  margin-right: 0;
+      margin-left: 0;
+      background-color: #fff;
+      border-color: #ddd;
+      border-width: 1px;
+      border-radius: 4px 4px 0 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+.nav-tabs > li > a {
+  color: white;
+}
 
 #kbase-article {
   & #header {
