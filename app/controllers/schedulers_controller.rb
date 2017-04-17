@@ -31,7 +31,7 @@ class SchedulersController < ApplicationController
 
     respond_to do |format|
       if @scheduler.save
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @scheduler.id)
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @scheduler.id, user_id: current_user.id)
         format.html { redirect_to job_path(@job), notice: 'Scheduler was successfully created.' }
         format.json { render :show, status: :created, location: @scheduler }
       else
