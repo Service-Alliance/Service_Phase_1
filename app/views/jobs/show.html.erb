@@ -1,100 +1,150 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
 <div class="container-fluid">
-<div id="wrapper">
-  <%= render partial: "partials/jobs_sidebar" %>
-    <div id="page-content-wrapper">
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
 
             <% if notice %>
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
 
             <div class="col-xs-12">
-                <h1 class="text-center">Job Information</h1>
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Status:
-                            <%= @job.try(:job_status).try(:name) %>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
+                <div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Take Notes</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">Add Activity</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Upload Files</a>
+                        </li>
+
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="notes">...</div>
+                        <div role="tabpanel" class="tab-pane" id="activity">
                             <div class="col-xs-12">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>Entered By:</td>
-                                            <td><%= @job.try(:user).try(:full_name) %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Coorinator Assigned:</td>
-                                            <td><%= @job.try(:job_coordinator).try(:full_name) %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Franchise</td>
-                                            <td><%= @job.try(:franchise).try(:name) %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Details</td>
-                                            <td><%= @job.details %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Notes</td>
-                                            <td><%= @job.job_note %></td>
-                                        </tr>
+                                <%= form_for [@job, @scheduler], remote: true do |f| %>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        Calendar Integration
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <%= f.text_field :title, placeholder: "Description", class:"form-control" %>
+                                            </div>
+                                            <div class="col-xs-4 margin-top-2">
+                                                <%= f.label :event_date, "Date" %><br>
+                                                <%= f.text_field :event_date, class:"form-control datePicker" %>
+                                            </div>
+                                            <div class="col-xs-4 margin-top-2">
+                                                <%= f.label :start_time %><br>
+                                                <%= f.text_field :start_time, class:"form-control timepicker" %>
+                                            </div>
+                                            <div class="col-xs-4 margin-top-2">
+                                                <%= f.label :end_time %><br>
+                                                <%= f.text_field :end_time, class:"form-control timepicker" %>
+                                            </div>
 
-                                        <tr>
-                                            <td>Referral Type</td>
-                                            <td><%= @job.try(:referral_type).try(:name) %></td>
-                                        </tr>
-                                        <% if @job.try(:referral_vendor_id) %>
-                                        <tr>
-                                            <td>Vendor Referrer</td>
-                                            <td><%= @job.try(:referral_vendor).try(:name) %></td>
-                                        </tr>
+                                            <div class="col-xs-12 margin-top-2">
+                                                <%= f.text_area :notes, class: "form-control", placeholder: "Notes" %>
+                                            </div>
+                                            <div class="col-xs-12 margin-top-2">
+                                                <%= f.label :assigned_to_user_id %><br>
+                                                <%= f.collection_select :assigned_to_user_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
+                                            </div>
+                                            <div class="col-xs-3 col-xs-offset-9">
+                                                <%= f.submit "Add", class: "btn btn-primary" %>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <% end %>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="upload">
+                            <div class="col-xs-12">
+                                <%= form_for [@job, @upload], remote: true do |f| %>
+                                <% if @upload.errors.any? %>
+                                <div id="error_explanation">
+                                    <h2><%= pluralize(@upload.errors.count, "error") %>
+                                        prohibited this upload from being saved:</h2>
+
+                                    <ul>
+                                        <% @upload.errors.full_messages.each do |message| %>
+                                        <li><%= message %></li>
                                         <% end %>
-
-                                        <% if @job.try(:referral_employee_id) %>
-                                        <tr>
-                                            <td>Employee Referrer</td>
-                                            <td><%= @job.try(:referral_employee).try(:full_name) %></td>
-                                        </tr>
-                                        <% end %>
-
-                                        <tr>
-                                            <td>Referral Note</td>
-                                            <td><%= @job.try(:referral_note) %></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Corporate Referral Type</td>
-                                            <td><%= @job.try(:corporate_referral_type).try(:name) %></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
+                                    </ul>
+                                </div>
+                                <% end %>
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="form-group">
+                                        <%= f.label :upload_category_id %><br>
+                                        <%= f.collection_select :upload_category_id, UploadCategory.all, :id, :name, {:prompt => 'Select an Upload Type'},  { class: 'form-control'} %>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <%= f.label :upload %><br>
+                                    <%= f.file_field :upload %>
+                                </div>
+                                <br>
+                                <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
+                                    <%= f.submit class: "btn btn-primary" %>
+                                </div>
+                                <% end %>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-footer">
-                        <a href="mailto:<%= @caller.try(:email) %>" type="button" class="btn btn-sm btn-primary">
-                            <i class="glyphicon glyphicon-envelope"></i>
-                        </a>
-                        <span class="pull-right">
 
-                            <%= link_to  edit_job_path(@job), class: "btn btn-sm btn-warning", type: "button" do %>
-                            <i class="glyphicon glyphicon-edit"></i>
-                            <% end %>
-                        </span>
-                    </div>
                 </div>
             </div>
 
+            <div class="col-xs-12 margin-top-5">
+                <h3 class="text-center">Planned</h3>
+                <% @job.schedulers.each do |scheduler| %>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><%= scheduler.title %></h3>
+                    </div>
+                    <div class="panel-body">
+                        <%= scheduler.start_time %> ~ <%= scheduler.assigned_to_user.try(:full_name) %>
+                    </div>
+                </div>
+                <% end %>
+            </div>
         </div>
     </div>
 </div>
 <script>
-    $("#menu-toggle").click(function(e) {
+    $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-    </script>
+
+    flatpickr(".datePicker", {
+        enableTime: false,
+        // create an extra input solely for display purposes
+        altInput: true,
+        altFormat: "F j, Y"
+    });
+
+    $('.timepicker').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 30,
+        minTime: '5',
+        maxTime: '8:00pm',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+    });
+</script>
