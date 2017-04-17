@@ -32,6 +32,36 @@
                                             <td>Call Info:</td>
                                             <td><%= link_to "Call Info", call_path(call) %></td>
                                         </tr>
+                                        <% call.notes.each do |note| %>
+                                        <tr>
+                                            <td>Note:</td>
+                                            <td><%= note.content %></td>
+                                        </tr>
+                                        <% end %>
+                                        <tr>
+                                          <td>New Note:</td>
+                                          <td>
+
+                                          <%= form_for call.notes.new do |f| %>
+                                          <%= hidden_field_tag "call[call_id]", call.id %>
+                                          <%= hidden_field_tag "call[job_id]", @job.id %>
+
+                                          <div class="col-xs-12">
+                                              <div class="form-group">
+                                                  <div class="field">
+                                                      <%= f.text_area :content, class: 'form-control' %>
+                                                  </div>
+                                              </div>
+                                              <div class="actions">
+                                                  <%= f.submit class: "btn btn-primary" %>
+                                              </div>
+
+                                          </div>
+                                          <% end %>
+                                        <!-- </div> -->
+                                          </td>
+                                      </tr>
+
                                         <% end %>
                                     </tbody>
                                 </table>

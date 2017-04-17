@@ -1,6 +1,7 @@
 class Call < ActiveRecord::Base
   belongs_to :job
   belongs_to :vendor
+  has_many :notes, as: :noteable, dependent: :destroy
 
   def self.call_request
     response = HTTParty.get(

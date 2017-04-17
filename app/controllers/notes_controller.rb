@@ -30,15 +30,23 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
-    tracker_task = TrackerTask.find_by(name: "Note Created")
-    @job = Job.find_by(id: job_params['job_id'])
+    unless job_params.empty?
+      tracker_task = TrackerTask.find_by(name: "Note Created")
+      @job = Job.find_by(id: job_params['job_id'])
 
-    @note = @job.notes.new(note_params)
-    @note.user_id = current_user.id
+      @note = @job.notes.new(note_params)
+      @note.user_id = current_user.id
+    end
+    unless call_params.empty?
+      @job = Job.find_by(id: call_params['job_id'])
+      @call = Call.find_by(id: call_params['call_id'])
+      @note = @call.notes.new(note_params)
+      @note.user_id = current_user.id
+    end
 
     respond_to do |format|
       if @note.save
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id) unless job_params.empty?
         format.html { redirect_to job_path(@job), notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
       else
@@ -78,7 +86,10 @@ class NotesController < ApplicationController
       @note = Note.find(params[:id])
     end
     def job_params
-      params.require(:job).permit(:job_id)
+      params.fetch(:job, {}).permit(:job_id)
+    end
+    def call_params
+      params.fetch(:call, {}).permit(:call_id, :job_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

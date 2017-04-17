@@ -256,6 +256,7 @@ class JobsController < ApplicationController
 
   def calls
     @calls = Call.where(job_id: @job.id)
+    
   end
 
   def add_call; end
