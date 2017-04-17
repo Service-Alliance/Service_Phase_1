@@ -256,7 +256,7 @@ class JobsController < ApplicationController
 
   def calls
     @calls = Call.where(job_id: @job.id)
-    
+
   end
 
   def add_call; end
@@ -265,8 +265,10 @@ class JobsController < ApplicationController
     @call = Call.find_by(id: call_params[:id])
     @call.job_id = @job.id
     @call.save
+    tracker_task = TrackerTask.find_by(name: "Call Assigned")
+    @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @call.id, user_id: current_user.id)
 
-    redirect_to job_calls_path(@job)
+    redirect_to job_path(@job)
   end
 
   private

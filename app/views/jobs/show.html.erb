@@ -11,217 +11,348 @@
             <% end %>
 
             <div class="col-xs-12 ">
-              <%= link_to  "Edit Job", edit_job_path(@job),class:"btn btn-primary" %>
-            <div class="panel with-nav-tabs panel-primary margin-top-2">
-                <div class="panel-heading">
+                <%= link_to  "Edit Job", edit_job_path(@job),class:"btn btn-primary" %>
+                <div class="panel with-nav-tabs panel-primary margin-top-2">
+                    <div class="panel-heading">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Take Notes</a></li>
-                            <li><a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">Add Activity</a></li>
-                            <li><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Files</a></li>
+                            <li class="active">
+                                <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Take Notes</a>
+                            </li>
+                            <li>
+                                <a href="#activity" aria-controls="activity" role="tab" data-toggle="tab">Add Activity</a>
+                            </li>
+                            <li>
+                                <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Files</a>
+                            </li>
+                            <li>
+                                <a href="#call" aria-controls="call" role="tab" data-toggle="tab">Calls</a>
+                            </li>
                         </ul>
-                </div>
-                <div class="panel-body">
-                    <div class="tab-content">
-                        <div class="tab-pane fade in active" id="notes">
-                          <%= form_for @note do |f| %>
-                          <%= hidden_field_tag "job[job_id]", @job.id %>
-                          <% if @note.errors.any? %>
-                          <div id="error_explanation">
-                              <h2><%= pluralize(@note.errors.count, "error") %>
-                                  prohibited this note from being saved:</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="notes">
+                                <%= form_for @note do |f| %>
+                                <%= hidden_field_tag "job[job_id]", @job.id %>
+                                <% if @note.errors.any? %>
+                                <div id="error_explanation">
+                                    <h2><%= pluralize(@note.errors.count, "error") %>
+                                        prohibited this note from being saved:</h2>
 
-                              <ul>
-                                  <% @note.errors.full_messages.each do |message| %>
-                                  <li><%= message %></li>
-                                  <% end %>
-                              </ul>
-                          </div>
-                          <% end %>
+                                    <ul>
+                                        <% @note.errors.full_messages.each do |message| %>
+                                        <li><%= message %></li>
+                                        <% end %>
+                                    </ul>
+                                </div>
+                                <% end %>
 
-                          <div class="col-xs-12">
-                              <div class="form-group">
-                                  <div class="field">
-                                      <%= f.text_area :content, class: 'form-control' %>
-                                  </div>
-                              </div>
-                              <div class="actions">
-                                  <%= f.submit class: "btn btn-primary" %>
-                              </div>
-
-                          </div>
-                          <% end %>
-                        </div>
-                        <div class="tab-pane fade" id="activity">
-
-                          <%= form_for [@job, @scheduler] do |f| %>
-
-                          <% if @scheduler.errors.any? %>
-                          <div id="error_explanation">
-                              <h2><%= pluralize(@scheduler.errors.count, "error") %>
-                                  prohibited this note from being saved:</h2>
-
-                              <ul>
-                                  <% @scheduler.errors.full_messages.each do |message| %>
-                                  <li><%= message %></li>
-                                  <% end %>
-                              </ul>
-                          </div>
-                          <% end %>
-                          <div class="row">
-                              <div class="col-sm-3">
-                                  Calendar (Coming Soon)
-                              </div>
-                              <div class="col-sm-9">
-                                  <div class="row">
-                                      <div class="col-xs-12 scheduler-icons">
-                                        <div class="btn-group" data-toggle="buttons">
-                                          <label class="btn btn-primary active">
-                                            <input type="radio" name="scheduler[scheduler_event_type_id]" value="1" id="scheduler_event_type_id_1" autocomplete="off" checked> <span class="glyphicon glyphicon-earphone" aria-hidden="true">Call</span>
-                                          </label>
-                                          <label class="btn btn-primary">
-                                            <input type="radio" name="scheduler[scheduler_event_type_id]" value="2" id="scheduler_event_type_id_2" autocomplete="off"> <span class="glyphicon glyphicon-user" aria-hidden="true">Meeting</span>
-                                          </label>
-                                          <label class="btn btn-primary">
-                                            <input type="radio" name="scheduler[scheduler_event_type_id]" value="3" id="scheduler_event_type_id_3" autocomplete="off"> <span class="glyphicon glyphicon-time" aria-hidden="true">Task</span>
-                                          </label>
-                                          <label class="btn btn-primary">
-                                            <input type="radio" name="scheduler[scheduler_event_type_id]" value="4" id="scheduler_event_type_id_4" autocomplete="off"> <span class="glyphicon glyphicon-cutlery" aria-hidden="true">Lunch</span>
-
-
-                                          </label>
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <div class="field">
+                                            <%= f.text_area :content, class: 'form-control' %>
                                         </div>
-                                      </div>
-                                      <div class="col-xs-12">
-                                          <%= f.text_field :title, placeholder: "Description", class:"form-control margin-top-2" %>
-                                      </div>
-                                      <div class="col-xs-4 margin-top-2">
-                                          <%= f.label :event_date, "Date (Required)" %><br>
-                                          <%= f.text_field :event_date, class:"form-control datePicker", required: true %>
-                                      </div>
-                                      <div class="col-xs-4 margin-top-2">
-                                          <%= f.label :start_time %><br>
-                                          <%= f.text_field :start_time, class:"form-control timepicker" %>
-                                      </div>
-                                      <div class="col-xs-4 margin-top-2">
-                                          <%= f.label :end_time %><br>
-                                          <%= f.text_field :end_time, class:"form-control timepicker" %>
-                                      </div>
+                                    </div>
+                                    <div class="actions">
+                                        <%= f.submit class: "btn btn-primary" %>
+                                    </div>
 
-                                      <div class="col-xs-12 margin-top-2">
-                                          <%= f.text_area :notes, class: "form-control", placeholder: "Notes" %>
-                                      </div>
-                                      <div class="col-xs-12 margin-top-2">
-                                          <%= f.label :assigned_to_user_id %><br>
-                                          <%= f.collection_select :assigned_to_user_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
-                                      </div>
-                                      <div class="col-xs-3 col-xs-offset-9 margin-top-2">
-                                          <%= f.submit "Add", class: "btn btn-primary" %>
-                                      </div>
-                                  </div>
+                                </div>
+                                <% end %>
+                            </div>
+                            <div class="tab-pane fade" id="activity">
 
-                              </div>
+                                <%= form_for [@job, @scheduler] do |f| %>
 
-                          </div>
-                          <% end %>
-                        </div>
-                        <div class="tab-pane fade" id="upload">
-                          <%= form_for [@job, @upload] do |f| %>
-                          <% if @upload.errors.any? %>
-                          <div id="error_explanation">
-                              <h2><%= pluralize(@upload.errors.count, "error") %>
-                                  prohibited this upload from being saved:</h2>
+                                <% if @scheduler.errors.any? %>
+                                <div id="error_explanation">
+                                    <h2><%= pluralize(@scheduler.errors.count, "error") %>
+                                        prohibited this note from being saved:</h2>
 
-                              <ul>
-                                  <% @upload.errors.full_messages.each do |message| %>
-                                  <li><%= message %></li>
-                                  <% end %>
-                              </ul>
-                          </div>
-                          <% end %>
-                          <div class="col-sm-6 col-sm-offset-3">
-                              <div class="form-group">
-                                  <%= f.label :upload_category_id %><br>
-                                  <%= f.collection_select :upload_category_id, UploadCategory.all, :id, :name, {:prompt => 'Select an Upload Type'},  { class: 'form-control'} %>
-                              </div>
-                          </div>
-                          <div class="col-sm-6 col-sm-offset-3">
-                              <%= f.label :upload %><br>
-                              <%= f.file_field :upload %>
-                          </div>
-                          <br>
-                          <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
-                              <%= f.submit class: "btn btn-primary" %>
-                          </div>
-                          <% end %>
+                                    <ul>
+                                        <% @scheduler.errors.full_messages.each do |message| %>
+                                        <li><%= message %></li>
+                                        <% end %>
+                                    </ul>
+                                </div>
+                                <% end %>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        Calendar (Coming Soon)
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="row">
+                                            <div class="col-xs-12 scheduler-icons">
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    <label class="btn btn-primary active">
+                                                        <input type="radio" name="scheduler[scheduler_event_type_id]" value="1" id="scheduler_event_type_id_1" autocomplete="off" checked>
+                                                        <span class="glyphicon glyphicon-earphone" aria-hidden="true">Call</span>
+                                                    </label>
+                                                    <label class="btn btn-primary">
+                                                        <input type="radio" name="scheduler[scheduler_event_type_id]" value="2" id="scheduler_event_type_id_2" autocomplete="off">
+                                                        <span class="glyphicon glyphicon-user" aria-hidden="true">Meeting</span>
+                                                    </label>
+                                                    <label class="btn btn-primary">
+                                                        <input type="radio" name="scheduler[scheduler_event_type_id]" value="3" id="scheduler_event_type_id_3" autocomplete="off">
+                                                        <span class="glyphicon glyphicon-time" aria-hidden="true">Task</span>
+                                                    </label>
+                                                    <label class="btn btn-primary">
+                                                        <input type="radio" name="scheduler[scheduler_event_type_id]" value="4" id="scheduler_event_type_id_4" autocomplete="off">
+                                                        <span class="glyphicon glyphicon-cutlery" aria-hidden="true">Lunch</span>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <%= f.text_field :title, placeholder: "Description", class:"form-control margin-top-2" %>
+                                            </div>
+                                            <div class="col-xs-4 margin-top-2">
+                                                <%= f.label :event_date, "Date (Required)" %><br>
+                                                <%= f.text_field :event_date, class:"form-control datePicker", required: true %>
+                                            </div>
+                                            <div class="col-xs-4 margin-top-2">
+                                                <%= f.label :start_time %><br>
+                                                <%= f.text_field :start_time, class:"form-control timepicker" %>
+                                            </div>
+                                            <div class="col-xs-4 margin-top-2">
+                                                <%= f.label :end_time %><br>
+                                                <%= f.text_field :end_time, class:"form-control timepicker" %>
+                                            </div>
+
+                                            <div class="col-xs-12 margin-top-2">
+                                                <%= f.text_area :notes, class: "form-control", placeholder: "Notes" %>
+                                            </div>
+                                            <div class="col-xs-12 margin-top-2">
+                                                <%= f.label :assigned_to_user_id %><br>
+                                                <%= f.collection_select :assigned_to_user_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
+                                            </div>
+                                            <div class="col-xs-3 col-xs-offset-9 margin-top-2">
+                                                <%= f.submit "Add", class: "btn btn-primary" %>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <% end %>
+                            </div>
+                            <div class="tab-pane fade" id="upload">
+                                <%= form_for [@job, @upload] do |f| %>
+                                <% if @upload.errors.any? %>
+                                <div id="error_explanation">
+                                    <h2><%= pluralize(@upload.errors.count, "error") %>
+                                        prohibited this upload from being saved:</h2>
+
+                                    <ul>
+                                        <% @upload.errors.full_messages.each do |message| %>
+                                        <li><%= message %></li>
+                                        <% end %>
+                                    </ul>
+                                </div>
+                                <% end %>
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="form-group">
+                                        <%= f.label :upload_category_id %><br>
+                                        <%= f.collection_select :upload_category_id, UploadCategory.all, :id, :name, {:prompt => 'Select an Upload Type'},  { class: 'form-control'} %>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <%= f.label :upload %><br>
+                                    <%= f.file_field :upload %>
+                                </div>
+                                <br>
+                                <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
+                                    <%= f.submit class: "btn btn-primary" %>
+                                </div>
+                                <% end %>
+                            </div>
+
+                            <div class="tab-pane fade" id="call">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class=" ">
+                                                <%= form_tag create_job_call_path(@job), method: :post do  %>
+
+                                                <div class="col-xs-6 col-xs-offset-3">
+                                                    <div class="form-group">
+                                                        <label for="call_id">Call ID</label><br/>
+                                                        <input id="id" name="call[id]" type="number" class="form-control"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 text-center">
+                                                    <div class="form-group">
+                                                        <div class="actions">
+                                                            <%= submit_tag "Add Call to Job", class: "btn btn-primary" %>
+                                                        </div>
+                                                    </div>
+                                                </div <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Calls</div>
+                                            <div class="panel-body table-responsive">
+                                                <table
+                                                    class="resp"
+                                                    data-toggle="table"
+                                                    data-url="/calls"
+                                                    data-show-refresh="true"
+                                                    data-show-toggle="true"
+                                                    data-show-columns="true"
+                                                    data-search="true"
+                                                    data-flat="true"
+                                                    data-select-item-name="toolbar1"
+                                                    data-pagination="true"
+                                                    data-sort-name="id"
+                                                    data-sort-order="desc">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="id" data-sortable="true" data-formatter="AddVendor"></th>
+                                                            <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Call Link</th>
+                                                            <th data-field="callrail_id" data-sortable="true">CallRail ID</th>
+                                                            <th data-field="datetime" data-sortable="true">Call Date/Time</th>
+                                                            <th data-field="customer_phone_number" data-sortable="true">Phone Number</th>
+                                                            <th data-field="customer_city" data-sortable="true">City</th>
+                                                            <th data-field="callrail_id" data-sortable="true" data-formatter="CallRailTimeline">CallRail Timeline</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
                 </div>
             </div>
 
+            <div class="col-xs-12 margin-top-5">
+                <h3 class="text-center">Planned</h3>
+                <% @future_schedules.each do |scheduler| %>
 
-                <div class="col-xs-12 margin-top-5">
-                    <h3 class="text-center">Planned</h3>
-                    <% @future_schedules.each do |scheduler| %>
-
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                          <h3 class="panel-title"><%= scheduler.title %></h3>
-                      </div>
-                      <div class="panel-body">
-                        Date: <%= scheduler.event_date %><br  />
-                        Event Type: <%= scheduler.scheduler_event %><br />
-                        Start Time: <%= scheduler.start_time.strftime("%I:%M %p") unless scheduler.start_time == nil %><br />
-                        End Time:  <%= scheduler.end_time.strftime("%I:%M %p") unless scheduler.end_time == nil %><br />
-                        Notes: <%= scheduler.notes %> <br />
-                        <%= scheduler.assigned_to_user.try(:full_name) %>
-                      </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><%= scheduler.title %></h3>
                     </div>
-                    <% end %>
-
+                    <div class="panel-body">
+                        Date:
+                        <%= scheduler.event_date %><br/>
+                        Event Type:
+                        <%= scheduler.scheduler_event %><br/>
+                        Start Time:
+                        <%= scheduler.start_time.strftime("%I:%M %p") unless scheduler.start_time == nil %><br/>
+                        End Time:
+                        <%= scheduler.end_time.strftime("%I:%M %p") unless scheduler.end_time == nil %><br/>
+                        Notes:
+                        <%= scheduler.notes %>
+                        <br/>
+                        <%= scheduler.assigned_to_user.try(:full_name) %>
+                    </div>
                 </div>
+                <% end %>
 
-                <div class="col-xs-12 margin-top-5">
-                    <h3 class="text-center">Past</h3>
+            </div>
+
+            <div class="col-xs-12 margin-top-5">
+                <h3 class="text-center">Past</h3>
+                <div class="timeline-centered">
                     <% @job.trackers.each do |tracker| %>
 
-                    <div class="panel panel-default">
-                      <% if tracker.tracker_task.name == "Note Created" %>
-                      <% noted = Note.find(tracker.child_id) %>
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Note</h3>
-                        </div>
-                        <div class="panel-body">
-                          <%= noted.content %>
-                        </div>
-
-                        <% elsif tracker.tracker_task.name == "File Uploaded" %>
-                        <% upload = Upload.find(tracker.child_id) %>
-                          <div class="panel-heading">
-                              <h3 class="panel-title">Upload</h3>
-                          </div>
-                          <div class="panel-body">
-                            <%= upload.try(:file_name) %>
-                            <a target="_blank" href="<%= upload.try(:upload).try(:url) %>">View/Download</a>
-                          </div>
-
-                          <% elsif tracker.tracker_task.name == "Scheduler Created" %>
-                          <% scheduler = Scheduler.find(tracker.child_id) %>
-                          <% if scheduler.event_date.past? %>
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><%= scheduler.title %></h3>
+                    <% if tracker.tracker_task.name == "Note Created" %>
+                    <% noted = Note.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </div>
-                            <div class="panel-body">
-                              Date: <%= scheduler.event_date %><br  />
-                              Event Type: <%= scheduler.scheduler_event %><br />
-                              Start Time: <%= scheduler.start_time.strftime("%I:%M %p") unless scheduler.start_time == nil %><br />
-                              End Time:  <%= scheduler.end_time.strftime("%I:%M %p") unless scheduler.end_time == nil %><br />
-                              Notes: <%= scheduler.notes %> <br />
-                              <%= scheduler.assigned_to_user.try(:full_name) %>
+                            <div class="timeline-label">
+
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Note Created &bull; <%= noted.created_at %> &bull; <%= noted.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= noted.content %>
+                                </div>
                             </div>
-                          <% end %>
-                      <% end %>
-                    </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "File Uploaded" %>
+                    <% upload = Upload.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Upload &bull; <%= upload.try(:created_at) %> &bull; <%= tracker.user.full_name %> </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= upload.try(:file_name) %>
+                                    <a target="_blank" href="<%= upload.try(:upload).try(:url) %>">View/Download</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "Call Assigned" %>
+                    <% call = Call.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Call Assigned &bull; <%= tracker.created_at %> &bull; <%= tracker.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= link_to "View Call", call_path(call.id) %>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "Scheduler Created" %>
+                    <% scheduler = Scheduler.find(tracker.child_id) %>
+                    <% if scheduler.event_date.past? %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><%= scheduler.title %> &bull; <%= tracker.created_at %> &bull; <%= tracker.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    Date:
+                                    <%= scheduler.event_date %><br/>
+                                    Event Type:
+                                    <%= scheduler.scheduler_event %><br/>
+                                    Start Time:
+                                    <%= scheduler.start_time.strftime("%I:%M %p") unless scheduler.start_time == nil %><br/>
+                                    End Time:
+                                    <%= scheduler.end_time.strftime("%I:%M %p") unless scheduler.end_time == nil %><br/>
+                                    Notes:
+                                    <%= scheduler.notes %>
+                                    <br/>
+                                    <%= scheduler.assigned_to_user.try(:full_name) %>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <% end %>
+                    <% end %>
+
                     <% end %>
                 </div>
 
@@ -233,6 +364,15 @@
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
+        function LinkFormatter(value, row, index) {
+            return "<a target='_blank href='/calls/" + row.id + ">" + value + "</a>";
+        }
+        function AddVendor(value, row, index) {
+            return "<a class='add-call' target='_blank' href='call_id=" + row.id + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
+        }
+        function CallRailTimeline(value, row, index) {
+            return "<a href='https://app.callrail.com/calls/" + value + "'>Timeline Link</a>";
+        }
 
         flatpickr(".datePicker", {
             enableTime: false,
@@ -250,9 +390,9 @@
             dropdown: true,
             scrollbar: true
         });
-        $('[data-toggle=tab]').click(function(){
-  if ($(this).parent().hasClass('active')){
-	$($(this).attr("href")).toggleClass('active');
-  }
-})
+        $('[data-toggle=tab]').click(function () {
+            if ($(this).parent().hasClass('active')) {
+                $($(this).attr("href")).toggleClass('active');
+            }
+        })
     </script>

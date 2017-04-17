@@ -1,6 +1,7 @@
 class Tracker < ActiveRecord::Base
   belongs_to :trackable, polymorphic: true
   belongs_to :tracker_task
+  belongs_to :user
 
   # def link_to
   #   if self.tracker_task_id == 1

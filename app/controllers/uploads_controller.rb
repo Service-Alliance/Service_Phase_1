@@ -30,7 +30,7 @@ class UploadsController < ApplicationController
 
     respond_to do |format|
       if @upload.save
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id, user_id: current_user.id)
         @job.update_last_action
         format.html { redirect_to job_path(@job), notice: 'Upload was successfully uploaded.' }
         format.json { render :show, status: :created, location: @upload }
