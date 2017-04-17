@@ -47,7 +47,7 @@ G - Girl      N - Nancy   U - Universe">
       <div class="col-xs-3">
           <div class="form-group">
               <%= label_tag :zip %><br>
-              <%= number_field_tag "address[zip_code]", @caller.try(:address).try(:zip_code), class: "form-control"  %>
+              <%= text_field_tag "address[zip_code]", @caller.try(:address).try(:zip_code), class: "form-control"  %>
           </div>
       </div>
         <div class="col-xs-3">
