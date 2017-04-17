@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <% if notice %>
+    <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+    <h1 class="text-center">Franchise:</h1>
+    <div class="col-xs-8 col-xs-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Franchise
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>ID:</td>
+                                    <td><%= @franchise.id %></td>
+                                </tr>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td><%= @franchise.name %></td>
+                                </tr>
+                                <tr>
+                                    <td>Contact:</td>
+                                    <td><%= @franchise.franchise_number %></td>
+                                </tr>
+                                <tr>
+                                    <td>Phone</td>
+                                    <td><%= @franchise.legal_name %></td>
+                                </tr>
+                                <tr>
+                                    <td>Cellphone</td>
+                                    <td><%= @franchise.phone %></td>
+                                </tr>
+                                <tr>
+                                    <td>Fax</td>
+                                    <td><%= @franchise.fax %></td>
+                                </tr>
+                                <tr>
+                                    <td>Website</td>
+                                    <td><%= @franchise.website %></td>
+                                </tr>
+                                <tr>
+                                    <td>General Licesnse</td>
+                                    <td><%= @franchise.general_license %></td>
+                                </tr>
+                                <tr>
+                                    <td>Residential License</td>
+                                    <td><%= @franchise.residential_license %></td>
+                                </tr>
+                                <tr>
+                                    <td>Commercial License</td>
+                                    <td><%= @franchise.commercial_license %></td>
+                                </tr>
+                                <tr>
+                                    <td>Mold Remediation License</td>
+                                    <td><%= @franchise.mold_remediation_license %></td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+
+                <%= link_to edit_franchise_path(@franchise), class: "btn btn-sm btn-warning", type: "button" do %>
+                <i class="glyphicon glyphicon-edit"></i>
+                <% end %>
+
+          
+            </div>
+        </div>
+    </div>
+</div>

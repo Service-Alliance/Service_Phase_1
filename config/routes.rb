@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :upload_categories
   resources :franchise_users
   resources :images
+  resources :franchises
   resources :vendor_upload_types
   resources :tracker_tasks
   resources :trackers

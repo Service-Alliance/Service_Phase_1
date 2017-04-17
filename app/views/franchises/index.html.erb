@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <p id="notice"><%= notice %></p>
+
+    <div class="row">
+
+        <div class="col-lg-12">
+          <%= link_to 'New Franchise', new_franchise_path, class: "btn btn-success margin-top-2 margin-bottom-2 margin-left-2" %>
+            <div class="panel panel-default">
+                <div class="panel-heading">Franchises</div>
+                <div class="panel-body">
+                    <table
+                        data-toggle="table"
+                        data-url="franchises"
+                        data-show-refresh="true"
+                        data-show-toggle="true"
+                        data-show-columns="true"
+                        data-search="true"
+                        data-flat="true"
+                        data-select-item-name="toolbar1"
+                        data-pagination="true"
+                        data-sort-name="id"
+                        data-sort-order="asc">
+                        <thead>
+                            <tr>
+                                <th data-field="state" data-checkbox="true">Franchise ID</th>
+                                <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Franchise ID</th>
+                                <th data-field="name" data-sortable="true">Name</th>
+                                <th data-field="franchise_number" data-sortable="true">Franchise Number</th>
+                                <th data-field="legal_name" data-sortable="true">Legal Name</th>
+                                <th data-field="phone" data-sortable="true">Phone</th>
+                                <th data-field="cellphone" data-sortable="true">Cellphone</th>
+                                <th data-field="fax" data-sortable="true">Fax</th>
+                                <th data-field="website" data-sortable="true">Website</th>
+                                <th data-field="general_license" data-sortable="true">General License</th>
+                                <th data-field="residential_license" data-sortable="true">Residential License</th>
+                                <th data-field="commercial_license" data-sortable="true">Commercial License</th>
+                                <th data-field="mold_remediation_license" data-sortable="true">Mold Remediation License</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function LinkFormatter(value, row, index) {
+        return "<a href='franchises/" + row.id + "'>" + value + "</a>";
+    }
+</script>

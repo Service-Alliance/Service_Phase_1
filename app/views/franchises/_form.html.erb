@@ -1,0 +1,94 @@
+<div class="col-xs-12">
+    <div class="row content-box">
+        <%= form_for(@franchise) do |f| %>
+        <% if @franchise.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@franchise.errors.count, "error") %>
+                prohibited this franchise from being saved:</h2>
+
+            <ul>
+                <% @franchise.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :name %><br>
+                <%= f.text_field :name, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :franchise_number %><br>
+                <%= f.text_field :franchise_number, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :franchise_number %><br>
+                <%= f.text_field :franchise_number, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :legal_name %><br>
+                <%= f.text_field :legal_name, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :phone %><br>
+                <%= f.text_field :phone, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :fax %><br>
+                <%= f.text_field :fax, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :website %><br>
+                <%= f.text_field :website, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :general_license %><br>
+                <%= f.date_select :general_license, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :general_license %><br>
+                <%= f.date_select :general_license, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :commercial_license %><br>
+                <%= f.date_select :commercial_license, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :mold_remediation_license %><br>
+                <%= f.date_select :mold_remediation_license, class:"form-control" %>
+            </div>
+        </div>
+        
+
+
+        <div class="col-xs-12 text-center">
+            <div class="actions">
+                <%= f.submit class: "btn btn-primary" %>
+            </div>
+        </div>
+
+        <% end %>
+    </div>
+</div>
