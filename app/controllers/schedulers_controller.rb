@@ -27,13 +27,15 @@ class SchedulersController < ApplicationController
   def create
     @scheduler = Scheduler.new(scheduler_params)
     @scheduler.job_id = @job.id
+    tracker_task = TrackerTask.find_by(name: "Scheduler Created")
 
     respond_to do |format|
       if @scheduler.save
-        format.html { redirect_to job_scheduler_path(@job, @scheduler), notice: 'Scheduler was successfully created.' }
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @scheduler.id)
+        format.html { redirect_to job_path(@job), notice: 'Scheduler was successfully created.' }
         format.json { render :show, status: :created, location: @scheduler }
       else
-        format.html { render :new }
+        format.html { redirect_to job_path(@job), errors: @scheduler.errors }
         format.json { render json: @scheduler.errors, status: :unprocessable_entity }
       end
     end

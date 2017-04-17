@@ -26,15 +26,16 @@ class UploadsController < ApplicationController
   # POST /uploads.json
   def create
     @upload = @job.uploads.new(upload_params)
-
+    tracker_task = TrackerTask.find_by(name: "File Uploaded")
 
     respond_to do |format|
       if @upload.save
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
         @job.update_last_action
-        format.html { redirect_to job_uploads_path(@job), notice: 'Upload was successfully uploaded.' }
+        format.html { redirect_to job_path(@job), notice: 'Upload was successfully uploaded.' }
         format.json { render :show, status: :created, location: @upload }
       else
-        format.html { render :new }
+        format.html { redirect_to job_path(@job) }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
     end

@@ -45,6 +45,15 @@ class JobsController < ApplicationController
     @callrail = Call.find_by(job_id: @job.id)
     @scheduler = Scheduler.new
     @upload = Upload.new
+    @future_schedules = []
+    @past_schedules = []
+    @note = @job.notes.new
+    @job.schedulers.each do |scheduler|
+      @future_schedules << scheduler if scheduler.event_date.future?
+    end
+    # @job.schedulers.each do |scheduler|
+    #   @past_schedules << scheduler unless scheduler.event_date.future?
+    # end
   end
 
   # GET /jobs/new
