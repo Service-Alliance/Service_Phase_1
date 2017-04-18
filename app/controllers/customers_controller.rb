@@ -24,7 +24,7 @@ class CustomersController < ApplicationController
 
   # GET /customers/1/edit
   def edit
-    @address = Address.find_by(id: @customer.address_id) || @address = Address.new
+    @customer_address = Address.find_by(id: @customer.address_id) || @customer_address = Address.new
     @phones = @customer.phones
     @job = Job.find_by(id: params[:job_id])
   end
