@@ -149,6 +149,37 @@ body {
     }
 }
 
+#modal-new-number {
+    & .remove-number-toggle {
+        display: none;
+    }
+
+    & .add-number-toggle {
+        display: block;
+    }
+
+}
+
+#modal-number-container {
+    & .add-number-toggle {
+        display: none;
+    }
+
+    & .remove-number-toggle {
+        display: block;
+    }
+
+    & .add-label {
+        display: none;
+    }
+
+    & .delete-label {
+        display: block;
+    }
+}
+
+
+
 
 #new-oncall {
     & .remove-oncall-toggle {
