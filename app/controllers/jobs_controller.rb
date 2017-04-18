@@ -58,7 +58,9 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.create(entered_by_id: current_user.id, coordinator_id: current_user.id)
+    @customer_address = Address.create
+    @customer = Customer.create(address_id: @customer_address.id)
+    @job = Job.create(entered_by_id: current_user.id, coordinator_id: current_user.id, customer_id: @customer.id)
     @job.trackers.create(tracker_task_id: 1)
     @loss = Loss.create(job_id: @job.id)
     @caller = Caller.create(job_id: @job.id)
@@ -68,6 +70,7 @@ class JobsController < ApplicationController
     @caller.save
     @job_detail = JobDetail.create(job_id: @job.id)
     @phones = nil
+
 
     # @grouped_people_options = Department.all.map do |department|
     #   [department.name,

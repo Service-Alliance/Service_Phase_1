@@ -392,6 +392,75 @@
     <!-- /.modal-dialog -->
 </div>
 
+<div id="customerModal" class="modal fade" tabindex="-1" role="dialog">
+    <%= form_for @customer, remote: true do |f| %>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Billing</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+
+                            <% if @customer.errors.any? %>
+                            <div id="error_explanation">
+                                <h2><%= pluralize(@customer.errors.count, "error") %>
+                                    prohibited this customer from being saved:</h2>
+
+                                <ul>
+                                    <% @customer.errors.full_messages.each do |message| %>
+                                    <li><%= message %></li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                            <% end %>
+
+                            <% if @job %>
+                            <%= hidden_field_tag "job[job_id]", @job.id %>
+                            <% end %>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <%= f.label :first_name %><br>
+                                    <%= f.text_field :first_name, class:"form-control" %>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <%= f.label :last_name %><br>
+                                    <%= f.text_field :last_name, class:"form-control" %>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <%= f.label :email %><br>
+                                    <%= f.text_field :email, class:"form-control" %>
+                                </div>
+                            </div>
+
+                            <%= render 'customers/address_form', f: f %>
+                            <%= render 'partials/phone_form', f: f %>
+
+
+                            <!-- /.modal-dialog -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <%= f.submit "Save changes" , class: 'btn btn-primary' %>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>
+
 <div id="billingModal" class="modal fade" tabindex="-1" role="dialog">
     <%= form_for [@job, @job_detail], remote: true  do |f| %>
     <div class="modal-dialog" role="document">
@@ -480,11 +549,11 @@
                                 </div>
                             </div>
                             <!-- <div class="col-xs-6"> -->
-                                <!-- <div class="form-group"> -->
-                                    <!-- <div class="field"> -->
-                                        <% f.label :esl_nst_amount_id %><br>
-                                        <% f.collection_radio_buttons(:esl_nst_amount_id, AffectedType.all, :id, :name) %>
-                                    <!-- </div>
+                            <!-- <div class="form-group"> -->
+                            <!-- <div class="field"> -->
+                            <% f.label :esl_nst_amount_id %><br>
+                            <% f.collection_radio_buttons(:esl_nst_amount_id, AffectedType.all, :id, :name) %>
+                            <!-- </div>
                                 </div>
                             </div> -->
                             <div class="col-xs-6 non-self">
