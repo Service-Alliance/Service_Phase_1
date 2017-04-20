@@ -1,3 +1,5 @@
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-10 table-responsive">
@@ -6,14 +8,18 @@
             <!-- <%= select_tag("filter", options_for_select(JobStatus.all.map{|p| [p.name, p.id]}, class: "form-control")) %> -->
             <!-- comment -->
             <div class="row">
-              <div class="col-xs-12">
-                <a href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=32&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search" class="btn btn-primary">New York Data</a>
+                <div class="col-xs-12">
+                    <!-- <a
+                        href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=32&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search"
+                        class="btn btn-primary">New York Data</a>
 
-                <a class="btn btn-primary" href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=30&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search">New Jersey Data</a>
-              </div>
+                    <a
+                        class="btn btn-primary"
+                        href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=30&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search">New Jersey Data</a> -->
+                </div>
             </div>
 
-            <table class="table table-striped">
+            <table id="job-table" class="table table-striped">
                 <thead>
                     <tr>
                         <th>Job Recieved</th>
@@ -41,13 +47,18 @@
                 <tbody>
                     <% @jobs.each do |job| %>
                     <tr>
-                        <td> <%= job.created_at %></td>
+                        <td>
+                          <%= job.created_at.strftime("%D %I:%M %p") %></td>
                         <td><%= job.try(:losses).try(:first).try(:loss_type).try(:name) %></td>
                         <td><%= job.try(:customer).try(:full_name) %></td>
-                        <td><%= job.try(:customer).try(:address).try(:address_1) %> <%= job.try(:customer).try(:address).try(:address_2) %></td>
-                        <td><%= job.try(:customer).try(:address).try(:city) %> </td>
-                        <td><%= job.try(:customer).try(:address).try(:zip_code) %> </td>
-                        <td><%= job.try(:customer).try(:phones).try(:first).try(:number) %> </td>
+                        <td><%= job.try(:customer).try(:address).try(:address_1) %>
+                            <%= job.try(:customer).try(:address).try(:address_2) %></td>
+                        <td><%= job.try(:customer).try(:address).try(:city) %>
+                        </td>
+                        <td><%= job.try(:customer).try(:address).try(:zip_code) %>
+                        </td>
+                        <td><%= job.try(:customer).try(:phones).try(:first).try(:number) %>
+                        </td>
                         <td><%= job.try(:referral_type).try(:name) %></td>
                         <td><%= job.try(:job_detail).try(:insurance_company).try(:name) %></td>
                         <td><%= job.try(:job_detail).try(:job_coordinator).try(:full_name) %></td>
@@ -70,9 +81,9 @@
         </div>
         <div class="col-xs-2 margin-top-5">
             <%= search_form_for @search do |f| %>
-            <%= f.label :caller_full_name, "Caller Full Name" %><br />
+            <%= f.label :caller_full_name, "Caller Full Name" %><br/>
             <%= f.search_field :caller_full_name_cont, {class: "form-control"} %>
-            <%= f.label :customer_full_name_cont, "Customer Full Name" %><br />
+            <%= f.label :customer_full_name_cont, "Customer Full Name" %><br/>
             <%= f.search_field :customer_full_name_cont, {class: "form-control"} %>
             <%= f.label :franchise_id %><br/>
             <%= f.select :franchise_id_in, options_from_collection_for_select(Franchise.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
@@ -103,8 +114,6 @@
 
             <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-top-2" %></div>
 
-
-
             <% end %>
         </div>
     </div>
@@ -113,23 +122,9 @@
 
 <script>
 
-    $('#filter').live('change', function () {
-        searching_new_data()
-    }).change();
 
-    function searching_new_data() {
-        $.ajax({
-            url: "/jobs/filter",
-            data: {
-                data: {
-                    status: $('filter').val()
-                }
-
-                success: function (html) {
-
-                    $('table').empty();
-                    $('table').append(html);
-                }
-            })})
-    }
+    $(document).ready(function () {
+        $('#job-table').DataTable();
+    });
 </script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>

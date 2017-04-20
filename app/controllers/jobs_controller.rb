@@ -16,10 +16,25 @@ class JobsController < ApplicationController
   end
 
   def list
-    @jobs = Job.where.not(status_id: nil).last(200)
-    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
-                                         :job_loss_type, :insurance_details,
-                                         :job_detail, :customer])
+    @count = Job.where.not(status_id: nil).count
+    # p "order"
+    # # p params[:order]
+    # # .order("callers.id ASC").includes(:caller)
+    # if params[:sort].include?(".")
+    #   @sort = params[:sort].split('.').first.to_sym
+    #   order_string = "#{@sort} #{params[:order]}"
+      @jobs = Job.where.not(status_id: nil).limit(200)
+      render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
+                                           :job_loss_type, :insurance_details,
+                                           :job_detail, :customer])
+    # else
+    #   @sort = params[:sort]
+    #   order_string = "#{@sort} #{params[:order]}"
+    #   @jobs = Job.where.not(status_id: nil).limit(params[:limit]).offset(params[:offset]).order(order_string)
+    #   render json: {"total": @count, rows: @jobs.as_json(include: [:job_status, :job_type, :franchise,
+    #                                        :job_loss_type, :insurance_details,
+    #                                        :job_detail, :customer])}
+    # end
   end
 
   def no_activity
