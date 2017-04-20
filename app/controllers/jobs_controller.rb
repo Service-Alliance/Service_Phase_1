@@ -7,11 +7,11 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     if params[:user_id]
-      @jobs = Job.where(entered_by_id: params[:user_id]).paginate(page: params[:page], per_page: 30).order('created_at DESC')
+      @jobs = Job.where(entered_by_id: params[:user_id]).page(params[:page]).order('created_at DESC')
     else
       @search = Job.where.not(status_id: nil).order('created_at DESC').search(params[:q])
       # @jobs = @search.result
-      @jobs = @search.result.paginate(page: params[:page], per_page: 30).order('created_at DESC')
+      @jobs = @search.result.page(params[:page]).order('created_at DESC')
     end
   end
 
