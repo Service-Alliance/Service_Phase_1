@@ -61,7 +61,7 @@
                         </td>
                         <td><%= job.try(:referral_type).try(:name) %></td>
                         <td><%= job.try(:job_detail).try(:insurance_company).try(:name) %></td>
-                        <td><%= job.try(:job_coordinator).try(:full_name) %></td>
+                        <td><%= job.try(:job_detail).try(:job_coordinator).try(:full_name) %></td>
                         <td><%= job.try(:user).try(:full_name) %></td>
                         <td><%= job.try(:franchise).try(:name) %></td>
                         <td><%= job.try(:job_status).try(:name) %></td>
@@ -101,8 +101,7 @@
             <%= f.label :losses_loss_type_id_in, "Loss Type" %><br/>
             <%= f.select :losses_loss_type_id_in, options_from_collection_for_select(LossType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
-            <%= f.label :customer_address_state_id, "Customer State" %><br/>
-            <%= f.select :customer_address_state_id_in, options_from_collection_for_select(State.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            
             <%= f.label :referral_type_id_in, "Referral Type" %><br/>
             <%= f.select :referral_type_id_in, options_from_collection_for_select(ReferralType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :agent_id_in, "Agent Name" %><br/>

@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   get 'jobs/:id/create_contract' => 'jobs#create_contract', as: :create_contract
   get 'jobs/:id/create_contract_sent' => 'jobs#create_contract_sent', as: :create_contract_sent
   get 'pipeline' => 'pipeline#index'
+  get 'jobs/new-york-datasheet' => 'jobs#new_york_datasheet', as: :new_york_datasheet
 
   resources :jobs do
     get 'notes' => 'notes#job_notes'

@@ -37,6 +37,13 @@ class JobsController < ApplicationController
     # end
   end
 
+  def new_york_datasheet
+    # new_york = State.find_by(name: "NY")
+    jim = User.find_by(email: 'jbertini@servpro5933.com')
+    @search = Job.where.not(status_id: nil).where(franchise_id: [1,2,3,4]).where.not(referral_employee_id: jim.id).order('created_at DESC').search(params[:q])
+    @jobs = @search.result.page(params[:page]).order('created_at DESC')
+  end
+
   def no_activity
     @jobs = Job.where('last_action < ? AND status_id = ?', 7.days.ago, 1)
     render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
