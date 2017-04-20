@@ -31,6 +31,8 @@ class WorkOrdersController < ApplicationController
 
     respond_to do |format|
       if @work_order.save
+        tracker_task = TrackerTask.find_by(name: "Work Order Created")
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id)
         work_order_send_to_params[:send_to].each do |user|
           unless user == ""
             @user = User.find(user)
@@ -46,7 +48,7 @@ class WorkOrdersController < ApplicationController
           end
           @job.save
         end
-        format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order was successfully created.' }
+        format.html { redirect_to job_path(@job), notice: 'Work Order was successfully created.' }
         format.json { render :show, status: :created, location: @work_order }
       else
         format.html { render :new }

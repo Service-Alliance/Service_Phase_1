@@ -27,6 +27,9 @@
                             <li>
                                 <a href="#call" aria-controls="call" role="tab" data-toggle="tab">Calls</a>
                             </li>
+                            <li>
+                                <a href="#work_order" aria-controls="work_order" role="tab" data-toggle="tab">Work Order</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="panel-body">
@@ -166,7 +169,6 @@
                                 </div>
                                 <% end %>
                             </div>
-
                             <div class="tab-pane fade" id="call">
                                 <div class="col-xs-12">
                                     <div class="row">
@@ -187,7 +189,8 @@
                                                             <%= submit_tag "Add Call to Job", class: "btn btn-primary" %>
                                                         </div>
                                                     </div>
-                                                </div <% end %>
+                                                </div>
+                                                <% end %>
                                             </div>
                                         </div>
                                     </div>
@@ -227,7 +230,173 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade" id="work_order">
+                              <%= form_for [@job, @work_order] do |f| %>
+                              <% if @work_order.errors.any? %>
+                              <div id="error_explanation">
+                                  <h2><%= pluralize(@work_order.errors.count, "error") %>
+                                      prohibited this work_order from being saved:</h2>
+
+                                  <ul>
+                                      <% @work_order.errors.full_messages.each do |message| %>
+                                      <li><%= message %></li>
+                                      <% end %>
+                                  </ul>
+                              </div>
+                              <% end %>
+                              <hr/>
+                              <div class="col-xs-12">
+                                <h2>SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
+                                <h2><%= @job.try(:franchise).try(:phone) %></h2>
+                              </div>
+
+                              <div class="col-sm-6">
+
+                                  <div class="form-group">
+                                      <%= f.label :to %><br>
+                                      <%= f.text_field :to, class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-6">
+                                  <div class="form-group">
+                                      <%= f.label :name %><br>
+                                      <%= f.text_field :name, class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-6">
+                                  <div class="form-group">
+                                      <%= f.label :date %><br>
+                                      <%= f.date_select :date %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-6">
+                                  <div class="form-group">
+                                      <%= f.label :typed_by %><br>
+                                      <%= f.text_field :typed_by, class: "form-control", value: current_user.full_name %>
+                                  </div>
+                              </div>
+                              <div class="col-xs-12">
+                                <hr/>
+                              </div>
+
+                              <h2 class="text-center">Work Order</h2>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :job_start %><br>
+                                      <%= f.datetime_select :job_start, class: "form-control", :ampm => true %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :job_name %><br>
+                                      <%= f.text_field :job_name, class: "form-control", value: @job.name %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :job_location %><br>
+                                      <%= f.text_field :job_location, class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :telephone %><br>
+                                      <%= f.text_field :telephone, class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :contact %><br>
+                                      <%= f.text_field :contact, class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= f.label :insurance %><br>
+                                      <%= f.text_field :insurance, value: "", class: "form-control", value: @job.try(:job_detail).try(:insurance_company).try(:name) %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= f.label :claim_number %><br>
+                                      <%= f.text_field :claim_number, class: "form-control", value: @job.try(:job_detail).try(:claim_number) %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= f.label :crew %><br>
+                                      <%= f.text_field :crew, class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= f.label :approx_time_on_loss %><br>
+                                      <%= f.time_select :approx_time_on_loss, class: "form-control", :ampm => true %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :required %><br>
+                                      <%= f.text_area :required, class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :referral %><br>
+                                      <%= f.text_field :referral, class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :franchise_location %><br>
+                                      <%= f.text_field :franchise_location, class: "form-control", value:  @job.try(:franchise).try(:name) %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :scope_of_work %><br>
+                                      <%= f.text_area :scope_of_work, class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-12">
+                                  <div class="form-group">
+                                      <%= f.label :job_manager_contact_info %><br>
+                                      <%= f.text_field :job_manager_contact_info, class: "form-control", value: @job.job_managers.map{|manager| manager.job_manager.full_name} %>
+                                  </div>
+                              </div>
+                              <div class="col-xs-12">
+
+
+                              <label>Send to:</label><br />
+                            </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="actions col-sm-12">
+                                  <%= f.submit class: "btn btn-primary" %>
+                              </div>
+                              <% end %>
+                            </div>
                         </div>
+
+
 
                     </div>
                 </div>
@@ -275,7 +444,10 @@
                             <div class="timeline-label">
 
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Note Created &bull; <%= noted.created_at.strftime("%D %I:%M %p") %> &bull; <%= noted.try(:user).try(:full_name) %></h3>
+                                    <h3 class="panel-title">Note Created &bull;
+                                        <%= noted.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= noted.try(:user).try(:full_name) %></h3>
                                 </div>
                                 <div class="panel-body">
                                     <%= noted.content %>
@@ -293,7 +465,11 @@
                             </div>
                             <div class="timeline-label">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Upload &bull; <%= upload.try(:created_at).strftime("%D %I:%M %p") %> &bull; <%= tracker.user.try(:full_name) %> </h3>
+                                    <h3 class="panel-title">Upload &bull;
+                                        <%= upload.try(:created_at).strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.user.try(:full_name) %>
+                                    </h3>
                                 </div>
                                 <div class="panel-body">
                                     <%= upload.try(:file_name) %>
@@ -312,10 +488,34 @@
                             </div>
                             <div class="timeline-label">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Call Assigned &bull; <%= tracker.created_at.strftime("%D %I:%M %p") %> &bull; <%= tracker.try(:user).try(:full_name) %></h3>
+                                    <h3 class="panel-title">Call Assigned &bull;
+                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.try(:user).try(:full_name) %></h3>
                                 </div>
                                 <div class="panel-body">
                                     <%= link_to "View Call", call_path(call.id) %>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "Work Order Created" %>
+                    <% call = WorkOrder.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Work Order Created &bull;
+                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= link_to "View Work Order", job_work_order_path(@job, call.id) %>
                                 </div>
                             </div>
                         </div>
@@ -331,7 +531,11 @@
                             </div>
                             <div class="timeline-label">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><%= scheduler.title %> &bull; <%= tracker.created_at.strftime("%D %I:%M %p") %> &bull; <%= tracker.try(:user).try(:full_name) %></h3>
+                                    <h3 class="panel-title"><%= scheduler.title %>
+                                        &bull;
+                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.try(:user).try(:full_name) %></h3>
                                 </div>
                                 <div class="panel-body">
                                     Date:

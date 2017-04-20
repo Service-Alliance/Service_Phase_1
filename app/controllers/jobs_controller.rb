@@ -63,6 +63,7 @@ class JobsController < ApplicationController
     @future_schedules = []
     @past_schedules = []
     @note = @job.notes.new
+    @work_order = WorkOrder.new
     @job.schedulers.each do |scheduler|
       @future_schedules << scheduler if scheduler.event_date.future?
     end
@@ -85,6 +86,7 @@ class JobsController < ApplicationController
     @caller.save
     @job_detail = JobDetail.create(job_id: @job.id)
     @phones = nil
+
 
 
     # @grouped_people_options = Department.all.map do |department|
