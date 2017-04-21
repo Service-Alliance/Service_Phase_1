@@ -210,6 +210,10 @@ body {
     }
 }
 
+.inline {
+  display: inline-block !important;
+}
+
 #bottom-nav {
     & ul {
         list-style-type: none;

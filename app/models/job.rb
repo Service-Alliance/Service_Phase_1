@@ -28,6 +28,7 @@ class Job < ActiveRecord::Base
   has_many :schedulers
   belongs_to :referral_vendor, foreign_key: :referral_vendor_id, class_name: 'Vendor'
   belongs_to :referral_employee, foreign_key: :referral_employee_id, class_name: 'User'
+  has_many :subscriptions
 
 
   # Activity Tracking activated

@@ -6,42 +6,41 @@
                 Job<span class="glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul class="nav nav-second-level">
-              <li>
-                  <%= link_to job_path(@job)  do %>
-                  <i class="<%= @job ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Job Information
-                  <% end %>
-              </li>
+                <li>
+                    <%= link_to job_path(@job)  do %>
+                    <i class="<%= @job ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Job Information
+                    <% end %>
+                </li>
 
-              <li>
-                  <%= link_to new_or_view_job_loss_path(@job, @job.losses)  do %>
-                  <i class="<%= @job.losses ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Loss Information
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to new_or_view_job_property_path(@job, @job.property)  do %>
-                  <i class="<%= @job.property ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Property Information
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to new_or_view_job_detail_path(@job, @job.job_detail)  do %>
-                  <i class="<%= @job.job_detail ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Billing Details
-                  <% end %>
-              </li>
+                <li>
+                    <%= link_to new_or_view_job_loss_path(@job, @job.losses)  do %>
+                    <i class="<%= @job.losses ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Loss Information
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_property_path(@job, @job.property)  do %>
+                    <i class="<%= @job.property ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Property Information
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_detail_path(@job, @job.job_detail)  do %>
+                    <i class="<%= @job.job_detail ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Billing Details
+                    <% end %>
+                </li>
 
-              <li>
-                  <%= link_to job_overview_path(@job)  do %>
-                <i class="glyph-done glyphicon glyphicon-ok"></i>
-                  Job Overview
-                  <% end %>
-              </li>
+                <li>
+                    <%= link_to job_overview_path(@job)  do %>
+                    <i class="glyph-done glyphicon glyphicon-ok"></i>
+                    Job Overview
+                    <% end %>
+                </li>
             </ul>
             <!-- /.nav-second-level -->
         </li>
-
 
         <li>
             <a href="#">
@@ -49,18 +48,18 @@
                 Contact<span class="glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul class="nav nav-second-level">
-              <li>
-                  <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
-                  <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Caller Information
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to job_calls_path(@job)  do %>
-                  <i class="<%= @job.calls ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Phone Calls
-                  <% end %>
-              </li>
+                <li>
+                    <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
+                    <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Caller Information
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to job_calls_path(@job)  do %>
+                    <i class="<%= @job.calls ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Phone Calls
+                    <% end %>
+                </li>
             </ul>
             <!-- /.nav-second-level -->
         </li>
@@ -71,114 +70,137 @@
                 Job Contacts<span class="glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul class="nav nav-second-level">
-              <li>
-                  <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
-                  <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Caller Information
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to new_or_view_customer_path(@job, @job.customer)  do %>
-                  <i class="<%= @job.customer ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Customer Information
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to new_or_view_job_manager_path(@job, @job.job_managers)  do %>
-                  <i class="<%= @job.job_managers.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
-                  Manager Assignment
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to new_or_view_job_vendor_path(@job, @job.vendor_assignments)  do %>
-                  <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Vendor Assignment
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to new_or_view_job_contact_path(@job, @job.contact_assignments)  do %>
-                  <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Referral Assignment
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to new_or_view_agent_path(@job, @job.agent)  do %>
-                  <i class="<%= @job.agent ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Insurance Agent
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to new_or_view_adjuster_path(@job, @job.adjuster)  do %>
-                  <i class="<%= @job.adjuster ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Insurance Adjuster
-                  <% end %>
-              </li>
-              <li>
-                  <%= link_to new_or_view_job_emergency_contact_path(@job, @job.emergency_contact)  do %>
-                  <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Emergency Contacts
-                  <% end %>
-              </li>
+                <li>
+                    <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
+                    <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Caller Information
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_customer_path(@job, @job.customer)  do %>
+                    <i class="<%= @job.customer ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Customer Information
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_manager_path(@job, @job.job_managers)  do %>
+                    <i class="<%= @job.job_managers.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
+                    Manager Assignment
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_vendor_path(@job, @job.vendor_assignments)  do %>
+                    <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Vendor Assignment
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_contact_path(@job, @job.contact_assignments)  do %>
+                    <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Referral Assignment
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_agent_path(@job, @job.agent)  do %>
+                    <i class="<%= @job.agent ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Insurance Agent
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_adjuster_path(@job, @job.adjuster)  do %>
+                    <i class="<%= @job.adjuster ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Insurance Adjuster
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to new_or_view_job_emergency_contact_path(@job, @job.emergency_contact)  do %>
+                    <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
+                    Emergency Contacts
+                    <% end %>
+                </li>
             </ul>
             <!-- /.nav-second-level -->
         </li>
         <li>
 
-
-        <%= link_to new_or_view_job_work_order_path(@job, @job.work_orders)  do %>
-        Work Order
-        <% end %>
-  </li>
-        <li>
-          <a href="#">
-              <i class="fa fa-bar-chart-o fa-fw"></i>
-              Job Files<span class="glyphicon glyphicon-chevron-down"></span>
-          </a>
-          <ul class="nav nav-second-level">
-            <li>
-                <%= link_to job_uploads_path(@job)  do %>
-                <i class="<%= @job.uploads.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
-                Files/Uploads
-                <% end %>
-            </li>
-          </ul>
-
+            <%= link_to new_or_view_job_work_order_path(@job, @job.work_orders)  do %>
+            Work Order
+            <% end %>
         </li>
-
-
-
-        <!-- <li>
+        <li>
             <a href="#">
                 <i class="fa fa-bar-chart-o fa-fw"></i>
-                Other<span class="glyphicon glyphicon-chevron-down"></span>
+                Job Files<span class="glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul class="nav nav-second-level">
-              <li>
-                  <%= link_to new_or_view_job_notes_path(@job, @job.notes)  do %>
-                  <i class="<%= @job.emergency_contact ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Job Notes
-                  <% end %>
-              </li>
-
-
-              <li>
-                  <%= link_to job_job_forms_path(@job)  do %>
-                  <i class="<%= @job.job_forms ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
-                  Form Details
-                  <% end %>
-              </li>
-
-
-
+                <li>
+                    <%= link_to job_uploads_path(@job)  do %>
+                    <i class="<%= @job.uploads.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
+                    Files/Uploads
+                    <% end %>
+                </li>
             </ul>
-          </li> -->
+        </li>
 
+        <li>
+            <div class="subscribers">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">SUBSCRIBERS (<%=@job.subscriptions.count %>) <a class="inline" data-toggle="modal" data-target="#subscriptions"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <% @job.subscriptions.each do |subscriber| %>
 
+                            <li>
+                                <%= subscriber.user.full_name %>
+                            </li>
+
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </li>
 
     </ul>
+
 </div>
 <!-- /#sidebar-wrapper -->
 
-<script>$(function() {
-    $('.sidebar-nav').metisMenu();
-});</script>
+
+<div class="modal fade" id="subscriptions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for [@job, @job.subscriptions.new] do |f| %>
+
+
+          <div class="field">
+            <%= f.label :user_id %><br>
+            <%= f.collection_select :user_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+    $(function () {
+        $('.sidebar-nav').metisMenu();
+    });
+</script>

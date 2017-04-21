@@ -40,7 +40,15 @@ class JobsController < ApplicationController
   def new_york_datasheet
     # new_york = State.find_by(name: "NY")
     jim = User.find_by(email: 'jbertini@servpro5933.com')
-    @search = Job.where.not(status_id: nil).where(franchise_id: [1,2,3,4]).where.not(referral_employee_id: jim.id).order('created_at DESC').search(params[:q])
+    duct = LossType.find_by(name: "Duct Cleaning")
+    state_farm = InsuranceCompany.find_by(name: "State Farm")
+    @first = Job.where.not(status_id: nil).where(franchise_id: [1,2,3,4])
+    p @search = @first.order('created_at DESC').search(params[:q], franchise_id_in: [1,2,3,4], job_detail_insurance_company_id_eq: nil)
+    @duct = Job.joins(:losses).merge(Loss.where(loss_type_id: duct.id))
+    @state_farm = Job.joins(:job_detail).merge(JobDetail.where(insurance_company_id: state_farm.id))
+    @jim = Job.where(referral_employee_id: jim.id)
+    # @search = @search - @duct - @state_farm - @jim
+
     @jobs = @search.result.page(params[:page]).order('created_at DESC')
   end
 

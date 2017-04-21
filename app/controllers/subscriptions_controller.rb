@@ -26,10 +26,11 @@ class SubscriptionsController < ApplicationController
   # POST /vendor_categories.json
   def create
     @subscription = Subscription.new(subscription_params)
+    @subscription.job_id = @job.id
 
     respond_to do |format|
       if @subscription.save
-        format.html { redirect_to job_subscriptions_path(@job), notice: 'Subscription was successfully created.' }
+        format.html { redirect_to job_path(@job), notice: 'Subscription was successfully created.' }
         format.json { render :show, status: :created, location: @subscription }
       else
         format.html { render :new }
