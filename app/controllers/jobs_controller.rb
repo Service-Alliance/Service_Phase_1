@@ -64,7 +64,7 @@ class JobsController < ApplicationController
   def show
     @property = Property.find_by(job_id: @job)
     @phone = Call.find_by(job_id: @job.id)
-    @loss = Loss.find_by(job_id: @job.id)
+    @loss = Loss.find_by(job_id: @job.id, fnol_recieved: Time.now)
     @caller = Caller.find_by(job_id: @job.id)
     @address = @caller.try(:address)
     @customer = @job.customer

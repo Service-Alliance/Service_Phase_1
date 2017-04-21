@@ -48,7 +48,7 @@
                     <% @jobs.each do |job| %>
                     <tr>
                         <td>
-                          <%= job.created_at.strftime("%D %I:%M %p") %></td>
+                          <%= job.losses.try(:first).try(:fnol_recieved).try(:strftime, "%D %I:%M %p") %></td>
                         <td><%= job.try(:losses).try(:first).try(:loss_type).try(:name) %></td>
                         <td><%= job.try(:customer).try(:full_name) %></td>
                         <td><%= job.try(:customer).try(:address).try(:address_1) %>
@@ -81,6 +81,13 @@
         </div>
         <div class="col-xs-2 margin-top-5">
             <%= search_form_for @search do |f| %>
+            <%= f.label :losses_fnol_recieved_gteq, "Date Range" %><br/>
+            <%= f.search_field :losses_fnol_recieved_gteq, {class: "form-control datePicker"} %>
+
+            <% f.label :losses_fnol_recieved_gteq, "End Date" %>
+            <%= f.search_field :losses_fnol_recieved_lteq, {class: "form-control datePicker"} %>
+
+
             <%= f.label :caller_full_name, "Caller Full Name" %><br/>
             <%= f.search_field :caller_full_name_cont, {class: "form-control"} %>
             <%= f.label :customer_full_name_cont, "Customer Full Name" %><br/>
@@ -121,10 +128,15 @@
 <p id="notice"><%= notice %></p>
 
 <script>
+flatpickr(".datePicker", {
+    // defaultDate: new Date(),
+    // create an extra input solely for display purposes
+    altInput: true,
+    altFormat: "F j, Y"
+});
 
-
-    $(document).ready(function () {
-        $('#job-table').DataTable();
-    });
+    // $(document).ready(function () {
+    //     $('#job-table').DataTable();
+    // });
 </script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
