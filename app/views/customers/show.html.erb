@@ -6,7 +6,9 @@
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
             <div class="col-xs-12">
+
                 <h1 class="text-center">Customer Information:</h1>
+                  <%= link_to "Same As Caller", job_customer_same_as_caller_path(@job), class: "btn btn-primary margin-top-2 margin-bottom-2", method: :post %>
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title">
