@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   resources :jobs do
     get 'notes' => 'notes#job_notes'
     get 'overview' => 'overview#index', as: :overview
+    get 'loss-sheet' => 'loss_sheet#index', as: :loss_sheet
     resources :ticsheets
     resources :properties
     resources :losses

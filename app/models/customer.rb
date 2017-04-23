@@ -18,5 +18,45 @@ class Customer < ActiveRecord::Base
     return "#{first+ " " + last}"
   end
 
+  def cell_phones
+    phones = []
+    self.phones.each do |phone|
+      if phone.type.name == "Cell"
+        phones << phone
+      end
+    end
+    return phones
+  end
+
+  def home_phones
+    phones = []
+    self.phones.each do |phone|
+      if phone.type.name == "Home"
+        phones << phone
+      end
+    end
+    return phones
+  end
+
+  def fax_numbers
+    phones = []
+    self.phones.each do |phone|
+      if phone.type.name == "Fax"
+        phones << phone
+      end
+    end
+    return phones
+  end
+
+  def work_numbers
+    phones = []
+    self.phones.each do |phone|
+      if phone.type.name == "Work"
+        phones << phone
+      end
+    end
+    return phones
+  end
+
 
 end

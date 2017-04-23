@@ -1,0 +1,182 @@
+<div class="container-fluid">
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <div class="col-xs-12">
+                <h1 class="text-center">Overview</h1>
+                <div class="row panel">
+                  <button class="btn btn-primary margin-top-1 margin-bottom-1 hidden-print pull-right" onclick="printPage()">Print this page</button>
+                    <div class="col-xs-12">
+                        <section id="job-information">
+                        <div class="row">
+                          <div class="col-xs-4">
+                            STATUS: <br />
+                            <%= @job.job_status.name %>
+                          </div>
+                          <div class="col-xs-4 text-center">
+                            <h2 style="margin: 0;">Loss Sheet</h2>
+                          </div>
+                          <div class="col-xs-4">
+                            JOB MANAGER <br  />
+                            <%= @job.try(:job_managers).try(:first).try(:job_manager).try(:full_name) %>
+                          </div>
+                        </div>
+                        <div class="row margin-top-2">
+                          <div class="col-xs-4">
+                            Date Recieved: <%= @job.created_at %>
+                          </div>
+                          <div class="col-xs-4">
+                            Taken By: <%= @job.try(:user).try(:full_name) %>
+                          </div>
+                          <div class="col-xs-4">
+                            Time: <%= @job.created_at %>
+                          </div>
+                          <div class="col-xs-12">
+                            Called In By: <%= @job.try(:caller).try(:full_name) %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12 text-center">
+                            <h2>Insureds Information</h2>
+                          </div>
+                          <div class="col-xs-6">
+                            Insured (Customer): <%= @job.try(:customer).try(:full_name) %>
+                          </div>
+                          <div class="col-xs-6">
+                            Home #:
+                            <% @job.try(:customer).try(:home_phones).each do |phones| %>
+                              <%= phone.number %>
+                            <% end %>
+                          </div>
+                          <div class="col-xs-6">
+                            Address:
+                          </div>
+                          <div class="col-xs-6">
+                            Business #:
+                            <% @job.try(:customer).try(:work_numbers).each do |phones| %>
+                              <%= phone.number %>
+                            <% end %>
+                          </div>
+                          <div class="col-xs-6">
+                            <%= @job.try(:customer).try(:adddress).try(:address_1) %>
+                          </div>
+                          <div class="col-xs-6">
+                            Fax #:
+                            <% @job.try(:customer).try(:fax_numbers).each do |phones| %>
+                              <%= phone.number %>
+                            <% end %>
+                          </div>
+                          <div class="col-xs-6">
+                            <%= @job.try(:customer).try(:adddress).try(:address_2) %>
+                          </div>
+                          <div class="col-xs-6">
+                            Cell #:
+                            <% @job.try(:customer).try(:cell_phones).each do |phones| %>
+                              <%= phone.number %>
+                            <% end %>
+                          </div>
+                          <div class="col-xs-6">
+                            <%= @job.try(:customer).try(:adddress).try(:city) %> <%= @job.try(:customer).try(:adddress).try(:state).try(:name) %><%= @job.try(:customer).try(:adddress).try(:zip_code) %>
+                          </div>
+                          <div class="col-xs-12">
+                            Speak To:
+                          </div>
+                          <div class="col-xs-6">
+                            Other (Caller):
+                          </div>
+                          <div class="col-xs-6">
+                            Home #:  <% @job.try(:caller).try(:home_phones).each do |phones| %>
+                                <%= phone.number %> <br  />
+                              <% end %>
+                          </div>
+                          <div class="col-xs-6">
+                            Address:
+                          </div>
+                          <div class="col-xs-6">
+                            Business #:
+                            <% @job.try(:caller).try(:work_numbers).each do |phones| %>
+                              <%= phone.number %><br />
+                            <% end %>
+                          </div>
+                          <div class="col-xs-6">
+                            <%= @job.try(:caller).try(:adddress).try(:address_1) %>
+
+                          </div>
+                          <div class="col-xs-6">
+                            Fax #:
+                            <% @job.try(:caller).try(:fax_numbers).each do |phones| %>
+                              <%= phone.number %> <br />
+                            <% end %>
+                          </div>
+                          <div class="col-xs-6">
+                                <%= @job.try(:caller).try(:adddress).try(:address_2) %>
+                          </div>
+                          <div class="col-xs-6">
+                            Other #:
+                          </div>
+                          <div class="col-xs-12">
+                            Speak To:
+                          </div>
+                          <div class="col-xs-6">
+                              <%= @job.try(:caller).try(:adddress).try(:city) %>, <%= @job.try(:caller).try(:adddress).try(:state).try(:name) %>   <%= @job.try(:caller).try(:adddress).try(:zip_code) %>
+                          </div>
+                          <div class="col-xs-6">
+                            Referred By: <%= @job.referral_type.try(:name) %>
+                          </div>
+                          <div class="col-xs-6">
+
+                          </div>
+                          <div class="col-xs-6">
+                            Company:
+                          </div>
+                          <div class="col-xs-6">
+
+                          </div>
+                          <div class="col-xs-6">
+                            Phone:
+                          </div>
+                          <div class="col-xs-6">
+                            Type of Loss:
+                          </div>
+                          <div class="col-xs-6">
+                            Date of Loss:
+                          </div>
+                          <div class="col-xs-12">
+                            Insurance Information
+                          </div>
+                          <div class="col-xs-12">
+                            Company: <%= @job.try(:job_deail).try(:insurance_company).try(:name) %>
+                          </div>
+                          <div class="col-xs-6">
+                            Claim #:<%= @job.try(:job_deail).try(:claim_number) %>
+                          </div>
+                          <div class="col-xs-6">
+                            Policy #:<%= @job.try(:job_deail).try(:policy_number) %>
+                          </div>
+                          <div class="col-xs-6">
+                            Adjuster:<%= @job.try(:adjuster).try(:full_name) %>
+                          </div>
+                          <div class="col-xs-6">
+                            Phone #:
+                          </div>
+                          <div class="col-xs-6">
+                            Fax #:
+                          </div>
+                          <div class="col-xs-6">
+                            Deductible: $<%= @job.try(:job_deail).try(:deductible_amount) %>
+                          </div>
+                        </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+function printPage() {
+    window.print();
+}
+</script>
