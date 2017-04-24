@@ -3,7 +3,6 @@
         <%= render partial: "partials/jobs_sidebar" %>
         <div id="page-content-wrapper">
             <div class="col-xs-12">
-                <h1 class="text-center">Overview</h1>
                 <div class="row panel">
                   <button class="btn btn-primary margin-top-1 margin-bottom-1 hidden-print pull-right" onclick="printPage()">Print this page</button>
                     <div class="col-xs-12">
@@ -23,13 +22,13 @@
                         </div>
                         <div class="row margin-top-2">
                           <div class="col-xs-4">
-                          <span class="bold">Date Recieved: </span><%= @job.created_at %>
+                          <span class="bold">Date Recieved: </span><%= @job.created_at.strftime("%D") %>
                           </div>
                           <div class="col-xs-4">
                             <span class="bold">Taken By: </span><%= @job.try(:user).try(:full_name) %>
                           </div>
                           <div class="col-xs-4">
-                            <span class="bold">Time: </span><%= @job.created_at %>
+                            <span class="bold">Time: </span><%= @job.created_at.strftime("%I:%M %p") %>
                           </div>
                           <div class="col-xs-12">
                             <span class="bold">Called In By: </span><%= @job.try(:caller).try(:full_name) %>
