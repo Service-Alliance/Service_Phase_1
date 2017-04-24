@@ -160,13 +160,13 @@
                             Insurance Information
                           </div>
                           <div class="col-xs-12">
-                            Company: <%= @job.try(:job_deail).try(:insurance_company).try(:name) %>
+                            Company: <%= @job.try(:job_detail).try(:insurance_company).try(:name) %>
                           </div>
                           <div class="col-xs-6">
-                            Claim #:<%= @job.try(:job_deail).try(:claim_number) %>
+                            Claim #:<%= @job.try(:job_detail).try(:claim_number) %>
                           </div>
                           <div class="col-xs-6">
-                            Policy #:<%= @job.try(:job_deail).try(:policy_number) %>
+                            Policy #:<%= @job.try(:job_detail).try(:policy_number) %>
                           </div>
                           <div class="col-xs-6">
                             Adjuster:<%= @job.try(:adjuster).try(:full_name) %>
@@ -196,7 +196,7 @@
                             <% end %>
                           </div>
                           <div class="col-xs-6">
-                            Deductible: $<%= @job.try(:job_deail).try(:deductible_amount) %>
+                            Deductible: $<%= @job.try(:job_detail).try(:deductible_amount) %>
                           </div>
                         </div>
                         </section>
