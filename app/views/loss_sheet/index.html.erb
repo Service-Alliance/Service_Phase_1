@@ -53,8 +53,10 @@
                           </div>
                           <div class="col-xs-6">
                             Business #:
+                            <% if @job.customer && @job.customer.phones %>
                             <% @job.try(:customer).try(:work_numbers).each do |phones| %>
                               <%= phone.number %>
+                            <% end %>
                             <% end %>
                           </div>
                           <div class="col-xs-6">
@@ -62,8 +64,10 @@
                           </div>
                           <div class="col-xs-6">
                             Fax #:
+                            <% if @job.customer && @job.customer.phones %>
                             <% @job.try(:customer).try(:fax_numbers).each do |phones| %>
                               <%= phone.number %>
+                            <% end %>
                             <% end %>
                           </div>
                           <div class="col-xs-6">
@@ -71,8 +75,10 @@
                           </div>
                           <div class="col-xs-6">
                             Cell #:
+                            <% if @job.customer && @job.customer.phones %>
                             <% @job.try(:customer).try(:cell_phones).each do |phones| %>
                               <%= phone.number %>
+                            <% end %>
                             <% end %>
                           </div>
                           <div class="col-xs-6">
@@ -85,8 +91,10 @@
                             Other (Caller):
                           </div>
                           <div class="col-xs-6">
+                              <% if @job.caller && @job.caller.phones %>
                             Home #:  <% @job.try(:caller).try(:home_phones).each do |phones| %>
                                 <%= phone.number %> <br  />
+                              <% end %>
                               <% end %>
                           </div>
                           <div class="col-xs-6">
@@ -94,8 +102,10 @@
                           </div>
                           <div class="col-xs-6">
                             Business #:
+                            <% if @job.caller && @job.caller.phones %>
                             <% @job.try(:caller).try(:work_numbers).each do |phones| %>
                               <%= phone.number %><br />
+                            <% end %>
                             <% end %>
                           </div>
                           <div class="col-xs-6">
@@ -104,8 +114,10 @@
                           </div>
                           <div class="col-xs-6">
                             Fax #:
+                            <% if @job.caller && @job.caller.phones %>
                             <% @job.try(:caller).try(:fax_numbers).each do |phones| %>
                               <%= phone.number %> <br />
+                            <% end %>
                             <% end %>
                           </div>
                           <div class="col-xs-6">
@@ -161,20 +173,26 @@
                           </div>
                           <div class="col-xs-6">
                             Business #:
+                            <% if @job.adjuster && @job.adjuster.phones %>
                             <% @job.try(:adjuster).try(:work_numbers).each do |phones| %>
                               <%= phone.number %><br />
+                            <% end %>
                             <% end %>
                           </div>
                           <div class="col-xs-6">
                             Cell #:
+                              <% if @job.adjuster && @job.adjuster.phones %>
                             <% @job.try(:adjuster).try(:cell_phones).each do |phones| %>
                               <%= phone.number %><br />
+                            <% end %>
                             <% end %>
                           </div>
                           <div class="col-xs-6">
                             Fax #:
-                            <% @job.try(:caller).try(:fax_numbers).each do |phones| %>
+                              <% if @job.adjuster && @job.adjuster.phones %>
+                            <% @job.try(:adjuster).try(:fax_numbers).each do |phones| %>
                               <%= phone.number %><br />
+                            <% end %>
                             <% end %>
                           </div>
                           <div class="col-xs-6">
