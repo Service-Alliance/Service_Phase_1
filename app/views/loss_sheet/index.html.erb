@@ -137,9 +137,12 @@
                           </div>
                           <div class="col-xs-6">
                             Type of Loss:
+                            <% @job.losses.each do |loss| %>
+                              <%= loss.try(:loss_type).try(:name) %>
+                            <% end %>
                           </div>
                           <div class="col-xs-6">
-                            Date of Loss:
+                            Date of Loss:   <%= @job.losses.first.try(:fnol_loss) %>
                           </div>
                           <div class="col-xs-12">
                             Insurance Information
@@ -157,10 +160,22 @@
                             Adjuster:<%= @job.try(:adjuster).try(:full_name) %>
                           </div>
                           <div class="col-xs-6">
-                            Phone #:
+                            Business #:
+                            <% @job.try(:adjuster).try(:work_numbers).each do |phones| %>
+                              <%= phone.number %><br />
+                            <% end %>
+                          </div>
+                          <div class="col-xs-6">
+                            Cell #:
+                            <% @job.try(:adjuster).try(:cell_phones).each do |phones| %>
+                              <%= phone.number %><br />
+                            <% end %>
                           </div>
                           <div class="col-xs-6">
                             Fax #:
+                            <% @job.try(:caller).try(:fax_numbers).each do |phones| %>
+                              <%= phone.number %><br />
+                            <% end %>
                           </div>
                           <div class="col-xs-6">
                             Deductible: $<%= @job.try(:job_deail).try(:deductible_amount) %>
