@@ -2,11 +2,11 @@ $(function() {
     $(document).on('click', '#modal-add-number', function(event) {
 
         event.preventDefault();
-        addNumber(this);
+        addModalNumber(this);
     });
 });
 
-function addNumber(that) {
+function addModalNumber(that) {
     var numberContainer = $("#modal-number-container");
     var newNumber = $("#modal-new-number")
 
@@ -26,10 +26,10 @@ $(function() {
     $(document).on('click', '#modal-remove-number', function(event) {
 
         event.preventDefault();
-        removeNumber(this);
+        removeModalNumber(this);
     });
 });
 
-function removeNumber(that) {
+function removeModalNumber(that) {
   $(that).parent().parent().remove();
 }
