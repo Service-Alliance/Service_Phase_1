@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Notify type:</strong>
+  <%= @notification.notify_type %>
+</p>
+
+<p>
+  <strong>Actor:</strong>
+  <%= @notification.actor_id %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @notification.target_id %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @notification.event_id %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @notification.job_id %>
+</p>
+
+<p>
+  <strong>Notify text:</strong>
+  <%= @notification.notify_text %>
+</p>
+
+<%= link_to 'Edit', edit_notification_path(@notification) %> |
+<%= link_to 'Back', notifications_path %>
