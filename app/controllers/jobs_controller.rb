@@ -304,7 +304,7 @@ class JobsController < ApplicationController
     tracker_task = TrackerTask.find_by(name: "Call Assigned")
     @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @call.id, user_id: current_user.id)
 
-    redirect_to job_path(@job)
+    redirect_to job_path(@job), notice: 'Call was successfully added to Job.'
   end
 
   private
