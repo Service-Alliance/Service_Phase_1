@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424212446) do
+ActiveRecord::Schema.define(version: 20170425183155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -319,6 +319,7 @@ ActiveRecord::Schema.define(version: 20170424212446) do
     t.integer  "billing_type_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.text     "coverate_type"
   end
 
   create_table "job_forms", force: :cascade do |t|
@@ -447,6 +448,17 @@ ActiveRecord::Schema.define(version: 20170424212446) do
   end
 
   add_index "notes", ["noteable_type", "noteable_id"], name: "index_notes_on_noteable_type_and_noteable_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.text     "notify_type"
+    t.integer  "actor_id"
+    t.integer  "target_id"
+    t.integer  "event_id"
+    t.integer  "job_id"
+    t.text     "notify_text"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "occupants", force: :cascade do |t|
     t.string   "first_name"

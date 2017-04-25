@@ -147,7 +147,7 @@ class JobDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_detail_params
-      params.require(:job_detail).permit(:insurance_company_id, :claim_number, :policy_number, :coverage_type_id, :deductible_amount, :self_pay_id, :deductible_id, :esl_nst_amount_id, :emergency_service_amount, :job_id, :billing_type_id)
+      params.require(:job_detail).permit(:insurance_company_id, :claim_number, :policy_number, :coverage_type_id, :deductible_amount, :self_pay_id, :deductible_id, :esl_nst_amount_id, :emergency_service_amount, :job_id, :billing_type_id, :coverage_type)
     end
     def address_params
       params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city,
