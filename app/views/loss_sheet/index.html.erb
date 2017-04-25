@@ -59,7 +59,7 @@
                             <% end %>
                           </div>
                           <div class="col-xs-6">
-                            <%= @job.try(:customer).try(:adddress).try(:address_1) %>
+                            <%= @job.try(:customer).try(:address).try(:address_1) %>
                           </div>
                           <div class="col-xs-6">
                             <span class="bold">Fax #: </span>
@@ -70,7 +70,7 @@
                             <% end %>
                           </div>
                           <div class="col-xs-6">
-                            <%= @job.try(:customer).try(:adddress).try(:address_2) %>
+                            <%= @job.try(:customer).try(:address).try(:address_2) %>
                           </div>
                           <div class="col-xs-6">
                             <span class="bold">Cell #: </span>
@@ -81,7 +81,7 @@
                             <% end %>
                           </div>
                           <div class="col-xs-6">
-                            <%= @job.try(:customer).try(:adddress).try(:city) %> <%= @job.try(:customer).try(:adddress).try(:state).try(:name) %><%= @job.try(:customer).try(:adddress).try(:zip_code) %>
+                            <%= @job.try(:customer).try(:address).try(:city) %> <%= @job.try(:customer).try(:address).try(:state).try(:name) %><%= @job.try(:customer).try(:address).try(:zip_code) %>
                           </div>
                           <div class="col-xs-12">
                             <span class="bold">Speak To: </span>
@@ -108,7 +108,7 @@
                             <% end %>
                           </div>
                           <div class="col-xs-6">
-                            <%= @job.try(:caller).try(:adddress).try(:address_1) %>
+                            <%= @job.try(:caller).try(:address).try(:address_1) %>
 
                           </div>
                           <div class="col-xs-6">
@@ -120,7 +120,7 @@
                             <% end %>
                           </div>
                           <div class="col-xs-6">
-                                <%= @job.try(:caller).try(:adddress).try(:address_2) %>
+                                <%= @job.try(:caller).try(:address).try(:address_2) %>
                           </div>
                           <div class="col-xs-6">
                             <span class="bold">Other #: </span>
@@ -129,7 +129,7 @@
                             <span class="bold">Speak To: </span>
                           </div>
                           <div class="col-xs-6">
-                              <%= @job.try(:caller).try(:adddress).try(:city) %>, <%= @job.try(:caller).try(:adddress).try(:state).try(:name) %>   <%= @job.try(:caller).try(:adddress).try(:zip_code) %>
+                              <%= @job.try(:caller).try(:address).try(:city) %>, <%= @job.try(:caller).try(:address).try(:state).try(:name) %>   <%= @job.try(:caller).try(:address).try(:zip_code) %>
                           </div>
                           <div class="col-xs-6">
                             <span class="bold">Referred By: </span><%= @job.referral_type.try(:name) %>
