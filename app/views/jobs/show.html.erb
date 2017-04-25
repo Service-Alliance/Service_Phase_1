@@ -175,6 +175,7 @@
                                         <div class="col-xs-12">
                                             <div class=" ">
                                                 <%= form_tag create_job_call_path(@job), method: :post do  %>
+                                                <%= hidden_field_tag "call[job_id]", @job.id %>
 
                                                 <div class="col-xs-6 col-xs-offset-3">
                                                     <div class="form-group">

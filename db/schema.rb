@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425183155) do
+ActiveRecord::Schema.define(version: 20170425184139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -319,7 +319,7 @@ ActiveRecord::Schema.define(version: 20170425183155) do
     t.integer  "billing_type_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.text     "coverate_type"
+    t.text     "coverage_type"
   end
 
   create_table "job_forms", force: :cascade do |t|

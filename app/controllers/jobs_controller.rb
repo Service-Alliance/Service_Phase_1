@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
   # before_action :authorize_policy
 
   # GET /jobs
@@ -298,6 +298,7 @@ class JobsController < ApplicationController
 
   def create_call
     @call = Call.find_by(id: call_params[:id])
+    @job =  Job.find_by(id: call_params[:job_id])
     @call.job_id = @job.id
     @call.save
     tracker_task = TrackerTask.find_by(name: "Call Assigned")
@@ -339,7 +340,7 @@ class JobsController < ApplicationController
   end
 
   def call_params
-    params.fetch(:call, {}).permit(:id)
+    params.fetch(:call, {}).permit(:id, :job_id)
   end
 
   def property_params
