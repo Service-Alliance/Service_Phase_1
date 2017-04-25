@@ -98,6 +98,16 @@ class Job < ActiveRecord::Base
       return '14'
     end
   end
+  def self.to_csv
+
+    CSV.generate(headers: true) do |csv|
+      csv << ["Job ID", "Job Type", "Job Status", "Franchise"]
+
+      all.each do |job|
+        csv << ([job.id, job.try(:job_type).try(:name), job.try(:job_status).try(:name), job.try(:franchise).try(:name)])
+      end
+    end
+  end
 
 
 

@@ -19,6 +19,8 @@
                 </div>
             </div>
 
+            <%= link_to "Export As CSV (Work In Progress)", jobs_path(params.merge(format: "csv")), class: "btn btn-primary margin-bottom-2" %>
+
             <table id="job-table" class="table table-striped">
                 <thead>
                     <tr>

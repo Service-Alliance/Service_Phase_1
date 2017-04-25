@@ -12,6 +12,12 @@ class JobsController < ApplicationController
       @search = Job.where.not(status_id: nil).order('created_at DESC').search(params[:q])
       # @jobs = @search.result
       @jobs = @search.result.page(params[:page]).order('created_at DESC')
+      @all_results = @search.result
+
+      respond_to do |format|
+        format.html
+        format.csv { render text: @all_results.to_csv }
+      end
     end
   end
 
