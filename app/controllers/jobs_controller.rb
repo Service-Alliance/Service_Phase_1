@@ -221,6 +221,11 @@ class JobsController < ApplicationController
           end
         end
 
+        if same_caller_params[:same_indicator] == "1"
+          p 'TRIGGER'
+          Customer.same_as_caller(@job)
+        end
+
         if job_params[:job_manager_id]
           @user = User.find_by(id: job_params[:job_manager_id])
           UserMailer.manager_assignment(@user, @job).deliver_now
@@ -330,7 +335,7 @@ class JobsController < ApplicationController
                                 :entered_by_id, :details,
                                 :job_note, :customer_id, :referral_type_id, :referral_note, :corporate_referral_type_id,
                                 :billing_address_id, :emergency,
-                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id, :coordinator_id, :name,
+                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id, :coordinator_id, :name, :same_caller,
                                 customer: [:address_1, :address_2, :zip_code, :city,
                                            :state_id, :county])
   end
@@ -347,6 +352,10 @@ class JobsController < ApplicationController
 
   def call_params
     params.fetch(:call, {}).permit(:id, :job_id)
+  end
+
+  def same_caller_params
+    params.fetch(:same_caller, {}).permit(:same_indicator)
   end
 
   def property_params

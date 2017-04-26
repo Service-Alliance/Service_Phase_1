@@ -58,5 +58,34 @@ class Customer < ActiveRecord::Base
     return phones
   end
 
+  def self.same_as_caller(job)
+    @job = Job.find_by(id: job)
+    @caller = Caller.find_by(job_id: @job.id)
+
+    # check if old customer exists
+    if @job.customer_id
+      Customer.find_by(id: @job.customer_id).destroy
+    end
+
+    @caller_phones = @caller.phones
+
+    @caller_address = Address.find_by(id: @caller.address_id)
+
+    @address = Address.new(address_1: @caller_address.address_1, address_2: @caller_address.address_2, zip_code: @caller_address.zip_code, city: @caller_address.city, county: @caller_address.county, state_id: @caller_address.state_id)
+
+    @address.save
+
+    @customer = Customer.new(first_name: @caller.first_name, last_name: @caller.last_name, email: @caller.email, address_id: @address.id)
+    @customer.save
+
+    @job.customer_id = @customer.id
+
+    @caller_phones.each do |phone|
+      @caller.phones.create(number: phone.number, extension: phone.extension, type_id: phone.type_id)
+    end
+
+    @job.save
+  end
+
 
 end
