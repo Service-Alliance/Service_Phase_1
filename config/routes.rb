@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :notifications
   devise_for :admin_users, ActiveAdmin::Devise.config
   resources :pipeline_statuses
@@ -83,6 +84,7 @@ Rails.application.routes.draw do
     resources :work_orders
     resources :schedulers
     resources :subscriptions
+    resources :purchase_order_approvals
   end
 
   resources :customers

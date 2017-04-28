@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" %>
+        <div id="page-content-wrapper">
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="col-xs-12">
+                <h1 class="text-center">Purchase Order Approval:</h1>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Purchase Order Approval
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Date:</td>
+                                            <td><%= @purchase_order_approval.date %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Year Built</td>
+                                            <td><%= @purchase_order_approval.vendor %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Purchase Item</td>
+                                            <td><%= @purchase_order_approval.purchase_item %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Amount</td>
+                                            <td><%= @purchase_order_approval.amount %></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Four Digits on Card</td>
+                                            <td><%= @purchase_order_approval.last_four_card %></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+
+                        <span>
+                            <%= link_to edit_job_purchase_order_approval_path(@job, @purchase_order_approval), class: "btn btn-sm btn-warning", type: "button" do %>
+                            <i class="glyphicon glyphicon-edit"></i>
+                            <% end %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

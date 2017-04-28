@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2017-04-27
+  job_name: MyText
+  vendor: MyText
+  purchase_item: MyText
+  amount: MyText
+  last_four_card: MyText
+
+two:
+  date: 2017-04-27
+  job_name: MyText
+  vendor: MyText
+  purchase_item: MyText
+  amount: MyText
+  last_four_card: MyText

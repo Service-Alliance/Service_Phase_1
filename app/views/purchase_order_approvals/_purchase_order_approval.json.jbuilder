@@ -1,0 +1,2 @@
+json.extract! purchase_order_approval, :id, :date, :job_name, :vendor, :purchase_item, :amount, :last_four_card, :created_at, :updated_at
+json.url purchase_order_approval_url(purchase_order_approval, format: :json)

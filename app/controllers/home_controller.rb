@@ -22,6 +22,7 @@ class HomeController < ApplicationController
       render template: 'home/project_manager'
     elsif current_user.contractor?
       Subscription.where(user_id: current_user).each do |sub|
+
       end
       @jobs = current_user.subscriptions.merge()
       render template: 'home/project_manager'

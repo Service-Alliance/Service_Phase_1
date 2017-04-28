@@ -1,0 +1,37 @@
+<%= form_for [@job, @purchase_order_approval] do |f| %>
+  <% if @purchase_order_approval.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase_order_approval.errors.count, "error") %> prohibited this purchase_order_approval from being saved:</h2>
+
+      <ul>
+      <% @purchase_order_approval.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-xs-12">
+    <%= f.label :date %><br>
+    <%= f.date_select :date %>
+  </div>
+  <div class="col-xs-12">
+    <%= f.label :vendor %><br>
+    <%= f.text_field :vendor, class: "form-control" %>
+  </div>
+  <div class="col-xs-12">
+    <%= f.label :purchase_item %><br>
+    <%= f.text_field :purchase_item, class: "form-control" %>
+  </div>
+  <div class="col-xs-12">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount, class: "form-control" %>
+  </div>
+  <div class="col-xs-12">
+    <%= f.label :last_four_card %><br>
+    <%= f.text_field :last_four_card, class: "form-control" %>
+  </div>
+  <div class="col-xs-12">
+    <%= f.submit class: "btn btn-primary margin-top-2" %>
+  </div>
+<% end %>

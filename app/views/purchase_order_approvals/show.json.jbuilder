@@ -1,0 +1,1 @@
+json.partial! "purchase_order_approvals/purchase_order_approval", purchase_order_approval: @purchase_order_approval

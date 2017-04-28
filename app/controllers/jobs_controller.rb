@@ -81,6 +81,7 @@ class JobsController < ApplicationController
     @callrail = Call.find_by(job_id: @job.id)
     @scheduler = Scheduler.new
     @upload = Upload.new
+    @purchase_order_approval = PurchaseOrderApproval.new
     @future_schedules = []
     @past_schedules = []
     @note = @job.notes.new

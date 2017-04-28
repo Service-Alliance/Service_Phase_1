@@ -1,0 +1,1 @@
+json.array! @purchase_order_approvals, partial: 'purchase_order_approvals/purchase_order_approval', as: :purchase_order_approval
