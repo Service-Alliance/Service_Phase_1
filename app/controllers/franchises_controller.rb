@@ -10,6 +10,7 @@ class FranchisesController < ApplicationController
   # GET /franchises/1
   # GET /franchises/1.json
   def show
+    @address = Address.find_by(id: @franchise.address_id)
   end
 
   # GET /franchises/new
@@ -19,12 +20,15 @@ class FranchisesController < ApplicationController
 
   # GET /franchises/1/edit
   def edit
+    @address = Address.find_by(id: @franchise.address_id) || @address = Address.new
   end
 
   # POST /franchises
   # POST /franchises.json
   def create
     @franchise = Franchise.new(franchise_params)
+    @address = Address.new(address_params)
+    @franchise.address_id = @address.id
 
     respond_to do |format|
       if @franchise.save
@@ -40,6 +44,13 @@ class FranchisesController < ApplicationController
   # PATCH/PUT /franchises/1
   # PATCH/PUT /franchises/1.json
   def update
+    if @franchise.address
+      @franchise.address.update(address_params)
+    else
+      @address = Address.create(address_params)
+      @franchise.address_id = @address.id
+      @franchise.save
+    end
     respond_to do |format|
       if @franchise.update(franchise_params)
         format.html { redirect_to @franchise, notice: 'Franchise was successfully updated.' }
@@ -65,6 +76,10 @@ class FranchisesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_franchise
       @franchise = Franchise.find(params[:id])
+    end
+
+    def address_params
+      params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -60,6 +60,30 @@
                                     <td>Mold Remediation License</td>
                                     <td><%= @franchise.mold_remediation_license %></td>
                                 </tr>
+                                <tr>
+                                    <td>Address 1</td>
+                                    <td><%= @franchise.try(:address).try(:address_1) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Address 2</td>
+                                    <td><%= @franchise.try(:address).try(:address_2) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Zip</td>
+                                    <td><%= @franchise.try(:address).try(:zip_code) %></td>
+                                </tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td><%= @franchise.try(:address).try(:city) %></td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td><%= @franchise.try(:address).try(:state).try(:name) %></td>
+                                </tr>
+                                <tr>
+                                    <td>County</td>
+                                    <td><%= @franchise.try(:address).try(:count) %></td>
+                                </tr>
 
 
 
@@ -76,7 +100,7 @@
                 <i class="glyphicon glyphicon-edit"></i>
                 <% end %>
 
-          
+
             </div>
         </div>
     </div>

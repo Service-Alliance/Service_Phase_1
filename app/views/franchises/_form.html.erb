@@ -59,28 +59,30 @@
         <div class="col-xs-6">
             <div class="form-group">
                 <%= f.label :general_license %><br>
-                <%= f.date_select :general_license, class:"form-control" %>
+                <%= f.text_field :general_license, class:"form-control" %>
             </div>
         </div>
         <div class="col-xs-6">
             <div class="form-group">
                 <%= f.label :general_license %><br>
-                <%= f.date_select :general_license, class:"form-control" %>
+                <%= f.text_field :general_license, class:"form-control" %>
             </div>
         </div>
         <div class="col-xs-6">
             <div class="form-group">
                 <%= f.label :commercial_license %><br>
-                <%= f.date_select :commercial_license, class:"form-control" %>
+                <%= f.text_field :commercial_license, class:"form-control" %>
             </div>
         </div>
         <div class="col-xs-6">
             <div class="form-group">
                 <%= f.label :mold_remediation_license %><br>
-                <%= f.date_select :mold_remediation_license, class:"form-control" %>
+                <%= f.text_field :mold_remediation_license, class:"form-control" %>
             </div>
         </div>
-        
+
+        <%= render 'address_form', f: f %>
+
 
 
         <div class="col-xs-12 text-center">
