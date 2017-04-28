@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   belongs_to :role
   has_many :job_managers, foreign_key: :job_manager_id
   has_many :franchise_users
+  has_many :subscriptions
 
 
 
@@ -29,6 +30,9 @@ class User < ActiveRecord::Base
   end
   def project_manager?
     self.role_id == 4 ? true : false
+  end
+  def contractor?
+    self.role_id == 5 ? true : false
   end
   def unassigned?
     self.role_id == 0 || self.role_id == nil  ? true : false

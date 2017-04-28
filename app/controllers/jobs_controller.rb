@@ -206,6 +206,7 @@ class JobsController < ApplicationController
         @job.franchise_id = franchise.franchise_id if franchise
         @job.referral_employee_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
         @job.referral_vendor_id = nil if @job.try(:referral_type).try(:name) != 'Vendor'
+        @job.save
 
         @caller = Caller.find_by(job_id: @job.id)
         if @caller
