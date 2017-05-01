@@ -22,6 +22,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to notifications_path  do %>
+          Notifications <span class="badge"><%= current_user.notifications.where(viewed: false).count %></span> 
+          <% end %>
+        </li>
         <li><%= link_to "New Job", new_job_path %></li>
         <li><%= link_to "My Job Assignments", user_job_assignents_path(current_user) %></li>
         <li><% link_to "On Call Assignments", oncalls_path %></li>

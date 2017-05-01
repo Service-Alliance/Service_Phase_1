@@ -1,0 +1,1 @@
+json.partial! "notify_types/notify_type", notify_type: @notify_type

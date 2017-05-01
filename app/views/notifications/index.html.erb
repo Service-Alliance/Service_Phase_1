@@ -1,37 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Notifications</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Notify type</th>
-      <th>Actor</th>
-      <th>Target</th>
-      <th>Event</th>
-      <th>Job</th>
-      <th>Notify text</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container-fluid">
+  <div class='row'>
+    <div class="col-sm-6 col-sm-offset-3">
+      <h1 class="text-center">Notifications</h1>
 
-  <tbody>
-    <% @notifications.each do |notification| %>
-      <tr>
-        <td><%= notification.notify_type %></td>
-        <td><%= notification.actor_id %></td>
-        <td><%= notification.target_id %></td>
-        <td><%= notification.event_id %></td>
-        <td><%= notification.job_id %></td>
-        <td><%= notification.notify_text %></td>
-        <td><%= link_to 'Show', notification %></td>
-        <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
-        <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="notification-container">
+      <ul class="notifications">
+        <% @notifications.each do |notification| %>
+        <li class="notification">
+            <div class="media">
+              <div class="media-left">
+                <div class="media-object">
+                  <!-- <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="Name"> -->
+                </div>
+              </div>
+              <div class="media-body">
+                <strong class="notification-title"><%= link_to "Job", job_path(notification.job_id)%></strong>
+                <p class="notification-desc"><%= notification.notify_text %></p>
 
-<br>
+                <div class="notification-meta">
+                  <small class="timestamp"><%= notification.created_at %></small>
+                </div>
+              </div>
+            </div>
+        </li>
+        <% end %>
+      </ul>
+      </div>
 
-<%= link_to 'New Notification', new_notification_path %>
+    </div>
+  </div>
+</div>

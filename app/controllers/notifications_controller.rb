@@ -4,7 +4,11 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.all
+    @notifications = Notification.where(target_id: current_user.id)
+    @notifications.each do |note|
+      note.viewed = true
+      note.save
+    end
   end
 
   # GET /notifications/1

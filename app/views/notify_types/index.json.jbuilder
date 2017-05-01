@@ -1,0 +1,1 @@
+json.array! @notify_types, partial: 'notify_types/notify_type', as: :notify_type

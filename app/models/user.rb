@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :job_managers, foreign_key: :job_manager_id
   has_many :franchise_users
   has_many :subscriptions
+  has_many :notifications, foreign_key: :target_id
 
 
 

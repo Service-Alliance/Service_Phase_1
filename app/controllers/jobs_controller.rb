@@ -23,24 +23,11 @@ class JobsController < ApplicationController
 
   def list
     @count = Job.where.not(status_id: nil).count
-    # p "order"
-    # # p params[:order]
-    # # .order("callers.id ASC").includes(:caller)
-    # if params[:sort].include?(".")
-    #   @sort = params[:sort].split('.').first.to_sym
-    #   order_string = "#{@sort} #{params[:order]}"
+
       @jobs = Job.where.not(status_id: nil).limit(200)
       render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
                                            :job_loss_type, :insurance_details,
                                            :job_detail, :customer])
-    # else
-    #   @sort = params[:sort]
-    #   order_string = "#{@sort} #{params[:order]}"
-    #   @jobs = Job.where.not(status_id: nil).limit(params[:limit]).offset(params[:offset]).order(order_string)
-    #   render json: {"total": @count, rows: @jobs.as_json(include: [:job_status, :job_type, :franchise,
-    #                                        :job_loss_type, :insurance_details,
-    #                                        :job_detail, :customer])}
-    # end
   end
 
   def new_york_datasheet
@@ -89,9 +76,6 @@ class JobsController < ApplicationController
     @job.schedulers.each do |scheduler|
       @future_schedules << scheduler if scheduler.event_date.future?
     end
-    # @job.schedulers.each do |scheduler|
-    #   @past_schedules << scheduler unless scheduler.event_date.future?
-    # end
   end
 
   # GET /jobs/new
@@ -112,16 +96,6 @@ class JobsController < ApplicationController
     @caller.save
     @job_detail = JobDetail.create(job_id: @job.id)
     @phones = nil
-
-
-
-    # @grouped_people_options = Department.all.map do |department|
-    #   [department.name,
-    #    department.users.map do |user|
-    #      [user.full_name, user.id]
-    #    end]
-    # end
-
 
   end
 
@@ -235,6 +209,14 @@ class JobsController < ApplicationController
           @user = User.find_by(id: job_params[:job_manager_id])
           UserMailer.manager_assignment(@user, @job).deliver_now
           return redirect_to job_job_managers_path(@job)
+        end
+
+        if new_params[:newly_created] == "true" && current_user.call_rep?
+          notify_type = NotifyType.find_by(name: "Call Rep Created Job")
+          call_rep = Role.find_by(name: "Call Rep")
+          User.where(role_id: call_rep.id).each do |user|
+            Notification.create(notify_type: notify_type.id,actor_id: current_user.id, target_id: user.id, job_id: @job.id, notify_text: "Call Rep #{current_user.full_name} created a job.")
+          end
         end
 
         format.html do
@@ -358,6 +340,10 @@ class JobsController < ApplicationController
                                 :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id, :coordinator_id, :name, :same_caller,
                                 customer: [:address_1, :address_2, :zip_code, :city,
                                            :state_id, :county])
+  end
+
+  def new_params
+    params.fetch(:new, {}).permit(:newly_created)
   end
 
   def caller_params
