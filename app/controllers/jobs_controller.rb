@@ -98,7 +98,11 @@ class JobsController < ApplicationController
   def new
     @customer_address = Address.create
     @customer = Customer.create(address_id: @customer_address.id)
-    @job = Job.create(entered_by_id: current_user.id, coordinator_id: current_user.id, customer_id: @customer.id)
+    if current_user.call_rep?
+      @job = Job.create(entered_by_id: current_user.id, customer_id: @customer.id)
+    else
+      @job = Job.create(entered_by_id: current_user.id, coordinator_id: current_user.id, customer_id: @customer.id)
+    end
     @job.trackers.create(tracker_task_id: 1)
     @loss = Loss.create(job_id: @job.id)
     @caller = Caller.create(job_id: @job.id)
@@ -224,7 +228,6 @@ class JobsController < ApplicationController
         end
 
         if same_caller_params[:same_indicator] == "1"
-          p 'TRIGGER'
           Customer.same_as_caller(@job)
         end
 
@@ -318,6 +321,21 @@ class JobsController < ApplicationController
     @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @call.id, user_id: current_user.id)
 
     redirect_to job_path(@job), notice: 'Call was successfully added to Job.'
+  end
+
+  def unassigned_job
+    # @jobs = Job.where.not(status_id: nil.limit(200)
+    @jobs = Job.where.not(status_id: nil).where(coordinator_id: nil).limit(200)
+    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
+                                         :job_loss_type, :insurance_details,
+                                         :job_detail, :customer])
+  end
+
+  def call_rep_jobs
+    @jobs = Job.joins(:user).merge(User.where(role_id: 3)).where.not(status_id: nil).limit(200)
+    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
+                                         :job_loss_type, :insurance_details,
+                                         :job_detail, :customer])
   end
 
   private

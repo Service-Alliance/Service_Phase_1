@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   resources :adjusters
   get 'jobs/list' => 'jobs#list'
   get 'jobs/index_search' => 'jobs#index_search'
+  get 'jobs/unassigned_job' => 'jobs#unassigned_job'
+  get 'jobs/call_rep_jobs' => 'jobs#call_rep_jobs'
   get 'jobs/no-activity' => 'jobs#no_activity', as: :jobs_no_activity
   get 'jobs/search' => 'jobs#search', as: :job_search
   get 'jobs/:id/calls' => 'jobs#calls', as: :job_calls

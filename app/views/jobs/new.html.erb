@@ -507,6 +507,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <% unless current_user.call_rep? %>
                             <div class="col-xs-6 non-self">
                                 <div class="form-group">
                                     <div class="field">
@@ -564,6 +565,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <% end %>
                         </div>
                     </div>
                 </div>

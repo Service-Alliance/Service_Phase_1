@@ -48,6 +48,7 @@ class Job < ActiveRecord::Base
     save
   end
 
+
   def current_progress_position
     manager_assigned = self.job_managers.any?
     manager_visited = self.job_managers.first && self.job_managers.first.schedule_date && self.job_managers.first.schedule_date >= Date.today

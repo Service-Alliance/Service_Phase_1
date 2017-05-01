@@ -119,7 +119,7 @@
 
 
 
-      <% unless current_user.call_rep? %>
+
         <div class="col-xs-12 margin-top-2">
             <div class="form-group referrals">
                 <%= f.label :referral_type_id %><br>
@@ -130,6 +130,7 @@
 
             </div>
         </div>
+        <% unless current_user.call_rep? %>
         <div class="col-xs-12 margin-top-2">
             <div class="form-group referrals">
                 <%= f.label :corporate_referral_type_id %><br>
@@ -140,6 +141,7 @@
 
             </div>
         </div>
+        <% end %>
 
         <div id="referral_vendor" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Vendor" %>">
             <div class="form-group">
@@ -160,7 +162,7 @@
                 <%= f.text_field :referral_note, class: "form-control" %><br>
             </div>
         </div>
-        <% end %>
+
 
         <div class="col-xs-12">
             <div class="form-group">
