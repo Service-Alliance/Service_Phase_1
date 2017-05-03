@@ -9,6 +9,12 @@
             <% if notice %>
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
+            <% unless @job.coordinator_id %>
+              <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <strong>Job Coordinator</strong> has not been assigned</div>
+            <% end %>
+            <% unless @job.franchise_id %>
+              <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <strong>Franchise</strong> has not been assigned</div>
+            <% end %>
 
             <div class="col-xs-12 ">
                 <%= link_to  "Edit Job", edit_job_path(@job),class:"btn btn-primary" %>
