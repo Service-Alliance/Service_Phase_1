@@ -22,7 +22,7 @@ class HomeController < ApplicationController
       render template: 'home/project_manager'
     elsif current_user.contractor?
       @jobs = Job.eager_load(:subscriptions).where("subscriptions.user_id= ?", current_user.id)
-      render template: 'home/project_manager'
+      render template: 'home/contractor'
     end
   end
 end

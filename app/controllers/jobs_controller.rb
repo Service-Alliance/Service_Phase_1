@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_job, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
+  before_action :verify_user, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
   # before_action :authorize_policy
 
   # GET /jobs
@@ -327,8 +328,17 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
   end
 
-  def authorize_policy
-    authorize Job
+  def verify_user
+    if current_user.contractor?
+      subs = current_user.subscriptions.pluck(:job_id)
+      if subs.include?(@job.id)
+        true
+      else
+        redirect_to "/"
+      end
+    else
+      true
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
