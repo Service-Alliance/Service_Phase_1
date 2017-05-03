@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   get 'jobs/new-york-datasheet' => 'jobs#new_york_datasheet', as: :new_york_datasheet
 
   resources :jobs do
+    post 'manger-assignment' => 'jobs#manager_assignment', as: :manager_assignment
     get 'notes' => 'notes#job_notes'
     get 'overview' => 'overview#index', as: :overview
     get 'loss-sheet' => 'loss_sheet#index', as: :loss_sheet

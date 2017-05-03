@@ -292,6 +292,14 @@ class JobsController < ApplicationController
     @calls = Call.where(job_id: @job.id)
 
   end
+  def manager_assignment
+    p params
+    p params[:job_id]
+    @job = Job.find(params[:job_id])
+    @job.coordinator_id = job_params[:coordinator_id]
+    @job.save
+    redirect_to @job
+  end
 
   def add_call; end
 
@@ -365,6 +373,7 @@ class JobsController < ApplicationController
     params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city,
                                       :state_id, :county)
   end
+
 
   def call_params
     params.fetch(:call, {}).permit(:id, :job_id)

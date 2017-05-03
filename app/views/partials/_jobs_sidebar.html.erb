@@ -171,6 +171,28 @@
             </div>
         </li>
 
+        <li>
+            <div class="subscribers">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">JOB MANAGER <a class="inline" data-toggle="modal" data-target="#job_manager"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                    </div>
+                    <% if @job.job_coordinator %>
+                    <div class="panel-body">
+                        <ul>
+
+                            <li>
+                                <%= @job.try(:job_coordinator).try(:full_name) %>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <% end %>
+                </div>
+
+            </div>
+        </li>
+
     </ul>
 
 </div>
@@ -204,6 +226,35 @@
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="job_manager" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+        <%= form_for @job, url: job_manager_assignment_url(@job), method: :post do |f| %>
+      <div class="modal-body">
+
+          <div class="field">
+            <%= f.label :coordinator_id %><br>
+            <%= f.collection_select :coordinator_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
+          </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit "Save Changes", class: "btn btn-primary" %>
+
+      </div>
+      <% end %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+
 </div><!-- /.modal -->
 
 <script>
