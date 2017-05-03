@@ -10,27 +10,23 @@
         </div>
         <div id="oncall-container">
             <% if @oncalls %>
-            <% @oncalls.each do |oncall| %>
-            <div class="row">
-                <div class="col-xs-6">
-                    <div class="form-group">
-                        <%= label_tag :user_id %><br>
-                        <%= select_tag("oncall[user_ids][]", options_for_select(User.all.map{|p| [p.full_name, p.id]}, selected: oncall.user_id), class: "form-control") %>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <%= label_tag :priority %><br>
-                        <%= number_field_tag "oncall[priorities][]", oncall.priority ,  class: 'form-control'  %>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <%= label_tag :delete %><br>
-                    <a id="remove-oncall" href="" class="btn btn-danger full-width">Delete</a>
-                </div>
-            </div>
-            <% end %>
-            <% end %>
+            <div class="col-xs-12">
+
+            <p>
+              Drag to set order
+            </p>
+            <ul id="sortable" data-update-url="<%= sort_oncalls_url %>">
+                <% @oncalls.each do |oncall| %>
+                <%= content_tag_for :li, oncall do %>
+                  <span class="handle">[drag]</span>
+                    <%= oncall.user.full_name %>
+                    <a id="remove-oncall" href="">Delete</a>
+                <% end %>
+
+                <% end %>
+                <% end %>
+            </ul>
+          </div>
         </div>
         <div id="new-oncall">
             <div class="row">
@@ -40,12 +36,7 @@
                         <%= select_tag("oncall[user_ids][]", options_for_select(User.all.map{|p| [p.full_name, p.id]}), class: "form-control") %>
                     </div>
                 </div>
-                <div class="col-xs-3">
-                    <div class="field">
-                        <%= f.label :priority %><br>
-                        <%= number_field_tag "oncall[priorities][]", nil, class: 'form-control' %>
-                    </div>
-                </div>
+
                 <div class="col-xs-3 remove-oncall-toggle">
                     <%= label_tag :delete %><br>
                     <a id="remove-oncall" href="" class="btn btn-danger full-width">Delete</a>

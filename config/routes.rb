@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :articles
   resources :franchise_zipcodes
-  resources :oncalls
+  resources :oncalls do
+    collection {post :sort}
+  end
   resources :forms
   resources :vendor_categories
   resources :vendors do

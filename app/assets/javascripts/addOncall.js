@@ -28,5 +28,5 @@ $(function() {
 });
 
 function removeOncall(that) {
-    $(that).parent().parent().remove();
+    $(that).parent().remove();
 }

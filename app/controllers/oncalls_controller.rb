@@ -51,6 +51,13 @@ class OncallsController < ApplicationController
     end
   end
 
+  def sort
+    params[:oncall].each_with_index do |id, index|
+      Oncall.where(id: id).update_all({priority: index+1})
+    end
+    render :ok
+  end
+
   # DELETE /oncalls/1
   # DELETE /oncalls/1.json
   def destroy

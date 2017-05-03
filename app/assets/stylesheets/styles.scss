@@ -214,6 +214,18 @@ body {
   display: inline-block !important;
 }
 
+#sortable {
+  & ul {
+    list-style: none;
+  }
+  & li {
+    list-style: none;
+  }
+  .handle {
+    cursor: move;
+    color: green;
+  }
+}
 #bottom-nav {
     & ul {
         list-style-type: none;

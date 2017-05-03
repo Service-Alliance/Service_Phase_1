@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   protect_from_forgery with: :exception
-  before_action :verify_user
+  # before_action :verify_user
 
 
   private
@@ -16,8 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_user
-    p "VERIFy"
-    p current_user.contractor?
     if current_user.contractor? && params[:job_id]
       subs = current_user.subscriptions.pluck(:job_id)
       @job = Job.find(params[:job_id])
