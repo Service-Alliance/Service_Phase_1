@@ -81,6 +81,10 @@
                             <% end %>
                           </div>
                           <div class="col-xs-6">
+                            <span class="bold">Email: </span>
+                            <%= @job.try(:customer).try(:email) %>
+                          </div>
+                          <div class="col-xs-6">
                             <%= @job.try(:customer).try(:address).try(:city) %> <%= @job.try(:customer).try(:address).try(:state).try(:name) %><%= @job.try(:customer).try(:address).try(:zip_code) %>
                           </div>
                           <div class="col-xs-12">
