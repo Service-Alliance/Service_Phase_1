@@ -83,11 +83,11 @@ class JobsController < ApplicationController
   def new
     @customer_address = Address.create
     @customer = Customer.create(address_id: @customer_address.id)
-    if current_user.call_rep?
+    # if current_user.call_rep?
       @job = Job.create(entered_by_id: current_user.id, customer_id: @customer.id)
-    else
-      @job = Job.create(entered_by_id: current_user.id, coordinator_id: current_user.id, customer_id: @customer.id)
-    end
+    # else
+    #   @job = Job.create(entered_by_id: current_user.id, coordinator_id: current_user.id, customer_id: @customer.id)
+    # end
     @job.trackers.create(tracker_task_id: 1)
     @loss = Loss.create(job_id: @job.id)
     @caller = Caller.create(job_id: @job.id)
