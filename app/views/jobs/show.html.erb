@@ -482,6 +482,8 @@
                         <%= scheduler.notes %>
                         <br/>
                         <%= scheduler.assigned_to_user.try(:full_name) %>
+                        <br />
+                        <%= link_to 'Delete Scheduled Event',  tracker_path(tracker, job_id: @job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
                     </div>
                 </div>
                 <% end %>
