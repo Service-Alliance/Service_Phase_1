@@ -387,7 +387,7 @@ ActiveRecord::Schema.define(version: 20170501203021) do
     t.boolean  "contract_sent",              default: false
     t.date     "contract_sent_date"
     t.integer  "coordinator_id"
-    t.integer  "pipeline_status_id",         default: 1
+    t.integer  "pipeline_status_id"
   end
 
   create_table "locations", force: :cascade do |t|

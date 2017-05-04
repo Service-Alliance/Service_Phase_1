@@ -510,7 +510,14 @@
                                 </div>
                                 <div class="panel-body">
                                     <%= noted.content %>
+                                    <br />
+                                    <%= link_to 'Delete Note',  tracker,  method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </div>
+
+
+
+
+
                             </div>
                         </div>
                     </article>
@@ -631,7 +638,11 @@
                                     <%= scheduler.notes %>
                                     <br/>
                                     <%= scheduler.assigned_to_user.try(:full_name) %>
+
+                                    <br />
+                                    <%= link_to 'Delete Note',  tracker,  method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </div>
+                                
                             </div>
                         </div>
                     </article>
