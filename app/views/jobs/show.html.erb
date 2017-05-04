@@ -511,7 +511,7 @@
                                 <div class="panel-body">
                                     <%= noted.content %>
                                     <br />
-                                    <%= link_to 'Delete Note',  tracker,  method: :delete, data: { confirm: 'Are you sure?' } %>
+                                    <%= link_to 'Delete Note',  tracker_path(tracker, job_id: @job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </div>
 
 
@@ -640,9 +640,9 @@
                                     <%= scheduler.assigned_to_user.try(:full_name) %>
 
                                     <br />
-                                    <%= link_to 'Delete Note',  tracker,  method: :delete, data: { confirm: 'Are you sure?' } %>
+                                    <%= link_to 'Delete Scheduled Event',  tracker_path(tracker, job_id: @job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </article>
