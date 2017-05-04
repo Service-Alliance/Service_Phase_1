@@ -317,7 +317,11 @@ class JobsController < ApplicationController
     else
       return redirect_to @job, notice: 'Error Adding Manager.'
     end
+  end
 
+  def customer
+    @job = Job.find(params[:job_id])
+    @customer = Customer.find(params[:id])
   end
 
   def add_call; end

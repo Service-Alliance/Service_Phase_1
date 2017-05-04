@@ -66,6 +66,7 @@ Rails.application.routes.draw do
     get 'notes' => 'notes#job_notes'
     get 'overview' => 'overview#index', as: :overview
     get 'loss-sheet' => 'loss_sheet#index', as: :loss_sheet
+    get 'customers/:id' => 'jobs#customer', as: :customer
     resources :ticsheets
     resources :properties
     resources :losses
@@ -95,6 +96,8 @@ Rails.application.routes.draw do
   end
 
   resources :customers
+  post 'customers/:id/calls' => 'customers#create_call', as: :create_customer_call
+
   post 'jobs/filter' => 'jobs#filter'
   post 'addresses/geolocate' => 'addresses#geolocate'
   post 'agents/lookup' => 'agents#lookup'

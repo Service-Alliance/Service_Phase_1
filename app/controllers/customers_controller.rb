@@ -1,18 +1,25 @@
 class CustomersController < ApplicationController
 
-  before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy, :create_call]
 
 
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    @search = Customer.where.not(first_name: nil).order('created_at DESC').search(params[:q])
+    # @jobs = @search.result
+    @customers = @search.result.page(params[:page]).order('created_at DESC')
+    @all_results = @search.result
   end
 
   # GET /customers/1
   # GET /customers/1.json
   def show
     @job = Job.find_by(id: params[:job_id])
+    @note = @customer.notes.new
+    @uploads = @customer.uploads.build
+
+
   end
 
   # GET /customers/new
@@ -74,7 +81,10 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/1.json
   def update
     respond_to do |format|
-      @job = Job.find_by(id: job_param[:job_id])
+      if job_param[:job_id]
+        @job = Job.find_by(id: job_param[:job_id])
+        @job.update_last_action
+      end
       if @address = Address.find_by(id: @customer.address_id)
         if @address.update(address_params)
         end
@@ -84,16 +94,24 @@ class CustomersController < ApplicationController
         @customer.address_id = @address.id
       end
       if @customer.update(customer_params)
-        @job.update_last_action
-        @customer.phones.destroy_all
-        phone_count = phone_params["type_ids"].count
+        unless phone_params.empty?
+          @customer.phones.destroy_all
+          phone_count = phone_params["type_ids"].count
 
-        phone_count.times do |index|
-          unless phone_params["numbers"][index] == ""
-            @customer.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          phone_count.times do |index|
+            unless phone_params["numbers"][index] == ""
+              @customer.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+            end
           end
         end
-        format.html { redirect_to job_path(@job), notice: 'Customer was successfully updated.' }
+        format.html {
+          unless job_param.empty?
+            return redirect_to job_path(@job), notice: 'Customer was successfully updated.'
+          else
+            return redirect_to customer_path(@customer), notice: 'Customer was successfully updated.'
+          end
+
+        }
         format.json { render :show, status: :ok, location: @customer }
       else
         format.html { render :edit }
@@ -137,6 +155,13 @@ class CustomersController < ApplicationController
     redirect_to customer_path(@customer, job_id: @job.id), notice: 'Customer was successfully replicated from caller.'
   end
 
+  def create_call
+    @call = Call.find(call_params[:call_id])
+    @call.customer_id = @customer.id
+    @call.save
+    redirect_to @customer
+  end
+
 
 
   private
@@ -145,20 +170,24 @@ class CustomersController < ApplicationController
       @customer = Customer.find(params[:id])
     end
 
+    def call_params
+      params.fetch(:call, {}).permit(:id, :call_id)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :job_id)
+      params.require(:customer).permit(:first_name, :last_name, :email, :job_id, uploads_attributes: [:upload, :upload_category_id], notes_attributes: [:content] )
     end
 
     def job_param
-      params.require(:job).permit(:job_id)
+      params.fetch(:job, {}).permit(:job_id)
     end
 
     def address_params
-        params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
+        params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
     end
 
     def phone_params
-      params.require(:phones).permit(numbers:[], extensions:[], type_ids:[])
+      params.fetch(:phones, {}).permit(numbers:[], extensions:[], type_ids:[])
     end
 end

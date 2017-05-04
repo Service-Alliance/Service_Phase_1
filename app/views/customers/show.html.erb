@@ -1,82 +1,402 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
 <div class="container-fluid">
-    <div id="wrapper">
-        <%= render partial: "partials/jobs_sidebar" %>
-        <div id="page-content-wrapper">
+
             <% if notice %>
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
-            <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="well">
+                  <div class="inline">
+                    <%= @customer.full_name %>
+                  </div>
+                  <div class="inline pull-right">
+                    <%= @customer.try(:owner).try(:full_name) %><br />
+                    <span class="owner">Owner</span>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="panel panel-primary margin-top-2">
+                <div class="panel-heading">
+                  Details
+                </div>
+                <div class="panel-body">
+                  <div class="item">
+                    Name: <%= @customer.full_name %>
+                  </div>
+                  <div class="item">
+                    Email: <%= @customer.email %>
+                  </div>
+                  <div class="item">
+                    Address: <%= @customer.try(:address_1) %>
+                  </div>
+                  <div class="item">
+                    Address 2: <%= @customer.try(:address_1) %>
+                  </div>
+                  <div class="item">
+                    City: <%= @customer.try(:city) %>
+                  </div>
+                  <div class="item">
+                    State: <%= @customer.try(:state).try(:name) %>
+                  </div>
+                  <div class="item">
+                    Zip: <%= @customer.try(:zip_code) %>
+                  </div>
+                  <div class="item">
+                    County: <%= @customer.try(:county) %>
+                  </div>
+                  <% @customer.phones.each do |phone| %>
+                  <div class="item">
+                    Email: <%= phone.number %> (<%= phone.type.name %>)
+                  </div>
+                  <% end %>
+                </div>
+                <div class="panel-footer">
+                  <%= link_to edit_customer_path(@customer), class: "btn btn-sm btn-warning", type: "button" do %>
+                  <i class="glyphicon glyphicon-edit"></i>
+                  <% end %>
+                </div>
+              </div>
+            </div>
 
-                <h1 class="text-center">Customer Information:</h1>
-                  <%= link_to "Same As Caller", job_customer_same_as_caller_path(@job), class: "btn btn-primary margin-top-2 margin-bottom-2", method: :post %>
-                <div class="panel panel-info">
+
+            <div class="col-sm-8">
+
+
+                <div class="panel with-nav-tabs panel-primary margin-top-2">
                     <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <%= @customer.first_name %>
-                            <%= @customer.last_name %>
-                        </h3>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Take Notes</a>
+                            </li>
+                            <li>
+                                <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Files</a>
+                            </li>
+                            <li>
+                                <a href="#call" aria-controls="call" role="tab" data-toggle="tab">Calls</a>
+                            </li>
+
+                        </ul>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>First Name:</td>
-                                            <td><%= @customer.first_name %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Last Name:</td>
-                                            <td><%= @customer.last_name %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email:</td>
-                                            <td><%= @customer.email %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Address 1:</td>
-                                            <td><%= @customer.try(:address).try(:address_1) %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Address 2</td>
-                                            <td><%= @customer.try(:address).try(:address_2) %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>City</td>
-                                            <td><%= @customer.try(:address).try(:city) %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Zip</td>
-                                            <td><%= @customer.try(:address).try(:zip_code) %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>State</td>
-                                            <td><%= @customer.try(:address).try(:state).try(:name) %></td>
-                                        </tr>
-                                        <tr>
-                                            <td>County</td>
-                                            <td><%= @customer.try(:address).try(:county) %></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="">
-                                    <button class="btn btn-primary">View All Jobs</button>
-                                </a>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="notes">
+                                <%= form_for @customer do |f| %>
+                                <%= f.fields_for :notes, @customer.notes.build do |g|%>
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <div class="field">
+                                            <%= g.text_area :content, class: 'form-control' %>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <%= f.submit class: "btn btn-primary" %>
+                                    </div>
+                                </div>
+                                <% end %>
+                                <% end %>
+                            </div>
+                            <div class="tab-pane fade" id="upload">
+                                <%= form_for @customer do |f| %>
+                                <%= f.fields_for :uploads, @customer.uploads.build do |g|%>
+
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="form-group">
+                                        <%= g.label :upload_category_id %><br>
+                                        <%= g.collection_select :upload_category_id, UploadCategory.all, :id, :name, {:prompt => 'Select an Upload Type'},  { class: 'form-control'} %>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <%= g.label :upload %><br>
+                                    <%= g.file_field :upload %>
+                                </div>
+                                <br>
+                                <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
+                                    <%= f.submit class: "btn btn-primary" %>
+                                </div>
+                                <% end %>
+                                <% end %>
+                            </div>
+
+
+                            <div class="tab-pane fade" id="call">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class=" ">
+                                                <%= form_tag create_customer_call_path(@customer), method: :post do  %>
+                                                <%= hidden_field_tag "call[id]", @customer.id %>
+
+                                                <div class="col-xs-6 col-xs-offset-3">
+                                                    <div class="form-group">
+                                                        <label for="call_id">Call ID</label><br/>
+                                                        <input id="id" name="call[call_id]" type="number" class="form-control"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 text-center">
+                                                    <div class="form-group">
+                                                        <div class="actions">
+                                                            <%= submit_tag "Add Call to Job", class: "btn btn-primary" %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Calls</div>
+                                            <div class="panel-body table-responsive">
+                                                <table
+                                                    class="resp"
+                                                    data-toggle="table"
+                                                    data-url="/calls"
+                                                    data-show-refresh="true"
+                                                    data-show-toggle="true"
+                                                    data-show-columns="true"
+                                                    data-search="true"
+                                                    data-flat="true"
+                                                    data-select-item-name="toolbar1"
+                                                    data-pagination="true"
+                                                    data-sort-name="id"
+                                                    data-sort-order="desc">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="id" data-sortable="true" data-formatter="AddVendor"></th>
+                                                            <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Call Link</th>
+                                                            <th data-field="callrail_id" data-sortable="true">CallRail ID</th>
+                                                            <th data-field="datetime" data-sortable="true">Call Date/Time</th>
+                                                            <th data-field="customer_phone_number" data-sortable="true">Phone Number</th>
+                                                            <th data-field="customer_city" data-sortable="true">City</th>
+                                                            <th data-field="callrail_id" data-sortable="true" data-formatter="CallRailTimeline">CallRail Timeline</th>
+                                                            <th data-field="customer_id" data-sortable="true">Already Assigned?</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-footer">
-                        <a href="mailto:<%= @customer.email %>" type="button" class="btn btn-sm btn-primary">
-                            <i class="glyphicon glyphicon-envelope"></i>
-                        </a>
-                        <span class="pull-right">
-                            <%= link_to edit_customer_path(@customer, job_id: @job.id), class: "btn btn-sm btn-warning", type: "button" do %>
-                            <i class="glyphicon glyphicon-edit"></i>
-                            <% end %>
-                        </span>
+                </div>
+            </div>
+
+
+            <div class="col-sm-8 margin-top-5">
+                <h3 class="text-center">Past</h3>
+                <div class="timeline-centered">
+                    <% @customer.trackers.each do |tracker| %>
+
+                    <% if tracker.tracker_task.name == "Note Created" %>
+                    <% noted = Note.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Note Created &bull;
+                                        <%= noted.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= noted.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= noted.content %>
+                                    <br />
+                                    <%= link_to 'Delete Note',  tracker_path(tracker, customer_id: @customer.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "File Uploaded" %>
+                    <% upload = Upload.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Upload &bull;
+                                        <%= upload.try(:created_at).strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.user.try(:full_name) %>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= upload.try(:file_name) %>
+                                    <a target="_blank" href="<%= upload.try(:upload).try(:url) %>">View/Download</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "Call Assigned" %>
+                    <% call = Call.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Call Assigned &bull;
+                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= link_to "View Call", call_path(call.id) %>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "Scheduler Created" %>
+                    <% scheduler = Scheduler.find(tracker.child_id) %>
+                    <% if scheduler.event_date.past? %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><%= scheduler.title %>
+                                        &bull;
+                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    Date:
+                                    <%= scheduler.event_date %><br/>
+                                    Event Type:
+                                    <%= scheduler.scheduler_event %><br/>
+                                    Start Time:
+                                    <%= scheduler.start_time.strftime("%I:%M %p") unless scheduler.start_time == nil %><br/>
+                                    End Time:
+                                    <%= scheduler.end_time.strftime("%I:%M %p") unless scheduler.end_time == nil %><br/>
+                                    Notes:
+                                    <%= scheduler.notes %>
+                                    <br/>
+                                    <%= scheduler.assigned_to_user.try(:full_name) %>
+
+                                    <br />
+                                    <%= link_to 'Delete Scheduled Event',  tracker_path(tracker, customer_id: @customer.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
+                                </div>
+
+                            </div>
+                        </div>
+                    </article>
+                    <% end %>
+                    <% end %>
+
+                    <% end %>
+                </div>
+
+            </div>
+
+
+    <div id="currentCallsModal" class="modal fade" tabindex="-1" role="dialog">
+        <%= form_for :call, url: create_customer_call_url(@customer), method: :post do |f|  %>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Add Current Call</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+
+
+                              <%= hidden_field_tag "call[customer_id]", @customer.id %>
+
+                              <div class="col-xs-6 col-xs-offset-3">
+                                  <div class="form-group">
+                                      <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
+                                  </div>
+                              </div>
+
+                              <div class="col-xs-12 text-center">
+                                  <div class="form-group">
+                                      <div class="actions">
+
+                                      </div>
+                                  </div>
+                              </div>
+
+
+
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <%= f.submit "Add Call to Job", class: "btn btn-primary" %>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
                 </div>
             </div>
         </div>
+        <% end %>
     </div>
-</div>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        function LinkFormatter(value, row, index) {
+            return "<a target='_blank href='/calls/" + row.id + ">" + value + "</a>";
+        }
+        function AddVendor(value, row, index) {
+            return "<a class='add-call' target='_blank' href='call_id=" + row.id + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
+        }
+        function CallRailTimeline(value, row, index) {
+            return "<a href='https://app.callrail.com/calls/" + value + "'>Timeline Link</a>";
+        }
+
+        flatpickr(".datePicker", {
+            enableTime: false,
+            // create an extra input solely for display purposes
+            altInput: true,
+            altFormat: "F j, Y"
+        });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '5',
+            maxTime: '8:00pm',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+        $('[data-toggle=tab]').click(function () {
+            if ($(this).parent().hasClass('active')) {
+                $($(this).attr("href")).toggleClass('active');
+            }
+        })
+    </script>

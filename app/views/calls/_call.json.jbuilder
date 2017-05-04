@@ -1,2 +1,2 @@
-json.extract! call, :id, :callrail_id, :recording, :datetime, :customer_phone_number, :customer_name, :job_id
+json.extract! call, :id, :callrail_id, :recording, :datetime, :customer_phone_number, :customer_name, :job_id, :customer_id
 json.url call_url(call, format: :json)

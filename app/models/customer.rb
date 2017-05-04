@@ -1,6 +1,12 @@
 class Customer < ActiveRecord::Base
   has_many :phones, as: :phoneable
   belongs_to :address
+  has_many :notes, as: :noteable, dependent: :destroy
+  has_many :trackers, as: :trackable, dependent: :destroy
+  has_many :uploads, as: :uploadable, dependent: :destroy
+  belongs_to :owner, class_name: "User"
+  accepts_nested_attributes_for :uploads
+  accepts_nested_attributes_for :notes
   # validates :email, presence: true, format: {
   # with: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/i,
   # message: 'Invalid email format.'

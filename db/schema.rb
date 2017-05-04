@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501203021) do
+ActiveRecord::Schema.define(version: 20170504210354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 20170501203021) do
     t.datetime "updated_at",            null: false
     t.text     "transcription"
     t.integer  "vendor_id"
+    t.integer  "customer_id"
   end
 
   create_table "contact_assignments", force: :cascade do |t|
@@ -218,8 +219,15 @@ ActiveRecord::Schema.define(version: 20170501203021) do
     t.string   "last_name"
     t.string   "email"
     t.integer  "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "owner_id"
+    t.text     "sharp_spring_id"
+    t.text     "company_name"
+    t.text     "title"
+    t.text     "website"
+    t.text     "category"
+    t.text     "sub_category"
   end
 
   create_table "departments", force: :cascade do |t|
