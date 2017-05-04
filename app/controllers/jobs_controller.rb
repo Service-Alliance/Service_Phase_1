@@ -292,13 +292,32 @@ class JobsController < ApplicationController
     @calls = Call.where(job_id: @job.id)
 
   end
-  def manager_assignment
-    p params
-    p params[:job_id]
+  def coordinator_assignment
     @job = Job.find(params[:job_id])
     @job.coordinator_id = job_params[:coordinator_id]
     @job.save
     redirect_to @job
+  end
+
+  def manager_assignment
+    @job = Job.find(params[:job_id])
+    @user = User.find(params[:job_manager_id])
+
+    unless @job.job_managers.pluck(:job_manager_id).include?(@user.id)
+      @job_manager = @job.job_managers.create(job_manager_id: @user.id)
+      @job.update_last_action
+      @job.pipeline_status_id = 2
+      @job.save
+
+      @job.trackers.create(tracker_task_id: 2, child_id: @job_manager.id)
+      if @user.email
+        UserMailer.manager_assignment(@user, @job_manager).deliver_now
+      end
+      return redirect_to @job, notice: 'Job Manager Added.'
+    else
+      return redirect_to @job, notice: 'Error Adding Manager.'
+    end
+
   end
 
   def add_call; end
