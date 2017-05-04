@@ -175,7 +175,7 @@
             <div class="subscribers">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">JOB MANAGER <a class="inline" data-toggle="modal" data-target="#job_manager"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                        <h3 class="panel-title">JOB COORDINATOR <a class="inline" data-toggle="modal" data-target="#job_manager"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
                     </div>
                     <% if @job.job_coordinator %>
                     <div class="panel-body">
@@ -234,7 +234,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Job Manager Assignment</h4>
+        <h4 class="modal-title">Job Coordinator Assignment</h4>
       </div>
         <%= form_for @job, url: job_manager_assignment_url(@job), method: :post do |f| %>
       <div class="modal-body">
