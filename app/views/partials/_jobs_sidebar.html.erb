@@ -153,6 +153,27 @@
             <div class="subscribers">
                 <div class="panel panel-default">
                     <div class="panel-heading">
+                        <h3 class="panel-title">LOSS COORDINATOR <a class="inline" data-toggle="modal" data-target="#job_coordinator"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                    </div>
+                    <% if @job.job_coordinator %>
+                    <div class="panel-body">
+                        <ul>
+
+                            <li>
+                                <%= @job.try(:job_coordinator).try(:full_name) %>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <div class="subscribers">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
                         <h3 class="panel-title">SUBSCRIBERS (<%=@job.subscriptions.count %>) <a class="inline" data-toggle="modal" data-target="#subscriptions"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
                     </div>
                     <div class="panel-body">
@@ -171,32 +192,13 @@
             </div>
         </li>
 
-        <li>
-            <div class="subscribers">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">JOB COORDINATOR <a class="inline" data-toggle="modal" data-target="#job_coordinator"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
-                    </div>
-                    <% if @job.job_coordinator %>
-                    <div class="panel-body">
-                        <ul>
 
-                            <li>
-                                <%= @job.try(:job_coordinator).try(:full_name) %>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <% end %>
-                </div>
-            </div>
-        </li>
 
         <li>
             <div class="managers">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">JOB MANAGER <a class="inline" data-toggle="modal" data-target="#job_manager"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                        <h3 class="panel-title">PROJECT MANAGER <a class="inline" data-toggle="modal" data-target="#job_manager"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
                     </div>
                     <% unless @job.job_managers.empty? %>
 
@@ -252,7 +254,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Job Coordinator Assignment</h4>
+        <h4 class="modal-title">Loss Coordinator Assignment</h4>
       </div>
         <%= form_for @job, url: job_coordinator_assignment_url(@job), method: :post do |f| %>
       <div class="modal-body">
@@ -281,7 +283,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Job Manager Assignment</h4>
+        <h4 class="modal-title">Project Manager Assignment</h4>
       </div>
         <%= form_for @job, url: job_manager_assignment_url(@job), method: :post do |f| %>
       <div class="modal-body">
@@ -290,7 +292,8 @@
             <% if @job.franchise_id %>
             <%= select_tag 'job_manager_id', options_from_collection_for_select(User.joins(:franchise_users).merge(FranchiseUser.where(franchise_id: @job.franchise_id)), "id", "full_name"), class: "form-control"  %>
             <% else %>
-            <%= select_tag 'job_manager_id', options_from_collection_for_select(User.all, "id", "full_name"), class: "form-control"  %>
+            <% role = Role.find_by(name: "Project Manager") %>
+            <%= select_tag 'job_manager_id', options_from_collection_for_select(User.where(role_id: role.id), "id", "full_name"), class: "form-control"  %>
             <% end %>
 
           </div>
