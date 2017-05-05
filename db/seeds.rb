@@ -8,6 +8,7 @@ user = User.create(email: 'creaumond@gmail.com', password: 'password', password_
 Role.create(name: "Admin")
 Role.create(name: "Job Coordinator")
 Role.create(name: "Call Rep")
+Role.create(name: 'Project Manager')
 
 csv_text = File.read("db/files/users.csv")
 csv = CSV.parse(csv_text, :headers => true)

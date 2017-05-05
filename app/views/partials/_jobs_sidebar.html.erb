@@ -10,11 +10,9 @@
                   <% if @job.job_coordinator %>
                   <div class="panel-body">
                       <ul>
-
                           <li>
                               <%= @job.try(:job_coordinator).try(:full_name) %>
                           </li>
-
                       </ul>
                   </div>
                   <% end %>
@@ -264,10 +262,10 @@
       </div>
         <%= form_for @job, url: job_coordinator_assignment_url(@job), method: :post do |f| %>
       <div class="modal-body">
-
+          <% coordinator = Role.find_by(name: "Job Coordinator") %>
           <div class="field">
             <%= f.label :coordinator_id %><br>
-            <%= f.collection_select :coordinator_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
+            <%= f.collection_select :coordinator_id, User.where("role_id= ? OR id= ? OR id= ?", coordinator.id, 28, 60), :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
           </div>
 
 
