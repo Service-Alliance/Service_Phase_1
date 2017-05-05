@@ -5,7 +5,6 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    include AuthPolicy
     @contacts = Contact.all
   end
 
