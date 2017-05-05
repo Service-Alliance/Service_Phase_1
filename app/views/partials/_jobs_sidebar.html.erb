@@ -143,12 +143,12 @@
                     Vendor Assignment
                     <% end %>
                 </li>
-                <li>
-                    <%= link_to new_or_view_job_contact_path(@job, @job.contact_assignments)  do %>
+                <!-- <li>
+                    <% link_to new_or_view_job_contact_path(@job, @job.contact_assignments)  do %>
                     <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Referral Assignment
                     <% end %>
-                </li>
+                </li> -->
                 <li>
                     <%= link_to new_or_view_agent_path(@job, @job.agent)  do %>
                     <i class="<%= @job.agent ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
