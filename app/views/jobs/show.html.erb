@@ -15,6 +15,9 @@
             <% unless @job.franchise_id %>
               <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <strong>Franchise</strong> has not been assigned</div>
             <% end %>
+            <% if @job.job_managers.empty? %>
+              <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <strong>Job Manager</strong> has not been assigned</div>
+            <% end %>
 
             <div class="col-xs-12 ">
                 <%= link_to  "Edit Job", edit_job_path(@job),class:"btn btn-primary" %>
