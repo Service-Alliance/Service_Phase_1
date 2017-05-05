@@ -27,6 +27,7 @@ class PurchaseOrderApprovalsController < ApplicationController
   def create
     @purchase_order_approval = PurchaseOrderApproval.new(purchase_order_approval_params)
     @purchase_order_approval.job_id = @job.id
+    @purchase_order_approval.user_id = current_user.id
 
     respond_to do |format|
       if @purchase_order_approval.save
@@ -76,6 +77,6 @@ class PurchaseOrderApprovalsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_order_approval_params
-      params.require(:purchase_order_approval).permit(:date, :job_name, :vendor, :purchase_item, :amount, :last_four_card)
+      params.require(:purchase_order_approval).permit(:date, :job_name, :vendor, :purchase_item, :amount, :last_four_card, :description)
     end
 end
