@@ -207,7 +207,7 @@
                           <% end %>
                         </ul>
                     </div>
-                  
+
                     <% end %>
                 </div>
             </div>
@@ -291,7 +291,12 @@
       <div class="modal-body">
           <div class="field">
             <%= label_tag :job_manager_id, "Add a Job Manager" %><br>
+            <% if @job.franchise_id %>
+            <%= select_tag 'job_manager_id', options_from_collection_for_select(User.joins(:franchise_users).merge(FranchiseUser.where(franchise_id: @job.franchise_id)), "id", "full_name"), class: "form-control"  %>
+            <% else %>
             <%= select_tag 'job_manager_id', options_from_collection_for_select(User.all, "id", "full_name"), class: "form-control"  %>
+            <% end %>
+            
           </div>
       </div>
       <div class="modal-footer">
