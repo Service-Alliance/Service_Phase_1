@@ -15,4 +15,10 @@ class Scheduler < ActiveRecord::Base
       return
     end
   end
+
+  def check_manager(job)
+    if job.job_managers.empty?
+      job.job_managers.create(job_manager_id: self.assigned_to_user_id)
+    end
+  end
 end

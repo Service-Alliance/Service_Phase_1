@@ -28,6 +28,9 @@ class SchedulersController < ApplicationController
     @scheduler = Scheduler.new(scheduler_params)
     @scheduler.job_id = @job.id
     tracker_task = TrackerTask.find_by(name: "Scheduler Created")
+    if @scheduler.scheduler_event_type_id == 5
+      @scheduler.check_manager(@job)
+    end
 
     respond_to do |format|
       if @scheduler.save

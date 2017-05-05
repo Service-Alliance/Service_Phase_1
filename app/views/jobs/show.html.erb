@@ -115,13 +115,16 @@
                                                         <span class="glyphicon glyphicon-user" aria-hidden="true">Meeting</span>
                                                     </label>
                                                     <label class="btn btn-primary">
+                                                        <input type="radio" name="scheduler[scheduler_event_type_id]" value="5" id="scheduler_event_type_id_2" autocomplete="off">
+                                                        <span class="glyphicon glyphicon-user" aria-hidden="true">Initial Inspection</span>
+                                                    </label>
+                                                    <label class="btn btn-primary">
                                                         <input type="radio" name="scheduler[scheduler_event_type_id]" value="3" id="scheduler_event_type_id_3" autocomplete="off">
                                                         <span class="glyphicon glyphicon-time" aria-hidden="true">Task</span>
                                                     </label>
                                                     <label class="btn btn-primary">
                                                         <input type="radio" name="scheduler[scheduler_event_type_id]" value="4" id="scheduler_event_type_id_4" autocomplete="off">
                                                         <span class="glyphicon glyphicon-cutlery" aria-hidden="true">Lunch</span>
-
                                                     </label>
                                                 </div>
                                             </div>
@@ -144,9 +147,19 @@
                                             <div class="col-xs-12 margin-top-2">
                                                 <%= f.text_area :notes, class: "form-control", placeholder: "Notes" %>
                                             </div>
-                                            <div class="col-xs-12 margin-top-2">
+                                            <div id="other-assign-to-user" class="col-xs-12 margin-top-2">
                                                 <%= f.label :assigned_to_user_id %><br>
                                                 <%= f.collection_select :assigned_to_user_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
+                                            </div>
+                                            <div id="manager-assign-to-user" class="col-xs-12 margin-top-2 hidden">
+                                                <%= f.label :assigned_to_user_id, "Assigned to Manager" %><br>
+                                              <% if @job.franchise_id %>
+                                                <%= f.collection_select :assigned_to_user_id, User.joins(:franchise_users).merge(FranchiseUser.where(franchise_id: @job.franchise_id)), :id, :full_name, {prompt: true, selected: @job.job_managers.try(:first).try(:job_manager_id)},  { class: 'form-control'} %>
+                                              <% else %>
+                                                <% role = Role.find_by(name: "Project Manager") %>
+                                                <%= f.collection_select :assigned_to_user_id, User.where(role_id: role.id), :id, :full_name, {prompt: true, selected: @job.job_managers.try(:first).try(:job_manager_id)},  { class: 'form-control'} %>
+
+                                                <% end %>
                                             </div>
                                             <div class="col-xs-3 col-xs-offset-9 margin-top-2">
                                                 <%= f.submit "Add", class: "btn btn-primary" %>
