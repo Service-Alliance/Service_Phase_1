@@ -212,6 +212,8 @@
                                         </div>
                                     </div>
 
+
+
                                     <div class="col-lg-12">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">Calls</div>
@@ -239,6 +241,38 @@
                                                             <th data-field="customer_city" data-sortable="true">City</th>
                                                             <th data-field="callrail_id" data-sortable="true" data-formatter="CallRailTimeline">CallRail Timeline</th>
 
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Added Calls</div>
+                                            <div class="panel-body table-responsive">
+                                                <table
+                                                    class="resp"
+                                                    data-toggle="table"
+                                                    data-url="<%=@job.id %>/calls.json"
+                                                    data-show-refresh="true"
+                                                    data-show-toggle="true"
+                                                    data-show-columns="true"
+                                                    data-search="true"
+                                                    data-flat="true"
+                                                    data-select-item-name="toolbar1"
+                                                    data-pagination="true"
+                                                    data-sort-name="id"
+                                                    data-sort-order="desc">
+                                                    <thead>
+                                                        <tr>
+                                                          <th data-field="callrail_id" data-sortable="true" data-formatter="ReturnCallRail">CallRail Timeline</th>
+                                                            <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Call Link</th>
+                                                            <th data-field="callrail_id" data-sortable="true">CallRail ID</th>
+                                                            <th data-field="datetime" data-sortable="true">Call Date/Time</th>
+                                                            <th data-field="customer_phone_number" data-sortable="true">Phone Number</th>
+                                                            <th data-field="customer_city" data-sortable="true">City</th>
                                                         </tr>
                                                     </thead>
                                                 </table>
@@ -722,6 +756,9 @@
         }
         function CallRailTimeline(value, row, index) {
             return "<a href='https://app.callrail.com/calls/" + value + "'>Timeline Link</a>";
+        }
+        function ReturnCallRail(value, row, index){
+            return "<a class='btn btn-primary' href='https://app.callrail.com/a/686639065/leadcenter/#/calls/" + value + "'>Return Call</a>";
         }
 
         flatpickr(".datePicker", {

@@ -290,6 +290,10 @@ class JobsController < ApplicationController
 
   def calls
     @calls = Call.where(job_id: @job.id)
+    respond_to do |format|
+      format.html { }
+      format.json {render json: @calls }
+    end
 
   end
   def coordinator_assignment

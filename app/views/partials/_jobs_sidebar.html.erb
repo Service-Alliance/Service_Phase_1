@@ -1,5 +1,49 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
+
+      <li>
+          <div class="assignment-card">
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">LOSS COORDINATOR <a class="inline" data-toggle="modal" data-target="#job_coordinator"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                  </div>
+                  <% if @job.job_coordinator %>
+                  <div class="panel-body">
+                      <ul>
+
+                          <li>
+                              <%= @job.try(:job_coordinator).try(:full_name) %>
+                          </li>
+
+                      </ul>
+                  </div>
+                  <% end %>
+              </div>
+          </div>
+      </li>
+
+      <li>
+          <div class="assignment-card">
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">PROJECT MANAGER <a class="inline" data-toggle="modal" data-target="#job_manager"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                  </div>
+                  <% unless @job.job_managers.empty? %>
+
+                  <div class="panel-body">
+                      <ul>
+                        <% @job.job_managers.each do |job_manager| %>
+                          <li><%= job_manager.job_manager.try(:full_name) %></li>
+                        <% end %>
+                      </ul>
+                  </div>
+
+                  <% end %>
+              </div>
+          </div>
+      </li>
+
+
         <li>
             <a href="#">
                 <i class="fa fa-bar-chart-o fa-fw"></i>
@@ -149,29 +193,10 @@
             </ul>
         </li>
 
-        <li>
-            <div class="subscribers">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">LOSS COORDINATOR <a class="inline" data-toggle="modal" data-target="#job_coordinator"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
-                    </div>
-                    <% if @job.job_coordinator %>
-                    <div class="panel-body">
-                        <ul>
 
-                            <li>
-                                <%= @job.try(:job_coordinator).try(:full_name) %>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <% end %>
-                </div>
-            </div>
-        </li>
 
         <li>
-            <div class="subscribers">
+            <div class="assignment-card">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">SUBSCRIBERS (<%=@job.subscriptions.count %>) <a class="inline" data-toggle="modal" data-target="#subscriptions"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
@@ -194,26 +219,7 @@
 
 
 
-        <li>
-            <div class="managers">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">PROJECT MANAGER <a class="inline" data-toggle="modal" data-target="#job_manager"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
-                    </div>
-                    <% unless @job.job_managers.empty? %>
 
-                    <div class="panel-body">
-                        <ul>
-                          <% @job.job_managers.each do |job_manager| %>
-                            <li><%= job_manager.job_manager.try(:full_name) %></li>
-                          <% end %>
-                        </ul>
-                    </div>
-
-                    <% end %>
-                </div>
-            </div>
-        </li>
 
 
 
