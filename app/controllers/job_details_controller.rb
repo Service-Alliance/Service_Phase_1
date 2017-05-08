@@ -44,7 +44,7 @@ class JobDetailsController < ApplicationController
             @job_detail.billing_address_first_name = @job.customer.first_name
             @job_detail.billing_address_last_name = @job.customer.last_name
           elsif billing_params[:type][0] == '2'
-            adjuster = Adjuster.find_by(job_id: @job.id)
+            adjuster = @job.adjuster
             unless adjuster
               return redirect_to edit_job_job_detail_path(@job, @job_detail), notice: 'No adjuster was found.'
             end
