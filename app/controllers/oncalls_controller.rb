@@ -10,6 +10,11 @@ class OncallsController < ApplicationController
       render :day_show, oncalls: @oncalls
     else
       @oncalls = Oncall.all
+      respond_to do |format|
+        format.html {}
+        format.json { render json: @oncalls.to_json }
+      end
+
     end
   end
 
@@ -30,9 +35,12 @@ class OncallsController < ApplicationController
   # POST /oncalls
   # POST /oncalls.json
   def create
-    Oncall.load_oncalls(oncall_params)
+    oncall = Oncall.new(oncall_params)
+    count = Oncall.where(scheduled_on: oncall_params[:scheduled_on], state_id: oncall_params[:state_id]).count
+    oncall.priority = count + 1
+    oncall.save
     respond_to do |format|
-        format.html { redirect_to oncalls_path, notice: 'Oncall was successfully created.' }
+        format.html { redirect_to oncalls_path('date' => oncall_params[:scheduled_on]), notice: 'Oncall was successfully created.' }
         format.json { render :show, status: :created, location: @oncall }
     end
   end
@@ -76,6 +84,6 @@ class OncallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def oncall_params
-      params.require(:oncall).permit(:scheduled_on, user_ids: [], priorities: [])
+      params.require(:oncall).permit(:scheduled_on, :user_id, :state_id)
     end
 end

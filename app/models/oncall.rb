@@ -23,4 +23,15 @@ class Oncall < ActiveRecord::Base
   def self.clear_oncalls(date)
     Oncall.where(scheduled_on: date).destroy_all
   end
+
+  def as_json(options = {})
+    {
+      :id => self.id,
+      :title => self.try(:user).try(:full_name),
+      :start => self.scheduled_on.beginning_of_day,
+      :end => self.scheduled_on.beginning_of_day,
+      :allDay => true,
+     }
+     end
+
 end

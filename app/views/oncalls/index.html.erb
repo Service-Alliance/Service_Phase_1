@@ -2,7 +2,6 @@
 
 <div id="calendar"></div>
 
-<%= link_to 'New Oncall', new_oncall_path %>
 
 <script>
     $(document).ready(function () {
@@ -11,7 +10,10 @@
             navLinkDayClick: function (date, jsEvent) {
                 console.log('day', date.format());
                 window.location.href = "<%= ENV['ROOT_URL'] %>/oncalls?date=" + date.format();
-            }
+            },
+            eventSources: [
+              '/oncalls'
+          ]
         })
     });
 </script>
