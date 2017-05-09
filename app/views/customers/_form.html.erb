@@ -36,6 +36,13 @@
             </div>
         </div>
 
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :owner %><br>
+                <%= f.collection_select :owner_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
+            </div>
+        </div>
+
         <%= render 'address_form', f: f %>
         <%= render 'partials/phone_form', f: f %>
 
