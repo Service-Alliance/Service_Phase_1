@@ -62,7 +62,7 @@
                     <span class="bold">Home #:
                     </span>
                     <% @job.try(:customer).try(:home_phones).each do |phone| %>
-                    <%= phone.number %>
+                    <%= phone.number %><br />
                     <% end %>
                   </div>
 
@@ -71,7 +71,7 @@
                     </span>
                     <% if @job.customer && @job.customer.phones %>
                     <% @job.try(:customer).try(:work_numbers).each do |phone| %>
-                    <%= phone.number %>
+                    <%= phone.number %><br />
                     <% end %>
                     <% end %>
                   </div>
@@ -81,7 +81,7 @@
                     </span>
                     <% if @job.customer && @job.customer.phones %>
                     <% @job.try(:customer).try(:fax_numbers).each do |phone| %>
-                    <%= phone.number %>
+                    <%= phone.number %><br />
                     <% end %>
                     <% end %>
                   </div>
@@ -91,7 +91,7 @@
                     </span>
                     <% if @job.customer && @job.customer.phones %>
                     <% @job.try(:customer).try(:cell_phones).each do |phone| %>
-                    <%= phone.number %>
+                    <%= phone.number %><br />
                     <% end %>
                     <% end %>
                   </div>
@@ -128,7 +128,7 @@
                     <% if @job.caller && @job.caller.phones %>
                     <span class="bold">Home #:</span>
                     <% @job.try(:caller).try(:home_phones).each do |phone| %>
-                    <%= phone.number %>
+                    <%= phone.number %><br />
                     <br/>
                     <% end %>
                     <% end %>
@@ -149,7 +149,7 @@
                     </span>
                     <% if @job.caller && @job.caller.phones %>
                     <% @job.try(:caller).try(:fax_numbers).each do |phone| %>
-                    <%= phone.number %>
+                    <%= phone.number %> <br />
                     <br/>
                     <% end %>
                     <% end %>
