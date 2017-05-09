@@ -1,35 +1,143 @@
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-10 table-responsive">
+            <h1>Listing Jobs</h1>
+
+            <!-- <%= select_tag("filter", options_for_select(JobStatus.all.map{|p| [p.name, p.id]}, class: "form-control")) %> -->
+            <!-- comment -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- <a
+                        href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=32&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search"
+                        class="btn btn-primary">New York Data</a>
+
+                    <a
+                        class="btn btn-primary"
+                        href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=30&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search">New Jersey Data</a> -->
+                </div>
+            </div>
+
+            <%= link_to "Export As CSV (Work In Progress)", jobs_path(params.merge(format: "csv")), class: "btn btn-primary margin-bottom-2" %>
+
+            <table id="job-table" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Job Recieved</th>
+                        <th>Loss Type</th>
+                        <th>Customer Name</th>
+                        <th>Street Address</th>
+                        <th>City</th>
+                        <th>Zip</th>
+                        <th>Phone</th>
+                        <th>Referred By</th>
+                        <th>Insurance Company</th>
+                        <th>Coordinator</th>
+                        <th>Entered by</th>
+                        <th>Franchise</th>
+                        <th>Job Status</th>
+                        <th colspan="3"></th>
+                    </tr>
+                </thead>
+                <!-- Sort by date entered -->
+                <!-- Sort by date ranmge -->
+                <!-- Full text search -->
+                <!--  Sorting -->
+                <!--  -->
+
+                <tbody>
+                    <% @jobs.each do |job| %>
+                    <tr>
+                        <td><%= job.losses.try(:first).try(:fnol_recieved).try(:strftime, "%D %I:%M %p") %></td>
+                        <td><%= job.try(:losses).try(:first).try(:loss_type).try(:name) %></td>
+                        <td><%= job.try(:customer).try(:full_name) %></td>
+                        <td><%= job.try(:customer).try(:address).try(:address_1) %>
+                            <%= job.try(:customer).try(:address).try(:address_2) %></td>
+                        <td><%= job.try(:customer).try(:address).try(:city) %>
+                        </td>
+                        <td><%= job.try(:customer).try(:address).try(:zip_code) %>
+                        </td>
+                        <td><%= job.try(:customer).try(:phones).try(:first).try(:number) %>
+                        </td>
+                        <td><%= job.try(:referral_type).try(:name) %></td>
+                        <td><%= job.try(:job_detail).try(:insurance_company).try(:name) %></td>
+                        <td><%= job.try(:job_coordinator).try(:full_name) %></td>
+                        <td><%= job.try(:user).try(:full_name) %></td>
+                        <td><%= job.try(:franchise).try(:name) %></td>
+                        <td><%= job.try(:job_status).try(:name) %></td>
+                        <td><%= link_to 'Show', job %></td>
+                        <% if current_user.admin?%>
+                        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <% end %>
+
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <%= paginate @jobs %>
+            <br>
+
+            <%= link_to 'New Job', new_job_path %>
+        </div>
+        <div class="col-xs-2 margin-top-5">
+            <%= search_form_for @search do |f| %>
+            <%= f.label :losses_fnol_recieved_gteq, "Date Range" %><br/>
+            <%= f.search_field :losses_fnol_recieved_gteq, {class: "form-control datePicker"} %>
+
+            <% f.label :losses_fnol_recieved_gteq, "End Date" %>
+            <%= f.search_field :losses_fnol_recieved_lteq, {class: "form-control datePicker"} %>
 
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">Jobs Assignments</div>
-      <div class="panel-body">
-        <table
-          class="responsive"
-          data-toggle="table"
-          data-url="job-assignments/list"
-          data-show-refresh="true"
-          data-show-toggle="true"
-          data-show-columns="true"
-          data-search="true"
-          data-flat="true"
-          data-select-item-name="toolbar1"
-          data-pagination="true"
-          data-sort-name="id"
-          data-sort-order="desc">
-          <thead>
-            <tr>
-              <th data-field="id" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
-              <th data-field="schedule_datetime" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Scheduled</th>
-              <th data-field="job_id" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
-              <th data-field="manager_confirmation" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Confirmed?</th>
+            <%= f.label :caller_full_name, "Caller Full Name" %><br/>
+            <%= f.search_field :caller_full_name_cont, {class: "form-control"} %>
+            <%= f.label :customer_full_name_cont, "Customer Full Name" %><br/>
+            <%= f.search_field :customer_full_name_cont, {class: "form-control"} %>
+            <%= f.label :customer_address_address_1, "Customer Address" %><br/>
+            <%= f.search_field :customer_address_address_1_or_customer_address_address_2_or_customer_address_city_or_customer_address_county_or_customer_address_zip_code_cont, {class: "form-control"} %>
+            <%= f.label :franchise_id %><br/>
+            <%= f.select :franchise_id_in, options_from_collection_for_select(Franchise.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
-            </tr>
-          </thead>
-        </table>
-      </div>
+            <%= f.label :job_detail_insurance_company_id_in %><br/>
+            <%= f.select :job_detail_insurance_company_id_in, options_from_collection_for_select(InsuranceCompany.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+
+            <%= f.label :status_id_in, "Job Status" %><br/>
+            <%= f.select :status_id_in, options_from_collection_for_select(JobStatus.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.label :entered_by_id_in, "Entered By" %><br/>
+            <%= f.select :entered_by_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.label :referral_employee_id_in, "Referred By" %><br/>
+            <%= f.select :referral_employee_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+
+            <%= f.label :losses_loss_type_id_in, "Loss Type" %><br/>
+            <%= f.select :losses_loss_type_id_in, options_from_collection_for_select(LossType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+
+            <%= f.label :customer_address_state_id, "Customer State" %><br/>
+            <%= f.select :customer_address_state_id_in, options_from_collection_for_select(State.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.label :referral_type_id_in, "Referral Type" %><br/>
+            <%= f.select :referral_type_id_in, options_from_collection_for_select(ReferralType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.label :agent_id_in, "Agent Name" %><br/>
+            <%= f.select :agent_id_in, options_from_collection_for_select(Agent.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.label :adjuster_id_in, "Adjuster Name" %><br/>
+            <%= f.select :adjuster_id_in, options_from_collection_for_select(Adjuster.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+  
+            <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-top-2" %></div>
+
+            <% end %>
+        </div>
     </div>
-  </div>
 </div>
+<p id="notice"><%= notice %></p>
+
+<script>
+flatpickr(".datePicker", {
+    // defaultDate: new Date(),
+    // create an extra input solely for display purposes
+    altInput: true,
+    altFormat: "F j, Y"
+});
+
+    // $(document).ready(function () {
+    //     $('#job-table').DataTable();
+    // });
+</script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>

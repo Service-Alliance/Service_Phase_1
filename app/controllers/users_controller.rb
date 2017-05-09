@@ -68,13 +68,29 @@ class UsersController < ApplicationController
   end
 
   def job_assignments
+    @search = Job.joins(:job_managers).merge(JobManager.where(:job_manager_id => current_user.id)).order('created_at DESC').search(params[:q])
+    # @jobs = @search.result
+    @jobs = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC')
+    @all_results = @search.result
+
+    respond_to do |format|
+      format.html
+      format.csv { render text: @all_results.to_csv }
+    end
 
   end
 
   def job_assignments_list
-    @job_assignments = @user.job_managers
+    @search = Job.joins(:job_managers).merge(JobManager.where(:job_manager_id => current_user.id)).order('created_at DESC').search(params[:q])
+    # @jobs = @search.result
+    @jobs = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC')
+    @all_results = @search.result
 
-    render json: @job_assignments
+    respond_to do |format|
+      format.html
+      format.csv { render text: @all_results.to_csv }
+    end
+
   end
 
 
