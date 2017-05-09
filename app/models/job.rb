@@ -5,6 +5,7 @@ class Job < ActiveRecord::Base
   belongs_to :franchise
   belongs_to :referral_type
   belongs_to :customer
+  has_one :customer_address, through: :customer, source: "address"
   # has_one :state, through: :customer
   has_many :calls
   belongs_to :user, foreign_key: :entered_by_id

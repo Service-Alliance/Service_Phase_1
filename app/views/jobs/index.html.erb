@@ -49,8 +49,7 @@
                 <tbody>
                     <% @jobs.each do |job| %>
                     <tr>
-                        <td>
-                          <%= job.losses.try(:first).try(:fnol_recieved).try(:strftime, "%D %I:%M %p") %></td>
+                        <td><%= job.losses.try(:first).try(:fnol_recieved).try(:strftime, "%D %I:%M %p") %></td>
                         <td><%= job.try(:losses).try(:first).try(:loss_type).try(:name) %></td>
                         <td><%= job.try(:customer).try(:full_name) %></td>
                         <td><%= job.try(:customer).try(:address).try(:address_1) %>
@@ -94,6 +93,8 @@
             <%= f.search_field :caller_full_name_cont, {class: "form-control"} %>
             <%= f.label :customer_full_name_cont, "Customer Full Name" %><br/>
             <%= f.search_field :customer_full_name_cont, {class: "form-control"} %>
+            <%= f.label :customer_address_address_1, "Customer Address" %><br/>
+            <%= f.search_field :customer_address_address_1_or_customer_address_address_2_or_customer_address_city_or_customer_address_county_or_customer_address_zip_code_cont, {class: "form-control"} %>
             <%= f.label :franchise_id %><br/>
             <%= f.select :franchise_id_in, options_from_collection_for_select(Franchise.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
