@@ -160,7 +160,7 @@
                     </span>
                     <% if @job.caller && @job.caller.phones %>
                     <% @job.try(:caller).try(:cell_phones).each do |phone| %>
-                    <%= phone.number %>
+                    <%= phone.number %><br />
                     <% end %>
                     <% end %>
                   </div>
