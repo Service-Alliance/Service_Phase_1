@@ -61,7 +61,11 @@
                         <td><%= job.try(:customer).try(:phones).try(:first).try(:number) %>
                         </td>
                         <td><%= job.try(:referral_type).try(:name) %></td>
-                        <td><%= job.try(:job_detail).try(:insurance_company).try(:name) %></td>
+                        <% if job.try(:job_detail).try(:self_pay_id) %>
+                          <td>Self Pay</td>
+                        <% else %>
+                          <td><%= job.try(:job_detail).try(:insurance_company).try(:name) %></td>
+                        <% end %>
                         <td><%= job.try(:job_coordinator).try(:full_name) %></td>
                         <td><%= job.try(:user).try(:full_name) %></td>
                         <td><%= job.try(:franchise).try(:name) %></td>
