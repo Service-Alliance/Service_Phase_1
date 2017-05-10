@@ -303,6 +303,19 @@ class JobsController < ApplicationController
     redirect_to @job
   end
 
+  def caller_assignment
+    @job = Job.find(params[:job_id])
+    if @caller = @job.caller
+      @caller.update(caller_params)
+      @caller.address.update(address_params)
+    else
+        @job.caller.create(caller_params)
+    end
+    # @job.coordinator_id = job_params[:coordinator_id]
+    # @job.save
+    redirect_to @job
+  end
+
   def manager_assignment
     @job = Job.find(params[:job_id])
     @user = User.find(params[:job_manager_id])

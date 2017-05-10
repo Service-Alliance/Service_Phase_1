@@ -41,6 +41,37 @@
           </div>
       </li>
 
+      <li>
+          <div class="assignment-card">
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">CUSTOMER <a class="inline" data-toggle="modal" data-target="#customer"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                  </div>
+                  <% if @job.customer %>
+                  <div class="panel-body">
+                    Name: <%= @job.customer.full_name %> <br />
+                    Email: <%= @job.customer.email %> <br />
+                  </div>
+                  <% end %>
+              </div>
+          </div>
+      </li>
+      <li>
+          <div class="assignment-card">
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">Caller <a class="inline" data-toggle="modal" data-target="#caller"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                  </div>
+                  <% if @job.caller %>
+                  <div class="panel-body">
+                    Name: <%= @job.caller.full_name %> <br />
+                    Email: <%= @job.caller.email %> <br />
+                  </div>
+                  <% end %>
+              </div>
+          </div>
+      </li>
+
 
         <li>
             <a href="#">
@@ -312,6 +343,173 @@
   </div><!-- /.modal-dialog -->
 
 </div><!-- /.modal -->
+
+
+
+
+<div id="customer" class="modal fade" tabindex="-1" role="dialog">
+    <%= form_for @job.customer do |f| %>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Customer</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+
+                            <% if @job %>
+                            <%= hidden_field_tag "job[job_id]", @job.id %>
+                            <% end %>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <%= f.label :first_name %><br>
+                                    <%= f.text_field :first_name, class:"form-control" %>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <%= f.label :last_name %><br>
+                                    <%= f.text_field :last_name, class:"form-control" %>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <%= f.label :email %><br>
+                                    <%= f.text_field :email, class:"form-control" %>
+                                </div>
+                            </div>
+                            <%= render 'customers/address_form', f: f %>
+                            <%= render 'partials/modal_phone_form', f: f %>
+
+
+
+
+                            <!-- /.modal-dialog -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <%= f.submit "Save changes" , class: 'btn btn-primary' %>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>
+
+
+<div id="caller" class="modal fade" tabindex="-1" role="dialog">
+    <%= form_for @job.caller,  url: job_caller_assignment_url(@job), method: :post do |f| %>
+    <%= hidden_field_tag "job[id]", @job.id %>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Caller</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                          <div class="col-xs-4">
+                              <div class="form-group">
+                                  <%= label_tag :first_name %><br>
+                                  <%= text_field_tag "caller[first_name]", @caller.first_name, class: "form-control"  %>
+                              </div>
+                          </div>
+                          <div class="col-xs-4">
+                              <div class="form-group">
+                                  <%= label_tag :last_name %><br>
+                                  <%= text_field_tag "caller[last_name]", @caller.last_name, class: "form-control"  %>
+                              </div>
+                          </div>
+                          <div class="col-xs-4">
+                              <div class="form-group">
+                                  <%= label_tag :email %><a data-toggle="tooltip" class="tooltipLink" data-original-title="A - Apple  H - Happy  O - Orange   V - Victor
+                          B - Boy      I - Ice            P - Paul        W - Work
+                          C - Cat      J - Jack        Q - Queen    X - X-Ray
+                          D - David  K - King       R - Rabbit    Y - Yes
+                          E - Eagle  L - Lion         S - Sam       Z - Zebra
+                          F - Frank  M - Mary     T - Tom
+                          G - Girl      N - Nancy   U - Universe">
+                                      <span class="glyphicon glyphicon-info-sign"></span>
+                                  </a><br>
+                                  <%= text_field_tag "caller[email]", @caller.email, class: "form-control"  %>
+                              </div>
+                          </div>
+                          <div class="col-xs-6">
+                              <div class="form-group">
+                                  <%= label_tag :address_1 %><br>
+                                  <%= text_field_tag "address[address_1]", @caller.try(:address).try(:address_1), class: "form-control"  %>
+                              </div>
+                          </div>
+                          <div class="col-xs-6">
+                              <div class="form-group">
+                                  <%= label_tag :address_2 %><br>
+                                  <%= text_field_tag "address[address_2]", @caller.try(:address).try(:address_2), class: "form-control" %>
+                              </div>
+                          </div>
+
+
+                          <div class="col-xs-12">
+                              <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="form-group">
+                                        <%= label_tag :zip %><br>
+                                        <%= text_field_tag "address[zip_code]", @caller.try(:address).try(:zip_code), class: "form-control"  %>
+                                    </div>
+                                </div>
+                                  <div class="col-xs-3">
+                                      <label>Zip Code Lookup</label><br>
+                                      <button id="zipLookup" type="button" class="btn btn-primary">Lookup</button>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-xs-6">
+                              <div class="form-group">
+                                  <%= label_tag :city %><br>
+                                  <%= text_field_tag "address[city]", @caller.try(:address).try(:city), class: "form-control"  %>
+                              </div>
+                          </div>
+                          <div class="col-xs-6">
+                              <div class="form-group">
+                                  <%= label_tag :state_id %><br>
+                                  <%= select_tag("address[state_id]", options_for_select(State.all.map{|p| [p.name, p.id]}, selected: @caller.try(:address).try(:state).try(:id)), class: "form-control") %>
+                              </div>
+                          </div>
+                          <div class="col-xs-6">
+                              <div class="form-group">
+                                  <%= label_tag :county %><br>
+                                  <%= text_field_tag "address[county]", @caller.try(:address).try(:county), class: "form-control"  %>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <%= f.submit "Save changes" , class: 'btn btn-primary' %>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>
+
+
+
+
+
 
 <script>
     $(function () {

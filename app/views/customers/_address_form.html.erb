@@ -1,3 +1,4 @@
+<%  @customer_address = @job.customer.address unless @customer_address%>
 <%= f.fields_for(@customer_address) do |g| %>
 
 <div class="col-xs-6">
