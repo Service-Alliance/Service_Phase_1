@@ -24,9 +24,17 @@ namespace :import do
         sharp_spring_id = hash["sharp_spring_id"]
         state = State.find_by(name: state_code)
 
+
+        if customer = Customer.find_by(first_name: first_name, last_name: last_name, email: email)
+          p "CUSTOMER FOUND"
+          customer.owner_id = owner_id
+          customer.save
+        else
+          p "CUSTOMER NOT FOUND"
         address = Address.create(address_1: address_1, address_2: address_2, city: city, state_id: state.try(:id), zip_code: zip_code)
         p customer = Customer.create(first_name: first_name, last_name: last_name, email: email, company_name: company_name, website: website, title: title, category: category, sub_category: sub_category, address_id: address.id, sharp_spring_id: sharp_spring_id)
         customer.phones.create(number: phone, type_id: 1)
+        end
 
 
       end

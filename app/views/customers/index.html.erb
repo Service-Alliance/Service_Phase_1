@@ -28,6 +28,7 @@
                         <th>Zip</th>
                         <th>State</th>
                         <th>County</th>
+                        <th>Sales Rep</th>
                     </tr>
                 </thead>
                 <!-- Sort by date entered -->
@@ -46,6 +47,7 @@
                         <td><%= customer.try(:address).try(:zip_code) %></td>
                         <td><%= customer.try(:address).try(:state).try(:name) %></td>
                         <td><%= customer.try(:address).try(:county) %></td>
+                        <td><%= customer.try(:owner).try(:full_name) %></td>
                         <td><%= link_to 'Show', customer %></td>
                         <% if current_user.admin?%>
                         <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -76,7 +78,8 @@
             <%= f.search_field :address_city_cont, {class: "form-control"} %>
             <%= f.label :address_county, "County" %><br/>
             <%= f.search_field :address_county_cont, {class: "form-control"} %>
-
+            <%= f.label :owner_id_in, "Sales Rep" %><br/>
+            <%= f.select :owner_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
             <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-top-2" %></div>
 

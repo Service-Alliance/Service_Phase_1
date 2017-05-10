@@ -1,9 +1,11 @@
 <div class="container-fluid">
+  <% if params[:job_id] %>
     <div id="wrapper">
-      <% if params[:job_id] %>
         <%= render partial: "partials/jobs_sidebar" %>
       <% end %>
+      <% if params[:job_id] %>
         <div id="page-content-wrapper">
+      <% end %>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="row">
@@ -14,6 +16,9 @@
                     </div>
                 </div>
             </div>
+            <% if params[:job_id] %>
         </div>
-    </div>
+
+      </div>
+      <% end %>
 </div>
