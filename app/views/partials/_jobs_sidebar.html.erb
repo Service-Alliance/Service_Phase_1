@@ -348,6 +348,7 @@
 
 
 <div id="customer" class="modal fade" tabindex="-1" role="dialog">
+  <% if @job.customer %>
     <%= form_for @job.customer do |f| %>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -401,6 +402,7 @@
             </div>
         </div>
     </div>
+    <% end %>
     <% end %>
 </div>
 
