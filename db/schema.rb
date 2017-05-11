@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511015325) do
+ActiveRecord::Schema.define(version: 20170511141044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -395,7 +395,7 @@ ActiveRecord::Schema.define(version: 20170511015325) do
     t.boolean  "contract_sent",              default: false
     t.date     "contract_sent_date"
     t.integer  "coordinator_id"
-    t.integer  "pipeline_status_id",         default: 1
+    t.integer  "pipeline_status_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -654,6 +654,7 @@ ActiveRecord::Schema.define(version: 20170511015325) do
     t.string   "uploadable_type"
     t.integer  "upload_category_id"
     t.json     "uploads"
+    t.text     "description"
   end
 
   add_index "uploads", ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable_type_and_uploadable_id", using: :btree
