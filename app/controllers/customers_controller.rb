@@ -115,6 +115,8 @@ class CustomersController < ApplicationController
           tracker_task = TrackerTask.find_by(name: "File Uploaded")
           @customer.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
         end
+
+
         format.html {
           unless job_param.empty?
             return redirect_to job_path(@job), notice: 'Customer was successfully updated.'
@@ -167,8 +169,10 @@ class CustomersController < ApplicationController
   end
 
   def create_call
+    tracker_task = TrackerTask.find_by(name: "Call Assigned")
     @call = Call.find(call_params[:call_id])
     @call.customer_id = @customer.id
+    @customer.trackers.create(tracker_task_id: tracker_task.id, child_id: @call.id, user_id: current_user.id)
     @call.save
     redirect_to @customer
   end
@@ -187,7 +191,7 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :job_id, :owner_id, uploads_attributes: [:upload, :upload_category_id], notes_attributes: [:content] )
+      params.require(:customer).permit(:first_name, :last_name, :email, :job_id, :owner_id, uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content] )
     end
 
     def job_param

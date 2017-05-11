@@ -197,7 +197,7 @@
             </div>
 
 
-            <div class="col-sm-8 margin-top-5">
+            <div class="col-sm-8 col-sm-offset-4 margin-top-5">
                 <h3 class="text-center">Past</h3>
                 <div class="timeline-centered">
                     <% @customer.trackers.each do |tracker| %>
@@ -247,8 +247,11 @@
                                     </h3>
                                 </div>
                                 <div class="panel-body">
-                                    <%= upload.try(:file_name) %>
-                                    <a target="_blank" href="<%= upload.try(:upload).try(:url) %>">View/Download</a>
+                                  <% upload.uploads.each_with_index do |file, index| %>
+                                    <%= upload.description  %> <br />
+                                    <%= upload.uploads[index].file.filename  %> -
+                                    <a target="_blank" href="<%= file.try(:url) %>">View/Download</a><br />
+                                  <% end %>
                                 </div>
                             </div>
                         </div>

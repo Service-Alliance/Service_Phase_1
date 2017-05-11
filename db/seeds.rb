@@ -492,7 +492,7 @@ TrackerTask.create(name: "Contract Created")
 TrackerTask.create(name: "Contract Sent")
 TrackerTask.create(name: "Note Created")
 TrackerTask.create(name: "File Uploaded")
-
+TrackerTask.create(name: "Call Assigned")
 VendorUploadType.create(name: "W9")
 VendorUploadType.create(name: "W9")
 VendorUploadType.create(name: "W9")
