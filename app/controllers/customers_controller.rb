@@ -105,6 +105,16 @@ class CustomersController < ApplicationController
             end
           end
         end
+        if customer_params[:notes_attributes]
+          @note = @customer.notes.last
+          tracker_task = TrackerTask.find_by(name: "Note Created")
+          @customer.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
+        end
+        if customer_params[:uploads_attributes]
+          @upload = @customer.uploads.last
+          tracker_task = TrackerTask.find_by(name: "File Uploaded")
+          @customer.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
+        end
         format.html {
           unless job_param.empty?
             return redirect_to job_path(@job), notice: 'Customer was successfully updated.'
