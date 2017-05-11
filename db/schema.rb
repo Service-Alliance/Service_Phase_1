@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508211045) do
+ActiveRecord::Schema.define(version: 20170508194956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -395,7 +395,7 @@ ActiveRecord::Schema.define(version: 20170508211045) do
     t.boolean  "contract_sent",              default: false
     t.date     "contract_sent_date"
     t.integer  "coordinator_id"
-    t.integer  "pipeline_status_id"
+    t.integer  "pipeline_status_id",         default: 1
   end
 
   create_table "locations", force: :cascade do |t|
