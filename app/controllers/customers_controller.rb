@@ -41,8 +41,9 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
+    @address = Address.create(address_params)
     @customer = Customer.new(customer_params)
-    @address = Address.new(address_params)
+    @customer.address_id = @address.id
     @job = Job.find_by(id: job_param[:job_id])
     @job.update_last_action
 
