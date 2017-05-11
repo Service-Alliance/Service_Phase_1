@@ -98,7 +98,7 @@ class Customer < ActiveRecord::Base
     @job.customer_id = @customer.id
 
     @caller_phones.each do |phone|
-      @caller.phones.create(number: phone.number, extension: phone.extension, type_id: phone.type_id)
+      @customer.phones.create(number: phone.number, extension: phone.extension, type_id: phone.type_id)
     end
 
     @job.save
