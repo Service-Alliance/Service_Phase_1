@@ -2,6 +2,7 @@
 
 <div id="modal-number-container">
     <div class="col-xs-12">
+        <% @phones = @job.customer.phones if @job.customer %>
         <% if @phones %>
         <% @phones.each do |phone| %>
         <div class="row">
