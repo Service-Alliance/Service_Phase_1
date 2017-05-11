@@ -49,8 +49,16 @@
                   </div>
                   <% if @job.customer %>
                   <div class="panel-body">
+
                     Name: <%= @job.customer.full_name %> <br />
-                    Email: <%= @job.customer.email %> <br />
+                    <% if @job.customer.try(:address).address_1 &&  @job.customer.try(:address).address_1 != ""  %>
+                    <%= @job.customer.try(:address).address_1 %> <br />
+                    <% end %>
+                    <% if @job.customer.try(:address).address_2 &&  @job.customer.try(:address).address_2 != "" %>
+                    <%= @job.customer.try(:address).address_2  %> <br />
+                    <% end %>
+                    <%= @job.customer.try(:address).city %>, <%= @job.customer.try(:address).try(:state).try(:name) %>  <%= @job.customer.try(:address).zip_code %>
+                    <%= link_to "View", @job.customer %>
                   </div>
                   <% end %>
               </div>
@@ -64,8 +72,16 @@
                   </div>
                   <% if @job.caller %>
                   <div class="panel-body">
+
                     Name: <%= @job.caller.full_name %> <br />
-                    Email: <%= @job.caller.email %> <br />
+                    <% if @job.caller.try(:address).address_1 &&  @job.caller.try(:address).address_1 != ""  %>
+                    <%= @job.caller.try(:address).address_1 %> <br />
+                    <% end %>
+                    <% if @job.caller.try(:address).address_2 &&  @job.caller.try(:address).address_2 != "" %>
+                    <%= @job.caller.try(:address).address_2  %> <br />
+                    <% end %>
+                    <%= @job.caller.try(:address).city %>, <%= @job.caller.try(:address).try(:state).try(:name) %>  <%= @job.caller.try(:address).zip_code %>
+                    <%= link_to "View", job_caller_path(@job, @job.caller) %>
                   </div>
                   <% end %>
               </div>

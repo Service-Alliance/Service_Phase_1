@@ -5,6 +5,7 @@ class Customer < ActiveRecord::Base
   has_many :trackers, as: :trackable, dependent: :destroy
   has_many :uploads, as: :uploadable, dependent: :destroy
   belongs_to :owner, class_name: "User"
+  has_many :jobs
   accepts_nested_attributes_for :uploads
   accepts_nested_attributes_for :notes
   # validates :email, presence: true, format: {

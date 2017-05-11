@@ -61,6 +61,23 @@
                   <% end %>
                 </div>
               </div>
+
+              <div class="panel panel-primary margin-top-2">
+                <div class="panel-heading">
+                  Jobs
+                </div>
+                <div class="panel-body">
+                  <% @customer.jobs.each do |job| %>
+                  <% if job.name && job.name != "" %>
+                    <%= link_to job.name, job %>
+                  <% else %>
+                    <%= link_to job.id, job %>
+                  <% end %>
+                  <% end %>
+
+                </div>
+
+              </div>
             </div>
 
 
