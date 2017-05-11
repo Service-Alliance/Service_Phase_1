@@ -25,7 +25,9 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
+
     @upload = @job.uploads.new(upload_params)
+
     tracker_task = TrackerTask.find_by(name: "File Uploaded")
 
     respond_to do |format|
@@ -79,6 +81,6 @@ class UploadsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def upload_params
-    params.require(:upload).permit(:upload, :upload_category_id)
+    params.require(:upload).permit(:upload, :upload_category_id, {uploads: []})
   end
 end

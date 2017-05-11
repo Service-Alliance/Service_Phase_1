@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="col-sm-6 col-sm-offset-3">
                                     <%= f.label :upload %><br>
-                                    <%= f.file_field :upload %>
+                                    <%= f.file_field :uploads, multiple: true %>
                                 </div>
                                 <br>
                                 <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
@@ -601,8 +601,10 @@
                                     </h3>
                                 </div>
                                 <div class="panel-body">
-                                    <%= upload.try(:file_name) %>
-                                    <a target="_blank" href="<%= upload.try(:upload).try(:url) %>">View/Download</a>
+                                  <% upload.uploads.each_with_index do |file, index| %>
+                                    <%= upload.uploads[index].file.filename  %> - 
+                                    <a target="_blank" href="<%= file.try(:url) %>">View/Download</a><br />
+                                  <% end %>
                                 </div>
                             </div>
                         </div>

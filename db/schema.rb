@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508194956) do
+ActiveRecord::Schema.define(version: 20170511015325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -653,6 +653,7 @@ ActiveRecord::Schema.define(version: 20170508194956) do
     t.integer  "uploadable_id"
     t.string   "uploadable_type"
     t.integer  "upload_category_id"
+    t.json     "uploads"
   end
 
   add_index "uploads", ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable_type_and_uploadable_id", using: :btree
