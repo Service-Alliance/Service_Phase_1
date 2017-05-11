@@ -20,7 +20,7 @@
             </div>
 
             <%= link_to "Export As CSV (Work In Progress)", jobs_path(params.merge(format: "csv")), class: "btn btn-primary margin-bottom-2" %> <br />
-            Total: 
+            Total:
             <%= @total_count %>
 
             <table id="job-table" class="table table-striped">
@@ -72,7 +72,8 @@
                         <td><%= job.try(:user).try(:full_name) %></td>
                         <td><%= job.try(:franchise).try(:name) %></td>
                         <td><%= job.try(:job_status).try(:name) %></td>
-                        <td><%= link_to 'Show', job %></td>
+                        <td><%= link_to "Show", job %></td>
+                        <td><%= link_to job.name, job %></td>
                         <% if current_user.admin?%>
                         <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         <% end %>
