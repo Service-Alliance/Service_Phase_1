@@ -38,6 +38,13 @@
 
         <div class="col-xs-6">
             <div class="form-group">
+                <%= f.label :company_name %><br>
+                <%= f.text_field :company_name, class:"form-control" %>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="form-group">
                 <%= f.label :owner, "Sales Rep" %><br>
                 <%= f.collection_select :owner_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
             </div>

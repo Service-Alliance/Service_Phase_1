@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :notify_types
   resources :notifications
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -75,6 +76,7 @@ Rails.application.routes.draw do
     resources :occupants
     resources :job_details
     resources :job_managers
+    resources :pricings
     get 'job_managers/:id/acknolwedge' => 'job_managers#acknolwedge'
     get 'work_orders/:id/acknolwedge' => 'work_orders#acknowledge'
     resources :vendor_assignments
