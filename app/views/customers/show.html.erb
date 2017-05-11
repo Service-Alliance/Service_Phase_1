@@ -111,8 +111,12 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-sm-offset-3">
-                                    <%= g.label :upload %><br>
-                                    <%= g.file_field :upload %>
+                                    <%= f.label :description %><br>
+                                    <%= f.text_area :description, class:"form-control" %>
+                                </div>
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <%= f.label :upload %><br>
+                                    <%= f.file_field :uploads, multiple: true %>
                                 </div>
                                 <br>
                                 <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
