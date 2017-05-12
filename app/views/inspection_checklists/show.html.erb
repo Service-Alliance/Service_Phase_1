@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Estimate will be sent:</strong>
+  <%= @inspection_checklist.estimate_will_be_sent %>
+</p>
+
+<p>
+  <strong>Estimate given verbally:</strong>
+  <%= @inspection_checklist.estimate_given_verbally %>
+</p>
+
+<p>
+  <strong>Estimate range:</strong>
+  <%= @inspection_checklist.estimate_range %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @inspection_checklist.notes %>
+</p>
+
+<p>
+  <strong>Next steps:</strong>
+  <%= @inspection_checklist.next_steps %>
+</p>
+
+<p>
+  <strong>Send within one day:</strong>
+  <%= @inspection_checklist.send_within_one_day %>
+</p>
+
+<p>
+  <strong>Additional vendor:</strong>
+  <%= @inspection_checklist.additional_vendor %>
+</p>
+
+<p>
+  <strong>Verify information:</strong>
+  <%= @inspection_checklist.verify_information %>
+</p>
+
+<p>
+  <strong>Potential construction:</strong>
+  <%= @inspection_checklist.potential_construction %>
+</p>
+
+<%= link_to 'Edit', edit_job_inspection_checklist_path(@job, @inspection_checklist) %> |
+<%= link_to 'Back', job_inspection_checklists_path(@job) %>

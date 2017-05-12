@@ -1,0 +1,53 @@
+<%= form_for [@job, @inspection_checklist] do |f| %>
+  <% if @inspection_checklist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inspection_checklist.errors.count, "error") %> prohibited this inspection_checklist from being saved:</h2>
+
+      <ul>
+      <% @inspection_checklist.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :estimate_will_be_sent %><br>
+    <%= f.date_select :estimate_will_be_sent %>
+  </div>
+  <div class="field">
+    <%= f.label :estimate_given_verbally %><br>
+    <%= f.check_box :estimate_given_verbally %>
+  </div>
+  <div class="field">
+    <%= f.label :estimate_range %><br>
+    <%= f.text_field :estimate_range %>
+  </div>
+  <div class="field">
+    <%= f.label :notes %><br>
+    <%= f.text_area :notes %>
+  </div>
+  <div class="field">
+    <%= f.label :next_steps %><br>
+    <%= f.text_area :next_steps %>
+  </div>
+  <div class="field">
+    <%= f.label :send_within_one_day %><br>
+    <%= f.check_box :send_within_one_day %>
+  </div>
+  <div class="field">
+    <%= f.label :additional_vendor %><br>
+    <%= f.check_box :additional_vendor %>
+  </div>
+  <div class="field">
+    <%= f.label :verify_information %><br>
+    <%= f.check_box :verify_information %>
+  </div>
+  <div class="field">
+    <%= f.label :potential_construction %><br>
+    <%= f.check_box :potential_construction %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

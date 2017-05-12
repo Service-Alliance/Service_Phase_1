@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  estimate_will_be_sent: 2017-05-12
+  estimate_given_verbally: false
+  estimate_range: 9.99
+  notes: MyText
+  next_steps: MyText
+  send_within_one_day: false
+  additional_vendor: false
+  verify_information: false
+  potential_construction: false
+
+two:
+  estimate_will_be_sent: 2017-05-12
+  estimate_given_verbally: false
+  estimate_range: 9.99
+  notes: MyText
+  next_steps: MyText
+  send_within_one_day: false
+  additional_vendor: false
+  verify_information: false
+  potential_construction: false

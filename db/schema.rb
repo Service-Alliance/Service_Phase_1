@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511224943) do
+ActiveRecord::Schema.define(version: 20170512144054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -292,6 +292,21 @@ ActiveRecord::Schema.define(version: 20170511224943) do
     t.string   "mold_remediation_license"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "inspection_checklists", force: :cascade do |t|
+    t.date     "estimate_will_be_sent"
+    t.boolean  "estimate_given_verbally"
+    t.decimal  "estimate_range",          precision: 8, scale: 2
+    t.text     "notes"
+    t.text     "next_steps"
+    t.boolean  "send_within_one_day"
+    t.boolean  "additional_vendor"
+    t.boolean  "verify_information"
+    t.boolean  "potential_construction"
+    t.integer  "job_id"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   create_table "insurance_companies", force: :cascade do |t|

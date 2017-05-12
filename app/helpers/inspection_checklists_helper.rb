@@ -1,0 +1,2 @@
+module InspectionChecklistsHelper
+end

@@ -28,6 +28,58 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#currentCallsModal">
                     Add Active Call
                 </button>
+                <% if  @job.inspection_checklist == nil && @job.job_managers.pluck(:job_manager_id).include?(current_user.id) %>
+                <div class="panel with-nav-tabs panel-primary margin-top-2">
+                    <div class="panel-heading">
+                      Checklist For Initial Inspection
+                    </div>
+                    <div class="panel-body">
+                      <%= form_for [@job, @inspection_checklist] do |f| %>
+                        <div class="field">
+                          <%= f.label :estimate_will_be_sent %><br>
+                          <%= f.date_select :estimate_will_be_sent %>
+                        </div>
+
+                        <div class="field">
+                          <%= f.label :estimate_range %><br>
+                          <%= f.text_field :estimate_range, class: "form-control" %>
+                        </div>
+                        <div class="field">
+                          <%= f.label :notes %><br>
+                          <%= f.text_area :notes, class: "form-control" %>
+                        </div>
+                        <div class="field">
+                          <%= f.label :next_steps %><br>
+                          <%= f.text_area :next_steps, class: "form-control" %>
+                        </div>
+                        <div class="field">
+                          <%= f.label :estimate_given_verbally %><br>
+                          <%= f.check_box :estimate_given_verbally %>
+                        </div>
+                        <div class="field">
+                          <%= f.label :send_within_one_day %><br>
+                          <%= f.check_box :send_within_one_day %>
+                        </div>
+                        <div class="field">
+                          <%= f.label :additional_vendor %><br>
+                          <%= f.check_box :additional_vendor %>
+                        </div>
+                        <div class="field">
+                          <%= f.label :verify_information %><br>
+                          <%= f.check_box :verify_information %>
+                        </div>
+                        <div class="field">
+                          <%= f.label :potential_construction %><br>
+                          <%= f.check_box :potential_construction %>
+                        </div>
+                        <div class="actions">
+                          <%= f.submit %>
+                        </div>
+                      <% end %>
+
+                    </div>
+                  </div>
+                <% end %>
                 <div class="panel with-nav-tabs panel-primary margin-top-2">
                     <div class="panel-heading">
                         <ul class="nav nav-tabs">
@@ -676,6 +728,35 @@
                                 </div>
                                 <div class="panel-body">
                                     <%= link_to "View Work Order", job_purchase_order_approval_path(@job, purchase_order.id) %>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "Inspection Checklist Created" %>
+                    <% checklist = InspectionChecklist.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Inspection Checklist Created &bull;
+                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    Estimate Will Be Sent: <%= checklist.estimate_will_be_sent %> <br />
+                                    Estimate Given Verbally: <%= checklist.estimate_given_verbally ? "Yes" : "No" %> <br />
+                                    Estimate Range: $<%= checklist.estimate_range %><br />
+                                    Notes: <%= checklist.notes %><br />
+                                    Next Steps: <%= checklist.next_steps %><br />
+                                    Estimate will be prepared and sent within 1 business day?: <%= checklist.send_within_one_day ? "Yes" : "No" %><br />
+                                    Will we be bringing in another Vendor?: <%= checklist.additional_vendor ? "Yes" : "No" %><br />
+                                    Verify all the basic information, and update the customer information if necessary?: <%= checklist.verify_information  ? "Yes" : "No"%><br />
+                                    Does the job have potential for construction?:<%= checklist.potential_construction ? "Yes" : "No" %><br />
                                 </div>
                             </div>
                         </div>

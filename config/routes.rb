@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   resources :notify_types
   resources :notifications
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -96,6 +94,7 @@ Rails.application.routes.draw do
     resources :schedulers
     resources :subscriptions
     resources :purchase_order_approvals
+    resources :inspection_checklists
   end
 
   resources :customers

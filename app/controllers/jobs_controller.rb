@@ -11,10 +11,7 @@ class JobsController < ApplicationController
       @jobs = Job.where(entered_by_id: params[:user_id]).page(params[:page]).order('created_at DESC')
     else
       @search = Job.where.not(status_id: nil).order('created_at DESC').search(params[:q])
-      # @jobs = @search.result
       @jobs = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC')
-
-
       @total_count = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC').total_count
       @all_results = @search.result
 
@@ -77,6 +74,7 @@ class JobsController < ApplicationController
     @past_schedules = []
     @note = @job.notes.new
     @work_order = WorkOrder.new
+    @inspection_checklist = InspectionChecklist.new
     @job.schedulers.each do |scheduler|
       @future_schedules << scheduler if scheduler.event_date.future?
     end

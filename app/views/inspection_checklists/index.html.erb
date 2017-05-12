@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Inspection Checklists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Estimate will be sent</th>
+      <th>Estimate given verbally</th>
+      <th>Estimate range</th>
+      <th>Notes</th>
+      <th>Next steps</th>
+      <th>Send within one day</th>
+      <th>Additional vendor</th>
+      <th>Verify information</th>
+      <th>Potential construction</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inspection_checklists.each do |inspection_checklist| %>
+      <tr>
+        <td><%= inspection_checklist.estimate_will_be_sent %></td>
+        <td><%= inspection_checklist.estimate_given_verbally %></td>
+        <td><%= inspection_checklist.estimate_range %></td>
+        <td><%= inspection_checklist.notes %></td>
+        <td><%= inspection_checklist.next_steps %></td>
+        <td><%= inspection_checklist.send_within_one_day %></td>
+        <td><%= inspection_checklist.additional_vendor %></td>
+        <td><%= inspection_checklist.verify_information %></td>
+        <td><%= inspection_checklist.potential_construction %></td>
+        <td><%= link_to 'Show', job_inspection_checklist(@job) %></td>
+        <td><%= link_to 'Edit', edit_job_inspection_checklist_path(@job, inspection_checklist) %></td>
+        <td><%= link_to 'Destroy', job_inspection_checklist(@job), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Inspection checklist', new_job_inspection_checklist_path(@job) %>
