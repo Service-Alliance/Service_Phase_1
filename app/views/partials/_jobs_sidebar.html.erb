@@ -138,27 +138,27 @@
             <!-- /.nav-second-level -->
         </li>
 
-        <li>
+        <!-- <li>
             <a href="#">
                 <i class="fa fa-bar-chart-o fa-fw"></i>
                 Contact<span class="glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul class="nav nav-second-level">
                 <li>
-                    <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
+                    <% link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
                     <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Caller Information
                     <% end %>
                 </li>
                 <li>
-                    <%= link_to job_calls_path(@job)  do %>
+                    <% link_to job_calls_path(@job)  do %>
                     <i class="<%= @job.calls ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Phone Calls
                     <% end %>
                 </li>
             </ul>
-            <!-- /.nav-second-level -->
-        </li>
+
+        </li> -->
 
         <li>
             <a href="#">
@@ -166,24 +166,24 @@
                 Job Contacts<span class="glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul class="nav nav-second-level">
-                <li>
-                    <%= link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
+                <!-- <li>
+                    <% link_to new_or_view_job_caller_path(@job, @job.caller)  do %>
                     <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Caller Information
                     <% end %>
-                </li>
-                <li>
-                    <%= link_to new_or_view_customer_path(@job, @job.customer)  do %>
+                </li> -->
+                <!-- <li>
+                    <% link_to new_or_view_customer_path(@job, @job.customer)  do %>
                     <i class="<%= @job.customer ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
                     Customer Information
                     <% end %>
-                </li>
-                <li>
-                    <%= link_to new_or_view_job_manager_path(@job, @job.job_managers)  do %>
+                </li> -->
+                <!-- <li>
+                    <% link_to new_or_view_job_manager_path(@job, @job.job_managers)  do %>
                     <i class="<%= @job.job_managers.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
                     Manager Assignment
                     <% end %>
-                </li>
+                </li> -->
                 <li>
                     <%= link_to new_or_view_job_vendor_path(@job, @job.vendor_assignments)  do %>
                     <i class="<%= @job.job_managers ? 'glyph-done' : 'glyph-incomplete'  %> glyphicon glyphicon-ok"></i>
