@@ -74,7 +74,7 @@
                         <td><%= job.try(:user).try(:full_name) %></td>
                         <td><%= job.try(:franchise).try(:name) %></td>
                         <td><%= job.try(:job_status).try(:name) %></td>
-                        <% if job.name %>
+                        <% if job.name && job.name != ""%>
                         <td><%= link_to job.name, job %></td>
                         <% else %>
                         <td><%= link_to "Show", job %></td>
