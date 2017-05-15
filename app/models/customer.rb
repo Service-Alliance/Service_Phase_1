@@ -105,5 +105,43 @@ class Customer < ActiveRecord::Base
     @job.save
   end
 
+  def send_to_sharpspring(franchise)
+    p @json = {
+      "method":"createLeads",
+      "params":
+        {"objects":
+          [{"firstName": self.first_name,"lastName": self.last_name,"emailAddress": self.email, "companyName": self.company_name, "title": self.title, "website": self.website, "street": self.try(:address).try(:address_1), "city": self.try(:address).try(:city), "state": self.try(:address).try(:state).try(:name), "mobilePhoneNumber": self.try(:phones).where(type_id: 1).first.try(:number), "mobilePhoneNumber": self.try(:phones).where(type_id: 3).first.try(:number), "officePhoneNumber": self.try(:phones).where(type_id: 2).first.try(:number), "faxNumber": self.try(:phones).where(type_id: 4).first.try(:number)}]
+        },
+      "id":"1"
+    }.to_json
+    p "FRANCHISE"
+    p franchise
+    if franchise.name == "Central Manhattan"
+      p "IM HERE"
+      @accountId = ENV['CENTRAL_MANHATTAN_SHARPSPRING_ACCOUNT_ID']
+      @secretKey = ENV['CENTRAL_MANHATTAN_SHARPSPRING_SECRET']
+    elsif franchise.name == "East Windsor"
+      @accountId = ENV['EAST_WINDSOR_SHARPSPRING_ACCOUNT_ID']
+      @secretKey = ENV['EAST_WINDSOR_SHARPSPRING_SECRET']
+    elsif franchise.name == "Medford"
+      @accountId = ENV['MEDFORD_SHARPSPRING_ACCOUNT_ID']
+      @secretKey = ENV['MEDFORD_SHARPSPRING_SECRET']
+    elsif franchise.name == "Oakdale/North Bay Shore"
+      @accountId = ENV['OAKDALE_SHARPSPRING_ACCOUNT_ID']
+      @secretKey = ENV['OAKDALE_SHARPSPRING_SECRET']
+    elsif franchise.name == "Old Bridge/Cranbury"
+      @accountId = ENV['CRANBURY_SHARPSPRING_ACCOUNT_ID']
+      @secretKey = ENV['CRANBURY_SHARPSPRING_SECRET']
+    elsif franchise.name == "Southwest Brooklyn"
+      @accountId = ENV['CRANBURY_SHARPSPRING_ACCOUNT_ID']
+      @secretKey = ENV['CRANBURY_SHARPSPRING_SECRET']
+    end
+    p @accountId
+    p @secretKey
+    p response = HTTParty.post("https://api.sharpspring.com/pubapi/v1/?accountID=#{@accountId}&secretKey=#{@secretKey}", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}, body: @json)
+    self.sharp_spring_id = response.parsed_response['result']['creates'][0]['id']
+    self.save
+  end
+
 
 end

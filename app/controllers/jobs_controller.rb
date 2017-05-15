@@ -210,6 +210,11 @@ class JobsController < ApplicationController
         if job_params[:job_manager_id]
           @user = User.find_by(id: job_params[:job_manager_id])
           UserMailer.manager_assignment(@user, @job).deliver_now
+
+          if @job.franchise && @job.customer
+            @job.customer.send_to_sharpspring(@job.franchise)
+          end
+
           return redirect_to job_job_managers_path(@job)
         end
 
@@ -330,6 +335,9 @@ class JobsController < ApplicationController
       @job.trackers.create(tracker_task_id: 2, child_id: @job_manager.id)
       if @user.email
         UserMailer.manager_assignment(@user, @job_manager).deliver_now
+      end
+      if @job.franchise && @job.customer && @job.customer.sharp_spring_id == nil
+        @job.customer.send_to_sharpspring(@job.franchise)
       end
       return redirect_to @job, notice: 'Job Manager Added.'
     else
