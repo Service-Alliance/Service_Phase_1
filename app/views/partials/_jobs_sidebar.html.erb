@@ -141,19 +141,7 @@
                     <% end %>
                 </li>
 
-                <li>
-                    <%= link_to job_overview_path(@job)  do %>
-                    <i class="glyph-done glyphicon glyphicon-ok"></i>
-                    Job Overview
-                    <% end %>
-                </li>
 
-                <li>
-                    <%= link_to job_loss_sheet_path(@job)  do %>
-                    <i class="glyph-done glyphicon glyphicon-ok"></i>
-                    Loss Sheet
-                    <% end %>
-                </li>
             </ul>
             <!-- /.nav-second-level -->
         </li>
@@ -256,6 +244,17 @@
                     <% end %>
                 </li>
             </ul>
+        </li>
+        <li>
+            <%= link_to job_overview_path(@job)  do %>
+            Job Overview
+            <% end %>
+        </li>
+
+        <li>
+            <%= link_to job_loss_sheet_path(@job)  do %>
+            Loss Sheet
+            <% end %>
         </li>
 
 
