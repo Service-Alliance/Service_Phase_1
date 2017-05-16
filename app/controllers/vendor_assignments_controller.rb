@@ -30,7 +30,7 @@ class VendorAssignmentsController < ApplicationController
 
     respond_to do |format|
       if @vendor_assignment.vendor_id && @vendor_assignment.save
-        format.html { redirect_to job_vendor_assignments_path(@job), notice: 'Vendor assigment was successfully created.' }
+        format.html { redirect_to @job, notice: 'Vendor assigment was successfully created.' }
         format.json { render :show, status: :created, location: @vendor_assignment }
       else
         format.html { render :new }
