@@ -74,6 +74,16 @@ class TrackersController < ApplicationController
         format.html { redirect_to franchise_path(@franchise), notice: 'Tracker was successfully destroyed.' }
         format.json { head :no_content }
       end
+      if params[:insurance_company_id]
+        @insurance_company = InsuranceCompany.find(params[:insurance_company_id])
+        format.html { redirect_to insurance_company_path(@insurance_company), notice: 'Tracker was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+      if params[:vendor_id]
+        @vendor = Vendor.find(params[:vendor_id])
+        format.html { redirect_to vendor_path(@vendor), notice: 'Tracker was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
