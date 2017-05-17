@@ -45,14 +45,25 @@ class FranchisesController < ApplicationController
   # PATCH/PUT /franchises/1.json
   def update
     if @franchise.address
-      @franchise.address.update(address_params)
+      @franchise.address.update(address_params) unless address_params.empty?
     else
       @address = Address.create(address_params)
       @franchise.address_id = @address.id
       @franchise.save
     end
+
     respond_to do |format|
       if @franchise.update(franchise_params)
+        if franchise_params[:notes_attributes]
+          @note = @franchise.notes.last
+          tracker_task = TrackerTask.find_by(name: "Note Created")
+          @franchise.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
+        end
+        if franchise_params[:uploads_attributes]
+          @upload = @franchise.uploads.last
+          tracker_task = TrackerTask.find_by(name: "File Uploaded")
+          @franchise.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
+        end
         format.html { redirect_to @franchise, notice: 'Franchise was successfully updated.' }
         format.json { render :show, status: :ok, location: @franchise }
       else
@@ -79,11 +90,11 @@ class FranchisesController < ApplicationController
     end
 
     def address_params
-      params.require(:address).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
+      params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def franchise_params
-      params.require(:franchise).permit(:name, :franchise_number, :legal_name, :phone, :fax, :website, :general_license, :residential_license, :commercial_license, :mold_remediation_license)
+      params.require(:franchise).permit(:name, :franchise_number, :legal_name, :phone, :fax, :website, :general_license, :residential_license, :commercial_license, :mold_remediation_license, uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content])
     end
 end

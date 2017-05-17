@@ -28,6 +28,7 @@ class InsuranceCompaniesController < ApplicationController
 
     respond_to do |format|
       if @insurance_company.save
+
         format.html {  redirect_to insurance_company_path(@insurance_company), notice: 'Insurance Company was successfully created.' }
         format.json { render :show, status: :created, location: @insurance_company }
       else
@@ -42,6 +43,16 @@ class InsuranceCompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @insurance_company.update(insurance_company_params)
+        if insurance_company_params[:notes_attributes]
+          @note = @insurance_company.notes.last
+          tracker_task = TrackerTask.find_by(name: "Note Created")
+          @insurance_company.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
+        end
+        if insurance_company_params[:uploads_attributes]
+          @upload = @insurance_company.uploads.last
+          tracker_task = TrackerTask.find_by(name: "File Uploaded")
+          @insurance_company.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
+        end
         format.html {  redirect_to insurance_company_path(@insurance_company), notice: 'Insurance Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @insurance_company }
       else
@@ -69,6 +80,6 @@ class InsuranceCompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def insurance_company_params
-      params.require(:insurance_company).permit(:idea, :name, :bulletin_number, :effective_date, :states_involved, :property_type, :collect_deductible, :esl, :estimating_software, :pricing, :customer_service_contacts, :special_conditions)
+      params.require(:insurance_company).permit(:idea, :name, :bulletin_number, :effective_date, :states_involved, :property_type, :collect_deductible, :esl, :estimating_software, :pricing, :customer_service_contacts, :special_conditions, uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content])
     end
 end

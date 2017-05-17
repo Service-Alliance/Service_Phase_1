@@ -1,83 +1,231 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
-    <h1 class="text-center">Insurance Company:</h1>
-    <div class="col-xs-8 col-xs-offset-2">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Insurance Company
-                </h3>
+
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="well">
+                  <div class="inline">
+                    <%= @insurance_company.name %>
+                  </div>
+
+              </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="panel panel-primary margin-top-2">
+                <div class="panel-heading">
+                  Details
+                </div>
+                <div class="panel-body">
+                  <div class="item">
+                    <span class="bold">ID:</span> <%= @insurance_company.id %>
+                  </div>
+                  <div class="item">
+                    <span class="bold">Name:</span> <%= @insurance_company.name %>
+                  </div>
+                  <div class="item">
+                    <span class="bold">Bulletin Number:</span> <%= @insurance_company.bulletin_number %>
+                  </div>
+                  <div class="item">
+                    <span class="bold">States Involved:</span> <%= @insurance_company.states_involved %>
+                  </div>
+                  <div class="item">
+                    <span class="bold">Property Type:</span> <%= @insurance_company.property_type %>
+                  </div>
+                  <div class="item">
+                    <span class="bold">Collect Deductable:</span> <%= @insurance_company.collect_deductible %>
+                  </div>
+                  <div class="item">
+                    <span class="bold">ESL:</span> <%= @insurance_company.esl %>
+                  </div>
+                  <div class="item">
+                  <span class="bold">Estimating Software:</span> <%= @insurance_company.estimating_software %>
+                  </div>
+                  <div class="item">
+                    <span class="bold">Pricing:</span> <%= @insurance_company.pricing %>
+                  </div>
+                  <div class="item">
+                    <span class="bold">Customer Service Contacts:</span> <%= @insurance_company.customer_service_contacts %>
+                  </div>
+                  <div class="item">
+                    <span class="bold">Special Conditions:</span> <%= @insurance_company.special_conditions %>
+                  </div>
+
+                </div>
+                <div class="panel-footer">
+                  <%= link_to edit_insurance_company_path(@insurance_company), class: "btn btn-sm btn-warning", type: "button" do %>
+                  <i class="glyphicon glyphicon-edit"></i>
+                  <% end %>
+                </div>
+              </div>
             </div>
 
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>ID:</td>
-                                    <td><%= @insurance_company.id %></td>
-                                </tr>
-                                <tr>
-                                    <td>Name:</td>
-                                    <td><%= @insurance_company.name %></td>
-                                </tr>
-                                <tr>
-                                    <td>Bulletin Number:</td>
-                                    <td><%= @insurance_company.bulletin_number %></td>
-                                </tr>
-                                <tr>
-                                    <td>Effective Date:</td>
-                                    <td><%= @insurance_company.effective_date %></td>
-                                </tr>
-                                <tr>
-                                    <td>States Involved:</td>
-                                    <td><%= @insurance_company.states_involved %></td>
-                                </tr>
-                                <tr>
-                                    <td>Property Type</td>
-                                    <td><%= @insurance_company.property_type %></td>
-                                </tr>
-                                <tr>
-                                    <td>Collect Deductible</td>
-                                    <td><%= @insurance_company.collect_deductible %></td>
-                                </tr>
-                                <tr>
-                                    <td>ESL</td>
-                                    <td><%= @insurance_company.esl %></td>
-                                </tr>
-                                <tr>
-                                    <td>Estimating Software</td>
-                                    <td><%= @insurance_company.estimating_software %></td>
-                                </tr>
-                                <tr>
-                                    <td>Pricing</td>
-                                    <td><%= @insurance_company.pricing %></td>
-                                </tr>
-                                <tr>
-                                    <td>Customer Service Contacts</td>
-                                    <td><%= @insurance_company.customer_service_contacts %></td>
-                                </tr>
-                                <tr>
-                                    <td>Special Conditions</td>
-                                    <td><%= @insurance_company.special_conditions %></td>
-                                </tr>
 
-                            </tbody>
-                        </table>
+            <div class="col-sm-8">
+                <div class="panel with-nav-tabs panel-primary margin-top-2">
+                    <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Take Notes</a>
+                            </li>
+                            <li>
+                                <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Files</a>
+                            </li>
 
+
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="notes">
+                                <%= form_for @insurance_company do |f| %>
+                                <%= f.fields_for :notes, @insurance_company.notes.build do |g|%>
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <div class="field">
+                                            <%= g.text_area :content, class: 'form-control' %>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <%= f.submit class: "btn btn-primary" %>
+                                    </div>
+                                </div>
+                                <% end %>
+                                <% end %>
+                            </div>
+                            <div class="tab-pane fade" id="upload">
+                                <%= form_for @insurance_company do |f| %>
+                                <%= f.fields_for :uploads, @insurance_company.uploads.build do |g|%>
+
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="form-group">
+                                        <%= g.label :upload_category_id %><br>
+                                        <%= g.collection_select :upload_category_id, UploadCategory.all, :id, :name, {:prompt => 'Select an Upload Type'},  { class: 'form-control'} %>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <%= g.label :description %><br>
+                                    <%= g.text_area :description, class: 'form-control' %>
+                                </div>
+
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <%= g.label :upload %><br>
+                                    <%= g.file_field :uploads, multiple: true %>
+                                </div>
+                                <br>
+                                <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
+                                    <%= f.submit class: "btn btn-primary" %>
+                                </div>
+                                <% end %>
+                                <% end %>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
 
-                <%= link_to edit_insurance_company_path(@insurance_company), class: "btn btn-sm btn-warning", type: "button" do %>
-                <i class="glyphicon glyphicon-edit"></i>
-                <% end %>
+
+            <div class="col-sm-8 col-sm-offset-4 margin-top-1">
+                <h3 class="text-center">Past</h3>
+                <div class="timeline-centered">
+                    <% @insurance_company.trackers.each do |tracker| %>
+
+                    <% if tracker.tracker_task.name == "Note Created" %>
+                    <% noted = Note.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Note Created &bull;
+                                        <%= noted.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= noted.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= noted.content %>
+                                    <br />
+                                    <%= link_to 'Delete Note',  tracker_path(tracker, insurance_company_id: @insurance_company.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "File Uploaded" %>
+                    <% upload = Upload.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Upload &bull;
+                                        <%= upload.try(:created_at).strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.user.try(:full_name) %>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                  <%= upload.description  %> <br />
+                                  <% upload.uploads.each_with_index do |file, index| %>
+
+                                    <%= upload.uploads[index].file.filename  %> -
+                                    <a target="_blank" href="<%= file.try(:url) %>">View/Download</a><br />
+                                  <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <% end %>
+                      <% end %>
+                </div>
+
             </div>
-        </div>
-    </div>
-</div>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        function LinkFormatter(value, row, index) {
+            return "<a target='_blank href='/calls/" + row.id + ">" + value + "</a>";
+        }
+        function AddVendor(value, row, index) {
+            return "<a class='add-call' target='_blank' href='call_id=" + row.id + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
+        }
+        function CallRailTimeline(value, row, index) {
+            return "<a href='https://app.callrail.com/calls/" + value + "'>Timeline Link</a>";
+        }
+
+        flatpickr(".datePicker", {
+            enableTime: false,
+            // create an extra input solely for display purposes
+            altInput: true,
+            altFormat: "F j, Y"
+        });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '5',
+            maxTime: '8:00pm',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+        $('[data-toggle=tab]').click(function () {
+            if ($(this).parent().hasClass('active')) {
+                $($(this).attr("href")).toggleClass('active');
+            }
+        })
+    </script>
