@@ -129,7 +129,7 @@
             </div>
 
             <%= render 'address_form', f: f %>
-            <%= render 'partials/phone_form', f: f %>
+            <%= render 'partials/phone_form', f: f,  locals: {phone_for: 'adjusters'} %>
         </div>
 
         <%= hidden_field_tag "same_adjuster[adjuster_id]" %>

@@ -1,9 +1,38 @@
 <%= f.fields_for(:phones) do |g| %>
 
 <div id="number-container">
-<%= locals[:phone_for]  %>
     <div class="col-xs-12">
-      <% if locals[:phone_for] == "customer" %>
+      <% if locals[:phone_for] == "caller" %>
+      <% if @caller_phones || @caller_phones = @caller.phones %>
+      <% @caller_phones.each do |phone| %>
+      <div class="row">
+          <div class="col-xs-3">
+              <div class="form-group">
+                  <%= label_tag :type_id %><br>
+                  <%= select_tag("phones[type_ids][]", options_for_select(PhoneType.all.map{|p| [p.name, p.id]}, selected: phone.type_id), class: "form-control") %>
+              </div>
+          </div>
+          <div class="col-xs-3">
+              <div class="form-group">
+                  <%= label_tag :number %><br>
+                  <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+              </div>
+          </div>
+          <div class="col-xs-3">
+              <div class="form-group">
+                  <%= label_tag :extension %><br>
+                  <%= text_field_tag "phones[extensions][]", phone.try(:extension), class: "form-control"  %>
+              </div>
+          </div>
+          <div class="col-xs-3">
+              <%= label_tag :delete %><br>
+              <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
+          </div>
+      </div>
+      <% end %>
+      <% end %>
+
+      <% elsif locals[:phone_for] == "customer" %>
         <% if @phones %>
         <% @phones.each do |phone| %>
         <div class="row">
@@ -32,39 +61,69 @@
         </div>
         <% end %>
         <% end %>
-        <% end %>
-werwer
-        <% if locals[:phone_for] == "caller" %>
-        CA::ER:ER:E
-        <% if @caller_phones || @caller_phones = @caller.phones %>
-        <% @caller_phones.each do |phone| %>
-        <div class="row">
-            <div class="col-xs-3">
-                <div class="form-group">
-                    <%= label_tag :type_id %><br>
-                    <%= select_tag("phones[type_ids][]", options_for_select(PhoneType.all.map{|p| [p.name, p.id]}, selected: phone.type_id), class: "form-control") %>
+
+
+        <% elsif locals[:phone_for] == "agents"  %>
+
+
+          <% @phones.each do |phone| %>
+          <div class="row">
+              <div class="col-xs-3">
+                  <div class="form-group">
+                      <%= label_tag :type_id %><br>
+                      <%= select_tag("phones[type_ids][]", options_for_select(PhoneType.all.map{|p| [p.name, p.id]}, selected: phone.type_id), class: "form-control") %>
+                  </div>
+              </div>
+              <div class="col-xs-3">
+                  <div class="form-group">
+                      <%= label_tag :number %><br>
+                      <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+                  </div>
+              </div>
+              <div class="col-xs-3">
+                  <div class="form-group">
+                      <%= label_tag :extension %><br>
+                      <%= text_field_tag "phones[extensions][]", phone.try(:extension), class: "form-control"  %>
+                  </div>
+              </div>
+              <div class="col-xs-3">
+                  <%= label_tag :delete %><br>
+                  <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
+              </div>
+          </div>
+          <% end %>
+
+          <% elsif locals[:phone_for] == "adjusters" %>
+
+          <% @phones = @adjuster.phones %>
+            <% @phones.each do |phone| %>
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <%= label_tag :type_id %><br>
+                        <%= select_tag("phones[type_ids][]", options_for_select(PhoneType.all.map{|p| [p.name, p.id]}, selected: phone.type_id), class: "form-control") %>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <%= label_tag :number %><br>
+                        <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <%= label_tag :extension %><br>
+                        <%= text_field_tag "phones[extensions][]", phone.try(:extension), class: "form-control"  %>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <%= label_tag :delete %><br>
+                    <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
                 </div>
             </div>
-            <div class="col-xs-3">
-                <div class="form-group">
-                    <%= label_tag :number %><br>
-                    <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
-                </div>
-            </div>
-            <div class="col-xs-3">
-                <div class="form-group">
-                    <%= label_tag :extension %><br>
-                    <%= text_field_tag "phones[extensions][]", phone.try(:extension), class: "form-control"  %>
-                </div>
-            </div>
-            <div class="col-xs-3">
-                <%= label_tag :delete %><br>
-                <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
-            </div>
-        </div>
-        <% end %>
-        <% end %>
-        <% end %>
+            <% end %>
+          <% end %>
+
     </div>
 </div>
 
