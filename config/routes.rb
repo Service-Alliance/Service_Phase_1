@@ -85,7 +85,6 @@ Rails.application.routes.draw do
     post 'adjuster/remove_from_job' => 'adjusters#remove_from_job',  as: :remove_adjuster
     resources :emergency_contacts
     post 'emergency_contacts/samecaller' => 'emergency_contacts#samecaller'
-    post 'customers/samecaller' => 'customers#samecaller', as: :customer_same_as_caller
     resources :uploads
     get 'job_forms/dowload/:id' => 'job_forms#download'
     resources :job_forms
@@ -97,7 +96,9 @@ Rails.application.routes.draw do
     resources :inspection_checklists
   end
 
-  resources :customers
+  resources :customers do
+    post '/jobs/:job_id' => 'customers#send_to_sharpspring', as: :send_to_sharpspring
+  end
   post 'customers/:id/calls' => 'customers#create_call', as: :create_customer_call
 
   post 'jobs/filter' => 'jobs#filter'

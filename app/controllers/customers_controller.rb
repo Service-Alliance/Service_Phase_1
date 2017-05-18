@@ -177,6 +177,13 @@ class CustomersController < ApplicationController
     redirect_to @customer
   end
 
+  def send_to_sharpspring
+    @customer = Customer.find(params[:customer_id])
+    @job = Job.find(params[:job_id])
+    @customer.send_to_sharpspring(@job.franchise)
+    redirect_to @job
+  end
+
 
 
   private

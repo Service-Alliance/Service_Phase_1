@@ -106,10 +106,10 @@ class JobsController < ApplicationController
     @caller = Caller.find_by(job_id: @job.id)
     if @caller
       @address = @caller.address
-      @phones = @caller.phones
+      @caller_phones = @caller.phones
     else
       @address = Address.new
-      @phones = nil
+      @caller_phones = nil
       @caller = Caller.new
     end
 
@@ -358,7 +358,7 @@ class JobsController < ApplicationController
     @call.job_id = @job.id
     @call.save
     tracker_task = TrackerTask.find_by(name: "Call Assigned")
-    @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @call.id, user_id: current_user.id)
+    @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @call.id, user_id: current_user.id, note: call_params[:note])
 
     redirect_to job_path(@job), notice: 'Call was successfully added to Job.'
   end
@@ -425,7 +425,7 @@ class JobsController < ApplicationController
 
 
   def call_params
-    params.fetch(:call, {}).permit(:id, :job_id)
+    params.fetch(:call, {}).permit(:id, :job_id, :note)
   end
 
   def same_caller_params

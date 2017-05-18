@@ -28,6 +28,9 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#currentCallsModal">
                     Add Active Call
                 </button>
+                <% if @job.franchise && @job.customer.sharp_spring_id == nil %>
+                  <%= link_to  "Send Customer To Sharpspring", customer_send_to_sharpspring_path(@job.customer, @job), method: :post,class:"btn btn-primary" %>
+                <% end %>
                 <div class="progress margin-top-2">
                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:20%">
                      Job Entered
@@ -296,6 +299,12 @@
                                                     <div class="form-group">
                                                         <label for="call_id">Call ID</label><br/>
                                                         <input id="id" name="call[id]" type="number" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-xs-offset-3">
+                                                    <div class="form-group">
+                                                        <label for="call_id">Notes</label><br/>
+                                                        <textarea id="note" name="call[note]" class="form-control"></textarea>
                                                     </div>
                                                 </div>
 
@@ -711,7 +720,11 @@
                                         <%= tracker.try(:user).try(:full_name) %></h3>
                                 </div>
                                 <div class="panel-body">
-                                    <%= link_to "View Call", call_path(call.id) %>
+                                    <% if tracker.note %>
+                                      <span class="bold">Note: </span><%= tracker.note %> <br />
+                                    <% end %>
+                                    <a class="btn btn-primary margin-top-1" target="_blank" href="https://app.callrail.com/calls/<%= call.callrail_id %>">View Call</a> <br />
+                                    <%= link_to "View Details", call_path(call.id), class: "btn btn-primary margin-top-1" %>
                                 </div>
                             </div>
                         </div>

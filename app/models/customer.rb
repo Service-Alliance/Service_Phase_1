@@ -114,8 +114,6 @@ class Customer < ActiveRecord::Base
         },
       "id":"1"
     }.to_json
-    p "FRANCHISE"
-    p franchise
     if franchise.name == "Central Manhattan"
       p "IM HERE"
       @accountId = ENV['CENTRAL_MANHATTAN_SHARPSPRING_ACCOUNT_ID']
@@ -136,9 +134,7 @@ class Customer < ActiveRecord::Base
       @accountId = ENV['CRANBURY_SHARPSPRING_ACCOUNT_ID']
       @secretKey = ENV['CRANBURY_SHARPSPRING_SECRET']
     end
-    p @accountId
-    p @secretKey
-    p response = HTTParty.post("https://api.sharpspring.com/pubapi/v1/?accountID=#{@accountId}&secretKey=#{@secretKey}", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}, body: @json)
+    response = HTTParty.post("https://api.sharpspring.com/pubapi/v1/?accountID=#{@accountId}&secretKey=#{@secretKey}", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}, body: @json)
     self.sharp_spring_id = response.parsed_response['result']['creates'][0]['id']
     self.save
   end

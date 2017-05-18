@@ -432,7 +432,7 @@
                                 </div>
                             </div>
                             <%= render 'customers/address_form', f: f %>
-                            <%= render 'partials/sidebar_phone_form', f: f %>
+                            <%= render 'partials/sidebar_phone_form', f: f, locals: {phone_for: 'customer'}  %>
 
 
 
@@ -540,6 +540,7 @@
                                   <%= text_field_tag "address[county]", @job.try(:caller).try(:address).try(:county), class: "form-control"  %>
                               </div>
                           </div>
+                          <%= render 'partials/sidebar_phone_form', f: f, locals: {phone_for: 'caller'}  %>
                         </div>
                     </div>
                 </div>
