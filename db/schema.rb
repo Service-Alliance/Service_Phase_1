@@ -535,11 +535,11 @@ ActiveRecord::Schema.define(version: 20170515205512) do
   end
 
   create_table "pricings", force: :cascade do |t|
-    t.decimal  "price"
+    t.decimal  "price",               precision: 8, scale: 2
     t.integer  "pricing_category_id"
     t.text     "description"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "properties", force: :cascade do |t|
