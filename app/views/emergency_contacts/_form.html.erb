@@ -33,7 +33,7 @@
         </div>
 
         <%= render 'address_form', f: f %>
-        <%= render 'partials/phone_form', f: f %>
+        <%= render 'partials/phone_form', f: f, locals: {phone_for: "emergency_contacts"} %>
 
         <div class="col-xs-12 text-center">
             <div class="actions">
