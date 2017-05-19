@@ -16,6 +16,7 @@ class FranchisesController < ApplicationController
   # GET /franchises/new
   def new
     @franchise = Franchise.new
+     @address = Address.new
   end
 
   # GET /franchises/1/edit
