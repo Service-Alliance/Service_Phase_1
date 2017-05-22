@@ -2,7 +2,7 @@
     <p id="notice"><%= notice %></p>
 
     <div class="row margin-top-4">
-      <%= @franchises.first.name %>
+      Jobs by Franchise
       <div class="col-xs-12">
         <%= line_chart @franchises.map { |franchise|
             {name: franchise.name, data: franchise.jobs.group_by_week(:created_at, range: 4.weeks.ago.midnight..Time.now).count}

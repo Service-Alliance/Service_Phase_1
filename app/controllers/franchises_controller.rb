@@ -11,6 +11,7 @@ class FranchisesController < ApplicationController
   # GET /franchises/1.json
   def show
     @address = Address.find_by(id: @franchise.address_id)
+    @loss_types = LossType.all
   end
 
   # GET /franchises/new

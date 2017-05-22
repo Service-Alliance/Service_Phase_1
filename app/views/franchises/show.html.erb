@@ -207,6 +207,15 @@
                 </div>
 
             </div>
+
+            <div class="row margin-top-4">
+              Jobs by Franchise
+              <div class="col-xs-12">
+                <%= line_chart @loss_types.map { |type|
+                    {name: type.name, data: type.jobs.where(franchise_id: @franchise.id).group_by_week('jobs.created_at', range: 4.weeks.ago.midnight..Time.now).count}
+                } %>
+              </div>
+
     <script>
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
