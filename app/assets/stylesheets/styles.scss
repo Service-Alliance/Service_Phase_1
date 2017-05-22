@@ -100,6 +100,10 @@ body {
     margin-right: 10px;
   }
 }
+.ql {
+  display: inline !important;
+  color: #fff !important;
+}
 .scheduler-icons {
   input[type='checkbox'].icon-checkbox{display:none}
   input[type='checkbox'].icon-checkbox+label .unchecked{display:inline}

@@ -195,13 +195,16 @@ class JobsController < ApplicationController
           @caller.update(caller_params)
           @address.update(address_params)
         end
-        @caller.phones.destroy_all if @caller && @caller.phones
-        phone_count = phone_params['type_ids'].count
-        phone_count.times do |index|
-          unless phone_params['numbers'][index] == ''
-            @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
+        unless phone_params.empty?
+          @caller.phones.destroy_all if @caller && @caller.phones
+          phone_count = phone_params['type_ids'].count
+          phone_count.times do |index|
+            unless phone_params['numbers'][index] == ''
+              @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
+            end
           end
         end
+
 
         if same_caller_params[:same_indicator] == "1"
           Customer.same_as_caller(@job)
@@ -404,7 +407,7 @@ class JobsController < ApplicationController
                                 :entered_by_id, :details,
                                 :job_note, :customer_id, :referral_type_id, :referral_note, :corporate_referral_type_id,
                                 :billing_address_id, :emergency,
-                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id, :coordinator_id, :name, :same_caller,
+                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id, :coordinator_id, :name, :same_caller, :work_center_link, :xact_link,
                                 customer: [:address_1, :address_2, :zip_code, :city,
                                            :state_id, :county])
   end
@@ -442,6 +445,6 @@ class JobsController < ApplicationController
   end
 
   def phone_params
-    params.require(:phones).permit(numbers: [], extensions: [], type_ids: [])
+    params.fetch(:phones, {}).permit(numbers: [], extensions: [], type_ids: [])
   end
 end

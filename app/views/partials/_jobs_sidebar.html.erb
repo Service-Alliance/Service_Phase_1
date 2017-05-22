@@ -45,6 +45,33 @@
           <div class="assignment-card">
               <div class="panel panel-default">
                   <div class="panel-heading">
+                      <h3 class="panel-title">JOB LINKS <a class="inline" data-toggle="modal" data-target="#job_manager"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                  </div>
+
+                  <div class="panel-body">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#workCenterLink">
+                        Add/Edit Links
+                    </button>
+                    <% if @job.work_center_link %>
+                      <a target="_blank" href="<%= @job.work_center_link %>" class="btn btn-primary ql" >
+                          Open Work Center
+                      </a>
+                    <% end %>
+                    <% if @job.xact_link %>
+                      <a target="_blank" href="<%= @job.xact_link %>" class="btn btn-primary margin-top-1 ql" >
+                          Open Xact Analysis
+                      </a>
+                    <% end %>
+
+                  </div>
+              </div>
+          </div>
+      </li>
+
+      <li>
+          <div class="assignment-card">
+              <div class="panel panel-default">
+                  <div class="panel-heading">
                       <h3 class="panel-title">CUSTOMER <a class="inline" data-toggle="modal" data-target="#customer"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
                   </div>
                   <% if @job.customer %>
@@ -581,6 +608,46 @@
 </div><!-- /.modal -->
 
 
+<div id="workCenterLink" class="modal fade" tabindex="-1" role="dialog">
+    <%= form_for @job do |f|  %>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Quick Link</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                          <div class="col-xs-12 text-center">Note: Links must start with 'http://' or 'https://'</div><br />
+                          <div class="col-xs-6 col-xs-offset-3 margin-top-2">
+                              <div class="form-group">
+                                  <%= f.label :work_center_link %> <br />
+                                  <%= f.text_field :work_center_link, class: 'form-control'%>
+                              </div>
+                          </div>
+                          <div class="col-xs-6 col-xs-offset-3 margin-top-2">
+                              <div class="form-group">
+                                  <%= f.label :xact_link %> <br />
+                                  <%= f.text_field :xact_link, class: 'form-control'%>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <%= f.submit "Add Call to Job", class: "btn btn-primary" %>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>
 
 
 
