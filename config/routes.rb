@@ -99,6 +99,8 @@ Rails.application.routes.draw do
   resources :customers do
     post '/jobs/:job_id' => 'customers#send_to_sharpspring', as: :send_to_sharpspring
   end
+  get 'customer_search_suggestions' => 'customers#search_suggestions'
+  get 'caller_search_suggestions' => 'callers#search_suggestions'
   post 'customers/:id/calls' => 'customers#create_call', as: :create_customer_call
 
   post 'jobs/filter' => 'jobs#filter'

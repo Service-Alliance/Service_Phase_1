@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170522083632) do
+ActiveRecord::Schema.define(version: 20170523174705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -512,6 +512,16 @@ ActiveRecord::Schema.define(version: 20170522083632) do
     t.integer  "state_id"
   end
 
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
+
   create_table "phone_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -537,11 +547,11 @@ ActiveRecord::Schema.define(version: 20170522083632) do
   end
 
   create_table "pricings", force: :cascade do |t|
-    t.decimal  "price"
+    t.decimal  "price",               precision: 8, scale: 2
     t.integer  "pricing_category_id"
     t.text     "description"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "properties", force: :cascade do |t|

@@ -184,6 +184,11 @@ class CustomersController < ApplicationController
     redirect_to @job
   end
 
+  def search_suggestions
+    @customers = Customer.search_suggestions(params[:term])
+    p render json: @customers, include: [:address, :phones]
+  end
+
 
 
   private

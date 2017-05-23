@@ -1,6 +1,11 @@
 <div class="col-xs-12 text-center">
     <h1>Caller Information</h1>
 </div>
+
+<div class="col-xs-12">
+  <label for="customer_search">Caller Search</label>
+  <input id="customer_search" class="form-control autocomplete">
+</div>
 <%= f.fields_for(@caller) do |g| %>
 <div class="col-xs-4">
     <div class="form-group">

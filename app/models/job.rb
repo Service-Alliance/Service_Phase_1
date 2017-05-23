@@ -112,6 +112,24 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def self.customer_search_suggestions(query)
+    customer_or_address = Customer.joins(:address).where("first_name @@ :q or last_name @@ :q or email @@ :q or company_name @@ :q or addresses.address_1 @@ :q or addresses.address_2 @@ :q or addresses.city @@ :q", q: query)
+    phones = Customer.joins(:phones).where("phones.number @@ :q", q: query)
+
+    p unique_list = (customer_or_address + phones).uniq
+
+    return unique_list
+  end
+
+  def self.caller_search_suggestions(query)
+    caller_or_address = Caller.joins(:address).where("first_name @@ :q or last_name @@ :q or email @@ :q or company_name @@ :q or addresses.address_1 @@ :q or addresses.address_2 @@ :q or addresses.city @@ :q or phones.number @@ :q", q: query)
+    phones = Caller.joins(:phones).where("phones.number @@ :q", q: query)
+
+    unique_list = (caller_or_address + phones).uniq
+
+    return unique_list
+  end
+
 
 
 end

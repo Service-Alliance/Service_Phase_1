@@ -12,11 +12,27 @@ class Customer < ActiveRecord::Base
   # with: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/i,
   # message: 'Invalid email format.'
   # }
+  include PgSearch
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
   ransacker :full_name do |parent|
   Arel::Nodes::InfixOperation.new('||',
     parent.table[:first_name], parent.table[:last_name])
+  end
+
+  pg_search_scope :full_search,
+  against: [:first_name, :last_name],
+  associated_against: {
+    :address => [:address_1, :address_2, :city],
+    :phones => [:number]
+  },
+  using: {
+    tsearch: {dictionary: 'english'}
+  }
+
+  def self.search_suggestions(param)
+    results = full_search(param)
+    return results.limit(10)
   end
 
 

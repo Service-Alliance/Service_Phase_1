@@ -1,7 +1,7 @@
 class CallersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_caller, only: [:show, :edit, :update, :destroy]
-  before_action :set_job
+  before_action :set_job, except: [:search_suggestions]
   # GET /callers
   # GET /callers.json
   def index
@@ -86,6 +86,14 @@ class CallersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+    def search_suggestions
+      @callers = Caller.search_suggestions(params[:term])
+      p render json: @callers, include: [:address, :phones]
+    end
+
+
 
   private
 
