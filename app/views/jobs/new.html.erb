@@ -393,7 +393,10 @@
 </div>
 
 <div id="customerModal" class="modal fade" tabindex="-1" role="dialog">
+
+
     <%= form_for @customer, remote: true do |f| %>
+
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -423,6 +426,10 @@
                             <% if @job %>
                             <%= hidden_field_tag "job[job_id]", @job.id %>
                             <% end %>
+                            <div class="col-xs-12">
+                              <label for="customer_search">Customer Search</label>
+                              <input id="customer_search" class="form-control autocomplete">
+                            </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <%= f.label :first_name %><br>

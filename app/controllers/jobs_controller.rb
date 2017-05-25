@@ -189,6 +189,8 @@ class JobsController < ApplicationController
         @job.referral_vendor_id = nil if @job.try(:referral_type).try(:name) != 'Vendor'
         @job.save
 
+
+        
         @caller = Caller.find_by(job_id: @job.id)
         if @caller
           @address = @caller.address

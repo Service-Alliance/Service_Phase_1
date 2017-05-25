@@ -122,6 +122,12 @@ class ContactsController < ApplicationController
     end
   end
 
+  def search_suggestions
+    @customers = Customer.search_suggestions(params[:term])
+    p render json: @customers, include: [:address, :phones]
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
