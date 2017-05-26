@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-10 table-responsive">
+            <h1>Companies</h1>
+            <%= link_to "Create Company", new_company_path, class: "btn btn-primary" %>
+            <table id="job-table" class="table table-striped margin-top-1">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Zip</th>
+                        <th>State</th>
+                        <th>County</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @companies.each do |company| %>
+                    <tr>
+                        <td><%= company.try(:name) %></td>
+                        <td><%= company.try(:address).try(:address_1) %></td>
+                        <td><%= company.try(:address).try(:city) %></td>
+                        <td><%= company.try(:address).try(:zip_code) %></td>
+                        <td><%= company.try(:address).try(:state).try(:name) %></td>
+                        <td><%= company.try(:address).try(:county) %></td>
+                        <td><%= link_to 'Show', company %></td>
+                        <% if current_user.admin?%>
+                        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                        <% end %>
+
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <%= paginate @companies %>
+            <br>
+        </div>
+        <div class="col-xs-2 margin-top-5">
+            <%= search_form_for @search do |f| %>
+            <%= f.label :name, "Name" %><br/>
+            <%= f.search_field :name_cont, {class: "form-control"} %>
+
+            <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-top-2" %></div>
+
+            <% end %>
+        </div>
+
+
+
+
+    </div>
+</div>
+<p id="notice"><%= notice %></p>
+
+<script>
+flatpickr(".datePicker", {
+    // defaultDate: new Date(),
+    // create an extra input solely for display purposes
+    altInput: true,
+    altFormat: "F j, Y"
+});
+
+</script>

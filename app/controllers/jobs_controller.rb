@@ -90,6 +90,7 @@ class JobsController < ApplicationController
     #   @job = Job.create(entered_by_id: current_user.id, coordinator_id: current_user.id, customer_id: @customer.id)
     # end
     @job.trackers.create(tracker_task_id: 1)
+    @customer_companies = @customer.customer_companies.build
     @loss = Loss.create(job_id: @job.id)
     @caller = Caller.create(job_id: @job.id)
     @address = Address.create
@@ -190,7 +191,7 @@ class JobsController < ApplicationController
         @job.save
 
 
-        
+
         @caller = Caller.find_by(job_id: @job.id)
         if @caller
           @address = @caller.address

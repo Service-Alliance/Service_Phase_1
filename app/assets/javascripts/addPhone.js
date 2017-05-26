@@ -31,5 +31,5 @@ $(function() {
 });
 
 function removeNumber(that) {
-  $(that).parent().parent().remove();
+  $(that).parent().parent().parent().parent().remove();
 }

@@ -86,6 +86,14 @@ class CustomersController < ApplicationController
         @job = Job.find_by(id: job_param[:job_id])
         @job.update_last_action
       end
+
+      unless customer_exists_params['customer_id'] == "0"
+        @customer = Customer.find(customer_exists_params['customer_id'])
+        @job.customer_id = @customer.id
+        @job.save
+      end
+
+
       if @address = Address.find_by(id: @customer.address_id)
         if @address.update(address_params)
         end
@@ -94,6 +102,7 @@ class CustomersController < ApplicationController
         @address.save
         @customer.address_id = @address.id
       end
+
       if @customer.update(customer_params)
         unless phone_params.empty?
           @customer.phones.destroy_all
@@ -203,11 +212,14 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :job_id, :owner_id, :company_name, uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content] )
+      params.require(:customer).permit(:first_name, :last_name, :email, :job_id, :owner_id, :company_name, uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content], customer_companies_attributes: [:company_id] )
     end
 
     def job_param
       params.fetch(:job, {}).permit(:job_id)
+    end
+    def customer_exists_params
+      params.fetch(:customer_exists, {}).permit(:customer_id)
     end
 
     def address_params

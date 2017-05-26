@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :customer_companies
+  resources :companies
   resources :notify_types
   resources :notifications
   devise_for :admin_users, ActiveAdmin::Devise.config

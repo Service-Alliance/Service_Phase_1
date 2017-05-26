@@ -8,6 +8,9 @@ class Customer < ActiveRecord::Base
   has_many :jobs
   accepts_nested_attributes_for :uploads
   accepts_nested_attributes_for :notes
+  has_many :customer_companies
+  has_many :companies, through: :customer_companies
+  accepts_nested_attributes_for :customer_companies
   # validates :email, presence: true, format: {
   # with: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/i,
   # message: 'Invalid email format.'
@@ -131,7 +134,6 @@ class Customer < ActiveRecord::Base
       "id":"1"
     }.to_json
     if franchise.name == "Central Manhattan"
-      p "IM HERE"
       @accountId = ENV['CENTRAL_MANHATTAN_SHARPSPRING_ACCOUNT_ID']
       @secretKey = ENV['CENTRAL_MANHATTAN_SHARPSPRING_SECRET']
     elsif franchise.name == "East Windsor"

@@ -11,6 +11,7 @@ function addModalNumber(that) {
     var newNumber = $("#modal-new-number")
 
     cloned = newNumber.clone();
+    cloned.addClass("added-number");
 
     numberContainer.append(cloned);
 
@@ -31,5 +32,5 @@ $(function() {
 });
 
 function removeModalNumber(that) {
-  $(that).parent().parent().remove();
+  $(that).parent().parent().parent().parent().remove();
 }

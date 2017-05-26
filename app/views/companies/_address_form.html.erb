@@ -1,0 +1,49 @@
+<%= f.fields_for(@address) do |g| %>
+
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :address_1 %><br>
+        <%= text_field_tag "address[address_1]", @address.try(:address_1), class: "form-control"  %>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :address_2 %><br>
+        <%= text_field_tag "address[address_2]", @address.try(:address_2), class: "form-control" %>
+    </div>
+</div>
+
+
+<div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-3">
+          <div class="form-group">
+              <%= label_tag :zip %><br>
+              <%= number_field_tag "address[zip_code]", @address.try(:zip_code), class: "form-control"  %>
+          </div>
+      </div>
+        <div class="col-xs-3">
+            <label>Zip Code Lookup</label><br>
+            <button id="zipLookup" type="button" class="btn btn-primary">Lookup</button>
+        </div>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :city %><br>
+        <%= text_field_tag "address[city]", @address.try(:city), class: "form-control"  %>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :state_id %><br>
+        <%= select_tag("address[state_id]", options_for_select(State.all.map{|p| [p.name, p.id]}, selected: @address.try(:state).try(:id)), class: "form-control") %>
+    </div>
+</div>
+<div class="col-xs-6">
+    <div class="form-group">
+        <%= label_tag :county %><br>
+        <%= text_field_tag "address[county]", @address.try(:county), class: "form-control"  %>
+    </div>
+</div>
+<% end %>

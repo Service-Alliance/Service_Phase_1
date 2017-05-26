@@ -5,7 +5,7 @@
       <% if locals[:phone_for] == "caller" %>
       <% if @caller_phones || @caller_phones = @caller.phones %>
       <% @caller_phones.each do |phone| %>
-      <div class="row">
+      <div id="caller" class="row">
           <div class="col-xs-3">
               <div class="form-group">
                   <%= label_tag :type_id %><br>
@@ -35,7 +35,7 @@
       <% elsif locals[:phone_for] == "customer" %>
         <% if @phones %>
         <% @phones.each do |phone| %>
-        <div class="row">
+        <div id="customer" class="row">
             <div class="col-xs-3">
                 <div class="form-group">
                     <%= label_tag :type_id %><br>

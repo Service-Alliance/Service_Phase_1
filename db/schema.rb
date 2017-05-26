@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523174705) do
+ActiveRecord::Schema.define(version: 20170525170234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,6 +181,13 @@ ActiveRecord::Schema.define(version: 20170523174705) do
     t.integer  "customer_id"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.text     "name"
+    t.integer  "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "contact_assignments", force: :cascade do |t|
     t.integer  "contact_id"
     t.integer  "job_id"
@@ -212,6 +219,13 @@ ActiveRecord::Schema.define(version: 20170523174705) do
     t.integer  "address_type_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "customer_companies", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "customers", force: :cascade do |t|
@@ -411,7 +425,7 @@ ActiveRecord::Schema.define(version: 20170523174705) do
     t.boolean  "contract_sent",              default: false
     t.date     "contract_sent_date"
     t.integer  "coordinator_id"
-    t.integer  "pipeline_status_id",         default: 1
+    t.integer  "pipeline_status_id"
     t.text     "work_center_link"
     t.text     "xact_link"
   end
