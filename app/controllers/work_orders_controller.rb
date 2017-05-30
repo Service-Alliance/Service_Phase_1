@@ -33,15 +33,16 @@ class WorkOrdersController < ApplicationController
       if @work_order.save
         tracker_task = TrackerTask.find_by(name: "Work Order Created")
         @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id)
+
+        sched_manager = User.find_by(email: "sgreer@servpro5933.com")
+        UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now if sched_manager
+
         work_order_send_to_params[:send_to].each do |user|
           unless user == ""
             @user = User.find(user)
             UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
           end
-          sched_manager = User.find_by(email: "sgreer@servpro5933.com")
-          job_coordinator = User.find(@job.coordinator_id)
-          UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now if sched_manager
-          UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now if job_coordinator
+
           @job.pipeline_status_id = 8
           if @job.status_id == 1
             @job.status_id = 2

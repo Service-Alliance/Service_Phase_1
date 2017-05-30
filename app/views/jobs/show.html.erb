@@ -536,24 +536,33 @@
 
                               <label>Send to:</label><br />
                             </div>
+                            <% if @job.job_coordinator %>
                               <div class="col-sm-3">
                                   <div class="form-group">
-                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(id: @job.job_coordinator.id).collect{ |u| [u.full_name, u.id] }), class: "form-control" %>
+                                  </div>
+                              </div>
+                              <% end %>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(email: "kroggemann@servpro5933.com").collect{ |u| [u.full_name, u.id] }), class: "form-control" %>
                                   </div>
                               </div>
                               <div class="col-sm-3">
                                   <div class="form-group">
-                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+                                      <% @crew_chief = Role.find_by(name: "Crew Chief") %>
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(role_id: @crew_chief.id).collect{ |u| [u.full_name, u.id] }), prompt: "Select Crew Chief", class: "form-control" %>
                                   </div>
                               </div>
                               <div class="col-sm-3">
                                   <div class="form-group">
-                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(Vendor.all.collect{ |u| [u.name, u.id] }), prompt: "Select Vendor", class: "form-control" %>
                                   </div>
                               </div>
                               <div class="col-sm-3">
                                   <div class="form-group">
-                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.all.collect{ |u| [u.full_name, u.id] }), prompt: "Select Recipent", class: "form-control" %>
+                                    <% @tech = Role.find_by(name: "Technician") %>
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(role_id: @tech.id).collect{ |u| [u.full_name, u.id] }), prompt: "Select Technician", class: "form-control" %>
                                   </div>
                               </div>
                               <div class="actions col-sm-12">
