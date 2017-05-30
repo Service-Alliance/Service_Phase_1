@@ -35,6 +35,12 @@ class User < ActiveRecord::Base
   def contractor?
     self.role_id == 5 ? true : false
   end
+  def technician?
+    self.try(:role).try(:name) == 'Technician' ? true : false
+  end
+  def crew_chief?
+    self.try(:role).try(:name) == 'Crew Chief' ? true : false
+  end
   def unassigned?
     self.role_id == 0 || self.role_id == nil  ? true : false
   end

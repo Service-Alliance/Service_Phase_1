@@ -23,6 +23,10 @@ class HomeController < ApplicationController
     elsif current_user.contractor?
       @jobs = Job.eager_load(:subscriptions).where("subscriptions.user_id= ?", current_user.id)
       render template: 'home/contractor'
+    elsif current_user.technician?
+      render template: 'home/technician'
+    elsif current_user.crew_chief?
+      render template: 'home/crew_chief'
     end
   end
 end
