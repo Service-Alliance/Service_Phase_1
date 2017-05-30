@@ -69,11 +69,14 @@
       <div class="panel-body">
         <div class="tab-content">
           <div class="tab-pane fade in active" id="entered">
-            <%= @user.jobs.last(20).each do |job| %>
+            <% Job.where(entered_by_id: @user.id).last(20).each do |job| %>
+              <%= link_to job.id, job_path(job.id) %> <%= job.try(:name) %><br />
             <% end %>
           </div>
           <div class="tab-pane fade" id="assigned">
-
+            <% Job.where(coordinator_id: @user.id).last(20).each do |job| %>
+              <%= link_to job.id, job_path(job.id) %> <%= job.try(:name) %><br />
+            <% end %>
           </div>
         </div>
       </div>
