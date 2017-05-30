@@ -8,5 +8,24 @@
     <p>
       Click <a href="http://servicealliance.herokuapp.com/jobs/<%= @job.id %>/work_orders/<%= @work_order.id%>">here</a> to view the details.
     </p>
+    <p>
+      To: <%= @work_order.to %><br />
+      Name: <%= @work_order.name %><br />
+      Date: <%= @work_order.date %><br />
+      Typed By: <%= @work_order.typed_by %><br />
+      Job Start: <%= @work_order.job_start %><br />
+      Job Name: <%= @work_order.job_name %><br />
+      Job Location: <%= @work_order.job_location %><br />
+      Telephone: <%= @work_order.telephone %><br />
+      Contact: <%= @work_order.contact %><br />
+      Insurance: <%= @work_order.insurance %><br />
+      Claim Number: <%= @work_order.claim_number %><br />
+      Crew: <%= @work_order.crew %><br />
+      Time On Loss: <%= @work_order.approx_time_on_loss %><br />
+      Required: <%= @work_order.required %><br />
+      Franchise Location: <%= @work_order.franchise_location %><br />
+      Scope of Work: <%= @work_order.scope_of_work %><br />
+      Job Manager Contact Info: <%= @work_order.job_manager_contact_info %><br />
+    </p>
   </body>
 </html>
