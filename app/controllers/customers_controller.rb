@@ -48,6 +48,7 @@ class CustomersController < ApplicationController
     @job.update_last_action
 
 
+
     respond_to do |format|
       if @customer.save
         if @job
@@ -91,6 +92,10 @@ class CustomersController < ApplicationController
         @customer = Customer.find(customer_exists_params['customer_id'])
         @job.customer_id = @customer.id
         @job.save
+      end
+      unless company_params.empty?
+        @company = Company.create!(name: company_params[:company_name])
+        CustomerCompany.create(customer_id: @customer.id, company_id: @company.id)
       end
 
 
@@ -224,6 +229,9 @@ class CustomersController < ApplicationController
 
     def address_params
         params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
+    end
+    def company_params
+        params.fetch(:company, {}).permit(:company_name)
     end
 
     def phone_params

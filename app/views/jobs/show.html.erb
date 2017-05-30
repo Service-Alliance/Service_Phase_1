@@ -510,7 +510,7 @@
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <%= f.label :referral %><br>
-                                      <%= f.text_field :referral, class: "form-control" %>
+                                      <%= f.text_field :referral, class: "form-control", value: @job.try(:referral_type).try(:name) %>
                                   </div>
                               </div>
                               <div class="col-sm-12">
