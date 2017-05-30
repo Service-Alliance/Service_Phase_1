@@ -50,7 +50,7 @@
       <div class="col-xs-4">
           <div class="form-group">
               <%= f.label :franchise_id %><br>
-              <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {:prompt => 'Select a Franchise'},  { class: 'form-control'} %>
+              <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {:prompt => 'Select a Franchise', selected: @job.franchise_id}, { class: 'form-control'} %>
           </div>
       </div>
 
