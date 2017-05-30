@@ -29,6 +29,7 @@ class CustomersController < ApplicationController
     @job = Job.find_by(id: params[:job_id])
     @customer_address = Address.new
     @phones = nil
+    @customer_companies = @customer.customer_companies.build
   end
 
   # GET /customers/1/edit

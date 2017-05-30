@@ -98,6 +98,23 @@
         <% end %>
       </div>
     </div>
+
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Jobs Referred On (Total: <%= @assignments.count %>)
+      </div>
+      <div class="panel-body">
+        <div class="item">
+          <% @assignments.each do |assignment| %>
+          <%= link_to assignment.job_id, job_path(assignment.job_id) %> <br />
+          <% end %>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <%= paginate @assignments %>
+      </div>
+    </div>
   </div>
 
   <div class="col-sm-8">
