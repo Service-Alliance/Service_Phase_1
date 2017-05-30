@@ -71,7 +71,7 @@ G - Girl      N - Nancy   U - Universe">
 <div class="col-xs-6">
     <div class="form-group">
         <%= label_tag :state_id %><br>
-        <%= select_tag("address[state_id]", options_for_select(State.all.map{|p| [p.name, p.id]}, selected: @caller.try(:address).try(:state).try(:id)), class: "form-control") %>
+        <%= select_tag("address[state_id]", options_for_select(State.all.map{|p| [p.name, p.id]}.insert(0, ""), selected: @caller.try(:address).try(:state).try(:id)), class: "form-control") %>
     </div>
 </div>
 <div class="col-xs-6">
