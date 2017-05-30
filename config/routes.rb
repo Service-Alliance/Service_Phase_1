@@ -85,6 +85,7 @@ Rails.application.routes.draw do
     post 'adjusters/samecaller' => 'adjusters#samecaller'
     post 'agents/remove_from_job' => 'agents#remove_from_job', as: :remove_agent
     post 'adjuster/remove_from_job' => 'adjusters#remove_from_job',  as: :remove_adjuster
+    post 'customers/samecaller' => 'customers#samecaller', as: :customer_same_as_caller
     resources :emergency_contacts
     post 'emergency_contacts/samecaller' => 'emergency_contacts#samecaller'
     resources :uploads
