@@ -34,7 +34,7 @@
 
 
 
-                <% if @job.franchise && @job.customer.sharp_spring_id == nil %>
+                <% if @job.franchise && @job.customer.sharp_spring_id == nil && current_user.admin? %>
                   <%= link_to  "Send Customer To Sharpspring", customer_send_to_sharpspring_path(@job.customer, @job), method: :post,class:"btn btn-primary" %>
                 <% end %>
                 <div class="progress margin-top-2">

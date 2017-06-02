@@ -89,14 +89,16 @@ class CustomersController < ApplicationController
         @job.update_last_action
       end
 
-      unless customer_exists_params['customer_id'] == "0"
+      unless customer_exists_params['customer_id'] == "0" || customer_exists_params.empty?
         @customer = Customer.find(customer_exists_params['customer_id'])
         @job.customer_id = @customer.id
         @job.save
       end
       unless company_params.empty?
-        @company = Company.create!(name: company_params[:company_name])
-        CustomerCompany.create(customer_id: @customer.id, company_id: @company.id)
+        unless company_params[:company_name] == ""
+          @company = Company.create!(name: company_params[:company_name])
+          CustomerCompany.create(customer_id: @customer.id, company_id: @company.id)
+        end
       end
 
 

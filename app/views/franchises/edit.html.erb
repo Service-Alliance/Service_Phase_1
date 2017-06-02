@@ -2,7 +2,7 @@
     <% if notice %>
     <div class="alert alert-success" role="alert"><%= notice %></div>
     <% end %>
-
+<% if current_user.admin? %>
     <div class="row">
         <div class="col-xs-8 col-xs-offset-2">
             <div class="row">
@@ -13,4 +13,5 @@
             </div>
         </div>
     </div>
+  <% end %>
 </div>

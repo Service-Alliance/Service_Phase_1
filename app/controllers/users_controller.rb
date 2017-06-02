@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @assignments = Jobs.where(vendor_id: @vendor.id).page(params[:page]).order('created_at DESC')
   end
 
   # GET /users/new

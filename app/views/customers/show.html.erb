@@ -35,22 +35,22 @@
                     Company: <%= @customer.company_name %>
                   </div>
                   <div class="item">
-                    Address: <%= @customer.try(:address_1) %>
+                    Address: <%= @customer.try(:address).try(:address_1) %>
                   </div>
                   <div class="item">
-                    Address 2: <%= @customer.try(:address_1) %>
+                    Address 2: <%= @customer.try(:address).try(:address_1) %>
                   </div>
                   <div class="item">
-                    City: <%= @customer.try(:city) %>
+                    City: <%= @customer.try(:address).try(:city) %>
                   </div>
                   <div class="item">
-                    State: <%= @customer.try(:state).try(:name) %>
+                    State: <%= @customer.try(:address).try(:state).try(:name) %>
                   </div>
                   <div class="item">
-                    Zip: <%= @customer.try(:zip_code) %>
+                    Zip: <%= @customer.try(:address).try(:zip_code) %>
                   </div>
                   <div class="item">
-                    County: <%= @customer.try(:county) %>
+                    County: <%= @customer.try(:address).try(:county) %>
                   </div>
                   <% @customer.phones.each do |phone| %>
                   <div class="item">
