@@ -1,5 +1,6 @@
 class PricingsController < ApplicationController
   before_action :set_pricing, only: [:show, :edit, :update, :destroy]
+  before_action :set_job
 
   # GET /pricings
   # GET /pricings.json
@@ -25,10 +26,16 @@ class PricingsController < ApplicationController
   # POST /pricings.json
   def create
     @pricing = Pricing.new(pricing_params)
+    @pricing.job_id = @job.id
+    @pricing.current_status_id = @job.status_id
+
+    tracker_task = TrackerTask.find_by(name: "Pricing Created")
+
 
     respond_to do |format|
       if @pricing.save
-        format.html { redirect_to @pricing, notice: 'Pricing was successfully created.' }
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @pricing.id, user_id: current_user.id)
+        format.html { redirect_to @job, notice: 'Pricing was successfully created.' }
         format.json { render :show, status: :created, location: @pricing }
       else
         format.html { render :new }
@@ -65,6 +72,9 @@ class PricingsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_pricing
       @pricing = Pricing.find(params[:id])
+    end
+    def set_job
+      @job = Job.find(params[:job_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

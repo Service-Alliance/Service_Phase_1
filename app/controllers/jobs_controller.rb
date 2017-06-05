@@ -78,6 +78,7 @@ class JobsController < ApplicationController
     @job.schedulers.each do |scheduler|
       @future_schedules << scheduler if scheduler.event_date.future?
     end
+    @pricing = Pricing.new
   end
 
   # GET /jobs/new

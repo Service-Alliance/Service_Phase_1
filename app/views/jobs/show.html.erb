@@ -137,6 +137,9 @@
                             <li>
                                 <a href="#purchase_order_approval" aria-controls="purchase_order_approval" role="tab" data-toggle="tab">Purchase Order Approval</a>
                             </li>
+                            <li>
+                                <a href="#pricing" aria-controls="pricing" role="tab" data-toggle="tab">Pricing</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="panel-body">
@@ -623,6 +626,37 @@
                               <% end %>
 
                             </div>
+
+                            <div class="tab-pane fade" id="pricing">
+                              <%= form_for [@job, @pricing] do |f| %>
+
+                                <% if @pricing.errors.any? %>
+                                  <div id="error_explanation">
+                                    <h2><%= pluralize(@pricing.errors.count, "error") %> prohibited this pricing from being saved:</h2>
+
+                                    <ul>
+                                    <% @pricing.errors.full_messages.each do |message| %>
+                                      <li><%= message %></li>
+                                    <% end %>
+                                    </ul>
+                                  </div>
+                                <% end %>
+
+                                <div class="col-xs-12">
+                                  <%= f.label :price %><br>
+                                  <%= f.number_field :price, class: "form-control" %>
+                                </div>
+                                <div class="col-xs-12">
+                                  <%= f.label :description %><br>
+                                  <%= f.text_field :description, class: "form-control" %>
+                                </div>
+                                <div class="col-xs-12 margin-top-2">
+                                  <%= f.submit  class: "btn btn-primary" %>
+                                </div>
+
+                              <% end %>
+
+                            </div>
                         </div>
 
 
@@ -812,6 +846,30 @@
                                     Will we be bringing in another Vendor?: <%= checklist.additional_vendor ? "Yes" : "No" %><br />
                                     Verify all the basic information, and update the customer information if necessary?: <%= checklist.verify_information  ? "Yes" : "No"%><br />
                                     Does the job have potential for construction?:<%= checklist.potential_construction ? "Yes" : "No" %><br />
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "Pricing Created" %>
+                    <% pricing = Pricing.find(tracker.child_id) %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Pricing Created &bull;
+                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <span class="bold">Pricing:</span> $<%= pricing.price %> <br />
+                                    <span class="bold">Description:</span> <%= pricing.description%> <br />
+                                    <span class="bold">Job Status (At time of Pricing):</span> <%= pricing.job_status.name %><br />
+
                                 </div>
                             </div>
                         </div>
