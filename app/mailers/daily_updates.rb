@@ -10,7 +10,9 @@ class DailyUpdates < ApplicationMailer
     @users = User.where(role_id: manager_role)
     @users.each do |user|
       @jobs = Job.where(status_id: 1, coordinator_id: user.id)
-      mail(to: user.email, subject: "Pending Jobs as of (#{Date.today})")
+      unless @jobs.empty?
+        mail(to: user.email, subject: "Pending Jobs as of (#{Date.today})")
+      end
     end
   end
 
