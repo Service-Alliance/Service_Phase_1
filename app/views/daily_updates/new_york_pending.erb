@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <% Franchise.all.each do |franchise| %>
+    <%= franchise.name %> (<%= @jobs.where(franchise_id: franchise.id).count %>)
+      <% @jobs.where(franchise_id: franchise.id).find_each do |job| %>
+        Name: <%= job.name %> <br />
+        Loss Type: <% job.try(:losses).try(:first).try(:loss_type) %><br />
+        Customer Address: <% job.customer.try(:address).try(:address_1) %> <br />
+        <% if job.customer.try(:address).try(:address_2) %>
+          <% job.customer.try(:address).try(:address_2) %> <br />
+        <% end %>
+        <% job.customer.try(:address).try(:city) %><br />
+        <% job.customer.try(:address).try(:state).try(:name) %> <br />
+        Show Page: <a href="http://servicealliance.herokuapp.com/jobs/<%= job.id %>"></a><br />
+        Loss Sheet: <a href="http://servicealliance.herokuapp.com/jobs/<%= job.id %>/loss-sheet"></a><br />
+
+      <% end %>
+    <% end %>
+  </body>
+</html>
