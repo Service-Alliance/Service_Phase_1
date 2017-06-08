@@ -1,5 +1,10 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
+      <li>
+          <%= link_to job_loss_sheet_path(@job)  do %>
+          Loss Sheet
+          <% end %>
+      </li>
 
       <li>
           <div class="assignment-card">
@@ -252,37 +257,32 @@
             </ul>
             <!-- /.nav-second-level -->
         </li>
-        <li>
+        <!-- <li>
 
-            <%= link_to new_or_view_job_work_order_path(@job, @job.work_orders)  do %>
+            <% link_to new_or_view_job_work_order_path(@job, @job.work_orders)  do %>
             Work Order
             <% end %>
-        </li>
-        <li>
+        </li> -->
+        <!-- <li>
             <a href="#">
                 <i class="fa fa-bar-chart-o fa-fw"></i>
                 Job Files<span class="glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul class="nav nav-second-level">
                 <li>
-                    <%= link_to job_uploads_path(@job)  do %>
-                    <i class="<%= @job.uploads.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
+                    <% link_to job_uploads_path(@job)  do %>
+                    <i class="<% @job.uploads.empty? ? 'glyph-incomplete' : 'glyph-done'  %> glyphicon glyphicon-ok"></i>
                     Files/Uploads
                     <% end %>
                 </li>
             </ul>
-        </li>
+        </li> -->
         <li>
             <%= link_to job_overview_path(@job)  do %>
             Job Overview
             <% end %>
         </li>
 
-        <li>
-            <%= link_to job_loss_sheet_path(@job)  do %>
-            Loss Sheet
-            <% end %>
-        </li>
 
 
 
