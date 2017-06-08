@@ -50,21 +50,18 @@
           <div class="assignment-card">
               <div class="panel panel-default">
                   <div class="panel-heading">
-                      <h3 class="panel-title">JOB LINKS <a class="inline" data-toggle="modal" data-target="#workCenterLink"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                      <h3 class="panel-title">ADD JOB LINKS <a class="inline" data-toggle="modal" data-target="#workCenterLink"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
                   </div>
 
                   <div class="panel-body">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#workCenterLink">
-                        Add/Edit Links
-                    </button>
                     <% if @job.work_center_link %>
                       <a target="_blank" href="<%= @job.work_center_link %>" class="btn btn-primary ql" >
-                          Open Work Center
+                          View Job In Work Center
                       </a>
                     <% end %>
                     <% if @job.xact_link %>
                       <a target="_blank" href="<%= @job.xact_link %>" class="btn btn-primary margin-top-1 ql" >
-                          Open Xact Analysis
+                          View Job In Xact Analysis
                       </a>
                     <% end %>
 
@@ -640,7 +637,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <%= f.submit "Add Call to Job", class: "btn btn-primary" %>
+                <%= f.submit "Add Link to Job", class: "btn btn-primary" %>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
             </div>
