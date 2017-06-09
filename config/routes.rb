@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pricing_categories
   resources :customer_companies
   resources :companies
   resources :notify_types

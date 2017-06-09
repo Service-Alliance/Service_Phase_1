@@ -648,6 +648,10 @@
                                   <%= f.number_field :price, class: "form-control" %>
                                 </div>
                                 <div class="col-xs-12">
+                                  <%= f.label :pricing_category_id %><br>
+                                  <%= f.collection_select :pricing_category_id, PricingCategory.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                                </div>
+                                <div class="col-xs-12">
                                   <%= f.label :description %><br>
                                   <%= f.text_field :description, class: "form-control" %>
                                 </div>
@@ -868,6 +872,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <span class="bold">Pricing:</span> $<%= pricing.price %> <br />
+                                    <span class="bold">Category:</span> <%= pricing.try(:pricing_category).try(:name) %> <br />
                                     <span class="bold">Description:</span> <%= pricing.description%> <br />
                                     <span class="bold">Job Status (At time of Pricing):</span> <%= pricing.job_status.name %><br />
 

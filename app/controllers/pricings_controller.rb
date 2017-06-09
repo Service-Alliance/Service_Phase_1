@@ -1,6 +1,7 @@
 class PricingsController < ApplicationController
   before_action :set_pricing, only: [:show, :edit, :update, :destroy]
   before_action :set_job
+  
 
   # GET /pricings
   # GET /pricings.json

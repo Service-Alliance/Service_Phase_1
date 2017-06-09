@@ -503,3 +503,6 @@ VendorUploadType.create(name: "W9")
 VendorUploadType.create(name: "W9")
 VendorUploadType.create(name: "W9")
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
+
+PricingCategory.create(name: "")
