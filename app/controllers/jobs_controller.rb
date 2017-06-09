@@ -243,6 +243,7 @@ class JobsController < ApplicationController
             Notification.create(notify_type: notify_type.id,actor_id: current_user.id, target_id: user.id, job_id: @job.id, notify_text: "Call Rep #{current_user.full_name} created a job.")
           end
         end
+        
 
         format.html do
           if params[:commit] == 'Save and Move to Job Loss'

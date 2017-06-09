@@ -875,8 +875,14 @@
                                     <span class="bold">Category:</span> <%= pricing.try(:pricing_category).try(:name) %> <br />
                                     <span class="bold">Description:</span> <%= pricing.description%> <br />
                                     <span class="bold">Job Status (At time of Pricing):</span> <%= pricing.job_status.name %><br />
+                                    <% if @job.pricings.last == pricing %>
+                                    <% unless pricing.try(:pricing_category).try(:name) == "Final Estimate" %>
+                                    <%= link_to  "Move Pricing to Next Cateogry", move_to_next_path(job_id: @job, pricing_id: pricing.id),class:"btn btn-primary" %>
+                                    <% end %>
+                                    <% end %>
 
                                 </div>
+
                             </div>
                         </div>
                     </article>

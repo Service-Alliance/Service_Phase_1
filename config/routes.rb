@@ -98,7 +98,10 @@ Rails.application.routes.draw do
     resources :subscriptions
     resources :purchase_order_approvals
     resources :inspection_checklists
+
+
   end
+  get "move-pricing" => 'pricings#move_to_next', as: :move_to_next
 
   resources :customers do
     post '/jobs/:job_id' => 'customers#send_to_sharpspring', as: :send_to_sharpspring

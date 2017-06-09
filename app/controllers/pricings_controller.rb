@@ -1,7 +1,7 @@
 class PricingsController < ApplicationController
   before_action :set_pricing, only: [:show, :edit, :update, :destroy]
   before_action :set_job
-  
+
 
   # GET /pricings
   # GET /pricings.json
@@ -21,6 +21,25 @@ class PricingsController < ApplicationController
 
   # GET /pricings/1/edit
   def edit
+  end
+
+  def move_to_next
+    @job = Job.find(params[:job_id])
+    @pricing = Pricing.find(params[:pricing_id])
+    @category_id = 0
+    if  @pricing.pricing_category_id &&  @pricing.pricing_category_id < 4
+      @category_id = @pricing.pricing_category_id + 1
+      p @category_id
+    else
+      @category_id = 3
+    end
+
+    tracker_task = TrackerTask.find_by(name: "Pricing Created")
+
+    @new_pricing = Pricing.create(job_id: @job.id, current_status_id: @job.status_id, pricing_category_id: @category_id, description: "Moved to next category" )
+
+    @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @new_pricing.id, user_id: current_user.id)
+    redirect_to @job, notice: 'Pricing was successfully created.'
   end
 
   # POST /pricings

@@ -505,4 +505,6 @@ VendorUploadType.create(name: "W9")
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 
 
-PricingCategory.create(name: "")
+PricingCategory.create(name: "Initial Estimate")
+PricingCategory.create(name: "Revised Estimate")
+PricingCategory.create(name: "Final Estimate")

@@ -81,7 +81,7 @@ class Job < ActiveRecord::Base
   def self.value_of_jobs(jobs)
     value = 0
     jobs.each do |job|
-      if job.pricings.last
+      if job.pricings.last && job.pricings.last.price
         value += job.pricings.last.price
       end
     end
