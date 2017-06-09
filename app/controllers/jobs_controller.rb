@@ -2,6 +2,7 @@ class JobsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_job, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
   before_action :verify_user, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
+
   # before_action :authorize_policy
 
   # GET /jobs
@@ -14,6 +15,15 @@ class JobsController < ApplicationController
       @jobs = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC')
       @total_count = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC').total_count
       @all_results = @search.result
+
+      @total_pending_count =  @search.result.where(status_id: 1).count
+      @total_pending_value = Job.value_of_jobs(@search.result.where(status_id: 1))
+      @total_active_count =  @search.result.where(status_id: 2).count
+      @total_active_value = Job.value_of_jobs(@search.result.where(status_id: 2))
+      @total_invoiced_count =  @search.result.where(status_id: 3).count
+      @total_invoiced_value = Job.value_of_jobs(@search.result.where(status_id: 3))
+      @total_dead_count =  @search.result.where(status_id: 4).count
+      @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 4))
 
       respond_to do |format|
         format.html

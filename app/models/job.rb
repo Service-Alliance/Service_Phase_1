@@ -31,7 +31,7 @@ class Job < ActiveRecord::Base
   belongs_to :referral_employee, foreign_key: :referral_employee_id, class_name: 'User'
   has_many :subscriptions
   has_one :inspection_checklist
-
+    has_many :pricings
 
   # Activity Tracking activated
   include PublicActivity::Model
@@ -76,6 +76,16 @@ class Job < ActiveRecord::Base
     else
       return 1
     end
+  end
+
+  def self.value_of_jobs(jobs)
+    value = 0
+    jobs.each do |job|
+      if job.pricings.last
+        value += job.pricings.last.price
+      end
+    end
+    return value
   end
 
   def progress
