@@ -28,7 +28,7 @@
                     <tr>
                         <th>Job Recieved</th>
                         <th>Loss Type</th>
-                          <th>Sales Rep</th>
+                        <th>Sales Rep</th>
                         <th>Customer Name</th>
                         <th>Street Address</th>
                         <th>City</th>
@@ -54,7 +54,12 @@
                     <tr>
                         <td><%= job.losses.try(:first).try(:fnol_recieved).try(:strftime, "%D %I:%M %p") %></td>
                         <td><%= job.try(:losses).try(:first).try(:loss_type).try(:name) %></td>
-                        <td><%= job.try(:customer).try(:owner).try(:full_name) %></td>
+                        <td>
+                          <%= job.try(:subscriptions).try(:first).try(:user).try(:full_name) %>
+                          <% if job.try(:subscriptions).count > 1 %>
+                            (+ <%= job.try(:subscriptions).count %>)
+                          <% end %>
+                        </td>
                         <td><%= job.try(:customer).try(:full_name) %></td>
                         <td><%= job.try(:customer).try(:address).try(:address_1) %>
                             <%= job.try(:customer).try(:address).try(:address_2) %></td>

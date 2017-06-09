@@ -111,7 +111,9 @@ class CustomersController < ApplicationController
         @customer.address_id = @address.id
       end
 
+
       if @customer.update(customer_params)
+        @customer.add_owner_as_subscriber
         unless phone_params.empty?
           @customer.phones.destroy_all
           phone_count = phone_params["type_ids"].count

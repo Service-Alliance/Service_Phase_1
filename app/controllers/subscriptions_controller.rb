@@ -30,7 +30,7 @@ class SubscriptionsController < ApplicationController
 
     respond_to do |format|
       if @subscription.save
-        format.html { redirect_to job_path(@job), notice: 'Subscription was successfully created.' }
+        format.html { redirect_to job_path(@job), notice: 'Sales Rep was successfully added.' }
         format.json { render :show, status: :created, location: @subscription }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class SubscriptionsController < ApplicationController
   def update
     respond_to do |format|
       if @subscription.update(subscription_params)
-        format.html { redirect_to job_subscription_path(@job, @subscription), notice: 'Vendor category was successfully updated.' }
+        format.html { redirect_to job_subscription_path(@job, @subscription), notice: 'Sales Rep category was successfully updated.' }
         format.json { render :show, status: :ok, location: @subscription }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class SubscriptionsController < ApplicationController
   def destroy
     @subscription.destroy
     respond_to do |format|
-      format.html { redirect_to job_subscriptions_path(@job), notice: 'Vendor category was successfully destroyed.' }
+      format.html { redirect_to job_subscriptions_path(@job), notice: 'Sales Rep was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

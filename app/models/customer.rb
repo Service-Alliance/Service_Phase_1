@@ -124,6 +124,14 @@ class Customer < ActiveRecord::Base
     @job.save
   end
 
+  def add_owner_as_subscriber
+    if self.owner_id
+    self.jobs.each do |job|
+      Subscription.find_or_create_by(user_id: self.owner_id, job_id: job.id)
+    end
+  end
+  end
+
   def send_to_sharpspring(franchise)
     p @json = {
       "method":"createLeads",
