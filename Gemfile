@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 # gem 'will_paginate', '~> 3.1.0'
-
+gem 'newrelic_rpm'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'pundit'
 gem 'devise'
