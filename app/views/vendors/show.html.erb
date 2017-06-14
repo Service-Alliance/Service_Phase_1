@@ -107,7 +107,12 @@
       <div class="panel-body">
         <div class="item">
           <% @assignments.each do |assignment| %>
-          <%= link_to assignment.job_id, job_path(assignment.job_id) %> <br />
+          <% @job =  Job.find_by(id: assignment.job_id) %>
+          <% if @job && @job.name != nil %>
+            <%= link_to @job.name, job_path(assignment.job_id) %>
+          <% else %>
+            <%= link_to assignment.job_id, job_path(assignment.job_id) %> <br />
+          <% end %>
           <% end %>
         </div>
       </div>

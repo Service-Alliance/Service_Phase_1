@@ -117,7 +117,7 @@
 							data-sort-order="desc">
 							<thead>
 								<tr>
-									<th data-field="id" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
+									<th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job Name</th>
 									<th data-field="job_status.name" data-sortable="true">Status</th>
 									<th data-field="customer.last_name" data-sortable="true">Last Name</th>
 									<th data-field="customer.first_name" data-sortable="true">First Name</th>
@@ -210,7 +210,7 @@
 							data-sort-order="desc">
 							<thead>
 								<tr>
-									<th data-field="id" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
+									<th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job Name</th>
 									<th data-field="job_status.name" data-sortable="true">Status</th>
 									<th data-field="customer.last_name" data-sortable="true">Last Name</th>
 									<th data-field="customer.first_name" data-sortable="true">First Name</th>
@@ -245,7 +245,7 @@
 							<thead>
 								<tr>
 									<th data-field="id" data-formatter="WorkOrderLinkFormatter" data-sort-order='desc' data-sortable="true">Word Order ID</th>
-									<th data-field="job_id" data-formatter="JobLinkFormatter" data-sortable="true">Job ID</th>
+									<th data-field="name" data-formatter="JobLinkFormatter" data-sortable="true">Job Name</th>
 									<th data-field="job_id" data-formatter="WorkOrderAcknowledge" data-sortable="true">Acknowledge Job</th>
 									<th data-field="created_at"  data-sortable="true">Created At<th>
 								</tr>
@@ -387,7 +387,13 @@
 
 <script>
 function LinkFormatter(value, row, index) {
-	return "<a href='jobs/" + row.id + "'>" + value + "</a>";
+	var val = ""
+	if (value) {
+		val = value
+	} else {
+		val = row.id
+	}
+	return "<a href='jobs/" + row.id + "'>" + val + "</a>";
 }
 function UserLinkFormatter(value, row, index) {
 	return "<a href='users/" + row.id + "'>" + value + "</a>";
@@ -396,7 +402,13 @@ function WorkOrderLinkFormatter(value, row, index) {
 	return "<a href='jobs/" + row.job_id + "/work_orders/" + row.id + "'>" + value + "</a>";
 }
 function JobLinkFormatter(value, row, index) {
-	return "<a href='jobs/" + row.job_id +"'>" + value + "</a>";
+	var val = ""
+	if (value) {
+		val = value
+	} else {
+		val = row.id
+	}
+	return "<a href='jobs/" + row.job_id +"'>" + val + "</a>";
 }
 function WorkOrderAcknowledge(value, row, index) {
 	if (row.acknowledgement == true) {

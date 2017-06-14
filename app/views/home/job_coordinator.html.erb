@@ -220,7 +220,7 @@
 						data-sort-order="desc">
 						<thead>
 							<tr>
-								<th data-field="id" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
+								<th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job Name</th>
 								<th data-field="job_status.name" data-sortable="true">Status</th>
 								<th data-field="customer.last_name" data-sortable="true">Last Name</th>
 								<th data-field="customer.first_name" data-sortable="true">First Name</th>
@@ -254,7 +254,7 @@
 						data-sort-order="desc">
 						<thead>
 							<tr>
-								<th data-field="id" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
+								<th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job Name</th>
 								<th data-field="job_status.name" data-sortable="true">Status</th>
 								<th data-field="customer.last_name" data-sortable="true">Last Name</th>
 								<th data-field="customer.first_name" data-sortable="true">First Name</th>
@@ -279,7 +279,11 @@
 			%>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Job ID: <%= link_to job.id, job_path(job) %>
+				<% if job.name != nil %>
+					Job Name: <%= link_to job.name, job_path(job) %>
+				<% else %>
+					Job ID: <%= link_to job.id, job_path(job) %>
+				<% end %>
 			</div>
 			<div class="panel-body">
 				Progress:
@@ -336,6 +340,12 @@
 </div>
 <script>
 function LinkFormatter(value, row, index) {
-	return "<a href='jobs/" + row.id + "'>" + value + "</a>";
+	var val = ""
+	if (value) {
+		val = value
+	} else {
+		val = row.id
+	}
+	return "<a href='jobs/" + row.id + "'>" + val + "</a>";
 }
 </script>
