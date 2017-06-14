@@ -57,7 +57,7 @@
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <span class="bold">Job Start:</span><br>
-                                      <%= work_order.job_start %>
+                                      <%= work_order.job_start.try(:strftime, "%A, %B %d, %Y %l:%M:%S %p") %>
                                   </div>
                               </div>
                               <div class="col-sm-12">
@@ -105,7 +105,7 @@
                               <div class="col-sm-3">
                                   <div class="form-group">
                                       <span class="bold">Approx Time On Loss:</span><br>
-                                      <%= work_order.approx_time_on_loss %>
+                                      <%= work_order.approx_time_on_loss.try(:strftime, "%l:%M:%S %p") %>
                                   </div>
                               </div>
                               <div class="col-sm-12">
