@@ -65,6 +65,7 @@ Rails.application.routes.draw do
 
   resources :jobs do
     post 'manager-assignment' => 'jobs#manager_assignment', as: :manager_assignment
+    delete 'manager-assignment/:id' => 'jobs#destroy_manager_assignment', as: :destroy_manager_assignment
     post 'coordinator-assignment' => 'jobs#coordinator_assignment', as: :coordinator_assignment
     post 'caller-assignment' => 'jobs#caller_assignment', as: :caller_assignment
     get 'notes' => 'notes#job_notes'

@@ -363,6 +363,17 @@ class JobsController < ApplicationController
     end
   end
 
+  def destroy_manager_assignment
+    @job = Job.find(params[:job_id])
+    @manager = JobManager.find(params[:id])
+
+    if @manager.destroy
+      return redirect_to @job, notice: 'Job Manager Removed.'
+    else
+      return redirect_to @job, notice: 'Error Removing Manager.'
+    end
+  end
+
   def customer
     @job = Job.find(params[:job_id])
     @customer = Customer.find(params[:id])

@@ -141,45 +141,4 @@ class Job < ActiveRecord::Base
     return unique_list
   end
 
-
-
 end
-
-# {
-#   "name":"Connor",
-#   "description":"",
-#   "emailMessage":"",
-#   "autocomplete":true,
-#
-#    "roles": [
-#     {
-#       "id": "e7901eca-87bb-4891-9f93-51a8e44258c4",
-#       "index": 0,
-#       "type": "SIGNER",
-#       "signers": [
-#         {
-#           "email": "creaumond@gmail.com",
-#           "firstName": "Connor",
-#           "lastName": "Reaumond"
-#         }
-#       ],
-#       "name": "signer1"
-#     }
-#   ],
-#
-#   "settings": {
-#     "ceremony": {
-#       "inPerson":true
-#     }
-#   },
-#   "type":"PACKAGE",
-#   "due":nil,
-#   "language":"en",
-#   "status":"SENT"
-# }
-
-# Create new document
-# HTTParty.post("https://sandbox.esignlive.com/api/packages/amUqRrobcTQo3uoRTIoVA7Y1M34=/clone", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json', "Authorization" => "Basic bzJpaUlRcGNjaUFBOnpjQ1FBMjlsQ3UwVw=="}, body: thing)
-
-# Download document
-# HTTParty.get("https://sandbox.esignlive.com/api/packages/6x2XQiVW44ymcpHyLzpG9SBRp_Q=/documents/ad08384325cf474bf4c4075e63e38399aec3d93836c1030e/pdf", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json', "Authorization" => "Basic bzJpaUlRcGNjaUFBOnpjQ1FBMjlsQ3UwVw=="})
