@@ -42,13 +42,18 @@ class WorkOrdersController < ApplicationController
             @user = User.find(user)
             UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
           end
-
-          @job.pipeline_status_id = 8
-          if @job.status_id == 1
-            @job.status_id = 2
-          end
-          @job.save
         end
+
+        @vendor = Vendor.find_by(id: work_order_send_to_params[:send_to_vendor])
+        @vendor.customers.each do |contact|
+            UserMailer.work_order_notification(contact, @job, @work_order).deliver_now
+        end
+
+        @job.pipeline_status_id = 8
+        if @job.status_id == 1
+          @job.status_id = 2
+        end
+        @job.save
         format.html { redirect_to job_path(@job), notice: 'Work Order was successfully created.' }
         format.json { render :show, status: :created, location: @work_order }
       else
@@ -117,6 +122,6 @@ class WorkOrdersController < ApplicationController
     end
 
     def work_order_send_to_params
-      params.require(:work_order_send_to).permit(send_to:[])
+      params.require(:work_order_send_to).permit(:send_to_vendor, send_to:[])
     end
 end

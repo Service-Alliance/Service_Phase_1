@@ -120,6 +120,24 @@
         <%= paginate @assignments %>
       </div>
     </div>
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Associated Contacts
+      </div>
+      <div class="panel-body">
+        <div class="item">
+          <% @customers.each do |customer| %>
+          <% @customer =  Customer.find_by(id: customer.id) %>
+            <%= link_to @customer.full_name, customer_path(customer.id) %>
+
+          <% end %>
+        </div>
+      </div>
+      <div class="panel-footer">
+
+      </div>
+    </div>
   </div>
 
   <div class="col-sm-8">
@@ -245,6 +263,7 @@
       <% end %>
       <% end %>
     </div>
+
 
   </div>
   <script>
