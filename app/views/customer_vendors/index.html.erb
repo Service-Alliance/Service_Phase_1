@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Customer Vendors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Vendor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customer_vendors.each do |customer_vendor| %>
+      <tr>
+        <td><%= customer_vendor.customer_id %></td>
+        <td><%= customer_vendor.vendor_id %></td>
+        <td><%= link_to 'Show', customer_vendor %></td>
+        <td><%= link_to 'Edit', edit_customer_vendor_path(customer_vendor) %></td>
+        <td><%= link_to 'Destroy', customer_vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Customer vendor', new_customer_vendor_path %>

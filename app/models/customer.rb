@@ -11,6 +11,10 @@ class Customer < ActiveRecord::Base
   has_many :customer_companies
   has_many :companies, through: :customer_companies
   accepts_nested_attributes_for :customer_companies
+  has_many :customer_vendors
+  has_many :vendors, through: :customer_vendors
+  accepts_nested_attributes_for :customer_vendors
+
   # validates :email, presence: true, format: {
   # with: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/i,
   # message: 'Invalid email format.'

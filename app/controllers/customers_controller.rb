@@ -222,7 +222,7 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :job_id, :owner_id, :company_name, uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content], customer_companies_attributes: [:company_id] )
+      params.require(:customer).permit(:first_name, :last_name, :email, :job_id, :owner_id, :company_name, uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content], customer_companies_attributes: [:company_id], vendor_companies_attributes: [:company_id] )
     end
 
     def job_param

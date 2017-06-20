@@ -31,7 +31,7 @@ class Job < ActiveRecord::Base
   belongs_to :referral_employee, foreign_key: :referral_employee_id, class_name: 'User'
   has_many :subscriptions
   has_one :inspection_checklist
-    has_many :pricings
+  has_many :pricings
 
   # Activity Tracking activated
   include PublicActivity::Model

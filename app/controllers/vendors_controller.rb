@@ -12,6 +12,7 @@ class VendorsController < ApplicationController
   def show
     @w9 = @vendor.vendor_uploads.where(vendor_upload_type_id: 1).sort_by(&:created_at).last
     @assignments = VendorAssignment.where(vendor_id: @vendor.id).page(params[:page]).order('created_at DESC')
+    @customers = @vendor.customers
   end
 
   # GET /vendors/new
