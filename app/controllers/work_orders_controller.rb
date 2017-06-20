@@ -46,7 +46,7 @@ class WorkOrdersController < ApplicationController
 
         @vendor = Vendor.find_by(id: work_order_send_to_params[:send_to_vendor])
         @vendor.customers.each do |contact|
-            UserMailer.work_order_notification(contact, @job, @work_order).deliver_now
+            UserMailer.vendor_work_order_notification(contact, @job, @work_order).deliver_now
         end
 
         @job.pipeline_status_id = 8

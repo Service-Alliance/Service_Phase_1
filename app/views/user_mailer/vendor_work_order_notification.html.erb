@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @customer.full_name %>, you have been sent a work order.</h1>
+  
+    <p>
+      To: <%= @work_order.to %><br />
+      Name: <%= @work_order.name %><br />
+      Date: <%= @work_order.date %><br />
+      Typed By: <%= @work_order.typed_by %><br />
+      Job Start: <%= @work_order.job_start %><br />
+      Job Name: <%= @work_order.job_name %><br />
+      Job Location: <%= @work_order.job_location %><br />
+      Telephone: <%= @work_order.telephone %><br />
+      Contact: <%= @work_order.contact %><br />
+      Crew: <%= @work_order.crew %><br />
+      Time On Loss: <%= @work_order.approx_time_on_loss %><br />
+      Required: <%= @work_order.required %><br />
+      Franchise Location: <%= @work_order.franchise_location %><br />
+      Scope of Work: <%= @work_order.scope_of_work %><br />
+      Job Manager Contact Info: <%= @work_order.job_manager_contact_info %><br />
+    </p>
+  </body>
+</html>

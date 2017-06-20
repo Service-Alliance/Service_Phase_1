@@ -444,7 +444,7 @@
               <div class="field">
                 <%= f.fields_for :customer_vendors, @customer.customer_vendors.build do |g| %>
                   <%= g.label :vendor_id %><br>
-                  <%= g.collection_select :vendor_id, Vendor.all, :id, :name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
+                  <%= g.collection_select :vendor_id, Vendor.all, :id, :name, {:prompt => 'Select a Vendor'},  { class: 'form-control'} %>
                 <% end %>
               </div>
 
