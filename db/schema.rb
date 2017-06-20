@@ -432,7 +432,7 @@ ActiveRecord::Schema.define(version: 20170620020126) do
     t.boolean  "contract_sent",              default: false
     t.date     "contract_sent_date"
     t.integer  "coordinator_id"
-    t.integer  "pipeline_status_id"
+    t.integer  "pipeline_status_id",         default: 1
     t.text     "work_center_link"
     t.text     "xact_link"
   end

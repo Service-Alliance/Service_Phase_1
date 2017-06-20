@@ -11,6 +11,7 @@
                 <div class="col-xs-12">
                   <h2>SERVPRO of
                     <%= @job.try(:franchise).try(:name) %></h2>
+                    <h3><%= @job.try(:name) %></h3>
                 </div>
                 <div class="col-xs-4 margin-top-2">
                   <span class="bold">STATUS:</span>
@@ -29,7 +30,7 @@
               <div class="row margin-top-4">
                 <div class="col-xs-4">
                   <span class="bold">Date Recieved:
-                  </span><%= @job.created_at.strftime("%D") %>
+                  </span><%= @job.try(:losses).try(:first).try(:fnol_recieved).try(:strftime, "%A, %B %d, %Y %l:%M:%S %p") %>
                 </div>
                 <div class="col-xs-4">
                   <span class="bold">Taken By:
@@ -38,8 +39,13 @@
                   </span><%= @job.try(:job_coordinator).try(:full_name) %>
                 </div>
                 <div class="col-xs-4">
+                  <span class="bold">Taken On:
+                  </span><%= @job.created_at.try(:strftime, "%A, %B %d, %Y %l:%M:%S %p") %>
+                </div>
+                <div class="col-xs-4">
                   <span class="bold">Time:
-                  </span><%= @job.created_at.strftime("%I:%M %p") %>
+
+                  </span><%= @job.try(:losses).try(:first).try(:loss_occurred).try(:strftime, "%I:%M %p") %>
                 </div>
                 <div class="col-xs-12">
                   <span class="bold">Called In By:

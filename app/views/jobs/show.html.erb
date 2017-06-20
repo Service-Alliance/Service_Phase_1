@@ -9,7 +9,7 @@
             <% if notice %>
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
-            <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> <strong>Job Status:</strong> <%= @job.job_status.name %> </div>
+            <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> <strong>Job Status:</strong> <%= @job.job_status.try(:name) %> </div>
             <% unless @job.coordinator_id %>
               <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <strong>Job Coordinator</strong> has not been assigned</div>
             <% end %>
@@ -655,6 +655,12 @@
                                   <%= f.label :description %><br>
                                   <%= f.text_field :description, class: "form-control" %>
                                 </div>
+                                <%= f.fields_for :uploads, @pricing.uploads.build do |g|%>
+                                  <div class="col-sm-12">
+                                      <%= g.label :upload %><br>
+                                      <%= g.file_field :uploads, multiple: true %>
+                                  </div>
+                                <% end %>
                                 <div class="col-xs-12 margin-top-2">
                                   <%= f.submit  class: "btn btn-primary" %>
                                 </div>
@@ -851,6 +857,7 @@
                                     Will we be bringing in another Vendor?: <%= checklist.additional_vendor ? "Yes" : "No" %><br />
                                     Verify all the basic information, and update the customer information if necessary?: <%= checklist.verify_information  ? "Yes" : "No"%><br />
                                     Does the job have potential for construction?:<%= checklist.potential_construction ? "Yes" : "No" %><br />
+
                                 </div>
                             </div>
                         </div>
@@ -875,11 +882,18 @@
                                     <span class="bold">Category:</span> <%= pricing.try(:pricing_category).try(:name) %> <br />
                                     <span class="bold">Description:</span> <%= pricing.description%> <br />
                                     <span class="bold">Job Status (At time of Pricing):</span> <%= pricing.job_status.name %><br />
+                                    <% unless pricing.uploads.empty? %>
+                                    <% pricing.uploads.first.uploads.each_with_index do |file, index| %>
+                                      <%= pricing.uploads.first.uploads[index].file.filename  %> -
+                                      <a target="_blank" href="<%= file.try(:url) %>">View/Download</a><br />
+                                    <% end %>
+                                    <% end %>
                                     <% if @job.pricings.last == pricing %>
                                     <% unless pricing.try(:pricing_category).try(:name) == "Final Estimate" %>
                                     <%= link_to  "Move Pricing to Next Cateogry", move_to_next_path(job_id: @job, pricing_id: pricing.id),class:"btn btn-primary" %>
                                     <% end %>
                                     <% end %>
+
 
                                 </div>
 

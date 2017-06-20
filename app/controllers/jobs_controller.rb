@@ -34,9 +34,8 @@ class JobsController < ApplicationController
 
   def list
     @count = Job.where.not(status_id: nil).count
-
-      @jobs = Job.where.not(status_id: nil).limit(200)
-      render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
+    @jobs = Job.where.not(status_id: nil).limit(100)
+    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
                                            :job_loss_type, :insurance_details,
                                            :job_detail, :customer])
   end
@@ -57,7 +56,7 @@ class JobsController < ApplicationController
   end
 
   def no_activity
-    @jobs = Job.where('last_action < ? AND status_id = ?', 7.days.ago, 1)
+    @jobs = Job.where('last_action < ? AND status_id = ?', 7.days.ago, 1).limit(75)
     render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
                                          :job_loss_type, :insurance_details,
                                          :job_detail, :customer])
@@ -243,7 +242,7 @@ class JobsController < ApplicationController
             Notification.create(notify_type: notify_type.id,actor_id: current_user.id, target_id: user.id, job_id: @job.id, notify_text: "Call Rep #{current_user.full_name} created a job.")
           end
         end
-        
+
 
         format.html do
           if params[:commit] == 'Save and Move to Job Loss'

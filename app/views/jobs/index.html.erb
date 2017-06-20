@@ -112,7 +112,7 @@
                         <td>
                           <%= job.try(:subscriptions).try(:first).try(:user).try(:full_name) %>
                           <% if job.try(:subscriptions).count > 1 %>
-                            (+ <%= job.try(:subscriptions).count %>)
+                            (+ <%= job.try(:subscriptions).count - 1%>)
                           <% end %>
                         </td>
                         <td><%= job.try(:customer).try(:full_name) %></td>
@@ -159,7 +159,7 @@
             <%= search_form_for @search do |f| %>
             <%= f.label :losses_fnol_recieved_gteq, "Date Range" %><br/>
             <%= f.search_field :losses_fnol_recieved_gteq, {class: "form-control datePicker"} %>
-            
+
             <% f.label :losses_fnol_recieved_gteq, "End Date" %>
             <%= f.search_field :losses_fnol_recieved_lteq, {class: "form-control datePicker"} %>
 

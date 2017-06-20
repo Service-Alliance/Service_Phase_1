@@ -110,6 +110,7 @@ class JobDetailsController < ApplicationController
         @job_detail.billing_address_id = @billing_address.id
         @job_detail.save
         end
+      @job_detail.update(job_detail_params)
       @job.update_last_action
       @job_detail.save
 
