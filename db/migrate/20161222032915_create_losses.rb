@@ -1,9 +1,9 @@
 class CreateLosses < ActiveRecord::Migration
   def change
     create_table :losses do |t|
-      t.string :recieved_by
+      t.string :received_by
       t.datetime :loss_occurred
-      t.datetime :fnol_recieved
+      t.datetime :fnol_received
       t.date :customer_called
       t.integer :job_id
       t.integer :loss_type_id

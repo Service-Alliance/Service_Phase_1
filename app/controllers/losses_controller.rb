@@ -26,6 +26,10 @@ class LossesController < ApplicationController
   def create
     @loss = Loss.new(loss_params)
     @loss.job_id = @job.id
+    if loss_params['fnol_received']
+      @job.fnol_received = loss_params['fnol_received']
+      @job.save
+    end
 
     respond_to do |format|
       if @loss.save
@@ -42,6 +46,10 @@ class LossesController < ApplicationController
   # PATCH/PUT /losses/1
   # PATCH/PUT /losses/1.json
   def update
+    if loss_params['fnol_received']
+      @job.fnol_received = loss_params['fnol_received']
+      @job.save
+    end
     respond_to do |format|
       if @loss.update(loss_params)
         @job.update_last_action
@@ -81,6 +89,6 @@ class LossesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loss_params
-      params.require(:loss).permit(:recieved_by, :loss_occurred, :fnol_recieved, :customer_called, :loss_type_id, :loss_cause_id, :standing_water_id, :water_available_id, :electricity_available_id, :source_off_id, :visible_mold_id, :affected_square_footage, :cleaning_type, :previous_water_damage_id, :source_cause, :notes)
+      params.require(:loss).permit(:received_by, :loss_occurred, :fnol_received, :customer_called, :loss_type_id, :loss_cause_id, :standing_water_id, :water_available_id, :electricity_available_id, :source_off_id, :visible_mold_id, :affected_square_footage, :cleaning_type, :previous_water_damage_id, :source_cause, :notes)
     end
 end

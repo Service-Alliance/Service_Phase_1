@@ -9,7 +9,7 @@
             <% if notice %>
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
-            <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> <strong>Job Status:</strong> <%= @job.job_status.try(:name) %> </div>
+            <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> <strong>Job Status:</strong> <%= @job.job_status.try(:name) %>, <strong>Franchise:</strong> <%= @job.franchise.try(:name) %>, <strong>Name:</strong> <%= @job.name %>, <strong>Latest Estimate:</strong> <%= @job.pricings.try(:last).try(:price) %> </div>
             <% unless @job.coordinator_id %>
               <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <strong>Job Coordinator</strong> has not been assigned</div>
             <% end %>
@@ -34,29 +34,35 @@
                 </button>
 
 
-
+                <% if @job.customer %>
                 <% if @job.franchise && @job.customer.sharp_spring_id == nil && current_user.admin? %>
                   <%= link_to  "Send Customer To Sharpspring", customer_send_to_sharpspring_path(@job.customer, @job), method: :post,class:"btn btn-primary" %>
                 <% end %>
+                <% end %>
                 <div class="progress margin-top-2">
-                   <div class="progress-bar progress-bar-success" role="progressbar" style="width:20%">
+                   <div class="progress-bar progress-bar-success tooltipped" role="progressbar" style="width:20%">
                      Job Entered
+                     <span data-ttip="<%= (Time.now - @job.created_at).to_i / (24 * 60 * 60) %> Days Ago"></span>
                    </div>
                    <% unless @job.job_managers.empty? %>
-                   <div class="progress-bar progress-bar-warning" role="progressbar" style="width:20%">
+                   <div class="progress-bar progress-bar-warning tooltipped" role="progressbar" style="width:20%">
                      Project Manager Assigned
+                     <span data-ttip="<%= (Time.now - @job.job_managers.first.created_at).to_i / (24 * 60 * 60) %> Days Ago"></span>
                    </div>
                    <% unless @job.schedulers.where(scheduler_event_type_id: 5).empty? %>
-                   <div class="progress-bar progress-bar-primary" role="progressbar" style="width:20%">
+                   <div class="progress-bar progress-bar-primary tooltipped" role="progressbar" style="width:20%">
                      Project Manager Visit Scheduled
+                     <span data-ttip="<%= (Time.now - @job.schedulers.first.created_at).to_i / (24 * 60 * 60) %> Days Ago"></span>
                    </div>
                    <% if @job.schedulers.where(scheduler_event_type_id: 5).first.event_date.past? %>
-                   <div class="progress-bar progress-bar-danger" role="progressbar" style="width:20%">
+                   <div class="progress-bar progress-bar-danger tooltipped" role="progressbar" style="width:20%">
                      Project Manager Visited
+                     <span data-ttip="<%= (Time.now - @job.schedulers.where(scheduler_event_type_id: 5).first.created_at).to_i / (24 * 60 * 60) %> Days Ago"></span>
                    </div>
                    <% if @job.inspection_checklist %>
-                   <div class="progress-bar progress-bar-info" role="progressbar" style="width:20%">
+                   <div class="progress-bar progress-bar-info tooltipped" role="progressbar" style="width:20%">
                      Manager Checklist Created
+                     <span data-ttip="<%= (Time.now - @job.inspection_checklist.created_at).to_i / (24 * 60 * 60) %> Days Ago"></span>
                    </div>
                    <% end %>
                    <% end %>
@@ -443,7 +449,7 @@
                               <div class="col-sm-6">
                                   <div class="form-group">
                                       <%= f.label :typed_by %><br>
-                                      <%= f.text_field :typed_by, class: "form-control", value: current_user.full_name %>
+                                      <%= f.text_field :typed_by, class: "form-control", value: current_user.try(:full_name) %>
                                   </div>
                               </div>
                               <div class="col-xs-12">
@@ -890,7 +896,7 @@
                                     <% end %>
                                     <% if @job.pricings.last == pricing %>
                                     <% unless pricing.try(:pricing_category).try(:name) == "Final Estimate" %>
-                                    <%= link_to  "Move Pricing to Next Cateogry", move_to_next_path(job_id: @job, pricing_id: pricing.id),class:"btn btn-primary" %>
+                                    <%= link_to  "Move Pricing to Next Category", move_to_next_path(job_id: @job, pricing_id: pricing.id),class:"btn btn-primary" %>
                                     <% end %>
                                     <% end %>
 

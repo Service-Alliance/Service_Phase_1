@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  recieved_by: MyString
+  received_by: MyString
   loss_occurred: 2016-12-21 21:29:15
-  fnol_recieved: 2016-12-21 21:29:15
+  fnol_received: 2016-12-21 21:29:15
   customer_called: 2016-12-21
   loss_type_id: 1
   loss_cause_id: 1
@@ -14,9 +14,9 @@ one:
   visible_mold_id: 1
 
 two:
-  recieved_by: MyString
+  received_by: MyString
   loss_occurred: 2016-12-21 21:29:15
-  fnol_recieved: 2016-12-21 21:29:15
+  fnol_received: 2016-12-21 21:29:15
   customer_called: 2016-12-21
   loss_type_id: 1
   loss_cause_id: 1

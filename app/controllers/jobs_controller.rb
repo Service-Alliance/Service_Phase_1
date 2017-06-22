@@ -9,11 +9,11 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     if params[:user_id]
-      @jobs = Job.where(entered_by_id: params[:user_id]).page(params[:page]).order('created_at DESC')
+      @jobs = Job.where(entered_by_id: params[:user_id]).page(params[:page]).order('fnol_received DESC')
     else
-      @search = Job.where.not(status_id: nil).order('created_at DESC').search(params[:q])
-      @jobs = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC')
-      @total_count = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC').total_count
+      @search = Job.where.not(status_id: nil).order('fnol_received DESC').search(params[:q])
+      @jobs = @search.result.includes(:customer_address).page(params[:page]).order('fnol_received DESC')
+      @total_count = @search.result.includes(:customer_address).page(params[:page]).order('fnol_received DESC').total_count
       @all_results = @search.result
 
       @total_pending_count =  @search.result.where(status_id: 1).count
@@ -24,6 +24,8 @@ class JobsController < ApplicationController
       @total_invoiced_value = Job.value_of_jobs(@search.result.where(status_id: 3))
       @total_dead_count =  @search.result.where(status_id: 4).count
       @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 4))
+      @total_dead_count =  @search.result.where(status_id: 5).count
+      @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 5))
 
       respond_to do |format|
         format.html
@@ -67,7 +69,7 @@ class JobsController < ApplicationController
   def show
     @property = Property.find_by(job_id: @job)
     @phone = Call.find_by(job_id: @job.id)
-    @loss = Loss.find_by(job_id: @job.id, fnol_recieved: Time.now)
+    @loss = Loss.find_by(job_id: @job.id, fnol_received: Time.now)
     @caller = Caller.find_by(job_id: @job.id)
     @address = @caller.try(:address)
     @customer = @job.customer

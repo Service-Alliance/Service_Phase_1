@@ -103,7 +103,7 @@
                   <% unless @job.vendor_assignments.empty? %>
                   <div class="panel-body">
                     <% @job.vendor_assignments.each do |vendor| %>
-                    Vendor: <%= vendor.vendor.name %> <br />
+                    Vendor: <%= vendor.vendor.try(:name) %> <br />
                     <%= link_to "View", vendor_path(vendor.vendor_id) %>
                     <% end %>
                   </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620020126) do
+ActiveRecord::Schema.define(version: 20170622004158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -435,6 +435,7 @@ ActiveRecord::Schema.define(version: 20170620020126) do
     t.integer  "pipeline_status_id",         default: 1
     t.text     "work_center_link"
     t.text     "xact_link"
+    t.datetime "fnol_received"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -464,9 +465,9 @@ ActiveRecord::Schema.define(version: 20170620020126) do
   end
 
   create_table "losses", force: :cascade do |t|
-    t.string   "recieved_by"
+    t.string   "received_by"
     t.datetime "loss_occurred"
-    t.datetime "fnol_recieved"
+    t.datetime "fnol_received"
     t.date     "customer_called"
     t.integer  "job_id"
     t.integer  "loss_type_id"

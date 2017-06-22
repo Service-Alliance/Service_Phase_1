@@ -49,7 +49,7 @@
                 <tbody>
                     <% @jobs.each do |job| %>
                     <tr>
-                        <td><%= job.losses.try(:first).try(:fnol_recieved).try(:strftime, "%D %I:%M %p") %></td>
+                        <td><%= job.losses.try(:first).try(:fnol_received).try(:strftime, "%D %I:%M %p") %></td>
                         <td><%= job.try(:losses).try(:first).try(:loss_type).try(:name) %></td>
                         <td><%= job.try(:customer).try(:full_name) %></td>
                         <td><%= job.try(:customer).try(:address).try(:address_1) %>
@@ -82,11 +82,11 @@
         </div>
         <div class="col-xs-2 margin-top-5">
             <%= search_form_for @search do |f| %>
-            <%= f.label :losses_fnol_recieved_gteq, "Date Range" %><br/>
-            <%= f.search_field :losses_fnol_recieved_gteq, {class: "form-control datePicker"} %>
+            <%= f.label :losses_fnol_received_gteq, "Date Range" %><br/>
+            <%= f.search_field :losses_fnol_received_gteq, {class: "form-control datePicker"} %>
 
-            <% f.label :losses_fnol_recieved_gteq, "End Date" %>
-            <%= f.search_field :losses_fnol_recieved_lteq, {class: "form-control datePicker"} %>
+            <% f.label :losses_fnol_received_gteq, "End Date" %>
+            <%= f.search_field :losses_fnol_received_lteq, {class: "form-control datePicker"} %>
 
 
             <%= f.label :caller_full_name, "Caller Full Name" %><br/>

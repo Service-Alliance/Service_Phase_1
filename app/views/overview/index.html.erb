@@ -201,11 +201,11 @@
                             <% @job.losses.each do |loss| %>
                             <div class="columns">
                                 <ul>
-                                  <% if loss.try(:recieved_by) %>
+                                  <% if loss.try(:received_by) %>
                                     <li>
                                         <span class="identifier">Recieved By:
                                         </span>
-                                        <span class="value"><%= loss.try(:recieved_by) %></span>
+                                        <span class="value"><%= loss.try(:received_by) %></span>
                                     </li>
                                   <% end %>
                                   <% if loss.try(:email) %>
@@ -215,11 +215,11 @@
                                         <span class="value"><%= loss.try(:email) %></span>
                                     </li>
                                   <% end %>
-                                  <% if loss.try(:fnol_recieved) %>
+                                  <% if loss.try(:fnol_received) %>
                                     <li>
                                         <span class="identifier">FNOL Recieved:
                                         </span>
-                                        <span class="value"><%= loss.try(:fnol_recieved) %></span>
+                                        <span class="value"><%= loss.try(:fnol_received) %></span>
                                     </li>
                                     <% end %>
                                     <% if loss.try(:customer_called) %>
