@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622004158) do
+ActiveRecord::Schema.define(version: 20170622230136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -432,7 +432,7 @@ ActiveRecord::Schema.define(version: 20170622004158) do
     t.boolean  "contract_sent",              default: false
     t.date     "contract_sent_date"
     t.integer  "coordinator_id"
-    t.integer  "pipeline_status_id",         default: 1
+    t.integer  "pipeline_status_id"
     t.text     "work_center_link"
     t.text     "xact_link"
     t.datetime "fnol_received"
@@ -852,6 +852,7 @@ ActiveRecord::Schema.define(version: 20170622004158) do
     t.datetime "updated_at",                               null: false
     t.boolean  "acknowledgement",          default: false
     t.integer  "acknowledged_by_id"
+    t.integer  "vendor_id"
   end
 
 end

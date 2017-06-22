@@ -99,6 +99,21 @@
       </div>
     </div>
 
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Associated Contacts
+      </div>
+      <div class="panel-body">
+        <div class="item">
+          <% @customers.each do |customer| %>
+            <% @customer =  Customer.find_by(id: customer.id) %>
+            <%= link_to @customer.full_name, customer_path(customer.id) %>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel-footer">
+      </div>
+    </div>
 
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -123,20 +138,26 @@
 
     <div class="panel panel-primary">
       <div class="panel-heading">
-        Associated Contacts
+        Work Orders Sent(Total: <%= @work_orders.count %>)
       </div>
       <div class="panel-body">
         <div class="item">
-          <% @customers.each do |customer| %>
-            <% @customer =  Customer.find_by(id: customer.id) %>
-            <%= link_to @customer.full_name, customer_path(customer.id) %>
+          <% @work_orders.each do |work_orders| %>
+          <% @job =  Job.find_by(id: work_orders.job_id) %>
+          <% if @job && @job.name != nil %>
+            <%= link_to @job.name, job_work_order_path(@job.id, work_orders.id) %>
+          <% else %>
+            <%= link_to work_orders.job_id, job_work_order_path(@job.id, work_orders.id) %> <br />
+          <% end %>
           <% end %>
         </div>
       </div>
       <div class="panel-footer">
-
+        <%= paginate @assignments %>
       </div>
     </div>
+
+
   </div>
 
   <div class="col-sm-8">
