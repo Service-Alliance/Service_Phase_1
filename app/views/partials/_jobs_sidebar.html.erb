@@ -36,7 +36,7 @@
                   <div class="panel-body">
                       <ul>
                         <% @job.job_managers.each do |job_manager| %>
-                          <li><%= job_manager.job_manager.try(:full_name) %></li>
+                          <li><%= job_manager.job_manager.try(:full_name) %> <%= link_to "Remove", job_destroy_manager_assignment_path(@job.id, job_manager.id), method: :delete %></li>
                         <% end %>
                       </ul>
                   </div>
