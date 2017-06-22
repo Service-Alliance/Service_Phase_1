@@ -79,14 +79,14 @@
                   <% if @job.customer %>
                   <div class="panel-body">
 
-                    Name: <%= @job.customer.full_name %> <br />
-                    <% if @job.customer.try(:address).address_1 &&  @job.customer.try(:address).address_1 != ""  %>
-                    <%= @job.customer.try(:address).address_1 %> <br />
+                    Name: <%= @job.customer.try(:full_name) %> <br />
+                    <% if @job.customer.try(:address).try(:address_1) &&  @job.customer.try(:address).try(:address_1) != ""  %>
+                    <%= @job.customer.try(:address).try(:address_1) %> <br />
                     <% end %>
-                    <% if @job.customer.try(:address).address_2 &&  @job.customer.try(:address).address_2 != "" %>
-                    <%= @job.customer.try(:address).address_2  %> <br />
+                    <% if @job.customer.try(:address).try(:address_2) &&  @job.customer.try(:address).try(:address_2) != "" %>
+                    <%= @job.customer.try(:address).try(:address_2)  %> <br />
                     <% end %>
-                    <%= @job.customer.try(:address).city %>, <%= @job.customer.try(:address).try(:state).try(:name) %>  <%= @job.customer.try(:address).zip_code %>
+                    <%= @job.customer.try(:address).try(:city) %>, <%= @job.customer.try(:address).try(:state).try(:name) %>  <%= @job.customer.try(:address).try(:zip_code) %>
                     <%= link_to "View", @job.customer %>
                   </div>
                   <% end %>

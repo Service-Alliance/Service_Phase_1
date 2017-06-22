@@ -538,7 +538,7 @@
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <%= f.label :job_manager_contact_info %><br>
-                                      <%= f.text_field :job_manager_contact_info, class: "form-control", value: @job.job_managers.map{|manager| manager.job_manager.full_name} %>
+                                      <%= f.text_field :job_manager_contact_info, class: "form-control", value: @job.job_managers.map{|manager| manager.job_manager.try(:full_name)} %>
                                   </div>
                               </div>
                               <div class="col-xs-12">
