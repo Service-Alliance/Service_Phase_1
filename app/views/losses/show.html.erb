@@ -6,7 +6,7 @@
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
 
-            
+
             <div class="col-xs-12">
                 <h1 class="text-center">Job Loss Information:</h1>
                 <% @job.losses.each do |loss| %>
@@ -32,7 +32,7 @@
                                             <td><%= loss.loss_occurred %></td>
                                         </tr>
                                         <tr>
-                                            <td>FNOL Recieved</td>
+                                            <td>Job Recieved</td>
                                             <td><%= loss.fnol_received %></td>
                                         </tr>
                                         <tr>
