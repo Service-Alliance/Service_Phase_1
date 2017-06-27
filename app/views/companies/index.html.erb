@@ -24,7 +24,7 @@
                         <td><%= company.try(:address).try(:state).try(:name) %></td>
                         <td><%= company.try(:address).try(:county) %></td>
                         <td><%= link_to 'Show', company %></td>
-                        <% if current_user.admin?%>
+                        <% if current_user.admin? || current_user.owner? %>
                         <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                         <% end %>
 

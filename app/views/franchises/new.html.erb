@@ -1,4 +1,4 @@
-<% if current_user.admin? %>
+<% if current_user.admin? || current_user.owner? %>
 <h1>New Franchise</h1>
 
 <%= render 'form' %>

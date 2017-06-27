@@ -11,6 +11,7 @@ Role.create(name: "Call Rep")
 Role.create(name: 'Project Manager')
 Role.create(name: 'Crew Chief')
 Role.create(name: 'Technician')
+Role.create(name: 'Owner')
 
 csv_text = File.read("db/files/users.csv")
 csv = CSV.parse(csv_text, :headers => true)

@@ -60,7 +60,7 @@
               <%= f.collection_select :coordinator_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
           </div>
       </div>
-  <% if current_user.admin? %>
+  <% if current_user.admin? || current_user.owner? %>
       <div class="col-xs-4">
           <div class="form-group">
               <%= f.label :entered_by_id, "Entered By (Admin override)" %><br>

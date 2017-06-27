@@ -23,6 +23,9 @@ class User < ActiveRecord::Base
   def admin?
     self.role_id == 1 ? true : false
   end
+  def owner?
+    self.role_id == 6 ? true : false
+  end
   def job_coordinator?
     self.role_id == 2 ? true : false
   end
