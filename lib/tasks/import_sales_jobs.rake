@@ -16,7 +16,7 @@ namespace :import do
         email = hash["E-Mail"]
         loss_type = hash["Loss Type"]
         insurance = hash["Insurance Company"]
-        referral_type = hash["Referral Type"]
+        p referral_type = hash["Referral Type "]
         claim = hash["POLICY/CLAIM"]
         referral_note = hash["Referral Note"]
         adjuster_first_name = hash["adjuster_first_name"]
@@ -36,7 +36,9 @@ namespace :import do
         adjuster = Adjuster.find_by(first_name: adjuster_first_name, last_name: adjuster_last_name)
         found_state = State.find_by(name: state)
         found_insurance = InsuranceCompany.find_by(name: insurance)
-        found_referral_type = ReferralType.find_by(name: referral_type)
+        p "REFERRAL TYPE"
+        p found_referral_type = ReferralType.find_by(name: referral_type)
+        invoiced = JobStatus.find_by(name: "Invoiced")
 
         unless adjuster
           adjuster = Adjuster.create(first_name: adjuster_first_name, last_name: adjuster_last_name)
@@ -44,18 +46,20 @@ namespace :import do
 
         address = Address.create(city: city, state_id: found_state.try(:id), zip_code: zip)
 
-        caller = Caller.create(first_name: first_name, last_name: last_name, email: email, address_id: address.id)
+        p job = Job.create(franchise_id: found_franchise.try(:id), adjuster_id: adjuster.id, referral_note: referral_note, referral_type_id: found_referral_type.try(:id), fnol_received: formatted_date, status_id: invoiced.id, job_note: "Imported")
+
+        caller = Caller.create(first_name: first_name, last_name: last_name, email: email, address_id: address.id, job_id: job.id)
 
         caller.phones.create(type_id: 1, number: phone)
-
-        p job = Job.create(franchise_id: found_franchise.try(:id), adjuster_id: adjuster.id, referral_note: referral_note, referral_type_id: found_referral_type.try(:id), fnol_received: formatted_date)
 
         job.job_managers.create(job_manager_id: user.try(:id))
 
         JobDetail.create(job_id: job.id, insurance_company_id: found_insurance.try(:id), claim_number: claim)
 
         job.losses.create(fnol_received: formatted_date, loss_type_id: found_loss_type.try(:id))
-
+        if sales_rep
+          job.subscriptions.create(user_id: sales_rep.try(:id))
+        end
         Pricing.create(price: amount, pricing_category_id: PricingCategory.last.id)
 
       end
