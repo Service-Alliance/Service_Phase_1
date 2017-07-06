@@ -141,6 +141,8 @@
                         <td><%= job.try(:referral_type).try(:name) %></td>
                         <% if job.try(:job_detail).try(:self_pay_id) == 1 %>
                           <td>Self Pay</td>
+                        <% elsif job.try(:insurance_company_id) != nil %>
+                          <td><%= job.try(:job_detail).try(:insurance_company).try(:name) %></td>
                         <% elsif job.try(:job_detail).try(:self_pay_id) == nil || job.try(:job_detail).try(:self_pay_id) == 3 %>
                           <td>TBD/Unkown</td>
                         <% else %>
