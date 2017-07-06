@@ -52,7 +52,9 @@ namespace :import do
 
       p  caller = Caller.find_by(first_name: first_name, last_name: last_name, email: email)
 
+      if caller
       p  job = caller.job
+      end
 
         if job && job.pricings.empty?
           p Pricing.create(price: amount, pricing_category_id: PricingCategory.last.id, job_id: job.id)
