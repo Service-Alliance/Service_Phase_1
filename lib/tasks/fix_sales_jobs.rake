@@ -44,8 +44,8 @@ namespace :import do
 
       p  job = caller.job
 
-        if job.pricings.empty?
-          Pricing.create(price: amount, pricing_category_id: PricingCategory.last.id, job_id: job)
+        if job && job.pricings.empty?
+          p Pricing.create(price: amount, pricing_category_id: PricingCategory.last.id, job_id: job.id)
         end
 
       end
