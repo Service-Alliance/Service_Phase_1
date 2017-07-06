@@ -24,8 +24,8 @@ class JobsController < ApplicationController
       @total_invoiced_value = Job.value_of_jobs(@search.result.where(status_id: 3))
       @total_dead_count =  @search.result.where(status_id: 4).count
       @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 4))
-      @total_dead_count =  @search.result.where(status_id: 5).count
-      @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 5))
+      @total_closed_count =  @search.result.where(status_id: 5).count
+      @total_closed_value = Job.value_of_jobs(@search.result.where(status_id: 5))
 
       respond_to do |format|
         format.html
