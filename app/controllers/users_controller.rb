@@ -69,7 +69,7 @@ class UsersController < ApplicationController
   end
 
   def job_assignments
-    @search = Job.joins(:job_managers).merge(JobManager.where(:job_manager_id => current_user.id)).order('created_at DESC').search(params[:q])
+    @search = Job.joins(:job_managers).merge(JobManager.where(:job_manager_id => params[:id])).order('created_at DESC').search(params[:q])
     # @jobs = @search.result
     @jobs = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC')
     @all_results = @search.result
