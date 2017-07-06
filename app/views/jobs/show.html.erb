@@ -472,19 +472,19 @@
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <%= f.label :job_location %><br>
-                                      <%= f.text_field :job_location, class: "form-control" %>
+                                      <%= f.text_field :job_location, class: "form-control", value: @job.try(:customer).try(:full_address)  %>
                                   </div>
                               </div>
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <%= f.label :telephone %><br>
-                                      <%= f.text_field :telephone, class: "form-control" %>
+                                      <%= f.text_field :telephone, class: "form-control", value: @job.try(:customer).try(:phones).try(:number) %>
                                   </div>
                               </div>
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <%= f.label :contact %><br>
-                                      <%= f.text_field :contact, class: "form-control" %>
+                                      <%= f.text_field :contact, class: "form-control", value: @job.try(:customer).try(:full_name)  %>
                                   </div>
                               </div>
                               <div class="col-sm-3">
