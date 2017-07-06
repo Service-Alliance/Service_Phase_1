@@ -39,6 +39,16 @@ namespace :import do
         p found_referral_type = ReferralType.find_by(name: referral_type)
         invoiced = JobStatus.find_by(name: "Invoiced")
 
+        if first_name == nil
+          first_name = ""
+        end
+        if last_name == nil
+          last_name = ""
+        end
+        if email == nil
+          email = ""
+        end
+
 
       p  caller = Caller.find_by(first_name: first_name, last_name: last_name, email: email)
 
