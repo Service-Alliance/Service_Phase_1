@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :franchise_users
   has_many :subscriptions
   has_many :notifications, foreign_key: :target_id
+  has_many :trackers
 
 
 
@@ -46,6 +47,19 @@ class User < ActiveRecord::Base
   end
   def unassigned?
     self.role_id == 0 || self.role_id == nil  ? true : false
+  end
+
+  def metrics(days)
+    note = TrackerTask.find_by(name: "Note Created")
+    estimate = TrackerTask.find_by(name: "Estimate Sent")
+    work_order = TrackerTask.find_by(name: "Work Order Created")
+    array = []
+    array << self.full_name
+    array << self.jobs.where("created_at > ?", Time.now-days.days).count
+    array << self.trackers.where(tracker_task_id: note.id).where("created_at > ?", Time.now-days.days).count
+    array << self.trackers.where(tracker_task_id: estimate.id).where("created_at > ?", Time.now-days.days).count
+    array << self.trackers.where(tracker_task_id: work_order.id).where("created_at > ?", Time.now-days.days).count
+    return array
   end
 
 end
