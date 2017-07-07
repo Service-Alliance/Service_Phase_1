@@ -28,7 +28,6 @@ class WorkOrdersController < ApplicationController
   def create
     @work_order = WorkOrder.new(work_order_params)
     @work_order.job_id = @job.id
-    @work_order.user_id = current_user.id
 
     respond_to do |format|
       if @work_order.save
