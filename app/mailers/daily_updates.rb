@@ -17,12 +17,12 @@ class DailyUpdates < ApplicationMailer
   end
 
   def new_york_pending
-    @jobs = Job.where(status_id: 1, franchise_id: [1, 3, 5, 6])
+    @jobs = Job.where(status_id: 1, franchise_id: [1, 3, 4, 6])
     mail(to: 'davidkluger1@gmail.com', subject: "Pending Jobs as of (#{Date.today})")
   end
 
   def new_jersey_pending
-    @jobs = Job.where(status_id: 1, franchise_id: [2, 4])
+    @jobs = Job.where(status_id: 1, franchise_id: [2, 5])
     mail(to: 'meyerservpro@gmail.com', subject: "Pending Jobs as of (#{Date.today})")
   end
 end
