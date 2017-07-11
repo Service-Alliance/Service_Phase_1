@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :price %><br>
-    <%= f.text_field :price %>
+    <%= f.number_field :price, value: number_to_currency(f.object.amount.to_f, delimiter: '', unit: ''), step: :0.01 %>
   </div>
   <div class="field">
     <%= f.label :pricing_category_id %><br>

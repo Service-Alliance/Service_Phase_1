@@ -732,7 +732,7 @@
                                         <%= noted.try(:user).try(:full_name) %></h3>
                                 </div>
                                 <div class="panel-body">
-                                    <%= noted.content %>
+                                    <%= best_in_place noted, :content, :as => :textarea %>
                                     <br />
                                     <%= link_to 'Delete Note',  tracker_path(tracker, job_id: @job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </div>

@@ -87,7 +87,9 @@ class JobsController < ApplicationController
     @work_order = WorkOrder.new
     @inspection_checklist = InspectionChecklist.new
     @job.schedulers.each do |scheduler|
-      @future_schedules << scheduler if scheduler.event_date.future?
+      if scheduler.event_date.future? || scheduler.event_date.today?
+        @future_schedules << scheduler
+      end
     end
     @pricing = Pricing.new
   end

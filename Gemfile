@@ -44,12 +44,15 @@ gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'chartkick'
 gem 'groupdate'
 gem 'pg_search'
+gem 'whenever', :require => false
+gem 'best_in_place', '~> 3.0.1'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 gem 'unicorn'
 gem 'unicorn-worker-killer'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
