@@ -51,35 +51,37 @@ class User < ActiveRecord::Base
 
   def metrics(days)
     note = TrackerTask.find_by(name: "Note Created")
-    estimate = TrackerTask.find_by(name: "Estimate Sent")
+    pricing = TrackerTask.find_by(name: "Pricing Created")
     work_order = TrackerTask.find_by(name: "Work Order Created")
     array = []
     array << self.full_name
     array << self.jobs.where("created_at > ?", Time.now-days.days).count
     array << self.trackers.where(tracker_task_id: note.id).where("created_at > ?", Time.now-days.days).count
-    array << self.trackers.where(tracker_task_id: estimate.id).where("created_at > ?", Time.now-days.days).count
+    array << self.trackers.where(tracker_task_id: pricing.id).where("created_at > ?", Time.now-days.days).count
     array << self.trackers.where(tracker_task_id: work_order.id).where("created_at > ?", Time.now-days.days).count
     return array
   end
 
   def self.user_metrics(days)
-    metrics = ['Jobs', 'Notes', 'Estimates', 'Work Orders']
-    note = TrackerTask.find_by(name: "Note Created")
-    estimate = TrackerTask.find_by(name: "Estimate Sent")
+    metrics = ['Jobs', 'Notes', 'Pricings Created', 'Work Orders']
+    # note = TrackerTask.find_by(name: "Note Created")
+    estimate = TrackerTask.find_by(name: "Pricing Created")
     work_order = TrackerTask.find_by(name: "Work Order Created")
 
     array = []
     metrics.each do |metric|
       users = {}
       User.all.each do |user|
-        if metric == 'Jobs'
-          users[user.full_name] = user.jobs.where("created_at > ?", Time.now-days.days).count
-        elsif metric == 'Notes'
-          users[user.full_name] = user.trackers.where(tracker_task_id: note.id).where("created_at > ?", Time.now-days.days).count
-        elsif metric == 'Estimates'
-          users[user.full_name] = user.trackers.where(tracker_task_id: estimate.id).where("created_at > ?", Time.now-days.days).count
-        elsif metric == 'Work Orders'
-          users[user.full_name] = user.trackers.where(tracker_task_id: work_order.id).where("created_at > ?", Time.now-days.days).count
+        if user.jobs.count > 0
+          if metric == 'Jobs'
+            users[user.full_name] = user.jobs.where("created_at > ?", Time.now-days.days).count
+          elsif metric == 'Notes'
+            users[user.full_name] = Note.where(user_id: user.id, noteable_type: "Job").where("created_at > ?", Time.now-days.days).count
+          elsif metric == 'Estimates'
+            users[user.full_name] = user.trackers.where(tracker_task_id: estimate.id).where("created_at > ?", Time.now-days.days).count
+          elsif metric == 'Work Orders'
+            users[user.full_name] = user.trackers.where(tracker_task_id: work_order.id).where("created_at > ?", Time.now-days.days).count
+          end
         end
       end
       thing = {

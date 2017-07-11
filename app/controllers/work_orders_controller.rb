@@ -32,7 +32,7 @@ class WorkOrdersController < ApplicationController
     respond_to do |format|
       if @work_order.save
         tracker_task = TrackerTask.find_by(name: "Work Order Created")
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id)
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
 
         sched_manager = User.find_by(email: "kroggemann@servpro5933.com")
         UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now if sched_manager
