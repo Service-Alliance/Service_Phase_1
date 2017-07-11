@@ -1,10 +1,3 @@
 
-<%
-@data = []
-  @users.each do |user|
-    if user.jobs.count > 0
-      @data << user.metrics(7)
-    end
-  end
-%>
-<%= column_chart @data, stacked: true %>
+
+<%= column_chart User.user_metrics(7), stacked: true %>
