@@ -44,6 +44,7 @@ gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'chartkick'
 gem 'groupdate'
 gem 'pg_search'
+gem 'whenever', :require => false
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
