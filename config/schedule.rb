@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => '8:30 am' do
+every 1.day, :at => '8:00 am' do
   rake "morning:email"
 end
