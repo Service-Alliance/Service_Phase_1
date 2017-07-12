@@ -116,6 +116,6 @@ Rails.application.routes.draw do
   post 'addresses/geolocate' => 'addresses#geolocate'
   post 'agents/lookup' => 'agents#lookup'
   post 'adjusters/lookup' => 'adjusters#lookup'
-
+  get 'share/users', as: :mentionables
   root 'home#index'
 end

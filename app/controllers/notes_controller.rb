@@ -36,6 +36,21 @@ class NotesController < ApplicationController
 
       @note = @job.notes.new(note_params)
       @note.user_id = current_user.id
+
+      if @note.content.include?("@")
+        arr = @note.content.split(' ')
+        mentions = arr.select { |str| str.include?('@') }
+        notify_type = NotifyType.find_by(name: "Mentioned in Note")
+        mentions.each do |mention|
+          mention[0] = ''
+          name = mention.split("_")
+          user = User.find_by(first_name: name[0], last_name: name[1])
+          if user
+            Notification.create(notify_type: notify_type.id,actor_id: current_user.id, target_id: user.id, job_id: @job.id, notify_text: "#{current_user.full_name} mentioned you in a job note.")
+          end
+        end
+
+      end
     end
     unless call_params.empty?
       @job = Job.find_by(id: call_params['job_id'])

@@ -147,6 +147,7 @@ GEM
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
       multi_json (~> 1.2)
+    jquery-atwho-rails (1.3.2)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -310,6 +311,7 @@ DEPENDENCIES
   groupdate
   httparty
   jbuilder (~> 2.0)
+  jquery-atwho-rails
   jquery-rails
   kaminari
   pg (~> 0.15)
