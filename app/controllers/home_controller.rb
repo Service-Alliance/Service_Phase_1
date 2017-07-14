@@ -8,10 +8,9 @@ class HomeController < ApplicationController
 
     @activities = PublicActivity::Activity.all
 
-    if current_user.admin?
+    if current_user.admin? || current_user.owner?
       @jobs = Job.where(entered_by_id: current_user.id).where("status_id= ? OR status_id= ?", 1, 2)
       render template: 'home/admin'
-
     elsif current_user.job_coordinator? || current_user.unassigned?
       @jobs = Job.where(entered_by_id: current_user.id).where("status_id= ? OR status_id= ?", 1, 2)
       render template: 'home/job_coordinator'

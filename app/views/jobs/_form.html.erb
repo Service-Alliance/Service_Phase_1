@@ -60,7 +60,7 @@
               <%= f.collection_select :coordinator_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
           </div>
       </div>
-  <% if current_user.admin? %>
+  <% if current_user.admin? || current_user.owner? %>
       <div class="col-xs-4">
           <div class="form-group">
               <%= f.label :entered_by_id, "Entered By (Admin override)" %><br>
@@ -199,7 +199,7 @@
         <div class="col-xs-12 text-center">
 
             <div class="actions">
-                <%= f.submit class: "btn btn-primary", id:"submit-job", disabled: true %>
+                <%= f.submit class: "btn btn-primary", id:"submit-job" %>
                 <% f.submit "Save", class: "btn btn-primary" %>
                 <% f.submit "Save and Move to Job Loss", class: "btn btn-primary" %>
             </div>

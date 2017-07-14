@@ -11,6 +11,7 @@ Role.create(name: "Call Rep")
 Role.create(name: 'Project Manager')
 Role.create(name: 'Crew Chief')
 Role.create(name: 'Technician')
+Role.create(name: 'Owner')
 
 csv_text = File.read("db/files/users.csv")
 csv = CSV.parse(csv_text, :headers => true)
@@ -173,6 +174,8 @@ vandalism = LossType.create(name: 'Vandalism', tooltip: 'Tooltip about vandalism
 water = LossType.create(name: 'Water', tooltip: 'Tooltip about water')
 tree_removal = LossType.create(name: 'Tree Removal', tooltip: 'Tooltip about trees')
 equipment = LossType.create(name: 'Equipment Rental', tooltip: 'Tooltip about rentals')
+construction = LossType.create(name: 'Construction', tooltip: 'Tooltip about construction')
+
 
 # Loss Causes
 lc_fire = LossCause.create(name: 'Fire')

@@ -16,7 +16,21 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @assignments = Jobs.where(vendor_id: @vendor.id).page(params[:page]).order('created_at DESC')
+    # @assignments = Job.where(vendor_id: @vendor.id).page(params[:page]).order('created_at DESC')
+    @data = [
+      {
+        name: "Fantasy & Sci Fi",
+        data: [["2010", 10], ["2020", 16], ["2030", 28]]
+      },
+      {
+        name: "Romance",
+        data: [["2010", 24], ["2020", 22], ["2030", 19]]
+      },
+      {
+        name: "Mystery/Crime",
+        data: [["2010", 20], ["2020", 23], ["2030", 29]]
+      }
+    ]
   end
 
   # GET /users/new
@@ -69,7 +83,7 @@ class UsersController < ApplicationController
   end
 
   def job_assignments
-    @search = Job.joins(:job_managers).merge(JobManager.where(:job_manager_id => current_user.id)).order('created_at DESC').search(params[:q])
+    @search = Job.joins(:job_managers).merge(JobManager.where(:job_manager_id => params[:id])).order('created_at DESC').search(params[:q])
     # @jobs = @search.result
     @jobs = @search.result.includes(:customer_address).page(params[:page]).order('created_at DESC')
     @all_results = @search.result

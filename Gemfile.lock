@@ -61,6 +61,9 @@ GEM
     autoprefixer-rails (6.7.7.2)
       execjs
     bcrypt (3.1.11)
+    best_in_place (3.0.3)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.7)
@@ -76,6 +79,7 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     chartkick (2.2.4)
+    chronic (0.10.2)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -123,6 +127,7 @@ GEM
       actionpack (>= 3.2.13)
     formtastic_i18n (0.6.0)
     geocoder (1.4.3)
+    get_process_mem (0.2.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     groupdate (3.2.0)
@@ -142,6 +147,7 @@ GEM
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
       multi_json (~> 1.2)
+    jquery-atwho-rails (1.3.2)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -161,6 +167,7 @@ GEM
       activerecord
       kaminari-core (= 1.0.1)
     kaminari-core (1.0.1)
+    kgio (2.11.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.5)
@@ -172,7 +179,6 @@ GEM
     minitest (5.10.1)
     multi_json (1.12.1)
     multi_xml (0.6.0)
-    newrelic_rpm (3.18.0.329)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
@@ -227,6 +233,7 @@ GEM
       activesupport (= 4.2.6)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    raindrops (0.18.0)
     rake (12.0.0)
     ransack (1.8.2)
       actionpack (>= 3.0)
@@ -268,6 +275,12 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
+    unicorn (5.3.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
+    unicorn-worker-killer (0.4.4)
+      get_process_mem (~> 0)
+      unicorn (>= 4, < 6)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (2.3.0)
@@ -275,12 +288,15 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    whenever (0.9.7)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   activeadmin!
+  best_in_place (~> 3.0.1)
   bootstrap-sass (~> 3.3.6)
   byebug
   carrierwave (~> 1.0)
@@ -295,9 +311,9 @@ DEPENDENCIES
   groupdate
   httparty
   jbuilder (~> 2.0)
+  jquery-atwho-rails
   jquery-rails
   kaminari
-  newrelic_rpm
   pg (~> 0.15)
   pg_search
   prawn
@@ -312,7 +328,10 @@ DEPENDENCIES
   select2-rails
   spring
   uglifier (>= 1.3.0)
+  unicorn
+  unicorn-worker-killer
   web-console (~> 2.0)
+  whenever
 
 BUNDLED WITH
    1.15.0

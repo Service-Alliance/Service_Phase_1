@@ -146,7 +146,7 @@
           <% @job =  Job.find_by(id: work_orders.job_id) %>
           <% if @job && @job.name != nil %>
             <%= link_to @job.name, job_work_order_path(@job.id, work_orders.id) %>
-          <% else %>
+          <% elsif @job %>
             <%= link_to work_orders.job_id, job_work_order_path(@job.id, work_orders.id) %> <br />
           <% end %>
           <% end %>

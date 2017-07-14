@@ -24,8 +24,8 @@ class JobsController < ApplicationController
       @total_invoiced_value = Job.value_of_jobs(@search.result.where(status_id: 3))
       @total_dead_count =  @search.result.where(status_id: 4).count
       @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 4))
-      @total_dead_count =  @search.result.where(status_id: 5).count
-      @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 5))
+      @total_closed_count =  @search.result.where(status_id: 5).count
+      @total_closed_value = Job.value_of_jobs(@search.result.where(status_id: 5))
 
       respond_to do |format|
         format.html
@@ -87,7 +87,9 @@ class JobsController < ApplicationController
     @work_order = WorkOrder.new
     @inspection_checklist = InspectionChecklist.new
     @job.schedulers.each do |scheduler|
-      @future_schedules << scheduler if scheduler.event_date.future?
+      if scheduler.event_date.future? || scheduler.event_date.today?
+        @future_schedules << scheduler
+      end
     end
     @pricing = Pricing.new
   end

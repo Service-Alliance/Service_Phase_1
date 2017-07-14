@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
+
 <div class="container-fluid">
     <div id="wrapper">
         <%= render partial: "partials/jobs_sidebar" %>
@@ -35,7 +36,7 @@
 
 
                 <% if @job.customer %>
-                <% if @job.franchise && @job.customer.sharp_spring_id == nil && current_user.admin? %>
+                <% if @job.franchise && @job.customer.sharp_spring_id == nil && (current_user.admin? || current_user.owner?) %>
                   <%= link_to  "Send Customer To Sharpspring", customer_send_to_sharpspring_path(@job.customer, @job), method: :post,class:"btn btn-primary" %>
                 <% end %>
                 <% end %>
@@ -170,7 +171,7 @@
                                 <div class="col-xs-12">
                                     <div class="form-group">
                                         <div class="field">
-                                            <%= f.text_area :content, class: 'form-control' %>
+                                            <%= f.text_area :content, class: 'form-control', data: {behavior: 'autocomplete'} %>
                                         </div>
                                     </div>
                                     <div class="actions">
@@ -472,19 +473,19 @@
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <%= f.label :job_location %><br>
-                                      <%= f.text_field :job_location, class: "form-control" %>
+                                      <%= f.text_field :job_location, class: "form-control", value: @job.try(:customer).try(:full_address)  %>
                                   </div>
                               </div>
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <%= f.label :telephone %><br>
-                                      <%= f.text_field :telephone, class: "form-control" %>
+                                      <%= f.text_field :telephone, class: "form-control", value: @job.try(:customer).try(:phones).try(:number) %>
                                   </div>
                               </div>
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <%= f.label :contact %><br>
-                                      <%= f.text_field :contact, class: "form-control" %>
+                                      <%= f.text_field :contact, class: "form-control", value: @job.try(:customer).try(:full_name)  %>
                                   </div>
                               </div>
                               <div class="col-sm-3">
@@ -651,7 +652,7 @@
 
                                 <div class="col-xs-12">
                                   <%= f.label :price %><br>
-                                  <%= f.number_field :price, class: "form-control" %>
+                                  <%= f.number_field :price, class: "form-control", step: "0.01" %>
                                 </div>
                                 <div class="col-xs-12">
                                   <%= f.label :pricing_category_id %><br>
@@ -732,7 +733,7 @@
                                         <%= noted.try(:user).try(:full_name) %></h3>
                                 </div>
                                 <div class="panel-body">
-                                    <%= noted.content %>
+                                    <%= best_in_place noted, :content, :as => :textarea %>
                                     <br />
                                     <%= link_to 'Delete Note',  tracker_path(tracker, job_id: @job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </div>
@@ -1087,4 +1088,13 @@
                 $($(this).attr("href")).toggleClass('active');
             }
         })
+
+       $('[data-behavior="autocomplete"]').atwho({
+          at: '@',
+          data: '<%= mentionables_path %>',
+          insertTpl: '@${first_name}_${last_name}',
+          searchKey: "first_name",
+          displayTpl: '<li data-id="${id}"><span>@${first_name}_${last_name}</span></li>',
+        });
+
     </script>

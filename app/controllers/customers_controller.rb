@@ -46,16 +46,12 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
     @customer.address_id = @address.id
     @job = Job.find_by(id: job_param[:job_id])
-    # @job.update_last_action
-
-
 
     respond_to do |format|
       if @customer.save
         if @job
           @job.customer_id = @customer.id
           if @job.save
-
             @customer.phones.destroy_all
             phone_count = phone_params["type_ids"].count
 
@@ -70,6 +66,17 @@ class CustomersController < ApplicationController
             render :new
             return
           end
+        else
+          @customer.phones.destroy_all
+          phone_count = phone_params["type_ids"].count
+
+          phone_count.times do |index|
+            unless phone_params["numbers"][index] == ""
+              @customer.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+            end
+          end
+          redirect_to customer_path(@customer), notice: 'Customer was successfully created.'
+          return
         end
         format.html { redirect_to job_path(@job), notice: 'Customer was successfully created.' }
         format.json { render :show, status: :created, location: @customer }

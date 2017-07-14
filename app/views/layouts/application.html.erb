@@ -10,7 +10,7 @@
     </head>
     <body>
 
-    <% if current_user && (current_user.admin? || current_user.job_coordinator? || current_user.unassigned?) %>
+    <% if current_user && (current_user.admin? || current_user.job_coordinator? || current_user.unassigned? || current_user.owner?) %>
         <%= render partial: "layouts/admin_navbar" %>
     <% elsif current_user && current_user.project_manager? %>
       <%= render partial: "layouts/project_manager_navbar" %>
