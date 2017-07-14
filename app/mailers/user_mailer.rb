@@ -15,6 +15,13 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: "#{@user.full_name}, you have been sent a work order for job #{@job.id}, #{@job.name}")
   end
 
+  def mention_notification(user, job)
+    @user = user
+    @job = job
+
+    mail(to: @user.email, subject: "#{@user.full_name}, you have been mentioned on #{@job.id}, #{@job.name}")
+  end
+
   def vendor_work_order_notification(customer, job, work_order)
     @customer = customer
     @job = job
