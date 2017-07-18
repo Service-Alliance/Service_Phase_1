@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: uploads
+#
+#  id                 :integer          not null, primary key
+#  job_id             :integer
+#  upload             :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  uploadable_id      :integer
+#  uploadable_type    :string
+#  upload_category_id :integer
+#  uploads            :json
+#  description        :text
+#
+
 class Upload < ActiveRecord::Base
   belongs_to :uploadable, polymorphic: true
   belongs_to :upload_category
