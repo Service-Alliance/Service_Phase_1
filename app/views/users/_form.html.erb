@@ -1,33 +1,59 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="col-xs-12">
+    <div class="row content-box">
+        <%= form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %>
+                prohibited this insurance company from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+            <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :first_name %><br>
+                <%= f.text_field :first_name, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :last_name %><br>
+                <%= f.text_field :last_name, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :contact %><br>
+                <%= f.collection_select :role_id, Role.all, :id, :name, {:prompt => 'Select a Role', selected: @user.role_id}, { class: 'form-control'} %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :notes %><br>
+                <%= f.text_field :notes, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :contact %><br>
+                <%= f.collection_select :department_id, Department.all, :id, :name, {:prompt => 'Select a Department', selected: @user.department_id}, { class: 'form-control'} %>
+            </div>
+        </div>
+
+        <%= render 'partials/phone_form', f: f, locals: {phone_for: 'user'}  %>
+
+
+        <div class="col-xs-12 text-center">
+            <div class="actions">
+                <%= f.submit class: "btn btn-primary" %>
+            </div>
+        </div>
+
+        <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :access_level %><br>
-    <%= f.number_field :access_level %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

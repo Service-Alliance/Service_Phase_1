@@ -11,19 +11,17 @@ function addNumber(that) {
     var newNumber = $("#new-number")
 
     cloned = newNumber.clone();
+    cloned.removeAttr('id');
 
     numberContainer.append(cloned);
 
     newNumber.children().find('input').each(function() {
         $(this).val('');
     });
-
 }
 
-
-
 $(function() {
-    $(document).on('click', '#remove-number', function(event) {
+    $(document).on('click', '.remove-number', function(event) {
 
         event.preventDefault();
         removeNumber(this);
@@ -31,5 +29,5 @@ $(function() {
 });
 
 function removeNumber(that) {
-  $(that).parent().parent().parent().parent().remove();
+  $(that).parent().parent().remove();
 }

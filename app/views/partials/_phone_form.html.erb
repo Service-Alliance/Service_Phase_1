@@ -15,7 +15,7 @@
           <div class="col-xs-3">
               <div class="form-group">
                   <%= label_tag :number %><br>
-                  <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+                  <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-format"  %>
               </div>
           </div>
           <div class="col-xs-3">
@@ -26,7 +26,7 @@
           </div>
           <div class="col-xs-3">
               <%= label_tag :delete %><br>
-              <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
+              <a href="" class="btn btn-danger full-width remove-number">Delete</a>
           </div>
       </div>
       <% end %>
@@ -45,7 +45,7 @@
             <div class="col-xs-3">
                 <div class="form-group">
                     <%= label_tag :number %><br>
-                    <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+                    <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-format"  %>
                 </div>
             </div>
             <div class="col-xs-3">
@@ -56,11 +56,41 @@
             </div>
             <div class="col-xs-3">
                 <%= label_tag :delete %><br>
-                <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
+                <a href="" class="btn btn-danger full-width remove-number">Delete</a>
             </div>
         </div>
         <% end %>
         <% end %>
+
+        <% elsif locals[:phone_for] == "user" %>
+          <% if @phones %>
+          <% @phones.each do |phone| %>
+          <div class="row">
+              <div class="col-xs-3">
+                  <div class="form-group">
+                      <%= label_tag :type_id %><br>
+                      <%= select_tag("phones[type_ids][]", options_for_select(PhoneType.all.map{|p| [p.name, p.id]}, selected: phone.type_id), class: "form-control") %>
+                  </div>
+              </div>
+              <div class="col-xs-3">
+                  <div class="form-group">
+                      <%= label_tag :number %><br>
+                      <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+                  </div>
+              </div>
+              <div class="col-xs-3">
+                  <div class="form-group">
+                      <%= label_tag :extension %><br>
+                      <%= text_field_tag "phones[extensions][]", phone.try(:extension), class: "form-control"  %>
+                  </div>
+              </div>
+              <div class="col-xs-3">
+                  <%= label_tag :delete %><br>
+                    <a href="" class="btn btn-danger full-width remove-number">Delete</a>
+              </div>
+          </div>
+          <% end %>
+          <% end %>
 
 
         <% elsif locals[:phone_for] == "agents"  %>
@@ -88,7 +118,7 @@
               </div>
               <div class="col-xs-3">
                   <%= label_tag :delete %><br>
-                  <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
+                  <a href="" class="btn btn-danger full-width remove-number">Delete</a>
               </div>
           </div>
           <% end %>
@@ -118,7 +148,7 @@
                 </div>
                 <div class="col-xs-3">
                     <%= label_tag :delete %><br>
-                    <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
+                    <a href="" class="btn btn-danger full-width remove-number">Delete</a>
                 </div>
             </div>
             <% end %>
@@ -148,7 +178,7 @@
                   </div>
                   <div class="col-xs-3">
                       <%= label_tag :delete %><br>
-                      <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
+                      <a href="" class="btn btn-danger full-width remove-number">Delete</a>
                   </div>
               </div>
               <% end %>
@@ -157,8 +187,7 @@
     </div>
 </div>
 
-<div id="new-number">
-    <div class="col-xs-12">
+    <div id="new-number" class="col-xs-12">
         <div class="row">
             <div class="col-xs-3">
                 <div class="form-group">
@@ -169,7 +198,7 @@
             <div class="col-xs-3">
                 <div class="form-group">
                     <%= label_tag :number %><br>
-                    <%= text_field_tag "phones[numbers][]",nil, class: "form-control"  %>
+                    <%= text_field_tag "phones[numbers][]",nil, class: "form-control phone-format"  %>
                 </div>
             </div>
             <div class="col-xs-3">
@@ -180,7 +209,7 @@
             </div>
             <div class="col-xs-3 remove-number-toggle">
                 <%= label_tag :delete %><br>
-                <a id="remove-number" href="" class="btn btn-danger full-width">Delete</a>
+                <a href="" class="btn btn-danger full-width remove-number">Delete</a>
             </div>
             <div class="col-xs-3 add-number-toggle">
                 <%= label_tag :add %><br>
@@ -188,5 +217,4 @@
             </div>
         </div>
     </div>
-</div>
 <% end %>
