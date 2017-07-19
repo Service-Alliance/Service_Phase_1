@@ -5,6 +5,31 @@
                 <div class="col-xs-12 text-center">
                     <h1>New Call</h1>
                 </div>
+                <div class="col-xs-12 margin-botton-3">
+                  <h3>On call assignments</h3>
+                  <%= Date.today %>: <br / />
+                  <% Oncall.where(scheduled_on: Date.today).each do |oncall| %>
+
+                    <% user = User.find_by(id: oncall.user_id) %>
+                    <% if user && user.full_name %>
+                    Name: <%= link_to user.full_name, user_path(user.id) %><br / />
+                    Number(s): <% user.phones.each do |phone| %>
+                    <%= phone.number %> <br />
+                    <% end %>
+                    <% end %>
+                  <% end %><br /><br />
+
+                  <%= Date.tomorrow %>: <br / />
+                  <% Oncall.where(scheduled_on: Date.tomorrow).each do |oncall| %>
+                    <% user = User.find_by(id: oncall.user_id) %>
+                      <% if user && user.full_name %>
+                        Name: <%= link_to user.full_name, user_path(user.id) %><br / />
+                        Number(s): <% user.phones.each do |phone| %>
+                        <%= phone.number %><br  />
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
 
                 <%= render 'form' %>
 

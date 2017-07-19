@@ -556,7 +556,7 @@
                               <% end %>
                               <div class="col-sm-3">
                                   <div class="form-group">
-                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(email: "kroggemann@servpro5933.com").collect{ |u| [u.full_name, u.id] }), class: "form-control" %>
+                                      <%= select_tag 'work_order_send_to[dont_send_to][]', options_for_select(User.where(email: "kroggemann@servpro5933.com").collect{ |u| [u.full_name, u.id] }), class: "form-control" %>
                                   </div>
                               </div>
                               <div class="col-sm-3">

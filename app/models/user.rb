@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :notifications, foreign_key: :target_id
   has_many :trackers
+  has_many :phones, as: :phoneable
 
 
 

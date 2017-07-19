@@ -16,21 +16,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    # @assignments = Job.where(vendor_id: @vendor.id).page(params[:page]).order('created_at DESC')
-    @data = [
-      {
-        name: "Fantasy & Sci Fi",
-        data: [["2010", 10], ["2020", 16], ["2030", 28]]
-      },
-      {
-        name: "Romance",
-        data: [["2010", 24], ["2020", 22], ["2030", 19]]
-      },
-      {
-        name: "Mystery/Crime",
-        data: [["2010", 20], ["2020", 23], ["2030", 29]]
-      }
-    ]
   end
 
   # GET /users/new
@@ -40,6 +25,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @phones = @user.phones
   end
 
   # POST /users
@@ -49,6 +35,15 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+
+        @user.phones.destroy_all
+        phone_count = phone_params["type_ids"].count
+
+        phone_count.times do |index|
+          unless phone_params["numbers"][index] == ""
+            @user.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          end
+        end
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -63,6 +58,14 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        @user.phones.destroy_all
+        phone_count = phone_params["type_ids"].count
+
+        phone_count.times do |index|
+          unless phone_params["numbers"][index] == ""
+            @user.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
+          end
+        end
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -118,5 +121,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email, :first_name, :last_name, :access_level , :username, :email, :password, :salt, :encrypted_password, :first_name, :role_id, :notes, :department_id, :title, :additional_title, :location_id, :background_check, :online_physical, :fitness_test, :hep_b, :lead, :lead_expiration, :nys_mold, :nys_mold_expiration, :nys_mold_license, :bio_rec_bbp, :hartford, :pet_water, :pet_fire, :osha, :iicrc_reg, :iicrc_expiration, :cec_due, :number_cec_due, :iicrc_wrt, :iicrc_amrt, :iicrc_asd, :iicrc_srt, :iicrc_hst, :iicrc_uft, :iicrc_odor, :iicrc_cds, :sub_1, :sub_2, :dry_book, :login_count)
+    end
+
+    def phone_params
+      params.fetch(:phones, {}).permit(numbers:[], extensions:[], type_ids:[])
     end
 end
