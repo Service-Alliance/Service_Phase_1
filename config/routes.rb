@@ -98,6 +98,7 @@ Rails.application.routes.draw do
     resources :work_orders
     resources :schedulers
     resources :subscriptions
+    resources :collection_subscriptions, only: [:create, :update, :destroy]
     resources :purchase_order_approvals
     resources :inspection_checklists
 
