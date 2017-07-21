@@ -30,6 +30,7 @@ class Job < ActiveRecord::Base
   belongs_to :referral_vendor, foreign_key: :referral_vendor_id, class_name: 'Vendor'
   belongs_to :referral_employee, foreign_key: :referral_employee_id, class_name: 'User'
   has_many :subscriptions
+  has_many :collection_subscriptions
   has_one :inspection_checklist
   has_many :pricings, dependent: :destroy
   has_many :vendor_assignments, dependent: :destroy
@@ -37,6 +38,7 @@ class Job < ActiveRecord::Base
   # Activity Tracking activated
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
+
 
   def job_loss_type
     Loss.find_by(job_id: id).try(:loss_type)

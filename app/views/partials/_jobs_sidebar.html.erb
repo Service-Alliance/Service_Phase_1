@@ -306,10 +306,28 @@
         </li>
 
 
+        <li class="margin-top-2">
+            <div class="assignment-card">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">COLLECTION SUBSCRIBER(S) (<%=@job.collection_subscriptions.count %>) <a class="inline" data-toggle="modal" data-target="#collection_subscriptions"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a></h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <% @job.collection_subscriptions.each do |subscriber| %>
 
+                            <li>
+                                <%= subscriber.user.full_name %>
+                                <%= link_to "Remove", job_collection_subscription_path(@job.id, subscriber.id), method: :delete %></li>
+                            </li>
 
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
 
-
+            </div>
+        </li>
 
     </ul>
 
@@ -329,6 +347,31 @@
           <div class="field">
             <%= f.label :user_id %><br>
             <%= f.collection_select :user_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
+          </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "Save Changes", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="collection_subscriptions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add a Collection Department User</h4>
+      </div>
+      <%= form_for [@job, @job.collection_subscriptions.new] do |f| %>
+      <% collection_role = Role.find_by(name: "Collections Department") %>
+      <div class="modal-body">
+          <div class="field">
+            <%= f.label :user_id %><br>
+            <%= f.collection_select :user_id, User.where(role_id: collection_role.id), :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
           </div>
 
 

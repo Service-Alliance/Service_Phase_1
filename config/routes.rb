@@ -43,6 +43,8 @@ Rails.application.routes.draw do
   get 'jobs/list' => 'jobs#list'
   get 'jobs/index_search' => 'jobs#index_search'
   get 'jobs/unassigned_job' => 'jobs#unassigned_job'
+  get 'jobs/invoiced_collections_unassigned' => 'jobs#invoiced_collections_unassigned'
+  get 'jobs/collections' => 'jobs#collections'
   get 'jobs/call_rep_jobs' => 'jobs#call_rep_jobs'
   get 'jobs/no-activity' => 'jobs#no_activity', as: :jobs_no_activity
   get 'jobs/search' => 'jobs#search', as: :job_search
@@ -98,6 +100,7 @@ Rails.application.routes.draw do
     resources :work_orders
     resources :schedulers
     resources :subscriptions
+    resources :collection_subscriptions, only: [:create, :update, :destroy]
     resources :purchase_order_approvals
     resources :inspection_checklists
 
