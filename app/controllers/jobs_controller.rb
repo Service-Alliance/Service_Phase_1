@@ -3,7 +3,6 @@ class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
   before_action :verify_user, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
 
-  # before_action :authorize_policy
 
   # GET /jobs
   # GET /jobs.json
@@ -406,6 +405,21 @@ class JobsController < ApplicationController
 
   def call_rep_jobs
     @jobs = Job.joins(:user).merge(User.where(role_id: 3)).where.not(status_id: nil).limit(200)
+    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
+                                         :job_loss_type, :insurance_details,
+                                         :job_detail, :customer])
+  end
+
+  def invoiced_collections_unassigned
+    invoiced = JobStatus.find_by(name: "Invoiced")
+    jobs = Job.where(status_id: invoiced.id).includes(:collection_subscriptions).where(collection_subscriptions: {id: nil}).order(created_at: :desc).limit(200)
+    render json: jobs.to_json(include: [:job_status, :job_type, :franchise,
+                                         :job_loss_type, :insurance_details,
+                                         :job_detail, :customer])
+  end
+
+  def collections
+    @jobs = Job.includes(:collection_subscriptions).where(collection_subscriptions: {user_id: current_user.id}).limit(200)
     render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
                                          :job_loss_type, :insurance_details,
                                          :job_detail, :customer])
