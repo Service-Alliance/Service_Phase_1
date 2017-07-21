@@ -11,7 +11,7 @@ class CollectionSubscriptionsController < ApplicationController
         format.html { redirect_to job_path(@job), notice: 'Collection Department User was successfully added.' }
         format.json { render :show, status: :created, location: @collection_subscription }
       else
-        format.html { render :new }
+        format.html { redirect_to job_path(@job), notice: 'There was an error adding a Collection Department User.' }
         format.json { render json: @collection_subscription.errors, status: :unprocessable_entity }
       end
     end
@@ -32,7 +32,7 @@ class CollectionSubscriptionsController < ApplicationController
   def destroy
     @collection_subscription.destroy
     respond_to do |format|
-      format.html { redirect_to job_collection_subscriptions_path(@job), notice: 'Sales Rep was successfully destroyed.' }
+      format.html { redirect_to job_path(@job), notice: 'Sales Rep was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

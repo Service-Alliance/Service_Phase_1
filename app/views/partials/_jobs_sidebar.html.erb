@@ -318,6 +318,7 @@
 
                             <li>
                                 <%= subscriber.user.full_name %>
+                                <%= link_to "Remove", job_collection_subscription_path(@job.id, subscriber.id), method: :delete %></li>
                             </li>
 
                             <% end %>
