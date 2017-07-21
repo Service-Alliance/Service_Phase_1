@@ -1,0 +1,96 @@
+<!-- <div class="col-sm-12 col-lg-12 main">
+	<div class="row">
+		<ol class="breadcrumb">
+			<li>
+				<a href="#">
+					<svg class="glyph stroked home">
+						<use xlink:href="#stroked-home"></use>
+					</svg>
+				</a>
+			</li>
+			<li class="active">Dashboard</li>
+		</ol>
+	</div> -->
+<!--/.row-->
+<div class="container-fluid">
+
+
+<section id="home">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header text-center">Dashboard</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">Jobs without Collection Subscriptions</div>
+				<div class="panel-body">
+					<table
+						data-toggle="table"
+						data-url="/jobs/invoiced_collections_unassigned"
+						data-show-refresh="true"
+						data-show-toggle="true"
+						data-show-columns="true"
+						data-search="true"
+						data-flat="true"
+						data-select-item-name="toolbar1"
+						data-pagination="true"
+						data-sort-name="id"
+						data-sort-order="desc">
+						<thead>
+							<tr>
+								<th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job Name</th>
+								<th data-field="job_status.name" data-sortable="true">Status</th>
+								<th data-field="customer.last_name" data-sortable="true">Last Name</th>
+								<th data-field="customer.first_name" data-sortable="true">First Name</th>
+								<th data-field="job_detail.claim_number" data-sortable="true">Claim Number</th>
+								<th data-field="job_loss_type.name" data-sortable="true">Job Loss Type</th>
+								<th data-field="insurance_details.name" data-sortable="true">Insurance Carrier</th>
+								<th data-field="created_at" data-sortable="true">Date Received</th>
+
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">My Collection Subscriptions</div>
+				<div class="panel-body">
+					<table
+						data-toggle="table"
+						data-url="/jobs/collections"
+						data-show-refresh="true"
+						data-show-toggle="true"
+						data-show-columns="true"
+						data-search="true"
+						data-flat="true"
+						data-select-item-name="toolbar1"
+						data-pagination="true"
+						data-sort-name="id"
+						data-sort-order="desc">
+						<thead>
+							<tr>
+								<th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job Name</th>
+								<th data-field="job_status.name" data-sortable="true">Status</th>
+								<th data-field="customer.last_name" data-sortable="true">Last Name</th>
+								<th data-field="customer.first_name" data-sortable="true">First Name</th>
+								<th data-field="job_detail.claim_number" data-sortable="true">Claim Number</th>
+								<th data-field="job_loss_type.name" data-sortable="true">Job Loss Type</th>
+								<th data-field="insurance_details.name" data-sortable="true">Insurance Carrier</th>
+								<th data-field="created_at" data-sortable="true">Date Received</th>
+
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>

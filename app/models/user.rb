@@ -46,6 +46,9 @@ class User < ActiveRecord::Base
   def crew_chief?
     self.try(:role).try(:name) == 'Crew Chief' ? true : false
   end
+  def collections?
+    self.try(:role).try(:name) == 'Collections Department' ? true : false
+  end
   def unassigned?
     self.role_id == 0 || self.role_id == nil  ? true : false
   end

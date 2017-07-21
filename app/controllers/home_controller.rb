@@ -16,6 +16,8 @@ class HomeController < ApplicationController
       render template: 'home/job_coordinator'
     elsif current_user.call_rep?
       render template: 'home/call_rep'
+    elsif current_user.collections?
+      render template: 'home/collections'
     elsif current_user.project_manager?
       @jobs = Job.joins(:job_managers).merge(JobManager.where(:job_manager_id => current_user.id))
       render template: 'home/project_manager'

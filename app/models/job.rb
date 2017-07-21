@@ -39,6 +39,7 @@ class Job < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
 
+
   def job_loss_type
     Loss.find_by(job_id: id).try(:loss_type)
   end

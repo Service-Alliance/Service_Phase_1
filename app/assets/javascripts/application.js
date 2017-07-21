@@ -18,6 +18,7 @@
 //= require Chart.bundle
 //= require chartkick
 //= require best_in_place
+//= require filterrific/filterrific-jquery
 //= require_tree .
 
 $(function() {
