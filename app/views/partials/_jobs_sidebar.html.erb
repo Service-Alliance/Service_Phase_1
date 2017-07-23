@@ -424,13 +424,8 @@
       <div class="modal-body">
           <div class="field">
             <%= label_tag :job_manager_id, "Add a Job Manager" %><br>
-            <% if @job.franchise_id %>
-            <%= select_tag 'job_manager_id', options_from_collection_for_select(User.joins(:franchise_users).merge(FranchiseUser.where(franchise_id: @job.franchise_id)), "id", "full_name"), class: "form-control"  %>
-            <% else %>
             <% role = Role.find_by(name: "Project Manager") %>
             <%= select_tag 'job_manager_id', options_from_collection_for_select(User.where(role_id: role.id), "id", "full_name"), class: "form-control"  %>
-            <% end %>
-
           </div>
       </div>
       <div class="modal-footer">
