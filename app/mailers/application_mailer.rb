@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "email@servicealliance.com"
+  default from: "email@digitaljobchart.com"
   layout 'mailer'
 end
