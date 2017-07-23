@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
     work_order = TrackerTask.find_by(name: "Work Order Created")
     array = []
     array << self.full_name
-    array << self.jobs.where("created_at > ?", Time.now-days.days).count
+    array << self.jobs.where.not(status_id: nil).where("created_at > ?", Time.now-days.days).count
     array << self.trackers.where(tracker_task_id: note.id).where("created_at > ?", Time.now-days.days).count
     array << self.trackers.where(tracker_task_id: pricing.id).where("created_at > ?", Time.now-days.days).count
     array << self.trackers.where(tracker_task_id: work_order.id).where("created_at > ?", Time.now-days.days).count
