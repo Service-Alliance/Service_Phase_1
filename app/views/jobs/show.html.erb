@@ -716,7 +716,7 @@
                 <h3 class="text-center">Past</h3>
                 <div class="timeline-centered">
 
-                    <% @job.trackers.each do |tracker| %>
+                    <% @job.trackers.order('created_at DESC').each do |tracker| %>
                     <% if tracker.tracker_task.name == "Note Created" %>
                     <% noted = Note.find(tracker.child_id) %>
                     <article class="timeline-entry">
