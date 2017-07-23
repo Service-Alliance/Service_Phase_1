@@ -374,7 +374,6 @@
             <%= f.collection_select :user_id, User.where(role_id: collection_role.id), :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
           </div>
 
-
       </div>
       <div class="modal-footer">
         <%= f.submit "Save Changes", class: "btn btn-primary" %>
