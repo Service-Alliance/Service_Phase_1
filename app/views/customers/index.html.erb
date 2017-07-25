@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-xs-10 table-responsive">
             <h1>Customers/Contacts</h1>
-            <table id="job-table" class="table table-striped">
+              <%= link_to 'New Customer', new_customer_path, class: 'btn btn-primary' %>
+            <table id="job-table" class="table table-striped margin-top-2">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -44,7 +45,7 @@
             <%= paginate @customers %>
             <br>
 
-            <%= link_to 'New Customer', new_customer_path %>
+
         </div>
         <div class="col-xs-2 margin-top-5">
             <%= search_form_for @search do |f| %>
