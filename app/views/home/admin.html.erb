@@ -398,7 +398,8 @@ function LinkFormatter(value, row, index) {
 function UserLinkFormatter(value, row, index) {
 	return "<a href='users/" + row.id + "'>" + value + "</a>";
 }
-function WorkOrderLinkFormatter(value, row, index) {
+
+function WorkOrderLinkFormatter(value, row, index)
 	return "<a href='jobs/" + row.job_id + "/work_orders/" + row.id + "'>" + value + "</a>";
 }
 function JobLinkFormatter(value, row, index) {
