@@ -129,7 +129,7 @@ class Job < ActiveRecord::Base
     customer_or_address = Customer.joins(:address).where("first_name @@ :q or last_name @@ :q or email @@ :q or company_name @@ :q or addresses.address_1 @@ :q or addresses.address_2 @@ :q or addresses.city @@ :q", q: query)
     phones = Customer.joins(:phones).where("phones.number @@ :q", q: query)
 
-    p unique_list = (customer_or_address + phones).uniq
+    unique_list = (customer_or_address + phones).uniq
 
     return unique_list
   end
@@ -141,6 +141,22 @@ class Job < ActiveRecord::Base
     unique_list = (caller_or_address + phones).uniq
 
     return unique_list
+  end
+
+  # Check to see if the job is being moved to invoiced
+  def moving_to_invoiced(old_status_id, new_status_id, job)
+    if old_status_id != new_status_id
+      invoiced = JobStatus.find_by(name: "Invoiced")
+      if new_status_id === invoiced.id
+        job.collection_subscriptions.each do |collection_user|
+          UserMailer.job_moved_to_invoiced(collection_user.user, job).deliver_now
+        end
+      else
+        return false
+      end
+    else
+      return false
+    end
   end
 
 end

@@ -29,4 +29,19 @@ class UserMailer < ApplicationMailer
 
     mail(to: @customer.email, subject: "#{@customer.full_name}, you have been sent a work order from Service Alliance for job,#{@job.name}. Franchise: #{@job.franchise.try(:name)}.")
   end
+
+  # Email collections users who are subscribed to a job
+  def job_moved_to_invoiced(user, job)
+    @user = user
+    @job = job
+
+    mail(to: @user.email, subject: "#{@user.full_name}, #{@job.name} has moved to invoiced.")
+  end
+  #Email collection users who have been added to a job
+  def collections_user_added_to_job(user, job)
+    @user = user
+    @job = job
+
+    mail(to: @user.email, subject: "#{@user.full_name}, you have been added as a subscriber to #{@job.name}.")
+  end
 end
