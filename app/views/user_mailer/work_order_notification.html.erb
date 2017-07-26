@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1><%= @user.full_name %>, you have been sent a work order.</h1>
+    <h1><%= @user.full_name %>, you have been sent a work order. Franchise: <%= @job.franchise.try(:name) %></h1>
     <p>
       Click <a href="http://digitaljobchart.com/jobs/<%= @job.id %>/work_orders/<%= @work_order.id%>">here</a> to view the details.
     </p>

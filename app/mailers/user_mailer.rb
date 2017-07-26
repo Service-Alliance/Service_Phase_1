@@ -12,7 +12,7 @@ class UserMailer < ApplicationMailer
     @job = job
     @work_order = work_order
 
-    mail(to: @user.email, subject: "#{@user.full_name}, you have been sent a work order for job #{@job.id}, #{@job.name}")
+    mail(to: @user.email, subject: "#{@user.full_name}, you have been sent a work order for job #{@job.id}, #{@job.name}. Franchise: #{@job.franchise.try(:name)}.")
   end
 
   def mention_notification(user, job)
@@ -27,6 +27,6 @@ class UserMailer < ApplicationMailer
     @job = job
     @work_order = work_order
 
-    mail(to: @customer.email, subject: "#{@customer.full_name}, you have been sent a work order from Service Alliance for job,#{@job.name}")
+    mail(to: @customer.email, subject: "#{@customer.full_name}, you have been sent a work order from Service Alliance for job,#{@job.name}. Franchise: #{@job.franchise.try(:name)}.")
   end
 end
