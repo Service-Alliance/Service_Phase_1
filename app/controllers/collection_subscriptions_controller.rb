@@ -8,6 +8,7 @@ class CollectionSubscriptionsController < ApplicationController
 
     respond_to do |format|
       if @collection_subscription.save
+        UserMailer.collections_user_added_to_job(@collection_subscription.user, @job).deliver_now
         format.html { redirect_to job_path(@job), notice: 'Collection Department User was successfully added.' }
         format.json { render :show, status: :created, location: @collection_subscription }
       else

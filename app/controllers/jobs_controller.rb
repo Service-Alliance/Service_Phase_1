@@ -148,7 +148,7 @@ class JobsController < ApplicationController
 
     @call = Call.find_by(id: call_params[:id]) if call_params[:id]
     @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
-    p franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
+    franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
     @job.franchise_id = franchise.id if franchise
     @job.pipeline_status_id = 1
 
@@ -174,8 +174,6 @@ class JobsController < ApplicationController
           end
         end
 
-        # @job.create_activity action: 'Created a new Job', job_id: @job.id, owner: current_user
-
         if params[:commit] == 'Save and Move to Job Loss'
           redirect_to new_job_loss_path(@job), notice: 'Job was successfully created.'
         elsif params[:commit] == 'Save'
@@ -194,6 +192,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    @previous_status = Job.find(params[:id])
     respond_to do |format|
       if @job.update(job_params)
         @job.update_last_action
@@ -204,7 +203,7 @@ class JobsController < ApplicationController
         @job.referral_vendor_id = nil if @job.try(:referral_type).try(:name) != 'Vendor'
         @job.save
 
-
+        @job.moving_to_invoiced(@previous_status.status_id, @job.status_id, @job)
 
         @caller = Caller.find_by(job_id: @job.id)
         if @caller
