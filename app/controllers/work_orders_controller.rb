@@ -49,6 +49,12 @@ class WorkOrdersController < ApplicationController
           end
         end
 
+        @job.job_managers.each do |manager|
+          if manager.email != nil
+            UserMailer.vendor_work_order_notification(manager, @job, @work_order).deliver_now
+          end
+        end
+
         @vendor = Vendor.find_by(id: work_order_params[:vendor_id])
         if @vendor
           @vendor.customers.each do |contact|
@@ -127,7 +133,7 @@ class WorkOrdersController < ApplicationController
   end
 
     def work_order_params
-      params.require(:work_order).permit(:job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telephone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info, :acknowledgement, :acknowledged_by_id, :vendor_id)
+      params.require(:work_order).permit(:job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telephone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info, :acknowledgement, :acknowledged_by_id, :vendor_id, :hours_on_job)
     end
 
     def work_order_send_to_params
