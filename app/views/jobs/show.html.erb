@@ -422,35 +422,66 @@
                                   </ul>
                               </div>
                               <% end %>
-                              <hr/>
+
                               <div class="col-xs-12">
                                 <h2>SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
                                 <h2><%= @job.try(:franchise).try(:phone) %></h2>
                               </div>
 
-                              <div class="col-sm-6">
+                          <div class="row">
+                            <div class="col-xs-12">
+                              <label>Send to:</label><br />
+                            </div>
+                            <% if @job.job_coordinator %>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(id: @job.job_coordinator.id).collect{ |u| [u.full_name, u.id] }), class: "form-control" %>
+                                  </div>
+                              </div>
+                              <% end %>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= select_tag 'work_order_send_to[dont_send_to][]', options_for_select(User.where(email: "kroggemann@servpro5933.com").collect{ |u| [u.full_name, u.id] }), class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <% @crew_chief = Role.find_by(name: "Crew Chief") %>
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(role_id: @crew_chief.id).collect{ |u| [u.full_name, u.id] }), prompt: "Select Crew Chief", class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <%= select_tag 'work_order[vendor_id]', options_for_select(Vendor.all.collect{ |u| [u.name, u.id] }), prompt: "Select Vendor", class: "form-control" %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
+                                    <% @tech = Role.find_by(name: "Technician") %>
+                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(role_id: @tech.id).collect{ |u| [u.full_name, u.id] }), prompt: "Select Technician", class: "form-control" %>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-xs-12">
+                              <hr/>
+                            </div>
 
-                                  <div class="form-group">
-                                      <%= f.label :to %><br>
-                                      <%= f.text_field :to, class: "form-control" %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <%= f.label :name %><br>
-                                      <%= f.text_field :name, class: "form-control" %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <%= f.label :date %><br>
-                                      <%= f.date_select :date %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6">
+                              <div class="col-sm-4">
                                   <div class="form-group">
                                       <%= f.label :typed_by %><br>
                                       <%= f.text_field :typed_by, class: "form-control", value: current_user.try(:full_name) %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <%= f.label :name, "Loss Coordinator" %><br>
+                                      <%= f.text_field :name, class: "form-control", value: @job.try(:job_coordinator).try(:full_name) %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-4">
+                                  <div class="form-group">
+                                      <%= f.label :date %><br>
+                                      <%= f.text_field :date, class:"form-control datePicker" %>
                                   </div>
                               </div>
                               <div class="col-xs-12">
@@ -502,14 +533,21 @@
                               </div>
                               <div class="col-sm-3">
                                   <div class="form-group">
-                                      <%= f.label :crew %><br>
+                                      <%= f.label :crew, "Crew Size" %><br>
                                       <%= f.text_field :crew, class: "form-control" %>
                                   </div>
                               </div>
+
+                              <!-- <div class="col-sm-3">
+                                  <div class="form-group">
+                                      <% f.label :approx_time_on_loss %><br>
+                                      <% f.time_select :approx_time_on_loss, class: "form-control", :ampm => true %>
+                                  </div>
+                              </div> -->
                               <div class="col-sm-3">
                                   <div class="form-group">
-                                      <%= f.label :approx_time_on_loss %><br>
-                                      <%= f.time_select :approx_time_on_loss, class: "form-control", :ampm => true %>
+                                      <%= f.label :hours_on_job %><br>
+                                      <%= f.text_field :hours_on_job, class: "form-control" %>
                                   </div>
                               </div>
                               <div class="col-sm-12">
@@ -542,40 +580,7 @@
                                       <%= f.text_field :job_manager_contact_info, class: "form-control", value: @job.job_managers.map{|manager| manager.job_manager.try(:full_name)} %>
                                   </div>
                               </div>
-                              <div class="col-xs-12">
 
-
-                              <label>Send to:</label><br />
-                            </div>
-                            <% if @job.job_coordinator %>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(id: @job.job_coordinator.id).collect{ |u| [u.full_name, u.id] }), class: "form-control" %>
-                                  </div>
-                              </div>
-                              <% end %>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <%= select_tag 'work_order_send_to[dont_send_to][]', options_for_select(User.where(email: "kroggemann@servpro5933.com").collect{ |u| [u.full_name, u.id] }), class: "form-control" %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <% @crew_chief = Role.find_by(name: "Crew Chief") %>
-                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(role_id: @crew_chief.id).collect{ |u| [u.full_name, u.id] }), prompt: "Select Crew Chief", class: "form-control" %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <%= select_tag 'work_order[vendor_id]', options_for_select(Vendor.all.collect{ |u| [u.name, u.id] }), prompt: "Select Vendor", class: "form-control" %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                    <% @tech = Role.find_by(name: "Technician") %>
-                                      <%= select_tag 'work_order_send_to[send_to][]', options_for_select(User.where(role_id: @tech.id).collect{ |u| [u.full_name, u.id] }), prompt: "Select Technician", class: "form-control" %>
-                                  </div>
-                              </div>
                               <div class="actions col-sm-12">
                                   <%= f.submit class: "btn btn-primary" %>
                               </div>

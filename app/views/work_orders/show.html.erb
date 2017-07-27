@@ -96,14 +96,14 @@
                               </div>
                               <div class="col-sm-3">
                                   <div class="form-group">
-                                      <span class="bold">Crew:</span><br>
+                                      <span class="bold">Crew Size:</span><br>
                                       <%= @work_order.crew %>
                                   </div>
                               </div>
                               <div class="col-sm-3">
                                   <div class="form-group">
-                                      <span class="bold">Approx Time On Loss:</span><br>
-                                      <%= @work_order.approx_time_on_loss.try(:strftime, "%l:%M:%S %p") %>
+                                      <span class="bold">Hours on Job:</span><br>
+                                      <%= @work_order.hours_on_job %>
                                   </div>
                               </div>
                               <div class="col-sm-12">
