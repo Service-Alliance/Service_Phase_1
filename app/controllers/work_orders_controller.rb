@@ -50,8 +50,8 @@ class WorkOrdersController < ApplicationController
         end
 
         @job.job_managers.each do |manager|
-          if manager.email != nil
-            UserMailer.vendor_work_order_notification(manager, @job, @work_order).deliver_now
+          if manager.job_manager && manager.job_manager.email != nil
+            UserMailer.vendor_work_order_notification(manager.job_manager, @job, @work_order).deliver_now
           end
         end
 
