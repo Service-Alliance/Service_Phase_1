@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170727022314) do
+ActiveRecord::Schema.define(version: 20170728014924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -861,6 +861,7 @@ ActiveRecord::Schema.define(version: 20170727022314) do
     t.integer  "acknowledged_by_id"
     t.integer  "vendor_id"
     t.text     "hours_on_job"
+    t.text     "adjuster"
   end
 
 end

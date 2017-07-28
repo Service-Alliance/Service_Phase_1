@@ -133,7 +133,7 @@ class WorkOrdersController < ApplicationController
   end
 
     def work_order_params
-      params.require(:work_order).permit(:job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telephone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info, :acknowledgement, :acknowledged_by_id, :vendor_id, :hours_on_job)
+      params.require(:work_order).permit(:job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telephone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info, :acknowledgement, :acknowledged_by_id, :vendor_id, :hours_on_job, :adjuster)
     end
 
     def work_order_send_to_params
