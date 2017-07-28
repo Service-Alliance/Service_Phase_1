@@ -527,6 +527,12 @@
                               </div>
                               <div class="col-sm-3">
                                   <div class="form-group">
+                                      <%= f.label :adjuster %><br>
+                                      <%= f.text_field :adjuster, value: "", class: "form-control", value: @job.try(:adjuster).try(:full_name) %>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3">
+                                  <div class="form-group">
                                       <%= f.label :claim_number %><br>
                                       <%= f.text_field :claim_number, class: "form-control", value: @job.try(:job_detail).try(:claim_number) %>
                                   </div>
