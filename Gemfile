@@ -48,6 +48,8 @@ gem 'whenever', :require => false
 gem 'best_in_place', '~> 3.0.1'
 gem 'jquery-atwho-rails'
 gem 'jquery-ui-rails'
+gem 'simple_form'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
