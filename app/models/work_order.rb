@@ -1,5 +1,5 @@
 class WorkOrder < ActiveRecord::Base
-  has_many :mail_logs
+  has_many :mail_logs, as: :mail_loggable
 
   def initialize_from_job(job, typed_by)
     self.typed_by = typed_by.full_name
