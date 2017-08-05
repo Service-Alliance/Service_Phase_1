@@ -1,17 +1,16 @@
 <%= simple_form_for [@job, @work_order] do |f| %>
   <% if @work_order.errors.any? %>
-  <div id="error_explanation">
+    <div id="error_explanation">
       <h2><%= pluralize(@work_order.errors.count, "error") %>
           prohibited this work_order from being saved:</h2>
-
       <ul>
-          <% @work_order.errors.full_messages.each do |message| %>
+        <% @work_order.errors.full_messages.each do |message| %>
           <li><%= message %></li>
-          <% end %>
+        <% end %>
       </ul>
-  </div>
+    </div>
+    <hr/>
   <% end %>
-  <hr/>
   <div class="col-xs-12">
     <h2>SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
     <h2><%= @job.try(:franchise).try(:phone) %></h2>
@@ -22,7 +21,9 @@
   <%= f.input :name, as: :string, wrapper_html: {class: 'col-sm-6'} %>
   <%= f.input :date, wrapper_html: {class: 'col-sm-6'} %>
   <%= f.input :typed_by, as: :string, input_html: {value: current_user.full_name}, wrapper_html: {class: 'col-sm-6'} %>
-  <hr/>
+  <div class="col-xs-12">
+    <hr/>
+  </div>
   <h2 class="text-center">Work Order</h2>
   <%= f.input :job_start, as: :datetime, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :job_name, as: :string, input_html: {value: @job.name}, wrapper_html: {class: 'col-sm-12'} %>
