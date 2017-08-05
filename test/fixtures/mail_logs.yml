@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  name: MyString
+  email: MyString
+  body: MyText
+  mail_loggable_id: 1
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+
+two:
+  user_id: 
+  name: MyString
+  email: MyString
+  body: MyText
+  mail_loggable_id: 1
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
+  mail_loggable: 
