@@ -17,30 +17,29 @@
   </div>
   <%= render partial: 'work_orders/send_to' if @work_order.new_record? %>
 
-  <%= f.input :to, as: :string, wrapper_html: {class: 'col-sm-6'} %>
-  <%= f.input :name, as: :string, wrapper_html: {class: 'col-sm-6'} %>
-  <%= f.input :date, wrapper_html: {class: 'col-sm-6'} %>
-  <%= f.input :typed_by, as: :string, input_html: {value: current_user.full_name}, wrapper_html: {class: 'col-sm-6'} %>
+  <%= f.input :typed_by, as: :string, wrapper_html: {class: 'col-sm-4'} %>
+  <%= f.input :name, as: :string, wrapper_html: {class: 'col-sm-4'}, label: 'Loss Coordinator' %>
+  <%= f.input :date, as: :string, input_html: {class: 'datePicker'}, wrapper_html: {class: 'col-sm-4'} %>
   <div class="col-xs-12">
     <hr/>
   </div>
   <h2 class="text-center">Work Order</h2>
-  <%= f.input :job_start, as: :datetime, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :job_name, as: :string, input_html: {value: @job.name}, wrapper_html: {class: 'col-sm-12'} %>
+  <%= f.input :job_start, as: :datetime, ampm: true, wrapper_html: {class: 'col-sm-12'} %>
+  <%= f.input :job_name, as: :string, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :job_location, as: :string, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :telephone, as: :string, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :contact, as: :string, wrapper_html: {class: 'col-sm-12'} %>
 
-  <%= f.input :insurance, as: :string, input_html: {value: @job.try(:job_detail).try(:insurance_company).try(:name)}, wrapper_html: {class: 'col-sm-3'} %>
-  <%= f.input :claim_number, as: :string, input_html: {value: @job.try(:job_detail).try(:claim_number)}, wrapper_html: {class: 'col-sm-3'} %>
+  <%= f.input :insurance, as: :string, wrapper_html: {class: 'col-sm-3'} %>
+  <%= f.input :claim_number, as: :string, wrapper_html: {class: 'col-sm-3'} %>
   <%= f.input :crew, as: :string, wrapper_html: {class: 'col-sm-3'} %>
   <%= f.input :approx_time_on_loss, wrapper_html: {class: 'col-sm-3'} unless @work_order.new_record? %>
 
   <%= f.input :required, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :referral, as: :string, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :franchise_location, as: :string, input_html: {value: @job.try(:franchise).try(:name)}, wrapper_html: {class: 'col-sm-12'} %>
+  <%= f.input :franchise_location, as: :string, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :scope_of_work, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :job_manager_contact_info, as: :string, input_html: {value: @job.job_managers.map{|manager| manager.job_manager.full_name}}, wrapper_html: {class: 'col-sm-12'} %>
+  <%= f.input :job_manager_contact_info, as: :string, wrapper_html: {class: 'col-sm-12'} %>
   <div class="actions col-sm-12">
       <%= f.submit class: "btn btn-primary" %>
   </div>

@@ -37,7 +37,7 @@ class UserMailer < ApplicationMailer
     @work_order = work_order
     subject = "#{@customer.full_name}, you have been sent a work order from Service Alliance for job,#{@job.name}. Franchise: #{@job.franchise.try(:name)}."
 
-    mail(to: @customer.email, subject: subject)
+    @mail = mail(to: @customer.email, subject: subject)
 
     MailLog.create(
       name: @customer.full_name,
