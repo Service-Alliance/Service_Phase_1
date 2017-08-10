@@ -73,10 +73,12 @@ class AdjustersController < ApplicationController
   # PATCH/PUT /adjusters/1.json
   def update
     @job = Job.find_by(id: job_params[:job_id])
+    p @adjuster
     respond_to do |format|
       if @adjuster.update(adjuster_params)
-        p address_params
-        @adjuster.address.update(address_params)
+        if @adjuster.address
+          @adjuster.address.update(address_params)
+        end
         @adjuster.phones.destroy_all
         phone_count = phone_params["type_ids"].count
 
