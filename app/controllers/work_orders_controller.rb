@@ -137,6 +137,6 @@ class WorkOrdersController < ApplicationController
     end
 
     def work_order_send_to_params
-      params.require(:work_order_send_to).permit(send_to:[])
+      params.fetch(:work_order_send_to, {}).permit(send_to:[])
     end
 end
