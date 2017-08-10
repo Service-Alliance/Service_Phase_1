@@ -22,29 +22,27 @@
                                 <h2><%= @job.try(:franchise).try(:phone) %></h2>
                               </div>
 
-                              <div class="col-sm-6">
-
-                                  <div class="form-group">
-                                      <span class="bold">To:</span><br>
-                                      <%= @work_order.to %>
+                              <div class="clearfix">
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <span class="bold">To:</span><br>
+                                          <%= @work_order.to %>
+                                          <%= @work_order.mail_logs.pluck(:name).join('<br />').html_safe %>
+                                      </div>
                                   </div>
-                              </div>
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <span class="bold">Name:</span><br>
-                                      <%= @work_order.name %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <span class="bold">Date:</span><br>
-                                        <%= @work_order.date %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <span class="bold">Typed By:</span><br>
-                                        <%= @work_order.typed_by %>
+                                  <div class="col-sm-6">
+                                      <div class="form-group">
+                                          <span class="bold">Name:</span><br>
+                                          <%= @work_order.name %>
+                                      </div>
+                                      <div class="form-group">
+                                          <span class="bold">Date:</span><br>
+                                            <%= @work_order.date %>
+                                      </div>
+                                      <div class="form-group">
+                                          <span class="bold">Typed By:</span><br>
+                                            <%= @work_order.typed_by %>
+                                      </div>
                                   </div>
                               </div>
                               <div class="col-xs-12">

@@ -11,8 +11,17 @@ class UserMailer < ApplicationMailer
     @user = user
     @job = job
     @work_order = work_order
+    subject = "#{@user.full_name}, you have been sent a work order for job #{@job.id}, #{@job.name}. Franchise: #{@job.franchise.try(:name)}."
 
-    mail(to: @user.email, subject: "#{@user.full_name}, you have been sent a work order for job #{@job.id}, #{@job.name}. Franchise: #{@job.franchise.try(:name)}.")
+    @mail = mail(to: @user.email, subject: subject)
+
+    MailLog.create(
+      name: @user.full_name,
+      email: @user.email,
+      subject: subject,
+      body: @mail.body.encoded,
+      mail_loggable: work_order
+    )
   end
 
   def mention_notification(user, job)
@@ -26,8 +35,17 @@ class UserMailer < ApplicationMailer
     @customer = customer
     @job = job
     @work_order = work_order
+    subject = "#{@customer.full_name}, you have been sent a work order from Service Alliance for job,#{@job.name}. Franchise: #{@job.franchise.try(:name)}."
 
-    mail(to: @customer.email, subject: "#{@customer.full_name}, you have been sent a work order from Service Alliance for job,#{@job.name}. Franchise: #{@job.franchise.try(:name)}.")
+    @mail = mail(to: @customer.email, subject: subject)
+
+    MailLog.create(
+      name: @customer.full_name,
+      email: @customer.email,
+      subject: subject,
+      body: @mail.body.encoded,
+      mail_loggable: work_order
+    )
   end
 
   # Email collections users who are subscribed to a job

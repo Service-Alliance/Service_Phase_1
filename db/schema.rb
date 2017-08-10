@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170728014924) do
+ActiveRecord::Schema.define(version: 20170805061539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -492,6 +492,20 @@ ActiveRecord::Schema.define(version: 20170728014924) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  create_table "mail_logs", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "mail_loggable_id"
+    t.string   "mail_loggable_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "mail_logs", ["user_id"], name: "index_mail_logs_on_user_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.text     "content"

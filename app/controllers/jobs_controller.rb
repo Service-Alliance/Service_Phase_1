@@ -83,7 +83,10 @@ class JobsController < ApplicationController
     @future_schedules = []
     @past_schedules = []
     @note = @job.notes.new
+
     @work_order = WorkOrder.new
+    @work_order.initialize_from_job(@job, current_user)
+
     @inspection_checklist = InspectionChecklist.new
     @job.schedulers.each do |scheduler|
       if scheduler.event_date.future? || scheduler.event_date.today?
