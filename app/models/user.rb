@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
     self.role_id == 0 || self.role_id == nil  ? true : false
   end
 
+  def phone_numbers
+    phones.map(&:number)
+  end
+
   def metrics(days)
     note = TrackerTask.find_by(name: "Note Created")
     pricing = TrackerTask.find_by(name: "Pricing Created")

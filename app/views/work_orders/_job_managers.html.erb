@@ -10,7 +10,7 @@
     <% job_managers.each do |manager| %>
       <tr>
         <td><%= manager.job_manager.full_name %></td>
-        <td><%= manager.job_manager.phones.first.try(:number) %></td>
+        <td><%= manager.job_manager.phone_numbers.join('<br />').html_safe %></td>
         <td><%= mail_to manager.job_manager.email %></td>
       </tr>
     <% end %>
