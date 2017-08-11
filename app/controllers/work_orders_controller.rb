@@ -83,12 +83,12 @@ class WorkOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @work_order.update(work_order_params)
-        work_order_send_to_params[:send_to].each do |user|
-          unless user == ""
-            @user = User.find(user)
-            UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
-          end
-        end
+        #work_order_send_to_params[:send_to].each do |user|
+        #  unless user == ""
+        #    @user = User.find(user)
+        #    UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
+        #  end
+        #end
         format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @work_order }
       else
