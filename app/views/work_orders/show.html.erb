@@ -132,7 +132,8 @@
                 <div class="col-sm-12">
                   <div class="form-group">
                     <span class="bold">Franchise Location:</span><br>
-                    <%= @work_order.franchise_location %>
+                    <%= @work_order.franchise_name %><br />
+                    <%= @work_order.franchise_full_address %>
                   </div>
                 </div>
                 <div class="col-sm-12">
@@ -143,8 +144,8 @@
                 </div>
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <span class="bold">Job Manager Contact Info:</span><br>
-                    <%= @work_order.job_manager_contact_info %>
+                    <span class="bold">Job Manager Contact Info:</span>
+                    <%= render partial: 'job_managers', locals: {job_managers: @work_order.job_managers} %>
                   </div>
                 </div>
 

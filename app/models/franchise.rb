@@ -6,4 +6,6 @@ class Franchise < ActiveRecord::Base
   has_many :jobs
   accepts_nested_attributes_for :uploads
   accepts_nested_attributes_for :notes
+
+  delegate :full_address, to: :address, allow_nil: true
 end
