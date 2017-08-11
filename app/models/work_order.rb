@@ -13,6 +13,6 @@ class WorkOrder < ActiveRecord::Base
     self.claim_number = job.try(:job_detail).try(:claim_number)
     self.referral = job.try(:referral_type).try(:name)
     self.franchise_location = job.try(:franchise).try(:name)
-    self.job_manager_contact_info = job.job_managers.map{|manager| manager.job_manager.full_name}
+    self.job_manager_contact_info = job.job_managers.map{|manager| manager.job_manager.try(:full_name)}
   end
 end
