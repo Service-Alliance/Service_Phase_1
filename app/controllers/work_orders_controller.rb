@@ -17,6 +17,8 @@ class WorkOrdersController < ApplicationController
   # GET /work_orders/new
   def new
     @work_order = WorkOrder.new
+    job = Job.find(params[:job_id])
+    @work_order.initialize_from_job(job, current_user)
   end
 
   # GET /work_orders/1/edit

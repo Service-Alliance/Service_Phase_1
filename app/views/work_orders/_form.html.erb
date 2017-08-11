@@ -26,7 +26,7 @@
   <h2 class="text-center">Work Order</h2>
   <%= f.input :job_start, as: :datetime, ampm: true, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :job_name, as: :string, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :job_location, as: :string, wrapper_html: {class: 'col-sm-12'} %>
+  <%= f.input :job_location, as: :string, wrapper_html: {class: 'col-sm-12'}, disabled: true %>
   <%= f.input :telephone, as: :string, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :contact, as: :string, wrapper_html: {class: 'col-sm-12'} %>
 
@@ -37,9 +37,9 @@
 
   <%= f.input :required, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :referral, as: :string, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :franchise_location, as: :string, wrapper_html: {class: 'col-sm-12'} %>
+  <%= f.input :franchise_location, as: :string, wrapper_html: {class: 'col-sm-12'}, disabled: true %>
   <%= f.input :scope_of_work, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :job_manager_contact_info, as: :string, wrapper_html: {class: 'col-sm-12'} %>
+  <%= f.input :job_manager_contact_info, as: :string, wrapper_html: {class: 'col-sm-12'}, disabled: true %>
   <div class="actions col-sm-12">
       <%= f.submit class: "btn btn-primary" %>
   </div>
