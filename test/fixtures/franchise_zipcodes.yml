@@ -2,8 +2,8 @@
 
 one:
   franchise_id: 1
-  zipcode: 1
+  zip_code: 1
 
 two:
   franchise_id: 1
-  zipcode: 1
+  zip_code: 1

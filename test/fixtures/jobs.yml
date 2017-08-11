@@ -6,7 +6,7 @@ one:
   entered_by_id: 1
   franchise_id: 1
   details: MyText
-  notes: MyText
+  job_note: MyText
   customer_id: 1
   referral_type_id: 1
 
@@ -16,6 +16,6 @@ two:
   entered_by_id: 1
   franchise_id: 1
   details: MyText
-  notes: MyText
+  job_note: MyText
   customer_id: 1
   referral_type_id: 1

@@ -3,13 +3,11 @@
 one:
   name: MyString
   package_id: MyString
-  document_id: MyString
-  signed: false
-  link: MyString
+  transaction_id: MyString
+  signer_id: false
 
 two:
   name: MyString
   package_id: MyString
-  document_id: MyString
-  signed: false
-  link: MyString
+  transaction_id: MyString
+  signer_id: false
