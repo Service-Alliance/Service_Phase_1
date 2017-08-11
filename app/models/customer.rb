@@ -15,6 +15,8 @@ class Customer < ActiveRecord::Base
   has_many :vendors, through: :customer_vendors
   accepts_nested_attributes_for :customer_vendors
 
+  delegate :full_address, to: :address, allow_nil: true
+
   # validates :email, presence: true, format: {
   # with: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/i,
   # message: 'Invalid email format.'
@@ -47,16 +49,6 @@ class Customer < ActiveRecord::Base
     first = first_name || " "
     last = last_name || " "
     return "#{first+ " " + last}"
-  end
-
-  def full_address
-    address_1 = self.try(:address).try(:address_1) || " "
-    address_2 = self.try(:address).try(:address_2) || " "
-    city =  self.try(:address).try(:city) || " "
-    state =  self.try(:address).try(:state).try(:name) || " "
-    zip_code =  self.try(:address).try(:zip_code) || " "
-    county =  self.try(:address).try(:county) || " "
-    return "#{address_1 + " " + address_2 + " " + city + " " + state + " " + zip_code + " " + county}"
   end
 
   def cell_phones
