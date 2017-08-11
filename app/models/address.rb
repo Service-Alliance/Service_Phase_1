@@ -9,7 +9,7 @@ class Address < ActiveRecord::Base
   # end
 
   def full_address
-    [address_1, address_2, city, state_name, zip_code, county].delete_if(&:empty?).join(' ')
+    [address_1, address_2, city, state_name, zip_code, county].delete_if(&:blank?).join(' ')
   end
 
 end
