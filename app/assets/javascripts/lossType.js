@@ -1,5 +1,4 @@
 $(function() {
-    // $("#loss_loss_cause_id").parent().hide();
     var lossCauses = $("#loss_loss_cause_id").html();
     if ($("#loss_loss_cause_id").val() == ""){
         $("#loss_loss_cause_id").empty();
