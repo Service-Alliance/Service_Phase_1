@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: companies
+#
+#  id         :integer          not null, primary key
+#  name       :text
+#  address_id :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Company < ActiveRecord::Base
   has_many :notes, as: :noteable, dependent: :destroy
   has_many :trackers, as: :trackable, dependent: :destroy

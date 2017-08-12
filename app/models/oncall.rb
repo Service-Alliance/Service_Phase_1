@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: oncalls
+#
+#  id           :integer          not null, primary key
+#  scheduled_on :date
+#  user_id      :integer
+#  priority     :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  state_id     :integer
+#
+
 class Oncall < ActiveRecord::Base
   belongs_to :user
 

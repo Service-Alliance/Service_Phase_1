@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: ticsheets
+#
+#  id          :integer          not null, primary key
+#  key_code    :integer
+#  description :string
+#  uom         :string
+#  percentage  :integer
+#  quantity    :integer
+#  job_id      :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Ticsheet < ActiveRecord::Base
   def self.water_damage_list
     array = [['8010', 'Emerg Service, After HR/Wknd', 'EA'],
