@@ -177,6 +177,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
+    marginalia (1.4.0)
+      actionpack (>= 2.3)
+      activerecord (>= 2.3)
+    memory_profiler (0.9.8)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
@@ -208,6 +212,8 @@ GEM
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (1.6.8)
+    rack-mini-profiler (0.10.5)
+      rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.8)
@@ -332,12 +338,15 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   letter_opener_web
+  marginalia
+  memory_profiler
   pg (~> 0.15)
   pg_search
   prawn
   public_activity
   puma
   pundit
+  rack-mini-profiler
   rails (= 4.2.8)
   rails_12factor
   ransack
@@ -353,4 +362,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.14.6
+   1.15.3

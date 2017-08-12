@@ -57,9 +57,10 @@ gem 'simple_form'
 gem 'unicorn'
 gem 'unicorn-worker-killer'
 
+# Add source of code for every database query
+gem 'marginalia'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -67,6 +68,10 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rack-mini-profiler', require: false
+  gem 'memory_profiler', require: false
+
+
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
