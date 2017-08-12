@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class StatesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @state = states(:one)
   end

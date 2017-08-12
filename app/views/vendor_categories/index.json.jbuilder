@@ -1,1 +1,0 @@
-json.array! @vendor_categories, partial: 'vendor_categories/vendor_category', as: :vendor_category

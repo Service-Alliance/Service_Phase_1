@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class CustomerCompaniesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @customer_company = customer_companies(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

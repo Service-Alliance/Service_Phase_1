@@ -68,7 +68,7 @@ class CustomersController < ApplicationController
           end
         else
           @customer.phones.destroy_all
-          phone_count = phone_params["type_ids"].count
+          phone_count = phone_params["type_ids"].try(:count) || 0
 
           phone_count.times do |index|
             unless phone_params["numbers"][index] == ""

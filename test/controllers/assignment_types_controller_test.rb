@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class AssignmentTypesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @assignment_type = assignment_types(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

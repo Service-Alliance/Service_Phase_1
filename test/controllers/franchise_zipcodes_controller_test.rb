@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class FranchiseZipcodesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @franchise_zipcode = franchise_zipcodes(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do
@@ -18,7 +21,7 @@ class FranchiseZipcodesControllerTest < ActionController::TestCase
 
   test "should create franchise_zipcode" do
     assert_difference('FranchiseZipcode.count') do
-      post :create, franchise_zipcode: { franchise_id: @franchise_zipcode.franchise_id, zipcode: @franchise_zipcode.zipcode }
+      post :create, franchise_zipcode: { franchise_id: @franchise_zipcode.franchise_id, zipcode: @franchise_zipcode.zip_code }
     end
 
     assert_redirected_to franchise_zipcode_path(assigns(:franchise_zipcode))
@@ -35,7 +38,7 @@ class FranchiseZipcodesControllerTest < ActionController::TestCase
   end
 
   test "should update franchise_zipcode" do
-    patch :update, id: @franchise_zipcode, franchise_zipcode: { franchise_id: @franchise_zipcode.franchise_id, zipcode: @franchise_zipcode.zipcode }
+    patch :update, id: @franchise_zipcode, franchise_zipcode: { franchise_id: @franchise_zipcode.franchise_id, zipcode: @franchise_zipcode.zip_code }
     assert_redirected_to franchise_zipcode_path(assigns(:franchise_zipcode))
   end
 

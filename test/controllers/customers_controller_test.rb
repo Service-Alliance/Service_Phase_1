@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class CustomersControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @customer = customers(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do
@@ -18,7 +21,7 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should create customer" do
     assert_difference('Customer.count') do
-      post :create, customer: { address_1: @customer.address_1, address_2: @customer.address_2, city: @customer.city, county: @customer.county, state_id: @customer.state_id, zip: @customer.zip }
+      post :create, customer: valid_customer_params()
     end
 
     assert_redirected_to customer_path(assigns(:customer))
@@ -35,7 +38,7 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
   test "should update customer" do
-    patch :update, id: @customer, customer: { address_1: @customer.address_1, address_2: @customer.address_2, city: @customer.city, county: @customer.county, state_id: @customer.state_id, zip: @customer.zip }
+    patch :update, id: @customer, customer: valid_customer_params()
     assert_redirected_to customer_path(assigns(:customer))
   end
 
@@ -45,5 +48,9 @@ class CustomersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to customers_path
+  end
+
+  def valid_customer_params
+    {first_name: 'First', last_name:'Last', email: 'test@example.com'}
   end
 end

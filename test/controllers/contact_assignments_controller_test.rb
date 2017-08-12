@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class ContactAssignmentsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @contact_assignment = contact_assignments(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class FranchiseUsersControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @franchise_user = franchise_users(:one)
   end

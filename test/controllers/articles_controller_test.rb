@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ArticlesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
   setup do
     @article = articles(:one)
   end

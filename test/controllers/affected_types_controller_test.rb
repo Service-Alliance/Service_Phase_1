@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class AffectedTypesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @affected_type = affected_types(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

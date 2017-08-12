@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class OccupantsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @occupant = occupants(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

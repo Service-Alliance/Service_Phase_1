@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class UploadCategoriesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @upload_category = upload_categories(:one)
   end

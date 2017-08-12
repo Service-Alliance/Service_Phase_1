@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class FormsControllerTest < ActionController::TestCase
-  setup do
-    @form = forms(:one)
-  end
+  include Devise::Test::ControllerHelpers
+  setup { @form = forms(:one) }
 
   test "should get index" do
     get :index

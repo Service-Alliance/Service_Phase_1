@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class JobFormsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @job_form = job_forms(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class CustomerVendorsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @customer_vendor = customer_vendors(:one)
   end

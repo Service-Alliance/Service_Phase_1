@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :pipeline_statuses
   resources :upload_categories
   resources :franchise_users
-  resources :images
   resources :franchises
   resources :vendor_upload_types
   resources :tracker_tasks
@@ -28,7 +27,6 @@ Rails.application.routes.draw do
     collection {post :sort}
   end
   resources :forms
-  resources :vendor_categories
   resources :vendors do
     resources :vendor_uploads
   end

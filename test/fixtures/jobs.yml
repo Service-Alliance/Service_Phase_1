@@ -1,21 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  type_id: 1
-  status_id: 1
-  entered_by_id: 1
-  franchise_id: 1
+DEFAULTS: &DEFAULTS
   details: MyText
-  job_note: MyText
   customer_id: 1
   referral_type_id: 1
 
-two:
+one:
+  <<: *DEFAULTS
   type_id: 1
   status_id: 1
   entered_by_id: 1
   franchise_id: 1
-  details: MyText
-  job_note: MyText
-  customer_id: 1
-  referral_type_id: 1
+
+with_note:
+  <<: *DEFAULTS
+  job_note: just a note

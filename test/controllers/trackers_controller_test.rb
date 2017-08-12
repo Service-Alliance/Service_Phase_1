@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class TrackersControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @tracker = trackers(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

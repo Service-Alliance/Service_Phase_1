@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class StructureTypesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @structure_type = structure_types(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

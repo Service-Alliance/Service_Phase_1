@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class PropertyTypesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @property_type = property_types(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

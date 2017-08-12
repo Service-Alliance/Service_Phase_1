@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class OncallsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @oncall = oncalls(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

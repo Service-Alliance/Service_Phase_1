@@ -1,1 +1,0 @@
-json.partial! "vendor_categories/vendor_category", vendor_category: @vendor_category

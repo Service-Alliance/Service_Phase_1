@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class WorkOrdersControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @work_order = work_orders(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do
@@ -18,7 +21,27 @@ class WorkOrdersControllerTest < ActionController::TestCase
 
   test "should create work_order" do
     assert_difference('WorkOrder.count') do
-      post :create, work_order: { approx_time_on_loss: @work_order.approx_time_on_loss, claim_number: @work_order.claim_number, contact: @work_order.contact, crew: @work_order.crew, date: @work_order.date, franchise_location: @work_order.franchise_location, insurance: @work_order.insurance, job_id: @work_order.job_id, job_location: @work_order.job_location, job_manager_contact_info: @work_order.job_manager_contact_info, job_name: @work_order.job_name, job_start: @work_order.job_start, name: @work_order.name, referral: @work_order.referral, required: @work_order.required, scope_of_work: @work_order.scope_of_work, telphone: @work_order.telphone, to: @work_order.to, typed_by: @work_order.typed_by }
+      post :create, work_order: {
+        approx_time_on_loss: @work_order.approx_time_on_loss,
+        claim_number: @work_order.claim_number,
+        contact: @work_order.contact,
+        crew: @work_order.crew,
+        date: @work_order.date,
+        franchise_location: @work_order.franchise_location,
+        insurance: @work_order.insurance,
+        job_id: @work_order.job_id,
+        job_location: @work_order.job_location,
+        job_manager_contact_info: @work_order.job_manager_contact_info,
+        job_name: @work_order.job_name,
+        job_start: @work_order.job_start,
+        name: @work_order.name,
+        referral: @work_order.referral,
+        required: @work_order.required,
+        scope_of_work: @work_order.scope_of_work,
+        telephone: @work_order.telephone,
+        to: @work_order.to,
+        typed_by: @work_order.typed_by
+      }
     end
 
     assert_redirected_to work_order_path(assigns(:work_order))
@@ -35,7 +58,7 @@ class WorkOrdersControllerTest < ActionController::TestCase
   end
 
   test "should update work_order" do
-    patch :update, id: @work_order, work_order: { approx_time_on_loss: @work_order.approx_time_on_loss, claim_number: @work_order.claim_number, contact: @work_order.contact, crew: @work_order.crew, date: @work_order.date, franchise_location: @work_order.franchise_location, insurance: @work_order.insurance, job_id: @work_order.job_id, job_location: @work_order.job_location, job_manager_contact_info: @work_order.job_manager_contact_info, job_name: @work_order.job_name, job_start: @work_order.job_start, name: @work_order.name, referral: @work_order.referral, required: @work_order.required, scope_of_work: @work_order.scope_of_work, telphone: @work_order.telphone, to: @work_order.to, typed_by: @work_order.typed_by }
+    patch :update, id: @work_order, work_order: { approx_time_on_loss: @work_order.approx_time_on_loss, claim_number: @work_order.claim_number, contact: @work_order.contact, crew: @work_order.crew, date: @work_order.date, franchise_location: @work_order.franchise_location, insurance: @work_order.insurance, job_id: @work_order.job_id, job_location: @work_order.job_location, job_manager_contact_info: @work_order.job_manager_contact_info, job_name: @work_order.job_name, job_start: @work_order.job_start, name: @work_order.name, referral: @work_order.referral, required: @work_order.required, scope_of_work: @work_order.scope_of_work, telephone: @work_order.telephone, to: @work_order.to, typed_by: @work_order.typed_by }
     assert_redirected_to work_order_path(assigns(:work_order))
   end
 

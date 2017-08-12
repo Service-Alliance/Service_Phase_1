@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       if @user.save
 
         @user.phones.destroy_all
-        phone_count = phone_params["type_ids"].count
+        phone_count = phone_params["type_ids"].try(:count) || 0
 
         phone_count.times do |index|
           unless phone_params["numbers"][index] == ""
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         @user.phones.destroy_all
-        phone_count = phone_params["type_ids"].count
+        phone_count = phone_params["type_ids"].try(:count) || 0
 
         phone_count.times do |index|
           unless phone_params["numbers"][index] == ""

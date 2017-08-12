@@ -32,7 +32,7 @@
         <td><% job_detail.esl_nst_amount_id %></td>
         <td><%= job_detail.emergency_service_amount %></td>
         <td><%= job_detail.job_id %></td>
-        <td><%= link_to 'Show', job_job_detail %></td>
+        <td><%= link_to 'Show', job_job_detail_path(@job, job_detail) %></td>
         <td><%= link_to 'Edit', edit_job_job_detail_path(@job, job_detail) %></td>
       </tr>
     <% end %>

@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class SchedulersControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @scheduler = schedulers(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

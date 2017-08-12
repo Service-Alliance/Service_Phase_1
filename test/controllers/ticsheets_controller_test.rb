@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class TicsheetsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @ticsheet = ticsheets(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

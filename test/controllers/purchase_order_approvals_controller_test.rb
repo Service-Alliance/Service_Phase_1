@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class PurchaseOrderApprovalsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @purchase_order_approval = purchase_order_approvals(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do
