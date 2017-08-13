@@ -1,18 +1,19 @@
 user = User.create(email: 'callrep@test.com', password: 'password', password_confirmation: 'password', role_id: 3, first_name: 'Call', last_name: 'Rep', department_id: 1)
 user = User.create(email: 'jobcoordinator@test.com', first_name: 'User', last_name: 'Two', password: 'password', password_confirmation: 'password', role_id: 2)
 user = User.create(email: 'admin@test.com', first_name: 'User', last_name: 'Three', password: 'password', password_confirmation: 'password', role_id: 1)
-
+user = User.create(email: 'jobmanager@test.com', first_name: 'Job', last_name: 'Manager',  password: 'password', password_confirmation: 'password', role_id: 4)
+user = User.create(email: 'jobmanager@test.com', first_name: 'Todd', last_name: 'Manager',  password: 'password', password_confirmation: 'password', role_id: 4)
 user = User.create(email: 'creaumond@gmail.com', password: 'password', password_confirmation: 'password', role_id: 1, first_name: 'Connor', last_name: 'Reaumond', department_id: 1)
 
-
-Role.create(name: "Admin")
-Role.create(name: "Job Coordinator")
-Role.create(name: "Call Rep")
-Role.create(name: 'Project Manager')
-Role.create(name: 'Crew Chief')
-Role.create(name: 'Technician')
-Role.create(name: 'Owner')
-Role.create(name: 'Collections Department')
+# User Roles
+Role.create(name: "Admin") # Role_ID: 1
+Role.create(name: "Job Coordinator")  # Role_ID: 2
+Role.create(name: "Call Rep")  # Role_ID: 3
+Role.create(name: 'Project Manager')  # Role_ID: 4
+Role.create(name: 'Crew Chief')  # Role_ID: 5
+Role.create(name: 'Technician')  # Role_ID: 6
+Role.create(name: 'Owner')  # Role_ID: 7
+Role.create(name: 'Collections Department')  # Role_ID: 8
 
 csv_text = File.read("db/files/users.csv")
 csv = CSV.parse(csv_text, :headers => true)
@@ -79,13 +80,13 @@ CorporateReferralType.create(name: "Contractor Connections")
 
 
 # Franchise Names
-Franchise.create(name: 'Central Manhattan')
-Franchise.create(name: 'East Windsor')
+Franchise.create(name: 'Central Manhattan') # Franchise_Id: 1
+Franchise.create(name: 'East Windsor')  # Franchise_Id: 2
 medford_address = Address.create(address_1: "3090 Route 112", city: "Medford", state_id: 32, zip_code: "11763")
-Franchise.create(name: 'Medford', franchise_number: 9584, legal_name: "Restoration Services of Medford, LLC", phone: "(631) 732-4931", website: 'http://www.servpromedfordny.com/', address_id: medford_address.id, general_license: "", residential_license: "", commercial_license: "", mold_remediation_license: "")
-Franchise.create(name: 'Oakdale/North Bay Shore')
-Franchise.create(name: 'Old Bridge/Cranbury')
-Franchise.create(name: 'Southwest Brooklyn')
+Franchise.create(name: 'Medford', franchise_number: 9584, legal_name: "Restoration Services of Medford, LLC", phone: "(631) 732-4931", website: 'http://www.servpromedfordny.com/', address_id: medford_address.id, general_license: "", residential_license: "", commercial_license: "", mold_remediation_license: "")  # Franchise_Id: 3
+Franchise.create(name: 'Oakdale/North Bay Shore')  # Franchise_Id:4
+Franchise.create(name: 'Old Bridge/Cranbury')  # Franchise_Id: 5
+Franchise.create(name: 'Southwest Brooklyn')  # Franchise_Id: 6
 
 csv_text = File.read("db/files/central_zips.csv")
 csv = CSV.parse(csv_text, :headers => true)
