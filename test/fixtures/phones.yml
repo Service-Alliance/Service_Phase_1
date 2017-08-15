@@ -3,15 +3,9 @@
 one:
   number: MyString
   type_id: 1
-  occupant_id: 1
-  caller_id: 1
-  customer_id: 1
   extension: MyString
 
 two:
   number: MyString
   type_id: 1
-  occupant_id: 1
-  caller_id: 1
-  customer_id: 1
   extension: MyString

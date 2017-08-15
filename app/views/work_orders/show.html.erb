@@ -1,157 +1,165 @@
 <div class="container-fluid">
-    <div id="wrapper">
-        <%= render partial: "partials/jobs_sidebar" %>
-        <div id="page-content-wrapper">
-            <% if notice %>
-            <div class="alert alert-success" role="alert"><%= notice %></div>
-            <% end %>
-            <div class="col-xs-12">
-                <h1 class="text-center">Work Order Information:</h1>
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Work Order:
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12">
-                              <hr/>
-                              <div class="col-xs-12">
-                                <h2>SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
-                                <h2><%= @job.try(:franchise).try(:phone) %></h2>
-                              </div>
-
-                              <div class="clearfix">
-                                  <div class="col-sm-6">
-                                      <div class="form-group">
-                                          <span class="bold">To:</span><br>
-                                          <%= @work_order.to %>
-                                          <%= @work_order.mail_logs.pluck(:name).join('<br />').html_safe %>
-                                      </div>
-                                  </div>
-                                  <div class="col-sm-6">
-                                      <div class="form-group">
-                                          <span class="bold">Name:</span><br>
-                                          <%= @work_order.name %>
-                                      </div>
-                                      <div class="form-group">
-                                          <span class="bold">Date:</span><br>
-                                            <%= @work_order.date %>
-                                      </div>
-                                      <div class="form-group">
-                                          <span class="bold">Typed By:</span><br>
-                                            <%= @work_order.typed_by %>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div class="col-xs-12">
-                                <hr/>
-                              </div>
-
-                              <h2 class="text-center">Work Order</h2>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Job Start:</span><br>
-                                      <%= @work_order.job_start.try(:strftime, "%A, %B %d, %Y %l:%M:%S %p") %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Job Name:</span><br>
-                                        <%= @work_order.job_name %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Job Location:</span><br>
-                                      <%= @work_order.job_location %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Telephone:</span><br>
-                                      <%= @work_order.telephone %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Contact:</span><br>
-                                      <%= @work_order.contact %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <span class="bold">Insurance:</span><br>
-                                      <%= @work_order.insurance %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <span class="bold">Adjuster:</span><br>
-                                      <%= @work_order.adjuster %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <span class="bold">Claim Number:</span><br>
-                                      <%= @work_order.claim_number %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <span class="bold">Crew Size:</span><br>
-                                      <%= @work_order.crew %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <span class="bold">Hours on Job:</span><br>
-                                      <%= @work_order.hours_on_job %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Required:</span><br>
-                                      <%= @work_order.required %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Referral:</span><br>
-                                      <%= @work_order.referral %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Franchise Location:</span><br>
-                                      <%= @work_order.franchise_location %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Scope of Work:</span><br>
-                                      <%= @work_order.scope_of_work %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Job Manager Contact Info:</span><br>
-                                      <%= @work_order.job_manager_contact_info %>
-                                  </div>
-                              </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                            <%= link_to edit_job_work_order_path(@job, @work_order), class: "btn btn-sm btn-warning", type: "button" do %>
-                            <i class="glyphicon glyphicon-edit"></i>
-                            <% end %>
-                    </div>
+  <div id="wrapper">
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div id="page-content-wrapper">
+      <% if notice %>
+        <div class="alert alert-success" role="alert"><%= notice %></div>
+      <% end %>
+      <div class="col-xs-12">
+        <h1 class="text-center">Work Order Information:</h1>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              Work Order:
+            </h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <hr/>
+                <div class="col-xs-12">
+                  <h2>SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
+                  <h2><%= @job.try(:franchise).try(:phone) %></h2>
                 </div>
+
+                <div class="clearfix">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <span class="bold">To:</span><br>
+                      <%= @work_order.to %>
+                      <%= @work_order.mail_logs.pluck(:name).join('<br />').html_safe %>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <span class="bold">Name:</span><br>
+                      <%= @work_order.name %>
+                    </div>
+                    <div class="form-group">
+                      <span class="bold">Date:</span><br>
+                      <%= @work_order.date %>
+                    </div>
+                    <div class="form-group">
+                      <span class="bold">Typed By:</span><br>
+                      <%= @work_order.typed_by %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12">
+                  <hr/>
+                </div>
+
+                <h2 class="text-center">Work Order</h2>
+                <div class="row">
+                  <div class="col-sm-6">
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <span class="bold">Job Start:</span><br>
+                          <%= @work_order.job_start.try(:strftime, "%A, %B %d, %Y %l:%M:%S %p") %>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <span class="bold">Job Name:</span><br>
+                          <%= @work_order.job_name %>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <span class="bold">Job Location:</span><br>
+                          <%= @work_order.job_location %>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <span class="bold">Telephone:</span><br>
+                          <%= @work_order.telephone %>
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <span class="bold">Contact:</span><br>
+                          <%= @work_order.contact %>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <%= render partial: 'partials/google_map', locals: {map_id: 'map'} %>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <span class="bold">Insurance:</span><br>
+                    <%= @work_order.insurance %>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <span class="bold">Adjuster:</span><br>
+                    <%= @work_order.adjuster %>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <span class="bold">Claim Number:</span><br>
+                    <%= @work_order.claim_number %>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <span class="bold">Crew Size:</span><br>
+                    <%= @work_order.crew %>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <span class="bold">Hours on Job:</span><br>
+                    <%= @work_order.hours_on_job %>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <span class="bold">Required:</span><br>
+                    <%= @work_order.required %>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <span class="bold">Referral:</span><br>
+                    <%= @work_order.referral %>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <span class="bold">Franchise Location:</span><br>
+                    <%= @work_order.franchise_name %><br />
+                    <%= @work_order.franchise_full_address %>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <span class="bold">Scope of Work:</span><br>
+                    <%= @work_order.scope_of_work %>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <span class="bold">Job Manager Contact Info:</span>
+                    <%= render partial: 'job_managers', locals: {job_managers: @work_order.job_managers} %>
+                  </div>
+                </div>
+
+
+              </div>
             </div>
+          </div>
+          <div class="panel-footer">
+            <%= link_to edit_job_work_order_path(@job, @work_order), class: "btn btn-sm btn-warning", type: "button" do %>
+              <i class="glyphicon glyphicon-edit"></i>
+            <% end %>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

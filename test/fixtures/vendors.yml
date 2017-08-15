@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  category_id: 
   name: MyString
   contact: MyString
   phone: MyString
@@ -17,7 +16,6 @@ one:
   email: MyString
 
 two:
-  category_id: 
   name: MyString
   contact: MyString
   phone: MyString
