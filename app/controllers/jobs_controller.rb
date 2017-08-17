@@ -42,7 +42,6 @@ class JobsController < ApplicationController
   end
 
   def new_york_datasheet
-    # new_york = State.find_by(name: "NY")
     jim = User.find_by(email: 'jbertini@servpro5933.com')
     duct = LossType.find_by(name: "Duct Cleaning")
     state_farm = InsuranceCompany.find_by(name: "State Farm")
