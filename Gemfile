@@ -48,6 +48,8 @@ gem 'best_in_place', '~> 3.0.1'
 gem 'jquery-atwho-rails'
 gem 'jquery-ui-rails'
 gem 'simple_form'
+gem 'tsheets', github: 'tsheets/api_ruby'
+gem 'font-awesome-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -61,17 +63,22 @@ gem 'marginalia'
 gem 'seed_migration'
 
 gem 'sidekiq'
+#sendgrid integration to webhooks
+gem 'gridhook', github: 'Service-Alliance/gridhook'
 
 #sendgrid integration to webhooks
 gem 'gridhook', github: 'Service-Alliance/gridhook'
 
-
 group :development, :test do
-  gem 'byebug'
   gem 'minitest-reporters'
   gem 'simplecov', :require => false
   gem 'single_test'
-  gem 'pry'
+  gem 'pry-byebug'
+end
+
+group :test do
+  gem 'minitest-vcr'
+  gem 'webmock'
 end
 
 group :development do

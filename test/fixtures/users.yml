@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: user1@domain.com
-  first_name: MyString
-  last_name: MyString
-  role: one
+  email: user1@servpro.com
+  first_name: Dave
+  last_name: Jones
+
 
 two:
-  email: user2@domain.com
-  first_name: MyString
-  last_name: MyString
-  role: two
+  email: user2@servpro.com
+  first_name: Barry
+  last_name: Barnett
+  tsheets: {tsheets_id: 123}
