@@ -1,17 +1,31 @@
 <div id="<%= map_id %>" style="height: 300px;width:100%"></div>
 <script>
-function initMap() {
-  var uluru = {lat: -25.363, lng: 131.044};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
-    center: uluru
+var geocoder;
+var map;
+function initialize() {
+  geocoder = new google.maps.Geocoder();
+
+  var address = '<%= address %>';
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == 'OK') {
+      loadMap(results[0].geometry.location);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
   });
+}
+
+function loadMap(location) {
+  var mapOptions = {
+    zoom: 14,
+    center: location
+  }
+  map = new google.maps.Map(document.getElementById('map'), mapOptions);
   var marker = new google.maps.Marker({
-    position: uluru,
-    map: map
+    map: map,
+    position: location
   });
 }
 </script>
-<script async defer
-     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALx2TEAZ7MUHAqGl7SVodwFQiyGDgcC-4&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALx2TEAZ7MUHAqGl7SVodwFQiyGDgcC-4&callback=initialize">
 </script>

@@ -84,9 +84,10 @@
                       </div>
                   </div>
                   <div class="col-sm-6">
-                    <%= render partial: 'partials/google_map', locals: {map_id: 'map'} %>
+                    <%= render partial: 'partials/google_map', locals: {map_id: 'map', address: @work_order.job_location} %>
                   </div>
                 </div>
+                <hr />
                 <div class="col-sm-3">
                   <div class="form-group">
                     <span class="bold">Insurance:</span><br>
