@@ -34,11 +34,10 @@ class JobsController < ApplicationController
   end
 
   def list
-    @count = Job.where.not(status_id: nil).count
-    @jobs = Job.where.not(status_id: nil).limit(100)
-    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
-                                           :job_loss_type, :insurance_details,
-                                           :job_detail, :customer])
+    @jobs = Job.where.not(status_id: nil)
+      .includes(job_associations)
+      .limit(100)
+    render json: @jobs.to_json(include: job_json_includes)
   end
 
   def new_york_datasheet
@@ -57,10 +56,10 @@ class JobsController < ApplicationController
   end
 
   def no_activity
-    @jobs = Job.where('last_action < ? AND status_id = ?', 7.days.ago, 1).limit(75)
-    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
-                                         :job_loss_type, :insurance_details,
-                                         :job_detail, :customer])
+    @jobs = Job.where('last_action < ? AND status_id = ?', 7.days.ago, 1)
+      .includes(job_associations)
+      .limit(75)
+    render json: @jobs.to_json(include: job_json_includes)
   end
 
   # GET /jobs/1
