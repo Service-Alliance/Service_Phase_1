@@ -65,16 +65,16 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
-    @property = Property.find_by(job_id: @job)
+    @property = @job.property
     @phone = Call.find_by(job_id: @job.id)
     @loss = Loss.find_by(job_id: @job.id, fnol_received: Time.now)
-    @caller = Caller.find_by(job_id: @job.id)
+    @caller = @job.caller
     @address = @caller.try(:address)
     @customer = @job.customer
-    @occupants = Occupant.where(job_id: @job.id)
-    @job_detail = JobDetail.find_by(job_id: @job.id)
-    @emergency_contact = EmergencyContact.find_by(job_id: @job.id)
-    @uploads = Upload.where(job_id: @job.id)
+    @occupants = @job.occupants
+    @job_detail = @job.job_detail
+    @emergency_contact = @job.emergency_contact
+    @uploads = @job.uploads
     @callrail = Call.find_by(job_id: @job.id)
     @scheduler = Scheduler.new
     @upload = Upload.new
