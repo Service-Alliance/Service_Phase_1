@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def list
-    @users = User.all
+    @users = User.includes(:department)
     render :json => @users.to_json(include: [:department])
   end
 
