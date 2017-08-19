@@ -39,13 +39,12 @@ class Job < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
 
+  delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
+
+  alias_method :insurance_details, :insurance_company
 
   def job_loss_type
-    Loss.find_by(job_id: id).try(:loss_type)
-  end
-
-  def insurance_details
-    JobDetail.find_by(job_id: id).try(:insurance_company)
+    losses.first.try(:loss_type)
   end
 
   def update_last_action

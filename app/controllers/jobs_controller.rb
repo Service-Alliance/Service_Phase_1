@@ -398,36 +398,48 @@ class JobsController < ApplicationController
   end
 
   def unassigned_job
-    # @jobs = Job.where.not(status_id: nil.limit(200)
-    @jobs = Job.where.not(status_id: nil).where(coordinator_id: nil).limit(200)
-    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
-                                         :job_loss_type, :insurance_details,
-                                         :job_detail, :customer])
+    @jobs = Job.where.not(status_id: nil)
+      .includes(job_associations)
+      .where(coordinator_id: nil).limit(200)
+    render json: @jobs.to_json(include: job_json_includes)
   end
 
   def call_rep_jobs
-    @jobs = Job.joins(:user).merge(User.where(role_id: 3)).where.not(status_id: nil).limit(200)
-    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
-                                         :job_loss_type, :insurance_details,
-                                         :job_detail, :customer])
+    @jobs = Job.joins(:user)
+      .merge(User.where(role_id: 3))
+      .includes(job_associations)
+      .where.not(status_id: nil)
+      .limit(200)
+    render json: @jobs.to_json(include: job_json_includes)
   end
 
   def invoiced_collections_unassigned
     invoiced = JobStatus.find_by(name: "Invoiced")
-    jobs = Job.where(status_id: invoiced.id).includes(:collection_subscriptions).where(collection_subscriptions: {id: nil}).order(created_at: :desc).limit(200)
-    render json: jobs.to_json(include: [:job_status, :job_type, :franchise,
-                                         :job_loss_type, :insurance_details,
-                                         :job_detail, :customer])
+    jobs = Job.includes(:collection_subscriptions)
+      .includes(job_associations)
+      .where(status_id: invoiced.id)
+      .where(collection_subscriptions: {id: nil})
+      .order(created_at: :desc)
+      .limit(200)
+    render json: jobs.to_json(include: job_json_includes)
   end
 
   def collections
-    @jobs = Job.includes(:collection_subscriptions).where(collection_subscriptions: {user_id: current_user.id}).limit(200)
-    render json: @jobs.to_json(include: [:job_status, :job_type, :franchise,
-                                         :job_loss_type, :insurance_details,
-                                         :job_detail, :customer])
+    @jobs = Job.joins(:collection_subscriptions)
+      .includes(job_associations)
+      .where(collection_subscriptions: {user_id: current_user.id}).limit(200)
+    render json: jobs.to_json(include: job_json_includes)
   end
 
   private
+
+  def job_associations
+    [:job_status, :job_type, :franchise, :job_detail, :customer, :losses, {job_detail: :insurance_company}, {losses: :loss_type}]
+  end
+
+  def job_json_includes
+    [:job_status, :job_type, :franchise, :job_detail, :customer, :insurance_details, :job_loss_type]
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_job
