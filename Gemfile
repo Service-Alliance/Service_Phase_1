@@ -60,6 +60,8 @@ gem 'unicorn-worker-killer'
 # Add source of code for every database query
 gem 'marginalia'
 
+gem 'seed_migration'
+
 
 
 group :development, :test do
