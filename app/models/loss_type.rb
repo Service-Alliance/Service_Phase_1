@@ -24,7 +24,8 @@ class LossType < ActiveRecord::Base
             16 => "Duct Cleaning",
             17 => "Crime Scene",
             18 => "Power Washing",
-            19 => "Construction" }.freeze
+            19 => "Construction",
+            20 => "Board Up"}.freeze
 
   def self.fetch_all
     TYPES
