@@ -11,11 +11,10 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Base.transaction do
-  user = User.create(email: 'callrep@test.com', password: 'password', password_confirmation: 'password', role_id: 3, first_name: 'Call', last_name: 'Rep', department_id: 1)
-  user = User.create(email: 'jobcoordinator@test.com', first_name: 'User', last_name: 'Two', password: 'password', password_confirmation: 'password', role_id: 2)
-  user = User.create(email: 'admin@test.com', first_name: 'User', last_name: 'Three', password: 'password', password_confirmation: 'password', role_id: 1)
-
-  user = User.create(email: 'creaumond@gmail.com', password: 'password', password_confirmation: 'password', role_id: 1, first_name: 'Connor', last_name: 'Reaumond', department_id: 1)
+  User.create(email: 'callrep@test.com', password: 'password', password_confirmation: 'password', role_id: 3, first_name: 'Call', last_name: 'Rep', department_id: 1)
+  User.create(email: 'jobcoordinator@test.com', first_name: 'User', last_name: 'Two', password: 'password', password_confirmation: 'password', role_id: 2)
+  User.create(email: 'admin@test.com', first_name: 'User', last_name: 'Three', password: 'password', password_confirmation: 'password', role_id: 1)
+  User.create(email: 'creaumond@gmail.com', password: 'password', password_confirmation: 'password', role_id: 1, first_name: 'Connor', last_name: 'Reaumond', department_id: 1)
 
 
   Role.create(name: "Admin")
@@ -457,4 +456,4 @@ ActiveRecord::Base.transaction do
   PricingCategory.create(name: "Final Estimate")
 end
 
-SeedMigration::Migrator.bootstrap(20170822161548)
+SeedMigration::Migrator.bootstrap(20170822163100)

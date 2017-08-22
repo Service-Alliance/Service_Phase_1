@@ -31,7 +31,7 @@ class LossType < ActiveRecord::Base
     TYPES
   end
 
-  def self.by_name(name)
+  def self.id(name)
     TYPES.invert.fetch(name)
   end
 end
