@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     collection {post :sort}
   end
   resources :forms
+  resources :vendor_categories
   resources :vendors do
     resources :vendor_uploads
   end
