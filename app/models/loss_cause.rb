@@ -1,6 +1,8 @@
 class LossCause < ActiveRecord::Base
   has_many :loss_types
 
+  validates_presence_of :name
+
   # Lookup table should be removed in favor of this cached hash
   # This is just a table duplicate
 

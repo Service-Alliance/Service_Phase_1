@@ -4,6 +4,8 @@ class LossType < ActiveRecord::Base
   has_many :losses
   has_many :jobs, through: :losses
 
+  validates_presence_of :name
+
   # FIXME: this should replace database lookup table eventually
 
   TYPES = { 1 => "Content Inventory",
