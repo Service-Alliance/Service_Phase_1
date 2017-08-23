@@ -17,7 +17,7 @@ class FranchisesController < ApplicationController
   # GET /franchises/new
   def new
     @franchise = Franchise.new
-     @address = Address.new
+    @address = Address.new
   end
 
   # GET /franchises/1/edit
@@ -86,17 +86,17 @@ class FranchisesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_franchise
-      @franchise = Franchise.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_franchise
+    @franchise = Franchise.find(params[:id])
+  end
 
-    def address_params
-      params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
-    end
+  def address_params
+    params.fetch(:address, {}).permit(:address_1, :address_2, :zip_code, :city, :state_id, :county)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def franchise_params
-      params.require(:franchise).permit(:name, :franchise_number, :legal_name, :phone, :fax, :website, :general_license, :residential_license, :commercial_license, :mold_remediation_license, uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def franchise_params
+    params.require(:franchise).permit(:name, :franchise_number, :legal_name, :phone, :fax, :website, :general_license, :residential_license, :commercial_license, :mold_remediation_license, uploads_attributes: [:upload_category_id, :description, { uploads: [] }], notes_attributes: [:content])
+  end
 end
