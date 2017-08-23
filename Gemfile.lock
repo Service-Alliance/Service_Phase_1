@@ -98,9 +98,6 @@ GEM
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
     erubis (2.7.0)
-    exception_notification (4.2.1)
-      actionmailer (>= 4.0, < 6)
-      activesupport (>= 4.0, < 6)
     excon (0.57.1)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -132,6 +129,7 @@ GEM
     has_scope (0.7.1)
       actionpack (>= 4.1, < 5.2)
       activesupport (>= 4.1, < 5.2)
+    honeybadger (3.1.2)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
     i18n (0.8.6)
@@ -328,10 +326,10 @@ DEPENDENCIES
   combine_pdf
   devise
   dotenv-rails
-  exception_notification
   fog-aws
   geocoder
   groupdate
+  honeybadger (~> 3.1)
   httparty
   jbuilder (~> 2.0)
   jquery-atwho-rails

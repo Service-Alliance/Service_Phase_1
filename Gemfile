@@ -35,7 +35,7 @@ gem 'carrierwave', '~> 1.0'
 gem "fog-aws"
 gem "prawn"
 gem 'combine_pdf'
-gem 'exception_notification'
+gem 'honeybadger', '~> 3.1'
 gem 'public_activity'
 gem "select2-rails"
 gem 'ransack'
