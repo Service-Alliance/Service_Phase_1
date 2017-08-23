@@ -40,7 +40,7 @@ class LossCause < ActiveRecord::Base
     31 => 'Mildew',
     32 => 'Sewage Back-Up',
     33 => 'Stain on Carpet',
-    34 => '',
-    35 => 'Rain'
+    36 => 'Rain',
+    37 => "Post Construction"
   }.freeze
 end
