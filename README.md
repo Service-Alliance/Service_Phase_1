@@ -8,6 +8,26 @@
 - Use `Procfile` to start application (lookup [Foreman](https://github.com/ddollar/foreman),
 [Hivemind](https://github.com/DarthSim/hivemind) or [Overmind](https://github.com/DarthSim/overmind))
 
+## Development
+### Rails gotchas
+- Avoid using `ENV['VARIABLE']` in favor of `ENV.fetch('VARIABLE')`. So if ENV variable is missing, app will fail during bootup.
+
+### Migrations
+
+Please use separate migrations for data/schema changes.
+
+In case of schema changes, use standard Rails functionality:
+
+```ruby
+rails g migration MyNewMigration
+``` 
+
+In case of data use seed_migration gem, like this:
+
+```ruby
+rails g seed_migration NewDataMigration
+```
+
 ## Tooling
 
 - [Trello](https://trello.com/b/zMV1ztiR/service-alliance-web-app)
