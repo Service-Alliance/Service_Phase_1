@@ -1312,6 +1312,8 @@ ActiveRecord::Base.transaction do
   StructureType.create({"id"=>1, "name"=>"Residential"})
 
   StructureType.create({"id"=>2, "name"=>"Commercial"})
+
+  StructureType.create({"id"=>3, "name"=>"Restaurant"})
   ActiveRecord::Base.connection.reset_pk_sequence!('structure_types')
 
   PropertyType.create({"id"=>1, "name"=>"Church", "structure_type_id"=>2})
@@ -2600,4 +2602,4 @@ ActiveRecord::Base.transaction do
   ActiveRecord::Base.connection.reset_pk_sequence!('pricing_categories')
 end
 
-SeedMigration::Migrator.bootstrap(20170823142925)
+SeedMigration::Migrator.bootstrap(20170823144703)
