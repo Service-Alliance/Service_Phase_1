@@ -20,13 +20,23 @@ In case of schema changes, use standard Rails functionality:
 
 ```ruby
 rails g migration MyNewMigration
-``` 
+```
 
 In case of data use seed_migration gem, like this:
 
 ```ruby
 rails g seed_migration NewDataMigration
 ```
+
+### Deployment
+Server needs to be properly configured for deployment to work.
+
+- SSH public/private key pair set up
+- deploy user to have access to folders where you want to install the application
+- installed git
+- installed ruby (some ruby manager recommended rbenv/rvm/chruby)
+- installed bundler
+
 
 ## Tooling
 
