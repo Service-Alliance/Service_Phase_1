@@ -12,6 +12,7 @@ class UserMailer < ApplicationMailer
     @job = job
     @work_order = work_order
     subject = "#{@user.full_name}, you have been sent a work order for job #{@job.id}, #{@job.name}. Franchise: #{@job.franchise.try(:name)}."
+    @to = @work_order.to.join(', ')
 
     @mail = mail(to: @user.email, subject: subject)
 
@@ -36,7 +37,7 @@ class UserMailer < ApplicationMailer
     @job = job
     @work_order = work_order
     subject = "#{@customer.full_name}, you have been sent a work order from Service Alliance for job,#{@job.name}. Franchise: #{@job.franchise.try(:name)}."
-    @to = vendor.nil? ? @work_order.to : vendor.name
+    @to = vendor.nil? ? @work_order.to.join(', ') : vendor.name
 
     @mail = mail(to: @customer.email, subject: subject)
 
