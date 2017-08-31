@@ -8,12 +8,6 @@ class EmergencyContactsControllerTest < ActionController::TestCase
     sign_in(users(:one))
   end
 
-  test "should get index" do
-    get :index, job_id: @emergency_contact.job_id
-    assert_response :success
-    assert_not_nil assigns(:emergency_contacts)
-  end
-
   test "should get new" do
     get :new, job_id: @emergency_contact.job_id
     assert_response :success

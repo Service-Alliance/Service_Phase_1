@@ -19,14 +19,6 @@ class OncallsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create oncall" do
-    assert_difference('Oncall.count') do
-      post :create, oncall: { priority: @oncall.priority, scheduled_on: @oncall.scheduled_on, user_id: @oncall.user_id }
-    end
-
-    assert_redirected_to oncall_path(assigns(:oncall))
-  end
-
   test "should show oncall" do
     get :show, id: @oncall
     assert_response :success
