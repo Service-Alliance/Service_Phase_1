@@ -36,35 +36,7 @@ class WorkOrdersController < ApplicationController
         tracker_task = TrackerTask.find_by(name: "Work Order Created")
         @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
 
-        # Send all work orders (for now) to Kevin
-        sched_manager = User.find_by(email: "kroggemann@servpro5933.com")
-        UserMailer.work_order_notification(sched_manager, @job, @work_order).deliver_now if sched_manager
-        # User who created the work order should recieve email
-        UserMailer.work_order_notification(current_user, @job, @work_order).deliver_now if sched_manager
-
-        work_order_send_to_params[:send_to].each do |user|
-          unless user == ""
-            @user = User.find(user)
-            if @user.email
-              UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
-            end
-          end
-        end
-
-        @job.job_managers.each do |manager|
-          if manager.job_manager && manager.job_manager.email != nil
-            UserMailer.vendor_work_order_notification(manager.job_manager, @job, @work_order).deliver_now
-          end
-        end
-
-        @vendor = Vendor.find_by(id: work_order_params[:vendor_id])
-        if @vendor
-          @vendor.customers.each do |contact|
-            if contact.email != nil
-              UserMailer.vendor_work_order_notification(contact, @job, @work_order, @vendor).deliver_now
-            end
-          end
-        end
+        WorkOrderDeliveryService.new(@work_order, current_user).deliver!
 
         @job.pipeline_status_id = 8
         if @job.status_id == 1
