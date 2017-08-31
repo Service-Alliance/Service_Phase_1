@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   end
 
   def self.with_role(role_name)
-    User.joins(:role).where(roles: {name: role_name})
+    joins(:role).where(roles: {name: role_name})
   end
 
   def self.user_metrics(days)

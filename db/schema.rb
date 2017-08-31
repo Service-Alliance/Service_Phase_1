@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823145631) do
+ActiveRecord::Schema.define(version: 20170831060348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -756,7 +756,7 @@ ActiveRecord::Schema.define(version: 20170823145631) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "role_id",                default: 0
+    t.integer  "role_id",                 default: 0
     t.string   "notes"
     t.integer  "department_id"
     t.string   "title"
@@ -792,18 +792,21 @@ ActiveRecord::Schema.define(version: 20170823145631) do
     t.date     "sub_2"
     t.string   "dry_book"
     t.integer  "login_count"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "email",                   default: "", null: false
+    t.string   "encrypted_password",      default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",           default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.integer  "tsheets_user_id"
+    t.string   "tsheets_user_first_name"
+    t.string   "tsheets_user_last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -855,6 +858,26 @@ ActiveRecord::Schema.define(version: 20170823145631) do
     t.boolean  "active",                           default: true
   end
 
+  create_table "work_order_users", force: :cascade do |t|
+    t.integer  "work_order_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "work_order_users", ["user_id"], name: "index_work_order_users_on_user_id", using: :btree
+  add_index "work_order_users", ["work_order_id"], name: "index_work_order_users_on_work_order_id", using: :btree
+
+  create_table "work_order_vendors", force: :cascade do |t|
+    t.integer  "work_order_id"
+    t.integer  "vendor_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "work_order_vendors", ["vendor_id"], name: "index_work_order_vendors_on_vendor_id", using: :btree
+  add_index "work_order_vendors", ["work_order_id"], name: "index_work_order_vendors_on_work_order_id", using: :btree
+
   create_table "work_orders", force: :cascade do |t|
     t.integer  "job_id"
     t.text     "to"
@@ -884,4 +907,8 @@ ActiveRecord::Schema.define(version: 20170823145631) do
     t.text     "adjuster"
   end
 
+  add_foreign_key "work_order_users", "users"
+  add_foreign_key "work_order_users", "work_orders"
+  add_foreign_key "work_order_vendors", "vendors"
+  add_foreign_key "work_order_vendors", "work_orders"
 end

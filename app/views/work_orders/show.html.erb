@@ -26,8 +26,15 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <span class="bold">To:</span><br>
-                      <%= @work_order.to %>
-                      <%= @work_order.mail_logs.pluck(:name).join('<br />').html_safe %>
+                      <%= @work_order.to.join('<br />').html_safe %>
+                    </div>
+                    <div class="form-group">
+                      <span class="bold">Crew Chief(s):</span><br>
+                      <%= @work_order.crew_chief_names.join('<br />').html_safe %>
+                    </div>
+                    <div class="form-group">
+                      <span class="bold">Technician(s):</span><br>
+                      <%= @work_order.technician_names.join('<br />').html_safe %>
                     </div>
                   </div>
                   <div class="col-sm-6">

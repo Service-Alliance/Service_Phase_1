@@ -1,7 +1,14 @@
 class WorkOrder < ActiveRecord::Base
   has_many :mail_logs, as: :mail_loggable
   belongs_to :job, required: true
-  belongs_to :vendor, required: false
+
+  has_many :work_order_vendors
+  has_many :vendors, through: :work_order_vendors
+
+  has_many :work_order_users
+  has_many :users, through: :work_order_users
+  has_many :technicians, -> {with_role('Technician')}, through: :work_order_users, class_name: 'User', source: :user
+  has_many :crew_chiefs, -> {with_role('Crew Chief')}, through: :work_order_users, class_name: 'User', source: :user
 
   delegate :customer, :franchise, :job_managers, to: :job, allow_nil: true
 
@@ -16,7 +23,17 @@ class WorkOrder < ActiveRecord::Base
   end
 
   def to
-    vendor.present? ? vendor.name : 'SERVPRO'
+    to = vendors.pluck(:name)
+    to << "SERVPRO of #{franchise_name}" unless to.length == 1
+    to
+  end
+
+  def technician_names
+    technicians.map(&:full_name)
+  end
+
+  def crew_chief_names
+    crew_chiefs.map(&:full_name)
   end
 
   def initialize_from_job(job, typed_by)
