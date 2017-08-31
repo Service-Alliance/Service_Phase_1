@@ -1,6 +1,7 @@
 class WorkOrder < ActiveRecord::Base
   has_many :mail_logs, as: :mail_loggable
   belongs_to :job, required: true
+  belongs_to :vendor, required: false
 
   delegate :customer, :franchise, :job_managers, to: :job, allow_nil: true
 
@@ -12,6 +13,10 @@ class WorkOrder < ActiveRecord::Base
 
   def job_manager_contact_info
     job_managers.map{|manager| manager.job_manager.full_name}
+  end
+
+  def to
+    vendor.present? ? vendor.name : 'SERVPRO'
   end
 
   def initialize_from_job(job, typed_by)
