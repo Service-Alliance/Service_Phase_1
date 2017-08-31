@@ -61,7 +61,7 @@ class WorkOrdersController < ApplicationController
         if @vendor
           @vendor.customers.each do |contact|
             if contact.email != nil
-              UserMailer.vendor_work_order_notification(contact, @job, @work_order).deliver_now
+              UserMailer.vendor_work_order_notification(contact, @job, @work_order, @vendor).deliver_now
             end
           end
         end
