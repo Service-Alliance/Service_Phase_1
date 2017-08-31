@@ -76,6 +76,8 @@ group :development do
   gem 'rack-mini-profiler', require: false
   gem 'memory_profiler', require: false
 
+  gem 'overcommit'
+
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

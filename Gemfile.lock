@@ -76,6 +76,8 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     chartkick (2.2.4)
+    childprocess (0.7.1)
+      ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     coderay (1.1.1)
     coffee-rails (4.1.1)
@@ -140,6 +142,7 @@ GEM
       has_scope (~> 0.6)
       railties (>= 3.2, < 5.2.x)
       responders
+    iniparse (1.4.4)
     ipaddress (0.8.3)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -197,6 +200,9 @@ GEM
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
     orm_adapter (0.5.0)
+    overcommit (0.41.0)
+      childprocess (~> 0.6, >= 0.6.3)
+      iniparse (~> 1.4)
     pdf-core (0.7.0)
     pg (0.21.0)
     pg_search (2.0.1)
@@ -356,6 +362,7 @@ DEPENDENCIES
   marginalia
   memory_profiler
   minitest-reporters
+  overcommit
   pg (~> 0.15)
   pg_search
   prawn
@@ -381,4 +388,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   1.15.3
+   1.15.4
