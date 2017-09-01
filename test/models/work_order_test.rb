@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class WorkOrderTest < ActiveSupport::TestCase
+  test "to returns SERVPRO without 'of franchise' if no franchise" do
+    work_order = work_orders(:one)
+    work_order.job.franchise = nil
+    assert_equal ['SERVPRO'], work_order.to
+  end
+
   test 'to returns SERVPRO if no vendors' do
     to = work_orders(:one).to
     assert_equal ['SERVPRO of FranchiseOne'], to
