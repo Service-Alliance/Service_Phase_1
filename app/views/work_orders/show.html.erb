@@ -74,7 +74,7 @@
                       <div class="col-sm-12">
                         <div class="form-group">
                           <span class="bold">Job Location:</span><br>
-                          <%= @work_order.job_location %>
+                          <%= @work_order.customer_address_without_county %>
                         </div>
                       </div>
                       <div class="col-sm-12">
@@ -91,7 +91,7 @@
                       </div>
                   </div>
                   <div class="col-sm-6">
-                    <%= render partial: 'partials/google_map', locals: {map_id: 'map', address: @work_order.job_location} %>
+                    <%= render partial: 'partials/google_map', locals: {map_id: 'map', address: @work_order.customer_full_address} %>
                   </div>
                 </div>
                 <hr />
@@ -141,7 +141,7 @@
                   <div class="form-group">
                     <span class="bold">Franchise Location:</span><br>
                     <%= @work_order.franchise_name %><br />
-                    <%= @work_order.franchise_full_address %>
+                    <%= @work_order.franchise_address_without_county %>
                   </div>
                 </div>
                 <div class="col-sm-12">
