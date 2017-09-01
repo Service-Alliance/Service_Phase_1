@@ -2,28 +2,20 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
   before_action :set_job
 
-  # GET /vendor_categories
-  # GET /vendor_categories.json
   def index
     @subscriptions = Subscription.all
   end
 
-  # GET /vendor_categories/1
-  # GET /vendor_categories/1.json
   def show
   end
 
-  # GET /vendor_categories/new
   def new
     @subscription = Subscription.new
   end
 
-  # GET /vendor_categories/1/edit
   def edit
   end
 
-  # POST /vendor_categories
-  # POST /vendor_categories.json
   def create
     @subscription = Subscription.new(subscription_params)
     @subscription.job_id = @job.id
@@ -39,8 +31,6 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /vendor_categories/1
-  # PATCH/PUT /vendor_categories/1.json
   def update
     respond_to do |format|
       if @subscription.update(subscription_params)
@@ -53,8 +43,6 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  # DELETE /vendor_categories/1
-  # DELETE /vendor_categories/1.json
   def destroy
     @subscription.destroy
     respond_to do |format|

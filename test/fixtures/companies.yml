@@ -2,7 +2,7 @@
 
 one:
   name: MyText
-  address_id: 1
+  address: california
 
 two:
   name: MyText

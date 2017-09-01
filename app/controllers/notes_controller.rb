@@ -1,13 +1,9 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-  # GET /notes
-  # GET /notes.json
   def index
     @notes = Note.all
   end
 
-  # GET /notes/1
-  # GET /notes/1.json
   def show
 
   end
@@ -17,13 +13,11 @@ class NotesController < ApplicationController
     @notes = @job.notes
   end
 
-  # GET /notes/new
   def new
     @note = Note.new
     @job = Job.find_by(id: params[:job_id])
   end
 
-  # GET /notes/1/edit
   def edit
   end
 
@@ -33,7 +27,6 @@ class NotesController < ApplicationController
     unless job_params.empty?
       tracker_task = TrackerTask.find_by(name: "Note Created")
       @job = Job.find_by(id: job_params['job_id'])
-
       @note = @job.notes.new(note_params)
       @note.user_id = current_user.id
 

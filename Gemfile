@@ -67,11 +67,16 @@ gem 'seed_migration'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'minitest-reporters'
+  gem 'single_test'
+  gem 'pry'
 end
 
 group :development do
   gem 'rack-mini-profiler', require: false
   gem 'memory_profiler', require: false
+
+  gem 'overcommit'
 
 
   # Access an IRB console on exception pages or by using <%= console %> in views

@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class PricingCategoriesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @pricing_category = pricing_categories(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

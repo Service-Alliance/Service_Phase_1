@@ -10,16 +10,4 @@ one:
   deductible_id: 1
   esl_nst_amount_id: 1
   emergency_service_amount: 1
-  job_id: 1
-
-two:
-  insurance_company_id: 1
-  claim_number: MyString
-  policy_number: MyString
-  coverage_type_id: 1
-  deductible_amount: 1
-  self_pay_id: 1
-  deductible_id: 1
-  esl_nst_amount_id: 1
-  emergency_service_amount: 1
-  job_id: 1
+  job: one

@@ -22,9 +22,9 @@
         <td><%= emergency_contact.last_name %></td>
         <td><%= emergency_contact.email %></td>
         <td><%= emergency_contact.address_id %></td>
-        <td><%= link_to 'Show', emergency_contact %></td>
-        <td><%= link_to 'Edit', edit_emergency_contact_path(emergency_contact) %></td>
-        <td><%= link_to 'Destroy', emergency_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', job_emergency_contact_path %></td>
+        <td><%= link_to 'Edit', edit_job_emergency_contact_path(emergency_contact) %></td>
+        <td><%= link_to 'Destroy', job_emergency_contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: "test"
 
-two:
-  name: MyString
+collection_department:
+  name: Collections Department
+
+job_coordinator:
+  name: Job Coordinator
+
+project_manager:
+  name: Project Manager

@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class TrackersControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @tracker = trackers(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do
@@ -16,13 +19,6 @@ class TrackersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create tracker" do
-    assert_difference('Tracker.count') do
-      post :create, tracker: { trackable_id: @tracker.trackable_id, trackable_type: @tracker.trackable_type }
-    end
-
-    assert_redirected_to tracker_path(assigns(:tracker))
-  end
 
   test "should show tracker" do
     get :show, id: @tracker
@@ -32,18 +28,5 @@ class TrackersControllerTest < ActionController::TestCase
   test "should get edit" do
     get :edit, id: @tracker
     assert_response :success
-  end
-
-  test "should update tracker" do
-    patch :update, id: @tracker, tracker: { trackable_id: @tracker.trackable_id, trackable_type: @tracker.trackable_type }
-    assert_redirected_to tracker_path(assigns(:tracker))
-  end
-
-  test "should destroy tracker" do
-    assert_difference('Tracker.count', -1) do
-      delete :destroy, id: @tracker
-    end
-
-    assert_redirected_to trackers_path
   end
 end

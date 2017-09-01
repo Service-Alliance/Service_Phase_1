@@ -17,13 +17,10 @@ class Customer < ActiveRecord::Base
 
   delegate :full_address, to: :address, allow_nil: true
 
-  # validates :email, presence: true, format: {
-  # with: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/i,
-  # message: 'Invalid email format.'
-  # }
   include PgSearch
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
+
   ransacker :full_name do |parent|
   Arel::Nodes::InfixOperation.new('||',
     parent.table[:first_name], parent.table[:last_name])
