@@ -93,8 +93,10 @@
 
       </div>
       <div class="panel-footer">
-        <%= link_to edit_vendor_path(@vendor), class: "btn btn-sm btn-warning", type: "button" do %>
-        <i class="glyphicon glyphicon-edit"></i>
+        <% if Vendor.can_edit?(current_user) %>
+          <%= link_to edit_vendor_path(@vendor), class: "btn btn-sm btn-warning", type: "button" do %>
+          <i class="glyphicon glyphicon-edit"></i>
+          <% end %>
         <% end %>
       </div>
     </div>
