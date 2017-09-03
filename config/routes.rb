@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :customer_vendors
   resources :pricing_categories
   resources :customer_companies
-  resources :companies
+  resources :companies do
+    get 'search_suggestions', on: :collection
+  end
   resources :notify_types
   resources :notifications
   devise_for :admin_users, ActiveAdmin::Devise.config

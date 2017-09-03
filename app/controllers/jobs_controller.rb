@@ -462,7 +462,7 @@ class JobsController < ApplicationController
   end
 
   def caller_params
-    params.fetch(:caller, {}).permit(:first_name, :last_name, :email, :address_1,
+    params.fetch(:caller, {}).permit(:company_name, :company_id, :first_name, :last_name, :email, :address_1,
                                      :address_2, :zip, :city, :state_id, :county)
   end
 

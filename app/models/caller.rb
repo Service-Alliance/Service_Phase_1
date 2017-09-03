@@ -1,7 +1,10 @@
 class Caller < ActiveRecord::Base
   belongs_to :job
   belongs_to :address
+  belongs_to :company, required: false
   has_many :phones, as: :phoneable
+
+  delegate :name, to: :company, allow_nil: true, prefix: true
 
   include PgSearch
   include PublicActivity::Model
@@ -74,4 +77,8 @@ class Caller < ActiveRecord::Base
     return phones
   end
 
+  def company_name=(value)
+    return if company.present?
+    self.company = Company.find_by(name: value)
+  end
 end

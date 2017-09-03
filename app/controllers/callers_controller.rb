@@ -87,13 +87,10 @@ class CallersController < ApplicationController
     end
   end
 
-
-    def search_suggestions
-      @callers = Caller.search_suggestions(params[:term])
-      p render json: @callers, include: [:address, :phones]
-    end
-
-
+  def search_suggestions
+    @callers = Caller.search_suggestions(params[:term])
+    p render json: @callers, include: [:address, :phones]
+  end
 
   private
 

@@ -80,6 +80,11 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def search_suggestions
+    companies = Company.search_suggestions(params[:term])
+    render json: companies, include: [:address]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
