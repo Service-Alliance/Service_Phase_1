@@ -40,7 +40,7 @@ gem 'public_activity'
 gem "select2-rails"
 gem 'ransack'
 gem 'kaminari'
-gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+gem 'activeadmin', '~> 1.1'
 gem 'chartkick'
 gem 'groupdate'
 gem 'pg_search'
