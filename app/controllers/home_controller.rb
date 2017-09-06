@@ -19,7 +19,7 @@ class HomeController < ApplicationController
     elsif current_user.collections?
       render template: 'home/collections'
     elsif current_user.project_manager?
-      @jobs = Job.joins(:job_managers).merge(JobManager.where(:job_manager_id => current_user.id))
+      @jobs = Job.with_manager_id(current_user.id)
       render template: 'home/project_manager'
     elsif current_user.contractor?
       @jobs = Job.eager_load(:subscriptions).where("subscriptions.user_id= ?", current_user.id)
