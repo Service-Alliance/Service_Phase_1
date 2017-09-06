@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  job_manager_id: 1
+  job: one
   schedule_date: 2017-01-20
   note: MyText
+  job_manager_id: one
 
 two:
-  job_manager_id: 1
+  job: with_note
   schedule_date: 2017-01-20
   note: MyText
+  job_manager_id: two

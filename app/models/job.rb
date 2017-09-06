@@ -40,6 +40,7 @@ class Job < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
 
+  scope :with_manager_id, -> (user_id) { joins(:job_managers).merge(JobManager.where(:job_manager_id => user_id)) }
 
   def job_loss_type
     Loss.find_by(job_id: id).try(:loss_type)
