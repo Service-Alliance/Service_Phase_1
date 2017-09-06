@@ -7,7 +7,7 @@
     <h1><%= @customer.full_name %>, you have been sent a work order. Franchise: <%= @job.franchise.try(:name) %></h1>
 
     <p>
-      To: <%= @work_order.to %><br />
+      To: <%= @to %><br />
       Name: <%= @work_order.name %><br />
       Date: <%= @work_order.date %><br />
       Typed By: <%= @work_order.typed_by %><br />

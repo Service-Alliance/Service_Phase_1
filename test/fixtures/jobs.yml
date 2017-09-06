@@ -2,7 +2,7 @@
 
 DEFAULTS: &DEFAULTS
   details: MyText
-  customer_id: 1
+  customer: one
   referral_type_id: 1
 
 one:
@@ -10,8 +10,9 @@ one:
   type_id: 1
   status_id: 1
   entered_by_id: 1
-  franchise_id: 1
+  franchise: one
 
 with_note:
   <<: *DEFAULTS
   job_note: just a note
+  franchise: 2

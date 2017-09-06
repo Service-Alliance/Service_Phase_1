@@ -3,7 +3,6 @@
     <tr>
       <th>Name</th>
       <th>Phone</th>
-      <th>Email</th>
     </tr>
   </thead>
   <tbody>
@@ -11,7 +10,6 @@
       <tr>
         <td><%= manager.job_manager.full_name %></td>
         <td><%= manager.job_manager.phone_numbers.join('<br />').html_safe %></td>
-        <td><%= mail_to manager.job_manager.email %></td>
       </tr>
     <% end %>
   </tbody>

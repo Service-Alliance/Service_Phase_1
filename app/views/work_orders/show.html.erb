@@ -17,7 +17,7 @@
             <div class="row">
               <div class="col-xs-12">
                 <hr/>
-                <div class="col-xs-12">
+                <div class="col-xs-12 text-center">
                   <h2>SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
                   <h2><%= @job.try(:franchise).try(:phone) %></h2>
                 </div>
@@ -26,8 +26,15 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <span class="bold">To:</span><br>
-                      <%= @work_order.to %>
-                      <%= @work_order.mail_logs.pluck(:name).join('<br />').html_safe %>
+                      <%= @work_order.to.join('<br />').html_safe %>
+                    </div>
+                    <div class="form-group">
+                      <span class="bold">Crew Chief(s):</span><br>
+                      <%= @work_order.crew_chief_names.join('<br />').html_safe %>
+                    </div>
+                    <div class="form-group">
+                      <span class="bold">Technician(s):</span><br>
+                      <%= @work_order.technician_names.join('<br />').html_safe %>
                     </div>
                   </div>
                   <div class="col-sm-6">
@@ -67,7 +74,7 @@
                       <div class="col-sm-12">
                         <div class="form-group">
                           <span class="bold">Job Location:</span><br>
-                          <%= @work_order.job_location %>
+                          <%= @work_order.customer_address_without_county %>
                         </div>
                       </div>
                       <div class="col-sm-12">
@@ -84,7 +91,7 @@
                       </div>
                   </div>
                   <div class="col-sm-6">
-                    <%= render partial: 'partials/google_map', locals: {map_id: 'map', address: @work_order.job_location} %>
+                    <%= render partial: 'partials/google_map', locals: {map_id: 'map', address: @work_order.customer_full_address} %>
                   </div>
                 </div>
                 <hr />
@@ -134,7 +141,7 @@
                   <div class="form-group">
                     <span class="bold">Franchise Location:</span><br>
                     <%= @work_order.franchise_name %><br />
-                    <%= @work_order.franchise_full_address %>
+                    <%= @work_order.franchise_address_without_county %>
                   </div>
                 </div>
                 <div class="col-sm-12">
