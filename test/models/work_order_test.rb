@@ -3,7 +3,6 @@ require 'test_helper'
 class WorkOrderTest < ActiveSupport::TestCase
   setup do
     @work_order = work_orders(:one)
-    @work_order_two = work_orders(:two)
   end
 
   test "to returns SERVPRO without 'of franchise' if no franchise" do
