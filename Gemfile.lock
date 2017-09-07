@@ -203,7 +203,7 @@ GEM
       childprocess (~> 0.6, >= 0.6.3)
       iniparse (~> 1.4)
     pdf-core (0.7.0)
-    pg (0.21.0)
+    pg (0.20.0)
     pg_search (2.0.1)
       activerecord (>= 4.2)
       activesupport (>= 4.2)
@@ -363,7 +363,7 @@ DEPENDENCIES
   mina
   minitest-reporters
   overcommit
-  pg (~> 0.15)
+  pg (= 0.20)
   pg_search
   prawn
   pry
