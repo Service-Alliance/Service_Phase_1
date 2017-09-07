@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.3'
+ruby '2.4.1'
 #ruby-gemset=service_alliance
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
