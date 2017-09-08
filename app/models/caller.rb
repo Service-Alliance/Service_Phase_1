@@ -1,8 +1,9 @@
 class Caller < ActiveRecord::Base
   belongs_to :job
   belongs_to :address
-  belongs_to :company, required: false
   has_many :phones, as: :phoneable
+  has_many :caller_companies
+  has_many :companies, through: :caller_companies
 
   delegate :name, to: :company, allow_nil: true, prefix: true
 
@@ -78,7 +79,7 @@ class Caller < ActiveRecord::Base
   end
 
   def company_name=(value)
-    return if company.present?
-    self.company = Company.find_by(name: value)
+    return if companies.find_by(name: value).present?
+    self.companies << Company.find_or_create_by(name: value)
   end
 end
