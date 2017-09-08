@@ -5,8 +5,6 @@ class Caller < ActiveRecord::Base
   has_many :caller_companies
   has_many :companies, through: :caller_companies
 
-  delegate :name, to: :company, allow_nil: true, prefix: true
-
   include PgSearch
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
@@ -76,6 +74,10 @@ class Caller < ActiveRecord::Base
       end
     end
     return phones
+  end
+
+  def company_name
+    companies.count == 1 ? companies.first.name : ''
   end
 
   def company_name=(value)

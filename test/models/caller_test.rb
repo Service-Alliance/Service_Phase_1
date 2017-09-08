@@ -5,6 +5,20 @@ class CallerTest < ActiveSupport::TestCase
     @caller = callers(:one)
   end
 
+  test 'Caller#company_name returns an empty string if no companies' do
+    assert_equal '', @caller.company_name
+  end
+
+  test 'Caller#company_name returns the name of the company if there is only one company' do
+    @caller.companies << companies(:one)
+    assert_equal companies(:one).name, @caller.company_name
+  end
+
+  test 'Caller#company_name returns an empty string if there is more than one company' do
+    @caller.companies << [companies(:one), companies(:two)]
+    assert_equal '', @caller.company_name
+  end
+
   test 'Caller#company_name= creates a new company if it does not exist' do
     assert_difference ['Company.count', '@caller.companies.count'], 1 do
       @caller.company_name = 'New Company'
