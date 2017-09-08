@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+ruby '2.3'
+#ruby-gemset=service_alliance
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
@@ -23,7 +24,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
-# gem 'will_paginate', '~> 3.1.0'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'pundit'
 gem 'devise'
@@ -40,7 +40,7 @@ gem 'public_activity'
 gem "select2-rails"
 gem 'ransack'
 gem 'kaminari'
-gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+gem 'activeadmin', '~> 1.1'
 gem 'chartkick'
 gem 'groupdate'
 gem 'pg_search'
@@ -59,7 +59,6 @@ gem 'unicorn-worker-killer'
 
 # Add source of code for every database query
 gem 'marginalia'
-
 gem 'seed_migration'
 
 
@@ -73,11 +72,10 @@ group :development, :test do
 end
 
 group :development do
+  gem 'mina'
   gem 'rack-mini-profiler', require: false
   gem 'memory_profiler', require: false
-
   gem 'overcommit'
-
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

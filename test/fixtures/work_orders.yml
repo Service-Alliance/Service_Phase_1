@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  job_id: 1
+  job: one
   to: MyText
   name: MyText
   date: 2017-03-08
@@ -22,7 +22,7 @@ one:
   job_manager_contact_info: MyText
 
 two:
-  job_id: 1
+  job: two
   to: MyText
   name: MyText
   date: 2017-03-08
