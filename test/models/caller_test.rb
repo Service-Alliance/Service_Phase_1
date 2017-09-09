@@ -19,27 +19,22 @@ class CallerTest < ActiveSupport::TestCase
     assert_equal '', @caller.company_name
   end
 
-  test 'Caller#company_name= creates a new company if it does not exist' do
-    assert_difference ['Company.count', '@caller.companies.count'], 1 do
-      @caller.company_name = 'New Company'
+  test "Caller#add_company doesn't do anything if passed nil" do
+    assert_difference '@caller.companies.count', 0 do
+      @caller.add_company(nil)
     end
-    assert_equal 1, @caller.companies.where(name: 'New Company').count
   end
 
-  test 'Caller#company_name= assigns the company but does not create a new one if there already is one by that name' do
-    assert_difference 'Company.count', 0 do
-      assert_difference '@caller.companies.count', 1 do
-        @caller.company_name = companies(:two).name
-      end
+  test "Caller#add_company adds the company if not already there" do
+    assert_difference '@caller.companies.count', 1 do
+      @caller.add_company(companies(:one))
     end
-    assert_equal 1, @caller.companies.where(name: companies(:one).name).count
   end
 
-  test 'Caller#company_name= does not change anything if the company is already assigned' do
-    @caller.companies << companies(:one)
-    assert_difference ['Company.count', '@caller.companies.count'], 0 do
-      @caller.company_name = companies(:one).name
+  test "Caller#add_company doesn't do anything if company already associated" do
+    @caller.add_company(companies(:one))
+    assert_difference '@caller.companies.count', 0 do
+      @caller.add_company(companies(:one))
     end
-    assert_equal 1, @caller.companies.where(name: companies(:one).name).count
   end
 end

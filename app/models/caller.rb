@@ -80,8 +80,8 @@ class Caller < ActiveRecord::Base
     companies.count == 1 ? companies.first.name : ''
   end
 
-  def company_name=(value)
-    return if companies.find_by(name: value).present?
-    self.companies << Company.find_or_create_by(name: value)
+  def add_company(company)
+    return if company.nil?
+    companies << company unless companies.include?(company)
   end
 end

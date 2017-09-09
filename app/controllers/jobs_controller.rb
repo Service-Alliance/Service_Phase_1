@@ -114,7 +114,6 @@ class JobsController < ApplicationController
     @caller.save
     @job_detail = JobDetail.create(job_id: @job.id)
     @phones = nil
-
   end
 
   # GET /jobs/1/edit
@@ -147,6 +146,7 @@ class JobsController < ApplicationController
     @job.entered_by_id = current_user.id
     @caller = Caller.new(caller_params)
     @address = Address.new(address_params)
+    @company = Company.find_or_create_by(name: company_params[:name]) if company_params[:name].present?
 
     @call = Call.find_by(id: call_params[:id]) if call_params[:id]
     @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
@@ -164,8 +164,12 @@ class JobsController < ApplicationController
         end
         @caller.job_id = @job.id
         @caller.address_id = @address.id
+        @caller.add_company(@company)
         @caller.save
         @job.update_last_action
+
+        @company.address = @address if @company.address.blank?
+        @company.save
 
         @caller.phones.destroy_all
         phone_count = phone_params['type_ids'].count
@@ -491,5 +495,9 @@ class JobsController < ApplicationController
 
   def phone_params
     params.fetch(:phones, {}).permit(numbers: [], extensions: [], type_ids: [])
+  end
+
+  def phone_params
+    params.fetch(:company, {}).permit(:name)
   end
 end

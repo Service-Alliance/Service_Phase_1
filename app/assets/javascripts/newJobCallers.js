@@ -19,7 +19,7 @@ var newJobCallers = (function($) {
         event.preventDefault();
         var record = ui.item.record;
         $("#caller_caller_exists").val(1)
-        $("#caller_company_name").val(record.company_name);
+        $("#company_name").val(record.company_name);
         $("#caller_first_name").val(record.first_name);
         $("#caller_last_name").val(record.last_name);
         $("#caller_email").val(record.email);
@@ -40,7 +40,7 @@ var newJobCallers = (function($) {
   }
 
   var initialiseCompanySearch = function() {
-    $( "#caller_company_name.autocomplete" ).autocomplete({
+    $( "#company_name.autocomplete" ).autocomplete({
       // source: "/customer_search_suggestions",
       source: function (request, response) {
         $.getJSON("/companies/search_suggestions?term=" + request.term, function (data) {
@@ -57,8 +57,7 @@ var newJobCallers = (function($) {
         event.preventDefault();
         var record = ui.item.record;
         $("#caller_caller_exists").val(1)
-        $("#caller_company_id").val(record.id);
-        $("#caller_company_name").val(record.name);
+        $("#company_name").val(record.name);
         if(record.address !== undefined) {
           loadAddress(record.address);
         }
@@ -74,17 +73,13 @@ var newJobCallers = (function($) {
     $("#address_county").val(address.county);
     $("#address_state_id").val(address.state_id);
   }
-  
+
   var init = function() {
     $(document).ready(function() {
-      if($('#caller_search').length + $('#caller_company_name').length === 0) {return;}
+      if($('#caller_search').length + $('#company_name').length === 0) {return;}
 
       initialiseCallerSearch();
       initialiseCompanySearch();
-      // If they overtype the name, reset the id
-      $('#caller_company_name').on('change', function() {
-        $('#caller_company_id').val('');
-      })
     });
   }
 
