@@ -44,6 +44,8 @@ Server needs to be properly configured for deployment to work.
 
 - [Trello](https://trello.com/b/zMV1ztiR/service-alliance-web-app)
 - [Jenkins](http://34.226.74.30)
+- [Cloud66](cloud66.com) - DevOps as a service
+- [CircleCi](circleci.com) - Continuesly checks pull requests (at least so far)
 
 
 ### Jenkins Credentials:
@@ -52,17 +54,14 @@ Server needs to be properly configured for deployment to work.
 |Public IP|34.226.74.30|
 |Keypair| servicealliance-ops-key|
 
+## Production
+hostname: digitaljobchart.com
+cloud66 stack: https://app.cloud66.com/stacks/47322
+
 
 ## Staging Infrastructure
 
 ### AWS Staging App Server Credentials
-|Host Name|  servicealliance-staging-app|
----------|---------
-|Public IP|  34.231.46.98|
-|KeyPair|  servicealliance-staging-keypair|
+hostname : staging.digitaljobchart.com
 
-### RDS Staging Database Credentials
 
-  |Database|Staging|
-  ---------|--------
-  |Host|servicealliance-staging.c82auby89hhq.us-east-1.rds.amazonaws.com|
