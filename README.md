@@ -1,3 +1,5 @@
+![Cloud66](https://app.cloud66.com/stacks/badge/f3e65df9edad6603f34a68933bbc4d1f.svg)
+
 ## Getting started
 
 - Be sure to have **rvm** or **rbenv**
