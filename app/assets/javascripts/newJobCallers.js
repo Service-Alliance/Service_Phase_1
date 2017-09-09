@@ -15,23 +15,7 @@ var newJobCallers = (function($) {
           }));
         });
       },
-      select: function( event, ui ) {
-        event.preventDefault();
-        var record = ui.item.record;
-        $("#caller_caller_exists").val(1)
-        $("#company_name").val(record.company_name);
-        $("#caller_first_name").val(record.first_name);
-        $("#caller_last_name").val(record.last_name);
-        $("#caller_email").val(record.email);
-
-        if(record.address !== undefined) {
-          loadAddress(record.address)
-        }
-
-        $.each(ui.item.value.phones, function( index, value ) {
-          loadPhone(value);
-        });
-      }
+      select: selectFromAutocomplete
     } );
   }
 
@@ -49,24 +33,40 @@ var newJobCallers = (function($) {
           }));
         });
       },
-      select: function( event, ui ) {
-        event.preventDefault();
-        var record = ui.item.record;
-        $("#caller_caller_exists").val(1)
-        $("#company_name").val(record.name);
-        if(record.address !== undefined) {
-          loadAddress(record.address);
-        }
-      }
+      select: selectFromAutocomplete
     } );
   }
 
-  var loadPhone = function(phone) {
+  var selectFromAutocomplete = function(event, ui) {
+    event.preventDefault();
+    var record = ui.item.record;
+    $("#caller_caller_exists").val(1)
+    $("#company_name").val(record.company_name);
+    updateFieldIfPresent("#caller_first_name", record.first_name);
+    updateFieldIfPresent("#caller_last_name", record.last_name);
+    updateFieldIfPresent("#caller_email", record.email);
+
+    if(record.address !== undefined) {
+      loadAddress(record.address)
+    }
+
+    if(record.phones !== undefined) {
+      $.each(record.phones, loadPhone);
+    }
+  }
+
+  var updateFieldIfPresent = function(field, value) {
+    if(value !== undefined) {
+      $(field).val(value);
+    }
+  }
+
+  var loadPhone = function(index, phone) {
     $("#add-number" ).trigger( "click" );
     $('#submit-job').prop('disabled', false);
-    $("#phones_numbers_").first().val(phone.number)
-    $("#phones_extensions_").first().val(phone.extension)
-    $("#phones_type_ids_").first().val(phone.type_id);
+    $("[name='phones[numbers][]']").eq(index).val(phone.number)
+    $("[name='phones[extensions][]']").eq(index).val(phone.extension)
+    $("[name='phones[type_ids][]']").eq(index).val(phone.type_id)
   }
 
   var loadAddress = function(address) {
