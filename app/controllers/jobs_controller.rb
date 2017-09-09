@@ -216,6 +216,10 @@ class JobsController < ApplicationController
           @address = @caller.address
           @caller.update(caller_params)
           @address.update(address_params)
+          company = Company.find_or_create_by(name: company_params[:name]) if company_params[:name].present?
+          company.address = @address if company.address.blank?
+          company.save
+          @caller.add_company(company)
         end
         unless phone_params.empty?
           @caller.phones.destroy_all if @caller && @caller.phones
@@ -497,7 +501,7 @@ class JobsController < ApplicationController
     params.fetch(:phones, {}).permit(numbers: [], extensions: [], type_ids: [])
   end
 
-  def phone_params
+  def company_params
     params.fetch(:company, {}).permit(:name)
   end
 end
