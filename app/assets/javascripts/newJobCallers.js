@@ -29,11 +29,7 @@ var newJobCallers = (function($) {
         }
 
         $.each(ui.item.value.phones, function( index, value ) {
-          $("#add-number" ).trigger( "click" );
-          $('#submit-job').prop('disabled', false);
-          $("#phones_numbers_").first().val(value.number)
-          $("#phones_extensions_").first().val(value.extension)
-          $("#phones_type_ids_").first().val(value.type_id);
+          loadPhone(value);
         });
       }
     } );
@@ -63,6 +59,14 @@ var newJobCallers = (function($) {
         }
       }
     } );
+  }
+
+  var loadPhone = function(phone) {
+    $("#add-number" ).trigger( "click" );
+    $('#submit-job').prop('disabled', false);
+    $("#phones_numbers_").first().val(phone.number)
+    $("#phones_extensions_").first().val(phone.extension)
+    $("#phones_type_ids_").first().val(phone.type_id);
   }
 
   var loadAddress = function(address) {
