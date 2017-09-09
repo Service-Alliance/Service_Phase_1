@@ -41,7 +41,12 @@ var newJobCallers = (function($) {
     event.preventDefault();
     var record = ui.item.record;
     $("#caller_caller_exists").val(1)
-    $("#company_name").val(record.company_name);
+    if(record.company_name === undefined) {
+      $("#company_name").val(record.name);
+    }
+    else {
+      $("#company_name").val(record.company_name);
+    }
     updateFieldIfPresent("#caller_first_name", record.first_name);
     updateFieldIfPresent("#caller_last_name", record.last_name);
     updateFieldIfPresent("#caller_email", record.email);
@@ -51,6 +56,7 @@ var newJobCallers = (function($) {
     }
 
     if(record.phones !== undefined) {
+      $('#number-container').empty();
       $.each(record.phones, loadPhone);
     }
   }
