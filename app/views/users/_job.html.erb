@@ -1,0 +1,10 @@
+<tr>
+  <td><%= link_to job.id, job %></td>
+  <td><%= job.job_status_name %></td>
+  <td><%= job.name %></td>
+  <td><%= job.customer_full_name %></td>
+  <td><%= job.franchise_name %></td>
+  <td><%= job.loss_type_names.join('<br/>').html_safe %></td>
+  <td><%= job.last_action %></td>
+  <td><%= job.job_coordinator_full_name %></td>
+</tr>
