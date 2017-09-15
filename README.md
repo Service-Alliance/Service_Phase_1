@@ -44,7 +44,7 @@ Server needs to be properly configured for deployment to work.
 
 - [Trello](https://trello.com/b/zMV1ztiR/service-alliance-web-app)
 - [Jenkins](http://34.226.74.30)
-- [Cloud66](cloud66.com) - DevOps as a service
+- [Cloud66](http://cloud66.com) - DevOps as a service
 - [CircleCi](https://circleci.com/gh/Service-Alliance/Service_Phase_1) - Continuesly checks pull requests (at least so far)
 
 ### Jenkins Credentials:
@@ -54,12 +54,12 @@ Server needs to be properly configured for deployment to work.
 |Keypair| servicealliance-ops-key|
 
 ## Production
-- hostname: ![www.digitaljobchart.com](www.digitaljobchart.com)
+- hostname: [http://www.digitaljobchart.com]('http://www.digitaljobchart.com')
 - cloud66: https://app.cloud66.com/stacks/47322
 - needs to be deployed manually
 ?? how to access database
 
 ## Staging
-- hostname : ![staging.digitaljobchart.com](staging.digitaljobchart.com)
+- hostname : [http://staging.digitaljobchart.com]('http://staging.digitaljobchart.com')
 - auto deployed from master
 ?? how to access database
