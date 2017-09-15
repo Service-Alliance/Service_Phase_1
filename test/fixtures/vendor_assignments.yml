@@ -2,6 +2,5 @@ one:
   vendor: one
   job: one
 
-two:
-  vendor: one
+no_vendor:
   job: with_note
