@@ -60,6 +60,7 @@ gem 'unicorn-worker-killer'
 gem 'marginalia'
 gem 'seed_migration'
 
+gem 'sidekiq'
 
 
 group :development, :test do
