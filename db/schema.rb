@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 20170831060348) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "caller_companies", force: :cascade do |t|
+    t.integer  "caller_id"
+    t.integer  "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "caller_companies", ["caller_id"], name: "index_caller_companies_on_caller_id", using: :btree
+  add_index "caller_companies", ["company_id"], name: "index_caller_companies_on_company_id", using: :btree
+
   create_table "callers", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -907,6 +917,8 @@ ActiveRecord::Schema.define(version: 20170831060348) do
     t.text     "adjuster"
   end
 
+  add_foreign_key "caller_companies", "callers"
+  add_foreign_key "caller_companies", "companies"
   add_foreign_key "work_order_users", "users"
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"
