@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class EmergencyContactsControllerTest < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-
   setup do
     @emergency_contact = emergency_contacts(:one)
     sign_in(users(:one))

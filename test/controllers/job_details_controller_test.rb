@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class JobDetailsControllerTest < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-
   setup do
     @job_detail = job_details(:one)
     sign_in(users(:one))
