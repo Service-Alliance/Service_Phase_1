@@ -98,11 +98,7 @@ class JobsController < ApplicationController
   def new
     @customer_address = Address.create
     @customer = Customer.create(address_id: @customer_address.id)
-    # if current_user.call_rep?
-      @job = Job.create(entered_by_id: current_user.id, customer_id: @customer.id)
-    # else
-    #   @job = Job.create(entered_by_id: current_user.id, coordinator_id: current_user.id, customer_id: @customer.id)
-    # end
+    @job = Job.create(entered_by_id: current_user.id, customer_id: @customer.id)
     @job.trackers.create(tracker_task_id: 1)
     @customer_companies = @customer.customer_companies.build
     @loss = Loss.create(job_id: @job.id)
@@ -344,8 +340,6 @@ class JobsController < ApplicationController
     else
         @job.caller.create(caller_params)
     end
-    # @job.coordinator_id = job_params[:coordinator_id]
-    # @job.save
     redirect_to @job
   end
 
@@ -363,9 +357,6 @@ class JobsController < ApplicationController
       if @user.email
         UserMailer.manager_assignment(@user, @job_manager).deliver_now
       end
-      # if @job.franchise && @job.customer && @job.customer.sharp_spring_id == nil
-      #   @job.customer.send_to_sharpspring(@job.franchise)
-      # end
       return redirect_to @job, notice: 'Job Manager Added.'
     else
       return redirect_to @job, notice: 'Error Adding Manager.'
