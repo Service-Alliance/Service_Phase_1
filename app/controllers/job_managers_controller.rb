@@ -83,7 +83,7 @@ class JobManagersController < ApplicationController
   end
 
   def list
-    @job_managers = JobManager.last(200)
+    @job_managers = JobManager.includes(:job_manager).last(200)
     render json: @job_managers.to_json(include: :job_manager)
   end
 

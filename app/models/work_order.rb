@@ -19,7 +19,7 @@ class WorkOrder < ActiveRecord::Base
   alias_method :franchise_location, :franchise_name
 
   def job_manager_contact_info
-    job_managers.map{|manager| manager.full_name}
+    job_managers.present? ? job_managers.map{|manager| manager.full_name} : ''
   end
 
   def to

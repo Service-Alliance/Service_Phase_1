@@ -6,7 +6,6 @@ class Job < ActiveRecord::Base
   belongs_to :referral_type
   belongs_to :customer
   has_one :customer_address, through: :customer, source: "address"
-  # has_one :state, through: :customer
   has_many :calls
   belongs_to :user, foreign_key: :entered_by_id
   belongs_to :job_coordinator, foreign_key: :coordinator_id, class_name: "User"
@@ -17,7 +16,6 @@ class Job < ActiveRecord::Base
   has_many :losses, dependent: :destroy
   has_one :job_detail, dependent: :destroy
   has_one :emergency_contact, dependent: :destroy
-  # has_many :uploads, dependent: :destroy
   has_many :uploads, as: :uploadable, dependent: :destroy
   has_many :job_managers, dependent: :destroy
   has_many :vendor_assignments
@@ -34,6 +32,7 @@ class Job < ActiveRecord::Base
   has_one :inspection_checklist
   has_many :pricings, dependent: :destroy
   has_many :vendor_assignments, dependent: :destroy
+  has_many :occupants
 
   delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
   delegate :full_name, to: :customer, allow_nil: true, prefix: true
@@ -43,6 +42,8 @@ class Job < ActiveRecord::Base
   # Activity Tracking activated
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
+
+  delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
 
   scope :with_manager_id, -> (user_id) { joins(:job_managers).merge(JobManager.where(:job_manager_id => user_id)) }
 
@@ -56,8 +57,10 @@ class Job < ActiveRecord::Base
     where(entered_by_id: user.id)
   end
 
+  alias_method :insurance_details, :insurance_company
+
   def job_loss_type
-    Loss.find_by(job_id: id).try(:loss_type)
+    losses.first.try(:loss_type)
   end
 
   def loss_type_names

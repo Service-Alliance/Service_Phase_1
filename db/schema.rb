@@ -191,6 +191,9 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.integer  "customer_id"
   end
 
+  add_index "calls", ["created_at"], name: "index_calls_on_created_at", using: :btree
+  add_index "calls", ["inprogress"], name: "index_calls_on_inprogress", using: :btree
+
   create_table "collection_subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "job_id"
@@ -212,6 +215,8 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "contact_assignments", ["job_id"], name: "index_contact_assignments_on_job_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.string   "company"
@@ -384,6 +389,8 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.text     "coverage_type"
   end
 
+  add_index "job_details", ["job_id"], name: "index_job_details_on_job_id", using: :btree
+
   create_table "job_forms", force: :cascade do |t|
     t.string   "document_id"
     t.boolean  "signed"
@@ -406,6 +413,8 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end
+
+  add_index "job_managers", ["job_id"], name: "index_job_managers_on_job_id", using: :btree
 
   create_table "job_statuses", force: :cascade do |t|
     t.string   "name",       null: false
@@ -455,6 +464,9 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.datetime "fnol_received"
   end
 
+  add_index "jobs", ["created_at"], name: "index_jobs_on_created_at", using: :btree
+  add_index "jobs", ["entered_by_id"], name: "index_jobs_on_entered_by_id", using: :btree
+
   create_table "locations", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -503,6 +515,8 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.datetime "updated_at",               null: false
   end
 
+  add_index "losses", ["job_id"], name: "index_losses_on_job_id", using: :btree
+
   create_table "mail_logs", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -540,6 +554,8 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.boolean  "viewed",      default: false
   end
 
+  add_index "notifications", ["target_id"], name: "index_notifications_on_target_id", using: :btree
+
   create_table "notify_types", force: :cascade do |t|
     t.text     "name",       null: false
     t.datetime "created_at", null: false
@@ -555,6 +571,8 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "occupants", ["job_id"], name: "index_occupants_on_job_id", using: :btree
 
   create_table "oncalls", force: :cascade do |t|
     t.date     "scheduled_on"
@@ -675,6 +693,8 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
   create_table "schedulers", force: :cascade do |t|
     t.date     "event_date"
     t.time     "start_time"
@@ -712,6 +732,8 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "subscriptions", ["job_id"], name: "index_subscriptions_on_job_id", using: :btree
 
   create_table "ticsheets", force: :cascade do |t|
     t.integer  "key_code"
@@ -821,6 +843,7 @@ ActiveRecord::Schema.define(version: 20170908063824) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
   create_table "vendor_assignments", force: :cascade do |t|
     t.integer  "vendor_id"
@@ -830,6 +853,8 @@ ActiveRecord::Schema.define(version: 20170908063824) do
     t.datetime "updated_at",         null: false
     t.integer  "assignment_type_id"
   end
+
+  add_index "vendor_assignments", ["job_id"], name: "index_vendor_assignments_on_job_id", using: :btree
 
   create_table "vendor_upload_types", force: :cascade do |t|
     t.string   "name"

@@ -1,2 +1,2 @@
-json.extract! work_order, :id, :job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telephone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info, :created_at, :updated_at
-json.url work_order_url(work_order, format: :json)
+json.extract! work_order, :id, :job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :scope_of_work, :created_at, :updated_at
+json.url job_work_order_url(work_order.job_id, work_order.id, format: :json)

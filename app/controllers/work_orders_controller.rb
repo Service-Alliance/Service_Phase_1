@@ -84,10 +84,6 @@ class WorkOrdersController < ApplicationController
 
   def list
     @work_orders = WorkOrder.last(200)
-    render json: @work_orders.to_json
-    # (include: [:job_status, :job_type, :franchise,
-    #                                      :job_loss_type, :insurance_details,
-    #                                      :job_detail, :customer])
   end
 
   def acknowledge

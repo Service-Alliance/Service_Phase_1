@@ -82,4 +82,7 @@ group :development do
 
   # Letter Opener for previewing emails in the browser https://github.com/fgrehm/letter_opener_web
   gem 'letter_opener_web'
+
+  # Bullet is used to detect N+1 queries and unused eager loading
+  gem 'bullet'
 end
