@@ -195,6 +195,7 @@ class CustomersController < ApplicationController
   end
 
   def create_call
+    # FIXME: this is almost exact copy of jobs_controller#create_call
     tracker_task = TrackerTask.find_by(name: "Call Assigned")
     @call = Call.find(call_params[:call_id])
     @call.customer_id = @customer.id
