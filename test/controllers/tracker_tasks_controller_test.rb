@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class TrackerTasksControllerTest < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-
   setup do
     @tracker_task = tracker_tasks(:one)
     sign_in(users(:one))

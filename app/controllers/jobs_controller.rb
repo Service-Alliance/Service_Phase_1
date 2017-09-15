@@ -197,6 +197,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    # FIXME: Decrease complexity of this code -- introduce workers!
     @previous_status = Job.find(params[:id])
     respond_to do |format|
       if @job.update(job_params)
@@ -215,10 +216,12 @@ class JobsController < ApplicationController
           @address = @caller.address
           @caller.update(caller_params)
           @address.update(address_params)
-          company = Company.find_or_create_by(name: company_params[:name]) if company_params[:name].present?
-          company.address = @address if company.address.blank?
-          company.save
-          @caller.add_company(company)
+          if company_params[:name].present?
+            company = Company.find_or_create_by(name: company_params[:name])
+            company.address = @address if company.address.blank?
+            company.save
+            @caller.add_company(company)
+          end
         end
         unless phone_params.empty?
           @caller.phones.destroy_all if @caller && @caller.phones
@@ -238,11 +241,6 @@ class JobsController < ApplicationController
         if job_params[:job_manager_id]
           @user = User.find_by(id: job_params[:job_manager_id])
           UserMailer.manager_assignment(@user, @job).deliver_now
-
-          # if @job.franchise && @job.customer
-          #   @job.customer.send_to_sharpspring(@job.franchise)
-          # end
-
           return redirect_to job_job_managers_path(@job)
         end
 

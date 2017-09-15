@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class AdjustersControllerTest < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-
   setup do
     @adjuster = adjusters(:one)
     sign_in(users(:one))

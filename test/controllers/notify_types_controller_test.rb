@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class NotifyTypesControllerTest < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-
   setup do
     @notify_type = notify_types(:one)
     sign_in(users(:one))

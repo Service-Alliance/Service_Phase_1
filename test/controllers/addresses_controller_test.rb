@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class AddressesControllerTest < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-
   setup do
     @address = addresses(:one)
     sign_in(users(:one))

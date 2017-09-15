@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class VendorUploadTypesControllerTest < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-
   setup do
     @vendor_upload_type = vendor_upload_types(:one)
     sign_in(users(:one))
