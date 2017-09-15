@@ -17,8 +17,9 @@ namespace :db do
   task :rebuild => :environment do
     config = Rails.configuration.database_configuration["development"]
     database = config["database"]
+    username = config["username"]
 
-    system("pg_restore --verbose --clean --no-acl --no-owner -h localhost -d #{database} #{Rails.root}/#{Dir.glob('tmp/*.dump').first
+    system("psql -U #{username} --no-password #{database} < #{Rails.root}/#{Dir.glob('tmp/*.dump').first
     }")
   end
 end
