@@ -216,11 +216,12 @@ class JobsController < ApplicationController
           @address = @caller.address
           @caller.update(caller_params)
           @address.update(address_params)
-          # if company not present ? there will be an error -- company will be nil
-          company = Company.find_or_create_by(name: company_params[:name]) if company_params[:name].present?
-          company.address = @address if company.address.blank?
-          company.save
-          @caller.add_company(company)
+          if company_params[:name].present?
+            company = Company.find_or_create_by(name: company_params[:name])
+            company.address = @address if company.address.blank?
+            company.save
+            @caller.add_company(company)
+          end
         end
         unless phone_params.empty?
           @caller.phones.destroy_all if @caller && @caller.phones
