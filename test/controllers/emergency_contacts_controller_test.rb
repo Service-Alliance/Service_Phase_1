@@ -1,49 +1,52 @@
 require 'test_helper'
 
 class EmergencyContactsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @emergency_contact = emergency_contacts(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:emergency_contacts)
+    sign_in(users(:one))
   end
 
   test "should get new" do
-    get :new
+    get :new, job_id: @emergency_contact.job_id
     assert_response :success
   end
 
   test "should create emergency_contact" do
     assert_difference('EmergencyContact.count') do
-      post :create, emergency_contact: { address_id: @emergency_contact.address_id, email: @emergency_contact.email, first_name: @emergency_contact.first_name, job_id: @emergency_contact.job_id, last_name: @emergency_contact.last_name }
+      post :create, job_id: @emergency_contact.job_id,
+           address: addresses(:california).attributes,
+           phones: phones(:thai).attributes,
+           emergency_contact: { email: @emergency_contact.email, first_name: @emergency_contact.first_name, job_id: @emergency_contact.job_id, last_name: @emergency_contact.last_name }
     end
 
-    assert_redirected_to emergency_contact_path(assigns(:emergency_contact))
+    assert_redirected_to job_emergency_contact_path(@emergency_contact.job_id, assigns(:emergency_contact))
   end
 
   test "should show emergency_contact" do
-    get :show, id: @emergency_contact
+    get :show, job_id: @emergency_contact.job_id, id: @emergency_contact
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @emergency_contact
+    get :edit, job_id: @emergency_contact.job_id, id: @emergency_contact
     assert_response :success
   end
 
   test "should update emergency_contact" do
-    patch :update, id: @emergency_contact, emergency_contact: { address_id: @emergency_contact.address_id, email: @emergency_contact.email, first_name: @emergency_contact.first_name, job_id: @emergency_contact.job_id, last_name: @emergency_contact.last_name }
-    assert_redirected_to emergency_contact_path(assigns(:emergency_contact))
+    patch :update, job_id: @emergency_contact.job_id, id: @emergency_contact,
+          address: addresses(:california).attributes,
+          phones: phones(:thai).attributes,
+          emergency_contact: { email: @emergency_contact.email, first_name: @emergency_contact.first_name, job_id: @emergency_contact.job_id, last_name: @emergency_contact.last_name }
+    assert_redirected_to job_emergency_contact_path(@emergency_contact.job_id, assigns(:emergency_contact))
   end
 
   test "should destroy emergency_contact" do
     assert_difference('EmergencyContact.count', -1) do
-      delete :destroy, id: @emergency_contact
+      delete :destroy, job_id: @emergency_contact.job_id, id: @emergency_contact
     end
 
-    assert_redirected_to emergency_contacts_path
+    assert_redirected_to job_emergency_contacts_path
   end
 end

@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class PipelineStatusesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @pipeline_status = pipeline_statuses(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class OncallsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @oncall = oncalls(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do
@@ -14,14 +17,6 @@ class OncallsControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
-  end
-
-  test "should create oncall" do
-    assert_difference('Oncall.count') do
-      post :create, oncall: { priority: @oncall.priority, scheduled_on: @oncall.scheduled_on, user_id: @oncall.user_id }
-    end
-
-    assert_redirected_to oncall_path(assigns(:oncall))
   end
 
   test "should show oncall" do

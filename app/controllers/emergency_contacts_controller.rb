@@ -41,7 +41,7 @@ class EmergencyContactsController < ApplicationController
         @job.update_last_action
 
         @emergency_contact.phones.destroy_all
-        phone_count = phone_params['type_ids'].count
+        phone_count = phone_params['type_ids'].try(:count) || 0
 
         phone_count.times do |index|
           unless phone_params['numbers'][index] == ''
@@ -67,7 +67,7 @@ class EmergencyContactsController < ApplicationController
       if @emergency_contact.update(emergency_contact_params)
         @job.update_last_action
         @emergency_contact.phones.destroy_all
-        phone_count = phone_params['type_ids'].count
+        phone_count = phone_params['type_ids'].try(:count) || 0
 
         phone_count.times do |index|
           unless phone_params['numbers'][index] == ''
@@ -90,7 +90,7 @@ class EmergencyContactsController < ApplicationController
     @emergency_contact.destroy
     @emergency_contact.phones.destroy_all
     respond_to do |format|
-      format.html { redirect_to emergency_contacts_url, notice: 'Emergency contact was successfully destroyed.' }
+      format.html { redirect_to job_emergency_contacts_url(@job.id), notice: 'Emergency contact was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

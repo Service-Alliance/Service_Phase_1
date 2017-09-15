@@ -12,12 +12,12 @@
   </thead>
 
   <tbody>
-    <% @notes.each do |note| %>
+    <% !@notes.empty? && @notes.each do |note| %>
       <tr>
-        <td><%= note.note %></td>
+        <td><%= note.content %></td>
         <td><%= note.noteable %></td>
-        <td><%= link_to 'Show', note %></td>
-        <td><%= link_to 'Edit', edit_note_path(note) %></td>
+        <td><%= link_to 'Show', job_notes_path(@job) %></td>
+        <td><%= link_to 'Edit', edit_notes_path(note) %></td>
         <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

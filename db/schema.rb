@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819062339) do
+ActiveRecord::Schema.define(version: 20170908063824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -407,13 +407,13 @@ ActiveRecord::Schema.define(version: 20170819062339) do
   add_index "job_managers", ["job_id"], name: "index_job_managers_on_job_id", using: :btree
 
   create_table "job_statuses", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "job_types", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -458,7 +458,7 @@ ActiveRecord::Schema.define(version: 20170819062339) do
   add_index "jobs", ["entered_by_id"], name: "index_jobs_on_entered_by_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -471,13 +471,13 @@ ActiveRecord::Schema.define(version: 20170819062339) do
   end
 
   create_table "loss_causes", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "loss_types", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.text     "tooltip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -547,7 +547,7 @@ ActiveRecord::Schema.define(version: 20170819062339) do
   add_index "notifications", ["target_id"], name: "index_notifications_on_target_id", using: :btree
 
   create_table "notify_types", force: :cascade do |t|
-    t.text     "name"
+    t.text     "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -584,7 +584,7 @@ ActiveRecord::Schema.define(version: 20170819062339) do
   add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
 
   create_table "phone_types", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -602,13 +602,13 @@ ActiveRecord::Schema.define(version: 20170819062339) do
   add_index "phones", ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id", using: :btree
 
   create_table "pipeline_statuses", force: :cascade do |t|
-    t.text     "name"
+    t.text     "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "pricing_categories", force: :cascade do |t|
-    t.text     "name"
+    t.text     "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -672,13 +672,13 @@ ActiveRecord::Schema.define(version: 20170819062339) do
   end
 
   create_table "referral_types", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -698,6 +698,12 @@ ActiveRecord::Schema.define(version: 20170819062339) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "seed_migration_data_migrations", force: :cascade do |t|
+    t.string   "version"
+    t.integer  "runtime"
+    t.datetime "migrated_on"
+  end
+
   create_table "states", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -705,7 +711,7 @@ ActiveRecord::Schema.define(version: 20170819062339) do
   end
 
   create_table "structure_types", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -877,6 +883,26 @@ ActiveRecord::Schema.define(version: 20170819062339) do
     t.boolean  "active",                           default: true
   end
 
+  create_table "work_order_users", force: :cascade do |t|
+    t.integer  "work_order_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "work_order_users", ["user_id"], name: "index_work_order_users_on_user_id", using: :btree
+  add_index "work_order_users", ["work_order_id"], name: "index_work_order_users_on_work_order_id", using: :btree
+
+  create_table "work_order_vendors", force: :cascade do |t|
+    t.integer  "work_order_id"
+    t.integer  "vendor_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "work_order_vendors", ["vendor_id"], name: "index_work_order_vendors_on_vendor_id", using: :btree
+  add_index "work_order_vendors", ["work_order_id"], name: "index_work_order_vendors_on_work_order_id", using: :btree
+
   create_table "work_orders", force: :cascade do |t|
     t.integer  "job_id"
     t.text     "to"
@@ -906,4 +932,8 @@ ActiveRecord::Schema.define(version: 20170819062339) do
     t.text     "adjuster"
   end
 
+  add_foreign_key "work_order_users", "users"
+  add_foreign_key "work_order_users", "work_orders"
+  add_foreign_key "work_order_vendors", "vendors"
+  add_foreign_key "work_order_vendors", "work_orders"
 end

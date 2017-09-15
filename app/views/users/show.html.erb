@@ -58,25 +58,20 @@
       <div class="panel-heading">
         <ul class="nav nav-tabs">
           <li class="active">
-            <a href="#notes" aria-controls="entered" role="tab" data-toggle="tab">Recent Jobs Entered</a>
+            <a href="#entered" aria-controls="entered" role="tab" data-toggle="tab">Recent Jobs Entered</a>
           </li>
           <li>
-            <a href="#upload" aria-controls="assigned" role="tab" data-toggle="tab">Recent Jobs Assigned</a>
+            <a href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab">Recent Jobs Assigned</a>
           </li>
-
         </ul>
       </div>
       <div class="panel-body">
         <div class="tab-content">
           <div class="tab-pane fade in active" id="entered">
-            <% Job.where(entered_by_id: @user.id).last(20).each do |job| %>
-              <%= link_to job.id, job_path(job.id) %> <%= job.try(:name) %><br />
-            <% end %>
+            <%= render partial: 'jobs', locals: {jobs: @user.jobs_entered_by_user} %>
           </div>
           <div class="tab-pane fade" id="assigned">
-            <% Job.where(coordinator_id: @user.id).last(20).each do |job| %>
-              <%= link_to job.id, job_path(job.id) %> <%= job.try(:name) %><br />
-            <% end %>
+            <%= render partial: 'jobs', locals: {jobs: @user.jobs_owned_by_user} %>
           </div>
         </div>
       </div>

@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class CorporateReferralTypesControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   setup do
     @corporate_referral_type = corporate_referral_types(:one)
+    sign_in(users(:one))
   end
 
   test "should get index" do

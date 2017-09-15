@@ -11,18 +11,11 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-  :email => {
-    :deliver_with => :deliver, # Rails >= 4.2.1 do not need this option since it defaults to :deliver_now
-    :email_prefix => "[PREFIX] ",
-    :sender_address => %{"notifier" <error@servpro.com>},
-    :exception_recipients => %w{creaumond@gmail.com}
-  }
 
-    config.action_mailer.default_url_options = { :host => 'digitaljobchart.com' }
+  config.action_mailer.default_url_options = { :host => 'digitaljobchart.com' }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.

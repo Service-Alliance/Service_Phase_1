@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  number: MyString
+  number: 1231231234
   type_id: 1
-  extension: MyString
+  extension: 66
 
-two:
-  number: MyString
+thai:
+  number: 1231231234
   type_id: 1
-  extension: MyString
+  extension: 66

@@ -15,15 +15,12 @@ class Customer < ActiveRecord::Base
   has_many :vendors, through: :customer_vendors
   accepts_nested_attributes_for :customer_vendors
 
-  delegate :full_address, to: :address, allow_nil: true
+  delegate :full_address, :address_without_county, to: :address, allow_nil: true
 
-  # validates :email, presence: true, format: {
-  # with: /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/i,
-  # message: 'Invalid email format.'
-  # }
   include PgSearch
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
+
   ransacker :full_name do |parent|
   Arel::Nodes::InfixOperation.new('||',
     parent.table[:first_name], parent.table[:last_name])

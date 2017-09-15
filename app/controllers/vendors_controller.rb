@@ -1,5 +1,6 @@
 class VendorsController < ApplicationController
   before_action :set_vendor, only: [:show, :edit, :update, :destroy]
+  before_action :verify_edit_status, only: [:edit, :update, :destroy, :new ]
 
   # GET /vendors
   # GET /vendors.json
@@ -23,6 +24,7 @@ class VendorsController < ApplicationController
 
   # GET /vendors/1/edit
   def edit
+
   end
 
   # POST /vendors
@@ -79,6 +81,12 @@ class VendorsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_vendor
       @vendor = Vendor.find(params[:id])
+    end
+
+    def verify_edit_status
+      unless Vendor.can_edit?(current_user)
+        redirect_to '/vendors', notice: 'You do not have sufficient privileges to complete this action.'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

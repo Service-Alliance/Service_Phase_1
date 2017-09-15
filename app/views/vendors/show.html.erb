@@ -93,8 +93,10 @@
 
       </div>
       <div class="panel-footer">
-        <%= link_to edit_vendor_path(@vendor), class: "btn btn-sm btn-warning", type: "button" do %>
-        <i class="glyphicon glyphicon-edit"></i>
+        <% if Vendor.can_edit?(current_user) %>
+          <%= link_to edit_vendor_path(@vendor), class: "btn btn-sm btn-warning", type: "button" do %>
+          <i class="glyphicon glyphicon-edit"></i>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -222,7 +224,7 @@
     </div>
   </div>
 
-  <div class="col-sm-8 col-sm-offset-4 margin-top-1">
+  <div class="col-sm-8 margin-top-1">
     <h3 class="text-center">Past</h3>
     <div class="timeline-centered">
       <% @vendor.trackers.each do |tracker| %>

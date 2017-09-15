@@ -482,6 +482,9 @@ body {
     }
 .nav-tabs > li > a {
   color: white;
+  &:active, &:hover {
+    color: #555;
+  }
 }
 
 #kbase-article {
@@ -651,4 +654,10 @@ body {
   text-align: center;
   background-color: red;
   border-radius: 10px;
+}
+
+form.new_user {
+  input[type=checkbox] {
+    margin-left: 0;
+  }
 }

@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :pipeline_statuses
   resources :upload_categories
   resources :franchise_users
-  resources :images
   resources :franchises
   resources :vendor_upload_types
   resources :tracker_tasks

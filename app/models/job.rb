@@ -34,11 +34,28 @@ class Job < ActiveRecord::Base
   has_many :vendor_assignments, dependent: :destroy
   has_many :occupants
 
+  delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
+  delegate :full_name, to: :customer, allow_nil: true, prefix: true
+  delegate :name, to: :job_status, allow_nil: true, prefix: true
+  delegate :name, to: :franchise, allow_nil: true, prefix: true
+
   # Activity Tracking activated
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
 
   delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
+
+  scope :with_manager_id, -> (user_id) { joins(:job_managers).merge(JobManager.where(:job_manager_id => user_id)) }
+
+  scope :latest_first, -> {order(created_at: :desc)}
+
+  def self.owned_by(user)
+    where(coordinator_id: user.id)
+  end
+
+  def self.entered_by(user)
+    where(entered_by_id: user.id)
+  end
 
   alias_method :insurance_details, :insurance_company
 
@@ -46,37 +63,17 @@ class Job < ActiveRecord::Base
     losses.first.try(:loss_type)
   end
 
+  def loss_type_names
+    losses.map(&:loss_type_name).delete_if(&:blank?)
+  end
+
+  def insurance_details
+    JobDetail.find_by(job_id: id).try(:insurance_company)
+  end
+
   def update_last_action
     self.last_action = Date.today
     save
-  end
-
-
-  def current_progress_position
-    manager_assigned = self.job_managers.any?
-    manager_visited = self.job_managers.first && self.job_managers.first.schedule_date && self.job_managers.first.schedule_date >= Date.today
-    estimate_created = self.estimate_created
-    estimate_sent = self.estimate_sent
-    contract_sent = self.contract_sent
-    contract_created = self.contract_created
-    work_order = self.work_orders.any?
-    if work_order == true
-      return 8
-    elsif contract_sent == true
-      return 7
-    elsif contract_created == true
-      return 6
-    elsif estimate_sent == true
-      return 5
-    elsif estimate_created == true
-      return 4
-    elsif manager_visited == true
-      return 3
-    elsif manager_assigned == true
-      return 2
-    else
-      return 1
-    end
   end
 
   def self.value_of_jobs(jobs)

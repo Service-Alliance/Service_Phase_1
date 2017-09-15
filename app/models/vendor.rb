@@ -8,4 +8,12 @@ class Vendor < ActiveRecord::Base
   has_many :customers, through: :customer_vendors
   accepts_nested_attributes_for :uploads
   accepts_nested_attributes_for :notes
+
+  def self.can_edit?(user)
+    if user.admin? || user.email == 'vchambers@servpro5933.com'
+      return true
+    else
+      return false
+    end
+  end
 end

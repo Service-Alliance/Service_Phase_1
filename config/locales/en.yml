@@ -20,4 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  work_orders:
+    servpro: "SERVPRO"
+    servpro_of_franchise: "SERVPRO of %{franchise}"

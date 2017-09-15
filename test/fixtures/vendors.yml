@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: VendorOne
   contact: MyString
   phone: MyString
   cellphone: MyString
@@ -16,7 +16,7 @@ one:
   email: MyString
 
 two:
-  name: MyString
+  name: VendorTwo
   contact: MyString
   phone: MyString
   cellphone: MyString

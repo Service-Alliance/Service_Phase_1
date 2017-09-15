@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
-
+ruby '2.4.1'
+#ruby-gemset=service_alliance
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg', '0.20' # increase this version only after migration to Rails 5.0.
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -22,8 +23,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'puma'
-# gem 'will_paginate', '~> 3.1.0'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'pundit'
 gem 'devise'
@@ -35,12 +34,12 @@ gem 'carrierwave', '~> 1.0'
 gem "fog-aws"
 gem "prawn"
 gem 'combine_pdf'
-gem 'exception_notification'
+gem 'honeybadger', '~> 3.1'
 gem 'public_activity'
 gem "select2-rails"
 gem 'ransack'
 gem 'kaminari'
-gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+gem 'activeadmin', '~> 1.1'
 gem 'chartkick'
 gem 'groupdate'
 gem 'pg_search'
@@ -59,18 +58,21 @@ gem 'unicorn-worker-killer'
 
 # Add source of code for every database query
 gem 'marginalia'
+gem 'seed_migration'
 
 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'minitest-reporters'
+  gem 'single_test'
+  gem 'pry'
 end
 
 group :development do
   gem 'rack-mini-profiler', require: false
   gem 'memory_profiler', require: false
-
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
