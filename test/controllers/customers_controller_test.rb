@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class CustomersControllerTest < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-
   setup do
     @customer = customers(:one)
     sign_in(users(:one))

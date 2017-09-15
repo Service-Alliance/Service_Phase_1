@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
-  include Devise::Test::ControllerHelpers
-
   setup do
     @user = users(:one)
     sign_in(users(:two))
