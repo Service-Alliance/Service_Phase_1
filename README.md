@@ -1,7 +1,7 @@
 [![Cloud66](https://app.cloud66.com/stacks/badge/f3e65df9edad6603f34a68933bbc4d1f.svg)](https://app.cloud66.com/stacks/47322)
 
 ## Getting started
-
+- dependencies: Postgresql and Redis
 - Be sure to have **rvm** or **rbenv**
 - be sure to have **bundler gem** installed.
 - Check that your IDE can handle [.editorconfig](http://editorconfig.org) file

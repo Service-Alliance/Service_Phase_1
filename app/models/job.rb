@@ -144,7 +144,7 @@ class Job < ActiveRecord::Base
       invoiced = JobStatus.find_by(name: "Invoiced")
       if new_status_id === invoiced.id
         job.collection_subscriptions.each do |collection_user|
-          UserMailer.job_moved_to_invoiced(collection_user.user, job).deliver_now
+          UserMailer.job_moved_to_invoiced(collection_user.user, job).deliver_later
         end
       else
         return false

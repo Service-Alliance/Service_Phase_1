@@ -36,7 +36,7 @@ class JobManagersController < ApplicationController
         @user = @job_manager.job_manager
         @job.trackers.create(tracker_task_id: 2, child_id: @job_manager.id)
         if @user.email
-          UserMailer.manager_assignment(@user, @job_manager).deliver_now
+          UserMailer.manager_assignment(@user, @job_manager).deliver_later
         end
         format.html { redirect_to job_job_managers_path(@job), notice: 'Job manager was successfully created.' }
         format.json { render :show, status: :created, location: @job_manager }
@@ -55,7 +55,7 @@ class JobManagersController < ApplicationController
         @job.update_last_action
         @user = @job_manager.job_manager
         if @user.email
-          UserMailer.manager_assignment(@user, @job_manager).deliver_now
+          UserMailer.manager_assignment(@user, @job_manager).deliver_later
         end
         format.html { redirect_to job_job_managers_path(@job), notice: 'Job manager was successfully updated.' }
         format.json { render :show, status: :ok, location: @job_manager }

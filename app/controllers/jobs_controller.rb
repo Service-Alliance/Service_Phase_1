@@ -150,7 +150,6 @@ class JobsController < ApplicationController
     @job.pipeline_status_id = 1
 
     if @caller.save
-      # CustomerMailer.welcome_email(@caller).deliver_now
       @address.save
       if @job.save
         if @call
@@ -236,7 +235,7 @@ class JobsController < ApplicationController
 
         if job_params[:job_manager_id]
           @user = User.find_by(id: job_params[:job_manager_id])
-          UserMailer.manager_assignment(@user, @job).deliver_now
+          UserMailer.manager_assignment(@user, @job).deliver_later
           return redirect_to job_job_managers_path(@job)
         end
 
@@ -355,7 +354,7 @@ class JobsController < ApplicationController
 
       @job.trackers.create(tracker_task_id: 2, child_id: @job_manager.id)
       if @user.email
-        UserMailer.manager_assignment(@user, @job_manager).deliver_now
+        UserMailer.manager_assignment(@user, @job_manager).deliver_later
       end
       return redirect_to @job, notice: 'Job Manager Added.'
     else
