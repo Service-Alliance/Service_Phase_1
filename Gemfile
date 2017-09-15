@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
-ruby '2.3'
+ruby '2.4.1'
 #ruby-gemset=service_alliance
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg', '0.20' # increase this version only after migration to Rails 5.0.
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -23,7 +23,6 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'puma'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'pundit'
 gem 'devise'
@@ -72,10 +71,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'mina'
   gem 'rack-mini-profiler', require: false
   gem 'memory_profiler', require: false
-  gem 'overcommit'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'

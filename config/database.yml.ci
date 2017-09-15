@@ -1,0 +1,12 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  user: postgres
+  database: amzstore_test
+test:
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  user: postgres
+  database: amzstore_test
