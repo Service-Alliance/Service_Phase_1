@@ -18,7 +18,7 @@ namespace :db do
     config = Rails.configuration.database_configuration["development"]
     database = config["database"]
 
-    system("pg_restore --verbose --clean --no-acl --no-owner -h localhost -d #{database} #{Rails.root}/#{Dir.glob('tmp/*.dump').first
+    system("psql -U sk --no-password #{database} < #{Rails.root}/#{Dir.glob('tmp/*.dump').first
     }")
   end
 end
