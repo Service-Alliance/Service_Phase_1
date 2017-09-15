@@ -197,6 +197,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    # FIXME: Decrease complexity of this code -- introduce workers!
     @previous_status = Job.find(params[:id])
     respond_to do |format|
       if @job.update(job_params)
@@ -215,6 +216,7 @@ class JobsController < ApplicationController
           @address = @caller.address
           @caller.update(caller_params)
           @address.update(address_params)
+          # if company not present ? there will be an error -- company will be nil
           company = Company.find_or_create_by(name: company_params[:name]) if company_params[:name].present?
           company.address = @address if company.address.blank?
           company.save

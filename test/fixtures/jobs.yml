@@ -12,6 +12,9 @@ one:
   entered_by_id: 1
   franchise: one
 
+no_caller:
+  <<: *DEFAULTS
+
 with_note:
   <<: *DEFAULTS
   job_note: just a note
