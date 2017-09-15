@@ -1,83 +1,91 @@
 <div class="col-xs-12 text-center">
-    <h1>Caller Information</h1>
+  <h1>Caller Information</h1>
 </div>
 
 <div class="col-xs-12">
-  <label for="caller_search">Caller Search</label>
-  <input id="caller_search" class="form-control autocomplete">
+  <div class="form-group">
+    <label for="caller_search">Caller Search</label>
+    <input id="caller_search" class="form-control autocomplete">
+  </div>
 </div>
 <%= f.fields_for(@caller) do |g| %>
-<%= hidden_field_tag "caller_exists[caller_exists]", 0 %>
-<div class="col-xs-4">
+  <%= hidden_field_tag "caller_exists[caller_exists]", 0 %>
+  <div class="col-xs-12">
     <div class="form-group">
-        <%= label_tag :first_name %><br>
-        <%= text_field_tag "caller[first_name]", @caller.first_name, class: "form-control"  %>
+      <%= label_tag :company_name %><br>
+      <%= text_field_tag "company[name]", '', class: "form-control autocomplete"  %>
     </div>
-</div>
-<div class="col-xs-4">
+  </div>
+  <div class="col-xs-4">
     <div class="form-group">
-        <%= label_tag :last_name %><br>
-        <%= text_field_tag "caller[last_name]", @caller.last_name, class: "form-control"  %>
+      <%= label_tag :first_name %><br>
+      <%= text_field_tag "caller[first_name]", @caller.first_name, class: "form-control"  %>
     </div>
-</div>
-<div class="col-xs-4">
+  </div>
+  <div class="col-xs-4">
     <div class="form-group">
-        <%= label_tag :email %><a data-toggle="tooltip" class="tooltipLink" data-original-title="A - Apple  H - Happy  O - Orange   V - Victor
-B - Boy      I - Ice            P - Paul        W - Work
-C - Cat      J - Jack        Q - Queen    X - X-Ray
-D - David  K - King       R - Rabbit    Y - Yes
-E - Eagle  L - Lion         S - Sam       Z - Zebra
-F - Frank  M - Mary     T - Tom
-G - Girl      N - Nancy   U - Universe">
-            <span class="glyphicon glyphicon-info-sign"></span>
-        </a><br>
-        <%= text_field_tag "caller[email]", @caller.email, class: "form-control"  %>
+      <%= label_tag :last_name %><br>
+      <%= text_field_tag "caller[last_name]", @caller.last_name, class: "form-control"  %>
     </div>
-</div>
-<div class="col-xs-6">
+  </div>
+  <div class="col-xs-4">
     <div class="form-group">
-        <%= label_tag :address_1 %><br>
-        <%= text_field_tag "address[address_1]", @caller.try(:address).try(:address_1), class: "form-control"  %>
+      <%= label_tag :email %><a data-toggle="tooltip" class="tooltipLink" data-original-title="A - Apple  H - Happy  O - Orange   V - Victor
+      B - Boy      I - Ice            P - Paul        W - Work
+      C - Cat      J - Jack        Q - Queen    X - X-Ray
+      D - David  K - King       R - Rabbit    Y - Yes
+      E - Eagle  L - Lion         S - Sam       Z - Zebra
+      F - Frank  M - Mary     T - Tom
+      G - Girl      N - Nancy   U - Universe">
+        <span class="glyphicon glyphicon-info-sign"></span>
+      </a><br>
+      <%= text_field_tag "caller[email]", @caller.email, class: "form-control"  %>
     </div>
-</div>
-<div class="col-xs-6">
+  </div>
+  <div class="col-xs-6">
     <div class="form-group">
-        <%= label_tag :address_2 %><br>
-        <%= text_field_tag "address[address_2]", @caller.try(:address).try(:address_2), class: "form-control" %>
+      <%= label_tag :address_1 %><br>
+      <%= text_field_tag "address[address_1]", @caller.try(:address).try(:address_1), class: "form-control"  %>
     </div>
-</div>
+  </div>
+  <div class="col-xs-6">
+    <div class="form-group">
+      <%= label_tag :address_2 %><br>
+      <%= text_field_tag "address[address_2]", @caller.try(:address).try(:address_2), class: "form-control" %>
+    </div>
+  </div>
 
 
-<div class="col-xs-12">
+  <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-3">
-          <div class="form-group">
-              <%= label_tag :zip %><br>
-              <%= text_field_tag "address[zip_code]", @caller.try(:address).try(:zip_code), class: "form-control"  %>
-          </div>
-      </div>
-        <div class="col-xs-3">
-            <label>Zip Code Lookup</label><br>
-            <button id="zipLookup" type="button" class="btn btn-primary">Lookup</button>
+        <div class="form-group">
+          <%= label_tag :zip %><br>
+          <%= text_field_tag "address[zip_code]", @caller.try(:address).try(:zip_code), class: "form-control"  %>
         </div>
+      </div>
+      <div class="col-xs-3">
+        <label>Zip Code Lookup</label><br>
+        <button id="zipLookup" type="button" class="btn btn-primary">Lookup</button>
+      </div>
     </div>
-</div>
-<div class="col-xs-6">
+  </div>
+  <div class="col-xs-6">
     <div class="form-group">
-        <%= label_tag :city %><br>
-        <%= text_field_tag "address[city]", @caller.try(:address).try(:city), class: "form-control"  %>
+      <%= label_tag :city %><br>
+      <%= text_field_tag "address[city]", @caller.try(:address).try(:city), class: "form-control"  %>
     </div>
-</div>
-<div class="col-xs-6">
+  </div>
+  <div class="col-xs-6">
     <div class="form-group">
-        <%= label_tag :state_id %><br>
-        <%= select_tag("address[state_id]", options_for_select(State.all.map{|p| [p.name, p.id]}.insert(0, ""), selected: @caller.try(:address).try(:state).try(:id)), class: "form-control") %>
+      <%= label_tag :state_id %><br>
+      <%= select_tag("address[state_id]", options_for_select(State.all.map{|p| [p.name, p.id]}.insert(0, ""), selected: @caller.try(:address).try(:state).try(:id)), class: "form-control") %>
     </div>
-</div>
-<div class="col-xs-6">
+  </div>
+  <div class="col-xs-6">
     <div class="form-group">
-        <%= label_tag :county %><br>
-        <%= text_field_tag "address[county]", @caller.try(:address).try(:county), class: "form-control"  %>
+      <%= label_tag :county %><br>
+      <%= text_field_tag "address[county]", @caller.try(:address).try(:county), class: "form-control"  %>
     </div>
-</div>
+  </div>
 <% end %>

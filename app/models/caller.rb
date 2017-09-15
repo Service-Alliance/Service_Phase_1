@@ -2,6 +2,8 @@ class Caller < ActiveRecord::Base
   belongs_to :job
   belongs_to :address
   has_many :phones, as: :phoneable
+  has_many :caller_companies
+  has_many :companies, through: :caller_companies
 
   include PgSearch
   include PublicActivity::Model
@@ -74,4 +76,12 @@ class Caller < ActiveRecord::Base
     return phones
   end
 
+  def company_name
+    companies.count == 1 ? companies.first.name : ''
+  end
+
+  def add_company(company)
+    return if company.nil?
+    companies << company unless companies.include?(company)
+  end
 end

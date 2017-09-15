@@ -114,7 +114,6 @@ class JobsController < ApplicationController
     @caller.save
     @job_detail = JobDetail.create(job_id: @job.id)
     @phones = nil
-
   end
 
   # GET /jobs/1/edit
@@ -147,6 +146,7 @@ class JobsController < ApplicationController
     @job.entered_by_id = current_user.id
     @caller = Caller.new(caller_params)
     @address = Address.new(address_params)
+    @company = Company.find_or_create_by(name: company_params[:name]) if company_params[:name].present?
 
     @call = Call.find_by(id: call_params[:id]) if call_params[:id]
     @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
@@ -164,8 +164,12 @@ class JobsController < ApplicationController
         end
         @caller.job_id = @job.id
         @caller.address_id = @address.id
+        @caller.add_company(@company)
         @caller.save
         @job.update_last_action
+
+        @company.address = @address if @company.address.blank?
+        @company.save
 
         @caller.phones.destroy_all
         phone_count = phone_params['type_ids'].count
@@ -212,6 +216,10 @@ class JobsController < ApplicationController
           @address = @caller.address
           @caller.update(caller_params)
           @address.update(address_params)
+          company = Company.find_or_create_by(name: company_params[:name]) if company_params[:name].present?
+          company.address = @address if company.address.blank?
+          company.save
+          @caller.add_company(company)
         end
         unless phone_params.empty?
           @caller.phones.destroy_all if @caller && @caller.phones
@@ -462,7 +470,7 @@ class JobsController < ApplicationController
   end
 
   def caller_params
-    params.fetch(:caller, {}).permit(:first_name, :last_name, :email, :address_1,
+    params.fetch(:caller, {}).permit(:company_name, :company_id, :first_name, :last_name, :email, :address_1,
                                      :address_2, :zip, :city, :state_id, :county)
   end
 
@@ -491,5 +499,9 @@ class JobsController < ApplicationController
 
   def phone_params
     params.fetch(:phones, {}).permit(numbers: [], extensions: [], type_ids: [])
+  end
+
+  def company_params
+    params.fetch(:company, {}).permit(:name)
   end
 end
