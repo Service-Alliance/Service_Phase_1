@@ -52,10 +52,10 @@ class WorkOrderDeliveryService
   end
 
   def deliver_user_email(user)
-    UserMailer.work_order_notification(user, @work_order.job, @work_order).deliver_now
+    UserMailer.work_order_notification(user, @work_order.job, @work_order).deliver_later
   end
 
   def deliver_vendor_email(contact, vendor = nil)
-    UserMailer.vendor_work_order_notification(contact, @work_order.job, @work_order, vendor).deliver_now
+    UserMailer.vendor_work_order_notification(contact, @work_order.job, @work_order, vendor).deliver_later
   end
 end

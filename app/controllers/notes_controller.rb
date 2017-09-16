@@ -40,7 +40,7 @@ class NotesController < ApplicationController
           user = User.find_by(first_name: name[0], last_name: name[1])
           if user
             Notification.create(notify_type: notify_type.id,actor_id: current_user.id, target_id: user.id, job_id: @job.id, notify_text: "#{current_user.full_name} mentioned you in a job note.")
-            UserMailer.mention_notification(user, @job).deliver_now
+            UserMailer.mention_notification(user, @job).deliver_later
           end
         end
 
