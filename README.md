@@ -1,4 +1,5 @@
 [![Cloud66](https://app.cloud66.com/stacks/badge/f3e65df9edad6603f34a68933bbc4d1f.svg)](https://app.cloud66.com/stacks/47322)
+[![CircleCI](https://circleci.com/gh/Service-Alliance/Service_Phase_1/tree/master.svg?style=svg)](https://circleci.com/gh/Service-Alliance/Service_Phase_1/tree/master)
 
 ## Getting started
 - dependencies: Postgresql and Redis
@@ -43,7 +44,6 @@ Server needs to be properly configured for deployment to work.
 ## Tooling
 
 - [Trello](https://trello.com/b/zMV1ztiR/service-alliance-web-app)
-- [Jenkins](http://34.226.74.30)
 - [Cloud66](http://cloud66.com) - DevOps as a service
 - [CircleCi](https://circleci.com/gh/Service-Alliance/Service_Phase_1) - Continuesly checks pull requests (at least so far)
 
