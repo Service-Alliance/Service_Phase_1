@@ -125,4 +125,20 @@ Rails.application.routes.draw do
   post 'adjusters/lookup' => 'adjusters#lookup'
   get 'share/users', as: :mentionables
   root 'home#index'
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+  require 'sidekiq/api'
+
+  match "default-queue-status" => proc { [
+    50,
+    { "Content-Type" => "text/plain" },
+    [Sidekiq::Queue.new("default").size < 5000 ? "OK" : "UHOH"]
+  ] }, via: :get
+
+  match "mailers-queue-status" => proc { [
+    20,
+    { "Content-Type" => "text/plain" },
+    [Sidekiq::Queue.new("mailers").size < 10000 ? "OK" : "UHOH"]
+  ] }, via: :get
 end
