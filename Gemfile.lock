@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/Service-Alliance/gridhook.git
+  revision: ec9951e35fc1ca9a5ba436e8c81f012d780134f3
+  specs:
+    gridhook (0.2.6)
+      multi_json (~> 1.12)
+      rails (~> 4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -352,6 +360,7 @@ DEPENDENCIES
   dotenv-rails
   fog-aws
   geocoder
+  gridhook!
   groupdate
   honeybadger (~> 3.1)
   httparty
