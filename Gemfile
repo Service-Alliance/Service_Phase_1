@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
-ruby '2.4.1'
+ruby '2.4.2'
 #ruby-gemset=service_alliance
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.8'
+gem 'rails', '~> 4.2'
 # Use postgresql as the database for Active Record
-gem 'pg', '0.20' # increase this version only after migration to Rails 5.0.
+gem 'pg', '~>0.20' # increase this version only after migration to Rails 5.0.
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'pundit'
 gem 'devise'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.3'
 gem 'geocoder'
 gem 'httparty'
 gem 'rails_12factor', group: :production
