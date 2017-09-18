@@ -67,9 +67,9 @@ gem 'gridhook', github: 'Service-Alliance/gridhook'
 
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'minitest-reporters'
+  gem 'simplecov', :require => false
   gem 'single_test'
   gem 'pry'
 end
