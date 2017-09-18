@@ -419,7 +419,7 @@ class JobsController < ApplicationController
   end
 
   def collections
-    @jobs = Job.joins(:collection_subscriptions)
+    jobs = Job.joins(:collection_subscriptions)
       .includes(job_associations)
       .where(collection_subscriptions: {user_id: current_user.id}).limit(200)
     render json: jobs.to_json(include: job_json_includes)
