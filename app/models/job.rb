@@ -38,6 +38,7 @@ class Job < ActiveRecord::Base
   delegate :full_name, to: :customer, allow_nil: true, prefix: true
   delegate :name, to: :job_status, allow_nil: true, prefix: true
   delegate :name, to: :franchise, allow_nil: true, prefix: true
+  delegate :full_address, to: :caller, allow_nil: true, prefix: true
 
   # Activity Tracking activated
   include PublicActivity::Model

@@ -16,6 +16,16 @@ class AddressTest < ActiveSupport::TestCase
     assert_equal('Line1 Line2 City Zip County', address.full_address)
   end
 
+  test "full_address defaults to space for a separator" do
+    address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City')
+    assert_equal('Line1 Line2 City', address.full_address)
+  end
+
+  test "full_address allows a custom separator" do
+    address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City')
+    assert_equal('Line1, Line2, City', address.full_address(', '))
+  end
+
   test "address_without_county returns all fields in the address except county" do
     address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City', state: State.new(name: 'State'), zip_code: 'Zip', county: 'County')
     assert_equal('Line1 Line2 City State Zip', address.address_without_county)

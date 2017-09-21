@@ -3,11 +3,11 @@ class Address < ActiveRecord::Base
 
   delegate :name, to: :state, allow_nil: true, prefix: true
 
-  def full_address
-    [address_1, address_2, city, state_name, zip_code, county].delete_if(&:blank?).join(' ')
+  def full_address(separator = ' ')
+    [address_1, address_2, city, state_name, zip_code, county].delete_if(&:blank?).join(separator)
   end
 
-  def address_without_county
-    [address_1, address_2, city, state_name, zip_code].delete_if(&:blank?).join(' ')
+  def address_without_county(separator = ' ')
+    [address_1, address_2, city, state_name, zip_code].delete_if(&:blank?).join(separator)
   end
 end

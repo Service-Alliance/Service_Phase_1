@@ -15,13 +15,13 @@
             </h3>
           </div>
           <% if @job.job_coordinator %>
-              <div class="panel-body">
-                <ul>
-                  <li>
-                    <%= @job.try(:job_coordinator).try(:full_name) %>
-                  </li>
-                </ul>
-              </div>
+            <div class="panel-body">
+              <ul>
+                <li>
+                  <%= link_to @job.job_coordinator_full_name, @job.job_coordinator %>
+                </li>
+              </ul>
+            </div>
           <% end %>
         </div>
       </div>
@@ -36,11 +36,13 @@
             </h3>
           </div>
           <% unless @job.job_managers.empty? %>
-
               <div class="panel-body">
                 <ul>
                   <% @job.job_managers.each do |job_manager| %>
-                      <li><%= job_manager.job_manager.try(:full_name) %> <%= link_to "Remove", job_destroy_manager_assignment_path(@job.id, job_manager.id), method: :delete %></li>
+                    <li>
+                    <%= link_to "Remove", job_destroy_manager_assignment_path(@job.id, job_manager.id), method: :delete, class: 'pull-right' %>
+                    <%= link_to job_manager.full_name, job_manager.job_manager %>
+                    </li>
                   <% end %>
                 </ul>
               </div>
@@ -88,14 +90,7 @@
               <div class="panel-body">
 
                 Name: <%= @job.customer.try(:full_name) %> <br/>
-                <% if @job.customer.try(:address).try(:address_1) && @job.customer.try(:address).try(:address_1) != "" %>
-                    <%= @job.customer.try(:address).try(:address_1) %> <br/>
-                <% end %>
-                <% if @job.customer.try(:address).try(:address_2) && @job.customer.try(:address).try(:address_2) != "" %>
-                    <%= @job.customer.try(:address).try(:address_2) %> <br/>
-                <% end %>
-                <%= @job.customer.try(:address).try(:city) %>
-                , <%= @job.customer.try(:address).try(:state).try(:name) %>  <%= @job.customer.try(:address).try(:zip_code) %>
+                <%= raw @job.customer.full_address('<br />') %> <br/>
                 <%= link_to "View", @job.customer %>
               </div>
           <% end %>
@@ -134,16 +129,8 @@
           </div>
           <% if @job.caller %>
               <div class="panel-body">
-
                 Name: <%= @job.caller.full_name %> <br/>
-                <% if @job.caller.try(:address).address_1 && @job.caller.try(:address).address_1 != "" %>
-                    <%= @job.caller.try(:address).address_1 %> <br/>
-                <% end %>
-                <% if @job.caller.try(:address).address_2 && @job.caller.try(:address).address_2 != "" %>
-                    <%= @job.caller.try(:address).address_2 %> <br/>
-                <% end %>
-                <%= @job.caller.try(:address).city %>
-                , <%= @job.caller.try(:address).try(:state).try(:name) %>  <%= @job.caller.try(:address).zip_code %>
+                <%= raw @job.caller_full_address('<br />') %>
                 <%= link_to "View", job_caller_path(@job, @job.caller) %>
               </div>
           <% end %>
@@ -188,28 +175,6 @@
       </ul>
       <!-- /.nav-second-level -->
     </li>
-
-    <!-- <li>
-            <a href="#">
-                <i class="fa fa-bar-chart-o fa-fw"></i>
-                Contact<span class="glyphicon glyphicon-chevron-down"></span>
-            </a>
-            <ul class="nav nav-second-level">
-                <li>
-                    <% link_to new_or_view_job_caller_path(@job, @job.caller) do %>
-                    <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete' %> glyphicon glyphicon-ok"></i>
-                    Caller Information
-                    <% end %>
-                </li>
-                <li>
-                    <% link_to job_calls_path(@job) do %>
-                    <i class="<%= @job.calls ? 'glyph-done' : 'glyph-incomplete' %> glyphicon glyphicon-ok"></i>
-                    Phone Calls
-                    <% end %>
-                </li>
-            </ul>
-
-        </li> -->
 
     <li>
       <a href="#">
@@ -307,11 +272,7 @@
           <div class="panel-body">
             <ul>
               <% @job.subscriptions.each do |subscriber| %>
-
-                  <li>
-                    <%= subscriber.user.full_name %>
-                  </li>
-
+                <li><%= link_to subscriber.user.full_name, subscriber.user %></li>
               <% end %>
             </ul>
           </div>
