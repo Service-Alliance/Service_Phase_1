@@ -173,10 +173,7 @@ class UsersController < ApplicationController
         :sub_1,
         :sub_2,
         :dry_book,
-        :login_count,
-        :tsheets_user_id,
-        :tsheets_user_first_name,
-        :tsheets_user_last_name
+        :login_count
       )
     end
 
