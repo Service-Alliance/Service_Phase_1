@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Service Alliance Inc.</title>
-        <%= stylesheet_link_tag    'application', media: 'all' %>
-        <%= javascript_include_tag 'application' %>
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.3/metisMenu.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.3/metisMenu.min.js"></script>
-        <%= csrf_meta_tags %>
-    </head>
-    <body>
-
+  <head>
+    <title>Service Alliance Inc.</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.3/metisMenu.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.3/metisMenu.min.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
     <% if current_user && (current_user.admin? || current_user.job_coordinator? || current_user.unassigned? || current_user.owner?) %>
-        <%= render partial: "layouts/admin_navbar" %>
+      <%= render partial: "layouts/admin_navbar" %>
     <% elsif current_user && current_user.project_manager? %>
       <%= render partial: "layouts/project_manager_navbar" %>
-      <% elsif current_user && current_user.contractor? %>
-        <%= render partial: "layouts/contractor_navbar" %>
+    <% elsif current_user && current_user.contractor? %>
+      <%= render partial: "layouts/contractor_navbar" %>
     <% else %>
-        <%= render partial: "layouts/call_rep_navbar" %>
+      <%= render partial: "layouts/call_rep_navbar" %>
     <% end %>
 
     <%= yield %>

@@ -1,3 +1,32 @@
-
-
 <%= column_chart User.user_metrics(7), stacked: true %>
+
+<div class="container-fluid">
+  <p id="notice"><%= notice %></p>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Users</div>
+    <div class="panel-body">
+      <table
+        data-toggle="table"
+        data-url="users/list"
+        data-show-refresh="true"
+        data-show-toggle="true"
+        data-show-columns="true"
+        data-search="true"
+        data-flat="true"
+        data-select-item-name="toolbar1"
+        data-pagination="true"
+        data-sort-name="id"
+        data-sort-order="asc">
+        <thead>
+          <tr>
+            <th data-field="id" data-sortable="true" data-formatter="UserLinkFormatter">User ID</th>
+            <th data-field="first_name" data-sortable="true">First Name</th>
+            <th data-field="last_name" data-sortable="true">Last Name</th>
+            <th data-field="department.name" data-sortable="true">Department</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
