@@ -1,0 +1,17 @@
+<% if local_assigns.fetch(:error, nil).present? %>
+  <div class="alert alert-danger"><i class="fa fa-times"></i> <%= error %></div>
+<% end %>
+<% if user.tsheets_id.present? %>
+  <div class="alert alert-success"><i class="fa fa-check-circle"></i> TSheets user linked</div>
+  <div class="item">
+    TSheets user name:
+    <%= user.tsheets_full_name %>
+  </div>
+  <button type="button" id="unlink_tsheets_user" class="btn btn-primary">Unlink user</button> <i class="tsheets-user-status"></i>
+<% else %>
+  <div class="item">
+    Link to TSheets user:
+    <%= text_field_tag :tsheets_user, '', class: 'form-control with-status', data: {user_id: user.id} %>
+    <i class="tsheets-user-status"></i>
+  </div>
+<% end %>

@@ -1,7 +1,7 @@
 
 
 $(function () {
-$( "#customer_search" ).autocomplete({
+  $( "#customer_search" ).autocomplete({
       source: function (request, response) {
         $.getJSON("/customer_search_suggestions?term=" + request.term, function (data) {
           response($.map(data, function (value, key) {

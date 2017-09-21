@@ -23,7 +23,6 @@ class JobsControllerTest < ActionController::TestCase
     assert_equal 'Job was successfully updated.', flash[:notice]
   end
 
-
   test '#collections' do
     get :collections
     assert_equal [], JSON.parse(response.body)

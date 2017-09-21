@@ -14,17 +14,23 @@ class User < ActiveRecord::Base
   has_many :trackers
   has_many :phones, as: :phoneable
 
+  store_accessor :tsheets, :tsheets_id, :tsheets_first_name, :tsheets_last_name
 
+  scope :with_tsheets_id, ->(tsheets_id) { where("tsheets->>'tsheets_id'='#{tsheets_id}'") }
+  scope :with_first_and_last_names, ->(first, last) { where('lower(first_name) = ? AND lower(last_name) = ?', first.try(:downcase), last.try(:downcase)) }
 
   def full_name
-    first = first_name || " "
-    last = last_name || " "
-    return "#{first+ " " + last}"
+    "#{first_name} #{last_name}"
+  end
+
+  def tsheets_full_name
+    [tsheets_first_name, tsheets_last_name].delete_if(&:blank?).join(' ')
   end
 
   def admin?
     self.role_id == 1 ? true : false
   end
+
   def owner?
     self.try(:role).try(:name) == 'Owner' ? true : false
   end

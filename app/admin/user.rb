@@ -2,7 +2,6 @@ ActiveAdmin.register User do
   permit_params :email, :password, :password_confirmation, :current_sign_in_at, :sign_in_count, :created_at, :current_sign_in_at, :sign_in_count, :created_at, :first_name, :last_name, :role_id, :notes, :department_id, :title, :additional_title, :location_id, :background_check, :online_physical, :fitness_test, :hep_b, :lead, :lead_expiration, :nys_mold, :nys_mold_expiration, :nys_mold_license, :bio_rec_bbp, :hartford, :pet_water, :pet_fire, :osha, :iicrc_reg, :iicrc_expiration, :cec_due, :number_cec_due, :iicrc_wrt, :iicrc_amrt, :iicrc_asd, :iicrc_srt, :iicrc_hst, :iicrc_uft, :iicrc_odor, :iicrc_cds, :sub_1, :sub_2, :dry_book, :login_count
 
 
-
   index do
     selectable_column
     id_column

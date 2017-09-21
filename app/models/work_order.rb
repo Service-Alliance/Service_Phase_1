@@ -13,7 +13,8 @@ class WorkOrder < ActiveRecord::Base
   delegate :customer, :franchise, :job_managers, to: :job, allow_nil: true
 
   delegate :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
-  delegate :name, :full_address, :address_without_county, to: :franchise, allow_nil: true, prefix: true
+  delegate :company_name, :full_address, to: :customer, allow_nil: true, prefix: true
+  delegate :name, :full_address, to: :franchise, allow_nil: true, prefix: true
 
   alias_method :job_location, :customer_full_address
   alias_method :franchise_location, :franchise_name

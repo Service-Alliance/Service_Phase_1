@@ -8,3 +8,4 @@ require 'single_test/tasks' if Rails.env.development?
 
 
 Rails.application.load_tasks
+require 'single_test/tasks'

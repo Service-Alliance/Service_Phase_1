@@ -656,8 +656,19 @@ body {
   border-radius: 10px;
 }
 
-form.new_user {
-  input[type=checkbox] {
-    margin-left: 0;
+.form-group.with-status,
+.form-control.with-status {
+  width: calc(100% - 30px);
+  display: inline-block;
+
+  &+i {
+    margin-left: 5px;
+    font-size: 20px;
+    @extend .fa;
+
+    &.loading {
+      @extend .fa-spin;
+      @extend .fa-refresh;
+    }
   }
 }
