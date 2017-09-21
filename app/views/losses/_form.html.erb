@@ -23,7 +23,7 @@
             <%= f.collection_radio_buttons(:loss_type_id, LossType.all, :id, :name, label: false, boolean_style: :inline) do |b| %>
               <span class="radio">
                 <%= b.label(:"data-value" => b.value, :"name" => "loss_type_id") { b.radio_button + b.text } %>
-                <a data-toggle="tooltip" class="tooltipLink" data-original-title="<%= b.object.tooltip %>">
+                <a data-toggle="tooltip" class="tooltipLink" title="<%= b.object.tooltip %>">
                   <span class="glyphicon glyphicon-info-sign"></span>
                 </a>
               </span>
@@ -59,6 +59,3 @@
     <% end %>
   </div>
 </div>
-<script>
-$("a.tooltipLink").tooltip();
-</script>
