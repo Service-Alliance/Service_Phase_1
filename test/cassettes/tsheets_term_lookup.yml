@@ -1,0 +1,73 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://rest.tsheets.com/api/v1/users?first_name=test*&page=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Typhoeus - https://github.com/typhoeus/typhoeus
+      Authorization:
+      - Bearer S.3__b71d2047fe9ad7e4c950674eb1276982f28384de
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 22 Sep 2017 16:11:52 GMT
+      Server:
+      - Apache
+      Cache-Control:
+      - no-cache, must-revalidate
+      Expires:
+      - '0'
+      Content-Length:
+      - '57'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: "{\n \"results\": {\n  \"users\": [\n   \n  ]\n },\n \"more\": false\n}"
+    http_version: 
+  recorded_at: Fri, 22 Sep 2017 16:11:53 GMT
+- request:
+    method: get
+    uri: https://rest.tsheets.com/api/v1/users?last_name=test*&page=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Typhoeus - https://github.com/typhoeus/typhoeus
+      Authorization:
+      - Bearer S.3__b71d2047fe9ad7e4c950674eb1276982f28384de
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 22 Sep 2017 16:11:53 GMT
+      Server:
+      - Apache
+      Cache-Control:
+      - no-cache, must-revalidate
+      Expires:
+      - '0'
+      Content-Length:
+      - '57'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: "{\n \"results\": {\n  \"users\": [\n   \n  ]\n },\n \"more\": false\n}"
+    http_version: 
+  recorded_at: Fri, 22 Sep 2017 16:11:53 GMT
+recorded_with: VCR 3.0.3

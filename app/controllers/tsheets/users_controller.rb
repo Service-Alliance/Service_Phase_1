@@ -1,13 +1,9 @@
 module Tsheets
   class UsersController < ApplicationController
     def index
-      @users = TsheetsService.find_by_names(term_params)
+      return head :not_acceptable unless request.format.symbol.eql? :json
+
+      @users = TsheetsService.new.find_by_names(params.require(:term))
     end
-  end
-
-  private
-
-  def term_params
-    params.require(:term)
   end
 end
