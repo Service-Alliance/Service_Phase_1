@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/Service-Alliance/gridhook.git
-  revision: ec9951e35fc1ca9a5ba436e8c81f012d780134f3
-  specs:
-    gridhook (0.2.6)
-      multi_json (~> 1.12)
-      rails (~> 4.2)
-
-GIT
   remote: git://github.com/tsheets/api_ruby.git
   revision: bb2b5089aa62707338d727f896f6c300d6698f23
   specs:
@@ -149,6 +141,9 @@ GEM
     get_process_mem (0.2.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    gridhook (0.2.0)
+      multi_json (>= 1.3.0)
+      rails (>= 3.1.0)
     groupdate (3.2.0)
       activesupport (>= 3)
     has_scope (0.7.1)
@@ -397,7 +392,7 @@ DEPENDENCIES
   fog-aws
   font-awesome-rails
   geocoder
-  gridhook!
+  gridhook
   groupdate
   honeybadger (~> 3.1)
   httparty
