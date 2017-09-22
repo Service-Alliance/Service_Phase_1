@@ -672,3 +672,9 @@ body {
     }
   }
 }
+
+form.new_user {
+  input[type=checkbox] {
+    margin-left: 0;
+  }
+}
