@@ -7,12 +7,17 @@ class Tsheets::UsersControllerTest < ActionController::TestCase
   end
 
   test 'should raise error for html format' do
-    assert_raises(ActionView::MissingTemplate) { get :index, term: 'test', format: :html }
+    VCR.use_cassette('tsheets_term_lookup') do
+      get :index, term: 'test', format: :html
+      assert_response :not_acceptable
+    end
   end
 
   test 'should responde with success' do
-    get :index, term: 'test', format: :json
-    assert_response :success
+    VCR.use_cassette('tsheets_term_lookup') do
+      get :index, term: 'test', format: :json
+      assert_response :success
+    end
   end
 end
 
