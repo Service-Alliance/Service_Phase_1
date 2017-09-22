@@ -64,10 +64,7 @@ gem 'seed_migration'
 
 gem 'sidekiq'
 #sendgrid integration to webhooks
-gem 'gridhook', github: 'Service-Alliance/gridhook'
-
-#sendgrid integration to webhooks
-gem 'gridhook', github: 'Service-Alliance/gridhook'
+gem 'gridhook'
 
 group :development, :test do
   gem 'minitest-reporters'
