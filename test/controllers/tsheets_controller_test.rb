@@ -6,8 +6,12 @@ class Tsheets::UsersControllerTest < ActionController::TestCase
     sign_in(@user)
   end
 
-  test 'status should be okey' do
-    get :index, term: 'test'
+  test 'should raise error for html format' do
+    assert_raises(ActionView::MissingTemplate) { get :index, term: 'test', format: :html }
+  end
+
+  test 'should responde with success' do
+    get :index, term: 'test', format: :json
     assert_response :success
   end
 end

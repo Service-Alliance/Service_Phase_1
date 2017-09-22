@@ -1,13 +1,9 @@
 module Tsheets
   class UsersController < ApplicationController
+    respond_to :json
+
     def index
-      @users = TsheetsService.find_by_names(term_params)
+      @users = TsheetsService.new.find_by_names(params.require(:term))
     end
-  end
-
-  private
-
-  def term_params
-    params.require(:term)
   end
 end
