@@ -5,28 +5,6 @@
       <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
     <% end %>
     <div class="row content-box margin-top-3">
-      <% if @job.errors.any? %>
-        <div id="error_explanation">
-          <h3><%= pluralize(@job.errors.count, "error") %>
-          prohibited this job from being saved:</h3>
-          <ul>
-            <% @job.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <% if @caller.errors.any? %>
-        <div id="error_explanation">
-          <h3><%= pluralize(@caller.errors.count, "error") %>
-          prohibited this job from being saved:</h3>
-          <ul>
-            <% @caller.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
       <div class="col-xs-12">
         <div class="form-group">
           <label for="job_emergency">Is this an emergency?</label><br>
@@ -34,51 +12,28 @@
           <%= f.check_box :emergency %>
         </div>
       </div>
-      <% if current_page?(controller: 'jobs', action: 'edit', id: @job.id) %>
-        <div class="col-xs-4">
-          <div class="form-group">
-            <%= f.label :franchise_id %><br>
-            <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {:prompt => 'Select a Franchise', selected: @job.franchise_id}, { class: 'form-control'} %>
-          </div>
-        </div>
-        <div class="col-xs-4">
-          <div class="form-group">
-            <%= f.label :coordinator_id, "Assigned Job Coordinator" %><br>
-            <%= f.collection_select :coordinator_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
-          </div>
-        </div>
-        <% if current_user.admin? || current_user.owner? %>
-          <div class="col-xs-4">
-            <div class="form-group">
-              <%= f.label :entered_by_id, "Entered By (Admin override)" %><br>
-              <%= f.collection_select :entered_by_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
       <div class="col-xs-4">
         <div class="form-group">
           <%= f.label :status_id %><br>
-          <%= f.collection_select :status_id, JobStatus.all, :id, :name, {selected: @job.status_id || 1},  { class: 'form-control'} %>
+          <%= f.collection_select :status_id, JobStatus.all, :id, :name, {selected: 1},  { class: 'form-control'} %>
         </div>
       </div>
 
-      <% if current_page?(controller: 'jobs', action: 'new') %>
-        <div class="col-xs-12">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lossModal">
-            Loss Information
-          </button>
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lossModal">
+          Loss Information
+        </button>
 
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#propertyModal">
-            Property Information
-          </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#propertyModal">
+          Property Information
+        </button>
 
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#billingModal">
-            Billing Information
-          </button>
-        </div>
-        <%= hidden_field_tag "new[newly_created]", true %>
-      <% end %>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#billingModal">
+          Billing Information
+        </button>
+      </div>
+      <%= hidden_field_tag "new[newly_created]", true %>
+
       <%= render 'callers_form', f: f %>
       <%= render 'partials/phone_form', f: f, locals: {phone_for: 'caller'} %>
 

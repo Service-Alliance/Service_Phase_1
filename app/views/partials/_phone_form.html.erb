@@ -3,7 +3,7 @@
 <div id="number-container">
     <div class="col-xs-12">
       <% if locals[:phone_for] == "caller" %>
-      <% if @caller_phones || @caller_phones = @caller.phones %>
+      <% if @caller_phones || @caller_phones = @caller.try(:phones) %>
       <% @caller_phones.each do |phone| %>
       <div id="caller" class="row">
           <div class="col-xs-3">

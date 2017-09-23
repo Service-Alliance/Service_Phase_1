@@ -45,7 +45,6 @@ class JobsController < ApplicationController
     @duct = Job.joins(:losses).merge(Loss.where(loss_type_id: duct.id))
     @state_farm = Job.joins(:job_detail).merge(JobDetail.where(insurance_company_id: state_farm.id))
     @jim = Job.where(referral_employee_id: jim.id)
-    # @search = @search - @duct - @state_farm - @jim
 
     @jobs = @search.result.page(params[:page]).order('created_at DESC')
   end
@@ -92,19 +91,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @customer_address = Address.create
-    @customer = Customer.create(address: @customer_address)
-    @job = Job.create(entered_by_id: current_user.id, customer_id: @customer.id)
-    @job.trackers.create(tracker_task_id: 1)
-    @customer_companies = @customer.customer_companies.build
-    @loss = Loss.create(job_id: @job.id)
-    @caller = Caller.create(job_id: @job.id)
-    @address = Address.create
-    @caller.address_id = @address.id
-    @property = Property.create(job_id: @job.id)
-    @caller.save
-    @job_detail = JobDetail.create(job_id: @job.id)
-    @phones = nil
+    render :new
   end
 
   # GET /jobs/1/edit
