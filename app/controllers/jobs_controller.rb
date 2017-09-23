@@ -117,56 +117,26 @@ class JobsController < ApplicationController
     end
   end
 
-  # POST /jobs
-  # POST /jobs.json
   def create
-    @job = Job.new(job_params)
-    @job.entered_by_id = current_user.id
-    @caller = Caller.new(caller_params)
-    @address = Address.new(address_params)
-    @company = Company.find_or_create_by(name: company_params[:name]) if company_params[:name].present?
-
-    @call = Call.find_by(id: call_params[:id]) if call_params[:id]
-    @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
-    franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
-    @job.franchise_id = franchise.id if franchise
-    @job.pipeline_status_id = 1
-
-    @caller.save!
-    @address.save!
-    @job.save!
-
-    if @call
-      @call.job_id = @job.id
-      @call.save
-    end
-    @caller.job_id = @job.id
-    @caller.address_id = @address.id
-    @caller.add_company(@company)
-    @caller.save
-    @job.update_last_action
-
-    @company.address = @address if @company.address.blank?
-    @company.save
-
-    @caller.phones.destroy_all
-    phone_count = phone_params['type_ids'].count
-
-    phone_count.times do |index|
-      unless phone_params['numbers'][index] == ''
-        @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
-      end
-    end
+    job = JobBuilder.call(
+      job_params,
+      caller_params,
+      address_params,
+      phone_params,
+      company_params[:name],
+      call_params[:id],
+      current_user.id
+    )
 
     if params[:commit] == 'Save and Move to Job Loss'
-      redirect_to new_job_loss_path(@job), notice: 'Job was successfully created.'
+      redirect_to new_job_loss_path(job), notice: 'Job was successfully created.'
     elsif params[:commit] == 'Save'
-      redirect_to edit_job_path(@job), notice: 'Job was saved successfully.'
+      redirect_to edit_job_path(job), notice: 'Job was saved successfully.'
     else
-      redirect_to @job, notice: 'Job was successfully created.'
+      redirect_to job, notice: 'Job was successfully created.'
     end
 
-  rescue => e
+  rescue JobBuilder::SaveError
     Honeybadger.notify(e)
     render :new
   end
