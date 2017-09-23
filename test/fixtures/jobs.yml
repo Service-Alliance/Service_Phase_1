@@ -15,6 +15,9 @@ one:
 no_caller:
   <<: *DEFAULTS
 
+no_manager:
+  <<: *DEFAULTS
+
 with_note:
   <<: *DEFAULTS
   job_note: just a note

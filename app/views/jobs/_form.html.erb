@@ -1,4 +1,4 @@
-<%= form_for(@job) do |f| %>
+<%= form_for(:job) do |f| %>
   <div class="col-xs-12 margin-top-3">
     <%= fields_for(:call) do |f| %>
       <%= f.label :current_active_calls, "Select Current Active Call" %>

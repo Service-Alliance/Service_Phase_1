@@ -40,7 +40,9 @@ Rails.application.routes.draw do
   post 'calls/precall-webhook' => 'calls#precall'
   post 'calls/postcall-webhook' => 'calls#postcall'
   get 'users/list' => 'users#list'
-  resources :users
+  resources :users do
+    patch 'link_tsheets_user'
+  end
   resources :states
   resources :agents
   resources :adjusters
@@ -77,6 +79,7 @@ Rails.application.routes.draw do
     get 'notes' => 'notes#job_notes'
     get 'overview' => 'overview#index', as: :overview
     get 'loss-sheet' => 'loss_sheet#index', as: :loss_sheet
+    get 'reconciliation-form'
     get 'customers/:id' => 'jobs#customer', as: :customer
     resources :ticsheets
     resources :properties
@@ -126,12 +129,13 @@ Rails.application.routes.draw do
   get 'share/users', as: :mentionables
   root 'home#index'
 
+  namespace :tsheets do
+    resources :users, only: :index
+  end
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
   require 'sidekiq/api'
-
-
 
   match "default-queue-status" => proc { [
     200,
@@ -145,3 +149,4 @@ Rails.application.routes.draw do
     [Sidekiq::Queue.new("low").size < 20 ? "OK" : "UHOH"]
   ] }, via: :get
 end
+

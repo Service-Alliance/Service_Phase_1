@@ -5,6 +5,10 @@ class WorkOrderTest < ActiveSupport::TestCase
     @work_order = work_orders(:one)
   end
 
+  test '#franchise_address_without_county' do
+    assert_nil @work_order.franchise_address_without_county
+  end
+
   test "to returns SERVPRO without 'of franchise' if no franchise" do
     work_order = work_orders(:one)
     work_order.job.franchise = nil
@@ -12,7 +16,7 @@ class WorkOrderTest < ActiveSupport::TestCase
   end
 
   test "job_manager_contact_info" do
-    assert_equal [nil], @work_order.job_manager_contact_info
+    assert_equal [users(:one).full_name], @work_order.job_manager_contact_info
   end
 
   test 'to returns SERVPRO if no vendors' do

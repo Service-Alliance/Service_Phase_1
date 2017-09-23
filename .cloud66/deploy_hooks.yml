@@ -1,0 +1,5 @@
+production:
+    after_rails: # should be executed after rails and all the stuff is installed
+      - command: cd $STACK_BASE/releases/$(ls -1 -t $STACK_BASE/releases/ | head -n1) && bundle exec rake seed:migrate
+        target: rails # Hook fields
+        execute: true

@@ -846,11 +846,13 @@ ActiveRecord::Schema.define(version: 20170916175039) do
     t.integer  "tsheets_user_id"
     t.string   "tsheets_user_first_name"
     t.string   "tsheets_user_last_name"
+    t.jsonb    "tsheets",                 default: {}, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
+  add_index "users", ["tsheets"], name: "index_users_on_tsheets", using: :gin
 
   create_table "vendor_assignments", force: :cascade do |t|
     t.integer  "vendor_id"

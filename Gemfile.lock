@@ -1,10 +1,10 @@
 GIT
-  remote: git://github.com/Service-Alliance/gridhook.git
-  revision: ec9951e35fc1ca9a5ba436e8c81f012d780134f3
+  remote: git://github.com/tsheets/api_ruby.git
+  revision: bb2b5089aa62707338d727f896f6c300d6698f23
   specs:
-    gridhook (0.2.6)
-      multi_json (~> 1.12)
-      rails (~> 4.2)
+    tsheets (0.1.3)
+      backports
+      typhoeus (~> 0.7.2)
 
 GEM
   remote: https://rubygems.org/
@@ -63,6 +63,7 @@ GEM
     arel (6.0.4)
     autoprefixer-rails (7.1.4)
       execjs
+    backports (3.8.0)
     bcrypt (3.1.11)
     best_in_place (3.0.3)
       actionpack (>= 3.2)
@@ -95,6 +96,8 @@ GEM
       ruby-rc4 (>= 0.1.5)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     debug_inspector (0.0.3)
     devise (4.3.0)
       bcrypt (~> 3.0)
@@ -108,6 +111,8 @@ GEM
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
     erubis (2.7.0)
+    ethon (0.10.1)
+      ffi (>= 1.3.0)
     excon (0.59.0)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -126,6 +131,8 @@ GEM
     fog-xml (0.1.3)
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
+    font-awesome-rails (4.7.0.2)
+      railties (>= 3.2, < 5.2)
     formatador (0.2.5)
     formtastic (3.1.5)
       actionpack (>= 3.2.13)
@@ -134,11 +141,15 @@ GEM
     get_process_mem (0.2.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    gridhook (0.2.0)
+      multi_json (>= 1.3.0)
+      rails (>= 3.1.0)
     groupdate (3.2.0)
       activesupport (>= 3)
     has_scope (0.7.1)
       actionpack (>= 4.1, < 5.2)
       activesupport (>= 4.1, < 5.2)
+    hashdiff (0.3.6)
     honeybadger (3.1.2)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
@@ -185,7 +196,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
-    marginalia (1.4.0)
+    marginalia (1.5.0)
       actionpack (>= 2.3)
       activerecord (>= 2.3)
     memory_profiler (0.9.8)
@@ -193,21 +204,27 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_portile2 (2.2.0)
+    mini_portile2 (2.3.0)
+    minispec-metadata (2.0.0)
+      minitest
     minitest (5.10.3)
     minitest-reporters (1.1.18)
       ansi
       builder
       minitest (>= 5.0)
       ruby-progressbar
+    minitest-vcr (1.4.0)
+      minispec-metadata (~> 2.0)
+      minitest (>= 4.7.5)
+      vcr (>= 2.9)
     multi_json (1.12.2)
     multi_xml (0.6.0)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
     pdf-core (0.7.0)
     pg (0.21.0)
-    pg_search (2.1.0)
+    pg_search (2.1.1)
       activerecord (>= 4.2)
       activesupport (>= 4.2)
       arel (>= 6)
@@ -216,10 +233,12 @@ GEM
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
-    pry (0.10.4)
+    pry (0.11.0)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
-      slop (~> 3.4)
+    pry-byebug (3.5.0)
+      byebug (~> 9.1)
+      pry (~> 0.10)
     public_activity (1.5.0)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
@@ -282,6 +301,7 @@ GEM
       railties (>= 4.2.0, < 5.3)
     ruby-progressbar (1.8.3)
     ruby-rc4 (0.1.5)
+    safe_yaml (1.0.4)
     sass (3.5.1)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -314,7 +334,6 @@ GEM
     simplecov-html (0.10.2)
     single_test (0.6.0)
       rake
-    slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     sprockets (3.7.1)
@@ -328,6 +347,8 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     ttfunk (1.5.1)
+    typhoeus (0.7.3)
+      ethon (>= 0.7.4)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -339,6 +360,7 @@ GEM
       get_process_mem (~> 0)
       unicorn (>= 4, < 6)
     uniform_notifier (1.10.0)
+    vcr (3.0.3)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (2.3.0)
@@ -346,6 +368,10 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    webmock (3.0.1)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     whenever (0.9.7)
       chronic (>= 0.6.3)
 
@@ -357,7 +383,6 @@ DEPENDENCIES
   best_in_place (~> 3.0.1)
   bootstrap-sass (~> 3.3)
   bullet
-  byebug
   carrierwave (~> 1.0)
   chartkick
   coffee-rails (~> 4.1.0)
@@ -365,8 +390,9 @@ DEPENDENCIES
   devise
   dotenv-rails
   fog-aws
+  font-awesome-rails
   geocoder
-  gridhook!
+  gridhook
   groupdate
   honeybadger (~> 3.1)
   httparty
@@ -379,10 +405,11 @@ DEPENDENCIES
   marginalia
   memory_profiler
   minitest-reporters
+  minitest-vcr
   pg (~> 0.20)
   pg_search
   prawn
-  pry
+  pry-byebug
   public_activity
   pundit
   rack-mini-profiler
@@ -398,10 +425,12 @@ DEPENDENCIES
   simplecov
   single_test
   spring
+  tsheets!
   uglifier (>= 1.3.0)
   unicorn
   unicorn-worker-killer
   web-console (~> 2.0)
+  webmock
   whenever
 
 RUBY VERSION

@@ -1,4 +1,4 @@
-<% @customer_address = @customer.address ||  @customer_address = Address.new unless @customer_address %>
+<% @customer_address = @customer.try(:address) ||  @customer_address = Address.new unless @customer_address %>
 <%= f.fields_for(@customer_address) do |g| %>
 
 <div class="col-xs-6">

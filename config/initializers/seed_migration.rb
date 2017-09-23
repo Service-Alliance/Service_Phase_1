@@ -1,11 +1,12 @@
 SeedMigration.register User do
-  exclude :created_at, :updated_at
+  exclude :created_at, :updated_at, :additional_title, :background_check, :bio_rec_bbp,
+  :current_sign_in_at, :current_sign_in_ip, :fitness_test, :id, :sub_1, :sub_2, :sign_in_count
 end
 SeedMigration.register Role do
   exclude :created_at, :updated_at
 end
 SeedMigration.register Address do
-  exclude :created_at, :updated_at
+  exclude :created_at, :updated_at, :address_type_id
 end
 SeedMigration.register Agent do
   exclude :created_at, :updated_at
@@ -20,7 +21,7 @@ SeedMigration.register Location do
   exclude :created_at, :updated_at
 end
 SeedMigration.register Job do
-  exclude :created_at, :updated_at
+  exclude :created_at, :updated_at, :adjuster_id, :agent_id, :contract_created_date, :contract_sent_date, :contract_sent, :coordinator_id, :fnol_received, :estimate_sent_date
 end
 SeedMigration.register Caller do
   exclude :created_at, :updated_at
@@ -29,7 +30,7 @@ SeedMigration.register Phone do
   exclude :created_at, :updated_at
 end
 SeedMigration.register Call do
-  exclude :created_at, :updated_at
+  exclude :created_at, :updated_at, :answered, :callrail_id, :callsource, :customer_id, :datetime, :destinationnum, :duration, :first_call, :franchise_id
 end
 SeedMigration.register JobStatus do
   exclude :created_at, :updated_at

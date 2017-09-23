@@ -1,0 +1,16 @@
+<%= render layout: 'partials/modal', locals: {id: 'work_order_tsheets_modal', title: 'Send to TSheets'} do %>
+  <%= simple_form_for(:work_order_tsheets) do |f| %>
+    <%= f.input :start_date, as: :date %>
+    <%= f.input :start_time, as: :time %>
+    <%= f.input :end_time, as: :time %>
+    <%= f.input :title %>
+    <%= f.input :employees %>
+    <%= f.input :customer, input_html: {value: work_order.customer_company_name} %>
+    <%= f.input :location, input_html: {value: work_order.job_location} %>
+    <%= f.input :notes, as: :text %>
+    <%= f.input :billable, as: :boolean %>
+    <%= f.input :class, wrapper_html: {class: 'with-status'} %> <i class="fa fa-refresh with-tooltip" title="Reload Classes from TSheets"></i>
+    <%= f.input :service_item, wrapper_html: {class: 'with-status'} %> <i class="fa fa-refresh with-tooltip" title="Reload Service Items from TSheets"></i>
+    <%= f.submit 'Send to TSheets', class: 'btn btn-primary'  %>
+  <% end %>
+<% end %>

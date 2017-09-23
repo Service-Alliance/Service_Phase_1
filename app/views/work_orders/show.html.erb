@@ -9,8 +9,9 @@
         <h1 class="text-center">Work Order Information:</h1>
         <div class="panel panel-info">
           <div class="panel-heading">
-            <h3 class="panel-title">
+            <h3 class="panel-title clearfix">
               Work Order:
+              <button type="button" data-toggle="modal" data-target="#work_order_tsheets_modal" class="pull-right btn btn-success">Send to TSheets</button>
             </h3>
           </div>
           <div class="panel-body">
@@ -171,3 +172,5 @@
     </div>
   </div>
 </div>
+
+<%= render partial: 'tsheets_modal', locals: {work_order: @work_order} %>
