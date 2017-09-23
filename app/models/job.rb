@@ -44,6 +44,7 @@ class Job < ActiveRecord::Base
   tracked owner: proc { |controller, _model| controller.current_user }
 
   delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
+  delegate :name, to: :insurance_company, allow_nil: true, prefix: true
 
   scope :with_manager_id, -> (user_id) { joins(:job_managers).merge(JobManager.where(:job_manager_id => user_id)) }
 
@@ -67,8 +68,8 @@ class Job < ActiveRecord::Base
     losses.map(&:loss_type_name).delete_if(&:blank?)
   end
 
-  def insurance_details
-    JobDetail.find_by(job_id: id).try(:insurance_company)
+  def job_manager_names
+    job_managers.map(&:full_name)
   end
 
   def update_last_action

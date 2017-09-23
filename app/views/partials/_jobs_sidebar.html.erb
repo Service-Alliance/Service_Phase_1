@@ -1,10 +1,7 @@
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
-    <li>
-      <%= link_to job_loss_sheet_path(@job) do %>
-          Loss Sheet
-      <% end %>
-    </li>
+    <li><%= link_to 'Loss Sheet', job_loss_sheet_path(@job) %></li>
+    <li><%= link_to 'Reconciliation Form', job_reconciliation_form_path(@job) %></li>
 
     <li>
       <div class="assignment-card">
