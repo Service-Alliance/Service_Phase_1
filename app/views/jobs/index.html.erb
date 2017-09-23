@@ -5,20 +5,6 @@
         <div class="col-xs-10 table-responsive">
             <h1>Listing Jobs</h1>
 
-            <!-- <%= select_tag("filter", options_for_select(JobStatus.all.map{|p| [p.name, p.id]}, class: "form-control")) %> -->
-            <!-- comment -->
-            <div class="row">
-                <div class="col-xs-12">
-                    <!-- <a
-                        href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=32&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search"
-                        class="btn btn-primary">New York Data</a>
-
-                    <a
-                        class="btn btn-primary"
-                        href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=30&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search">New Jersey Data</a> -->
-                </div>
-            </div>
-
             <div class="row">
         			<div class="col-xs-12 col-md-6 col-lg-3">
         				<div class="panel panel-blue panel-widget ">
@@ -112,11 +98,6 @@
                         <th colspan="3"></th>
                     </tr>
                 </thead>
-                <!-- Sort by date entered -->
-                <!-- Sort by date ranmge -->
-                <!-- Full text search -->
-                <!--  Sorting -->
-                <!--  -->
 
                 <tbody>
                     <% @jobs.each do |job| %>
@@ -228,14 +209,9 @@
 
 <script>
 flatpickr(".datePicker", {
-    // defaultDate: new Date(),
-    // create an extra input solely for display purposes
     altInput: true,
     altFormat: "F j, Y"
 });
 
-    // $(document).ready(function () {
-    //     $('#job-table').DataTable();
-    // });
 </script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
