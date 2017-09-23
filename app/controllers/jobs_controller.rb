@@ -25,29 +25,25 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    if params[:user_id]
-      @jobs = Job.where(entered_by_id: params[:user_id]).page(params[:page]).order('fnol_received DESC')
-    else
-      @search = Job.where.not(status_id: nil).order('fnol_received DESC').search(params[:q])
-      @jobs = @search.result.includes(:customer_address).page(params[:page]).order('fnol_received DESC')
-      @total_count = @search.result.includes(:customer_address).page(params[:page]).order('fnol_received DESC').total_count
-      @all_results = @search.result
+    @search = Job.where.not(status_id: nil).order('fnol_received DESC').search(params[:q])
+    @jobs = @search.result.includes(:customer_address).page(params[:page]).order('fnol_received DESC')
+    @total_count = @search.result.includes(:customer_address).page(params[:page]).order('fnol_received DESC').total_count
+    @all_results = @search.result
 
-      @total_pending_count =  @search.result.where(status_id: 1).count
-      @total_pending_value = Job.value_of_jobs(@search.result.where(status_id: 1))
-      @total_active_count =  @search.result.where(status_id: 2).count
-      @total_active_value = Job.value_of_jobs(@search.result.where(status_id: 2))
-      @total_invoiced_count =  @search.result.where(status_id: 3).count
-      @total_invoiced_value = Job.value_of_jobs(@search.result.where(status_id: 3))
-      @total_dead_count =  @search.result.where(status_id: 4).count
-      @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 4))
-      @total_closed_count =  @search.result.where(status_id: 5).count
-      @total_closed_value = Job.value_of_jobs(@search.result.where(status_id: 5))
+    @total_pending_count =  @search.result.where(status_id: 1).count
+    @total_pending_value = Job.value_of_jobs(@search.result.where(status_id: 1))
+    @total_active_count =  @search.result.where(status_id: 2).count
+    @total_active_value = Job.value_of_jobs(@search.result.where(status_id: 2))
+    @total_invoiced_count =  @search.result.where(status_id: 3).count
+    @total_invoiced_value = Job.value_of_jobs(@search.result.where(status_id: 3))
+    @total_dead_count =  @search.result.where(status_id: 4).count
+    @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 4))
+    @total_closed_count =  @search.result.where(status_id: 5).count
+    @total_closed_value = Job.value_of_jobs(@search.result.where(status_id: 5))
 
-      respond_to do |format|
-        format.html
-        format.csv { render text: @all_results.to_csv }
-      end
+    respond_to do |format|
+      format.html
+      format.csv { render text: @all_results.to_csv }
     end
   end
 
@@ -67,7 +63,6 @@ class JobsController < ApplicationController
     @duct = Job.joins(:losses).merge(Loss.where(loss_type_id: duct.id))
     @state_farm = Job.joins(:job_detail).merge(JobDetail.where(insurance_company_id: state_farm.id))
     @jim = Job.where(referral_employee_id: jim.id)
-    # @search = @search - @duct - @state_farm - @jim
 
     @jobs = @search.result.page(params[:page]).order('created_at DESC')
   end
@@ -114,19 +109,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @customer_address = Address.create
-    @customer = Customer.create(address_id: @customer_address.id)
-    @job = Job.create(entered_by_id: current_user.id, customer_id: @customer.id)
-    @job.trackers.create(tracker_task_id: 1)
-    @customer_companies = @customer.customer_companies.build
-    @loss = Loss.create(job_id: @job.id)
-    @caller = Caller.create(job_id: @job.id)
-    @address = Address.create
-    @caller.address_id = @address.id
-    @property = Property.create(job_id: @job.id)
-    @caller.save
-    @job_detail = JobDetail.create(job_id: @job.id)
-    @phones = nil
+    render :new
   end
 
   # GET /jobs/1/edit
@@ -152,59 +135,28 @@ class JobsController < ApplicationController
     end
   end
 
-  # POST /jobs
-  # POST /jobs.json
   def create
-    @job = Job.new(job_params)
-    @job.entered_by_id = current_user.id
-    @caller = Caller.new(caller_params)
-    @address = Address.new(address_params)
-    @company = Company.find_or_create_by(name: company_params[:name]) if company_params[:name].present?
+    job = JobBuilder.call(
+      job_params,
+      caller_params,
+      address_params,
+      phone_params,
+      company_params[:name],
+      call_params[:id],
+      current_user.id
+    )
 
-    @call = Call.find_by(id: call_params[:id]) if call_params[:id]
-    @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
-    franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
-    @job.franchise_id = franchise.id if franchise
-    @job.pipeline_status_id = 1
-
-    if @caller.save
-      @address.save
-      if @job.save
-        if @call
-          @call.job_id = @job.id
-          @call.save
-        end
-        @caller.job_id = @job.id
-        @caller.address_id = @address.id
-        @caller.add_company(@company)
-        @caller.save
-        @job.update_last_action
-
-        @company.address = @address if @company.address.blank?
-        @company.save
-
-        @caller.phones.destroy_all
-        phone_count = phone_params['type_ids'].count
-
-        phone_count.times do |index|
-          unless phone_params['numbers'][index] == ''
-            @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
-          end
-        end
-
-        if params[:commit] == 'Save and Move to Job Loss'
-          redirect_to new_job_loss_path(@job), notice: 'Job was successfully created.'
-        elsif params[:commit] == 'Save'
-          redirect_to edit_job_path(@job), notice: 'Job was saved successfully.'
-        else
-          redirect_to @job, notice: 'Job was successfully created.'
-        end
-      else
-        render :new
-      end
+    if params[:commit] == 'Save and Move to Job Loss'
+      redirect_to new_job_loss_path(job), notice: 'Job was successfully created.'
+    elsif params[:commit] == 'Save'
+      redirect_to edit_job_path(job), notice: 'Job was saved successfully.'
     else
-      render :new
+      redirect_to job, notice: 'Job was successfully created.'
     end
+
+  rescue JobBuilder::SaveError
+    Honeybadger.notify(e)
+    render :new
   end
 
   # PATCH/PUT /jobs/1

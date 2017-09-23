@@ -8,7 +8,7 @@
     <input id="caller_search" class="form-control autocomplete">
   </div>
 </div>
-<%= f.fields_for(@caller) do |g| %>
+<%= f.fields_for(:caller) do |g| %>
   <%= hidden_field_tag "caller_exists[caller_exists]", 0 %>
   <div class="col-xs-12">
     <div class="form-group">
@@ -19,13 +19,13 @@
   <div class="col-xs-4">
     <div class="form-group">
       <%= label_tag :first_name %><br>
-      <%= text_field_tag "caller[first_name]", @caller.first_name, class: "form-control"  %>
+      <%= text_field_tag "caller[first_name]", @caller.try(:first_name), class: "form-control"  %>
     </div>
   </div>
   <div class="col-xs-4">
     <div class="form-group">
       <%= label_tag :last_name %><br>
-      <%= text_field_tag "caller[last_name]", @caller.last_name, class: "form-control"  %>
+      <%= text_field_tag "caller[last_name]", @caller.try(:last_name), class: "form-control"  %>
     </div>
   </div>
   <div class="col-xs-4">
@@ -39,7 +39,7 @@
       G - Girl      N - Nancy   U - Universe">
         <span class="glyphicon glyphicon-info-sign"></span>
       </a><br>
-      <%= text_field_tag "caller[email]", @caller.email, class: "form-control"  %>
+      <%= text_field_tag "caller[email]", @caller.try(:email), class: "form-control"  %>
     </div>
   </div>
   <div class="col-xs-6">

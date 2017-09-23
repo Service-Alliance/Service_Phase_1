@@ -5,6 +5,10 @@ class WorkOrderTest < ActiveSupport::TestCase
     @work_order = work_orders(:one)
   end
 
+  test '#franchise_address_without_county' do
+    assert_nil @work_order.franchise_address_without_county
+  end
+
   test "to returns SERVPRO without 'of franchise' if no franchise" do
     work_order = work_orders(:one)
     work_order.job.franchise = nil
