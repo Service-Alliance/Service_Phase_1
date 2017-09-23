@@ -47,6 +47,16 @@
           <%= @user.title %>
         </div>
       </div>
+
+      <div class="panel-footer">
+        <% if current_user.admin? %>
+          <%= link_to edit_user_path(@user), class: "btn btn-sm btn-warning", type: "button" do %>
+          <i class="glyphicon glyphicon-edit"></i> Edit
+          <% end %>
+        <% end %>
+      </div>
+
+
     </div>
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -57,6 +67,7 @@
           <%= render partial: 'tsheets_integration', locals: {user: @user} %>
         </div>
       </div>
+
     </div>
   </div>
 

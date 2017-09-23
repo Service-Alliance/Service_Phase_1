@@ -11,9 +11,9 @@
 // about supported directives.
 //
 //= require jquery3
-//= require bootstrap-sprockets
 //= require jquery-ui
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require select2-full
 //= require Chart.bundle
 //= require chartkick
@@ -21,9 +21,9 @@
 //= require_tree .
 
 $(function() {
-    $("a.tooltipLink").tooltip();
-    $(".select-control").select2({
-      placeholder: "Select an option",
-      allowClear: true
-    });
+  $("a.tooltipLink").tooltip();
+  $(".select-control").select2({
+    placeholder: "Select an option",
+    allowClear: true
+  });
 });
