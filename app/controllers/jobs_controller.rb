@@ -132,44 +132,43 @@ class JobsController < ApplicationController
     @job.franchise_id = franchise.id if franchise
     @job.pipeline_status_id = 1
 
-    if @caller.save
-      @address.save
-      if @job.save
-        if @call
-          @call.job_id = @job.id
-          @call.save
-        end
-        @caller.job_id = @job.id
-        @caller.address_id = @address.id
-        @caller.add_company(@company)
-        @caller.save
-        @job.update_last_action
+    @caller.save!
+    @address.save!
+    @job.save!
 
-        @company.address = @address if @company.address.blank?
-        @company.save
-
-        @caller.phones.destroy_all
-        phone_count = phone_params['type_ids'].count
-
-        phone_count.times do |index|
-          unless phone_params['numbers'][index] == ''
-            @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
-          end
-        end
-
-        if params[:commit] == 'Save and Move to Job Loss'
-          redirect_to new_job_loss_path(@job), notice: 'Job was successfully created.'
-        elsif params[:commit] == 'Save'
-          redirect_to edit_job_path(@job), notice: 'Job was saved successfully.'
-        else
-          redirect_to @job, notice: 'Job was successfully created.'
-        end
-      else
-        render :new
-      end
-    else
-      render :new
+    if @call
+      @call.job_id = @job.id
+      @call.save
     end
+    @caller.job_id = @job.id
+    @caller.address_id = @address.id
+    @caller.add_company(@company)
+    @caller.save
+    @job.update_last_action
+
+    @company.address = @address if @company.address.blank?
+    @company.save
+
+    @caller.phones.destroy_all
+    phone_count = phone_params['type_ids'].count
+
+    phone_count.times do |index|
+      unless phone_params['numbers'][index] == ''
+        @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
+      end
+    end
+
+    if params[:commit] == 'Save and Move to Job Loss'
+      redirect_to new_job_loss_path(@job), notice: 'Job was successfully created.'
+    elsif params[:commit] == 'Save'
+      redirect_to edit_job_path(@job), notice: 'Job was saved successfully.'
+    else
+      redirect_to @job, notice: 'Job was successfully created.'
+    end
+
+  rescue => e
+    Honeybadger.notify(e)
+    render :new
   end
 
   # PATCH/PUT /jobs/1
