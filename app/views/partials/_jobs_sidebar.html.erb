@@ -1,10 +1,7 @@
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
-    <li>
-      <%= link_to job_loss_sheet_path(@job) do %>
-          Loss Sheet
-      <% end %>
-    </li>
+    <li><%= link_to 'Loss Sheet', job_loss_sheet_path(@job) %></li>
+    <li><%= link_to 'Reconciliation Form', job_reconciliation_form_path(@job) %></li>
 
     <li>
       <div class="assignment-card">
@@ -154,7 +151,6 @@
 
     <li>
       <a href="#">
-        <i class="fa fa-bar-chart-o fa-fw"></i>
         Job<span class="glyphicon glyphicon-chevron-down"></span>
       </a>
       <ul class="nav nav-second-level">
@@ -189,31 +185,8 @@
       <!-- /.nav-second-level -->
     </li>
 
-    <!-- <li>
-            <a href="#">
-                <i class="fa fa-bar-chart-o fa-fw"></i>
-                Contact<span class="glyphicon glyphicon-chevron-down"></span>
-            </a>
-            <ul class="nav nav-second-level">
-                <li>
-                    <% link_to new_or_view_job_caller_path(@job, @job.caller) do %>
-                    <i class="<%= @job.caller ? 'glyph-done' : 'glyph-incomplete' %> glyphicon glyphicon-ok"></i>
-                    Caller Information
-                    <% end %>
-                </li>
-                <li>
-                    <% link_to job_calls_path(@job) do %>
-                    <i class="<%= @job.calls ? 'glyph-done' : 'glyph-incomplete' %> glyphicon glyphicon-ok"></i>
-                    Phone Calls
-                    <% end %>
-                </li>
-            </ul>
-
-        </li> -->
-
     <li>
       <a href="#">
-        <i class="fa fa-bar-chart-o fa-fw"></i>
         Job Contacts<span class="glyphicon glyphicon-chevron-down"></span>
       </a>
       <ul class="nav nav-second-level">
@@ -276,7 +249,6 @@
         </li> -->
     <!-- <li>
             <a href="#">
-                <i class="fa fa-bar-chart-o fa-fw"></i>
                 Job Files<span class="glyphicon glyphicon-chevron-down"></span>
             </a>
             <ul class="nav nav-second-level">

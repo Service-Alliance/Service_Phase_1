@@ -16,7 +16,7 @@ class WorkOrderTest < ActiveSupport::TestCase
   end
 
   test "job_manager_contact_info" do
-    assert_equal [nil], @work_order.job_manager_contact_info
+    assert_equal [users(:one).full_name], @work_order.job_manager_contact_info
   end
 
   test 'to returns SERVPRO if no vendors' do

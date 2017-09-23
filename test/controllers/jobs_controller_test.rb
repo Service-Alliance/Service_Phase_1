@@ -62,4 +62,10 @@ class JobsControllerTest < ActionController::TestCase
     get :collections
     assert_equal [], JSON.parse(response.body)
   end
+
+  test '#reconciliation_form' do
+    job = jobs(:one)
+    get :reconciliation_form, job_id: job.id
+    assert_response :success
+  end
 end

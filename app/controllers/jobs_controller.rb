@@ -1,7 +1,25 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
-  before_action :verify_user, only: [:show, :edit, :update, :destroy, :calls, :add_call, :create_estimate, :create_estimate_sent, :create_contract, :create_contract_sent]
+  before_action :set_job, only: [:show,
+                                 :edit,
+                                 :update,
+                                 :destroy,
+                                 :calls,
+                                 :add_call,
+                                 :create_estimate,
+                                 :create_estimate_sent,
+                                 :create_contract,
+                                 :create_contract_sent]
+  before_action :verify_user, only: [:show,
+                                     :edit,
+                                     :update,
+                                     :destroy,
+                                     :calls,
+                                     :add_call,
+                                     :create_estimate,
+                                     :create_estimate_sent,
+                                     :create_contract,
+                                     :create_contract_sent]
 
 
   # GET /jobs
@@ -220,6 +238,10 @@ class JobsController < ApplicationController
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def reconciliation_form
+    @job = JobPresenter.new(Job.find(params[:job_id]), view_context)
   end
 
   # DELETE /jobs/1

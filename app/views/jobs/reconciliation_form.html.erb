@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <div id="wrapper">
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div id="page-content-wrapper">
+      <div class="panel">
+        <div class="panel-body">
+          <button class="btn btn-primary margin-top-1 margin-bottom-1 hidden-print pull-right" onclick="printPage()">Print this page</button>
+          <h2>SERVPRO of <%= @job.franchise_name %></h2>
+          <h3>Reconciliation Form</h3>
+
+          <div class="row">
+            <div class="col-sm-2">Date:</div>
+            <div class="col-sm-4"><%= DateTime.now.to_s %></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">Job Name</div>
+            <div class="col-sm-4"><%= @job.name %></div>
+            <div class="col-sm-2">Coordinator</div>
+            <div class="col-sm-4"><%= @job.job_coordinator_full_name %></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">Insurance Company</div>
+            <div class="col-sm-4"><%= @job.insurance_company_name %></div>
+            <div class="col-sm-2">Job Manager(s)</div>
+            <div class="col-sm-4"><%= @job.job_manager_names_display %></div>
+          </div>
+          <hr />
+          <table class="table table-striped">
+            <tr>
+              <th>Vendor / Supplier</th>
+              <th>Date</th>
+              <th>W/O#</th>
+              <th>P/O#</th>
+              <th>Description</th>
+              <th>Cost</th>
+              <th>Taxable</th>
+              <th>Amount Billed</th>
+              <th>Comments</th>
+            </tr>
+            <% @job.work_orders.date_ordered.each do |work_order| %>
+              <tr>
+                <td><%= work_order.to.join('<br />') %></td>
+                <td><%= work_order.date.to_s %></td>
+                <td><%= link_to work_order.id, job_work_order_path(work_order.job, work_order) %></td>
+                <td class="text-muted">P/O#</td>
+                <td><%= work_order.scope_of_work %></td>
+                <td class="text-muted">Cost</td>
+                <td class="text-muted">Taxable</td>
+                <td class="text-muted">Amount Billed</td>
+                <td class="text-muted">Comments</td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

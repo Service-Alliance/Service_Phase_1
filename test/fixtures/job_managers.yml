@@ -4,10 +4,10 @@ one:
   job: one
   schedule_date: 2017-01-20
   note: MyText
-  job_manager_id: one
+  job_manager: one
 
 two:
   job: with_note
   schedule_date: 2017-01-20
   note: MyText
-  job_manager_id: two
+  job_manager: two

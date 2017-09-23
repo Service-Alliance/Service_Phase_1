@@ -79,6 +79,7 @@ Rails.application.routes.draw do
     get 'notes' => 'notes#job_notes'
     get 'overview' => 'overview#index', as: :overview
     get 'loss-sheet' => 'loss_sheet#index', as: :loss_sheet
+    get 'reconciliation-form'
     get 'customers/:id' => 'jobs#customer', as: :customer
     resources :ticsheets
     resources :properties
