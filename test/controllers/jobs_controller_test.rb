@@ -1,20 +1,7 @@
 require 'test_helper'
 
 class JobsControllerTest < ActionController::TestCase
-  setup do
-    @user = users(:one)
-    sign_in(@user)
-  end
-
-  test '#index' do
-    get :index
-    assert_response :success
-  end
-
-  test '#index with user_id' do
-    get :index, user_id: @user.id
-    assert_response :success
-  end
+  setup { sign_in(users(:one)) }
 
   test "#update sucessfully" do
     job = jobs(:no_caller)
