@@ -21,5 +21,6 @@
 
     <%= yield %>
 
+    <%= render '/layouts/test_env' if Rails.env.test? %>
     </body>
 </html>

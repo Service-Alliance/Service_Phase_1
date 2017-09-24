@@ -6,7 +6,6 @@ class JobBuilder
     @job.entered_by_id = current_user_id
     @caller = Caller.new(caller_params)
     @address = Address.new(address_params)
-    @company = Company.find_or_create_by(name: company_name) if company_name.present?
 
     @call = Call.find_by(id: call_id) if call_id
     @job.referral_type_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
@@ -28,8 +27,11 @@ class JobBuilder
     @caller.save
     @job.update_last_action
 
-    @company.address = @address if @company.address.blank?
-    @company.save
+    if company_name.present?
+      @company = Company.find_or_create_by(name: company_name) if company_name.present?
+      @company.address = @address if @company.address.blank?
+      @company.save
+    end
 
     @caller.phones.destroy_all
     phone_count = phone_params['type_ids'].count

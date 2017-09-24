@@ -1,4 +1,4 @@
-<%= form_for(:job) do |f| %>
+<%= form_for(@job) do |f| %>
   <div class="col-xs-12 margin-top-3">
     <%= fields_for(:call) do |f| %>
       <%= f.label :current_active_calls, "Select Current Active Call" %>
@@ -33,6 +33,11 @@
         </button>
       </div>
       <%= hidden_field_tag "new[newly_created]", true %>
+
+      <%= render 'loss_form_modal', f: f %>
+      <%= render 'property_form_modal', f: f %>
+      <%= render 'billing_form_modal', f: f %>
+      <%= render 'customer_form_modal', f: f %>
 
       <%= render 'callers_form', f: f %>
       <%= render 'partials/phone_form', f: f, locals: {phone_for: 'caller'} %>

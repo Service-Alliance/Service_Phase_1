@@ -1,0 +1,76 @@
+<div id="customerModal" class="modal fade" tabindex="-1" role="dialog">
+  <%= f.fields_for :customer do |fc| %>
+
+  <div id="customer-form" class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Customer</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row">
+
+              <div class="col-xs-12">
+                <label for="customer_search">Customer Search</label>
+                <input id="customer_search" class="form-control autocomplete">
+              </div>
+              <div id="editing-customer" class="col-xs-12 margin-top-2 hidden">
+                Editing Customer: <div id="customer-name"></div><br />
+                Not This Customer? <a id="clear-customer">Clear</a>
+              </div>
+              <div class="col-xs-6 margin-top-2">
+                <div class="form-group">
+                  <%= fc.label :first_name %><br>
+                  <%= fc.text_field :first_name, class:"form-control" %>
+                </div>
+              </div>
+              <div class="col-xs-6 margin-top-2">
+                <div class="form-group">
+                  <%= fc.label :last_name %><br>
+                  <%= fc.text_field :last_name, class:"form-control" %>
+                </div>
+              </div>
+
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <%= fc.fields_for :customer_companies do |g| %>
+                  <%= g.label :company_id %><br>
+                  <%= g.collection_select :company_id, Company.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <%= label_tag "company[company_name]", "Create New Company" %><br />
+                  <%= text_field_tag "company[company_name]", nil, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <%= fc.label :email %><br>
+                  <%= fc.text_field :email, class:"form-control" %>
+                </div>
+              </div>
+
+              <%= render 'customers/address_form', f: fc %>
+              <%= render 'partials/modal_phone_form', f: fc %>
+
+
+              <!-- /.modal-dialog -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
