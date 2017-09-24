@@ -11,8 +11,8 @@ class JobsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test '#new' do
-    get :new
+  test '#index with user_id' do
+    get :index, user_id: @user.id
     assert_response :success
   end
 
