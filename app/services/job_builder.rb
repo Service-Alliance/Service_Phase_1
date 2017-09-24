@@ -17,6 +17,12 @@ class JobBuilder
     @address.save
     raise SaveError unless @job.save
 
+    if company_name.present?
+      @company = Company.find_or_create_by(name: company_name) if company_name.present?
+      @company.address = @address if @company.address.blank?
+      @company.save
+    end
+
     if @call
       @call.job_id = @job.id
       @call.save
@@ -26,12 +32,6 @@ class JobBuilder
     @caller.add_company(@company)
     @caller.save
     @job.update_last_action
-
-    if company_name.present?
-      @company = Company.find_or_create_by(name: company_name) if company_name.present?
-      @company.address = @address if @company.address.blank?
-      @company.save
-    end
 
     @caller.phones.destroy_all
     phone_count = phone_params['type_ids'].count
