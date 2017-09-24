@@ -454,7 +454,10 @@ class JobsController < ApplicationController
                                 :same_caller,
                                 :work_center_link,
                                 :xact_link,
-                                customer: [
+                                customer_attributes: [
+                                  :first_name,
+                                  :last_name,
+                                  :email,
                                   :address_1, 
                                   :address_2, 
                                   :zip_code, 
@@ -478,7 +481,7 @@ class JobsController < ApplicationController
                                   :affected_square_footage,
                                   :notes
                                 ],
-                                property: [
+                                property_attributes: [
                                   :structure_type_id, 
                                   :property_type_id,
                                   :year_built,
@@ -490,7 +493,7 @@ class JobsController < ApplicationController
                                   :ownership,
                                   :condo,
                                   flooring_type_ids: []],
-                                job_detail: [
+                                job_detail_attributes: [
                                   :insurance_company_id,
                                   :claim_number,
                                   :policy_number,

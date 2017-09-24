@@ -9,7 +9,9 @@ class JobsTest < Capybara::Rails::TestCase
   def add_loss
     click_button 'Loss Information'
     within '.modal-body' do
-      
+      # TODO: test Dates
+      # TODO: test radios
+      fill_in 'Notes', with: 'Loss Note'
     end
     within '.modal-footer' do
       click_button 'Close'
@@ -19,7 +21,8 @@ class JobsTest < Capybara::Rails::TestCase
   def add_property
     click_button 'Property Information'
     within '.modal-body' do
-      
+      #select 'Residential', from: :job_property_attributes_structure_type_id, visible: false
+      fill_in '# Floors Affected', with: '2'
     end
     within '.modal-footer' do
       click_button 'Close'
@@ -29,7 +32,8 @@ class JobsTest < Capybara::Rails::TestCase
   def add_billing
     click_button 'Billing Information'
     within '.modal-body' do
-      
+      #select InsuranceCompany.first.name, from: 'Insurance company'
+      fill_in 'Claim number', with: 'claim'
     end
     within '.modal-footer' do
       click_button 'Close'
@@ -39,7 +43,8 @@ class JobsTest < Capybara::Rails::TestCase
   def add_customer
     click_button 'Customer Information'
     within '.modal-body' do
-      
+      fill_in 'First name', with: 'Customerfname'
+      fill_in 'Last name', with: 'Customerlname'
     end
     within '.modal-footer' do
       click_button 'Close'
@@ -67,5 +72,24 @@ class JobsTest < Capybara::Rails::TestCase
     assert job.caller.companies.find_by(name: 'Company Name')
     assert_equal 'Callerfname', job.caller.first_name
     assert_equal 'Callerlname', job.caller.last_name
+
+    assert_equal 1, job.losses.count
+    job.losses.first.tap do |loss|
+      #assert_equal 'Liability', loss.loss_type.name
+      assert_equal 'Loss Note', loss.notes
+    end
+
+    job.property.tap do |property|
+      assert_equal 2, property.floors_affected
+    end
+
+    job.customer.tap do |customer|
+      assert_equal 'Customerfname', customer.first_name
+      assert_equal 'Customerlname', customer.last_name
+    end
+
+    job.job_detail.tap do |job_detail|
+      assert_equal 'claim', job_detail.claim_number
+    end
   end
 end
