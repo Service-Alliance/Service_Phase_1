@@ -76,6 +76,10 @@ end
 group :test do
   gem 'minitest-vcr'
   gem 'webmock'
+  gem 'minitest-rails-capybara'
+  gem 'launchy'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 group :development do
