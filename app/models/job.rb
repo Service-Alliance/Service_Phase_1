@@ -34,6 +34,11 @@ class Job < ActiveRecord::Base
   has_many :vendor_assignments, dependent: :destroy
   has_many :occupants
 
+  accepts_nested_attributes_for :losses
+  accepts_nested_attributes_for :job_detail
+  accepts_nested_attributes_for :property
+  accepts_nested_attributes_for :customer
+
   delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
   delegate :full_name, to: :customer, allow_nil: true, prefix: true
   delegate :name, to: :job_status, allow_nil: true, prefix: true

@@ -71,6 +71,9 @@ group :development, :test do
   gem 'simplecov', :require => false
   gem 'single_test'
   gem 'pry-byebug'
+  gem 'guard-minitest'
+  gem 'guard-rails'
+  gem 'guard-bundler'
 end
 
 group :test do

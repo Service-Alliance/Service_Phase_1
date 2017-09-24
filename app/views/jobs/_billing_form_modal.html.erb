@@ -1,0 +1,104 @@
+<div id="billingModal" class="modal fade" tabindex="-1" role="dialog">
+  <%= f.fields_for :job_detail do |fd| %>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Billing</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row">
+
+              <div class="col-xs-6">
+                <div class="form-group">
+                  <div class="field">
+                    <%= fd.label :self_pay_id %><br>
+                    <%= fd.collection_radio_buttons(:self_pay_id, AffectedType.all, :id, :name) %>
+                    <span id="50" class="hidden alert">Please advise that we will collect 50% upon start of job</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-xs-6 non-self">
+                <div class="form-group">
+                  <div class="field">
+                    <%= fd.label :insurance_company_id %><br>
+                    <%= fd.collection_select :insurance_company_id, InsuranceCompany.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                  </div>
+                </div>
+              </div>
+              <% unless current_user.call_rep? %>
+              <div class="col-xs-6 non-self">
+                <div class="form-group">
+                  <div class="field">
+                    <%= fd.label :claim_number %><br>
+                    <%= fd.text_field :claim_number, class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 non-self">
+                <div class="form-group">
+                  <div class="field">
+                    <%= fd.label :policy_number %><br>
+                    <%= fd.text_field :policy_number, class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 non-self">
+                <div class="form-group">
+                  <div class="field">
+                    <%= fd.label :coverage_type %><br>
+                    <%= fd.text_field :coverage_type, class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 non-self">
+                <div class="form-group">
+                  <div class="field">
+                    <%= fd.label :deductible_amount %><br>
+                    <%= fd.number_field :deductible_amount, class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-6 non-self">
+                <div class="form-group">
+                  <div class="field">
+                    <%= fd.label :deductible_id %><br>
+                    <%= fd.collection_radio_buttons(:deductible_id, AffectedType.all, :id, :name) %>
+                  </div>
+                </div>
+              </div>
+              <% fd.label :esl_nst_amount_id %><br>
+              <% fd.collection_radio_buttons(:esl_nst_amount_id, AffectedType.all, :id, :name) %>
+              <div class="col-xs-6 non-self">
+                <div class="form-group">
+                  <div class="field">
+                    <%= fd.label :emergency_service_amount %><br>
+                    <%= fd.number_field :emergency_service_amount, class: "form-control"%>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+
+  <% end %>
+  <!-- /.modal-dialog -->
+</div>
+

@@ -1,0 +1,149 @@
+<div id="propertyModal" class="modal fade" tabindex="-1" role="dialog">
+  <%= f.fields_for :property do |fp| %>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Property</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-xs-12">
+          <div class="row content-box">
+
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :structure_type_id %><br>
+                  <%= fp.collection_select :structure_type_id, StructureType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :property_type_id %><br>
+
+                  <%= fp.grouped_collection_select :property_type_id, StructureType.all, :property_types, :name, :id, :name, {prompt: true},  { class: 'form-control'} %>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :year_built %><br>
+                  <%= fp.number_field :year_built, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :floors_affected, "# Floors Affected" %><br>
+                  <%= fp.number_field :floors_affected, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :rooms_affected %><br>
+                  <%= fp.number_field :rooms_affected, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :occurred_level %><br>
+                  <%= fp.text_field :occurred_level, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :basement_finished %><br>(Check if yes)
+                  <%= fp.check_box :basement_finished %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :multi_unit %><br>(Check if yes)
+                  <%= fp.check_box :multi_unit %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :ownership %><br>(Check if yes)
+                  <%= fp.check_box :ownership %>
+                </div>
+              </div>
+            </div>
+            <div id="condo" class="col-xs-4 hidden">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :condo %><br>(Check if yes)
+                  <%= fp.check_box :condo %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :ceiling_affected %><br>
+                  <%= fp.collection_radio_buttons(:ceiling_affected_id, AffectedType.all, :id, :name) %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :walls_affected %><br>
+                  <%= fp.collection_radio_buttons(:walls_affected_id, AffectedType.all, :id, :name) %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :attic_affected %><br>
+                  <%= fp.collection_radio_buttons(:attic_affected_id, AffectedType.all, :id, :name) %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group">
+                <div class="field">
+                  <%= fp.label :contents_affected %><br>
+                  <%= fp.collection_radio_buttons(:contents_affected_id, AffectedType.all, :id, :name) %>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <%= fp.label :flooring_types %><br>
+              <%= fp.collection_check_boxes(:flooring_type_ids, FlooringType.all, :id, :name) %>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <% end %>
+  <!-- /.modal-dialog -->
+</div>

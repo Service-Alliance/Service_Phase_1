@@ -1,0 +1,204 @@
+<div id="lossModal" class="modal fade" tabindex="-1" role="dialog">
+  <%= f.fields_for :losses do |fl| %>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Loss</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+              <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Job Loss</a>
+            </li>
+            <li role="presentation">
+              <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Info 1</a>
+            </li>
+            <li role="presentation">
+              <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Info 2</a>
+            </li>
+            <li role="presentation">
+              <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+              <div class="row">
+                <div class="col-xs-12">
+
+                  <% if @loss && @loss.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@loss.errors.count, "error") %>
+                    prohibited this loss from being saved:</h2>
+
+                    <ul>
+                      <% @loss.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <% end %>
+
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :loss_occurred %><br>
+                        <%= fl.text_field :loss_occurred, class:"form-control datePicker" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :fnol_received, "Job Recieved" %><br>
+                        <%= fl.text_field :fnol_received, class:"form-control datePicker" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :customer_called %><br>
+                        <%= fl.text_field :customer_called, class:"form-control datePicker" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :loss_type_id %><br>
+                        <%= fl.collection_radio_buttons(:loss_type_id, LossType.all, :id, :name) do |b| %>
+                        <%= b.label(:"data-value" => b.value, :"name" => "loss_type_id") { b.radio_button + b.text } %>
+                        <a data-toggle="tooltip" class="tooltipLink" data-original-title="<%= b.object.tooltip %>">
+                          <span class="glyphicon glyphicon-info-sign"></span>
+                        </a>
+                        <br>
+                        <% end %>
+                        <% fl.collection_select :loss_type_id, LossType.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :loss_cause_id %><br>
+                        <%= fl.grouped_collection_select :loss_cause_id, LossType.all, :loss_causes, :name, :id, :name, {prompt: true},  { class: 'form-control'} %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :standing_water_id %><br>
+                        <%= fl.collection_radio_buttons(:standing_water_id, AffectedType.all, :id, :name) %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :water_available_id %><br>
+                        <%= fl.collection_radio_buttons(:water_available_id, AffectedType.all, :id, :name) %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :electricity_available_id %><br>
+                        <%= fl.collection_radio_buttons(:electricity_available_id, AffectedType.all, :id, :name) %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :source_off_id %><br>
+                        <%= fl.collection_radio_buttons(:source_off_id, AffectedType.all, :id, :name) %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :visible_mold_id %><br>
+                        <%= fl.collection_radio_buttons(:visible_mold_id, AffectedType.all, :id, :name) %>
+                        <div id="mold-alert" class="hidden alert">Please advise mold inspection is $150, which will come off the estimate if we do the work.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="previousWater" class="col-xs-4 hidden">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :previous_water_damage_id %><br>
+                        <%= fl.collection_radio_buttons(:previous_water_damage_id, AffectedType.all, :id, :name) %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="sourceCause" class="col-xs-12 hidden">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :source_cause %><br>
+                        <%= fl.text_area :source_cause, class:"form-control" %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="cleaningType" class="col-xs-12 hidden">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :cleaning_type %><br>
+                        <%= fl.text_area :cleaning_type, class:"form-control" %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="squareFootage" class="col-xs-4 hidden">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :affected_square_footage %><br>
+                        <%= fl.text_field :affected_square_footage, class:"form-control" %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <div class="field">
+                        <%= fl.label :notes %><br>
+                        <%= fl.text_area :notes, class:"form-control" %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 text-center">
+                    <div class="actions"></div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile">...</div>
+            <div role="tabpanel" class="tab-pane" id="messages">...</div>
+            <div role="tabpanel" class="tab-pane" id="settings">...</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <% end %>
+  <!-- /.modal-dialog -->
+</div>

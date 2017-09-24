@@ -109,6 +109,11 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
+    @job = Job.new
+    @loss = @job.losses.build
+    @property = @job.build_property
+    @job_detail = @job.build_job_detail
+    @customer = @job.build_customer
     render :new
   end
 
@@ -429,13 +434,70 @@ class JobsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def job_params
-    params.require(:job).permit(:type_id, :status_id,
-                                :entered_by_id, :details,
-                                :job_note, :customer_id, :referral_type_id, :referral_note, :corporate_referral_type_id,
-                                :billing_address_id, :emergency,
-                                :referral_employee_id, :referral_vendor_id, :job_manager_id, :franchise_id, :coordinator_id, :name, :same_caller, :work_center_link, :xact_link,
-                                customer: [:address_1, :address_2, :zip_code, :city,
-                                           :state_id, :county])
+    params.require(:job).permit(:type_id,
+                                :status_id,
+                                :entered_by_id,
+                                :details,
+                                :job_note,
+                                :customer_id,
+                                :referral_type_id,
+                                :referral_note,
+                                :corporate_referral_type_id,
+                                :billing_address_id,
+                                :emergency,
+                                :referral_employee_id,
+                                :referral_vendor_id,
+                                :job_manager_id,
+                                :franchise_id,
+                                :coordinator_id,
+                                :name,
+                                :same_caller,
+                                :work_center_link,
+                                :xact_link,
+                                customer: [
+                                  :address_1, 
+                                  :address_2, 
+                                  :zip_code, 
+                                  :city,
+                                  :state_id, 
+                                  :county
+                                ],
+                                losses_attributes: [
+                                  :loss_occurred,
+                                  :fnol_received,
+                                  :customer_called,
+                                  :loss_type_id,
+                                  :loss_cause_id,
+                                  :standing_water_id,
+                                  :water_available_id,
+                                  :electricity_available_id,
+                                  :source_off_id,
+                                  :visible_mold_id,
+                                  :source_cause,
+                                  :cleaning_type,
+                                  :affected_square_footage,
+                                  :notes
+                                ],
+                                property: [
+                                  :structure_type_id, 
+                                  :property_type_id,
+                                  :year_built,
+                                  :floors_affected,
+                                  :rooms_affected,
+                                  :occurred_level,
+                                  :basement_finished,
+                                  :multi_unit,
+                                  :ownership,
+                                  :condo,
+                                  flooring_type_ids: []],
+                                job_detail: [
+                                  :insurance_company_id,
+                                  :claim_number,
+                                  :policy_number,
+                                  :coverage_type,
+                                  :deductible_amount,
+                                  :emergency_service_amount
+                                ])
   end
 
   def new_params
