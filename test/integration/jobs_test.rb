@@ -1,4 +1,4 @@
-require "test_helper"
+require "integration_helper"
 
 class JobsTest < Capybara::Rails::TestCase
   def setup
@@ -51,7 +51,7 @@ class JobsTest < Capybara::Rails::TestCase
     end
   end
 
-  test 'can create a job' do
+  test 'can create a job and then edit it' do
     visit root_path
     click_link 'New Job'
     fill_in :company_name, with: 'Company Name'
@@ -91,5 +91,7 @@ class JobsTest < Capybara::Rails::TestCase
     job.job_detail.tap do |job_detail|
       assert_equal 'claim', job_detail.claim_number
     end
+
+    # now let's try to edit it
   end
 end
