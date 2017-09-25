@@ -13,3 +13,11 @@ two:
   last_name: Barnett
   encrypted_password: <%= User.new.send(:password_digest, "password") %>
   tsheets: {tsheets_id: 123}
+
+job_manager:
+  email: jobmanager@servpro.com
+  first_name: Jobby
+  last_name: Manager
+  role_id: 4
+  encrypted_password: <%= User.new.send(:password_digest, "password") %>
+

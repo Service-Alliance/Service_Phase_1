@@ -6,6 +6,60 @@ class JobsTest < Capybara::Rails::TestCase
     sign_in users(:one)
   end
 
+    test 'can create a job and then edit it' do
+    visit root_path
+    click_link 'New Job'
+    fill_in :company_name, with: 'Company Name'
+    fill_in :caller_first_name, with: 'Callerfname'
+    fill_in :caller_last_name, with: 'Callerlname'
+    add_loss
+    add_property
+    add_billing
+    add_customer
+    #within '.referrals', match: :first do
+      #choose('Internet')
+      #find('#job_referral_type_id_2').click
+    #end
+    click_button 'Create Job'
+    assert_content 'Job was successfully created'
+
+    job = Job.last
+    assert job.caller.companies.find_by(name: 'Company Name')
+    assert_equal 'Callerfname', job.caller.first_name
+    assert_equal 'Callerlname', job.caller.last_name
+
+    assert_equal 1, job.losses.count
+    job.losses.first.tap do |loss|
+      #assert_equal 'Liability', loss.loss_type.name
+      assert_equal 'Loss Note', loss.notes
+    end
+
+    job.property.tap do |property|
+      assert_equal 2, property.floors_affected
+    end
+
+    job.customer.tap do |customer|
+      assert_equal 'Customerfname', customer.first_name
+      assert_equal 'Customerlname', customer.last_name
+    end
+
+    job.job_detail.tap do |job_detail|
+      assert_equal 'claim', job_detail.claim_number
+    end
+
+    edit_job_franchise
+
+    job = Job.last
+    assert_equal 'FranchiseOne', job.franchise_name
+  end
+
+
+  def edit_job_franchise
+    click_link 'Edit Job'
+    find('#job_franchise_id').find(:xpath, 'option[2]').select_option
+    click_button 'submit-job'
+  end
+
   def add_loss
     click_button 'Loss Information'
     within '.modal-body' do
@@ -49,49 +103,5 @@ class JobsTest < Capybara::Rails::TestCase
     within '.modal-footer' do
       click_button 'Close'
     end
-  end
-
-  test 'can create a job and then edit it' do
-    visit root_path
-    click_link 'New Job'
-    fill_in :company_name, with: 'Company Name'
-    fill_in :caller_first_name, with: 'Callerfname'
-    fill_in :caller_last_name, with: 'Callerlname'
-    add_loss
-    add_property
-    add_billing
-    add_customer
-    #within '.referrals', match: :first do
-      #choose('Internet')
-      #find('#job_referral_type_id_2').click
-    #end
-    click_button 'Create Job'
-    assert_content 'Job was successfully created'
-
-    job = Job.last
-    assert job.caller.companies.find_by(name: 'Company Name')
-    assert_equal 'Callerfname', job.caller.first_name
-    assert_equal 'Callerlname', job.caller.last_name
-
-    assert_equal 1, job.losses.count
-    job.losses.first.tap do |loss|
-      #assert_equal 'Liability', loss.loss_type.name
-      assert_equal 'Loss Note', loss.notes
-    end
-
-    job.property.tap do |property|
-      assert_equal 2, property.floors_affected
-    end
-
-    job.customer.tap do |customer|
-      assert_equal 'Customerfname', customer.first_name
-      assert_equal 'Customerlname', customer.last_name
-    end
-
-    job.job_detail.tap do |job_detail|
-      assert_equal 'claim', job_detail.claim_number
-    end
-
-    # now let's try to edit it
   end
 end
