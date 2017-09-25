@@ -111,6 +111,7 @@ class JobsController < ApplicationController
   def new
     @job = Job.new
     @loss = @job.losses.build
+    @caller = Caller.new
     @property = @job.build_property
     @job_detail = @job.build_job_detail
     @customer = @job.build_customer
