@@ -6,7 +6,7 @@ class JobsTest < Capybara::Rails::TestCase
     sign_in users(:one)
   end
 
-    test 'can create a job and then edit it' do
+  test 'can create a job and then edit it' do
     visit root_path
     click_link 'New Job'
     fill_in :company_name, with: 'Company Name'
