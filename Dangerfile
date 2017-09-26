@@ -16,13 +16,11 @@ fail "Debugging code found - debugger" if `grep -r debugger lib/ app/ spec/`.len
 fail "Debugging code found - console.log" if `grep -r console.log lib/ app/ spec/`.length > 1
 fail "Debugging code found - require 'debug'" if `grep -r "require \'debug\'" lib/ app/ spec/`.length > 1
 
-# White space conventions
-# fail "Trailing whitespace" if added_lines =~ /\s$/
 fail "Use spaces instead of tabs for indenting" if added_lines =~ /\t/
 
 # We don't need default_scope in our codebase
 if added_lines =~ /\bdefault_scope\b/
-  fail "default_scope found. Please avoid this ([bad practice](http://stackoverflow.com/a/25087337))"
+  fail "default_scope found. Please avoid this [bad practice](http://stackoverflow.com/a/25087337)"
 end
 
 # Warn if 'Gemfile' was modified and 'Gemfile.lock' was not
@@ -30,6 +28,10 @@ if git.modified_files.include?("Gemfile") && !git.modified_files.include?("Gemfi
   warn("`Gemfile` was modified but `Gemfile.lock` was not")
 end
 
+# Ensure a clean commits history
+if git.commits.any? { |c| c.message =~ /^Merge branch/ }
+  fail('Please rebase to get rid of the merge commits in this PR')
+end
 
 # Look for GIT merge conflicts
 if `grep -r ">>>>\|=======\|<<<<<<<" app spec lib`.length > 1
