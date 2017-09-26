@@ -47,6 +47,10 @@ jobs:
           command: |
             mkdir /tmp/test-results
             bundle exec rake test
+      - run:
+          name: do Code Review
+          command: |
+            bundle exec danger
 
       # collect reports
       - store_test_results:
