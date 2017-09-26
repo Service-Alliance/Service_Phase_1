@@ -34,29 +34,9 @@
           <%= f.check_box :emergency %>
         </div>
       </div>
-      <!-- FIXME: This code in template tightly couples to implementation on back-end -->
-      <% if @job.id && current_page?(controller: 'jobs', action: 'edit', id: @job.id) %>
-        <div class="col-xs-4">
-          <div class="form-group">
-            <%= f.label :franchise_id %><br>
-            <%= f.collection_select :franchise_id, Franchise.all, :id, :name, {:prompt => 'Select a Franchise', selected: @job.franchise_id}, { class: 'form-control'} %>
-          </div>
-        </div>
-        <div class="col-xs-4">
-          <div class="form-group">
-            <%= f.label :coordinator_id, "Assigned Job Coordinator" %><br>
-            <%= f.collection_select :coordinator_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
-          </div>
-        </div>
-        <% if current_user.admin? || current_user.owner? %>
-          <div class="col-xs-4">
-            <div class="form-group">
-              <%= f.label :entered_by_id, "Entered By (Admin override)" %><br>
-              <%= f.collection_select :entered_by_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+
+      <%= yield :top_content %>
+
       <div class="col-xs-4">
         <div class="form-group">
           <%= f.label :status_id %><br>
