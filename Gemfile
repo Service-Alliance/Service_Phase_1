@@ -74,6 +74,7 @@ group :development, :test do
   gem 'guard-minitest'
   gem 'guard-rails'
   gem 'guard-bundler'
+  gem 'danger'
 end
 
 group :test do
