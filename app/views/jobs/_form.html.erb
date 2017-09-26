@@ -43,27 +43,7 @@
           <%= f.collection_select :status_id, JobStatus.all, :id, :name, {selected: @job.status_id || 1},  { class: 'form-control'} %>
         </div>
       </div>
-      <!-- FIXME: This code in template tightly couples to implementation on back-end -->
-      <% if current_page?(controller: 'jobs', action: 'new') %>
-        <div class="col-xs-12">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lossModal">
-            Loss Information
-          </button>
 
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#propertyModal">
-            Property Information
-          </button>
-
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#billingModal">
-            Billing Information
-          </button>
-        </div>
-        <%= hidden_field_tag "new[newly_created]", true %>
-      <% end %>
-
-      <%= render 'loss_form_modal', f: f %>
-      <%= render 'property_form_modal', f: f %>
-      <%= render 'billing_form_modal', f: f %>
       <%= render 'customer_form_modal', f: f %>
 
       <%= render 'callers_form', f: f %>
