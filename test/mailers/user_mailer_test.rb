@@ -4,7 +4,6 @@ class UserMailerTest < ActiveSupport::TestCase
   setup do
     @user = users(:one)
     @job = jobs(:one)
-    @work_order = work_orders(:one)
   end
 
   test '#collections_user_added_to_job' do
