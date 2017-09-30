@@ -29,20 +29,4 @@ class UserMailerTest < ActiveSupport::TestCase
     assert_equal ["user1@servpro.com"], email.to
     assert_equal "Dave Jones, you have been mentioned on #{@job.id}, ", email.subject
   end
-
-  test '#work_order_notification' do
-    email = UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
-
-    assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal ["user1@servpro.com"], email.to
-    assert_equal "Dave Jones, you have been sent a work order for job #{@job.id}, . Franchise: FranchiseOne.", email.subject()
-  end
-
-  test '#vendor_work_order_notification' do
-    email = UserMailer.work_order_notification(@user, @job, @work_order).deliver_now
-
-    assert_not ActionMailer::Base.deliveries.empty?
-    assert_equal ["user1@servpro.com"], email.to()
-    assert_equal "Dave Jones, you have been sent a work order for job #{@job.id}, . Franchise: FranchiseOne.", email.subject()
-  end
 end
