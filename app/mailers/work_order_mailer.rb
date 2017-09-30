@@ -1,5 +1,5 @@
 class WorkOrderMailer < ApplicationMailer
-  def vendor_work_order_notification(customer, job, work_order, vendor = nil)
+  def vendor_notification(customer, job, work_order, vendor = nil)
     @customer = customer
     @job = job
     @work_order = work_order
@@ -18,7 +18,7 @@ class WorkOrderMailer < ApplicationMailer
   end
 
 
-  def work_order_notification(user, job, work_order)
+  def notification(user, job, work_order)
     @user = user
     @job = job
     @work_order = work_order
