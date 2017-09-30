@@ -12,9 +12,10 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-star-empty" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right">
+        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
         							<div class="large"><%= @total_pending_count %></div>
         							<div class="text-muted">Pending Jobs ($<%= @total_pending_value %>)</div>
+        							<div class="text-muted">Pending Jobs ($<%= @total_pending_value_2 %>)</div>
         						</div>
         					</div>
         				</div>
@@ -25,9 +26,10 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-star" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right">
+        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
         							<div class="large"><%= @total_active_count %></div>
         							<div class="text-muted">Active Jobs ($<%= @total_active_value %>)</div>
+        							<div class="text-muted">Active Jobs ($<%= @total_active_value_2 %>)</div>
         						</div>
         					</div>
         				</div>
@@ -38,9 +40,10 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-usd" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right">
+        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
         							<div class="large"><%= @total_invoiced_count %></div>
         							<div class="text-muted">Invoiced Jobs ($<%= @total_invoiced_value %>)</div>
+        							<div class="text-muted">Invoiced Jobs ($<%= @total_invoiced_value_2 %>)</div>
         						</div>
         					</div>
         				</div>
@@ -51,9 +54,10 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-ban-circle" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right">
+        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
         							<div class="large"><%=@total_dead_count  %></div>
         							<div class="text-muted">Dead Jobs ($<%= @total_dead_value %>)</div>
+        							<div class="text-muted">Dead Jobs ($<%= @total_dead_value_2 %>)</div>
         						</div>
         					</div>
         				</div>
@@ -64,9 +68,10 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-ban-circle" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right">
+        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
         							<div class="large"><%=@total_closed_count  %></div>
         							<div class="text-muted">Closed Jobs ($<%= @total_closed_value %>)</div>
+        							<div class="text-muted">Closed Jobs ($<%= @total_closed_value_2 %>)</div>
         						</div>
         					</div>
         				</div>
@@ -84,9 +89,7 @@
                         <th>Loss Type</th>
                         <th>Sales Rep</th>
                         <th>Customer Name</th>
-                        <th>Street Address</th>
-                        <th>City</th>
-                        <th>Zip</th>
+                        <th>Customer Address</th>
                         <th>Phone</th>
                         <th>Referred By</th>
                         <th>Insurance Company</th>
@@ -102,24 +105,19 @@
                 <tbody>
                     <% @jobs.each do |job| %>
                     <tr>
-                        <td><%= job.try(:fnol_received).try(:strftime, "%D %I:%M %p") %></td>
-                        <td><%= job.try(:losses).try(:first).try(:loss_type).try(:name) %></td>
+                        <td><%= job.fnol_received.try(:strftime, "%D %I:%M %p") %></td>
+                        <td><%= job.loss_type_names.join('<br />').html_safe %></td>
                         <td>
-                          <%= job.try(:subscriptions).try(:first).try(:user).try(:full_name) %>
-                          <% if job.try(:subscriptions).count > 1 %>
-                            (+ <%= job.try(:subscriptions).count - 1%>)
+                          <%= job.subscriptions.first.try(:user_full_name) %>
+                          <% if job.subscriptions.size > 1 %>
+                            (+ <%= job.subscriptions.size - 1%>)
                           <% end %>
                         </td>
-                        <td><%= job.try(:customer).try(:full_name) %></td>
-                        <td><%= job.try(:customer).try(:address).try(:address_1) %>
-                            <%= job.try(:customer).try(:address).try(:address_2) %></td>
-                        <td><%= job.try(:customer).try(:address).try(:city) %>
+                        <td><%= job.customer_full_name %></td>
+                        <td><%= job.customer_address_without_county %></td>
+                        <td><%= job.customer_first_phone_number %>
                         </td>
-                        <td><%= job.try(:customer).try(:address).try(:zip_code) %>
-                        </td>
-                        <td><%= job.try(:customer).try(:phones).try(:first).try(:number) %>
-                        </td>
-                        <td><%= job.try(:referral_type).try(:name) %></td>
+                        <td><%= job.referral_type_name %></td>
                         <% if job.try(:job_detail).try(:self_pay_id) == 1 %>
                           <td>Self Pay</td>
                         <% elsif job.try(:job_detail).try(:insurance_company_id) != nil %>
@@ -129,10 +127,10 @@
                         <% else %>
                           <td><%= job.try(:job_detail).try(:insurance_company).try(:name) %></td>
                         <% end %>
-                        <td><%= job.try(:job_coordinator).try(:full_name) %></td>
-                        <td><%= job.try(:user).try(:full_name) %></td>
-                        <td><%= job.try(:franchise).try(:name) %></td>
-                        <td><%= job.try(:job_status).try(:name) %></td>
+                        <td><%= job.job_coordinator_full_name %></td>
+                        <td><%= job.user_full_name %></td>
+                        <td><%= job.franchise_name %></td>
+                        <td><%= job.job_status_name %></td>
                         <td><%= job.try(:pricings).try(:last).try(:price) %></td>
                         <% if job.name && job.name != ""%>
                         <td><%= link_to job.name, job %></td>
@@ -169,35 +167,35 @@
             <%= f.label :customer_address_address_1, "Customer Address" %><br/>
             <%= f.search_field :customer_address_address_1_or_customer_address_address_2_or_customer_address_city_or_customer_address_county_or_customer_address_zip_code_cont, {class: "form-control"} %>
             <%= f.label :franchise_id %><br/>
-            <%= f.select :franchise_id_in, options_from_collection_for_select(Franchise.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :franchise_id_in, options_from_collection_for_select(@jobs.all_franchises, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
             <%= f.label :job_detail_insurance_company_id_in %><br/>
-            <%= f.select :job_detail_insurance_company_id_in, options_from_collection_for_select(InsuranceCompany.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :job_detail_insurance_company_id_in, options_from_collection_for_select(@jobs.all_insurance_companies, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
             <%= f.label :status_id_in, "Job Status" %><br/>
-            <%= f.select :status_id_in, options_from_collection_for_select(JobStatus.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :status_id_in, options_from_collection_for_select(@jobs.all_job_statuses, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :entered_by_id_in, "Entered By" %><br/>
-            <%= f.select :entered_by_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :entered_by_id_in, options_from_collection_for_select(@jobs.all_users, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :referral_employee_id_in, "Referred By" %><br/>
-            <%= f.select :referral_employee_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :referral_employee_id_in, options_from_collection_for_select(@jobs.all_users, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
             <%= f.label :losses_loss_type_id_in, "Loss Type" %><br/>
-            <%= f.select :losses_loss_type_id_in, options_from_collection_for_select(LossType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :losses_loss_type_id_in, options_from_collection_for_select(@jobs.all_loss_types, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
             <%= f.label :customer_address_state_id, "Customer State" %><br/>
-            <%= f.select :customer_address_state_id_in, options_from_collection_for_select(State.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :customer_address_state_id_in, options_from_collection_for_select(@jobs.all_states, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :referral_type_id_in, "Referral Type" %><br/>
-            <%= f.select :referral_type_id_in, options_from_collection_for_select(ReferralType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :referral_type_id_in, options_from_collection_for_select(@jobs.all_referral_types, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :agent_id_in, "Agent Name" %><br/>
-            <%= f.select :agent_id_in, options_from_collection_for_select(Agent.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :agent_id_in, options_from_collection_for_select(@jobs.all_agents, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :adjuster_id_in, "Adjuster Name" %><br/>
-            <%= f.select :adjuster_id_in, options_from_collection_for_select(Adjuster.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :adjuster_id_in, options_from_collection_for_select(@jobs.all_adjusters, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :customer_owner_id_in, "Sales Rep" %><br/>
-            <%= f.select :customer_owner_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :customer_owner_id_in, options_from_collection_for_select(@jobs.all_users, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :coordinator_id_in, "Loss Coordinator" %><br/>
-            <%= f.select :coordinator_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :coordinator_id_in, options_from_collection_for_select(@jobs.all_users, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :job_managers_job_manager_id_in, "Project Manager" %><br/>
-            <%= f.select :job_managers_job_manager_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :job_managers_job_manager_id_in, options_from_collection_for_select(@jobs.all_users, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
             <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-top-2" %></div>
 

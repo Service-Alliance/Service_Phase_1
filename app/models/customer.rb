@@ -88,6 +88,10 @@ class Customer < ActiveRecord::Base
     return phones
   end
 
+  def first_phone_number
+    phones.first.try(:number)
+  end
+
   def self.same_as_caller(job)
     @job = Job.find_by(id: job)
     @caller = Caller.find_by(job_id: @job.id)
