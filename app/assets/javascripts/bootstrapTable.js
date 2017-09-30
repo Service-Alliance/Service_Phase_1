@@ -52,7 +52,6 @@ var $table = $('#table'),
                                 }
                                 var data = $table.bootstrapTable('getData'),
                                     index = $(this).parents('tr').data('index');
-                                console.log(data[index]);
                                 return '';
                             }
                         },
@@ -85,9 +84,6 @@ var $table = $('#table'),
                     $detail.html(res.replace(/\n/g, '<br>'));
                 });
             }
-        });
-        $table.on('all.bs.table', function (e, name, args) {
-            console.log(name, args);
         });
         $remove.click(function () {
             var ids = getIdSelections();
@@ -158,4 +154,4 @@ var $table = $('#table'),
     function getHeight() {
         return $(window).height() - $('h1').outerHeight(true);
     }
-    
+
