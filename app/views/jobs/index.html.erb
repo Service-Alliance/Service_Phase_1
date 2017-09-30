@@ -12,10 +12,9 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-star-empty" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
-        							<div class="large"><%= @total_pending_count %></div>
-        							<div class="text-muted">Pending Jobs ($<%= @total_pending_value %>)</div>
-        							<div class="text-muted">Pending Jobs ($<%= @total_pending_value_2 %>)</div>
+        						<div class="col-sm-9 col-lg-7 widget-right">
+        							<div class="large"><%= @jobs.pending_count %></div>
+        							<div class="text-muted">Pending Jobs ($<%= @jobs.pending_value %>)</div>
         						</div>
         					</div>
         				</div>
@@ -26,10 +25,9 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-star" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
-        							<div class="large"><%= @total_active_count %></div>
-        							<div class="text-muted">Active Jobs ($<%= @total_active_value %>)</div>
-        							<div class="text-muted">Active Jobs ($<%= @total_active_value_2 %>)</div>
+        						<div class="col-sm-9 col-lg-7 widget-right">
+        							<div class="large"><%= @jobs.active_count %></div>
+        							<div class="text-muted">Active Jobs ($<%= @jobs.active_value %>)</div>
         						</div>
         					</div>
         				</div>
@@ -40,10 +38,9 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-usd" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
-        							<div class="large"><%= @total_invoiced_count %></div>
-        							<div class="text-muted">Invoiced Jobs ($<%= @total_invoiced_value %>)</div>
-        							<div class="text-muted">Invoiced Jobs ($<%= @total_invoiced_value_2 %>)</div>
+        						<div class="col-sm-9 col-lg-7 widget-right">
+        							<div class="large"><%= @jobs.invoiced_count %></div>
+        							<div class="text-muted">Invoiced Jobs ($<%= @jobs.invoiced_value %>)</div>
         						</div>
         					</div>
         				</div>
@@ -54,10 +51,9 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-ban-circle" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
-        							<div class="large"><%=@total_dead_count  %></div>
-        							<div class="text-muted">Dead Jobs ($<%= @total_dead_value %>)</div>
-        							<div class="text-muted">Dead Jobs ($<%= @total_dead_value_2 %>)</div>
+        						<div class="col-sm-9 col-lg-7 widget-right">
+        							<div class="large"><%= @jobs.dead_count  %></div>
+        							<div class="text-muted">Dead Jobs ($<%= @jobs.dead_value %>)</div>
         						</div>
         					</div>
         				</div>
@@ -68,10 +64,9 @@
         						<div class="col-sm-3 col-lg-5 widget-left">
         							<i class="glyph-dash glyphicon glyphicon-ban-circle" aria-hidden="true"></i>
         						</div>
-        						<div class="col-sm-9 col-lg-7 widget-right" style="height:150px;">
-        							<div class="large"><%=@total_closed_count  %></div>
-        							<div class="text-muted">Closed Jobs ($<%= @total_closed_value %>)</div>
-        							<div class="text-muted">Closed Jobs ($<%= @total_closed_value_2 %>)</div>
+        						<div class="col-sm-9 col-lg-7 widget-right">
+        							<div class="large"><%=@jobs.closed_count  %></div>
+        							<div class="text-muted">Closed Jobs ($<%= @jobs.closed_value %>)</div>
         						</div>
         					</div>
         				</div>
@@ -80,7 +75,7 @@
 
             <%= link_to "Export As CSV (Work In Progress)", jobs_path(params.merge(format: "csv")), class: "btn btn-primary margin-bottom-2" %> <br />
             Total:
-            <%= @total_count %>
+            <%= @jobs.total_count %>
 
             <table id="job-table" class="table table-striped">
                 <thead>
@@ -103,7 +98,7 @@
                 </thead>
 
                 <tbody>
-                    <% @jobs.each do |job| %>
+                    <% @jobs.paged.each do |job| %>
                     <tr>
                         <td><%= job.fnol_received.try(:strftime, "%D %I:%M %p") %></td>
                         <td><%= job.loss_type_names.join('<br />').html_safe %></td>
@@ -146,7 +141,7 @@
                     <% end %>
                 </tbody>
             </table>
-            <%= paginate @jobs %>
+            <%= paginate @jobs.paged %>
             <br>
 
             <%= link_to 'New Job', new_job_path %>

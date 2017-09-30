@@ -57,6 +57,11 @@ class Job < ActiveRecord::Base
 
   scope :latest_first, -> {order(created_at: :desc)}
 
+  def self.with_status(status)
+    joins(:job_status)
+      .where(job_status: {name: status})
+  end
+
   def self.owned_by(user)
     where(coordinator_id: user.id)
   end
@@ -93,7 +98,6 @@ class Job < ActiveRecord::Base
         count = count + 1
       end
     end
-    pp "count: #{count}"
     return value
   end
 

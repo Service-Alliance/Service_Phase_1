@@ -1,4 +1,13 @@
 class JobsPresenter < BasePresenter
+  attr_accessor :paged, :all
+
+  delegate :total_count, :total_pages, to: :paged
+
+  def initialize(model, view_context, page)
+    super(model, view_context)
+    set_up_relation(page)
+  end
+
   def all_franchises
     @franchises ||= Franchise.all
     @franchises
@@ -42,5 +51,38 @@ class JobsPresenter < BasePresenter
   def all_adjusters
     @adjusters ||= Adjuster.all
     @adjusters
+  end
+
+  [:pending, :active, :invoiced, :dead, :closed].each do |status|
+    define_method("#{status}_count") do
+      status_id = JobStatus.find_by(name: status.capitalize).id
+      all.where(status_id: status_id).count
+    end
+
+    define_method("#{status}_value") do
+      status_id = JobStatus.find_by(name: status.capitalize).id
+      all.where(status_id: status_id).value
+    end
+  end
+
+  private
+
+  def set_up_relation(page)
+    @all = @model
+    @paged = @model.includes(:referral_type, 
+                             :job_detail,
+                             :job_coordinator,
+                             :user,
+                             :franchise,
+                             :job_status,
+                             :subscriptions,
+                             :losses,
+                             :pricings)
+                    .includes(customer: {address: :state})
+                    .includes(customer: :phones)
+                    .includes(subscriptions: :user)
+                    .includes(losses: :loss_type)
+                    .page(page)
+                    .order('fnol_received DESC')
   end
 end

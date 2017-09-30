@@ -26,50 +26,11 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     @search = Job.where.not(status_id: nil).order('fnol_received DESC').search(params[:q])
-    jobs = @search.result
-                   .includes(:referral_type, 
-                             :job_detail,
-                             :job_coordinator,
-                             :user,
-                             :franchise,
-                             :job_status,
-                             :subscriptions,
-                             :losses,
-                             :pricings)
-                   .includes(customer: {address: :state})
-                   .includes(customer: :phones)
-                   .includes(subscriptions: :user)
-                   .includes(losses: :loss_type)
-                   .page(params[:page])
-                   .order('fnol_received DESC')
-    @jobs = JobsPresenter.new(jobs, view_context)
-    @total_count = @jobs.total_count
-    @all_results = @search.result
-
-    @total_pending_count =  @search.result.where(status_id: 1).count
-    @total_pending_value = Job.value_of_jobs(@search.result.where(status_id: 1))
-    #pp @search.result.where(status_id: 1)
-    @total_pending_value_2 = @search.result.where(status_id: 1).value
-
-    @total_active_count =  @search.result.where(status_id: 2).count
-    @total_active_value = Job.value_of_jobs(@search.result.where(status_id: 2))
-    @total_active_value_2 =  @search.result.where(status_id: 2).value
-
-    @total_invoiced_count =  @search.result.where(status_id: 3).count
-    @total_invoiced_value = Job.value_of_jobs(@search.result.where(status_id: 3))
-    @total_invoiced_value_2 =  @search.result.where(status_id: 3).value
-
-    @total_dead_count =  @search.result.where(status_id: 4).count
-    @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 4))
-    @total_dead_value_2 =  @search.result.where(status_id: 4).value
-
-    @total_closed_count =  @search.result.where(status_id: 5).count
-    @total_closed_value = Job.value_of_jobs(@search.result.where(status_id: 5))
-    @total_closed_value_2 =  @search.result.where(status_id: 5).value
+    @jobs = JobsPresenter.new(@search.result, view_context, params[:page])
 
     respond_to do |format|
       format.html
-      format.csv { render text: @all_results.to_csv }
+      format.csv { render text: @jobs.all.to_csv }
     end
   end
 
