@@ -13,7 +13,5 @@ class WorkOrderDeliveryServiceTest < ActiveSupport::TestCase
     assert_enqueued_jobs 0
     WorkOrderDeliveryService.new(@work_order, @current_user).deliver!
     assert_enqueued_jobs 3
-    perform_enqueued_jobs
-    assert_equal 3, ActionMailer::Base.deliveries.count
   end
 end
