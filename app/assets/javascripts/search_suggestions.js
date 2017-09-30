@@ -5,7 +5,6 @@ $(function () {
       source: function (request, response) {
         $.getJSON("/customer_search_suggestions?term=" + request.term, function (data) {
           response($.map(data, function (value, key) {
-            console.log(value)
             return {
               label: "Customer: "+ value.first_name + " " + value.last_name,
               value: value

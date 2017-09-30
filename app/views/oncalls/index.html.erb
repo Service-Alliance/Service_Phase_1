@@ -8,12 +8,11 @@
         $('#calendar').fullCalendar({
             navLinks: true,
             navLinkDayClick: function (date, jsEvent) {
-                console.log('day', date.format());
                 window.location.href = "<%= ENV['ROOT_URL'] %>/oncalls?date=" + date.format();
             },
             eventSources: [
-              '/oncalls'
-          ]
+                '/oncalls'
+            ]
         })
     });
 </script>

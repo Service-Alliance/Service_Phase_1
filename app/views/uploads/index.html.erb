@@ -1,54 +1,53 @@
 <div class="container-fluid">
-    <div id="wrapper">
-        <%= render partial: "partials/jobs_sidebar" %>
-        <div id="page-content-wrapper">
-            <% if notice %>
-            <div class="alert alert-success" role="alert"><%= notice %></div>
-            <% end %>
-            <div class="col-xs-12">
-                <h1 class="text-center">Uploads/Files:</h1>
-                <h2><%= link_to "New Upload", new_job_upload_path(@job) %></h2>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Uploads/Files</div>
-                    <div class="panel-body">
-                        <table
-                            data-toggle="table"
-                            data-url="uploads"
-                            data-show-refresh="true"
-                            data-show-toggle="true"
-                            data-show-columns="true"
-                            data-search="true"
-                            data-flat="true"
-                            data-select-item-name="toolbar1"
-                            data-pagination="true"
-                            data-sort-name="name"
-                            data-sort-order="desc">
-                            <thead>
-                                <tr>
-                                    <th data-field="state" data-checkbox="true">Upload ID</th>
-                                    <th data-field="upload_category.name" data-sortable="true">Upload Cateogry</th>
-                                    <th data-field="id" data-sortable="true">Upload ID</th>
-                                    <th data-field="file_name" data-sortable="true">Name</th>
-                                    <th data-field="upload.url" data-formatter="LinkFormatter" data-sortable="true">Link</th>
-                                    <th data-field="id" data-formatter="DeleteUpload" data-sortable="true">Delete</th>
+  <div id="wrapper">
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div id="page-content-wrapper">
+      <% if notice %>
+          <div class="alert alert-success" role="alert"><%= notice %></div>
+      <% end %>
+      <div class="col-xs-12">
+        <h1 class="text-center">Uploads/Files:</h1>
+        <h2><%= link_to "New Upload", new_job_upload_path(@job) %></h2>
+        <div class="panel panel-default">
+          <div class="panel-heading">Uploads/Files</div>
+          <div class="panel-body">
+            <table
+            data-toggle="table"
+            data-url="uploads"
+            data-show-refresh="true"
+            data-show-toggle="true"
+            data-show-columns="true"
+            data-search="true"
+            data-flat="true"
+            data-select-item-name="toolbar1"
+            data-pagination="true"
+            data-sort-name="name"
+            data-sort-order="desc">
+              <thead>
+              <tr>
+                <th data-field="state" data-checkbox="true">Upload ID</th>
+                <th data-field="upload_category.name" data-sortable="true">Upload Cateogry</th>
+                <th data-field="id" data-sortable="true">Upload ID</th>
+                <th data-field="file_name" data-sortable="true">Name</th>
+                <th data-field="upload.url" data-formatter="LinkFormatter" data-sortable="true">Link</th>
+                <th data-field="id" data-formatter="DeleteUpload" data-sortable="true">Delete</th>
 
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
+              </tr>
+              </thead>
+            </table>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-    <script>
-        function LinkFormatter(value, row, index) {
+<script>
+    function LinkFormatter(value, row, index) {
 
-            return "<a href=" + value + ">View/Download</a>";
-        }
+        return "<a href=" + value + ">View/Download</a>";
+    }
 
-        function DeleteUpload(value, row, index) {
-            console.log(row)
-          return "<a data-method='delete' data-confirm='Are you sure?' href='/jobs/<%= @job.id %>/uploads/" + row.id + "'>Delete</a>";
-        }
-    </script>
+    function DeleteUpload(value, row, index) {
+        return "<a data-method='delete' data-confirm='Are you sure?' href='/jobs/<%= @job.id %>/uploads/" + row.id + "'>Delete</a>";
+    }
+</script>
