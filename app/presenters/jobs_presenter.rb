@@ -1,7 +1,7 @@
 class JobsPresenter < BasePresenter
   attr_accessor :paged, :all
 
-  delegate :total_count, :total_pages, to: :paged
+  delegate :total_count, :total_pages, :current_page, to: :paged
 
   def initialize(model, view_context, page)
     super(model, view_context)
