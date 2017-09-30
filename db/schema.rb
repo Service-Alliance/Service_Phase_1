@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916175039) do
+ActiveRecord::Schema.define(version: 20170930092733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -471,8 +471,18 @@ ActiveRecord::Schema.define(version: 20170916175039) do
     t.datetime "fnol_received"
   end
 
+  add_index "jobs", ["adjuster_id"], name: "index_jobs_on_adjuster_id", using: :btree
+  add_index "jobs", ["agent_id"], name: "index_jobs_on_agent_id", using: :btree
+  add_index "jobs", ["coordinator_id"], name: "index_jobs_on_coordinator_id", using: :btree
+  add_index "jobs", ["corporate_referral_type_id"], name: "index_jobs_on_corporate_referral_type_id", using: :btree
   add_index "jobs", ["created_at"], name: "index_jobs_on_created_at", using: :btree
+  add_index "jobs", ["customer_id"], name: "index_jobs_on_customer_id", using: :btree
   add_index "jobs", ["entered_by_id"], name: "index_jobs_on_entered_by_id", using: :btree
+  add_index "jobs", ["fnol_received"], name: "index_jobs_on_fnol_received", using: :btree
+  add_index "jobs", ["franchise_id"], name: "index_jobs_on_franchise_id", using: :btree
+  add_index "jobs", ["referral_employee_id"], name: "index_jobs_on_referral_employee_id", using: :btree
+  add_index "jobs", ["referral_type_id"], name: "index_jobs_on_referral_type_id", using: :btree
+  add_index "jobs", ["status_id"], name: "index_jobs_on_status_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "name",       null: false
@@ -795,7 +805,7 @@ ActiveRecord::Schema.define(version: 20170916175039) do
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "role_id",                 default: 0
+    t.integer  "role_id",                default: 0
     t.string   "notes"
     t.integer  "department_id"
     t.string   "title"
@@ -831,22 +841,19 @@ ActiveRecord::Schema.define(version: 20170916175039) do
     t.date     "sub_2"
     t.string   "dry_book"
     t.integer  "login_count"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.string   "email",                   default: "", null: false
-    t.string   "encrypted_password",      default: "", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",           default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.integer  "tsheets_user_id"
-    t.string   "tsheets_user_first_name"
-    t.string   "tsheets_user_last_name"
-    t.jsonb    "tsheets",                 default: {}, null: false
+    t.jsonb    "tsheets",                default: {}, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
