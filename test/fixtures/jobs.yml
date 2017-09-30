@@ -4,11 +4,11 @@ DEFAULTS: &DEFAULTS
   details: MyText
   customer: one
   referral_type_id: 1
+  job_status: active
 
 one:
   <<: *DEFAULTS
   type_id: 1
-  status_id: 1
   entered_by_id: 1
   franchise: one
 
@@ -22,3 +22,15 @@ with_note:
   <<: *DEFAULTS
   job_note: just a note
   franchise: 2
+
+pending:
+  <<: *DEFAULTS
+  job_status: pending
+
+invoiced:
+  <<: *DEFAULTS
+  job_status: invoiced
+
+dead:
+  <<: *DEFAULTS
+  job_status: dead

@@ -55,13 +55,13 @@ class JobsPresenter < BasePresenter
 
   [:pending, :active, :invoiced, :dead, :closed].each do |status|
     define_method("#{status}_count") do
-      status_id = JobStatus.find_by(name: status.capitalize).id
-      all.where(status_id: status_id).count
+      st = JobStatus.find_by(name: status.capitalize)
+      st.present? ? all.where(status_id: st.id).count : 0
     end
 
     define_method("#{status}_value") do
-      status_id = JobStatus.find_by(name: status.capitalize).id
-      all.where(status_id: status_id).value
+      st = JobStatus.find_by(name: status.capitalize)
+      st.present? ? all.where(status_id: st.id).value : 0
     end
   end
 

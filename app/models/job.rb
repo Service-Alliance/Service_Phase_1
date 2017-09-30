@@ -89,20 +89,9 @@ class Job < ActiveRecord::Base
     save
   end
 
-  def self.value_of_jobs(jobs)
-    value = 0
-    count = 0
-    jobs.each do |job|
-      if job.pricings.last && job.pricings.last.price
-        value += job.pricings.last.price
-        count = count + 1
-      end
-    end
-    return value
-  end
-
   def self.value
-    Pricing.from(
+    Pricing
+      .from(
         Pricing
           .where(job_id: all)
           .latest_per_job
