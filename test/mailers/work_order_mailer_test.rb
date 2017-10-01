@@ -7,7 +7,7 @@ class WorkOrderMailerTest < ActiveSupport::TestCase
     @work_order = work_orders(:one)
   end
 
-  test '#work_order_notification' do
+  test '#notification' do
     assert_difference 'MailLog.count' do
       email = WorkOrderMailer.notification(@user, @job, @work_order).deliver_now
       assert_not ActionMailer::Base.deliveries.empty?
@@ -21,12 +21,12 @@ class WorkOrderMailerTest < ActiveSupport::TestCase
     end
   end
 
-  test '#vendor_work_order_notification' do
+  test '#vendor_notification' do
     assert_difference 'MailLog.count' do
-      email = WorkOrderMailer.notification(@user, @job, @work_order).deliver_now
+      email = WorkOrderMailer.vendor_notification(@user, @job, @work_order).deliver_now
       assert_not ActionMailer::Base.deliveries.empty?
       assert_equal ["user1@servpro.com"], email.to()
-      assert_equal "Dave Jones, you have been sent a work order for job #{@job.id}, . Franchise: FranchiseOne.", email.subject()
+      assert_equal "Dave Jones, you have been sent a work order from Service Alliance for job,. Franchise: FranchiseOne.", email.subject()
 
       email.header.fields.select {|rec| rec.name.eql? "X-SMTPAPI"}.first.value["unique_args"].tap do |header_field|
         assert_equal "work_order", header_field["origin_type"]
