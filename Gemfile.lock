@@ -256,6 +256,8 @@ GEM
     lumberjack (1.0.12)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
+    mail-x_smtpapi (1.1.0)
+      mail (> 2.6.0)
     marginalia (1.5.0)
       actionpack (>= 2.3)
       activerecord (>= 2.3)
@@ -510,6 +512,7 @@ DEPENDENCIES
   kaminari
   launchy
   letter_opener_web
+  mail-x_smtpapi
   marginalia
   memory_profiler
   minitest-rails-capybara
