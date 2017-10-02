@@ -2,7 +2,7 @@ class Caller < ActiveRecord::Base
   belongs_to :job
   belongs_to :address
   has_many :phones, as: :phoneable
-  has_many :caller_companies
+  has_many :caller_companies, dependent: :destroy
   has_many :companies, through: :caller_companies
 
   include PgSearch
