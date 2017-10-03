@@ -86,8 +86,8 @@
                         <%= link_to edit_job_loss_path(@job, loss), class: "btn btn-sm btn-warning", type: "button" do %>
                         <i class="glyphicon glyphicon-edit"></i>
                         <% end %>
+                        <%= link_to 'Destroy', job_loss_path(@job, loss), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger", type: "button" %></td>
                     </div>
-
                 </div>
                 <% end %>
             </div>

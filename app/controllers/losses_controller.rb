@@ -69,8 +69,8 @@ class LossesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to job_losses_url, notice: 'Loss was successfully destroyed.' }
       format.json { head :no_content }
-    end
   end
+end
 
   def selected_loss_type
     if request.xhr?

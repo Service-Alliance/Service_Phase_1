@@ -63,7 +63,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", edit_job_path(@job), class: "hidden-print" %>
+                            <%= link_to "Edit", edit_job_path(@job), class: "btn btn-sm btn-warning", type: "button" %>
                         </section>
 
                         <section id="caller-information">
@@ -128,7 +128,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_job_caller_path(@job, @job.caller), class: "hidden-print"  %>
+                            <%= link_to "Edit", new_or_view_job_caller_path(@job, @job.caller), class: "btn btn-sm btn-warning", type: "button" %>
                         </section>
 
                         <section id="caller-information">
@@ -193,7 +193,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_customer_path(@job, @job.customer), class: "hidden-print"  %>
+                            <%= link_to "Edit", new_or_view_customer_path(@job, @job.customer), class: "btn btn-sm btn-warning", type: "button"  %>
                         </section>
 
                         <section id="loss-information">
@@ -315,7 +315,8 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_job_loss_path(@job, loss), class: "hidden-print"  %>
+                            <%= link_to "Edit", new_or_view_job_loss_path(@job, loss), class: "btn btn-sm btn-warning", type: "button"  %>
+                            <%= link_to "Delete", job_loss_path(@job, loss), method: :delete, data: { confirm: 'Are you sure you want to delete this loss?' }, class: "btn btn-sm btn-danger", type: "button" %></td>
                             <% end %>
                         </section>
 
@@ -424,7 +425,7 @@
 
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_job_property_path(@job, @job.property), class: "hidden-print"  %>
+                            <%= link_to "Edit", new_or_view_job_property_path(@job, @job.property), class: "btn btn-sm btn-warning", type: "button" %>
                         </section>
 
                         <section id="loss-information">
@@ -532,7 +533,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_job_detail_path(@job, @job.property), class: "hidden-print"  %>
+                            <%= link_to "Edit", new_or_view_job_detail_path(@job, @job.property), class: "btn btn-sm btn-warning", type: "button" %>
                         </section>
                         <section id="agent-information">
                             <h2>Agent Information</h2>
@@ -598,7 +599,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_agent_path(@job, @job.agent), class: "hidden-print"  %>
+                            <%= link_to "Edit", new_or_view_agent_path(@job, @job.agent), class: "btn btn-sm btn-warning", type: "button"  %>
                         </section>
                         <section id="agent-information">
                             <h2>Adjuster Information</h2>
@@ -664,7 +665,7 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_adjuster_path(@job, @job.adjuster), class: "hidden-print"  %>
+                            <%= link_to "Edit", new_or_view_adjuster_path(@job, @job.adjuster), class: "btn btn-sm btn-warning", type: "button"  %>
                         </section>
 
 
@@ -720,7 +721,7 @@
                             </div>
                             <% end %>
                             <% end %>
-                            <%= link_to "Edit", new_or_view_job_manager_path(@job, @job.job_managers), class: "hidden-print"  %>
+                            <%= link_to "Edit", new_or_view_job_manager_path(@job, @job.job_managers), class: "btn btn-sm btn-warning", type: "button"  %>
 
                         </section>
 
@@ -744,7 +745,7 @@
                             </div>
                             <% end %>
                             <% end %>
-                            <%= link_to "Edit", new_or_view_job_vendor_path(@job, @job.vendor_assignments), class: "hidden-print"  %>
+                            <%= link_to "Edit", new_or_view_job_vendor_path(@job, @job.vendor_assignments), class: "btn btn-sm btn-warning", type: "button"  %>
 
                         </section>
                     </div>
