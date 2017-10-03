@@ -4,8 +4,10 @@ one:
   price: 9.99
   pricing_category_id: 1
   description: MyText
+  job: one
 
 two:
   price: 9.99
   pricing_category_id: 1
   description: MyText
+  job: pending

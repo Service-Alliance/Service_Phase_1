@@ -11,4 +11,14 @@ class JobTest < ActiveSupport::TestCase
       assert_includes jobs, @job
     end
   end
+
+  test 'Job#value totals the value for the jobs in the relation' do
+    assert_equal 19.98, Job.all.value
+    assert_equal 9.99, Job.where(job_status: job_statuses(:pending)).value
+  end
+
+  test 'Job#value only takes the latest pricing for each job' do
+    jobs(:pending).pricings.create!(price: 15)
+    assert_equal 15, Job.where(job_status: job_statuses(:pending)).value
+  end
 end

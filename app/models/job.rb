@@ -40,21 +40,27 @@ class Job < ActiveRecord::Base
   accepts_nested_attributes_for :customer
 
   delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
-  delegate :full_name, to: :customer, allow_nil: true, prefix: true
+  delegate :full_name, to: :user, allow_nil: true, prefix: true
+  delegate :full_name, :address_without_county, :first_phone_number, to: :customer, allow_nil: true, prefix: true
   delegate :name, to: :job_status, allow_nil: true, prefix: true
   delegate :name, to: :franchise, allow_nil: true, prefix: true
   delegate :full_address, to: :caller, allow_nil: true, prefix: true
+  delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
+  delegate :name, to: :insurance_company, allow_nil: true, prefix: true
+  delegate :name, to: :referral_type, allow_nil: true, prefix: true
 
   # Activity Tracking activated
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
 
-  delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
-  delegate :name, to: :insurance_company, allow_nil: true, prefix: true
-
   scope :with_manager_id, -> (user_id) { joins(:job_managers).merge(JobManager.where(:job_manager_id => user_id)) }
 
   scope :latest_first, -> {order(created_at: :desc)}
+
+  def self.with_status(status)
+    joins(:job_status)
+      .where(job_status: {name: status})
+  end
 
   def self.owned_by(user)
     where(coordinator_id: user.id)
@@ -83,14 +89,14 @@ class Job < ActiveRecord::Base
     save
   end
 
-  def self.value_of_jobs(jobs)
-    value = 0
-    jobs.each do |job|
-      if job.pricings.last && job.pricings.last.price
-        value += job.pricings.last.price
-      end
-    end
-    return value
+  def self.value
+    Pricing
+      .from(
+        Pricing
+          .where(job_id: all)
+          .latest_per_job
+      )
+      .sum('subquery.price')
   end
 
   def progress

@@ -26,24 +26,11 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     @search = Job.where.not(status_id: nil).order('fnol_received DESC').search(params[:q])
-    @jobs = @search.result.includes(:customer_address).page(params[:page]).order('fnol_received DESC')
-    @total_count = @search.result.includes(:customer_address).page(params[:page]).order('fnol_received DESC').total_count
-    @all_results = @search.result
-
-    @total_pending_count =  @search.result.where(status_id: 1).count
-    @total_pending_value = Job.value_of_jobs(@search.result.where(status_id: 1))
-    @total_active_count =  @search.result.where(status_id: 2).count
-    @total_active_value = Job.value_of_jobs(@search.result.where(status_id: 2))
-    @total_invoiced_count =  @search.result.where(status_id: 3).count
-    @total_invoiced_value = Job.value_of_jobs(@search.result.where(status_id: 3))
-    @total_dead_count =  @search.result.where(status_id: 4).count
-    @total_dead_value = Job.value_of_jobs(@search.result.where(status_id: 4))
-    @total_closed_count =  @search.result.where(status_id: 5).count
-    @total_closed_value = Job.value_of_jobs(@search.result.where(status_id: 5))
+    @jobs = JobsPresenter.new(@search.result, view_context, params[:page])
 
     respond_to do |format|
       format.html
-      format.csv { render text: @all_results.to_csv }
+      format.csv { render text: @jobs.all.to_csv }
     end
   end
 
