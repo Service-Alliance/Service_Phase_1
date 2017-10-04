@@ -13,7 +13,18 @@ class Loss < ActiveRecord::Base
 
   delegate :name, to: :loss_type, allow_nil: true, prefix: true
 
+  after_save :update_job_fnol_received
+
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
+  private
+
+  def update_job_fnol_received
+    job.update_attributes(fnol_received: fnol_received) if should_update_job_fnol_received?
+  end
+
+  def should_update_job_fnol_received?
+    job.present? && fnol_received.present?
+  end
 end
