@@ -22,7 +22,19 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "My Job Assignments", user_job_assignents_path(current_user) %></li>
+         <li>
+          <% if current_user.notifications.where(viewed: false).count > 0 %>
+            <%= link_to notifications_path  do %>
+            Notifications <span class="badge-red"><%= current_user.notifications.where(viewed: false).count %></span>
+            <% end %>
+          <% else %>
+            <%= link_to notifications_path  do %>
+            Notifications <span class="badge"><%= current_user.notifications.where(viewed: false).count %></span>
+            <% end %>
+          <% end %>
+
+        </li>
+        <li><%= link_to "My Job's", user_job_assignents_path(current_user) %></li>
         <li><%= link_to "New Job", new_job_path %></li>
         <li><%= link_to "Log Book", jobs_path %></li>
 
