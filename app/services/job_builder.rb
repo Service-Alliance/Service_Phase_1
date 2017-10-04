@@ -1,7 +1,7 @@
 class JobBuilder
   class SaveError < StandardError; end
 
-  def self.call(job_params, caller_params, address_params, phone_params, company_name, call_id, current_user_id)
+  def self.call(job_params, caller_params, address_params, phone_params, company_name, call_id, current_user_id, customer_same_as_caller)
     @job = Job.new(job_params)
     @job.entered_by_id = current_user_id
     @caller = Caller.new(caller_params)
@@ -41,6 +41,8 @@ class JobBuilder
         @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
       end
     end
+
+    Customer.same_as_caller(@job) if customer_same_as_caller
 
     @job
 

@@ -20,6 +20,7 @@ class JobsTest < Capybara::Rails::TestCase
       #choose('Internet')
       #find('#job_referral_type_id_2').click
     #end
+
     click_button 'Create Job'
     assert_content 'Job was successfully created'
 
@@ -51,6 +52,28 @@ class JobsTest < Capybara::Rails::TestCase
 
     job = Job.last
     assert_equal 'FranchiseOne', job.franchise_name
+  end
+
+  test 'customer is created when caller is same as customer' do
+    visit root_path
+    click_link 'New Job'
+    fill_in :company_name, with: 'Company Name'
+    fill_in :caller_first_name, with: 'Callerfname'
+    fill_in :caller_last_name, with: 'Callerlname'
+
+    customer_checkbox = find('#same_caller_same_indicator')
+    assert customer_checkbox.checked?, 'Customer is caller checkbox not checked by default'
+
+    customer_checkbox.set(true)
+
+    click_button 'Create Job'
+    assert_content 'Job was successfully created'
+
+    job = Job.last
+    job.customer.tap do |customer|
+      assert_equal 'Callerfname', customer.first_name
+      assert_equal 'Callerlname', customer.last_name
+    end
   end
 
 
@@ -95,6 +118,9 @@ class JobsTest < Capybara::Rails::TestCase
   end
 
   def add_customer
+    customer_checkbox = find('#same_caller_same_indicator')
+    customer_checkbox.set(false)
+
     click_button 'Customer Information'
     within '.modal-body' do
       fill_in 'First name', with: 'Customerfname'
