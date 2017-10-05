@@ -25,7 +25,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @search = Job.where.not(status_id: nil).order('fnol_received DESC').search(params[:q])
+    @search = Job.where.not(status_id: nil).search(params[:q])
     @jobs = JobsPresenter.new(@search.result, view_context, params[:page])
 
     respond_to do |format|

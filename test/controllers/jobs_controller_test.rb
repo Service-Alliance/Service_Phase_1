@@ -14,6 +14,12 @@ class JobsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test '#index filters on loss_type' do
+    loss_type = loss_types(:fire)
+    get :index, q: {losses_loss_type_id_in: [loss_type.id]}
+    assert_response :success
+  end
+
   test '#new' do
     get :new
     assert_response :success
