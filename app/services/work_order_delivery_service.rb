@@ -20,8 +20,13 @@ class WorkOrderDeliveryService
   end
 
   def send_to_scheduling_manager
+    return unless should_send_to_scheduling_manager?
     sched_manager = User.find_by(email: "kroggemann@servpro5933.com")
-    deliver_user_email(sched_manager)
+    deliver_user_email(sched_manager) if sched_manager.present?
+  end
+
+  def should_send_to_scheduling_manager?
+    !(@current_user.department_name == 'Construction' && @work_order.vendors.count > 0)
   end
 
   def send_to_loss_coordinator
