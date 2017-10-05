@@ -47,7 +47,7 @@
   </div>
   <%= f.input :number_of_crew_chiefs, wrapper_html: {class: 'col-sm-3'} %>
   <%= f.input :number_of_technicians, wrapper_html: {class: 'col-sm-3'} %>
-  <%= f.input :estimated_hours, label: 'Estimated time', collection: [['1 hour', 1], ['2 hours', 2], ['4 hours', 4], ['1 day', 8]], wrapper_html: {class: 'col-sm-3'} %>
+  <%= f.input :estimated_hours, label: 'Estimated time', collection: @work_order.hours_for_collection, wrapper_html: {class: 'col-sm-3'} %>
 
   <div class="clearfix"></div>
   <hr />

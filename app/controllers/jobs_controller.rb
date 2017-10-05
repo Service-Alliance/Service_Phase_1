@@ -82,8 +82,9 @@ class JobsController < ApplicationController
     @past_schedules = []
     @note = @job.notes.new
 
-    @work_order = WorkOrder.new
-    @work_order.initialize_from_job(@job, current_user)
+    work_order = WorkOrder.new
+    work_order.initialize_from_job(@job, current_user)
+    @work_order = WorkOrderPresenter.new(work_order, view_context)
 
     @inspection_checklist = InspectionChecklist.new
     @job.schedulers.each do |scheduler|
@@ -447,11 +448,11 @@ class JobsController < ApplicationController
                                   :first_name,
                                   :last_name,
                                   :email,
-                                  :address_1, 
-                                  :address_2, 
-                                  :zip_code, 
+                                  :address_1,
+                                  :address_2,
+                                  :zip_code,
                                   :city,
-                                  :state_id, 
+                                  :state_id,
                                   :county
                                 ],
                                 losses_attributes: [
@@ -471,7 +472,7 @@ class JobsController < ApplicationController
                                   :notes
                                 ],
                                 property_attributes: [
-                                  :structure_type_id, 
+                                  :structure_type_id,
                                   :property_type_id,
                                   :year_built,
                                   :floors_affected,

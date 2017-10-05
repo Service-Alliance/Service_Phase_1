@@ -5,6 +5,12 @@ class WorkOrderPresenter < BasePresenter
     number_of_technicians.present? || number_of_crew_chiefs.present? ? display_total_crew : crew
   end
 
+  def hours_for_collection
+    [['1 hour', 1], ['2 hours', 2], ['4 hours', 4], ['1 day', 8]]
+  end
+
+  private
+
   def display_total_crew
     [display_number_of_crew_chiefs, display_number_of_technicians].delete_if(&:blank?).join(' and ')
   end

@@ -40,11 +40,11 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user rate" do
-    patch :update, id: @user, user: { rate_attributes: { amount: 50, period: 'hourly' } }
+    patch :update, id: @user, user: { rate_attributes: { amount: 50, period: 'hour' } }
     assert_redirected_to user_path(assigns(:user))
     @user.reload
     assert_equal 50, @user.rate_amount
-    assert_equal :hourly, @user.rate_period
+    assert_equal 'hour', @user.rate_period
   end
 
   test "should destroy user" do

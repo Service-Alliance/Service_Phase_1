@@ -1,7 +1,8 @@
 class WorkOrdersController < ApplicationController
 
-  before_action :set_work_order, only: [:show, :update, :destroy, :acknowledge]
+  before_action :set_work_order, only: [:update, :destroy, :acknowledge]
   before_action :set_job, except: :list
+  before_action :set_presenter, only: [:show, :new, :edit]
 
   # GET /work_orders
   # GET /work_orders.json
@@ -91,6 +92,11 @@ class WorkOrdersController < ApplicationController
   private
   def set_work_order
     @work_order = WorkOrder.find(params[:id])
+  end
+
+  def set_presenter
+    work_order = params[:id].present? ? WorkOrder.find(params[:id]) : WorkOrder.new
+    @work_order = WorkOrderPresenter.new(work_order, view_context)
   end
 
   def set_job
