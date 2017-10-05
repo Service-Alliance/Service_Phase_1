@@ -2,16 +2,7 @@
   <div class="content-box">
     <%= simple_form_for(@user) do |f| %>
       <div class="row">
-        <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@user.errors.count, "error") %>prohibited this insurance company from being saved:</h2>
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-        <% end %>
+        <%= render partial: 'partials/model_errors', locals: {model: @user, record_name: 'user'} %>
       </div>
 
       <div class="row">
@@ -29,7 +20,7 @@
       <% if policy(@user).administer_financials? %>
         <hr />
         <h4>Rate</h4>
-        <%= f.fields_for :rate, UserRate.new do |ur| %>
+        <%= f.fields_for :rate, @user.rate do |ur| %>
           <div class="row">
             <%= ur.input :amount, wrapper_html: {class: 'col-xs-5'} %>
             <%= ur.input :period, collection: UserRate.periods.keys, wrapper_html: {class: 'col-xs-5'} %>

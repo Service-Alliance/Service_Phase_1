@@ -3,7 +3,13 @@ class UserRate < ActiveRecord::Base
 
   belongs_to :user
 
+  validates :period, :amount, presence: true, if: :period_or_amount_present?
+
   def display_with_period
-    "$#{amount} per #{period}"
+    "$#{amount} per #{period}" if amount.present?
+  end
+
+  def period_or_amount_present?
+    period.present? || amount.present?
   end
 end
