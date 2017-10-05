@@ -172,7 +172,13 @@ class UsersController < ApplicationController
         :sub_1,
         :sub_2,
         :dry_book,
-        :login_count
+        :login_count,
+        rate_attributes: [
+          :amount,
+          :period,
+          :salaried,
+          :exempt
+        ]
       )
     end
 

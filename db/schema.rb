@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930092733) do
+ActiveRecord::Schema.define(version: 20171005061615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -802,6 +802,18 @@ ActiveRecord::Schema.define(version: 20170930092733) do
 
   add_index "uploads", ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable_type_and_uploadable_id", using: :btree
 
+  create_table "user_rates", force: :cascade do |t|
+    t.integer  "user_id"
+    t.decimal  "amount"
+    t.integer  "period"
+    t.boolean  "salaried"
+    t.boolean  "exempt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_rates", ["user_id"], name: "index_user_rates_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -960,6 +972,7 @@ ActiveRecord::Schema.define(version: 20170930092733) do
 
   add_foreign_key "caller_companies", "callers"
   add_foreign_key "caller_companies", "companies"
+  add_foreign_key "user_rates", "users", on_delete: :cascade
   add_foreign_key "work_order_users", "users"
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"

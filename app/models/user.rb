@@ -13,13 +13,17 @@ class User < ActiveRecord::Base
   has_many :notifications, foreign_key: :target_id
   has_many :trackers
   has_many :phones, as: :phoneable
+  has_one :rate, class_name: 'UserRate'
 
   store_accessor :tsheets, :tsheets_id, :tsheets_first_name, :tsheets_last_name
 
   delegate :name, to: :department, allow_nil: true, prefix: true
+  delegate :display_with_period, :amount, :period, :salaried, :exempt, to: :rate, allow_nil: true, prefix: true
 
   scope :with_tsheets_id, ->(tsheets_id) { where("tsheets->>'tsheets_id'='#{tsheets_id}'") }
   scope :with_first_and_last_names, ->(first, last) { where('lower(first_name) = ? AND lower(last_name) = ?', first.try(:downcase), last.try(:downcase)) }
+
+  accepts_nested_attributes_for :rate
 
   def full_name
     "#{first_name} #{last_name}"
