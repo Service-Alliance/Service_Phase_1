@@ -8,11 +8,11 @@
         <%= f.input :last_name, wrapper_html: {class: 'col-xs-6'} %>
       </div>
       <div class="row">
-        <%= f.input :role_id, collection: Role.all.order(:name), wrapper_html: {class: 'col-xs-6'} %>
+        <%= f.input :role_id, collection: @user.all_roles, wrapper_html: {class: 'col-xs-6'} %>
         <%= f.input :notes, wrapper_html: {class: 'col-xs-6'} %>
       </div>
       <div class="row">
-        <%= f.input :department_id, collection: Department.all.order(:name), wrapper_html: {class: 'col-xs-6'} %>
+        <%= f.input :department_id, collection: @user.all_departments, wrapper_html: {class: 'col-xs-6'} %>
       </div>
 
       <% if policy(@user).administer_financials? %>
@@ -21,7 +21,7 @@
         <%= f.fields_for :rate, @user.rate do |ur| %>
           <div class="row">
             <%= ur.input :amount, wrapper_html: {class: 'col-xs-5'} %>
-            <%= ur.input :period, collection: UserRate.periods.keys, wrapper_html: {class: 'col-xs-5'} %>
+            <%= ur.input :period, collection: @user.all_rate_periods, wrapper_html: {class: 'col-xs-5'} %>
             <div class="col-xs-2">
               <%= ur.input :salaried %>
               <%= ur.input :exempt %>
