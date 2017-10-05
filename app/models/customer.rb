@@ -134,7 +134,7 @@ class Customer < ActiveRecord::Base
       "method":"createLeads",
       "params":
         {"objects":
-          [{"firstName": self.first_name,"lastName": self.last_name,"emailAddress": self.email, "companyName": self.company_name, "title": self.title, "website": self.website, "street": self.try(:address).try(:address_1), "city": self.try(:address).try(:city), "state": self.try(:address).try(:state).try(:name), "mobilePhoneNumber": self.try(:phones).where(type_id: 1).first.try(:number), "mobilePhoneNumber": self.try(:phones).where(type_id: 3).first.try(:number), "officePhoneNumber": self.try(:phones).where(type_id: 2).first.try(:number), "faxNumber": self.try(:phones).where(type_id: 4).first.try(:number)}]
+          [{"firstName": self.first_name,"lastName": self.last_name,"emailAddress": self.email, "companyName": self.company_name, "title": self.title, "website": self.website, "street": self.try(:address).try(:address_1), "city": self.try(:address).try(:city), "state": self.try(:address).try(:state).try(:name), "mobilePhoneNumber": self.try(:phones).where(type_id: 1).first.try(:number), "homePhoneNumber": self.try(:phones).where(type_id: 3).first.try(:number), "officePhoneNumber": self.try(:phones).where(type_id: 2).first.try(:number), "faxNumber": self.try(:phones).where(type_id: 4).first.try(:number)}]
         },
       "id":"1"
     }.to_json
