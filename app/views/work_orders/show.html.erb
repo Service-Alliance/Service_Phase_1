@@ -114,10 +114,19 @@
                     <%= @work_order.claim_number %>
                   </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="clearfix"></div>
+                <hr />
+                <div class="col-sm-12"><h4>Crew</h4></div>
+                <div class="col-sm-6">
                   <div class="form-group">
                     <span class="bold">Crew Size:</span><br>
                     <%= @work_order.crew %>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <span class="bold">Estimated hours</span><br>
+                    <%= @work_order.estimated_hours %>
                   </div>
                 </div>
                 <div class="col-sm-3">
@@ -126,6 +135,8 @@
                     <%= @work_order.hours_on_job %>
                   </div>
                 </div>
+                <div class="clearfix"></div>
+                <hr />
                 <div class="col-sm-12">
                   <div class="form-group">
                     <span class="bold">Required:</span><br>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005061615) do
+ActiveRecord::Schema.define(version: 20171005075238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -968,6 +968,9 @@ ActiveRecord::Schema.define(version: 20171005061615) do
     t.integer  "vendor_id"
     t.text     "hours_on_job"
     t.text     "adjuster"
+    t.integer  "number_of_technicians"
+    t.integer  "number_of_crew_chiefs"
+    t.integer  "estimated_hours"
   end
 
   add_foreign_key "caller_companies", "callers"

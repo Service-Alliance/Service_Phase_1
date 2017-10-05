@@ -1,6 +1,6 @@
 class WorkOrdersController < ApplicationController
 
-  before_action :set_work_order, only: [:show, :edit, :update, :destroy, :acknowledge]
+  before_action :set_work_order, only: [:show, :update, :destroy, :acknowledge]
   before_action :set_job, except: :list
 
   # GET /work_orders
@@ -16,13 +16,14 @@ class WorkOrdersController < ApplicationController
 
   # GET /work_orders/new
   def new
-    @work_order = WorkOrder.new
+    @work_order = WorkOrderPresenter.new(WorkOrder.new, view_context)
     job = Job.find(params[:job_id])
     @work_order.initialize_from_job(job, current_user)
   end
 
   # GET /work_orders/1/edit
   def edit
+    @work_order = WorkOrderPresenter.new(WorkOrder.find(params[:id]), view_context)
   end
 
   # POST /work_orders
@@ -97,7 +98,37 @@ class WorkOrdersController < ApplicationController
   end
 
     def work_order_params
-      params.require(:work_order).permit(:job_id, :to, :name, :date, :typed_by, :job_start, :job_name, :job_location, :telephone, :contact, :insurance, :claim_number, :crew, :approx_time_on_loss, :required, :referral, :franchise_location, :scope_of_work, :job_manager_contact_info, :acknowledgement, :acknowledged_by_id, :vendor_id, :hours_on_job, :adjuster, technician_ids: [], crew_chief_ids: [], vendor_ids: [])
+      params.require(:work_order).permit(
+        :job_id,
+        :to,
+        :name,
+        :date,
+        :typed_by,
+        :job_start,
+        :job_name,
+        :job_location,
+        :telephone,
+        :contact,
+        :insurance,
+        :claim_number,
+        :crew,
+        :approx_time_on_loss,
+        :required,
+        :referral,
+        :franchise_location,
+        :scope_of_work,
+        :job_manager_contact_info,
+        :acknowledgement,
+        :acknowledged_by_id,
+        :vendor_id,
+        :hours_on_job,
+        :adjuster,
+        :number_of_crew_chiefs,
+        :number_of_technicians,
+        :estimated_hours,
+        technician_ids: [],
+        crew_chief_ids: [],
+        vendor_ids: [])
     end
 
     def work_order_send_to_params
