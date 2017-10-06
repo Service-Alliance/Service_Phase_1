@@ -97,6 +97,24 @@ class FranchisesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def franchise_params
-    params.require(:franchise).permit(:name, :franchise_number, :legal_name, :phone, :fax, :website, :general_license, :residential_license, :commercial_license, :mold_remediation_license, uploads_attributes: [:upload_category_id, :description, { uploads: [] }], notes_attributes: [:content])
+    params.require(:franchise).permit(
+      :name,
+      :franchise_number,
+      :legal_name,
+      :phone,
+      :fax,
+      :website,
+      :general_license,
+      :residential_license,
+      :commercial_license,
+      :mold_remediation_license,
+      uploads_attributes: [
+        :upload_category_id,
+        :description,
+        uploads: []
+      ],
+      notes_attributes: [:content],
+      work_order_distribution_ids: []
+    )
   end
 end

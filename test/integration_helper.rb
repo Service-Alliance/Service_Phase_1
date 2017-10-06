@@ -3,8 +3,6 @@ require 'test_helper'
 require 'minitest/rails/capybara'
 require 'capybara/poltergeist'
 
-Dir[Rails.root.join("test/support/**/*.rb")].each { |f| require f }
-
 class Capybara::Rails::TestCase
   include SignInHelpers
 

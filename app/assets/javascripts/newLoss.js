@@ -1,21 +1,23 @@
 $(function() {
 
-  var $input = $('input[type=radio][name=loss\\[loss_type_id\\]]:checked');
-  var lossType = $('label[for=' + $input.attr('id') + ']').text();
-  updateLossInfo($input, lossType);
+  if($('.loss-cause').length !== 0) {
+
+    var $input = $('.loss-type:checked');
+    var lossType = $input.parent().text();
+    updateLossInfo($input, lossType);
 
 
-  $('input[type=radio][name=loss\\[loss_type_id\\]]').change(function() {
-    var $input = $('input[type=radio][name=loss\\[loss_type_id\\]]:checked');
-    var lossType = $('label[for=' + $input.attr('id') + ']').text();
-    updateLossInfo($input, lossType)
-  });
+    $('input.loss-type[type=radio]').change(function() {
+      var $input = $(this);
+      var lossType = $input.parent().text();
+      updateLossInfo($input, lossType)
+    });
+  }
 
 });
 
 
 function updateLossInfo(input, lossType) {
-  var $input = input;
   if (lossType === "General Cleaning") {
       $("#cleaningType").removeClass("hidden");
       $("#squareFootage").addClass("hidden");

@@ -3,6 +3,7 @@ require 'active_job'
 
 class WorkOrderDeliveryServiceTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
+  include EmailDeliveryHelper
 
   setup do
     @work_order = work_orders(:one)
@@ -12,7 +13,7 @@ class WorkOrderDeliveryServiceTest < ActiveSupport::TestCase
   test "send out a lot of emails" do
     assert_enqueued_jobs 0
     WorkOrderDeliveryService.new(@work_order, @current_user).deliver!
-    assert_enqueued_jobs 3
+    assert_enqueued_jobs 4
   end
 
   test 'delivers to the scheduling manager normally' do
@@ -27,13 +28,22 @@ class WorkOrderDeliveryServiceTest < ActiveSupport::TestCase
     assert no_mail_enqueued_for_user(users(:scheduling_manager))
   end
 
-  def mail_enqueued_for_user(user)
-    user_id = user.to_global_id.to_s
-    jobs = enqueued_jobs.select{ |j| j[:args][3]["_aj_globalid"] == user_id }
-    jobs.size > 0
+  test 'delivers to user if in work order distribution for the franchise' do
+    franchises(:one).work_order_distribution << users(:two)
+    @work_order.job.update_attributes franchise_id: franchises(:one).id
+    WorkOrderDeliveryService.new(@work_order, @current_user).deliver!
+    assert mail_enqueued_for_user(users(:two))
   end
 
-  def no_mail_enqueued_for_user(user)
-    !mail_enqueued_for_user(user)
+  test 'does not deliver to user if in work order distribution for another franchise' do
+    franchises(:one).work_order_distribution << users(:two)
+    @work_order.job.update_attributes franchise_id: franchises(:two).id
+    WorkOrderDeliveryService.new(@work_order, @current_user).deliver!
+    assert no_mail_enqueued_for_user(users(:two))
+  end
+
+  test 'does not fail if no franchise on work order' do
+    @work_order.job.update_attributes franchise_id: nil
+    WorkOrderDeliveryService.new(@work_order, @current_user).deliver!
   end
 end

@@ -1,17 +1,17 @@
 $(function() {
-    var lossCauses = $("#loss_loss_cause_id").html();
-    if ($("#loss_loss_cause_id").val() == ""){
-        $("#loss_loss_cause_id").empty();
+    var lossCauses = $(".loss-cause").html();
+    if ($(".loss-cause").val() == ""){
+        $(".loss-cause").empty();
     }
-    $('input[type=radio][name=loss\\[loss_type_id\\]]').change(function() {
+    $('input.loss-type[type=radio]').change(function() {
         var $input = $('input[type=radio][name=loss\\[loss_type_id\\]]:checked');
-        var lossType = $('label[for=' + $input.attr('id') + ']').text();
+        var lossType = $(this).parent().text();
         var escaped_lossTypes = lossType.replace(/([ #/.?*+^$[\]\\(){}|-])/g, "\\$1");
         var options = $(lossCauses).filter("optgroup[label=" + escaped_lossTypes + "]").html();
         if (options) {
-            $("#loss_loss_cause_id").html(options);
+            $(".loss-cause").html(options);
         } else {
-            $("#loss_loss_cause_id").empty();
+            $(".loss-cause").empty();
         }
     });
 });
