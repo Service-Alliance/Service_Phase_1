@@ -15,6 +15,7 @@
             <div class="panel-body">
               <ul>
                 <li>
+                  <%= link_to "Remove", job_job_coordinator_path(@job.id), method: :delete, class: 'pull-right' %>
                   <%= link_to @job.job_coordinator_full_name, @job.job_coordinator %>
                 </li>
               </ul>
@@ -319,7 +320,7 @@
           <div class="modal-body">
             <div class="field">
               <%= f.label :user_id %><br>
-              <%= f.collection_select :user_id, User.all, :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
+              <%= f.collection_select :user_id, User.order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
             </div>
 
 
@@ -345,7 +346,7 @@
           <div class="modal-body">
             <div class="field">
               <%= f.label :user_id %><br>
-              <%= f.collection_select :user_id, User.where(role_id: collection_role.id), :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
+              <%= f.collection_select :user_id, User.where(role_id: collection_role.id).order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
             </div>
 
           </div>
@@ -366,12 +367,12 @@
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Loss Coordinator Assignment</h4>
       </div>
-      <%= form_for @job, url: job_coordinator_assignment_url(@job), method: :post do |f| %>
+      <%= form_for @job, url: job_job_coordinator_path(@job), method: :post do |f| %>
           <div class="modal-body">
             <% coordinator = Role.find_by(name: "Job Coordinator") %>
             <div class="field">
               <%= f.label :coordinator_id %><br>
-              <%= f.collection_select :coordinator_id, User.where("role_id= ? OR id= ? OR id= ?", coordinator.id, 28, 60), :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
+              <%= f.collection_select :coordinator_id, User.where("role_id= ? OR id= ? OR id= ?", coordinator.id, 28, 60).order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
             </div>
 
 
@@ -401,7 +402,7 @@
             <div class="field">
               <%= label_tag :job_manager_id, "Add a Job Manager" %><br>
               <% role = Role.find_by(name: "Project Manager") %>
-              <%= select_tag 'job_manager_id', options_from_collection_for_select(User.where(role_id: role.id), "id", "full_name"), class: "form-control" %>
+              <%= select_tag 'job_manager_id', options_from_collection_for_select(User.where(role_id: role.id).order(:first_name, :last_name), "id", "full_name"), class: "form-control" %>
             </div>
           </div>
           <div class="modal-footer">
@@ -464,7 +465,7 @@
                   <div class="col-xs-6">
                     <div class="form-group">
                       <%= f.label :owner, "Sales Rep" %><br>
-                      <%= f.collection_select :owner_id, User.all, :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
+                      <%= f.collection_select :owner_id, User.all.order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
                     </div>
                   </div>
                   <%= render 'customers/address_form', f: f %>
@@ -568,7 +569,7 @@
                     <div class="col-xs-6">
                       <div class="form-group">
                         <%= label_tag :state_id %><br>
-                        <%= select_tag("address[state_id]", options_for_select(State.all.map { |p| [p.name, p.id] }, selected: @job.try(:caller).try(:address).try(:state).try(:id)), class: "form-control") %>
+                        <%= select_tag("address[state_id]", options_for_select(State.all.order(:name).map { |p| [p.name, p.id] }, selected: @job.try(:caller).try(:address).try(:state).try(:id)), class: "form-control") %>
                       </div>
                     </div>
                     <div class="col-xs-6">
@@ -606,7 +607,7 @@
           <div class="modal-body">
             <div class="field">
               <%= f.label :vendor_id %><br>
-              <%= f.collection_select :vendor_id, Vendor.all, :id, :name, { :prompt => 'Select a Vendor' }, { class: 'form-control' } %>
+              <%= f.collection_select :vendor_id, Vendor.order(:name), :id, :name, { :prompt => 'Select a Vendor' }, { class: 'form-control' } %>
             </div>
 
 

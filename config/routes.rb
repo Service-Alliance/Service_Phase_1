@@ -89,6 +89,7 @@ Rails.application.routes.draw do
     resources :job_details
     resources :job_managers
     resources :pricings
+    resource :job_coordinator, only: %i(create destroy)
     get 'job_managers/:id/acknolwedge' => 'job_managers#acknolwedge'
     get 'work_orders/:id/acknolwedge' => 'work_orders#acknowledge'
     resources :vendor_assignments
