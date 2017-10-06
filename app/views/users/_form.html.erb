@@ -18,7 +18,7 @@
       <% if policy(@user).administer_financials? %>
         <hr />
         <h4>Rate</h4>
-        <%= f.fields_for :rate, @user.rate do |ur| %>
+        <%= f.simple_fields_for :rate, @user.initialized_rate do |ur| %>
           <div class="row">
             <%= ur.input :amount, wrapper_html: {class: 'col-xs-5'} %>
             <%= ur.input :period, collection: @user.all_rate_periods, wrapper_html: {class: 'col-xs-5'} %>
