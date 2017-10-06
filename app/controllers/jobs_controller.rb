@@ -292,12 +292,6 @@ class JobsController < ApplicationController
     end
 
   end
-  def coordinator_assignment
-    @job = Job.find(params[:job_id])
-    @job.coordinator_id = job_params[:coordinator_id]
-    @job.save
-    redirect_to @job
-  end
 
   def caller_assignment
     @job = Job.find(params[:job_id])
