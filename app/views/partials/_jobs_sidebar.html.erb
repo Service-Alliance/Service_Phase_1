@@ -15,7 +15,11 @@
             <div class="panel-body">
               <ul>
                 <li>
-                  <%= link_to "Remove", job_job_coordinator_path(@job.id), method: :delete, class: 'pull-right' %>
+                  <% if policy(@job).update? %>
+                    <%= link_to job_job_coordinator_path(@job.id), method: :delete, class: 'pull-right' do %>
+                      <i class="fa fa-times delete"></i>
+                    <% end %>
+                  <% end %>
                   <%= link_to @job.job_coordinator_full_name, @job.job_coordinator %>
                 </li>
               </ul>
@@ -38,7 +42,9 @@
                 <ul>
                   <% @job.job_managers.each do |job_manager| %>
                     <li>
-                    <%= link_to "Remove", job_destroy_manager_assignment_path(@job.id, job_manager.id), method: :delete, class: 'pull-right' %>
+                    <%= link_to job_destroy_manager_assignment_path(@job.id, job_manager.id), method: :delete, class: 'pull-right' do %>
+                      <i class="fa fa-times delete"></i>
+                    <% end %>
                     <%= link_to job_manager.full_name, job_manager.job_manager %>
                     </li>
                   <% end %>
