@@ -38,6 +38,7 @@ class JobsController < ApplicationController
     @jobs = Job.where.not(status_id: nil)
       .includes(job_associations)
       .limit(100)
+    @jobs = @jobs.where(franchise_id: params[:franchise_id]) if params[:franchise_id]
     render json: @jobs.to_json(include: job_json_includes)
   end
 
