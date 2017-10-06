@@ -39,6 +39,19 @@
   <%= f.input :crew, as: :string, wrapper_html: {class: 'col-sm-3'} %>
   <%= f.input :approx_time_on_loss, wrapper_html: {class: 'col-sm-3'} unless @work_order.new_record? %>
 
+  <div class="clearfix"></div>
+  <hr />
+
+  <div class="col-xs-12">
+    <h4>Crew</h4>
+  </div>
+  <%= f.input :number_of_crew_chiefs, wrapper_html: {class: 'col-sm-3'} %>
+  <%= f.input :number_of_technicians, wrapper_html: {class: 'col-sm-3'} %>
+  <%= f.input :estimated_hours, label: 'Estimated time', collection: @work_order.hours_for_collection, wrapper_html: {class: 'col-sm-3'} %>
+
+  <div class="clearfix"></div>
+  <hr />
+
   <%= f.input :required, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :referral, as: :string, wrapper_html: {class: 'col-sm-12'} %>
   <%= f.input :franchise_location, as: :string, wrapper_html: {class: 'col-sm-12'}, disabled: true %>

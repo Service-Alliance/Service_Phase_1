@@ -812,6 +812,18 @@ ActiveRecord::Schema.define(version: 20171006011347) do
 
   add_index "uploads", ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable_type_and_uploadable_id", using: :btree
 
+  create_table "user_rates", force: :cascade do |t|
+    t.integer  "user_id"
+    t.decimal  "amount"
+    t.integer  "period"
+    t.boolean  "salaried"
+    t.boolean  "exempt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_rates", ["user_id"], name: "index_user_rates_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -966,12 +978,16 @@ ActiveRecord::Schema.define(version: 20171006011347) do
     t.integer  "vendor_id"
     t.text     "hours_on_job"
     t.text     "adjuster"
+    t.integer  "number_of_technicians"
+    t.integer  "number_of_crew_chiefs"
+    t.integer  "estimated_hours"
   end
 
   add_foreign_key "caller_companies", "callers"
   add_foreign_key "caller_companies", "companies"
   add_foreign_key "franchise_work_order_distributions", "franchises", on_delete: :cascade
   add_foreign_key "franchise_work_order_distributions", "users", on_delete: :cascade
+  add_foreign_key "user_rates", "users", on_delete: :cascade
   add_foreign_key "work_order_users", "users"
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"

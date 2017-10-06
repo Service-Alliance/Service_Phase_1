@@ -43,6 +43,12 @@
           Title:
           <%= @user.title %>
         </div>
+        <% if policy(@user).administer_financials? %>
+          <div class="item">
+            Rate:
+            <%= @user.rate_display_with_period %>
+          </div>
+        <% end %>
       </div>
 
       <div class="panel-footer">
