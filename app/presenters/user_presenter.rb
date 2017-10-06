@@ -19,6 +19,10 @@ class UserPresenter < BasePresenter
     UserRate.periods.keys
   end
 
+  def initialized_rate
+    rate || UserRate.new
+  end
+
   private
 
   def jobs
