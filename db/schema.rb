@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930092733) do
+ActiveRecord::Schema.define(version: 20171006011347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -318,6 +318,16 @@ ActiveRecord::Schema.define(version: 20170930092733) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  create_table "franchise_work_order_distributions", force: :cascade do |t|
+    t.integer  "franchise_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "franchise_work_order_distributions", ["franchise_id"], name: "index_franchise_work_order_distributions_on_franchise_id", using: :btree
+  add_index "franchise_work_order_distributions", ["user_id"], name: "index_franchise_work_order_distributions_on_user_id", using: :btree
 
   create_table "franchise_zipcodes", force: :cascade do |t|
     t.integer  "franchise_id"
@@ -960,6 +970,8 @@ ActiveRecord::Schema.define(version: 20170930092733) do
 
   add_foreign_key "caller_companies", "callers"
   add_foreign_key "caller_companies", "companies"
+  add_foreign_key "franchise_work_order_distributions", "franchises", on_delete: :cascade
+  add_foreign_key "franchise_work_order_distributions", "users", on_delete: :cascade
   add_foreign_key "work_order_users", "users"
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"

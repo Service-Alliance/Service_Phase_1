@@ -11,6 +11,7 @@ class WorkOrderDeliveryService
     send_to_job_managers
     send_to_vendors
     send_to_crew
+    send_to_franchise_distribution
   end
 
   private
@@ -53,6 +54,13 @@ class WorkOrderDeliveryService
   def send_to_crew
     @work_order.users.each do |crew|
       deliver_user_email(crew)
+    end
+  end
+
+  def send_to_franchise_distribution
+    return if @work_order.franchise.nil?
+    @work_order.franchise.work_order_distribution.each do |user|
+      deliver_user_email(user)
     end
   end
 
