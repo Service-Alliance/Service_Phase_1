@@ -77,7 +77,8 @@ class WorkOrdersController < ApplicationController
   end
 
   def list
-    @work_orders = WorkOrder.last(200)
+    @work_orders = WorkOrder.includes(:job, :vendors, job: :franchise).limit(200)
+    @work_orders = @work_orders.where(jobs: {franchise_id: params[:franchise_id]}) if params[:franchise_id]
   end
 
   def acknowledge

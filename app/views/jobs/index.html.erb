@@ -124,7 +124,7 @@
                         <% end %>
                         <td><%= job.job_coordinator_full_name %></td>
                         <td><%= job.user_full_name %></td>
-                        <td><%= job.franchise_name %></td>
+                        <td><%= link_to job.franchise_name, job.franchise if job.franchise.present? %></td>
                         <td><%= job.job_status_name %></td>
                         <td><%= job.try(:pricings).try(:last).try(:price) %></td>
                         <% if job.name && job.name != ""%>
