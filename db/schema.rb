@@ -955,6 +955,7 @@ ActiveRecord::Schema.define(version: 20171006011347) do
     t.integer  "job_id"
     t.text     "to"
     t.text     "name"
+    t.date     "date"
     t.text     "typed_by"
     t.datetime "job_start"
     t.text     "job_name"
@@ -980,7 +981,6 @@ ActiveRecord::Schema.define(version: 20171006011347) do
     t.integer  "number_of_technicians"
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
-    t.string   "date"
   end
 
   add_foreign_key "caller_companies", "callers"

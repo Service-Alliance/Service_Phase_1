@@ -52,6 +52,18 @@ class JobsTest < Capybara::Rails::TestCase
 
     job = Job.last
     assert_equal 'FranchiseOne', job.franchise_name
+
+    # We should only have one loss
+    assert_equal 1, job.losses.count
+    job.losses.first.tap do |loss|
+      assert_equal 'Loss Note', loss.notes
+      assert_equal Date.today, loss.customer_called
+    end
+
+    job.customer.tap do |customer|
+      assert_equal 'Customerfname', customer.first_name
+      assert_equal 'Customerlname', customer.last_name
+    end
   end
 
   test 'customer is created when caller is same as customer' do

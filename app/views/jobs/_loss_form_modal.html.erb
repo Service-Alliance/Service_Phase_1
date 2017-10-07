@@ -1,5 +1,5 @@
 <div id="lossModal" class="modal fade" tabindex="-1" role="dialog">
-  <%= f.simple_fields_for :losses do |fl| %>
+  <%= f.simple_fields_for :losses, [@job.losses.first] do |fl| %>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

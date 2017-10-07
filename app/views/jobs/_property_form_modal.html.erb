@@ -1,5 +1,5 @@
 <div id="propertyModal" class="modal fade" tabindex="-1" role="dialog">
-  <%= f.fields_for :property do |fp| %>
+  <%= f.fields_for :property, @job.property do |fp| %>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
