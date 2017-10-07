@@ -159,6 +159,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1.json
   def update
     # FIXME: Decrease complexity of this code -- introduce workers!
+    # as the form is now nested we can probably get rid of a lot of this, just need to make sure it's covered with tests before removing
     @previous_status = Job.find(params[:id])
     respond_to do |format|
       if @job.update(job_params)
@@ -192,11 +193,6 @@ class JobsController < ApplicationController
               @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
             end
           end
-        end
-
-
-        if same_caller_params[:same_indicator] == "1"
-          Customer.same_as_caller(@job)
         end
 
         if job_params[:job_manager_id]

@@ -1,5 +1,5 @@
 <div id="customerModal" class="modal fade" tabindex="-1" role="dialog">
-  <%= f.fields_for :customer do |fc| %>
+  <%= f.fields_for :customer, @job.customer do |fc| %>
 
   <div id="customer-form" class="modal-dialog" role="document">
     <div class="modal-content">
