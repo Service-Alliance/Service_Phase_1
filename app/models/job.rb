@@ -45,6 +45,7 @@ class Job < ActiveRecord::Base
   delegate :name, to: :job_status, allow_nil: true, prefix: true
   delegate :name, to: :franchise, allow_nil: true, prefix: true
   delegate :full_address, to: :caller, allow_nil: true, prefix: true
+  delegate :full_address, to: :customer, allow_nil: true, prefix: true
   delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
   delegate :name, to: :insurance_company, allow_nil: true, prefix: true
   delegate :name, to: :referral_type, allow_nil: true, prefix: true
