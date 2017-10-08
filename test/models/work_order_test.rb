@@ -29,11 +29,9 @@ class WorkOrderTest < ActiveSupport::TestCase
     assert_equal [vendors(:one).name], work_orders(:one).to
   end
 
-  test '#initialize_from_job' do
+  test '#build_from_job' do
     job = jobs(:one)
-    work_order = WorkOrder.new
-
-    work_order.initialize_from_job(job, users(:one))
+    work_order = WorkOrder.build_from_job(job, users(:one).full_name)
 
     assert_equal job, work_order.job
     assert_equal users(:one).full_name, work_order.typed_by
