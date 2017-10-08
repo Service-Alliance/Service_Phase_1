@@ -29,6 +29,24 @@ class WorkOrderTest < ActiveSupport::TestCase
     assert_equal [vendors(:one).name], work_orders(:one).to
   end
 
+  test '#initialize_from_job' do
+    job = jobs(:one)
+    work_order = WorkOrder.new
+
+    work_order.initialize_from_job(job, users(:one))
+
+    assert_equal job, work_order.job
+    assert_equal users(:one).full_name, work_order.typed_by
+    assert_nil work_order.name
+    assert_equal job.name, work_order.job_name
+    assert_nil work_order.telephone
+    assert_equal job.customer_full_name, work_order.contact
+    assert_nil work_order.insurance
+    assert_nil work_order.adjuster
+    refute_nil work_order.claim_number
+    assert_nil work_order.referral
+  end
+
   test 'to returns SERVPRO plus all vendors if more than one vendor' do
     work_orders(:one).vendors << vendors(:one)
     work_orders(:one).vendors << vendors(:two)
