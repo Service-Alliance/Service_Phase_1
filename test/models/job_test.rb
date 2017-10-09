@@ -5,6 +5,10 @@ class JobTest < ActiveSupport::TestCase
     @job = jobs(:one)
   end
 
+  test "#customer_full_address" do
+    assert_equal "MyString MyString MyString 1 MyString", @job.customer_full_address
+  end
+
   test "Job#with_manager_id" do
     Job.with_manager_id(@job.job_managers.first.job_manager_id).tap do |jobs|
       assert_equal 1, jobs.count

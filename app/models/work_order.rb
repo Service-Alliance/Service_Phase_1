@@ -45,16 +45,19 @@ class WorkOrder < ActiveRecord::Base
     crew_chiefs.map(&:full_name)
   end
 
-  def initialize_from_job(job, typed_by)
-    self.job = job
-    self.typed_by = typed_by.full_name
-    self.name = job.try(:job_coordinator).try(:full_name)
-    self.job_name = job.name
-    self.telephone = job.try(:customer).try(:phones).try(:number)
-    self.contact = job.try(:customer).try(:full_name)
-    self.insurance = job.try(:job_detail).try(:insurance_company).try(:name)
-    self.adjuster = job.try(:adjuster).try(:full_name)
-    self.claim_number = job.try(:job_detail).try(:claim_number)
-    self.referral = job.try(:referral_type).try(:name)
+  def self.build_from_job(job, typed_by_full_name = nil)
+    new(
+      job: job,
+      typed_by: typed_by_full_name,
+      name: job.try(:job_coordinator).try(:full_name),
+      job_name: job.name,
+      job_location: job.customer_full_address,
+      telephone: job.try(:customer).try(:phones).try(:number),
+      contact: job.try(:customer).try(:full_name),
+      insurance: job.try(:job_detail).try(:insurance_company).try(:name),
+      adjuster: job.try(:adjuster).try(:full_name),
+      claim_number: job.try(:job_detail).try(:claim_number),
+      referral: job.try(:referral_type).try(:name)
+    )
   end
 end
