@@ -1,7 +1,7 @@
 class JobBuilder
   class SaveError < StandardError; end
 
-  def self.call(job_params, caller_params, address_params, phone_params, company_name, call_id, current_user_id, customer_same_as_caller)
+  def self.call(job_params, caller_params, address_params, phone_params, company_name, call_id, current_user_id)
     @job = Job.new(job_params)
     @job.entered_by_id = current_user_id
     @caller = Caller.new(caller_params)
@@ -13,28 +13,28 @@ class JobBuilder
     @job.franchise_id = franchise.id if franchise
     @job.pipeline_status_id = 1
 
-    raise SaveError unless @caller.save
-    @address.save
-    raise SaveError unless @job.save
+    raise SaveError unless @caller.save!
+    @address.save!
+    raise SaveError unless @job.save!
 
     if company_name.present?
       @company = Company.find_or_create_by(name: company_name) if company_name.present?
       @company.address = @address if @company.address.blank?
-      @company.save
+      @company.save!
     end
 
     if @call
       @call.job_id = @job.id
-      @call.save
+      @call.save!
     end
     @caller.job_id = @job.id
     @caller.address_id = @address.id
     @caller.add_company(@company)
-    @caller.save
+    @caller.save!
     @job.update_last_action
 
     @caller.phones.destroy_all
-    phone_count = phone_params['type_ids'].count
+    phone_count = phone_params.fetch('type_ids', []).count
 
     phone_count.times do |index|
       unless phone_params['numbers'][index] == ''
@@ -42,9 +42,6 @@ class JobBuilder
       end
     end
 
-    Customer.same_as_caller(@job) if customer_same_as_caller
-
     @job
-
   end
 end
