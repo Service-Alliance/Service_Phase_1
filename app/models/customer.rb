@@ -92,12 +92,14 @@ class Customer < ActiveRecord::Base
     phones.first.try(:number)
   end
 
+  # FIXME: this should be move to Job model
   def self.same_as_caller(job)
     @job = Job.find_by(id: job)
     @caller = Caller.find_by(job_id: @job.id)
 
     # check if old customer exists
     if @job.customer_id
+      # FIXME: it's not a good idea to destroy object from database. Maybe just inactive?
       Customer.find_by(id: @job.customer_id).destroy
     end
 
