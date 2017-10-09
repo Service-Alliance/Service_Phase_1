@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   resources :notify_types
   resources :notifications
   devise_for :admin_users, ActiveAdmin::Devise.config
-  resources :pipeline_statuses
   resources :upload_categories
   resources :franchise_users
   resources :franchises
