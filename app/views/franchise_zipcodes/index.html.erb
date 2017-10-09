@@ -15,7 +15,7 @@
     <% @franchise_zipcodes.each do |franchise_zipcode| %>
       <tr>
         <td><%= franchise_zipcode.franchise_id %></td>
-        <td><%= franchise_zipcode.zipcode %></td>
+        <td><%= franchise_zipcode.zip_code %></td>
         <td><%= link_to 'Show', franchise_zipcode %></td>
         <td><%= link_to 'Edit', edit_franchise_zipcode_path(franchise_zipcode) %></td>
         <td><%= link_to 'Destroy', franchise_zipcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
