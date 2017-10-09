@@ -7,24 +7,24 @@ class WorkOrder < ActiveRecord::Base
 
   has_many :work_order_users
   has_many :users, through: :work_order_users
-  has_many :technicians, -> {with_role('Technician')}, through: :work_order_users, class_name: 'User', source: :user
-  has_many :crew_chiefs, -> {with_role('Crew Chief')}, through: :work_order_users, class_name: 'User', source: :user
+  has_many :technicians, -> { with_role('Technician') }, through: :work_order_users, class_name: 'User', source: :user
+  has_many :crew_chiefs, -> { with_role('Crew Chief') }, through: :work_order_users, class_name: 'User', source: :user
 
   delegate :customer, :franchise, :job_managers, to: :job, allow_nil: true
-
   delegate :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
-
   delegate :company_name, :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
-
   delegate :name, :full_address, :address_without_county, to: :franchise, allow_nil: true, prefix: true
 
-  alias_method :job_location, :customer_full_address
   alias_method :franchise_location, :franchise_name
 
-  scope :date_ordered, -> {order(:date)}
+  scope :date_ordered, -> { order(:date) }
+
+  def location
+    job_location || customer_full_address
+  end
 
   def job_manager_contact_info
-    job_managers.present? ? job_managers.map{|manager| manager.full_name} : ''
+    job_managers.present? ? job_managers.map { |manager| manager.full_name } : ''
   end
 
   def to
