@@ -3,7 +3,6 @@
 DEFAULTS: &DEFAULTS
   to: MyText
   name: MyText
-  date: 2017-03-08
   typed_by: MyText
   job_start: 2017-03-08 08:56:46
   job_name:
