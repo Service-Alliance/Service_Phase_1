@@ -1,7 +1,7 @@
-require_relative '../../lib/service_object'
+require_relative '../../lib/single_call_object'
 
 class FranchiseZipcodeBuilder
-  include Servpro::ServiceObject
+  include Servpro::SingleCallObject
 
   def call(params)
     object = FranchiseZipcode.new(params)

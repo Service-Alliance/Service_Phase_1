@@ -1,5 +1,5 @@
 module Servpro
-  module ServiceObject
+  module SingleCallObject
     extend ActiveSupport::Concern
 
     included do
