@@ -1,6 +1,6 @@
 require_relative '../../lib/single_call_object'
 
-class FranchiseZipcodeBuilder
+class FranchiseZipcodeForm
   include Servpro::SingleCallObject
 
   def call(params)

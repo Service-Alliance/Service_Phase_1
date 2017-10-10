@@ -15,6 +15,8 @@ Minitest::Reporters.use!(
   ENV
 )
 
+Geocoder.configure(:lookup => :test)
+
 
 VCR.configure do |c|
   c.cassette_library_dir = 'test/cassettes'

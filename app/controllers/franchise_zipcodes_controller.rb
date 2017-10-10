@@ -24,7 +24,7 @@ class FranchiseZipcodesController < ApplicationController
   # POST /franchise_zipcodes
   # POST /franchise_zipcodes.json
   def create
-    @franchise_zipcode = FranchiseZipcodeBuilder.call(franchise_zipcode_params)
+    @franchise_zipcode = FranchiseZipcodeForm.call(franchise_zipcode_params)
 
     respond_to do |format|
       if @franchise_zipcode.save
