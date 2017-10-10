@@ -2,11 +2,15 @@
 
 <h1>Listing Franchise Zipcodes</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Franchise</th>
+      <th>Franchise ID</th>
+      <th>Franchise name</th>
       <th>Zipcode</th>
+      <th>City</th>
+      <th>County</th>
+      <th>Assigned</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,8 +19,11 @@
     <% @franchise_zipcodes.each do |franchise_zipcode| %>
       <tr>
         <td><%= franchise_zipcode.franchise_id %></td>
+        <td><%= franchise_zipcode.franchise.name %></td>
         <td><%= franchise_zipcode.zip_code %></td>
-        <td><%= link_to 'Show', franchise_zipcode %></td>
+        <td><%= franchise_zipcode.city %></td>
+        <td><%= franchise_zipcode.county %></td>
+        <td><%= franchise_zipcode.assigned %> </td>
         <td><%= link_to 'Edit', edit_franchise_zipcode_path(franchise_zipcode) %></td>
         <td><%= link_to 'Destroy', franchise_zipcode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
