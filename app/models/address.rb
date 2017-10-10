@@ -1,5 +1,9 @@
+require_relative '../../lib/zipcode'
+
 class Address < ActiveRecord::Base
   belongs_to :state
+
+  validates_format_of :zip_code, with: Servpro::Zipcode.regexp, message: "Zip should be 5 digits", if: -> { zip_code.present? }
 
   delegate :name, to: :state, allow_nil: true, prefix: true
 
