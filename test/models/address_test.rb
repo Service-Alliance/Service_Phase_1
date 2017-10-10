@@ -1,6 +1,23 @@
 require 'test_helper'
 
 class AddressTest < ActiveSupport::TestCase
+
+  test 'valid zipcode could be saved' do
+    ['12345-6789', '12345 6789', '12345', nil].each do |valid_zip|
+      address = Address.new(zip_code: valid_zip)
+      assert address.valid?, "#{valid_zip} - should be valid"
+    end
+  end
+
+  test "validation for zip_code field" do
+    ['1234', '123456'].each do |incorrect_zip|
+      address = Address.new(zip_code: incorrect_zip)
+
+      refute address.valid?, "#{incorrect_zip} - should be not valid"
+      assert_equal ['Zip should be 5 digits'], address.errors[:zip_code]
+    end
+  end
+
   test "full_address returns all fields in the address as a string" do
     address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City', state: State.new(name: 'State'), zip_code: 'Zip', county: 'County')
     assert_equal('Line1 Line2 City State Zip County', address.full_address)
