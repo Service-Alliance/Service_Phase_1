@@ -332,11 +332,11 @@ ActiveRecord::Schema.define(version: 20171011201930) do
   create_table "franchise_zipcodes", force: :cascade do |t|
     t.integer  "franchise_id"
     t.string   "zip_code"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "city"
     t.string   "county"
-    t.boolean  "assigned",     null: false
+    t.boolean  "assigned",     default: true, null: false
   end
 
   create_table "franchises", force: :cascade do |t|
