@@ -163,8 +163,8 @@ class JobsController < ApplicationController
     @previous_status = Job.find(params[:id])
     respond_to do |format|
       if @job.update(job_params)
-        @job.update_last_action
-
+        @job.franchise_id = FranchiseZipcode.detect_franchise(address_params['zip_code'])
+        @job.update(job_params)
         @job.referral_employee_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
         @job.referral_vendor_id = nil if @job.try(:referral_type).try(:name) != 'Vendor'
         @job.save
