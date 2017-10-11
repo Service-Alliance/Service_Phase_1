@@ -4,7 +4,7 @@ class FranchiseZipcodesController < ApplicationController
   # GET /franchise_zipcodes
   # GET /franchise_zipcodes.json
   def index
-    @franchise_zipcodes = FranchiseZipcode.all
+    @franchise_zipcodes = FranchiseZipcode.includes(:franchise).all
   end
 
   # GET /franchise_zipcodes/1
