@@ -949,7 +949,6 @@ ActiveRecord::Schema.define(version: 20171009190645) do
     t.integer  "job_id"
     t.text     "to"
     t.text     "name"
-    t.date     "date"
     t.text     "typed_by"
     t.datetime "job_start"
     t.text     "job_name"

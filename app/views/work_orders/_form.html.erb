@@ -12,52 +12,52 @@
     <hr/>
   <% end %>
   <div class="col-xs-12">
-    <h2>SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
-    <h2><%= @job.try(:franchise).try(:phone) %></h2>
+    <h1 class=text-center> SERVPRO of <%= @job.try(:franchise).try(:name) %> Work Order</h2>
+    <h2 class=text-center><%= @job.try(:franchise).try(:phone) %></h2>
+  <div class="clearfix"></div>
+  <hr />
+  <div class="col-xs-12">
+  <%= f.input :referral, as: :string, label: 'Referral Source', wrapper_html: {class: 'col-sm-4'} %>
+  <%= f.input :typed_by, as: :string, label:'Typed By:', wrapper_html: {class: 'col-sm-4'} %>
+  <%= f.input :name, as: :string, label: 'Loss Coordinator', wrapper_html: {class: 'col-sm-4'} %>
+
+
+  <%= f.input :job_name, label: 'Job Chart Name', as: :string, wrapper_html: {class: 'col-sm-4'} %>
+  <%= f.input :contact, label: 'Job Contact', as: :string, wrapper_html: {class: 'col-sm-4'} %>
+  <%= f.input :telephone, as: :string,label: 'Job Contact Phone #', wrapper_html: {class: 'col-sm-4'}, placeholder: "( ___ ) ___ - ____"%>
+  <%= f.input :required, wrapper_html: {class: 'col-sm-12'}, label: 'Required', placeholder: "Examples: Customer requests notification 20 minutes prior to Arrival, Bring Extra-Long Ladder..." %>
+  <%= f.input :scope_of_work, wrapper_html: {class: 'col-sm-12'}, placeholder: "What work needs to be done?" %>
+  <%= f.input :job_location, label: 'Job Location', as: :string, wrapper_html: {class: 'col-sm-12'}, disabled: true %>
+  <%= f.input :job_start, label: 'Job Start Time (Estimate)', as: :datetime, ampm: true, wrapper_html: {class: 'col-sm-12'} %>
+  </div>
+
+  <div class="col-xs-12">
+  <%= f.input :crew, as: :string, wrapper_html: {class: 'col-sm-3'}, placeholder: "Internal / External" %>
+  <%= f.input :number_of_crew_chiefs, label: '# Crew Chiefs', wrapper_html: {class: 'col-sm-2'}, placeholder: "1"%>
+  <%= f.input :number_of_technicians, label:'# Technicians', wrapper_html: {class: 'col-sm-2'}, placeholder: "1" %>
+  <%= f.input :estimated_hours, label: 'Estimated Labor Time', collection: @work_order.hours_for_collection, wrapper_html: {class: 'col-sm-6'}, selected: 2  %>
+
+    <div class="clearfix"></div>
+    <hr />
   </div>
   <div class="clearfix">
-    <%= f.input :crew_chief_ids, collection: User.with_role('Crew Chief'), label_method: :full_name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-6'}, label: 'Crew Chief(s)' %>
-    <%= f.input :technician_ids, collection: User.with_role('Technician'), label_method: :full_name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-6'}, label: 'Technician(s)' %>
+  <%= f.input :crew_chief_ids, collection: User.with_role('Crew Chief'), label_method: :full_name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-6'}, label: 'Crew Chief(s)', hint: "Will Receive Email"  %>
+  <%= f.input :technician_ids, collection: User.with_role('Technician'), label_method: :full_name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-6'}, label: 'Technician(s)', hint: "Will Receive Email" %>
   </div>
-  <%= f.input :vendor_ids, collection: Vendor.order(:name), label_method: :name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-12'}, label: 'Vendors' %>
+  <%= f.input :vendor_ids, collection: Vendor.order(:name), label_method: :name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-12'}, label: 'Vendors/Sub-Contractor', hint: "Will Receive Email" %>
 
-  <%= f.input :typed_by, as: :string, wrapper_html: {class: 'col-sm-4'} %>
-  <%= f.input :name, as: :string, wrapper_html: {class: 'col-sm-4'}, label: 'Loss Coordinator' %>
-  <%= f.input :date, as: :string, input_html: {class: 'datePicker'}, wrapper_html: {class: 'col-sm-4'} %>
+
   <div class="col-xs-12">
     <hr/>
   </div>
-  <h2 class="text-center">Work Order</h2>
-  <%= f.input :job_start, as: :datetime, ampm: true, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :job_name, as: :string, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :job_location, as: :string, wrapper_html: {class: 'col-sm-12'}, disabled: true %>
-  <%= f.input :telephone, as: :string, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :contact, as: :string, wrapper_html: {class: 'col-sm-12'} %>
-
-  <%= f.input :insurance, as: :string, wrapper_html: {class: 'col-sm-3'} %>
-  <%= f.input :claim_number, as: :string, wrapper_html: {class: 'col-sm-3'} %>
-  <%= f.input :crew, as: :string, wrapper_html: {class: 'col-sm-3'} %>
+    <%= f.input :job_manager_contact_info, as: :string, wrapper_html: {class: 'col-sm-12'}, disabled: true %>
+  <%= f.input :insurance, as: :string, label: 'Insurance Company',wrapper_html: {class: 'col-sm-4'} %>
+  <%= f.input :claim_number, as: :string, label: 'Claim Number', wrapper_html: {class: 'col-sm-4'} %>
+  <%= f.input :franchise_location, as: :string, wrapper_html: {class: 'col-sm-4'}, label: 'Franchise Assigned', disabled: false %>
   <%= f.input :approx_time_on_loss, wrapper_html: {class: 'col-sm-3'} unless @work_order.new_record? %>
 
-  <div class="clearfix"></div>
-  <hr />
 
-  <div class="col-xs-12">
-    <h4>Crew</h4>
-  </div>
-  <%= f.input :number_of_crew_chiefs, wrapper_html: {class: 'col-sm-3'} %>
-  <%= f.input :number_of_technicians, wrapper_html: {class: 'col-sm-3'} %>
-  <%= f.input :estimated_hours, label: 'Estimated time', collection: @work_order.hours_for_collection, wrapper_html: {class: 'col-sm-3'} %>
-
-  <div class="clearfix"></div>
-  <hr />
-
-  <%= f.input :required, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :referral, as: :string, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :franchise_location, as: :string, wrapper_html: {class: 'col-sm-12'}, disabled: true %>
-  <%= f.input :scope_of_work, wrapper_html: {class: 'col-sm-12'} %>
-  <%= f.input :job_manager_contact_info, as: :string, wrapper_html: {class: 'col-sm-12'}, disabled: true %>
   <div class="actions col-sm-12">
-      <%= f.submit class: "btn btn-primary" %>
+      <%= f.submit class: "btn btn-success" %>
   </div>
 <% end %>

@@ -15,7 +15,17 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-right">
-
+           <li>
+            <% if current_user.notifications.where(viewed: false).count > 0 %>
+              <%= link_to notifications_path  do %>
+              Notifications <span class="badge-red"><%= current_user.notifications.where(viewed: false).count %></span>
+              <% end %>
+            <% else %>
+              <%= link_to notifications_path  do %>
+              Notifications <span class="badge"><%= current_user.notifications.where(viewed: false).count %></span>
+              <% end %>
+            <% end %>
+          </li>
         <% if user_signed_in? %>
           <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
         <% else %>

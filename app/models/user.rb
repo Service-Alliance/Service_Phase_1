@@ -36,10 +36,6 @@ class User < ActiveRecord::Base
   def admin?
     self.role_id == 1 ? true : false
   end
-
-  def owner?
-    self.try(:role).try(:name) == 'Owner' ? true : false
-  end
   def job_coordinator?
     self.role_id == 2 ? true : false
   end
@@ -52,14 +48,17 @@ class User < ActiveRecord::Base
   def contractor?
     self.role_id == 5 ? true : false
   end
-  def technician?
-    self.try(:role).try(:name) == 'Technician' ? true : false
-  end
   def crew_chief?
-    self.try(:role).try(:name) == 'Crew Chief' ? true : false
+    self.role_id == 6 ? true : false
+  end
+  def technician?
+    self.role_id == 7 ? true : false
+  end
+  def owner?
+    self.role_id == 8 ? true : false
   end
   def collections?
-    self.try(:role).try(:name) == 'Collections Department' ? true : false
+    self.role_id == 9 ? true : false
   end
   def unassigned?
     self.role_id == 0 || self.role_id == nil  ? true : false
