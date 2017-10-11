@@ -16,7 +16,7 @@ class SendgridListenerTest < ActiveSupport::TestCase
   test 'if WorkOrder is missing' do
     event = event_stores(:sendgrid)
 
-    assert_difference 'Honeybadger::Backend::Test.notifications.count' do
+    assert_difference 'Honeybadger::Backend::Test.notifications.count', 0 do
       SendgridListener.call(event.data)
     end
   end
