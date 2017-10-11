@@ -10,6 +10,5 @@ class FranchiseZipcodeAssignedMakeNotNull < ActiveRecord::Migration
 
   def down
     change_column :franchise_zipcodes, :assigned, :boolean
-
   end
 end
