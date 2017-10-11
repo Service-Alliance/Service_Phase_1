@@ -306,7 +306,6 @@ class JobsController < ApplicationController
 
     unless @job.job_managers.pluck(:job_manager_id).include?(@user.id)
       @job_manager = @job.job_managers.create(job_manager_id: @user.id)
-      @job.update_last_action
       @job.pipeline_status_id = 2
       @job.save
 

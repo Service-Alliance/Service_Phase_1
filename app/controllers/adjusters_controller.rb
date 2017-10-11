@@ -37,7 +37,6 @@ class AdjustersController < ApplicationController
     @job = Job.find_by(id: job_params[:job_id])
     if same_adjuster_params[:adjuster_id] != ''
       @job.adjuster_id = same_adjuster_params[:adjuster_id]
-      @job.update_last_action
       @job.save
       return redirect_to job_path(@job), notice: 'Adjuster was successfully assigned.'
     else
@@ -87,7 +86,6 @@ class AdjustersController < ApplicationController
             @adjuster.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
           end
         end
-        @job.update_last_action
 
         format.html { redirect_to adjuster_path(@adjuster, job_id: @job.id), notice: 'Adjuster was successfully updated.' }
         format.json { render :show, status: :ok, location: @adjuster }

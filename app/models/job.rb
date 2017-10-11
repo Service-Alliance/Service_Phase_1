@@ -84,11 +84,6 @@ class Job < ActiveRecord::Base
     job_managers.map(&:full_name)
   end
 
-  def update_last_action
-    self.last_action = Date.today
-    save
-  end
-
   def self.value
     Pricing
       .from(

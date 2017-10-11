@@ -90,7 +90,6 @@ class CustomersController < ApplicationController
     respond_to do |format|
       if job_param[:job_id]
         @job = Job.find_by(id: job_param[:job_id])
-        # @job.update_last_action
       end
 
       unless customer_exists_params['customer_id'] == "0" || customer_exists_params.empty?
