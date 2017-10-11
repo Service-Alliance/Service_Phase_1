@@ -41,8 +41,8 @@
     <hr />
   </div>
   <div class="clearfix">
-  <%= f.input :crew_chief_ids, collection: User.with_role('Crew Chief'), label_method: :full_name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-6'}, label: 'Crew Chief(s)', hint: "Will Receirve Email"  %>
-  <%= f.input :technician_ids, collection: User.with_role('Technician'), label_method: :full_name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-6'}, label: 'Technician(s)', hint: "Will Receirve Email" %>
+  <%= f.input :crew_chief_ids, collection: User.with_role('Crew Chief'), label_method: :full_name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-6'}, label: 'Crew Chief(s)', hint: "Will Receive Email"  %>
+  <%= f.input :technician_ids, collection: User.with_role('Technician'), label_method: :full_name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-6'}, label: 'Technician(s)', hint: "Will Receive Email" %>
   </div>
   <%= f.input :vendor_ids, collection: Vendor.order(:name), label_method: :name, input_html: {multiple: true, class: 'select-control form-control', style: 'width: 100%'}, wrapper_html: {class: 'col-sm-12'}, label: 'Vendors/Sub-Contractor', hint: "Will Receive Email" %>
 
@@ -58,6 +58,6 @@
 
 
   <div class="actions col-sm-12">
-      <%= f.submit class: "btn btn-primary" %>
+      <%= f.submit class: "btn btn-success" %>
   </div>
 <% end %>
