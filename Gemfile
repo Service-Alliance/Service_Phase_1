@@ -58,8 +58,6 @@ gem 'font-awesome-rails'
 gem 'mail-x_smtpapi'
 # Sendgrid integration to webhooks
 gem 'gridhook'
-# Wrapper for pg_notify, sprinkling Event Sourcing on top of the project!
-gem 'tusk'
 
 # Use Unicorn as the app server
 gem 'unicorn'
