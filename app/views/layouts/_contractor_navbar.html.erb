@@ -25,7 +25,7 @@
               Notifications <span class="badge"><%= current_user.notifications.where(viewed: false).count %></span>
               <% end %>
             <% end %>
-                </li>
+          </li>
         <% if user_signed_in? %>
           <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
         <% else %>
