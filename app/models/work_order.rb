@@ -17,7 +17,7 @@ class WorkOrder < ActiveRecord::Base
 
   alias_method :franchise_location, :franchise_name
 
-  scope :date_ordered, -> { order(:date) }
+  scope :date_ordered, -> { order(:updated_at) }
 
   def location
     job_location || customer_full_address
