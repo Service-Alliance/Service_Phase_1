@@ -3,6 +3,10 @@ require 'test_helper'
 class EventStoreTest < ActiveSupport::TestCase
   DATA_FIELD = { "test" => "test" }.freeze
 
+  test "#channel" do
+    assert_equal 'event_stores', EventStore.channel
+  end
+
   test 'should be possible to create a record' do
     assert_equal true, EventStore.new(event_type: 'yeah', data: DATA_FIELD).valid?
   end
