@@ -10,7 +10,6 @@ class SendgridListener
         order.events << event_builder(data)
         order.save!
       rescue ActiveRecord::RecordNotFound => e
-        binding.pry
         Honeybadger.notify(e, context: data)
       end
     end

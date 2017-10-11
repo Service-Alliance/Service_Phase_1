@@ -54,7 +54,7 @@ gem 'font-awesome-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Set's proper headers for Sendgrid\
+# Set's proper headers for Sendgrid
 gem 'mail-x_smtpapi'
 # Sendgrid integration to webhooks
 gem 'gridhook'
