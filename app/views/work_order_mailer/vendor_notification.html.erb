@@ -9,11 +9,11 @@
     <p>
       To: <%= @to %><br />
       Name: <%= @work_order.name %><br />
-      Date: <%= @work_order.date %><br />
+      Date: <%= @work_order.updated_at.try(:strftime, "%a, %D %I:%M %p") %><br />
       Typed By: <%= @work_order.typed_by %><br />
       Job Start: <%= @work_order.job_start %><br />
       Job Name: <%= @work_order.job_name %><br />
-      Job Location: <%= @work_order.job_location %><br />
+      Job Location: <%= @work_order.location %><br />
       Telephone: <%= @work_order.telephone %><br />
       Contact: <%= @work_order.contact %><br />
       Crew: <%= @work_order.crew %><br />

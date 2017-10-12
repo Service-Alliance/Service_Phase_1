@@ -8,12 +8,15 @@ require 'rails/test_help'
 require "minitest/autorun"
 require "minitest/reporters"
 
+
 Dir[Rails.root.join("test/support/**/*.rb")].each { |f| require f }
 
 Minitest::Reporters.use!(
   Minitest::Reporters::SpecReporter.new,
   ENV
 )
+
+Geocoder.configure(:lookup => :test)
 
 
 VCR.configure do |c|

@@ -91,9 +91,7 @@ class JobsController < ApplicationController
     @past_schedules = []
     @note = @job.notes.new
 
-    work_order = WorkOrder.new
-    work_order.initialize_from_job(@job, current_user)
-    @work_order = WorkOrderPresenter.new(work_order, view_context)
+    @work_order = WorkOrderPresenter.new(WorkOrder.build_from_job(@job, current_user.full_name), view_context)
 
     @inspection_checklist = InspectionChecklist.new
     @job.schedulers.each do |scheduler|
@@ -146,9 +144,10 @@ class JobsController < ApplicationController
       phone_params,
       company_params[:name],
       call_params[:id],
-      current_user.id,
-      same_caller_params[:same_indicator] == "1"
+      current_user.id
     )
+
+    Customer.same_as_caller(job) if same_caller_params[:same_indicator] == "1"
 
     if params[:commit] == 'Save and Move to Job Loss'
       redirect_to new_job_loss_path(job), notice: 'Job was successfully created.'
@@ -167,6 +166,7 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1.json
   def update
     # FIXME: Decrease complexity of this code -- introduce workers!
+    # as the form is now nested we can probably get rid of a lot of this, just need to make sure it's covered with tests before removing
     @previous_status = Job.find(params[:id])
     respond_to do |format|
       if @job.update(job_params)
@@ -200,11 +200,6 @@ class JobsController < ApplicationController
               @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
             end
           end
-        end
-
-
-        if same_caller_params[:same_indicator] == "1"
-          Customer.same_as_caller(@job)
         end
 
         if job_params[:job_manager_id]

@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  franchise_id: 1
-  zip_code: 1
+  franchise: one
+  zip_code: '00011'
 
 two:
-  franchise_id: 1
-  zip_code: 1
+  franchise: two
+  zip_code: '00012'

@@ -6,6 +6,11 @@ class WorkOrdersControllerTest < ActionController::TestCase
     sign_in(users(:one))
   end
 
+  test '#new' do
+    get :new, job_id: @work_order.job.id
+    assert_response :success
+  end
+
   test '#show' do
     get :show, id: @work_order.id, job_id: @work_order.job.id
     assert_response :success

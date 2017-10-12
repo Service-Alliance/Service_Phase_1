@@ -1,17 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+DEFAULTS: &DEFAULTS
+  address_1: MyString
+  address_2: MyString
+  zip_code: 12345
+  address_type_id: 1
 
 one:
-  address_1: MyString
-  address_2: MyString
-  zip_code: 1
   city: MyString
   county: MyString
-  address_type_id: 1
+  <<: *DEFAULTS
 
 california:
-  address_1: MyString
-  address_2: MyString
-  zip_code: 1
   city: Los Angeles
   county: California
-  address_type_id: 1
+  <<: *DEFAULTS

@@ -7,27 +7,29 @@
         </div>
         <div class="col-xs-12 margin-botton-3">
           <h3>On call assignments</h3>
-          <%= Date.today %>: <br / >
+          <%= Date.today %>: <br/>
           <% Oncall.where(scheduled_on: Date.today).each do |oncall| %>
 
-          <% user = User.find_by(id: oncall.user_id) %>
-          <% if user && user.full_name %>
-          Name: <%= link_to user.full_name, user_path(user.id) %><br / />
-          Number(s): <% user.phones.each do |phone| %>
-          <%= phone.number %> <br />
-          <% end %>
-          <% end %>
-          <% end %><br /><br />
+              <% user = User.find_by(id: oncall.user_id) %>
+              <% if user && user.full_name %>
+                  Name: <%= link_to user.full_name, user_path(user.id) %><br/>
+                  Number(s):
+                  <% user.phones.each do |phone| %>
+                      <%= phone.number %> <br/>
+                  <% end %>
+              <% end %>
+          <% end %><br/><br/>
 
-          <%= Date.tomorrow %>: <br / />
+          <%= Date.tomorrow %>: <br/>
           <% Oncall.where(scheduled_on: Date.tomorrow).each do |oncall| %>
-          <% user = User.find_by(id: oncall.user_id) %>
-          <% if user && user.full_name %>
-          Name: <%= link_to user.full_name, user_path(user.id) %><br / />
-          Number(s): <% user.phones.each do |phone| %>
-          <%= phone.number %><br  />
-          <% end %>
-          <% end %>
+              <% user = User.find_by(id: oncall.user_id) %>
+              <% if user && user.full_name %>
+                  Name: <%= link_to user.full_name, user_path(user.id) %><br/>
+                  Number(s):
+                  <% user.phones.each do |phone| %>
+                      <%= phone.number %><br/>
+                  <% end %>
+              <% end %>
           <% end %>
         </div>
 
@@ -40,39 +42,39 @@
 
 
 <script>
-  $(document).ready(function () {
-    $('input[type=radio]').change(function () {
-      if (this.value == '3') {
-        $('#billingForm').find('input').val('');
-        $("#billingForm").removeClass('hidden')
-      } else if (this.value == '1' || this.value == '2') {
-        $("#billingForm").addClass('hidden')
-        $('#billingForm').find('input').val('');
-      }
+    $(document).ready(function () {
+        $('input[type=radio]').change(function () {
+            if (this.value == '3') {
+                $('#billingForm').find('input').val('');
+                $("#billingForm").removeClass('hidden')
+            } else if (this.value == '1' || this.value == '2') {
+                $("#billingForm").addClass('hidden')
+                $('#billingForm').find('input').val('');
+            }
+        });
     });
-  });
 </script>
 
 <%= link_to 'Back', jobs_path %>
 
 <script>
-  $("a.tooltipLink").tooltip();
+    $("a.tooltipLink").tooltip();
 
-  flatpickr(".datePicker", {
-    enableTime: true,
-    defaultDate: new Date(),
+    flatpickr(".datePicker", {
+        enableTime: true,
+        defaultDate: new Date(),
         // create an extra input solely for display purposes
         altInput: true,
         altFormat: "F j, Y h:i K"
-      });
+    });
 
-  $("#submit-loss").on('click', function (e) {
-    e.preventDefault();
+    $("#submit-loss").on('click', function (e) {
+        e.preventDefault();
 
-    e.ajax({url: ""})
-  })
+        e.ajax({url: ""})
+    })
 
-  $('input[type="submit"]').click(function() {
-    $('.modal').modal('hide');
-  });
+    $('input[type="submit"]').click(function () {
+        $('.modal').modal('hide');
+    });
 </script>

@@ -1,5 +1,5 @@
 <div id="billingModal" class="modal fade" tabindex="-1" role="dialog">
-  <%= f.fields_for :job_detail do |fd| %>
+  <%= f.fields_for :job_detail, @job.job_detail do |fd| %>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

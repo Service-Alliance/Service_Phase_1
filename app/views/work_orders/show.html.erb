@@ -6,11 +6,14 @@
         <div class="alert alert-success" role="alert"><%= notice %></div>
       <% end %>
       <div class="col-xs-12">
-        <h1 class="text-center">Work Order Information:</h1>
+        <div class="col-xs-12">
+          <h2 class=text-center> SERVPRO of <%= @job.try(:franchise).try(:name) %> Work Order</h2>
+          <h3 class=text-center> <%= @work_order.created_at.try(:strftime, "%A, %B %d, %Y %l:%M %p") %></h3>
+          <h4 class=text-center> <%= @work_order.updated_at.try(:strftime, "%A, %B %d, %Y %l:%M %p") %></h3>
         <div class="panel panel-info">
           <div class="panel-heading">
             <h3 class="panel-title clearfix">
-              Work Order:
+              Work Order Details:
               <button type="button" data-toggle="modal" data-target="#work_order_tsheets_modal" class="hidden pull-right btn btn-success">Send to TSheets</button>
             </h3>
           </div>
@@ -18,11 +21,6 @@
             <div class="row">
               <div class="col-xs-12">
                 <hr/>
-                <div class="col-xs-12 text-center">
-                  <h2>SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
-                  <h2><%= @job.try(:franchise).try(:phone) %></h2>
-                </div>
-
                 <div class="clearfix">
                   <div class="col-sm-6">
                     <div class="form-group">
@@ -44,10 +42,6 @@
                       <%= @work_order.name %>
                     </div>
                     <div class="form-group">
-                      <span class="bold">Date:</span><br>
-                      <%= @work_order.date %>
-                    </div>
-                    <div class="form-group">
                       <span class="bold">Typed By:</span><br>
                       <%= @work_order.typed_by %>
                     </div>
@@ -56,8 +50,6 @@
                 <div class="col-xs-12">
                   <hr/>
                 </div>
-
-                <h2 class="text-center">Work Order</h2>
                 <div class="row">
                   <div class="col-sm-6">
                       <div class="col-sm-12">
