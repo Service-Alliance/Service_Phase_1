@@ -19,6 +19,7 @@
 //= require chartkick
 //= require best_in_place
 //= require timepicker.min
+//= require cocoon
 //= require_tree .
 
 $(function() {
@@ -26,14 +27,5 @@ $(function() {
   $(".select-control").select2({
     placeholder: "Select an option",
     allowClear: true
-  });
-  $('.timepicker').timepicker({
-      timeFormat: 'h:mm p',
-      interval: 30,
-      minTime: '5',
-      maxTime: '8:00pm',
-      dynamic: false,
-      dropdown: true,
-      scrollbar: true
   });
 });
