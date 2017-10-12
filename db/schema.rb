@@ -974,6 +974,7 @@ ActiveRecord::Schema.define(version: 20171011223125) do
     t.integer  "number_of_technicians"
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
+    t.string   "events",                   default: [],                 array: true
   end
 
   add_foreign_key "caller_companies", "callers"
