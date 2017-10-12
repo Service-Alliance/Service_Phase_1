@@ -461,6 +461,7 @@ ActiveRecord::Schema.define(version: 20171011223125) do
     t.integer  "agent_id"
     t.integer  "adjuster_id"
     t.date     "recieved"
+    t.date     "last_action"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.text     "referral_note"
