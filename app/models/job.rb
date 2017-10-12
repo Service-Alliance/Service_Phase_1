@@ -39,15 +39,16 @@ class Job < ActiveRecord::Base
   accepts_nested_attributes_for :property
   accepts_nested_attributes_for :customer
 
-  delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
-  delegate :full_name, to: :user, allow_nil: true, prefix: true
-  delegate :full_name, :address_without_county, :first_phone_number, to: :customer, allow_nil: true, prefix: true
-  delegate :name, to: :job_status, allow_nil: true, prefix: true
-  delegate :name, to: :franchise, allow_nil: true, prefix: true
   delegate :full_address, to: :caller, allow_nil: true, prefix: true
-  delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
+  delegate :full_name, :address_without_county, :first_phone_number, to: :customer, allow_nil: true, prefix: true
+  delegate :name, to: :franchise, allow_nil: true, prefix: true
   delegate :name, to: :insurance_company, allow_nil: true, prefix: true
+  delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
+  delegate :insurance_company, :claim_number, to: :job_detail, allow_nil: true, prefix: false
+  delegate :name, to: :job_loss_type, allow_nil: true, prefix: true
+  delegate :name, to: :job_status, allow_nil: true, prefix: true
   delegate :name, to: :referral_type, allow_nil: true, prefix: true
+  delegate :full_name, to: :user, allow_nil: true, prefix: true
 
   # Activity Tracking activated
   include PublicActivity::Model

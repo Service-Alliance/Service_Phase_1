@@ -42,6 +42,14 @@ class JobsController < ApplicationController
     render json: @jobs.to_json(include: job_json_includes)
   end
 
+  def for_table
+    @jobs = Job.where.not(status_id: nil)
+      .includes(job_associations)
+    @jobs = @jobs.where(franchise_id: params[:franchise_id]) if params[:franchise_id]
+    @count = @jobs.count
+    @jobs = @jobs.limit(params[:limit]).offset(params[:offset])
+  end
+
   def new_york_datasheet
     jim = User.find_by(email: 'jbertini@servpro5933.com')
     duct = LossType.find_by(name: "Duct Cleaning")

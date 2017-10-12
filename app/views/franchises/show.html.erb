@@ -152,7 +152,7 @@
           <table
             class="table-responsive"
             data-toggle="table"
-            data-url="/jobs/list?franchise_id=<%= @franchise.id %>"
+            data-url="/jobs/for_table?franchise_id=<%= @franchise.id %>"
             data-show-refresh="true"
             data-show-toggle="true"
             data-show-columns="true"
@@ -160,17 +160,17 @@
             data-flat="true"
             data-select-item-name="toolbar1"
             data-pagination="true"
+            data-side-pagination="server"
             data-sort-name="id"
             data-sort-order="desc">
             <thead>
               <tr>
                 <th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job Name</th>
-                <th data-field="job_status.name" data-sortable="true">Status</th>
-                <th data-field="customer.last_name" data-sortable="true">Last Name</th>
-                <th data-field="customer.first_name" data-sortable="true">First Name</th>
-                <th data-field="job_detail.claim_number" data-sortable="true">Claim Number</th>
-                <th data-field="job_loss_type.name" data-sortable="true">Job Loss Type</th>
-                <th data-field="insurance_details.name" data-sortable="true">Insurance Carrier</th>
+                <th data-field="job_status_name" data-sortable="true">Status</th>
+                <th data-field="customer_full_name" data-sortable="true">Customer Name</th>
+                <th data-field="claim_number" data-sortable="true">Claim Number</th>
+                <th data-field="job_loss_type_name" data-sortable="true">Job Loss Type</th>
+                <th data-field="insurance_company_name" data-sortable="true">Insurance Carrier</th>
                 <th data-field="created_at" data-sortable="true">Date Received</th>
               </tr>
             </thead>
