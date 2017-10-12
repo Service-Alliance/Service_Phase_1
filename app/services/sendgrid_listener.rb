@@ -1,4 +1,5 @@
 require_relative '../../lib/single_call_object'
+require 'date'
 
 class SendgridListener
   include Servpro::SingleCallObject
@@ -8,7 +9,7 @@ class SendgridListener
       begin
         order = WorkOrder.find(data['origin_id'])
         order.events << event_builder(data)
-        order.save!
+        order.save
       rescue ActiveRecord::RecordNotFound => e
         Honeybadger.notify(e, context: data)
       end
@@ -18,6 +19,6 @@ class SendgridListener
   private
 
   def event_builder(data)
-    "#{DateTime.now} | Email to #{data['email']} was #{data['event']} by IP #{data['ip']}"
+    "#{Time.at(data['timestamp']).to_datetime} | Email to #{data['email']} was #{data['event']} by IP #{data['ip']}"
   end
 end
