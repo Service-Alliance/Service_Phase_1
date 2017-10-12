@@ -9,12 +9,7 @@ class JobBuilder
 
     call = Call.find_by(id: call_id) if call_id
     job.referral_type_id = nil if job.try(:referral_type).try(:name) != 'Servpro Employee'
-
-    franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
-    if franchise
-      job.franchise_id = franchise.id
-    end
-
+    job.franchise_id = FranchiseZipcode.detect_franchise(address_params['zip_code'])
     job.pipeline_status_id = 1
 
     raise SaveError unless caller.save
