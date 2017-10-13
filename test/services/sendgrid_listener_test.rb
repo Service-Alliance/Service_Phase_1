@@ -6,10 +6,12 @@ class SendgridListenerTest < ActiveSupport::TestCase
   test '#call should update events for WorkOrder' do
     order = WorkOrder.create!(work_orders(:one).attributes.merge(id:@event.data['origin_id']))
 
-    assert_difference "WorkOrder.find(#{@event.data['origin_id']}).events.count" do
-      SendgridListener.call(@event.data)
+    travel_to Time.new(2018, 11, 24, 01, 04, 44) do
+      assert_difference "WorkOrder.find(#{@event.data['origin_id']}).events.count" do
+        SendgridListener.call(@event.data)
 
-      assert_equal "Wed, 10/11/17  3:08 AM | Email to aott@servpro5933.com was open by IP 47.19.76.18", WorkOrder.find(@event.data['origin_id']).events.last
+        assert_equal "Wed, 10/11/17  3:08 AM | Email to aott@servpro5933.com was open by IP 47.19.76.18", WorkOrder.find(@event.data['origin_id']).events.last
+      end
     end
 
     order.delete
