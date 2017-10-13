@@ -19,6 +19,7 @@
 //= require chartkick
 //= require best_in_place
 //= require timepicker.min
+//= require cocoon
 //= require_tree .
 
 $(function() {

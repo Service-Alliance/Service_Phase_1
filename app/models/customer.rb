@@ -1,6 +1,8 @@
 class Customer < ActiveRecord::Base
   has_many :phones, as: :phoneable
+  accepts_nested_attributes_for :phones, reject_if: :all_blank, allow_destroy: true
   belongs_to :address
+  accepts_nested_attributes_for :address
   has_many :notes, as: :noteable, dependent: :destroy
   has_many :trackers, as: :trackable, dependent: :destroy
   has_many :uploads, as: :uploadable, dependent: :destroy

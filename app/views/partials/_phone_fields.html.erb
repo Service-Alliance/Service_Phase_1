@@ -1,0 +1,28 @@
+<div class="nested-fields">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-3">
+        <div class="form-group">
+          <%= label_tag :type_id %><br>
+          <%= f.select(:type_id, options_for_select(PhoneType.all.map{|p| [p.name, p.id]}), {}, class: "form-control") %>
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="form-group">
+          <%= label_tag :number %><br>
+          <%= f.text_field :number, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="form-group">
+          <%= label_tag :extension %><br>
+          <%= f.text_field :extension, class: "form-control"  %>
+        </div>
+      </div>
+      <div class="col-xs-3 remove-number-toggle">
+        <%= label_tag :delete %><br>
+        <%= link_to_remove_association 'Delete', f, class: 'btn btn-danger full-width' %>
+      </div>
+    </div>
+  </div>
+</div>
