@@ -86,7 +86,7 @@
       <% if @job.new_record? %>
         <div class="col-xs-12">
           <div class="form-group">
-            <label for="job_emergency">Is the Caller the Customer?</label><br>
+            <label for="job_emergency">Is this Contact the Customer?</label><br>
             Check if yes
             <%= check_box_tag "same_caller[same_indicator]", '1', true %>
           </div>
@@ -142,7 +142,7 @@
       <div class="col-xs-12">
         <div class="form-group">
           <%= f.label :details %>
-          <a data-toggle="tooltip" class="tooltipLink" data-original-title="Tooltip text goes here">
+          <a data-toggle="tooltip" class="tooltipLink" data-original-title=" ">
             <span class="glyphicon glyphicon-info-sign"></span>
           </a>
           <br>
