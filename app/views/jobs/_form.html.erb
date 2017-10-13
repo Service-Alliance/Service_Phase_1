@@ -27,13 +27,7 @@
           </ul>
         </div>
       <% end %>
-      <div class="col-xs-12">
-        <div class="form-group">
-          <label for="job_emergency">Is this an emergency?</label><br>
-          Check if yes
-          <%= f.check_box :emergency %>
-        </div>
-      </div>
+
       <!-- FIXME: This code in template tightly couples to implementation on back-end -->
       <% if @job.id && current_page?(controller: 'jobs', action: 'edit', id: @job.id) %>
         <div class="col-xs-4">
