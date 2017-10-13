@@ -12,6 +12,7 @@ class JobsTest < Capybara::Rails::TestCase
     fill_in :company_name, with: 'Company Name'
     fill_in :caller_first_name, with: 'Callerfname'
     fill_in :caller_last_name, with: 'Callerlname'
+    fill_in :address_address_1, with: 'Caller Address 1'
     within '.new-number' do
       fill_in :new_phone_number, with: '0011223344'
     end
@@ -72,12 +73,14 @@ class JobsTest < Capybara::Rails::TestCase
     # We should _still_ only have one phone number on the caller and customer
     assert_equal 1, job.caller.phones.count
     assert_equal '0011223344', job.caller.phones.first.number
-    assert_equal 1, job.customer.phones.count
-    assert_equal '00000000', job.customer.phones.first.number
+    assert_equal 'Caller Address 1', job.caller.address.address_1
 
     job.customer.tap do |customer|
       assert_equal 'Customerfname', customer.first_name
       assert_equal 'Customerlname', customer.last_name
+      assert_equal 1, customer.phones.count
+      assert_equal '00000000', customer.phones.first.number
+      assert_equal 'Customer Address 1', customer.address.address_1
     end
   end
 
@@ -153,6 +156,7 @@ class JobsTest < Capybara::Rails::TestCase
       fill_in 'First name', with: 'Customerfname'
       fill_in 'Last name', with: 'Customerlname'
       fill_in :job_customer_attributes_phones_attributes_0_number, with: '00000000'
+      fill_in :job_customer_attributes_address_attributes_address_1, with: 'Customer Address 1'
     end
     within '.modal-footer' do
       click_button 'Close'

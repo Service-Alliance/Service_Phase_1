@@ -450,6 +450,14 @@ class JobsController < ApplicationController
                                     :number,
                                     :extension,
                                     :_destroy
+                                  ],
+                                  address_attributes: [
+                                    :address_1,
+                                    :address_2,
+                                    :zip_code,
+                                    :city,
+                                    :state_id,
+                                    :county
                                   ]
                                 ],
                                 losses_attributes: [
