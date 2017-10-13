@@ -93,8 +93,9 @@
           <% if @job.customer %>
               <div class="panel-body">
 
-                Name: <%= @job.customer.try(:full_name) %> <br/>
-                <%= raw @job.customer.full_address('<br />') %> <br/>
+                <%= @job.customer.try(:full_name) %> <br/>
+                <%= raw @job.customer_format_address %> <br/>
+                <i class='fa fa-phone'></i> <%= @job.customer.first_phone_number %><br />
                 <%= link_to "View", @job.customer %>
               </div>
           <% end %>
@@ -134,7 +135,8 @@
           <% if @job.caller %>
               <div class="panel-body">
                 Name: <%= @job.caller.full_name %> <br/>
-                <%= raw @job.caller_full_address('<br />') %>
+                <%= raw @job.caller_format_address %><br />
+                <i class='fa fa-phone'></i> <%= @job.caller.first_phone_number %><br />
                 <%= link_to "View", job_caller_path(@job, @job.caller) %>
               </div>
           <% end %>
@@ -273,7 +275,14 @@
           <div class="panel-body">
             <ul>
               <% @job.subscriptions.each do |subscriber| %>
-                <li><%= link_to subscriber.user.full_name, subscriber.user %></li>
+                <li>
+                  <% if policy(@job).update? %>
+                    <%= link_to job_subscription_path(@job.id, subscriber.id), method: :delete, class: 'pull-right' do %>
+                      <i class="fa fa-times delete"></i>
+                    <% end %>
+                  <% end %>
+                  <%= link_to subscriber.user.full_name, subscriber.user %>
+                </li>
               <% end %>
             </ul>
           </div>
@@ -296,8 +305,12 @@
               <% @job.collection_subscriptions.each do |subscriber| %>
 
                   <li>
+                    <% if policy(@job).update? %>
+                      <%= link_to job_collection_subscription_path(@job.id, subscriber.id), method: :delete, class: 'pull-right' do %>
+                        <i class="fa fa-times delete"></i>
+                      <% end %>
+                    <% end %>
                     <%= subscriber.user.full_name %>
-                    <%= link_to "Remove", job_collection_subscription_path(@job.id, subscriber.id), method: :delete %></li>
                   </li>
 
               <% end %>

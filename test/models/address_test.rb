@@ -47,4 +47,19 @@ class AddressTest < ActiveSupport::TestCase
     address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City', state: State.new(name: 'State'), zip_code: 'Zip', county: 'County')
     assert_equal('Line1 Line2 City State Zip', address.address_without_county)
   end
+
+  test '#format_address returns the address formatted with breaks if asked' do
+    address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City', state: State.new(name: 'State'), zip_code: 'Zip')
+    assert_equal('Line1<br />Line2<br />City<br />State<br />Zip', address.format_address(:breaks))
+  end
+
+  test '#format_address returns the address formatted with spaces if asked' do
+    address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City', state: State.new(name: 'State'), zip_code: 'Zip')
+    assert_equal('Line1 Line2 City State Zip', address.format_address(:spaces))
+  end
+
+  test '#format_address returns the address formatted in condensed format if asked' do
+    address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City', state: State.new(name: 'State'), zip_code: 'Zip')
+    assert_equal('Line1, Line2, City<br />State, Zip', address.format_address(:condensed))
+  end
 end
