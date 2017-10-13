@@ -1,5 +1,5 @@
 <div class="row nested-fields">
-  <%= f.input :user_id, collection: User.all, label_method: :full_name, wrapper_html: { class: 'col-sm-3' } %>
+  <%= f.input :user_id, collection: User.order(:first_name, :last_name), label_method: :full_name, wrapper_html: { class: 'col-sm-3' } %>
   <%= f.input :date, as: :date_picker, wrapper_html: { class: 'col-sm-3' } %>
   <%= f.input :start, as: :time_picker, wrapper_html: { class: 'col-sm-2' } %>
   <%= f.input :end, as: :time_picker, wrapper_html: { class: 'col-sm-2' } %>

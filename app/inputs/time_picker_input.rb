@@ -8,6 +8,11 @@ class TimePickerInput < SimpleForm::Inputs::Base
   end
 
   def input_html_options
-    super.merge({class: 'form-control timepicker'})
+    super.merge({class: 'form-control timepicker', value: value})
+  end
+
+  def value
+    time = @builder.object.send @attribute_name if @builder.object
+    time.present? ? time.strftime("%l:%M %p") : ""
   end
 end
