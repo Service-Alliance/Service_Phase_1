@@ -38,6 +38,7 @@ class Caller < ActiveRecord::Base
     return "#{first+ " " + last}"
   end
 
+  # FIXME: move all of these into a concern
   def cell_phones
     phones = []
     self.phones.each do |phone|
@@ -76,6 +77,10 @@ class Caller < ActiveRecord::Base
       end
     end
     return phones
+  end
+
+  def first_phone_number
+    phones.first.try(:number)
   end
 
   def company_name
