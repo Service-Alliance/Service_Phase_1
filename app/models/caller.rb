@@ -14,7 +14,7 @@ class Caller < ActiveRecord::Base
     parent.table[:first_name], parent.table[:last_name])
   end
 
-  delegate :full_address, :address_without_county, to: :address, allow_nil: true
+  delegate :full_address, :address_without_county, :format_address, to: :address, allow_nil: true
 
   pg_search_scope :full_search,
   against: [:first_name, :last_name],

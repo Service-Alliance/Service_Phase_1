@@ -94,7 +94,7 @@
               <div class="panel-body">
 
                 <%= @job.customer.try(:full_name) %> <br/>
-                <%= raw @job.customer.full_address(', ') %> <br/>
+                <%= raw @job.customer_format_address %> <br/>
                 <i class='fa fa-phone'></i> <%= @job.customer.first_phone_number %><br />
                 <%= link_to "View", @job.customer %>
               </div>
@@ -135,7 +135,7 @@
           <% if @job.caller %>
               <div class="panel-body">
                 Name: <%= @job.caller.full_name %> <br/>
-                <%= raw @job.caller_full_address(', ') %><br />
+                <%= raw @job.caller_format_address %><br />
                 <i class='fa fa-phone'></i> <%= @job.caller.first_phone_number %><br />
                 <%= link_to "View", job_caller_path(@job, @job.caller) %>
               </div>

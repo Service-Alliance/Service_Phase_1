@@ -15,7 +15,7 @@ class Customer < ActiveRecord::Base
   has_many :vendors, through: :customer_vendors
   accepts_nested_attributes_for :customer_vendors
 
-  delegate :full_address, :address_without_county, to: :address, allow_nil: true
+  delegate :full_address, :address_without_county, :format_address, to: :address, allow_nil: true
 
   include PgSearch
   include PublicActivity::Model
