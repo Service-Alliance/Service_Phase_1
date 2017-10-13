@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171011201930) do
+ActiveRecord::Schema.define(version: 20171011223125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -974,6 +974,7 @@ ActiveRecord::Schema.define(version: 20171011201930) do
     t.integer  "number_of_technicians"
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
+    t.string   "events",                   default: [],                 array: true
   end
 
   add_foreign_key "caller_companies", "callers"
