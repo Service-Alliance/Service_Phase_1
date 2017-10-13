@@ -12,6 +12,9 @@ class JobsTest < Capybara::Rails::TestCase
     fill_in :company_name, with: 'Company Name'
     fill_in :caller_first_name, with: 'Callerfname'
     fill_in :caller_last_name, with: 'Callerlname'
+    within '.new-number' do
+      fill_in :new_phone_number, with: '0011223344'
+    end
     add_loss
     add_property
     add_billing
@@ -44,6 +47,12 @@ class JobsTest < Capybara::Rails::TestCase
       assert_equal 'Customerlname', customer.last_name
     end
 
+    # We should only have one phone number on the caller and customer
+    assert_equal 1, job.caller.phones.count
+    assert_equal '0011223344', job.caller.phones.first.number
+    assert_equal 1, job.customer.phones.count
+    assert_equal '00000000', job.customer.phones.first.number
+
     job.job_detail.tap do |job_detail|
       assert_equal 'claim', job_detail.claim_number
     end
@@ -59,6 +68,12 @@ class JobsTest < Capybara::Rails::TestCase
       assert_equal 'Loss Note', loss.notes
       assert_equal Date.today, loss.customer_called
     end
+
+    # We should _still_ only have one phone number on the caller and customer
+    assert_equal 1, job.caller.phones.count
+    assert_equal '0011223344', job.caller.phones.first.number
+    assert_equal 1, job.customer.phones.count
+    assert_equal '00000000', job.customer.phones.first.number
 
     job.customer.tap do |customer|
       assert_equal 'Customerfname', customer.first_name
@@ -137,6 +152,7 @@ class JobsTest < Capybara::Rails::TestCase
     within '.modal-body' do
       fill_in 'First name', with: 'Customerfname'
       fill_in 'Last name', with: 'Customerlname'
+      fill_in :job_customer_attributes_phones_attributes_0_number, with: '00000000'
     end
     within '.modal-footer' do
       click_button 'Close'
