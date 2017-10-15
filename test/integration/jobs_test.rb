@@ -106,7 +106,6 @@ class JobsTest < Capybara::Rails::TestCase
     end
   end
 
-
   def edit_job_franchise
     click_link 'Edit Job'
     find('#job_franchise_id').find(:xpath, 'option[2]').select_option

@@ -1,17 +1,19 @@
-<% @customer_address = (@customer.try(:address) || Address.new) unless @customer_address %>
-<%= f.simple_fields_for(:address, @customer_address) do |a| %>
-  <%= a.input :address_1, wrapper_html: { class: 'col-xs-6' } %>
-  <%= a.input :address_2, wrapper_html: { class: 'col-xs-6' } %>
-  <div class="col-xs-12">
-    <div class="row">
-      <%= a.input :zip_code, label: 'Zip', wrapper_html: { class: 'col-xs-3' } %>
-      <div class="col-xs-3">
-          <label>Zip Code Lookup</label><br>
-          <button id="customerZipLookup" type="button" class="btn btn-primary">Lookup</button>
+<div class="customer-address">
+  <% @customer_address = (@customer.try(:address) || Address.new) unless @customer_address %>
+  <%= f.simple_fields_for(:address, @customer_address) do |a| %>
+    <%= a.input :address_1, wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'address-1' } %>
+    <%= a.input :address_2, wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'address-2' } %>
+    <div class="col-xs-12">
+      <div class="row">
+        <%= a.input :zip_code, label: 'Zip', wrapper_html: { class: 'col-xs-3' }, input_html: { class: 'zip-code' } %>
+        <div class="col-xs-3">
+            <label>Zip Code Lookup</label><br>
+            <button id="customerZipLookup" type="button" class="btn btn-primary">Lookup</button>
+        </div>
       </div>
     </div>
-  </div>
-  <%= a.input :city, wrapper_html: { class: 'col-xs-6' } %>
-  <%= a.input :state_id, collection: State.order(:name).pluck(:name, :id), wrapper_html: { class: 'col-xs-6' } %>
-  <%= a.input :county, wrapper_html: { class: 'col-xs-6' } %>
-<% end %>
+    <%= a.input :city, wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'city' } %>
+    <%= a.input :state_id, collection: State.order(:name).pluck(:name, :id), wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'state-id' } %>
+    <%= a.input :county, wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'county' } %>
+  <% end %>
+</div>
