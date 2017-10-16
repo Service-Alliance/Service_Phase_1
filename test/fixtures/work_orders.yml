@@ -1,12 +1,9 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 DEFAULTS: &DEFAULTS
   to: MyText
   name: MyText
   typed_by: MyText
   job_start: 2017-03-08 08:56:46
   job_name:
-  job_location: MyText
   telephone: MyText
   contact: MyText
   insurance: MyText
@@ -23,7 +20,7 @@ DEFAULTS: &DEFAULTS
 one:
   <<: *DEFAULTS
   job: one
-
+  job_location: MyText
 
 without_location:
   <<: *DEFAULTS
