@@ -56,6 +56,6 @@ class WorkOrderTest < ActiveSupport::TestCase
 
   test '#location' do
     assert_equal work_orders(:one).job_location, work_orders(:one).location
-    assert_equal work_orders(:without_location).customer_full_address, work_orders(:without_location).location
+    assert_equal work_orders(:without_location).customer_address_without_county, work_orders(:without_location).location
   end
 end

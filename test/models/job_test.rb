@@ -10,7 +10,7 @@ class JobTest < ActiveSupport::TestCase
   end
 
   test "#customer_address_without_county" do
-    assert_equal "AddressLine1 AddressLine2 City, State, 12345", @job.customer_address_without_county
+    assert_equal "MyString MyString MyString 12345", @job.customer_address_without_county
   end
 
   test "Job#with_manager_id" do

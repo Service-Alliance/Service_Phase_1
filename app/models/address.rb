@@ -11,10 +11,8 @@ class Address < ActiveRecord::Base
     join_fields([address_1, address_2, city, state_name, zip_code, county], separator)
   end
 
-  def address_without_county
-    spaces = join_fields([address_1, address_2], ' ')
-    commas = join_fields([city, state_name, zip_code], ', ')
-    join_fields([spaces, commas], ' ')
+  def address_without_county(separator = ' ')
+    join_fields([address_1, address_2, city, state_name, zip_code], separator)
   end
 
   def format_address(type = :condensed)
@@ -24,9 +22,13 @@ class Address < ActiveRecord::Base
     when :spaces
       address_without_county(' ')
     when :condensed
-      first = join_fields([address_1, address_2], ', ')
+      first = join_fields([address_1, address_2], ' ')
       last = join_fields([city, state_name, zip_code], ', ')
       join_fields([first, last], '<br />')
+    when :oneline
+      first = join_fields([address_1, address_2], ' ')
+      last = join_fields([city, state_name, zip_code], ', ')
+      join_fields([first, last], ' ')
     end
   end
 

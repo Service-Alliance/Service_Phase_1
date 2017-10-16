@@ -20,7 +20,7 @@ class WorkOrder < ActiveRecord::Base
   scope :date_ordered, -> { order(:updated_at) }
 
   def location
-    job_location || customer_full_address
+    job_location || customer_address_without_county
   end
 
   def job_manager_contact_info
