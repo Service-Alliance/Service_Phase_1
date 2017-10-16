@@ -51,7 +51,7 @@ class WorkOrder < ActiveRecord::Base
       typed_by: typed_by_full_name,
       name: job.try(:job_coordinator).try(:full_name),
       job_name: job.name,
-      job_location: job.customer_address_without_county,
+      job_location: job.try(:customer).try(:address_without_county),
       telephone: job.try(:customer).try(:phones).try(:number),
       contact: job.try(:customer).try(:full_name),
       insurance: job.try(:job_detail).try(:insurance_company).try(:name),
