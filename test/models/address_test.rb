@@ -39,8 +39,8 @@ class AddressTest < ActiveSupport::TestCase
   end
 
   test "full_address allows a custom separator" do
-    address = Address.new(address_1: 'Line1', address_2: 'Line2')
-    assert_equal('Line1, Line2', address.full_address(', '))
+    address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City')
+    assert_equal('Line1, Line2, City', address.full_address(', '))
   end
 
   test "address_without_county returns all fields in the address except county" do
