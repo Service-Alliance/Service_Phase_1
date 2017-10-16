@@ -43,7 +43,7 @@ class WorkOrderTest < ActiveSupport::TestCase
     assert_nil work_order.adjuster
     refute_nil work_order.claim_number
     assert_nil work_order.referral
-    assert_equal job.customer.full_address, work_order.job_location
+    assert_equal job.customer.address_without_county, work_order.job_location
   end
 
   test 'to returns SERVPRO plus all vendors if more than one vendor' do
