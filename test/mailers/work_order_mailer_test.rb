@@ -35,7 +35,7 @@ class WorkOrderMailerTest < ActiveSupport::TestCase
         assert_equal @work_order.id, header_field["origin_id"]
       end
 
-      assert_includes email.body.raw_source, "Job Location: #{@work_order.job_location}"
+      assert_includes email.body.raw_source, "Job Location: #{@work_order.customer_address_without_county}"
     end
   end
 end
