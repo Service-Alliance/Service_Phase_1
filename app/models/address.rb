@@ -22,9 +22,13 @@ class Address < ActiveRecord::Base
     when :spaces
       address_without_county(' ')
     when :condensed
-      first = join_fields([address_1, address_2, city], ', ')
-      last = join_fields([state_name, zip_code], ', ')
+      first = join_fields([address_1, address_2], ' ')
+      last = join_fields([city, state_name, zip_code], ', ')
       join_fields([first, last], '<br />')
+    when :oneline
+      first = join_fields([address_1, address_2], ' ')
+      last = join_fields([city, state_name, zip_code], ', ')
+      join_fields([first, last], ' ')
     end
   end
 

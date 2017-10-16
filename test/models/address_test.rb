@@ -60,6 +60,10 @@ class AddressTest < ActiveSupport::TestCase
 
   test '#format_address returns the address formatted in condensed format if asked' do
     address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City', state: State.new(name: 'State'), zip_code: 'Zip')
-    assert_equal('Line1, Line2, City<br />State, Zip', address.format_address(:condensed))
+    assert_equal('Line1 Line2<br />City, State, Zip', address.format_address(:condensed))
+  end
+  test '#format_address return the address with oneline if asked' do
+    address = Address.new(address_1: 'Line1', address_2: 'Line2', city: 'City', state: State.new(name: 'State'), zip_code: 'Zip')
+    assert_equal('Line1 Line2 City, State, Zip', address.format_address(:oneline))
   end
 end
