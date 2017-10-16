@@ -24,7 +24,6 @@ class WorkOrder < ActiveRecord::Base
     job_location || customer_address_without_county
   end
 
-
   def job_manager_contact_info
     job_managers.present? ? job_managers.map { |manager| manager.full_name } : ''
   end
