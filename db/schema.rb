@@ -983,6 +983,8 @@ ActiveRecord::Schema.define(version: 20171012062034) do
     t.date     "date"
     t.time     "start"
     t.time     "end"
+    t.time     "break_time"
+    t.time     "total_time"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
