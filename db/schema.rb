@@ -983,9 +983,6 @@ ActiveRecord::Schema.define(version: 20171012062034) do
     t.date     "date"
     t.time     "start"
     t.time     "end"
-    t.integer  "break_time"
-    t.integer  "total_time"
-    t.boolean  "approval"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
@@ -997,3 +994,11 @@ ActiveRecord::Schema.define(version: 20171012062034) do
   add_foreign_key "caller_companies", "companies"
   add_foreign_key "franchise_work_order_distributions", "franchises", on_delete: :cascade
   add_foreign_key "franchise_work_order_distributions", "users", on_delete: :cascade
+  add_foreign_key "user_rates", "users", on_delete: :cascade
+  add_foreign_key "work_order_users", "users"
+  add_foreign_key "work_order_users", "work_orders"
+  add_foreign_key "work_order_vendors", "vendors"
+  add_foreign_key "work_order_vendors", "work_orders"
+  add_foreign_key "work_shifts", "users", on_delete: :cascade
+  add_foreign_key "work_shifts", "work_orders", on_delete: :cascade
+end
