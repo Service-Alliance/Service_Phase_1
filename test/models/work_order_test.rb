@@ -29,11 +29,6 @@ class WorkOrderTest < ActiveSupport::TestCase
     assert_equal [vendors(:one).name], work_orders(:one).to
   end
 
-  test '#location' do
-    assert_equal work_orders(:one).job_location, work_orders(:one).location
-    assert_equal work_orders(:without_location).customer_address_without_county, work_orders(:without_location).location
-  end
-
   test '#build_from_job' do
     job = jobs(:one)
     work_order = WorkOrder.build_from_job(job, users(:one).full_name)
@@ -59,5 +54,8 @@ class WorkOrderTest < ActiveSupport::TestCase
     assert_includes work_orders(:one).to, vendors(:two).name
   end
 
-
+  test '#location from customer address without county' do
+    assert_equal work_orders(:one).job_location, work_orders(:one).location
+    assert_equal work_orders(:without_location).customer_address_without_county, work_orders(:without_location).location
+  end
 end

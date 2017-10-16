@@ -20,6 +20,10 @@ class WorkOrder < ActiveRecord::Base
 
   scope :date_ordered, -> { order(:updated_at) }
 
+  def location
+    job_location || customer_address_without_county
+  end
+
 
   def job_manager_contact_info
     job_managers.present? ? job_managers.map { |manager| manager.full_name } : ''
@@ -49,7 +53,7 @@ class WorkOrder < ActiveRecord::Base
       typed_by: typed_by_full_name,
       name: job.try(:job_coordinator).try(:full_name),
       job_name: job.name,
-      job_location: job.customer_,
+      job_location: job.customer_address_without_county,
       telephone: job.try(:customer).try(:phones).try(:number),
       contact: job.try(:customer).try(:full_name),
       insurance: job.try(:job_detail).try(:insurance_company).try(:name),
