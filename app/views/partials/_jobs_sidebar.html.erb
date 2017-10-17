@@ -134,7 +134,7 @@
           </div>
           <% if @job.caller %>
               <div class="panel-body">
-                Name: <%= @job.caller.full_name %> <br/>
+                <%= @job.caller.full_name %> <br/>
                 <%= raw @job.caller_format_address %><br />
                 <i class='fa fa-phone'></i> <%= @job.caller.first_phone_number %><br />
                 <%= link_to "View", job_caller_path(@job, @job.caller) %>
