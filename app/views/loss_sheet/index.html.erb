@@ -3,6 +3,7 @@
     <%= render partial: "partials/jobs_sidebar" %>
     <div id="page-content-wrapper">
       <div class="col-xs-12">
+        <%= link_to "Show", @job, class:"btn btn-primary margin-top-1 margin bottom-1 pull-left" %>
         <div class="row panel">
           <button class="btn btn-primary margin-top-1 margin-bottom-1 hidden-print pull-right" onclick="printPage()">Print this page</button>
           <div class="col-xs-12">
