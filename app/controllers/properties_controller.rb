@@ -29,7 +29,7 @@ class PropertiesController < ApplicationController
     @property.job_id = @job.id
     respond_to do |format|
       if @property.save
-        @job.update_last_action
+
         format.html {  redirect_to job_property_path(@job, @property), notice: 'Property was successfully created.' }
         format.json { render :show, status: :created, location: @property }
       else
@@ -44,7 +44,7 @@ class PropertiesController < ApplicationController
   def update
     respond_to do |format|
       if @property.update(property_params)
-        @job.update_last_action
+
         format.html {  redirect_to job_property_path(@job, @property), notice: 'Property was successfully updated.' }
         format.json { render :show, status: :ok, location: @property }
       else

@@ -38,7 +38,6 @@ class EmergencyContactsController < ApplicationController
       @emergency_contact.address_id = @address.id
       @emergency_contact.job_id = @job.id
       if @emergency_contact.save
-        @job.update_last_action
 
         @emergency_contact.phones.destroy_all
         phone_count = phone_params['type_ids'].try(:count) || 0
@@ -65,7 +64,6 @@ class EmergencyContactsController < ApplicationController
       @address = Address.find_by(id: @emergency_contact.address_id)
       @address.save if @address.update(address_params)
       if @emergency_contact.update(emergency_contact_params)
-        @job.update_last_action
         @emergency_contact.phones.destroy_all
         phone_count = phone_params['type_ids'].try(:count) || 0
 
