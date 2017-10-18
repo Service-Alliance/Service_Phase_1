@@ -1,0 +1,82 @@
+.container-fluid
+  - if notice
+    .alert.alert-success role="alert" = notice
+  .row
+    .col-xs-12
+      .well
+        .inline
+          = @user.full_name
+  .col-sm-4
+    .panel.panel-primary
+      .panel-heading
+        | Details
+      .panel-body
+        .item
+          | ID:
+          |  #{@user.id}
+        .item
+          | First name:
+          |  #{@user.first_name}
+        .item
+          | Last name:
+          |  #{@user.last_name}
+        .item
+          | Role:
+          |  #{@user.try(:role).try(:name)}
+        .item
+          | Department:
+          |  #{@user.try(:department).try(:name)}
+        .item
+          | Title:
+          |  #{@user.title}
+        - if policy(@user).administer_financials?
+          .item
+            | Rate:
+            |  #{@user.rate_display_with_period}
+      .panel-footer
+        - if current_user.admin?
+          = link_to edit_user_path(@user), class: "btn btn-sm btn-warning", type: "button" do
+            i.glyphicon.glyphicon-edit
+            | Edit
+    .panel.panel-primary
+      .panel-heading
+        | TSheets Integration
+      .panel-body
+        #tsheets_integration_container data-user-id="#{@user.id}"
+          = render partial: 'tsheets_integration', locals: {user: @user}
+  .col-sm-8
+    .panel.with-nav-tabs.panel-primary
+      .panel-heading
+        ul.nav.nav-tabs
+          li.active
+            a aria-controls="entered" data-toggle="tab" href="#entered" role="tab"  Recent Jobs Entered
+          li
+            a aria-controls="assigned" data-toggle="tab" href="#assigned" role="tab"  Recent Jobs Assigned
+          li
+            a aria-controls="tsheets" data-toggle="tab" href="#tsheets" role="tab"  Tsheets
+      .panel-body
+        .tab-content
+          #entered.tab-pane.fade.in.active
+            = render partial: 'jobs', locals: {jobs: @user.jobs_entered_by_user}
+          #assigned.tab-pane.fade
+            = render partial: 'jobs', locals: {jobs: @user.jobs_owned_by_user}
+          #tsheets.tab-pane.fade
+            = render partial: 'tsheets_timesheet'
+  javascript:
+    | $("#menu-toggle").click(function (e) {
+      | e.preventDefault();
+      | $("#wrapper").toggleClass("toggled");
+    | });
+
+    | flatpickr(".datePicker", {
+      | enableTime: false,
+      /!/ create an extra input solely for display purposes
+      | altInput: true,
+      | altFormat: "F j, Y"
+    | });
+
+    | $('[data-toggle=tab]').click(function () {
+      | if ($(this).parent().hasClass('active')) {
+        | $($(this).attr("href")).toggleClass('active');
+      | }
+    | })
