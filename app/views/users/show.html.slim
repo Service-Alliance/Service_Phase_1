@@ -38,12 +38,8 @@
           = link_to edit_user_path(@user), class: "btn btn-sm btn-warning", type: "button" do
             i.glyphicon.glyphicon-edit
             | Edit
-    .panel.panel-primary
-      .panel-heading
-        | TSheets Integration
-      .panel-body
-        #tsheets_integration_container data-user-id="#{@user.id}"
-          = render partial: 'tsheets_integration', locals: {user: @user}
+    = render partial: 'tsheets_integration', locals: {user: @user}
+
   .col-sm-8
     .panel.with-nav-tabs.panel-primary
       .panel-heading
