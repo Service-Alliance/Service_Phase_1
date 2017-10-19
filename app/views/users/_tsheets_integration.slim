@@ -1,6 +1,6 @@
 .panel.panel-primary
   .panel-heading
-    | TSheets Linking
+    | TSheets
   .panel-body
     #tsheets_integration_container data-user-id="#{user.id}"
       - if local_assigns.fetch(:error, nil).present?
@@ -8,14 +8,15 @@
           i.fa.fa-times
           = error
       - if user.tsheets_id.present?
-        .alert.alert-success
-          i.fa.fa-check-circle
-          | TSheets user linked
-        .item
-          | TSheets user name:
-          |  #{user.tsheets_full_name}
-        button#unlink_tsheets_user.btn.btn-primary type="button"  Unlink user
-        i.tsheets-user-status
+        - user.tsheet_info.each_pair do |key, value|
+          .item
+            b #{key}
+            | :
+            |  #{value}
+
+        <br/><br/>
+        button#unlink_tsheets_user.btn.btn-primary type="button"  Unlink
+
       - else
         .item
           | Link to TSheets user:

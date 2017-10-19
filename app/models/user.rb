@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   def tsheet_info
     return {} if tsheets.eql?({}) || tsheets.nil?
 
-    tsheets.slice(
+    Hash[tsheets.slice(
       'tsheets_email',
       'tsheets_email_verified',
       'tsheets_username',
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
       'tsheets_first_name',
       'tsheets_company_name',
       'tsheets_id'
-      )
+      ).map { |k,v| [k[8..(k.length)], v] }]
   end
 
   def admin?

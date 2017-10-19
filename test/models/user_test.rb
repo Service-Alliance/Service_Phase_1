@@ -39,14 +39,14 @@ class UserTest < ActiveSupport::TestCase
 
   test "tsheet_info" do
     EXPECTED = {
-      'tsheets_email' => 'toneboneus@gmail.com',
-      'tsheets_email_verified' => true,
-      'tsheets_username' => 'amartinez',
-      'tsheets_active' => true,
-      'tsheets_last_name' => 'MARTINEZ',
-      'tsheets_first_name' => 'ANTHONY',
-      'tsheets_company_name' => 'Servpromedfordny',
-      'tsheets_id' => 459375
+      'email' => 'toneboneus@gmail.com',
+      'email_verified' => true,
+      'username' => 'amartinez',
+      'active' => true,
+      'last_name' => 'MARTINEZ',
+      'first_name' => 'ANTHONY',
+      'company_name' => 'Servpromedfordny',
+      'id' => 459375
     }
 
     assert_equal ({}), users(:one).tsheet_info
