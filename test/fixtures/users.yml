@@ -6,13 +6,38 @@ one:
   last_name: Jones
   encrypted_password: <%= User.new.send(:password_digest, "password") %>
 
-
 two:
   email: user2@servpro.com
   first_name: Barry
   last_name: Barnett
   encrypted_password: <%= User.new.send(:password_digest, "password") %>
   tsheets: {tsheets_id: 123}
+
+with_tsheet:
+  email: tsheets@servpro.com
+  first_name: Barry
+  last_name: Tsheet
+  encrypted_password: <%= User.new.send(:password_digest, "password") %>
+  tsheets:
+    :tsheets_id: 459375
+    :tsheets_email: toneboneus@gmail.com
+    :tsheets_active: true
+    :tsheets_exempt: false
+    :tsheets_created: 2016-12-16T20:39:14.000+00:00
+    :tsheets_group_id: 45525
+    :tsheets_password: null
+    :tsheets_pay_rate: 0
+    :tsheets_salaried: false
+    :tsheets_username: amartinez
+    :tsheets_hire_date:
+    :tsheets_last_name: MARTINEZ
+    :tsheets_term_date: null
+    :tsheets_client_url: servpromedfordny
+    :tsheets_first_name: ANTHONY
+    :tsheets_payroll_id:
+    :tsheets_approved_to: 2017-09-17
+    :tsheets_last_active: 2017-09-22T19:07:12.000+00:00
+
 
 job_manager:
   email: jobmanager@servpro.com

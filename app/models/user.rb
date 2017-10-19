@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -31,6 +33,12 @@ class User < ActiveRecord::Base
 
   def tsheets_full_name
     [tsheets_first_name, tsheets_last_name].delete_if(&:blank?).join(' ')
+  end
+
+  def tsheet_info
+    return {} if tsheets.eql?({}) || tsheets.nil?
+
+    tsheets.slice('tsheets_email', 'tsheets_username')
   end
 
   def admin?

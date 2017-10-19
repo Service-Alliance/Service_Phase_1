@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
@@ -33,5 +34,17 @@ class UserTest < ActiveSupport::TestCase
   test "#with tsheets_id" do
     assert_equal @user,User.with_tsheets_id(@user.tsheets_id).first
     assert_nil User.with_tsheets_id('missing_id').first
+  end
+
+
+  test "tsheet_info" do
+    EXPECTED = {
+      'tsheets_email' => 'toneboneus@gmail.com',
+      'tsheets_username' => 'amartinez'
+    }
+
+
+    assert_equal ({}), users(:one).tsheet_info
+    assert_equal EXPECTED, users(:with_tsheet).tsheet_info
   end
 end
