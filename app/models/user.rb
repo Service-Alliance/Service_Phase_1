@@ -31,10 +31,6 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def tsheets_full_name
-    [tsheets_first_name, tsheets_last_name].delete_if(&:blank?).join(' ')
-  end
-
   def tsheet_info
     return {} if tsheets.blank?
 
