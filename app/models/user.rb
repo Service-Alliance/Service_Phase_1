@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   end
 
   def tsheet_info
-    return {} if tsheets.eql?({}) || tsheets.nil?
+    return {} if tsheets.blank?
 
     Hash[tsheets.slice(
       'tsheets_email',
