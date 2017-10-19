@@ -38,7 +38,16 @@ class User < ActiveRecord::Base
   def tsheet_info
     return {} if tsheets.eql?({}) || tsheets.nil?
 
-    tsheets.slice('tsheets_email', 'tsheets_username')
+    tsheets.slice(
+      'tsheets_email',
+      'tsheets_email_verified',
+      'tsheets_username',
+      'tsheets_active',
+      'tsheets_last_name',
+      'tsheets_first_name',
+      'tsheets_company_name',
+      'tsheets_id'
+      )
   end
 
   def admin?
