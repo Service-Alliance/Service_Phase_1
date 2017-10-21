@@ -139,7 +139,13 @@ class WorkOrdersController < ApplicationController
         :date,
         :start,
         :end,
-        :_destroy
+        :_destroy,
+        breaks_attributes: [
+          :id,
+          :start,
+          :end,
+          :_destroy
+        ]
       ])
   end
 

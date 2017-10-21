@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012062034) do
+ActiveRecord::Schema.define(version: 20171021075556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -976,6 +976,16 @@ ActiveRecord::Schema.define(version: 20171012062034) do
     t.string   "events",                   default: [],                 array: true
   end
 
+  create_table "work_shift_breaks", force: :cascade do |t|
+    t.integer  "work_shift_id"
+    t.time     "start"
+    t.time     "end"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "work_shift_breaks", ["work_shift_id"], name: "index_work_shift_breaks_on_work_shift_id", using: :btree
+
   create_table "work_shifts", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "work_order_id"
@@ -998,6 +1008,7 @@ ActiveRecord::Schema.define(version: 20171012062034) do
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"
   add_foreign_key "work_order_vendors", "work_orders"
+  add_foreign_key "work_shift_breaks", "work_shifts", on_delete: :cascade
   add_foreign_key "work_shifts", "users", on_delete: :cascade
   add_foreign_key "work_shifts", "work_orders", on_delete: :cascade
 end

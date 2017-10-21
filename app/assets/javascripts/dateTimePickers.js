@@ -15,14 +15,18 @@ var dateTimePickers = (function($) {
   }
 
   var initializeTimePickers = function(context) {
-    $(context || document).find('.timepicker').timepicker({
-      timeFormat: 'h:mm p',
-      interval: 30,
-      minTime: '5',
-      maxTime: '8:00pm',
-      dynamic: false,
-      dropdown: true,
-      scrollbar: true
+    $(context || document).find('.timepicker').each(function() {
+      $this = $(this);
+      var interval = $this.data('interval') || 30;
+      $this.timepicker({
+        timeFormat: 'h:mm p',
+        interval: interval,
+        minTime: '5',
+        maxTime: '8:00pm',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+      });
     });
   }
 
