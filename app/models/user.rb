@@ -13,11 +13,17 @@ class User < ActiveRecord::Base
   has_many :notifications, foreign_key: :target_id
   has_many :trackers
   has_many :phones, as: :phoneable
+  has_one :rate, class_name: 'UserRate'
 
   store_accessor :tsheets, :tsheets_id, :tsheets_first_name, :tsheets_last_name
 
+  delegate :name, to: :department, allow_nil: true, prefix: true
+  delegate :display_with_period, :amount, :period, :salaried, :exempt, to: :rate, allow_nil: true, prefix: true
+
   scope :with_tsheets_id, ->(tsheets_id) { where("tsheets->>'tsheets_id'='#{tsheets_id}'") }
   scope :with_first_and_last_names, ->(first, last) { where('lower(first_name) = ? AND lower(last_name) = ?', first.try(:downcase), last.try(:downcase)) }
+
+  accepts_nested_attributes_for :rate
 
   def full_name
     "#{first_name} #{last_name}"
@@ -29,10 +35,6 @@ class User < ActiveRecord::Base
 
   def admin?
     self.role_id == 1 ? true : false
-  end
-
-  def owner?
-    self.try(:role).try(:name) == 'Owner' ? true : false
   end
   def job_coordinator?
     self.role_id == 2 ? true : false
@@ -46,14 +48,17 @@ class User < ActiveRecord::Base
   def contractor?
     self.role_id == 5 ? true : false
   end
-  def technician?
-    self.try(:role).try(:name) == 'Technician' ? true : false
-  end
   def crew_chief?
-    self.try(:role).try(:name) == 'Crew Chief' ? true : false
+    self.role_id == 6 ? true : false
+  end
+  def technician?
+    self.role_id == 7 ? true : false
+  end
+  def owner?
+    self.role_id == 8 ? true : false
   end
   def collections?
-    self.try(:role).try(:name) == 'Collections Department' ? true : false
+    self.role_id == 9 ? true : false
   end
   def unassigned?
     self.role_id == 0 || self.role_id == nil  ? true : false

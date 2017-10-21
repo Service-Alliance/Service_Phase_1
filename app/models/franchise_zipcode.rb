@@ -1,17 +1,11 @@
 class FranchiseZipcode < ActiveRecord::Base
-  after_create :city_county_geocode
+  belongs_to :franchise
 
-  def city_county_geocode
-    # it takes a while to seed database on development
-    #FIXME: this is a hack, that works. but it would be great to remove this callback from model
-    unless Rails.env.development?
-      if search = Geocoder.search(self.zip_code).first
-        if search.address_components && search.address_components.third && search.address_components.third['long_name']
-          self.city = search.city
-          self.county = search.address_components.third['long_name']
-          self.save
-        end
-      end
-    end
+  validates_uniqueness_of :zip_code, conditions: -> { assigned }
+
+  scope :assigned, -> { where(assigned: true) }
+
+  def self.detect_franchise(zipcode)
+    assigned.where(zip_code: zipcode).pluck(:franchise_id).first
   end
 end

@@ -1,6 +1,8 @@
 class Customer < ActiveRecord::Base
   has_many :phones, as: :phoneable
+  accepts_nested_attributes_for :phones, reject_if: :all_blank, allow_destroy: true
   belongs_to :address
+  accepts_nested_attributes_for :address
   has_many :notes, as: :noteable, dependent: :destroy
   has_many :trackers, as: :trackable, dependent: :destroy
   has_many :uploads, as: :uploadable, dependent: :destroy
@@ -15,7 +17,7 @@ class Customer < ActiveRecord::Base
   has_many :vendors, through: :customer_vendors
   accepts_nested_attributes_for :customer_vendors
 
-  delegate :full_address, :address_without_county, to: :address, allow_nil: true
+  delegate :full_address, :address_without_county, :format_address, to: :address, allow_nil: true
 
   include PgSearch
   include PublicActivity::Model
@@ -92,12 +94,14 @@ class Customer < ActiveRecord::Base
     phones.first.try(:number)
   end
 
+  # FIXME: this should be move to Job model
   def self.same_as_caller(job)
     @job = Job.find_by(id: job)
     @caller = Caller.find_by(job_id: @job.id)
 
     # check if old customer exists
     if @job.customer_id
+      # FIXME: it's not a good idea to destroy object from database. Maybe just inactive?
       Customer.find_by(id: @job.customer_id).destroy
     end
 

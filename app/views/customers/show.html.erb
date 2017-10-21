@@ -231,7 +231,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th data-field="id" data-sortable="true" data-formatter="AddVendor"></th>
-                                                            <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Call Link</th>
+                                                            <th data-field="id" data-sortable="true" data-formatter="CallLinkFormatter">Call Link</th>
                                                             <th data-field="callrail_id" data-sortable="true">CallRail ID</th>
                                                             <th data-field="datetime" data-sortable="true">Call Date/Time</th>
                                                             <th data-field="customer_phone_number" data-sortable="true">Phone Number</th>
@@ -459,15 +459,6 @@
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
-        function LinkFormatter(value, row, index) {
-            return "<a target='_blank href='/calls/" + row.id + ">" + value + "</a>";
-        }
-        function AddVendor(value, row, index) {
-            return "<a class='add-call' target='_blank' href='call_id=" + row.id + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
-        }
-        function CallRailTimeline(value, row, index) {
-            return "<a href='https://app.callrail.com/calls/" + value + "'>Timeline Link</a>";
-        }
 
         flatpickr(".datePicker", {
             enableTime: false,

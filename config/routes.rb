@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   resources :notify_types
   resources :notifications
   devise_for :admin_users, ActiveAdmin::Devise.config
-  resources :pipeline_statuses
   resources :upload_categories
   resources :franchise_users
   resources :franchises
@@ -74,7 +73,6 @@ Rails.application.routes.draw do
   resources :jobs do
     post 'manager-assignment' => 'jobs#manager_assignment', as: :manager_assignment
     delete 'manager-assignment/:id' => 'jobs#destroy_manager_assignment', as: :destroy_manager_assignment
-    post 'coordinator-assignment' => 'jobs#coordinator_assignment', as: :coordinator_assignment
     post 'caller-assignment' => 'jobs#caller_assignment', as: :caller_assignment
     get 'notes' => 'notes#job_notes'
     get 'overview' => 'overview#index', as: :overview
@@ -89,6 +87,7 @@ Rails.application.routes.draw do
     resources :job_details
     resources :job_managers
     resources :pricings
+    resource :job_coordinator, only: %i(create destroy)
     get 'job_managers/:id/acknolwedge' => 'job_managers#acknolwedge'
     get 'work_orders/:id/acknolwedge' => 'work_orders#acknowledge'
     resources :vendor_assignments

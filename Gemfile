@@ -50,12 +50,15 @@ gem 'jquery-ui-rails'
 gem 'simple_form'
 gem 'tsheets', github: 'tsheets/api_ruby'
 gem 'font-awesome-rails'
+gem 'cocoon'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 # Set's proper headers for Sendgrid
 gem 'mail-x_smtpapi'
+# Sendgrid integration to webhooks
+gem 'gridhook'
 
 # Use Unicorn as the app server
 gem 'unicorn'
@@ -66,8 +69,6 @@ gem 'marginalia'
 gem 'seed_migration'
 
 gem 'sidekiq'
-#sendgrid integration to webhooks
-gem 'gridhook'
 
 group :development, :test do
   gem 'minitest-reporters'

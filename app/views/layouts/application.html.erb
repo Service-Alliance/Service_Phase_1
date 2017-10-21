@@ -9,14 +9,16 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <% if current_user && (current_user.admin? || current_user.job_coordinator? || current_user.unassigned? || current_user.owner?) %>
+    <% if current_user && (current_user.admin? || current_user.job_coordinator? || current_user.unassigned? || current_user.owner? || current_user.collections?) %>
       <%= render partial: "layouts/admin_navbar" %>
     <% elsif current_user && current_user.project_manager? %>
       <%= render partial: "layouts/project_manager_navbar" %>
+    <% elsif current_user && (current_user.technician? || current_user.crew_chief?) %>
+      <%= render partial: "layouts/crew_navbar" %>
     <% elsif current_user && current_user.contractor? %>
       <%= render partial: "layouts/contractor_navbar" %>
     <% else %>
-      <%= render partial: "layouts/call_rep_navbar" %>
+      <%= render partial: "layouts/navbar" %>
     <% end %>
 
     <%= yield %>

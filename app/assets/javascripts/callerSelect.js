@@ -10,8 +10,8 @@ ready = function() {
       data: {'id': id},
       dataType: 'json'
     })
-    .success(function(response){
-
+    .done(function(response){
+      // TODO: What is this supposed to do?
     });
   });
 };

@@ -18,7 +18,7 @@
 					data-sort-order="desc">
 					<thead>
 						<tr>
-							<th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Job ID</th>
+							<th data-field="id" data-sortable="true" data-formatter="JobLinkFormatter">Job ID</th>
 							<th data-field="job_status.name" data-sortable="false">Status</th>
 							<th data-field="customer.last_name" data-sortable="false">Last Name</th>
 							<th data-field="customer.first_name" data-sortable="false">First Name</th>
@@ -34,9 +34,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	function LinkFormatter(value, row, index) {
-		return "<a href='" + row.id + "'>" + value + "</a>";
-	}
-</script>

@@ -4,7 +4,7 @@ class StatesController < ApplicationController
   # GET /states
   # GET /states.json
   def index
-    @states = State.all
+    @states = State.order(:name)
   end
 
   # GET /states/1
@@ -28,7 +28,7 @@ class StatesController < ApplicationController
 
     respond_to do |format|
       if @state.save
-        format.html { redirect_to @state, notice: 'State was successfully created.' }
+        format.html { redirect_to states_path, notice: 'State was successfully created.' }
         format.json { render :show, status: :created, location: @state }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class StatesController < ApplicationController
   def update
     respond_to do |format|
       if @state.update(state_params)
-        format.html { redirect_to @state, notice: 'State was successfully updated.' }
+        format.html { redirect_to states_path, notice: 'State was successfully updated.' }
         format.json { render :show, status: :ok, location: @state }
       else
         format.html { render :edit }
@@ -62,13 +62,14 @@ class StatesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_state
-      @state = State.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def state_params
-      params.require(:state).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_state
+    @state = State.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def state_params
+    params.require(:state).permit(:name)
+  end
 end

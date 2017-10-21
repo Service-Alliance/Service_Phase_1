@@ -7,6 +7,22 @@ class UserPresenter < BasePresenter
     jobs.entered_by(@model)
   end
 
+  def all_departments
+    Department.all.order(:name).pluck(:name, :id)
+  end
+
+  def all_roles
+    Role.all.order(:name).pluck(:name, :id)
+  end
+
+  def all_rate_periods
+    UserRate.periods.keys
+  end
+
+  def initialized_rate
+    rate || UserRate.new
+  end
+
   private
 
   def jobs

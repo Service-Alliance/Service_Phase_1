@@ -11,6 +11,7 @@ class WorkOrderDeliveryService
     send_to_job_managers
     send_to_vendors
     send_to_crew
+    send_to_franchise_distribution
   end
 
   private
@@ -20,8 +21,13 @@ class WorkOrderDeliveryService
   end
 
   def send_to_scheduling_manager
+    return unless should_send_to_scheduling_manager?
     sched_manager = User.find_by(email: "kroggemann@servpro5933.com")
-    deliver_user_email(sched_manager)
+    deliver_user_email(sched_manager) if sched_manager.present?
+  end
+
+  def should_send_to_scheduling_manager?
+    !(@current_user.department_name == 'Construction' && @work_order.vendors.count > 0)
   end
 
   def send_to_loss_coordinator
@@ -48,6 +54,13 @@ class WorkOrderDeliveryService
   def send_to_crew
     @work_order.users.each do |crew|
       deliver_user_email(crew)
+    end
+  end
+
+  def send_to_franchise_distribution
+    return if @work_order.franchise.nil?
+    @work_order.franchise.work_order_distribution.each do |user|
+      deliver_user_email(user)
     end
   end
 

@@ -4,7 +4,7 @@ class FranchiseZipcodesController < ApplicationController
   # GET /franchise_zipcodes
   # GET /franchise_zipcodes.json
   def index
-    @franchise_zipcodes = FranchiseZipcode.all
+    @franchise_zipcodes = FranchiseZipcode.includes(:franchise).all
   end
 
   # GET /franchise_zipcodes/1
@@ -24,7 +24,7 @@ class FranchiseZipcodesController < ApplicationController
   # POST /franchise_zipcodes
   # POST /franchise_zipcodes.json
   def create
-    @franchise_zipcode = FranchiseZipcode.new(franchise_zipcode_params)
+    @franchise_zipcode = FranchiseZipcodeForm.call(franchise_zipcode_params)
 
     respond_to do |format|
       if @franchise_zipcode.save
@@ -69,6 +69,6 @@ class FranchiseZipcodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def franchise_zipcode_params
-      params.require(:franchise_zipcode).permit(:franchise_id, :zipcode)
+      params.require(:franchise_zipcode).permit(:franchise_id, :zip_code)
     end
 end

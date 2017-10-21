@@ -25,7 +25,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @search = Job.where.not(status_id: nil).order('fnol_received DESC').search(params[:q])
+    @search = Job.where.not(status_id: nil).search(params[:q])
     @jobs = JobsPresenter.new(@search.result, view_context, params[:page])
 
     respond_to do |format|
@@ -38,6 +38,7 @@ class JobsController < ApplicationController
     @jobs = Job.where.not(status_id: nil)
       .includes(job_associations)
       .limit(100)
+    @jobs = @jobs.where(franchise_id: params[:franchise_id]) if params[:franchise_id]
     render json: @jobs.to_json(include: job_json_includes)
   end
 
@@ -82,8 +83,7 @@ class JobsController < ApplicationController
     @past_schedules = []
     @note = @job.notes.new
 
-    @work_order = WorkOrder.new
-    @work_order.initialize_from_job(@job, current_user)
+    @work_order = WorkOrderPresenter.new(WorkOrder.build_from_job(@job, current_user.full_name), view_context)
 
     @inspection_checklist = InspectionChecklist.new
     @job.schedulers.each do |scheduler|
@@ -102,6 +102,7 @@ class JobsController < ApplicationController
     @property = @job.build_property
     @job_detail = @job.build_job_detail
     @customer = @job.build_customer
+    @customer.phones.build
     render :new
   end
 
@@ -136,9 +137,10 @@ class JobsController < ApplicationController
       phone_params,
       company_params[:name],
       call_params[:id],
-      current_user.id,
-      same_caller_params[:same_indicator] == "1"
+      current_user.id
     )
+
+    Customer.same_as_caller(job) if same_caller_params[:same_indicator] == "1"
 
     if params[:commit] == 'Save and Move to Job Loss'
       redirect_to new_job_loss_path(job), notice: 'Job was successfully created.'
@@ -157,12 +159,11 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1.json
   def update
     # FIXME: Decrease complexity of this code -- introduce workers!
+    # as the form is now nested we can probably get rid of a lot of this, just need to make sure it's covered with tests before removing
     @previous_status = Job.find(params[:id])
     respond_to do |format|
       if @job.update(job_params)
-        @job.update_last_action
-        franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
-        @job.franchise_id = franchise.franchise_id if franchise
+        @job.franchise_id = FranchiseZipcode.detect_franchise(address_params['zip_code'])
         @job.update(job_params)
         @job.referral_employee_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
         @job.referral_vendor_id = nil if @job.try(:referral_type).try(:name) != 'Vendor'
@@ -190,11 +191,6 @@ class JobsController < ApplicationController
               @caller.phones.create(type_id: phone_params['type_ids'][index], number: phone_params['numbers'][index], extension: phone_params['extensions'][index])
             end
           end
-        end
-
-
-        if same_caller_params[:same_indicator] == "1"
-          Customer.same_as_caller(@job)
         end
 
         if job_params[:job_manager_id]
@@ -292,12 +288,6 @@ class JobsController < ApplicationController
     end
 
   end
-  def coordinator_assignment
-    @job = Job.find(params[:job_id])
-    @job.coordinator_id = job_params[:coordinator_id]
-    @job.save
-    redirect_to @job
-  end
 
   def caller_assignment
     @job = Job.find(params[:job_id])
@@ -316,7 +306,6 @@ class JobsController < ApplicationController
 
     unless @job.job_managers.pluck(:job_manager_id).include?(@user.id)
       @job_manager = @job.job_managers.create(job_manager_id: @user.id)
-      @job.update_last_action
       @job.pipeline_status_id = 2
       @job.save
 
@@ -444,17 +433,34 @@ class JobsController < ApplicationController
                                 :work_center_link,
                                 :xact_link,
                                 customer_attributes: [
+                                  :id,
                                   :first_name,
                                   :last_name,
                                   :email,
-                                  :address_1, 
-                                  :address_2, 
-                                  :zip_code, 
+                                  :address_1,
+                                  :address_2,
+                                  :zip_code,
                                   :city,
-                                  :state_id, 
-                                  :county
+                                  :state_id,
+                                  :county,
+                                  phones_attributes: [
+                                    :id,
+                                    :type_id,
+                                    :number,
+                                    :extension,
+                                    :_destroy
+                                  ],
+                                  address_attributes: [
+                                    :address_1,
+                                    :address_2,
+                                    :zip_code,
+                                    :city,
+                                    :state_id,
+                                    :county
+                                  ]
                                 ],
                                 losses_attributes: [
+                                  :id,
                                   :loss_occurred,
                                   :fnol_received,
                                   :customer_called,
@@ -471,7 +477,8 @@ class JobsController < ApplicationController
                                   :notes
                                 ],
                                 property_attributes: [
-                                  :structure_type_id, 
+                                  :id,
+                                  :structure_type_id,
                                   :property_type_id,
                                   :year_built,
                                   :floors_affected,
@@ -483,6 +490,7 @@ class JobsController < ApplicationController
                                   :condo,
                                   flooring_type_ids: []],
                                 job_detail_attributes: [
+                                  :id,
                                   :insurance_company_id,
                                   :claim_number,
                                   :policy_number,

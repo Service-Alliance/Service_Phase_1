@@ -1,0 +1,13 @@
+<% if model.present? %>
+  <% record_name = local_assigns.fetch(:record_name, model.class.name.humanize) %>
+  <% if model.errors.any? %>
+    <div class="alert alert-danger">
+      <h5><%= pluralize(model.errors.count, "error") %> prohibited this <%= record_name %> from being saved:</h5>
+      <ul>
+        <% model.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

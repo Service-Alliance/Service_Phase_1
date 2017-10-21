@@ -1,1 +1,0 @@
-json.array! @pipeline_statuses, partial: 'pipeline_statuses/pipeline_status', as: :pipeline_status

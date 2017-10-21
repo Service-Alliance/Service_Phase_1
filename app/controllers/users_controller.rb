@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :job_assignments_list]
+  before_action :set_user, only: [:show, :edit, :new, :update, :destroy, :job_assignments_list]
 
   # GET /users
   # GET /users.json
@@ -19,7 +19,6 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
   end
 
   # GET /users/1/edit
@@ -46,6 +45,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
+        @user = UserPresenter.new(@user, view_context)
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -120,7 +120,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      user = User.find(params[:id])
+      user = params[:id].present? ? User.find(params[:id]) : User.new
       @user = UserPresenter.new(user, view_context)
     end
 
@@ -172,7 +172,13 @@ class UsersController < ApplicationController
         :sub_1,
         :sub_2,
         :dry_book,
-        :login_count
+        :login_count,
+        rate_attributes: [
+          :amount,
+          :period,
+          :salaried,
+          :exempt
+        ]
       )
     end
 

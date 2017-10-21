@@ -21,11 +21,12 @@
                         data-select-item-name="toolbar1"
                         data-pagination="true"
                         data-sort-name="id"
-                        data-sort-order="asc">
+                        data-sort-order="asc"
+                        data-row-style="RowFormatter">
                         <thead>
                             <tr>
                                 <th data-field="state" data-checkbox="true">Vendor ID</th>
-                                <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Vendor ID</th>
+                                <th data-field="id" data-sortable="true" data-formatter="VendorLinkFormatter">Vendor ID</th>
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="category_type" data-sortable="true">Category Type</th>
                                 <th data-field="contact" data-sortable="true">Contact</th>
@@ -51,7 +52,14 @@
 
 
 <script>
-    function LinkFormatter(value, row, index) {
-        return "<a href='vendors/" + row.id + "'>" + value + "</a>";
-    }
+  function RowFormatter(row, index) {
+    var auto = Date.parse(row.auto);
+    var liability = Date.parse(row.liability);
+    var pollution = Date.parse(row.pollution);
+    var wc = Date.parse(row.wc);
+    var today = Date.now()
+    var expired = auto < today || liability < today || pollution < today || wc < today;
+    var cls = expired ? 'danger' : '';
+    return { classes: cls, css: '' };
+  }
 </script>

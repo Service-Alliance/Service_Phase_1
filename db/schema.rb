@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930092733) do
-
+ActiveRecord::Schema.define(version: 20171012062034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -319,14 +318,24 @@ ActiveRecord::Schema.define(version: 20170930092733) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "franchise_work_order_distributions", force: :cascade do |t|
+    t.integer  "franchise_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "franchise_work_order_distributions", ["franchise_id"], name: "index_franchise_work_order_distributions_on_franchise_id", using: :btree
+  add_index "franchise_work_order_distributions", ["user_id"], name: "index_franchise_work_order_distributions_on_user_id", using: :btree
+
   create_table "franchise_zipcodes", force: :cascade do |t|
     t.integer  "franchise_id"
     t.string   "zip_code"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "city"
     t.string   "county"
-    t.boolean  "assigned"
+    t.boolean  "assigned",     default: true, null: false
   end
 
   create_table "franchises", force: :cascade do |t|
@@ -451,7 +460,6 @@ ActiveRecord::Schema.define(version: 20170930092733) do
     t.integer  "agent_id"
     t.integer  "adjuster_id"
     t.date     "recieved"
-    t.date     "last_action"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.text     "referral_note"
@@ -628,12 +636,6 @@ ActiveRecord::Schema.define(version: 20170930092733) do
 
   add_index "phones", ["phoneable_type", "phoneable_id"], name: "index_phones_on_phoneable_type_and_phoneable_id", using: :btree
 
-  create_table "pipeline_statuses", force: :cascade do |t|
-    t.text     "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "pricing_categories", force: :cascade do |t|
     t.text     "name",       null: false
     t.datetime "created_at", null: false
@@ -802,6 +804,18 @@ ActiveRecord::Schema.define(version: 20170930092733) do
 
   add_index "uploads", ["uploadable_type", "uploadable_id"], name: "index_uploads_on_uploadable_type_and_uploadable_id", using: :btree
 
+  create_table "user_rates", force: :cascade do |t|
+    t.integer  "user_id"
+    t.decimal  "amount"
+    t.integer  "period"
+    t.boolean  "salaried"
+    t.boolean  "exempt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_rates", ["user_id"], name: "index_user_rates_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -933,7 +947,6 @@ ActiveRecord::Schema.define(version: 20170930092733) do
     t.integer  "job_id"
     t.text     "to"
     t.text     "name"
-    t.date     "date"
     t.text     "typed_by"
     t.datetime "job_start"
     t.text     "job_name"
@@ -956,12 +969,34 @@ ActiveRecord::Schema.define(version: 20170930092733) do
     t.integer  "vendor_id"
     t.text     "hours_on_job"
     t.text     "adjuster"
+    t.integer  "number_of_technicians"
+    t.integer  "number_of_crew_chiefs"
+    t.integer  "estimated_hours"
+    t.string   "events",                   default: [],                 array: true
   end
+
+  create_table "work_shifts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "work_order_id"
+    t.date     "date"
+    t.time     "start"
+    t.time     "end"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "work_shifts", ["user_id"], name: "index_work_shifts_on_user_id", using: :btree
+  add_index "work_shifts", ["work_order_id"], name: "index_work_shifts_on_work_order_id", using: :btree
 
   add_foreign_key "caller_companies", "callers"
   add_foreign_key "caller_companies", "companies"
+  add_foreign_key "franchise_work_order_distributions", "franchises", on_delete: :cascade
+  add_foreign_key "franchise_work_order_distributions", "users", on_delete: :cascade
+  add_foreign_key "user_rates", "users", on_delete: :cascade
   add_foreign_key "work_order_users", "users"
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"
   add_foreign_key "work_order_vendors", "work_orders"
+  add_foreign_key "work_shifts", "users", on_delete: :cascade
+  add_foreign_key "work_shifts", "work_orders", on_delete: :cascade
 end
