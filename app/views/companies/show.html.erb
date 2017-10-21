@@ -254,15 +254,6 @@
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
-        function LinkFormatter(value, row, index) {
-            return "<a target='_blank href='/calls/" + row.id + ">" + value + "</a>";
-        }
-        function AddVendor(value, row, index) {
-            return "<a class='add-call' target='_blank' href='call_id=" + row.id + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
-        }
-        function CallRailTimeline(value, row, index) {
-            return "<a href='https://app.callrail.com/calls/" + value + "'>Timeline Link</a>";
-        }
 
         flatpickr(".datePicker", {
             enableTime: false,

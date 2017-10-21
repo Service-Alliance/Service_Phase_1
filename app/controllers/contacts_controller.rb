@@ -94,7 +94,6 @@ class ContactsController < ApplicationController
         @contact.address_id = @address.id
       end
       if @contact.update(contact_params)
-        @job.update_last_action
         @contact.phones.destroy_all
         phone_count = phone_params["type_ids"].count
 

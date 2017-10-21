@@ -34,17 +34,14 @@ class CustomersController < ApplicationController
 
   # GET /customers/1/edit
   def edit
-    @customer_address = Address.find_by(id: @customer.address_id) || @customer_address = Address.new
-    @phones = @customer.phones
     @job = Job.find_by(id: params[:job_id])
+    @phones = @customer.phones
   end
 
   # POST /customers
   # POST /customers.json
   def create
-    @address = Address.create(address_params)
     @customer = Customer.new(customer_params)
-    @customer.address_id = @address.id
     @job = Job.find_by(id: job_param[:job_id])
 
     respond_to do |format|
@@ -93,7 +90,6 @@ class CustomersController < ApplicationController
     respond_to do |format|
       if job_param[:job_id]
         @job = Job.find_by(id: job_param[:job_id])
-        # @job.update_last_action
       end
 
       unless customer_exists_params['customer_id'] == "0" || customer_exists_params.empty?
@@ -107,17 +103,6 @@ class CustomersController < ApplicationController
           CustomerCompany.create(customer_id: @customer.id, company_id: @company.id)
         end
       end
-
-
-      if @address = Address.find_by(id: @customer.address_id)
-        if @address.update(address_params)
-        end
-      else
-        @address = Address.new(address_params)
-        @address.save
-        @customer.address_id = @address.id
-      end
-
 
       if @customer.update(customer_params)
         @customer.add_owner_as_subscriber
@@ -230,7 +215,39 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :job_id, :owner_id, :company_name, uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content], customer_companies_attributes: [:company_id], customer_vendors_attributes: [:vendor_id] )
+      params.require(:customer).permit(:id,
+                                       :first_name, 
+                                       :last_name, 
+                                       :email, 
+                                       :job_id, 
+                                       :owner_id, 
+                                       :company_name, 
+                                       uploads_attributes: [
+                                         :id,
+                                         :upload_category_id,
+                                         :description,
+                                         {uploads: []}
+                                       ],
+                                       notes_attributes: [:id, :content],
+                                       customer_companies_attributes: [:id, :company_id],
+                                       customer_vendors_attributes: [:id, :vendor_id],
+                                       phones_attributes: [
+                                         :id,
+                                         :type_id,
+                                         :number,
+                                         :extension,
+                                         :_destroy
+                                       ],
+                                       address_attributes: [
+                                         :id,
+                                         :address_1,
+                                         :address_2,
+                                         :zip_code,
+                                         :city,
+                                         :state_id,
+                                         :county
+                                       ]
+                                      )
     end
 
     def job_param

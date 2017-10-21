@@ -33,7 +33,7 @@
                         <thead>
                             <tr>
                                 <th data-field="state" data-checkbox="true">Franchise ID</th>
-                                <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Franchise ID</th>
+                                <th data-field="id" data-sortable="true" data-formatter="FranchiseLinkFormatter">Franchise ID</th>
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="franchise_number" data-sortable="true">Franchise Number</th>
                                 <th data-field="legal_name" data-sortable="true">Legal Name</th>
@@ -54,10 +54,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    function LinkFormatter(value, row, index) {
-        return "<a href='franchises/" + row.id + "'>" + value + "</a>";
-    }
-</script>

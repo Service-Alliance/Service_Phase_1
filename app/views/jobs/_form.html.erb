@@ -16,17 +16,6 @@
               </ul>
             </div>
         <% end %>
-        <% if @caller.errors.any? %>
-            <div id="error_explanation">
-              <h3><%= pluralize(@caller.errors.count, "error") %>
-                prohibited this job from being saved:</h3>
-              <ul>
-                <% @caller.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
         <div class="col-xs-12">
           <div class="form-group">
             <label for="job_emergency">Is this an emergency?</label><br>

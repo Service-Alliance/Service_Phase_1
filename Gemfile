@@ -57,6 +57,8 @@ gem 'cocoon'
 
 # Set's proper headers for Sendgrid
 gem 'mail-x_smtpapi'
+# Sendgrid integration to webhooks
+gem 'gridhook'
 
 # Use Unicorn as the app server
 gem 'unicorn'
@@ -67,8 +69,6 @@ gem 'marginalia'
 gem 'seed_migration'
 
 gem 'sidekiq'
-#sendgrid integration to webhooks
-gem 'gridhook'
 
 group :development, :test do
   gem 'minitest-reporters'

@@ -110,7 +110,7 @@
                 <% end %>
               </td>
               <td><%= job.customer_full_name %></td>
-              <td><%= job.customer_address_without_county %></td>
+              <td><%= job.try(:customer).format_address(:oneline) %></td>
               <td><%= job.customer_first_phone_number %>
               </td>
               <td><%= job.referral_type_name %></td>

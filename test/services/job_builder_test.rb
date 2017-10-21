@@ -14,7 +14,6 @@ class JobBuilderTest < ActiveSupport::TestCase
 
     assert job.persisted?
     assert_equal 1, job.pipeline_status_id
-    assert_equal Date.today, job.last_action
     assert_equal 1, job.entered_by_id
   end
 

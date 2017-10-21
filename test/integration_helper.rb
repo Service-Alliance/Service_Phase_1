@@ -4,6 +4,7 @@ require 'minitest/rails/capybara'
 require 'capybara/poltergeist'
 
 class Capybara::Rails::TestCase
+  include CapybaraHelpers
   include SignInHelpers
 
   self.use_transactional_fixtures = false

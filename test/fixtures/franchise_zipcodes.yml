@@ -3,7 +3,9 @@
 one:
   franchise: one
   zip_code: '00011'
+  assigned: true
 
-two:
+unassigned:
   franchise: two
   zip_code: '00012'
+  assigned: false

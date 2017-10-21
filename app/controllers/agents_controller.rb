@@ -38,7 +38,6 @@ class AgentsController < ApplicationController
     if same_agent_params[:agent_id] != ''
       @agent = Agent.find(same_agent_params[:agent_id])
       @job.agent_id = same_agent_params[:agent_id]
-      @job.last_action = Date.today
       @job.save
 
       return redirect_to agent_path(@agent, job_id: @job.id), notice: 'Agent was successfully assigned.'
@@ -88,7 +87,6 @@ class AgentsController < ApplicationController
 
       if @agent.update(agent_params)
         @agent.address.update(address_params)
-        @job.last_action = Date.today
         @job.save
 
         format.html { redirect_to agent_path(@agent, job_id: @job.id), notice: 'Agent was successfully updated.' }

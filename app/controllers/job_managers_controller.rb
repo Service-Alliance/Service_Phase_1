@@ -30,7 +30,6 @@ class JobManagersController < ApplicationController
 
     respond_to do |format|
       if @job_manager.job_manager_id && @job_manager.save
-        @job.update_last_action
         @job.pipeline_status_id = 2
         @job.save
         @user = @job_manager.job_manager
@@ -52,7 +51,6 @@ class JobManagersController < ApplicationController
   def update
     respond_to do |format|
       if @job_manager.update(job_manager_params)
-        @job.update_last_action
         @user = @job_manager.job_manager
         if @user.email
           UserMailer.manager_assignment(@user, @job_manager).deliver_later

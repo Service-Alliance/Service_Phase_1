@@ -37,39 +37,40 @@
                     <%= f.submit "Create Referral Assignment", class: "btn btn-primary" %>
                 </div>
             </div>
-        </div <% end %>
+          </div>
+      <% end %>
     </div>
 </div>
 </div>
 <div class="col-lg-12">
-<div class="panel panel-default">
-    <div class="panel-heading">Contacts</div>
-    <div class="panel-body table-responsive">
-        <table
-            class="resp"
-            data-toggle="table"
-            data-url="/contacts"
-            data-show-refresh="true"
-            data-show-toggle="true"
-            data-show-columns="true"
-            data-search="true"
-            data-flat="true"
-            data-select-item-name="toolbar1"
-            data-pagination="true"
-            data-sort-name="id"
-            data-sort-order="asc">
-            <thead>
-                <tr>
-                    <th data-field="id" data-sortable="true" data-formatter="AddContact"></th>
-                    <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Contact ID</th>
-                    <th data-field="company" data-sortable="true">Company</th>
-                    <th data-field="first_name" data-sortable="true">First Name</th>
-                    <th data-field="last_name" data-sortable="true">Last Name</th>
-                    <th data-field="email" data-sortable="true">Email</th>
-                    <th data-field="user.first_name" data-sortable="true">Owner</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-</div>
+  <div class="panel panel-default">
+      <div class="panel-heading">Contacts</div>
+      <div class="panel-body table-responsive">
+          <table
+              class="resp"
+              data-toggle="table"
+              data-url="/contacts"
+              data-show-refresh="true"
+              data-show-toggle="true"
+              data-show-columns="true"
+              data-search="true"
+              data-flat="true"
+              data-select-item-name="toolbar1"
+              data-pagination="true"
+              data-sort-name="id"
+              data-sort-order="asc">
+              <thead>
+                  <tr>
+                      <th data-field="id" data-sortable="true" data-formatter="AddContact"></th>
+                      <th data-field="id" data-sortable="true" data-formatter="ContactLinkFormatter">Contact ID</th>
+                      <th data-field="company" data-sortable="true">Company</th>
+                      <th data-field="first_name" data-sortable="true">First Name</th>
+                      <th data-field="last_name" data-sortable="true">Last Name</th>
+                      <th data-field="email" data-sortable="true">Email</th>
+                      <th data-field="user.first_name" data-sortable="true">Owner</th>
+                  </tr>
+              </thead>
+          </table>
+      </div>
+  </div>
 </div>

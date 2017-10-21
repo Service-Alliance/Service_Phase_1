@@ -29,7 +29,6 @@ class JobDetailsController < ApplicationController
   def create
     @job_detail = JobDetail.new(job_detail_params)
     @job_detail.job_id = @job.id
-    @job.update_last_action
 
     respond_to do |format|
       if @job_detail.save
@@ -111,7 +110,6 @@ class JobDetailsController < ApplicationController
         @job_detail.save
         end
       @job_detail.update(job_detail_params)
-      @job.update_last_action
       @job_detail.save
 
       return redirect_to job_job_detail_path(@job, @job_detail), notice: 'Job was successfully updated.'

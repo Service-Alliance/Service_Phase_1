@@ -32,7 +32,6 @@ class CallersController < ApplicationController
   def create
     @caller = Caller.new(caller_params)
     @phone = Phone.new(phone_params)
-    @job.update_last_action
 
     respond_to do |format|
       if @caller.save
@@ -54,11 +53,9 @@ class CallersController < ApplicationController
       @address = Address.find_by(id: @caller.address_id)
 
       if @address.update(address_params)
-        @job.update_last_action
         @address.save
       end
       if @caller.update(caller_params)
-        @job.update_last_action
         @caller.phones.destroy_all
         phone_count = phone_params["type_ids"].count
 

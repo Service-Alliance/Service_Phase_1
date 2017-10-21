@@ -332,11 +332,11 @@ ActiveRecord::Schema.define(version: 20171012062034) do
   create_table "franchise_zipcodes", force: :cascade do |t|
     t.integer  "franchise_id"
     t.string   "zip_code"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "city"
     t.string   "county"
-    t.boolean  "assigned"
+    t.boolean  "assigned",     default: true, null: false
   end
 
   create_table "franchises", force: :cascade do |t|
@@ -461,7 +461,6 @@ ActiveRecord::Schema.define(version: 20171012062034) do
     t.integer  "agent_id"
     t.integer  "adjuster_id"
     t.date     "recieved"
-    t.date     "last_action"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.text     "referral_note"
@@ -974,6 +973,7 @@ ActiveRecord::Schema.define(version: 20171012062034) do
     t.integer  "number_of_technicians"
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
+    t.string   "events",                   default: [],                 array: true
   end
 
   create_table "work_shifts", force: :cascade do |t|

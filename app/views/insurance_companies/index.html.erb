@@ -23,7 +23,7 @@
                         <thead>
                             <tr>
                                 <th data-field="state" data-checkbox="true">Insurance Company ID</th>
-                                <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Insurance Company ID</th>
+                                <th data-field="id" data-sortable="true" data-formatter="InsuranceCompanyLinkFormatter">Insurance Company ID</th>
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="bulletin_number" data-sortable="true">Bulletin Number</th>
                                 <th data-field="effective_date" data-sortable="true">Effective Date</th>
@@ -44,10 +44,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    function LinkFormatter(value, row, index) {
-        return "<a href='insurance_companies/" + row.id + "'>" + value + "</a>";
-    }
-</script>

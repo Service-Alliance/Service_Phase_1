@@ -20,7 +20,7 @@
                         <thead>
                             <tr>
                                 <th data-field="state" data-checkbox="true">Contact ID</th>
-                                <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Contact ID</th>
+                                <th data-field="id" data-sortable="true" data-formatter="ContactLinkFormatter">Contact ID</th>
 
 
                             </tr>
@@ -32,9 +32,3 @@
     </div>
 </div>
 <%= link_to 'New Contact', new_contact_path %>
-
-<script>
-    function LinkFormatter(value, row, index) {
-        return "<a href='contacts/" + row.id + "'>" + value + "</a>";
-    }
-</script>
