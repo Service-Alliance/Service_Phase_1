@@ -125,6 +125,14 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <%= f.fields_for(:loss_rates) do |l| %>
+        <%= render partial: 'loss_rate_fields', locals: {f: l} %>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-xs-12"><%= link_to_add_association 'Add Loss Rate', f, :loss_rates, class: 'btn btn-primary' %></div>
+    </div>
 
     <div class="row">
       <div class="col-xs-12 text-center">
