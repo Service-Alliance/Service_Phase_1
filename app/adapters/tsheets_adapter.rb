@@ -5,6 +5,10 @@ class TsheetsAdapter
     end
   end
 
+  def timesheets(for_user)
+    tsheets_api.timesheets.where(user_ids: [for_user])
+  end
+
   def find_users(filters = {})
     response = tsheets_api.users.where(filters).all
     EventStore.tsheets(response)
