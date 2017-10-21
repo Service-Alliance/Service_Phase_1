@@ -74,4 +74,9 @@ class JobsControllerTest < ActionController::TestCase
     get :reconciliation_form, job_id: job.id
     assert_response :success
   end
+
+  test '#no-activity' do
+    get :no_activity
+    assert_response :success
+  end
 end
