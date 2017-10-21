@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012062034) do
+ActiveRecord::Schema.define(version: 20171021064954) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -921,6 +922,8 @@ ActiveRecord::Schema.define(version: 20171012062034) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.boolean  "active",                           default: true
+    t.decimal  "supervisor_rate"
+    t.decimal  "technician_rate"
   end
 
   create_table "work_order_users", force: :cascade do |t|
@@ -975,19 +978,6 @@ ActiveRecord::Schema.define(version: 20171012062034) do
     t.string   "events",                   default: [],                 array: true
   end
 
-  create_table "work_shifts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "work_order_id"
-    t.date     "date"
-    t.time     "start"
-    t.time     "end"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "work_shifts", ["user_id"], name: "index_work_shifts_on_user_id", using: :btree
-  add_index "work_shifts", ["work_order_id"], name: "index_work_shifts_on_work_order_id", using: :btree
-
   add_foreign_key "caller_companies", "callers"
   add_foreign_key "caller_companies", "companies"
   add_foreign_key "franchise_work_order_distributions", "franchises", on_delete: :cascade
@@ -997,6 +987,4 @@ ActiveRecord::Schema.define(version: 20171012062034) do
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"
   add_foreign_key "work_order_vendors", "work_orders"
-  add_foreign_key "work_shifts", "users", on_delete: :cascade
-  add_foreign_key "work_shifts", "work_orders", on_delete: :cascade
 end
