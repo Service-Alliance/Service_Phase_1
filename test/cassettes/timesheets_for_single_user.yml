@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://rest.tsheets.com/api/v1/timesheets?modified_since=Sat,%2010/07/17%20%201:52%20PM&page=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Typhoeus - https://github.com/typhoeus/typhoeus
+      Authorization:
+      - Bearer S.3__b71d2047fe9ad7e4c950674eb1276982f28384de
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 417
+      message: Expectation Failed
+    headers:
+      Date:
+      - Sat, 21 Oct 2017 17:52:11 GMT
+      Server:
+      - Apache
+      Cache-Control:
+      - no-cache, must-revalidate
+      Expires:
+      - '0'
+      Content-Length:
+      - '159'
+      Content-Type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+         "error": {
+          "code": 417,
+          "message": "Expectation Failed: 'modified_since' timestamp [Sat, 10\/07\/17  1:52 PM] is not in valid ISO-8601 time format"
+         }
+        }
+    http_version: 
+  recorded_at: Sat, 21 Oct 2017 17:52:11 GMT
+recorded_with: VCR 3.0.3
