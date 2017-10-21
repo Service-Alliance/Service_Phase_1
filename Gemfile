@@ -51,6 +51,7 @@ gem 'simple_form'
 gem 'tsheets', github: 'tsheets/api_ruby'
 gem 'font-awesome-rails'
 gem 'cocoon'
+gem 'slim'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
