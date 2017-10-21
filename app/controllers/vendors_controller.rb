@@ -108,7 +108,7 @@ class VendorsController < ApplicationController
         :supervisor_rate,
         :technician_rate,
         uploads_attributes: [:upload_category_id, :description, {uploads: []}], notes_attributes: [:content],
-        loss_rates_attributes: [:loss_type_id, :rate]
+        loss_rates_attributes: [:id, :loss_type_id, :rate, :_delete]
       )
     end
 end

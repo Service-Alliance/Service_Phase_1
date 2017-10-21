@@ -9,7 +9,7 @@ class Vendor < ActiveRecord::Base
   has_many :loss_rates, class_name: 'VendorLossRate'
   accepts_nested_attributes_for :uploads
   accepts_nested_attributes_for :notes
-  accepts_nested_attributes_for :loss_rates
+  accepts_nested_attributes_for :loss_rates, reject_if: :all_blank, allow_destroy: true
 
   def self.can_edit?(user)
     if user.admin? || user.email == 'vchambers@servpro5933.com'
