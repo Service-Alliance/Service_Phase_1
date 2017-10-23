@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171021075556) do
+ActiveRecord::Schema.define(version: 20171023213737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -995,6 +995,7 @@ ActiveRecord::Schema.define(version: 20171021075556) do
     t.time     "end"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.decimal  "total_time"
   end
 
   add_index "work_shift_breaks", ["work_shift_id"], name: "index_work_shift_breaks_on_work_shift_id", using: :btree
@@ -1007,6 +1008,7 @@ ActiveRecord::Schema.define(version: 20171021075556) do
     t.time     "end"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.decimal  "total_time"
   end
 
   add_index "work_shifts", ["user_id"], name: "index_work_shifts_on_user_id", using: :btree
