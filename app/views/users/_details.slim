@@ -1,0 +1,31 @@
+.panel.panel-primary
+  .panel-heading
+    | Details
+  .panel-body
+    .item
+      | ID:
+      |  #{user.id}
+    .item
+      | First name:
+      |  #{user.first_name}
+    .item
+      | Last name:
+      |  #{user.last_name}
+    .item
+      | Role:
+      |  #{user.try(:role).try(:name)}
+    .item
+      | Department:
+      |  #{user.try(:department).try(:name)}
+    .item
+      | Title:
+      |  #{user.title}
+    - if policy(user).administer_financials?
+      .item
+        | Rate:
+        |  #{user.rate_display_with_period}
+  .panel-footer
+    - if current_user.admin?
+      = link_to edit_user_path(user), class: "btn btn-sm btn-warning", type: "button" do
+        i.glyphicon.glyphicon-edit
+        | Edit

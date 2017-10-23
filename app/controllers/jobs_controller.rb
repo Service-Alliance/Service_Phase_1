@@ -56,7 +56,7 @@ class JobsController < ApplicationController
   end
 
   def no_activity
-    @jobs = Job.where('last_action < ? AND status_id = ?', 7.days.ago, 1)
+    @jobs = Job.where('updated_at < ? AND status_id = ?', 7.days.ago, 1)
       .includes(job_associations)
       .limit(75)
     render json: @jobs.to_json(include: job_json_includes)
