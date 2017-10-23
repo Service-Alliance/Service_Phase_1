@@ -15,15 +15,13 @@
   <% end %>
 
     <div class="row">
-      <!-- FIXME: what do we do with category - there is a cateogory_type field on vendor but no category
-                  also a VendorCategory model, but no associated database table
       <div class="col-xs-6">
         <div class="form-group">
           <%= f.label :category %><br>
-          <%= f.select :category, class:"form-control" %>
+          <%= f.text_field :category_type, class:"form-control" %>
         </div>
       </div>
-      -->
+
       <div class="col-xs-6">
         <div class="form-group">
           <%= f.label :name %><br>
