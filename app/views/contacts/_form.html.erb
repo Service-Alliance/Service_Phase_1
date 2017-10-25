@@ -18,17 +18,37 @@
         <%= hidden_field_tag "job[job_id]", @job.id %>
         <% end %>
         <div class="col-xs-12">
+        <div class="row">
+        <div class="col-xs-6">
           <div class="form-group">
               <%= f.label :owner_id %><br>
               <%= f.collection_select :owner_id, User.all, :id, :full_name, {prompt: true},  { class: 'form-control'} %>
           </div>
         </div>
-        <div class="col-xs-4">
+          <div class="col-xs-6">
+          <div class="form-group">
+              <%= f.label :category %> <br>
+              <%= f.select :category, options_for_select([ ["Customer", "customer"], ["Agent", "agent"], ["Adjuster", "adjuster"], ["Caller", "caller"], ["Property Manager", "property manager"]]), class:"form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
             <div class="form-group">
-                <%= f.label :company %><br>
-                <%= f.text_field :company, class:"form-control" %>
+              <%= f.fields_for :contact_companies do |g| %>
+                <%= g.label :company_id %><br>
+                <%= g.collection_select :company_id, Company.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+              <% end %>
             </div>
         </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+              <%= label_tag "company[company_name]", "Create New Company" %><br />
+              <%= text_field_tag "company[company_name]", nil, class: "form-control" %>
+            </div>
+        </div>
+      </div>
+
         <div class="col-xs-4">
             <div class="form-group">
                 <%= f.label :first_name %><br>
@@ -49,7 +69,7 @@
         </div>
 
         <%= render 'address_form', f: f %>
-        <%= render 'partials/phone_form', f: f %>
+        <%= render 'phone_form', f: f %>
 
         <div class="col-xs-12 text-center">
             <div class="actions">

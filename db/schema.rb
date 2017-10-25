@@ -1025,9 +1025,32 @@ ActiveRecord::Schema.define(version: 20180126021252) do
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
     t.string   "events",                   default: [],                 array: true
+<<<<<<< HEAD
     t.integer  "state",                    default: 0,     null: false
     t.boolean  "consumables_required?",    default: false, null: false
     t.boolean  "archived",                 default: false, null: false
+  end
+
+  create_table "work_shift_breaks", force: :cascade do |t|
+    t.integer  "work_shift_id"
+    t.time     "start"
+    t.time     "end"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.decimal  "total_time"
+  end
+
+  add_index "work_shift_breaks", ["work_shift_id"], name: "index_work_shift_breaks_on_work_shift_id", using: :btree
+
+  create_table "work_shifts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "work_order_id"
+    t.date     "date"
+    t.time     "start"
+    t.time     "end"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.decimal  "total_time"
   end
 
   create_table "work_shift_breaks", force: :cascade do |t|
@@ -1070,6 +1093,10 @@ ActiveRecord::Schema.define(version: 20180126021252) do
   add_foreign_key "work_crew_assignments", "work_orders", on_delete: :cascade
   add_foreign_key "work_order_crew", "users"
   add_foreign_key "work_order_crew", "work_orders"
+  add_foreign_key "work_order_users", "users"
+  add_foreign_key "work_order_users", "work_orders"
+  add_foreign_key "work_order_vendors", "vendors"
+  add_foreign_key "work_order_vendors", "work_orders"
   add_foreign_key "work_shift_breaks", "work_shifts", on_delete: :cascade
   add_foreign_key "work_shifts", "users", on_delete: :cascade
   add_foreign_key "work_shifts", "work_orders", on_delete: :cascade
