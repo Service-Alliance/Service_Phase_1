@@ -12,6 +12,7 @@ class TsheetsAdapter
     # Due to issues i was unable to fix in original library
     #   https://github.com/tsheets/api_ruby/issues/5
     # I've re-implemented parts of api with Net::HTTP
+    # FIXME: I would use Faraday later for this
 
     url = URI("https://rest.tsheets.com/api/v1/timesheets?user_ids=#{user_id}&start_date=2016-06-06")
 
@@ -24,7 +25,11 @@ class TsheetsAdapter
     request["cache-control"] = 'no-cache'
 
     response = http.request(request)
-    response.read_body
+    result = JSON.parse(response.read_body)
+
+    EventStore.tsheets(result)
+
+    result
   end
 
   def find_users(filters = {})
