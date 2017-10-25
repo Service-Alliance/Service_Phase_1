@@ -164,6 +164,10 @@ class JobsController < ApplicationController
       if @job.update(job_params)
         @job.franchise_id = FranchiseZipcode.detect_franchise(address_params['zip_code'])
         @job.update(job_params)
+        franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
+        @job.franchise_id = franchise.franchise_id if franchise
+        @job.referral_employee_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
+        @job.referral_vendor_id = nil if @job.try(:referral_type).try(:name) != 'Vendor'
         @job.save
 
         @job.moving_to_invoiced(@previous_status.status_id, @job.status_id, @job)
