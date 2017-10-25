@@ -29,7 +29,7 @@ class JobDetailsController < ApplicationController
   def create
     @job_detail = JobDetail.new(job_detail_params)
     @job_detail.job_id = @job.id
-    @job.update_last_action
+
 
     respond_to do |format|
       if @job_detail.save

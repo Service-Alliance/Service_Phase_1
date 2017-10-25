@@ -34,7 +34,7 @@ class JobBuilder
     caller.address_id = address.id
     caller.add_company(company)
     caller.save!
-    job.update_last_action
+
 
     caller.phones.destroy_all
 

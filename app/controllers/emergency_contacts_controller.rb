@@ -38,7 +38,6 @@ class EmergencyContactsController < ApplicationController
       @emergency_contact.address_id = @address.id
       @emergency_contact.job_id = @job.id
       if @emergency_contact.save
-        @job.update_last_action
 
         @emergency_contact.phones.destroy_all
         phone_count = phone_params['type_ids'].try(:count) || 0
