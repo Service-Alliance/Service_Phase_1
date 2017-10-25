@@ -2,7 +2,7 @@
 
 <div id="number-container">
     <div class="col-xs-12">
-
+      <% if locals[:phone_for] == "caller" %>
       <% if @caller_phones || @caller_phones = @caller.try(:phones) %>
       <% @caller_phones.each_with_index do |phone, idx| %>
       <div id="caller" class="row">
@@ -30,9 +30,9 @@
           </div>
       </div>
       <% end %>
+      <% end %>
 
-
-
+      <% elsif locals[:phone_for] == "customer" %>
         <% if @phones %>
         <% @phones.each do |phone| %>
         <div id="customer" class="row">
@@ -60,8 +60,9 @@
             </div>
         </div>
         <% end %>
+        <% end %>
 
-
+        <% elsif locals[:phone_for] == "user" %>
           <% if @phones %>
           <% @phones.each do |phone| %>
           <div class="row">
@@ -92,7 +93,7 @@
           <% end %>
 
 
-
+        <% elsif locals[:phone_for] == "agents"  %>
 
 
           <% @phones.each do |phone| %>
@@ -122,7 +123,7 @@
           </div>
           <% end %>
 
-
+          <% elsif locals[:phone_for] == "adjusters" %>
 
           <% @phones = @adjuster.phones %>
             <% @phones.each do |phone| %>
@@ -152,6 +153,7 @@
             </div>
             <% end %>
 
+            <% elsif locals[:phone_for] == "emergency_contacts" %>
 
             <% @phones = @emergency_contact.phones %>
               <% @phones.each do |phone| %>
@@ -215,5 +217,4 @@
             </div>
         </div>
     </div>
-<% end %>
 <% end %>
