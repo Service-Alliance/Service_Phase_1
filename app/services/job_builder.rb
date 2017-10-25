@@ -28,7 +28,6 @@ class JobBuilder
     caller.address_id = address.id
     caller.add_company(company)
     caller.save!
-
     caller.phones.destroy_all
 
     phone_params.fetch('type_ids', []).count.times do |index|
