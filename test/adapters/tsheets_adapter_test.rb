@@ -10,6 +10,12 @@ class TsheetsAdapterTest < ActiveSupport::TestCase
     end
   end
 
+  test "timesheets" do
+    VCR.use_cassette('timesheets for single user') do
+      @adapter.timesheets('218514')
+    end
+  end
+
   test "verify that all correspondence is saved in ServiceMessage table" do
     VCR.use_cassette('retrieving users') do
       assert_difference('EventStore.count') { @adapter.find_users }
