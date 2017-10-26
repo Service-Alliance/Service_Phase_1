@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :phones, as: :phoneable
   has_one :rate, class_name: 'UserRate'
 
-  store_accessor :tsheets, :tsheets_id, :tsheets_first_name, :tsheets_last_name
+  store_accessor :tsheets, :tsheets_id
 
   delegate :name, to: :department, allow_nil: true, prefix: true
   delegate :display_with_period, :amount, :period, :salaried, :exempt, to: :rate, allow_nil: true, prefix: true
@@ -44,10 +44,6 @@ class User < ActiveRecord::Base
       'tsheets_company_name',
       'tsheets_id'
       ).map { |k,v| [k[8..(k.length)], v] }]
-  end
-
-  def tsheets_id
-    tsheets['tsheets_id']
   end
 
   def admin?

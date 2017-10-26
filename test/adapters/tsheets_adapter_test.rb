@@ -13,7 +13,7 @@ class TsheetsAdapterTest < ActiveSupport::TestCase
   test "timesheets" do
     VCR.use_cassette('timesheets for single user') do
       assert_difference 'EventStore.count' do
-        results = @adapter.timesheets('218514')
+        results = TsheetsAdapter.timesheets('218514')
         assert_equal 2, results.first.count
       end
     end

@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   post 'calls/postcall-webhook' => 'calls#postcall'
   get 'users/list' => 'users#list'
   resources :users do
+    resources :timesheets
     patch 'link_tsheets_user'
   end
   resources :states
