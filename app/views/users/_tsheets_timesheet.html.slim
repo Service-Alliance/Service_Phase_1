@@ -1,4 +1,4 @@
-= form_for :TsheetTimesheet do |f|
-  = f.submit('Refresh Data', remote: true, class:'btn btn-default')
+= form_for :TsheetTimesheet, remote: true, method: :patch, url: tsheets_user_path(user) do |f|
+  = f.submit('Refresh Data', class:'btn btn-default')
 hr
 

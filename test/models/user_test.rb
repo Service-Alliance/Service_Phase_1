@@ -28,6 +28,11 @@ class UserTest < ActiveSupport::TestCase
     assert_nil User.with_tsheets_id('missing_id').first
   end
 
+  test "tsheet_id" do
+    assert_nil users(:one).tsheets_id
+    assert_equal 459375, users(:with_tsheet).tsheets_id
+  end
+
   test "tsheet_info" do
     EXPECTED = {
       'email' => 'toneboneus@gmail.com',

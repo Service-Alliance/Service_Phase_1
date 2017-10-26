@@ -27,7 +27,7 @@
           #assigned.tab-pane.fade
             = render partial: 'jobs', locals: {jobs: @user.jobs_owned_by_user}
           #tsheets.tab-pane.fade
-            = render partial: 'tsheets_timesheet'
+            = render partial: 'tsheets_timesheet', locals: { user: @user }
   javascript:
     | $("#menu-toggle").click(function (e) {
       | e.preventDefault();

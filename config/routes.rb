@@ -129,7 +129,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   namespace :tsheets do
-    resources :users, only: :index
+    resources :users, only: [:index, :update]
   end
 
   require 'sidekiq/web'

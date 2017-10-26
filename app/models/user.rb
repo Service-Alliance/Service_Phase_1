@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
       ).map { |k,v| [k[8..(k.length)], v] }]
   end
 
+  def tsheets_id
+    tsheets['tsheets_id']
+  end
+
   def admin?
     self.role_id == 1 ? true : false
   end
