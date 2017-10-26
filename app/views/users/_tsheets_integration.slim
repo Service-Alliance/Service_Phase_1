@@ -10,8 +10,7 @@
       - if user.tsheets_id.present?
         - user.tsheet_info.each_pair do |key, value|
           .item
-            b #{key}
-            | :
+            b #{key}:
             |  #{value}
 
         <br/><br/>

@@ -24,8 +24,7 @@ class TsheetsAdapter
     request["authorization"] = "Bearer #{TSHEETS_KEY}"
     request["cache-control"] = 'no-cache'
 
-    response = http.request(request)
-    result = JSON.parse(response.read_body)
+    result = JSON.parse(http.request(request).read_body)
 
     EventStore.tsheets(result)
 
