@@ -6,21 +6,7 @@ class TsheetsAdapterFake
     missing: TSheets::Models::User.new(id: 5678, first_name: 'Darren', last_name: 'Zack')
   }
   def find_users(*args)
-    result = []
-    users = USERS.map {|rec| rec.second }
-
-    args.first.each do |record|
-      key = record.first
-
-      users.each do |user|
-        if user.call(key).eql?(record[key])
-          result << user
-        end
-      end
-
-    end
-
-    result
+    [USERS[:valid]]
   end
 end
 
@@ -28,7 +14,6 @@ class TsheetsServiceTest < ActiveSupport::TestCase
   def setup
     @service = TsheetsService.new(TsheetsAdapterFake.new)
     @valid_user = TsheetsAdapterFake::USERS[:valid]
-    @missing_user = TsheetsAdapterFake::USERS[:missing]
   end
 
   test "#find_by_names" do
