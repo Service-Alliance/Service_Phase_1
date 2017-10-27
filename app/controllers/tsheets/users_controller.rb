@@ -7,7 +7,7 @@ module Tsheets
     end
 
     def update
-      TsheetsAdapter.timesheets(User.find(user_params).tsheets_id)
+      TsheetsService.new.timesheets(User.find(user_params))
       render json: 'test'
     end
 
