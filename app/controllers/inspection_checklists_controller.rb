@@ -33,7 +33,7 @@ class InspectionChecklistsController < ApplicationController
     respond_to do |format|
       if @inpsection_checklist.save
         @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @inpsection_checklist.id, user_id: current_user.id)
-        @job.update_last_action
+
         format.html { redirect_to job_path(@job), notice: 'InspectionChecklist was successfully created.' }
         format.json { render :show, status: :created, location: @inpsection_checklist }
       else
@@ -48,7 +48,6 @@ class InspectionChecklistsController < ApplicationController
   def update
     respond_to do |format|
       if @inpsection_checklist.update(inspection_checklist_params)
-        @job.update_last_action
         format.html { redirect_to job_inpsection_checklist_path(@job, @inpsection_checklist), notice: 'InspectionChecklist was successfully updated.' }
         format.json { render :show, status: :ok, location: @inpsection_checklist }
       else

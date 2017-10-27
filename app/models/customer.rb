@@ -1,6 +1,8 @@
 class Customer < ActiveRecord::Base
   has_many :phones, as: :phoneable
+  accepts_nested_attributes_for :phones, reject_if: :all_blank, allow_destroy: true
   belongs_to :address
+  accepts_nested_attributes_for :address
   has_many :notes, as: :noteable, dependent: :destroy
   has_many :trackers, as: :trackable, dependent: :destroy
   has_many :uploads, as: :uploadable, dependent: :destroy
@@ -15,7 +17,7 @@ class Customer < ActiveRecord::Base
   has_many :vendors, through: :customer_vendors
   accepts_nested_attributes_for :customer_vendors
 
-  delegate :full_address, :address_without_county, to: :address, allow_nil: true
+  delegate :full_address, :address_without_county, :format_address, to: :address, allow_nil: true
 
   include PgSearch
   include PublicActivity::Model
@@ -136,7 +138,7 @@ class Customer < ActiveRecord::Base
       "method":"createLeads",
       "params":
         {"objects":
-          [{"firstName": self.first_name,"lastName": self.last_name,"emailAddress": self.email, "companyName": self.company_name, "title": self.title, "website": self.website, "street": self.try(:address).try(:address_1), "city": self.try(:address).try(:city), "state": self.try(:address).try(:state).try(:name), "mobilePhoneNumber": self.try(:phones).where(type_id: 1).first.try(:number), "mobilePhoneNumber": self.try(:phones).where(type_id: 3).first.try(:number), "officePhoneNumber": self.try(:phones).where(type_id: 2).first.try(:number), "faxNumber": self.try(:phones).where(type_id: 4).first.try(:number)}]
+          [{"firstName": self.first_name,"lastName": self.last_name,"emailAddress": self.email, "companyName": self.company_name, "title": self.title, "website": self.website, "street": self.try(:address).try(:address_1), "city": self.try(:address).try(:city), "state": self.try(:address).try(:state).try(:name), "mobilePhoneNumber": self.try(:phones).where(type_id: 1).first.try(:number), "officePhoneNumber": self.try(:phones).where(type_id: 2).first.try(:number), "faxNumber": self.try(:phones).where(type_id: 4).first.try(:number)}]
         },
       "id":"1"
     }.to_json

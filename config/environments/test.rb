@@ -39,4 +39,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Turns off logging for test environment, 6% speed up for testsuit
+  config.logger = Logger.new(nil)
+  config.log_level = :fatal
 end

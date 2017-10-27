@@ -165,12 +165,14 @@
             data-sort-order="desc">
             <thead>
               <tr>
+
                 <th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="LinkFormatter">Job Name</th>
                 <th data-field="job_status_name" data-sortable="true">Status</th>
                 <th data-field="customer_full_name" data-sortable="true">Customer Name</th>
                 <th data-field="claim_number" data-sortable="true">Claim Number</th>
                 <th data-field="job_loss_type_name" data-sortable="true">Job Loss Type</th>
                 <th data-field="insurance_company_name" data-sortable="true">Insurance Carrier</th>
+
                 <th data-field="created_at" data-sortable="true">Date Received</th>
               </tr>
             </thead>
@@ -282,31 +284,22 @@
     </div>
   </div>
 
-    <script>
-$("#menu-toggle").click(function (e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
+  <script>
+    $("#menu-toggle").click(function (e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
     });
-function LinkFormatter(value, row, index) {
-  return "<a target='_blank href='/calls/" + row.id + ">" + value + "</a>";
-}
-function AddVendor(value, row, index) {
-  return "<a class='add-call' target='_blank' href='call_id=" + row.id + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
-}
-function CallRailTimeline(value, row, index) {
-  return "<a href='https://app.callrail.com/calls/" + value + "'>Timeline Link</a>";
-}
 
-flatpickr(".datePicker", {
-enableTime: false,
-// create an extra input solely for display purposes
-altInput: true,
-altFormat: "F j, Y"
-});
+    flatpickr(".datePicker", {
+      enableTime: false,
+      // create an extra input solely for display purposes
+      altInput: true,
+      altFormat: "F j, Y"
+    });
 
-$('[data-toggle=tab]').click(function () {
-    if ($(this).parent().hasClass('active')) {
-    $($(this).attr("href")).toggleClass('active');
-    }
+    $('[data-toggle=tab]').click(function () {
+      if ($(this).parent().hasClass('active')) {
+      $($(this).attr("href")).toggleClass('active');
+      }
     })
-    </script>
+  </script>

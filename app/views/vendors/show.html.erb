@@ -87,7 +87,18 @@
           <%= link_to "View", vendor_vendor_upload_path(@vendor, @w9)%>
           <% end %>
         </div>
-
+        <div class="item">
+          Supervisor Rate:
+          <%= @vendor.supervisor_rate %>
+        </div>
+        <div class="item">
+          Technician Rate:
+          <%= @vendor.technician_rate %>
+        </div>
+        <div class="item">
+          Loss Rates:
+          <%= @vendor.try(:loss_type_id).try(:rate) %>
+        </div>
       </div>
       <div class="panel-footer">
         <% if Vendor.can_edit?(current_user) %>
@@ -290,9 +301,6 @@
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
-    function LinkFormatter(value, row, index) {
-      return "<a target='_blank href='/calls/" + row.id + ">" + value + "</a>";
-    }
     function AddVendor(value, row, index) {
       return "<a class='add-call' target='_blank' href='call_id=" + row.id + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
     }

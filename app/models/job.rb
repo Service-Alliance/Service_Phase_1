@@ -42,6 +42,13 @@ class Job < ActiveRecord::Base
   delegate :full_address, to: :caller, allow_nil: true, prefix: true
   delegate :full_name, :address_without_county, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true
   delegate :name, to: :franchise, allow_nil: true, prefix: true
+  delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
+  delegate :full_name, to: :user, allow_nil: true, prefix: true
+  delegate :full_name, :address_without_county, :format_address, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true
+  delegate :name, to: :job_status, allow_nil: true, prefix: true
+  delegate :name, to: :franchise, allow_nil: true, prefix: true
+  delegate :full_address, :format_address, to: :caller, allow_nil: true, prefix: true
+  delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
   delegate :name, to: :insurance_company, allow_nil: true, prefix: true
   delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
   delegate :insurance_company, :claim_number, to: :job_detail, allow_nil: true, prefix: false
@@ -83,11 +90,6 @@ class Job < ActiveRecord::Base
 
   def job_manager_names
     job_managers.map(&:full_name)
-  end
-
-  def update_last_action
-    self.last_action = Date.today
-    save
   end
 
   def self.value

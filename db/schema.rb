@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009190645) do
+ActiveRecord::Schema.define(version: 20171021070557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -332,11 +332,11 @@ ActiveRecord::Schema.define(version: 20171009190645) do
   create_table "franchise_zipcodes", force: :cascade do |t|
     t.integer  "franchise_id"
     t.string   "zip_code"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "city"
     t.string   "county"
-    t.boolean  "assigned"
+    t.boolean  "assigned",     default: true, null: false
   end
 
   create_table "franchises", force: :cascade do |t|
@@ -461,7 +461,6 @@ ActiveRecord::Schema.define(version: 20171009190645) do
     t.integer  "agent_id"
     t.integer  "adjuster_id"
     t.date     "recieved"
-    t.date     "last_action"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.text     "referral_note"
@@ -888,6 +887,17 @@ ActiveRecord::Schema.define(version: 20171009190645) do
 
   add_index "vendor_assignments", ["job_id"], name: "index_vendor_assignments_on_job_id", using: :btree
 
+  create_table "vendor_loss_rates", force: :cascade do |t|
+    t.integer  "vendor_id"
+    t.integer  "loss_type_id"
+    t.decimal  "rate"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "vendor_loss_rates", ["loss_type_id"], name: "index_vendor_loss_rates_on_loss_type_id", using: :btree
+  add_index "vendor_loss_rates", ["vendor_id"], name: "index_vendor_loss_rates_on_vendor_id", using: :btree
+
   create_table "vendor_upload_types", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -923,6 +933,8 @@ ActiveRecord::Schema.define(version: 20171009190645) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.boolean  "active",                           default: true
+    t.decimal  "supervisor_rate"
+    t.decimal  "technician_rate"
   end
 
   create_table "work_order_users", force: :cascade do |t|
@@ -974,6 +986,7 @@ ActiveRecord::Schema.define(version: 20171009190645) do
     t.integer  "number_of_technicians"
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
+    t.string   "events",                   default: [],                 array: true
   end
 
   add_foreign_key "caller_companies", "callers"
@@ -981,6 +994,8 @@ ActiveRecord::Schema.define(version: 20171009190645) do
   add_foreign_key "franchise_work_order_distributions", "franchises", on_delete: :cascade
   add_foreign_key "franchise_work_order_distributions", "users", on_delete: :cascade
   add_foreign_key "user_rates", "users", on_delete: :cascade
+  add_foreign_key "vendor_loss_rates", "loss_types", on_delete: :cascade
+  add_foreign_key "vendor_loss_rates", "vendors", on_delete: :cascade
   add_foreign_key "work_order_users", "users"
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"

@@ -353,7 +353,7 @@
                                                     <thead>
                                                         <tr>
                                                           <th data-field="callrail_id" data-sortable="true" data-formatter="ReturnCallRail">CallRail Timeline</th>
-                                                            <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Call Link</th>
+                                                            <th data-field="id" data-sortable="true" data-formatter="CallLinkFormatter">Call Link</th>
                                                             <th data-field="callrail_id" data-sortable="true">CallRail ID</th>
                                                             <th data-field="datetime" data-sortable="true">Call Date/Time</th>
                                                             <th data-field="customer_phone_number" data-sortable="true">Phone Number</th>
@@ -387,7 +387,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th data-field="id" data-sortable="true" data-formatter="AddVendor"></th>
-                                                            <th data-field="id" data-sortable="true" data-formatter="LinkFormatter">Call Link</th>
+                                                            <th data-field="id" data-sortable="true" data-formatter="CallLinkFormatter">Call Link</th>
                                                             <th data-field="callrail_id" data-sortable="true">CallRail ID</th>
                                                             <th data-field="datetime" data-sortable="true">Call Date/Time</th>
                                                             <th data-field="customer_phone_number" data-sortable="true">Phone Number</th>
@@ -869,7 +869,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">Add Current Call</h4>
+                    <h4 class="modal-title">Update Job Status</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -891,7 +891,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <%= f.submit "Add Call to Job", class: "btn btn-primary" %>
+                    <%= f.submit "Update", class: "btn btn-primary" %>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                 </div>
@@ -910,18 +910,6 @@
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
-        function LinkFormatter(value, row, index) {
-            return "<a target='_blank href='/calls/" + row.id + ">" + value + "</a>";
-        }
-        function AddVendor(value, row, index) {
-            return "<a class='add-call' target='_blank' href='call_id=" + row.id + "'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a>";
-        }
-        function CallRailTimeline(value, row, index) {
-            return "<a href='https://app.callrail.com/calls/" + value + "'>Timeline Link</a>";
-        }
-        function ReturnCallRail(value, row, index){
-            return "<a class='btn btn-primary' href='https://app.callrail.com/a/686639065/leadcenter/#/calls/" + value + "'>Return Call</a>";
-        }
 
         flatpickr(".datePicker", {
             enableTime: false,

@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sendgrid:
+  event_type: SGE
+  data:
+    :origin_id: 1511
+    :ip: 47.19.76.18
+    :sg_event_id: d4t3j8mnQryO3K41fjHfHg
+    :sg_message_id: aGcBvIOoS7enqwliu5gL-w.filter0002p3iad2-15652-59DD20A3-2E.0
+    :useragent: Mozilla/4.0
+    :origin_type: work_order
+    :event: open
+    :email: aott@servpro5933.com
+    :timestamp: 1507666113
