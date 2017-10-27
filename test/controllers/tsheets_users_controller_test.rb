@@ -3,7 +3,7 @@ require_relative '../../app/controllers/tsheets/users_controller'
 
 class Tsheets::UsersControllerTest < ActionController::TestCase
   setup do
-    @user = users(:one)
+    @user = users(:with_tsheet)
     sign_in(@user)
   end
 

@@ -20,6 +20,9 @@ class TsheetsServiceTest < ActiveSupport::TestCase
     assert_equal [@valid_user], @service.find_by_names('Dave')
   end
 
+  test "update_timesheets errors" do
+    assert_raises(TsheetsService::MissingTsheetsId) { @service.update_timesheets(users(:one)) }
+  end
 
   test "#update_timesheets" do
     VCR.use_cassette('timesheet request, with service') do

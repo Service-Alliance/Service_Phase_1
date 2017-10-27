@@ -1,9 +1,12 @@
 class TsheetsService
+  class MissingTsheetsId < StandardError; end
+
   def initialize(adapter = TsheetsAdapter.new)
     @adapter = adapter
   end
 
   def update_timesheets(for_user)
+    raise MissingTsheetsId.new if for_user.tsheets_id.nil?
     @adapter.timesheets(for_user.tsheets_id)
   end
 
