@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -29,8 +31,19 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def tsheets_full_name
-    [tsheets_first_name, tsheets_last_name].delete_if(&:blank?).join(' ')
+  def tsheet_info
+    return {} if tsheets.blank?
+
+    Hash[tsheets.slice(
+      'tsheets_email',
+      'tsheets_email_verified',
+      'tsheets_username',
+      'tsheets_active',
+      'tsheets_last_name',
+      'tsheets_first_name',
+      'tsheets_company_name',
+      'tsheets_id'
+      ).map { |k,v| [k[8..(k.length)], v] }]
   end
 
   def admin?

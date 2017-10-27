@@ -82,8 +82,20 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       @job = Job.find_by(id: job_param[:job_id])
-        if @address = Address.find_by(id: @contact.address_id)
-          if @address.update(address_params)
+      if @address = Address.find_by(id: @contact.address_id)
+        if @address.update(address_params)
+        end
+      else
+        @address = Address.new(address_params)
+        @address.save
+        @contact.address_id = @address.id
+      end
+      if @contact.update(contact_params)
+        @contact.phones.destroy_all
+        phone_count = phone_params["type_ids"].count
+        phone_count.times do |index|
+          unless phone_params["numbers"][index] == ""
+            @contact.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])
           end
         else
           @address = Address.new(address_params)

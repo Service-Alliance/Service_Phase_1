@@ -1,4 +1,7 @@
 class RequireNamesForModels < ActiveRecord::Migration
+  class PipelineStatus < ActiveRecord::Base; end
+
+
   def change
     [StructureType,
      Role,

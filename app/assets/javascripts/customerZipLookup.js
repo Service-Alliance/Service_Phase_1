@@ -2,12 +2,13 @@ $(function() {
   $(document).on('click', '#customerZipLookup', function(event){
 
     event.preventDefault();
-    customerZipLookup();
+    customerZipLookup.call(this);
   });
 });
 
 function customerZipLookup(){
-  var zip = $("#customer_address_zip_code").val();
+  var container = $(this).parents('.customer-address');
+  var zip = container.find(".zip-code").val();
 
   $.ajax({
     method: "POST",
@@ -15,13 +16,15 @@ function customerZipLookup(){
     data: {'data': zip},
     dataType: 'json'
   })
-  .success(function(response){
-    var city = response[0]['data']['address_components'][1].long_name
-    var county = response[0]['data']['address_components'][2].long_name
-    var state = response[0]['data']['address_components'][3].short_name
-    $("#customer_address_city").val(city)
-    $("#customer_address_county").val(county)
-    var state_val = $('#customer_address_state_id option').filter(function () { return $(this).html() == state; }).val();
-    $("#customer_address_state_id").val(state_val)
+  .done(function(response){
+    if(response && response.length > 0) {
+      var city = response[0]['data']['address_components'][1].long_name
+      var county = response[0]['data']['address_components'][2].long_name
+      var state = response[0]['data']['address_components'][3].short_name
+      container.find('.city').val(city)
+      container.find('.county').val(county)
+      var state_val = container.find('.state-id option').filter(function () { return $(this).html() == state; }).val();
+      container.find('.state').val(state_val)
+    }
   })
 }

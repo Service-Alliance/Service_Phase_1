@@ -46,7 +46,7 @@ class SubscriptionsController < ApplicationController
   def destroy
     @subscription.destroy
     respond_to do |format|
-      format.html { redirect_to job_subscriptions_path(@job), notice: 'Sales Rep was successfully destroyed.' }
+      format.html { redirect_to @job, notice: 'Sales Rep was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

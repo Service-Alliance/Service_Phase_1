@@ -7,7 +7,6 @@ class TsheetsAdapterTest < ActiveSupport::TestCase
     VCR.use_cassette('retrieving users') do
       users = @adapter.find_users
       assert_equal 112, users.count
-      #binding.pry
     end
   end
 

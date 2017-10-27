@@ -9,6 +9,10 @@ class JobTest < ActiveSupport::TestCase
     assert_equal "MyString MyString MyString 12345 MyString", @job.customer_full_address
   end
 
+  test "#customer_address_without_county" do
+    assert_equal "MyString MyString MyString 12345", @job.customer_address_without_county
+  end
+
   test "Job#with_manager_id" do
     Job.with_manager_id(@job.job_managers.first.job_manager_id).tap do |jobs|
       assert_equal 1, jobs.count

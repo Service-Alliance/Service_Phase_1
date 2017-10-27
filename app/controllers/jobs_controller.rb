@@ -56,7 +56,7 @@ class JobsController < ApplicationController
   end
 
   def no_activity
-    @jobs = Job.where('last_action < ? AND status_id = ?', 7.days.ago, 1)
+    @jobs = Job.where('updated_at < ? AND status_id = ?', 7.days.ago, 1)
       .includes(job_associations)
       .limit(75)
     render json: @jobs.to_json(include: job_json_includes)
@@ -102,6 +102,7 @@ class JobsController < ApplicationController
     @property = @job.build_property
     @job_detail = @job.build_job_detail
     @customer = @job.build_customer
+    @customer.phones.build
     render :new
   end
 
@@ -164,6 +165,8 @@ class JobsController < ApplicationController
       if @job.update(job_params)
         franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
         @job.franchise_id = franchise.franchise_id if franchise
+        @job.franchise_id = FranchiseZipcode.detect_franchise(address_params['zip_code'])
+        @job.update(job_params)
         @job.referral_employee_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
         @job.referral_vendor_id = nil if @job.try(:referral_type).try(:name) != 'Vendor'
         @job.save
@@ -305,7 +308,6 @@ class JobsController < ApplicationController
 
     unless @job.job_managers.pluck(:job_manager_id).include?(@user.id)
       @job_manager = @job.job_managers.create(job_manager_id: @user.id)
-      @job.update_last_action
       @job.pipeline_status_id = 2
       @job.save
 
@@ -433,6 +435,7 @@ class JobsController < ApplicationController
                                 :work_center_link,
                                 :xact_link,
                                 customer_attributes: [
+                                  :id,
                                   :first_name,
                                   :last_name,
                                   :email,
@@ -441,9 +444,25 @@ class JobsController < ApplicationController
                                   :zip_code,
                                   :city,
                                   :state_id,
-                                  :county
+                                  :county,
+                                  phones_attributes: [
+                                    :id,
+                                    :type_id,
+                                    :number,
+                                    :extension,
+                                    :_destroy
+                                  ],
+                                  address_attributes: [
+                                    :address_1,
+                                    :address_2,
+                                    :zip_code,
+                                    :city,
+                                    :state_id,
+                                    :county
+                                  ]
                                 ],
                                 losses_attributes: [
+                                  :id,
                                   :loss_occurred,
                                   :fnol_received,
                                   :customer_called,
@@ -460,6 +479,7 @@ class JobsController < ApplicationController
                                   :notes
                                 ],
                                 property_attributes: [
+                                  :id,
                                   :structure_type_id,
                                   :property_type_id,
                                   :year_built,
@@ -472,6 +492,7 @@ class JobsController < ApplicationController
                                   :condo,
                                   flooring_type_ids: []],
                                 job_detail_attributes: [
+                                  :id,
                                   :insurance_company_id,
                                   :claim_number,
                                   :policy_number,
