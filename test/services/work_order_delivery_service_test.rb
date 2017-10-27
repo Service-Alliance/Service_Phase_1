@@ -13,14 +13,9 @@ class WorkOrderDeliveryServiceTest < ActiveSupport::TestCase
   test "send out a lot of emails" do
     assert_enqueued_jobs 0
     WorkOrderDeliveryService.new(@work_order, @current_user).deliver!
-    assert_enqueued_jobs 4
+    assert_enqueued_jobs 3
   end
-
-  test 'delivers to the scheduling manager normally' do
-    WorkOrderDeliveryService.new(@work_order, @current_user).deliver!
-    assert mail_enqueued_for_user(users(:scheduling_manager))
-  end
-
+  
   test 'does not send to scheduling manager if dept Construction and vendors present' do
     @work_order.vendors << vendors(:one)
     @current_user.update_attribute :department_id, departments(:construction).id

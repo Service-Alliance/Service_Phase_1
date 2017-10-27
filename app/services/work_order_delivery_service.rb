@@ -22,7 +22,7 @@ class WorkOrderDeliveryService
 
   def send_to_scheduling_manager
     return unless should_send_to_scheduling_manager?
-    sched_manager = User.find_by(email: "kroggemann@servpro5933.com")
+    sched_manager = User.find_by(email: 'dankluger@servpro5933.com')
     deliver_user_email(sched_manager) if sched_manager.present?
   end
 
