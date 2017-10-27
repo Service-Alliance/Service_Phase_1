@@ -8,7 +8,8 @@ class TsheetsAdapter
     end
   end
 
-  def self.timesheets(user_id)
+  # Doesn't have to a be a instance method
+  def timesheets(user_id)
     # Due to issues i was unable to fix in original library
     #   https://github.com/tsheets/api_ruby/issues/5
     # I've re-implemented parts of api with Net::HTTP

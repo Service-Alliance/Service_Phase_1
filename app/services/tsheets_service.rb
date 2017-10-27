@@ -3,8 +3,8 @@ class TsheetsService
     @adapter = adapter
   end
 
-  def timesheets(for_user)
-    TsheetsAdapter.timesheets(for_user.tsheets_id)
+  def update_timesheets(for_user)
+    @adapter.timesheets(for_user.tsheets_id)
   end
 
   def find_by_names(term)

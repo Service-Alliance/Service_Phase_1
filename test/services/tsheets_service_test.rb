@@ -3,10 +3,24 @@ require 'test_helper'
 class TsheetsAdapterFake
   USERS = {
     valid: TSheets::Models::User.new(id: 1234, first_name: 'Dave', last_name: 'Jones'),
-    missing: TSheets::Models::User.new(id: 5678, first_name: 'Darren', last_name: 'Smith')
+    missing: TSheets::Models::User.new(id: 5678, first_name: 'Darren', last_name: 'Zack')
   }
-  def find_users
-    [USERS[:valid], USERS[:missing]]
+  def find_users(*args)
+    result = []
+    users = USERS.map {|rec| rec.second }
+
+    args.first.each do |record|
+      key = record.first
+
+      users.each do |user|
+        if user.call(key).eql?(record[key])
+          result << user
+        end
+      end
+
+    end
+
+    result
   end
 end
 
@@ -15,5 +29,21 @@ class TsheetsServiceTest < ActiveSupport::TestCase
     @service = TsheetsService.new(TsheetsAdapterFake.new)
     @valid_user = TsheetsAdapterFake::USERS[:valid]
     @missing_user = TsheetsAdapterFake::USERS[:missing]
+  end
+
+  test "#find_by_names" do
+    assert_equal [@valid_user], @service.find_by_names('Dave')
+  end
+
+
+  test "#update_timesheets" do
+    VCR.use_cassette('timesheet request, with service') do
+      TsheetsService.new.update_timesheets(users(:with_tsheet)).tap do |result|
+        assert_kind_of Hash, result
+        refute_nil result['results']
+        assert result['more']
+        refute_nil result['supplemental_data']
+      end
+    end
   end
 end
