@@ -8,13 +8,9 @@ class TsheetsAdapter
     end
   end
 
-  # Doesn't have to a be a instance method
+  # FIXME: Doesn't have to a be a instance method
+  # FIXME: I would use Faraday later to simplify things
   def timesheets(user_id)
-    # Due to issues i was unable to fix in original library
-    #   https://github.com/tsheets/api_ruby/issues/5
-    # I've re-implemented parts of api with Net::HTTP
-    # FIXME: I would use Faraday later for this
-
     url = URI("https://rest.tsheets.com/api/v1/timesheets?user_ids=#{user_id}&start_date=2016-06-06")
 
     http = Net::HTTP.new(url.host, url.port)
@@ -25,18 +21,13 @@ class TsheetsAdapter
     request["authorization"] = "Bearer #{TSHEETS_KEY}"
     request["cache-control"] = 'no-cache'
 
-    result = JSON.parse(http.request(request).read_body)
-
-    EventStore.tsheets(result)
-
-    result
+    JSON.parse(http.request(request).read_body).tap do |resp|
+      EventStore.tsheets(resp)
+    end
   end
 
   def find_users(filters = {})
-    response = tsheets_api.users.where(filters).all
-    EventStore.tsheets(response)
-
-    response
+    tsheets_api.users.where(filters).all.tap { |resp|  EventStore.tsheets(resp)}
   end
 
   private
