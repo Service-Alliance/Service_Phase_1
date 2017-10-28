@@ -9,8 +9,11 @@ class TsheetsService
     raise MissingTsheetsId.new if for_user.tsheets_id.nil?
 
     response = @adapter.timesheets(for_user.tsheets_id)
-    for_user.timesheets = response['results']['timesheets']
-    for_user.save
+
+    if response['results']
+      for_user.timesheets = response['results']['timesheets']
+      for_user.save
+    end
 
     response
   end
