@@ -7,7 +7,12 @@ class TsheetsService
 
   def update_timesheets(for_user)
     raise MissingTsheetsId.new if for_user.tsheets_id.nil?
-    @adapter.timesheets(for_user.tsheets_id)
+
+    response = @adapter.timesheets(for_user.tsheets_id)
+    for_user.timesheets = response['results']['timesheets']
+    for_user.save
+
+    response
   end
 
   def find_by_names(term)

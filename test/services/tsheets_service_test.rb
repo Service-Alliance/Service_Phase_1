@@ -25,13 +25,18 @@ class TsheetsServiceTest < ActiveSupport::TestCase
   end
 
   test "#update_timesheets" do
+    user = users(:with_tsheet)
     VCR.use_cassette('timesheet request, with service') do
-      TsheetsService.new.update_timesheets(users(:with_tsheet)).tap do |result|
+      assert user.timesheets.blank?
+
+      TsheetsService.new.update_timesheets(user).tap do |result|
         assert_kind_of Hash, result
         refute_nil result['results']
         assert result['more']
         refute_nil result['supplemental_data']
       end
+
+      assert_equal 50, user.reload.timesheets.count
     end
   end
 end
