@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.3/metisMenu.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.6.3/metisMenu.min.js"></script>
     <%= csrf_meta_tags %>
+    <%= Gon::Base.render_data %>
   </head>
   <body>
     <% if current_user && (current_user.admin? || current_user.job_coordinator? || current_user.unassigned? || current_user.owner? || current_user.collections?) %>

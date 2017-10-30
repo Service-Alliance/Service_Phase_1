@@ -15,6 +15,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    #FIXME: currently, only 50 records are used
+    gon.timesheets = @user.timesheets
   end
 
   # GET /users/new
