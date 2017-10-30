@@ -1,0 +1,500 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://rest.tsheets.com/api/v1/timesheets?start_date=2016-06-06&user_ids=218514
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Authorization:
+      - Bearer S.3__b71d2047fe9ad7e4c950674eb1276982f28384de
+      Cache-Control:
+      - no-cache
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 25 Oct 2017 18:57:03 GMT
+      Server:
+      - Apache
+      Cache-Control:
+      - no-cache, must-revalidate
+      Expires:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      Content-Length:
+      - '3468'
+      Content-Type:
+      - application/json
+    body:
+      encoding: ASCII-8BIT
+      string: "{\n \"results\": {\n  \"timesheets\": {\n   \"2853171\": {\n    \"id\":
+        2853171,\n    \"user_id\": 218514,\n    \"jobcode_id\": 0,\n    \"start\":
+        \"2016-10-06T16:06:38-04:00\",\n    \"end\": \"2016-10-06T16:15:31-04:00\",\n
+        \   \"duration\": 533,\n    \"date\": \"2016-10-06\",\n    \"tz\": -4,\n    \"tz_str\":
+        \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\": \"TSheets
+        iPhone App\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n    \"notes\":
+        \"\",\n    \"customfields\": {\n     \"33849\": \"\",\n     \"33853\": \"\",\n
+        \    \"33851\": \"\"\n    },\n    \"last_modified\": \"2016-10-06T20:15:33+00:00\"\n
+        \  },\n   \"2854137\": {\n    \"id\": 2854137,\n    \"user_id\": 218514,\n
+        \   \"jobcode_id\": 0,\n    \"start\": \"2016-10-06T16:15:32-04:00\",\n    \"end\":
+        \"2016-10-07T00:00:00-04:00\",\n    \"duration\": 27868,\n    \"date\": \"2016-10-06\",\n
+        \   \"tz\": -4,\n    \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n
+        \   \"location\": \"TSheets iPhone App\",\n    \"on_the_clock\": false,\n
+        \   \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n     \"33849\":
+        \"\",\n     \"33853\": \"\",\n     \"33851\": \"\"\n    },\n    \"last_modified\":
+        \"2016-10-10T18:36:59+00:00\"\n   },\n   \"3060502\": {\n    \"id\": 3060502,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 0,\n    \"start\": \"2016-10-07T00:00:00-04:00\",\n
+        \   \"end\": \"2016-10-10T14:36:57-04:00\",\n    \"duration\": 311817,\n    \"date\":
+        \"2016-10-07\",\n    \"tz\": -4,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"TSheets iPhone App\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"\",\n     \"33853\": \"\",\n     \"33851\": \"\"\n    },\n
+        \   \"last_modified\": \"2016-10-10T18:36:59+00:00\"\n   },\n   \"9305449\":
+        {\n    \"id\": 9305449,\n    \"user_id\": 218514,\n    \"jobcode_id\": 6522705,\n
+        \   \"start\": \"2016-12-16T15:51:00-05:00\",\n    \"end\": \"2016-12-16T15:59:00-05:00\",\n
+        \   \"duration\": 480,\n    \"date\": \"2016-12-16\",\n    \"tz\": -5,\n    \"tz_str\":
+        \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\": \"(Hicksville,
+        NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n    \"notes\":
+        \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n
+        \    \"33851\": \"FIRE RESTORATION\"\n    },\n    \"last_modified\": \"2016-12-16T20:59:20+00:00\"\n
+        \  },\n   \"9306947\": {\n    \"id\": 9306947,\n    \"user_id\": 218514,\n
+        \   \"jobcode_id\": 6522695,\n    \"start\": \"2016-12-16T15:59:00-05:00\",\n
+        \   \"end\": \"2016-12-16T16:00:00-05:00\",\n    \"duration\": 60,\n    \"date\":
+        \"2016-12-16\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FIRE
+        RESTORATION\"\n    },\n    \"last_modified\": \"2016-12-16T21:00:20+00:00\"\n
+        \  },\n   \"9308214\": {\n    \"id\": 9308214,\n    \"user_id\": 218514,\n
+        \   \"jobcode_id\": 6523103,\n    \"start\": \"2016-12-16T16:05:00-05:00\",\n
+        \   \"end\": \"2016-12-16T16:23:00-05:00\",\n    \"duration\": 1080,\n    \"date\":
+        \"2016-12-16\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"TSheets iPhone App\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"I cleaned the ducts\",\n    \"customfields\":
+        {\n     \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\":
+        \"DUCT CLEANING\"\n    },\n    \"last_modified\": \"2016-12-16T21:23:04+00:00\"\n
+        \  },\n   \"9384804\": {\n    \"id\": 9384804,\n    \"user_id\": 218514,\n
+        \   \"jobcode_id\": 6521905,\n    \"start\": \"2016-12-18T14:50:00-05:00\",\n
+        \   \"end\": \"2016-12-18T14:52:00-05:00\",\n    \"duration\": 120,\n    \"date\":
+        \"2016-12-18\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"TSheets iPhone App\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"DUCT
+        CLEANING\"\n    },\n    \"last_modified\": \"2016-12-18T19:52:12+00:00\"\n
+        \  },\n   \"9390915\": {\n    \"id\": 9390915,\n    \"user_id\": 218514,\n
+        \   \"jobcode_id\": 6522713,\n    \"start\": \"2016-12-18T18:09:00-05:00\",\n
+        \   \"end\": \"2016-12-18T19:36:00-05:00\",\n    \"duration\": 5220,\n    \"date\":
+        \"2016-12-18\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"TSheets iPhone App\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2016-12-19T00:35:41+00:00\"\n   },\n
+        \  \"9452647\": {\n    \"id\": 9452647,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2016-12-19T10:35:00-05:00\",\n    \"end\": \"2016-12-19T19:16:00-05:00\",\n
+        \   \"duration\": 31260,\n    \"date\": \"2016-12-19\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"TSheets iPhone App\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2016-12-20T00:15:34+00:00\"\n   },\n   \"9595826\": {\n    \"id\": 9595826,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2016-12-20T09:00:00-05:00\",\n
+        \   \"end\": \"2016-12-20T19:25:00-05:00\",\n    \"duration\": 37500,\n    \"date\":
+        \"2016-12-20\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"TSheets iPhone App\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2016-12-21T00:24:53+00:00\"\n   },\n
+        \  \"9760051\": {\n    \"id\": 9760051,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2016-12-21T09:17:00-05:00\",\n    \"end\": \"2016-12-21T22:18:00-05:00\",\n
+        \   \"duration\": 46860,\n    \"date\": \"2016-12-21\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"TSheets iPhone App\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2016-12-22T03:17:46+00:00\"\n   },\n   \"9915804\": {\n    \"id\": 9915804,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2016-12-22T09:36:00-05:00\",\n
+        \   \"end\": \"2016-12-22T19:54:00-05:00\",\n    \"duration\": 37080,\n    \"date\":
+        \"2016-12-22\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"TSheets iPhone App\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2016-12-23T00:54:08+00:00\"\n   },\n
+        \  \"10060113\": {\n    \"id\": 10060113,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2016-12-23T10:00:00-05:00\",\n    \"end\": \"2016-12-23T11:00:00-05:00\",\n
+        \   \"duration\": 3600,\n    \"date\": \"2016-12-23\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2016-12-23T16:30:38+00:00\"\n   },\n   \"10060137\": {\n    \"id\": 10060137,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2016-12-23T11:31:00-05:00\",\n
+        \   \"end\": \"2016-12-23T15:51:00-05:00\",\n    \"duration\": 15600,\n    \"date\":
+        \"2016-12-23\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2016-12-23T20:51:03+00:00\"\n   },\n
+        \  \"10610322\": {\n    \"id\": 10610322,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2016-12-26T09:00:00-05:00\",\n    \"end\": \"2016-12-26T17:00:00-05:00\",\n
+        \   \"duration\": 28800,\n    \"date\": \"2016-12-26\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"Combined hours for Monday, 12\\/26 & Friday 12\\/20\\/16
+        - re: Accounting closing books\\/check writing for 2016 & unable to clock
+        in future time. \",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2016-12-30T16:11:27+00:00\"\n   },\n   \"10210183\": {\n    \"id\": 10210183,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2016-12-26T20:00:00-05:00\",\n
+        \   \"end\": \"2016-12-26T21:00:00-05:00\",\n    \"duration\": 3600,\n    \"date\":
+        \"2016-12-26\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"Yes\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2016-12-27T15:20:09+00:00\"\n   },\n
+        \  \"10209853\": {\n    \"id\": 10209853,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2016-12-27T09:00:00-05:00\",\n    \"end\": \"2016-12-27T10:16:00-05:00\",\n
+        \   \"duration\": 4560,\n    \"date\": \"2016-12-27\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2016-12-27T15:17:40+00:00\"\n   },\n   \"10210221\": {\n    \"id\": 10210221,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2016-12-27T10:20:00-05:00\",\n
+        \   \"end\": \"2016-12-27T12:23:00-05:00\",\n    \"duration\": 7380,\n    \"date\":
+        \"2016-12-27\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"Yes\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2016-12-27T17:22:48+00:00\"\n   },\n
+        \  \"10231745\": {\n    \"id\": 10231745,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2016-12-27T12:24:00-05:00\",\n    \"end\": \"2016-12-27T12:24:00-05:00\",\n
+        \   \"duration\": 0,\n    \"date\": \"2016-12-27\",\n    \"tz\": -5,\n    \"tz_str\":
+        \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\": \"TSheets
+        iPhone App\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n    \"notes\":
+        \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n
+        \    \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\": \"2016-12-27T17:24:23+00:00\"\n
+        \  },\n   \"10232531\": {\n    \"id\": 10232531,\n    \"user_id\": 218514,\n
+        \   \"jobcode_id\": 6522713,\n    \"start\": \"2016-12-27T12:28:00-05:00\",\n
+        \   \"end\": \"2016-12-27T14:52:00-05:00\",\n    \"duration\": 8640,\n    \"date\":
+        \"2016-12-27\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"TSheets iPhone App\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2016-12-27T19:51:49+00:00\"\n   },\n
+        \  \"10608024\": {\n    \"id\": 10608024,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2016-12-27T15:00:00-05:00\",\n    \"end\": \"2016-12-27T17:00:00-05:00\",\n
+        \   \"duration\": 7200,\n    \"date\": \"2016-12-27\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2016-12-30T15:57:25+00:00\"\n   },\n   \"10608130\": {\n    \"id\": 10608130,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2016-12-28T10:00:00-05:00\",\n
+        \   \"end\": \"2016-12-28T18:00:00-05:00\",\n    \"duration\": 28800,\n    \"date\":
+        \"2016-12-28\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2016-12-30T15:58:11+00:00\"\n   },\n
+        \  \"10608236\": {\n    \"id\": 10608236,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2016-12-29T10:00:00-05:00\",\n    \"end\": \"2016-12-29T18:30:00-05:00\",\n
+        \   \"duration\": 30600,\n    \"date\": \"2016-12-29\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2016-12-30T15:58:51+00:00\"\n   },\n   \"10743967\": {\n    \"id\": 10743967,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2017-01-02T12:00:00-05:00\",\n
+        \   \"end\": \"2017-01-02T13:12:00-05:00\",\n    \"duration\": 4320,\n    \"date\":
+        \"2017-01-02\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-02T18:13:06+00:00\"\n   },\n
+        \  \"10744019\": {\n    \"id\": 10744019,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2017-01-02T13:13:00-05:00\",\n    \"end\": \"2017-01-02T18:15:00-05:00\",\n
+        \   \"duration\": 18120,\n    \"date\": \"2017-01-02\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-02T23:14:52+00:00\"\n   },\n   \"10880745\": {\n    \"id\": 10880745,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2017-01-03T10:00:00-05:00\",\n
+        \   \"end\": \"2017-01-03T11:00:00-05:00\",\n    \"duration\": 3600,\n    \"date\":
+        \"2017-01-03\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-03T18:29:43+00:00\"\n   },\n
+        \  \"10880881\": {\n    \"id\": 10880881,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2017-01-03T12:15:00-05:00\",\n    \"end\": \"2017-01-03T13:29:00-05:00\",\n
+        \   \"duration\": 4440,\n    \"date\": \"2017-01-03\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-03T18:30:13+00:00\"\n   },\n   \"10880911\": {\n    \"id\": 10880911,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2017-01-03T13:30:00-05:00\",\n
+        \   \"end\": \"2017-01-03T19:44:00-05:00\",\n    \"duration\": 22440,\n    \"date\":
+        \"2017-01-03\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-04T00:43:33+00:00\"\n   },\n
+        \  \"11026740\": {\n    \"id\": 11026740,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2017-01-04T09:00:00-05:00\",\n    \"end\": \"2017-01-04T10:00:00-05:00\",\n
+        \   \"duration\": 3600,\n    \"date\": \"2017-01-04\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-04T16:10:14+00:00\"\n   },\n   \"11026802\": {\n    \"id\": 11026802,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2017-01-04T11:10:00-05:00\",\n
+        \   \"end\": \"2017-01-04T13:44:00-05:00\",\n    \"duration\": 9240,\n    \"date\":
+        \"2017-01-04\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-04T18:43:50+00:00\"\n   },\n
+        \  \"11060326\": {\n    \"id\": 11060326,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2017-01-04T13:45:00-05:00\",\n    \"end\": \"2017-01-04T17:34:00-05:00\",\n
+        \   \"duration\": 13740,\n    \"date\": \"2017-01-04\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"in: TSheets iPhone App, out: (Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-04T22:33:52+00:00\"\n   },\n
+        \  \"11197323\": {\n    \"id\": 11197323,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2017-01-05T09:00:00-05:00\",\n    \"end\": \"2017-01-05T10:00:00-05:00\",\n
+        \   \"duration\": 3600,\n    \"date\": \"2017-01-05\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-05T15:50:59+00:00\"\n   },\n   \"11197333\": {\n    \"id\": 11197333,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2017-01-05T10:51:00-05:00\",\n
+        \   \"end\": \"2017-01-05T18:14:00-05:00\",\n    \"duration\": 26580,\n    \"date\":
+        \"2017-01-05\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-05T23:13:55+00:00\"\n   },\n
+        \  \"11394258\": {\n    \"id\": 11394258,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2017-01-06T11:50:00-05:00\",\n    \"end\": \"2017-01-06T12:58:00-05:00\",\n
+        \   \"duration\": 4080,\n    \"date\": \"2017-01-06\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-06T18:01:21+00:00\"\n   },\n   \"11394300\": {\n    \"id\": 11394300,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2017-01-06T13:01:00-05:00\",\n
+        \   \"end\": \"2017-01-06T17:31:00-05:00\",\n    \"duration\": 16200,\n    \"date\":
+        \"2017-01-06\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-06T22:31:19+00:00\"\n   },\n
+        \  \"11628475\": {\n    \"id\": 11628475,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2017-01-09T11:00:00-05:00\",\n    \"end\": \"2017-01-09T11:52:00-05:00\",\n
+        \   \"duration\": 3120,\n    \"date\": \"2017-01-09\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-09T16:52:34+00:00\"\n   },\n   \"11628497\": {\n    \"id\": 11628497,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 6522713,\n    \"start\": \"2017-01-09T11:53:00-05:00\",\n
+        \   \"end\": \"2017-01-09T20:06:00-05:00\",\n    \"duration\": 29580,\n    \"date\":
+        \"2017-01-09\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-10T01:06:09+00:00\"\n   },\n
+        \  \"11817881\": {\n    \"id\": 11817881,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        7594200,\n    \"start\": \"2017-01-10T10:00:00-05:00\",\n    \"end\": \"2017-01-10T11:00:00-05:00\",\n
+        \   \"duration\": 3600,\n    \"date\": \"2017-01-10\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-10T16:03:17+00:00\"\n   },\n   \"11816863\": {\n    \"id\": 11816863,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 7594200,\n    \"start\": \"2017-01-10T11:00:00-05:00\",\n
+        \   \"end\": \"2017-01-10T11:01:00-05:00\",\n    \"duration\": 60,\n    \"date\":
+        \"2017-01-10\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-10T16:01:11+00:00\"\n   },\n
+        \  \"11817893\": {\n    \"id\": 11817893,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        7594200,\n    \"start\": \"2017-01-10T11:03:00-05:00\",\n    \"end\": \"2017-01-10T17:32:00-05:00\",\n
+        \   \"duration\": 23340,\n    \"date\": \"2017-01-10\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-10T22:32:15+00:00\"\n   },\n   \"12048540\": {\n    \"id\": 12048540,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 7594200,\n    \"start\": \"2017-01-11T10:01:00-05:00\",\n
+        \   \"end\": \"2017-01-11T11:00:00-05:00\",\n    \"duration\": 3540,\n    \"date\":
+        \"2017-01-11\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-13T19:03:56+00:00\"\n   },\n
+        \  \"12048668\": {\n    \"id\": 12048668,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        7594200,\n    \"start\": \"2017-01-11T12:00:00-05:00\",\n    \"end\": \"2017-01-11T13:20:00-05:00\",\n
+        \   \"duration\": 4800,\n    \"date\": \"2017-01-11\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-11T18:22:22+00:00\"\n   },\n   \"12048674\": {\n    \"id\": 12048674,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 7594200,\n    \"start\": \"2017-01-11T13:22:00-05:00\",\n
+        \   \"end\": \"2017-01-11T14:40:00-05:00\",\n    \"duration\": 4680,\n    \"date\":
+        \"2017-01-11\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-11T19:39:50+00:00\"\n   },\n
+        \  \"12201184\": {\n    \"id\": 12201184,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        7594200,\n    \"start\": \"2017-01-11T14:40:00-05:00\",\n    \"end\": \"2017-01-11T17:00:00-05:00\",\n
+        \   \"duration\": 8400,\n    \"date\": \"2017-01-11\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-12T15:13:51+00:00\"\n   },\n   \"12201008\": {\n    \"id\": 12201008,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 7594200,\n    \"start\": \"2017-01-12T09:30:00-05:00\",\n
+        \   \"end\": \"2017-01-12T10:11:00-05:00\",\n    \"duration\": 2460,\n    \"date\":
+        \"2017-01-12\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-12T15:12:48+00:00\"\n   },\n
+        \  \"12201018\": {\n    \"id\": 12201018,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        7594200,\n    \"start\": \"2017-01-12T10:13:00-05:00\",\n    \"end\": \"2017-01-12T22:31:00-05:00\",\n
+        \   \"duration\": 44280,\n    \"date\": \"2017-01-12\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-13T03:31:45+00:00\"\n   },\n   \"12380778\": {\n    \"id\": 12380778,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 7594200,\n    \"start\": \"2017-01-13T09:32:00-05:00\",\n
+        \   \"end\": \"2017-01-13T13:29:00-05:00\",\n    \"duration\": 14220,\n    \"date\":
+        \"2017-01-13\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-13T18:29:13+00:00\"\n   },\n
+        \  \"12432903\": {\n    \"id\": 12432903,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        7594200,\n    \"start\": \"2017-01-13T13:29:00-05:00\",\n    \"end\": \"2017-01-13T16:47:00-05:00\",\n
+        \   \"duration\": 11880,\n    \"date\": \"2017-01-13\",\n    \"tz\": -5,\n
+        \   \"tz_str\": \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\":
+        \"(Hicksville, NY?)\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n
+        \   \"notes\": \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\":
+        \"MEDFORD\",\n     \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\":
+        \"2017-01-13T21:46:44+00:00\"\n   },\n   \"12479421\": {\n    \"id\": 12479421,\n
+        \   \"user_id\": 218514,\n    \"jobcode_id\": 7594200,\n    \"start\": \"2017-01-13T16:56:00-05:00\",\n
+        \   \"end\": \"2017-01-13T17:27:00-05:00\",\n    \"duration\": 1860,\n    \"date\":
+        \"2017-01-13\",\n    \"tz\": -5,\n    \"tz_str\": \"America\\/New_York\",\n
+        \   \"type\": \"regular\",\n    \"location\": \"(Hicksville, NY?)\",\n    \"on_the_clock\":
+        false,\n    \"locked\": 0,\n    \"notes\": \"\",\n    \"customfields\": {\n
+        \    \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n     \"33851\": \"FEE
+        INCOME\"\n    },\n    \"last_modified\": \"2017-01-13T22:26:58+00:00\"\n   },\n
+        \  \"12489994\": {\n    \"id\": 12489994,\n    \"user_id\": 218514,\n    \"jobcode_id\":
+        6522713,\n    \"start\": \"2017-01-13T17:47:00-05:00\",\n    \"end\": \"2017-01-13T17:56:00-05:00\",\n
+        \   \"duration\": 540,\n    \"date\": \"2017-01-13\",\n    \"tz\": -5,\n    \"tz_str\":
+        \"America\\/New_York\",\n    \"type\": \"regular\",\n    \"location\": \"TSheets
+        iPhone App\",\n    \"on_the_clock\": false,\n    \"locked\": 0,\n    \"notes\":
+        \"\",\n    \"customfields\": {\n     \"33849\": \"No\",\n     \"33853\": \"MEDFORD\",\n
+        \    \"33851\": \"FEE INCOME\"\n    },\n    \"last_modified\": \"2017-01-13T22:56:16+00:00\"\n
+        \  }\n  }\n },\n \"more\": true,\n \"supplemental_data\": {\n  \"users\":
+        {\n   \"218514\": {\n    \"id\": 218514,\n    \"first_name\": \"DAN\",\n    \"last_name\":
+        \"KLUGER\",\n    \"group_id\": 47266,\n    \"active\": true,\n    \"employee_number\":
+        0,\n    \"salaried\": false,\n    \"exempt\": false,\n    \"username\": \"dankluger@servpro5933.com\",\n
+        \   \"email\": \"dankluger@servpro5933.com\",\n    \"email_verified\": true,\n
+        \   \"payroll_id\": \"\",\n    \"hire_date\": \"0000-00-00\",\n    \"term_date\":
+        \"0000-00-00\",\n    \"last_modified\": \"2017-10-23T13:37:45+00:00\",\n    \"last_active\":
+        \"2017-10-25T12:44:47+00:00\",\n    \"created\": \"2016-10-06T17:23:49+00:00\",\n
+        \   \"client_url\": \"servpromedfordny\",\n    \"company_name\": \"Servpromedfordny\",\n
+        \   \"profile_image_url\": \"https:\\/\\/servpromedfordny.tsheets.com\\/vfs\\/images\\/clients\\/1a4c42370e6233bf\\/profile_images\\/218514-300px-A.jpg?v=1508765865\",\n
+        \   \"mobile_number\": \"\",\n    \"pto_balances\": {\n     \"3293958\": 0,\n
+        \    \"3293960\": 0,\n     \"3293962\": 0,\n     \"10964327\": 0\n    },\n
+        \   \"submitted_to\": \"2017-10-22\",\n    \"approved_to\": \"2017-10-22\",\n
+        \   \"manager_of_group_ids\": [\n     45523\n    ],\n    \"require_password_change\":
+        false,\n    \"pay_rate\": 20,\n    \"pay_interval\": \"hour\",\n    \"permissions\":
+        {\n     \"admin\": true,\n     \"mobile\": true,\n     \"status_box\": true,\n
+        \    \"reports\": true,\n     \"manage_timesheets\": true,\n     \"manage_authorization\":
+        true,\n     \"manage_users\": true,\n     \"manage_my_timesheets\": true,\n
+        \    \"manage_jobcodes\": true,\n     \"pin_login\": true,\n     \"approve_timesheets\":
+        true,\n     \"manage_schedules\": true,\n     \"external_access\": false,\n
+        \    \"manage_my_schedule\": false,\n     \"manage_company_schedules\": true,\n
+        \    \"view_company_schedules\": false,\n     \"view_group_schedules\": false,\n
+        \    \"manage_no_schedules\": false,\n     \"view_my_schedules\": false\n
+        \   },\n    \"customfields\": \"\"\n   }\n  },\n  \"customfields\": {\n   \"33849\":
+        {\n    \"id\": 33849,\n    \"active\": true,\n    \"global\": true,\n    \"required\":
+        true,\n    \"applies_to\": \"timesheet\",\n    \"type\": \"managed-list\",\n
+        \   \"short_code\": \"b\",\n    \"regex_filter\": \"\",\n    \"name\": \"Billable\",\n
+        \   \"last_modified\": \"2016-12-16T20:15:42+00:00\",\n    \"created\": \"2016-12-16T20:15:20+00:00\",\n
+        \   \"ui_preference\": \"drop_down\",\n    \"required_customfields\": [\n
+        \    \n    ]\n   },\n   \"33853\": {\n    \"id\": 33853,\n    \"active\":
+        true,\n    \"global\": true,\n    \"required\": true,\n    \"applies_to\":
+        \"timesheet\",\n    \"type\": \"managed-list\",\n    \"short_code\": \"cl\",\n
+        \   \"regex_filter\": \"\",\n    \"name\": \"Class\",\n    \"last_modified\":
+        \"2016-12-16T20:15:56+00:00\",\n    \"created\": \"2016-12-16T20:15:56+00:00\",\n
+        \   \"ui_preference\": \"drop_down\",\n    \"required_customfields\": [\n
+        \    \n    ]\n   },\n   \"33851\": {\n    \"id\": 33851,\n    \"active\":
+        true,\n    \"global\": true,\n    \"required\": true,\n    \"applies_to\":
+        \"timesheet\",\n    \"type\": \"managed-list\",\n    \"short_code\": \"si\",\n
+        \   \"regex_filter\": \"\",\n    \"name\": \"Service Item\",\n    \"last_modified\":
+        \"2016-12-16T20:15:20+00:00\",\n    \"created\": \"2016-12-16T20:15:20+00:00\",\n
+        \   \"ui_preference\": \"drop_down\",\n    \"required_customfields\": [\n
+        \    \n    ]\n   }\n  },\n  \"jobcodes\": {\n   \"6522705\": {\n    \"id\":
+        6522705,\n    \"parent_id\": 0,\n    \"assigned_to_all\": true,\n    \"billable\":
+        false,\n    \"active\": true,\n    \"type\": \"regular\",\n    \"has_children\":
+        false,\n    \"billable_rate\": 0,\n    \"short_code\": \"\",\n    \"name\":
+        \"+-\",\n    \"last_modified\": \"2017-02-27T16:42:47+00:00\",\n    \"created\":
+        \"2016-12-16T20:40:38+00:00\",\n    \"filtered_customfielditems\": \"\",\n
+        \   \"required_customfields\": [\n     \n    ]\n   },\n   \"6522695\": {\n
+        \   \"id\": 6522695,\n    \"parent_id\": 0,\n    \"assigned_to_all\": true,\n
+        \   \"billable\": false,\n    \"active\": true,\n    \"type\": \"regular\",\n
+        \   \"has_children\": false,\n    \"billable_rate\": 0,\n    \"short_code\":
+        \"\",\n    \"name\": \".\",\n    \"last_modified\": \"2016-12-16T20:40:38+00:00\",\n
+        \   \"created\": \"2016-12-16T20:40:38+00:00\",\n    \"filtered_customfielditems\":
+        \"\",\n    \"required_customfields\": [\n     \n    ]\n   },\n   \"6523103\":
+        {\n    \"id\": 6523103,\n    \"parent_id\": 0,\n    \"assigned_to_all\": true,\n
+        \   \"billable\": false,\n    \"active\": true,\n    \"type\": \"regular\",\n
+        \   \"has_children\": false,\n    \"billable_rate\": 0,\n    \"short_code\":
+        \"\",\n    \"name\": \"DAYS INN 10\\/1\\/14\",\n    \"last_modified\": \"2017-05-02T19:01:41+00:00\",\n
+        \   \"created\": \"2016-12-16T20:40:44+00:00\",\n    \"filtered_customfielditems\":
+        \"\",\n    \"required_customfields\": [\n     \n    ]\n   },\n   \"6521905\":
+        {\n    \"id\": 6521905,\n    \"parent_id\": 0,\n    \"assigned_to_all\": true,\n
+        \   \"billable\": false,\n    \"active\": true,\n    \"type\": \"regular\",\n
+        \   \"has_children\": false,\n    \"billable_rate\": 0,\n    \"short_code\":
+        \"\",\n    \"name\": \"ADAMS, KEN\",\n    \"last_modified\": \"2017-02-03T15:42:44+00:00\",\n
+        \   \"created\": \"2016-12-16T20:40:21+00:00\",\n    \"filtered_customfielditems\":
+        \"\",\n    \"required_customfields\": [\n     \n    ]\n   },\n   \"6522713\":
+        {\n    \"id\": 6522713,\n    \"parent_id\": 0,\n    \"assigned_to_all\": true,\n
+        \   \"billable\": false,\n    \"active\": true,\n    \"type\": \"regular\",\n
+        \   \"has_children\": false,\n    \"billable_rate\": 0,\n    \"short_code\":
+        \"\",\n    \"name\": \"ABIDI, SEEME\",\n    \"last_modified\": \"2017-10-12T20:52:49+00:00\",\n
+        \   \"created\": \"2016-12-16T20:40:38+00:00\",\n    \"filtered_customfielditems\":
+        \"\",\n    \"required_customfields\": [\n     \n    ]\n   },\n   \"7594200\":
+        {\n    \"id\": 7594200,\n    \"parent_id\": 0,\n    \"assigned_to_all\": true,\n
+        \   \"billable\": false,\n    \"active\": true,\n    \"type\": \"regular\",\n
+        \   \"has_children\": false,\n    \"billable_rate\": 0,\n    \"short_code\":
+        \"\",\n    \"name\": \"MEDFORD OFFICE SIGN IN\",\n    \"last_modified\": \"2017-02-27T16:42:47+00:00\",\n
+        \   \"created\": \"2017-01-09T21:57:01+00:00\",\n    \"filtered_customfielditems\":
+        \"\",\n    \"required_customfields\": [\n     \n    ]\n   }\n  }\n }\n}"
+    http_version: 
+  recorded_at: Wed, 25 Oct 2017 18:57:04 GMT
+recorded_with: VCR 3.0.3
