@@ -33,9 +33,4 @@ end
 
 class ActionController::TestCase
   include Devise::Test::ControllerHelpers
-
-
-  def json
-    JSON.parse(response.body)
-  end
 end

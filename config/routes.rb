@@ -41,7 +41,6 @@ Rails.application.routes.draw do
   get 'users/list' => 'users#list'
   resources :users do
     patch 'link_tsheets_user'
-    resources 'timesheets', only: :index
   end
   resources :states
   resources :agents
