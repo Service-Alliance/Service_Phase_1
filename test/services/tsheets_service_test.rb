@@ -26,9 +26,9 @@ class TsheetsServiceTest < ActiveSupport::TestCase
 
   test "#update_timesheets" do
     user = users(:with_tsheet)
-    VCR.use_cassette('timesheet request, with service') do
-      assert user.timesheets.blank?
+    user.update_attributes(timesheets: {})
 
+    VCR.use_cassette('timesheet request, with service') do
       TsheetsService.new.update_timesheets(user).tap do |result|
         assert_kind_of Hash, result
         refute_nil result['results']
