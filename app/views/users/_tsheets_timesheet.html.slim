@@ -1,8 +1,20 @@
 = form_for :TsheetTimesheet, remote: true, method: :patch, url: tsheets_user_path(user) do |f|
   = f.submit('Refresh Data', class:'btn btn-default')
-hr
-
 
 #timesheets
-  = Gon.timesheets
+  table.table.table.table-striped.table-condensed
+    tbody
+      tr
+        th Start
+        th End
+        th Location
+        th Notes
+
+      - Gon.timesheets.each do |row|
+        tr
+          td =row['start']
+          td =row['end']
+          td =row['location']
+          td =row['notes']
+
 

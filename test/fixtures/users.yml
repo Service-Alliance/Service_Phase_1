@@ -50,7 +50,26 @@ with_tsheet:
     :tsheets_manager_of_group_ids: []
     :tsheets_require_password_change: false
   timesheets:
-    16342161: '{"id": 16342161, "tz": -5, "end": "2017-02-06T14:17:00-05:00", "date": "2017-02-06", "type": "regular", "notes": "", "start": "2017-02-06T14:16:00-05:00", "locked": 2, "tz_str": "tsET", "user_id": 459423, "duration": 60, "location": "TSheets iPhone App", "jobcode_id": 9285192, "customfields": {"33849": "No", "33851": "WATER RESTORATION", "33853": "MEDFORD"}, "on_the_clock": false, "last_modified": "2017-02-06T19:16:49+00:00"}, "16342527": {"id": 16342527, "tz": -5, "end": "2017-02-06T14:20:00-05:00", "date": "2017-02-06", "type": "regular", "notes": "", "start": "2017-02-06T14:17:00-05:00", "locked": 2, "tz_str": "tsET", "user_id": 459423, "duration": 180, "location": "TSheets iPhone App", "jobcode_id": 9285192, "customfields": {"33849": "No", "33851": "WATER RESTORATION", "33853": "MEDFORD"}, "on_the_clock": false, "last_modified": "2017-02-06T19:19:44+00:00"}'
+    16342161:
+      'id': 16342161
+      "tz": -5
+      "end": "2017-02-06T14:17:00-05:00"
+      "date": "2017-02-06"
+      "type": "regular"
+      "notes": ""
+      :start: "2017-02-06T14:16:00-05:00"
+      "locked": 2
+      "tz_str": tsET
+      "user_id": 459423
+      "duration": 60
+      "location": "TSheets iPhone App"
+      "jobcode_id": 9285192
+      "on_the_clock": false
+      "last_modified": "2017-02-06T19:16:49+00:00"
+      "customfields":
+        "33849": "No"
+        "33851": "WATER RESTORATION"
+        "33853": "MEDFORD"
 
 job_manager:
   <<: *DEFAULTS
