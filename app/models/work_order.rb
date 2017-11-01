@@ -3,7 +3,6 @@ class WorkOrder < ActiveRecord::Base
   belongs_to :job, required: true
   has_many :work_order_vendors
   has_many :vendors, through: :work_order_vendors
-  has_many :trackers, as: :trackable, dependent: :destroy
   has_many :work_order_users
   has_many :users, through: :work_order_users
   has_many :technicians, -> { with_role('Technician') }, through: :work_order_users, class_name: 'User', source: :user

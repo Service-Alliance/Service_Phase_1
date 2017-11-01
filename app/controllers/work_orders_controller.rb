@@ -36,8 +36,7 @@ class WorkOrdersController < ApplicationController
 
     respond_to do |format|
       if @work_order.save
-        tracker_task = TrackerTask.find_by(name: "Work Order Drafted")
-        binding.pry
+        tracker_task = TrackerTask.find_by(name: "Work Order Drafted"
         @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
 
         @job.pipeline_status_id = 8
@@ -62,7 +61,7 @@ class WorkOrdersController < ApplicationController
         tracker_task = TrackerTask.find_by(name: "Work Order Updated")
         @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
         WorkOrderDeliveryService.new(@work_order, current_user).deliver!
-        format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order have been delivered successfully' }
+        format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order has been delivered successfully' }
         format.json { render :show, status: :ok, location: @work_order }
       else
         format.html { render :edit }
