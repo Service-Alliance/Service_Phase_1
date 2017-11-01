@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyText
+  vendor_id: 
+  loss_type_id: 
+  rate: 9.99
 
 two:
-  name: MyText
+  vendor_id: 
+  loss_type_id: 
+  rate: 9.99

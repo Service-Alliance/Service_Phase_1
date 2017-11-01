@@ -1,0 +1,21 @@
+<div class="nested-fields">
+  <div class="col-xs-4">
+    <div class="form-group">
+      <%= label_tag :loss_type_id, 'Loss Type' %>
+      <%= f.select :loss_type_id, LossType.order(:name).pluck(:name, :id), {}, {class: 'form-control'} %>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <div class="form-group">
+      <%= label_tag :rate %>
+      <div class="input-group">
+        <%= f.text_field :rate, class: 'form-control' %>
+        <div class="input-group-addon">%</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <%= label_tag :delete %><br>
+    <%= link_to_remove_association 'Delete', f, class: 'btn btn-danger full-width' %>
+  </div>
+</div>

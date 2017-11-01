@@ -1,0 +1,50 @@
+.container-fluid
+  - if notice
+    .alert.alert-success role="alert" = notice
+  .row
+    .col-xs-12
+      .well
+        .inline
+          = @user.full_name
+  .col-sm-4
+    = render partial: 'details', locals: { user: @user }
+    = render partial: 'tsheets_integration', locals: { user: @user}
+
+  .col-sm-8
+    .panel.with-nav-tabs.panel-primary
+      .panel-heading
+        ul.nav.nav-tabs
+          li.active
+            a aria-controls="entered" data-toggle="tab" href="#entered" role="tab"  Recent Jobs Entered
+          li
+            a aria-controls="assigned" data-toggle="tab" href="#assigned" role="tab"  Recent Jobs Assigned
+          - if @user.tsheets_id
+            li
+              a aria-controls="tsheets" data-toggle="tab" href="#tsheets" role="tab"  Timesheet
+      .panel-body
+        .tab-content
+          #entered.tab-pane.fade.in.active
+            = render partial: 'jobs', locals: {jobs: @user.jobs_entered_by_user}
+          #assigned.tab-pane.fade
+            = render partial: 'jobs', locals: {jobs: @user.jobs_owned_by_user}
+          - if @user.tsheets_id
+            #tsheets.tab-pane.fade
+              = render partial: 'tsheets_timesheet', locals: { user: @user }
+  javascript:
+    | $("#menu-toggle").click(function (e) {
+      | e.preventDefault();
+      | $("#wrapper").toggleClass("toggled");
+    | });
+
+    | flatpickr(".datePicker", {
+      | enableTime: false,
+      /!/ create an extra input solely for display purposes
+      | altInput: true,
+      | altFormat: "F j, Y"
+    | });
+
+    | $('[data-toggle=tab]').click(function () {
+      | if ($(this).parent().hasClass('active')) {
+        | $($(this).attr("href")).toggleClass('active');
+      | }
+    | })

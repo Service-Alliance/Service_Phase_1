@@ -7,7 +7,15 @@ class TsheetsAdapterTest < ActiveSupport::TestCase
     VCR.use_cassette('retrieving users') do
       users = @adapter.find_users
       assert_equal 112, users.count
-      #binding.pry
+    end
+  end
+
+  test "timesheets" do
+    VCR.use_cassette('timesheets for single user') do
+      assert_difference 'EventStore.count' do
+        results = TsheetsAdapter.new.timesheets('218514')
+        assert_equal 2, results.first.count
+      end
     end
   end
 

@@ -1,111 +1,144 @@
 <div class="col-xs-12">
-    <div class="row content-box">
-        <%= form_for(@vendor) do |f| %>
-        <% if @vendor.errors.any? %>
-        <div id="error_explanation">
-            <h2><%= pluralize(@vendor.errors.count, "error") %>
-                prohibited this insurance company from being saved:</h2>
+  <div class="content-box">
+    <%= form_for(@vendor) do |f| %>
+      <% if @vendor.errors.any? %>
+      <div id="error_explanation">
+      <h2><%= pluralize(@vendor.errors.count, "error") %>
+      prohibited this insurance company from being saved:</h2>
 
-            <ul>
-                <% @vendor.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-                <% end %>
-            </ul>
-        </div>
-        <% end %>
-
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :category %><br>
-                <%= f.text_field :category, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :name %><br>
-                <%= f.text_field :name, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :contact %><br>
-                <%= f.text_field :contact, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :phone %><br>
-                <%= f.text_field :phone, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :cellphone %><br>
-                <%= f.text_field :cellphone, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :fax %><br>
-                <%= f.text_field :fax, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :address %><br>
-                <%= f.text_field :address, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :wc %><br>
-                <%= f.date_select :wc, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :liability %><br>
-                <%= f.date_select :liability, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :pollution %><br>
-                <%= f.date_select :pollution, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :auto %><br>
-                <%= f.date_select :auto, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :w9 %><br>
-                <%= f.text_field :w9, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :independent_contractor_agreement %><br>
-                <%= f.text_field :independent_contractor_agreement, class:"form-control" %>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="form-group">
-                <%= f.label :email %><br>
-                <%= f.text_field :email, class:"form-control" %>
-            </div>
-        </div>
-
-
-        <div class="col-xs-12 text-center">
-            <div class="actions">
-                <%= f.submit class: "btn btn-primary" %>
-            </div>
-        </div>
-
-        <% end %>
+      <ul>
+        <% @vendor.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+      <% end %>
+      </ul>
     </div>
+  <% end %>
+
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :category %><br>
+          <%= f.text_field :category_type, class:"form-control" %>
+        </div>
+      </div>
+
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :contact %><br>
+          <%= f.text_field :contact, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :phone %><br>
+          <%= f.text_field :phone, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :cellphone %><br>
+          <%= f.text_field :cellphone, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :fax %><br>
+          <%= f.text_field :fax, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :address %><br>
+          <%= f.text_field :address, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :wc %><br>
+          <%= f.date_select :wc, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :liability %><br>
+          <%= f.date_select :liability, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :pollution %><br>
+          <%= f.date_select :pollution, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :auto %><br>
+          <%= f.date_select :auto, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :w9 %><br>
+          <%= f.text_field :w9, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :independent_contractor_agreement %><br>
+          <%= f.text_field :independent_contractor_agreement, class:"form-control" %>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :email %><br>
+          <%= f.text_field :email, class:"form-control" %>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <h4>Rates</h4>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :supervisor_rate %><br>
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <%= f.text_field :supervisor_rate, class:"form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <%= f.label :technician_rate %><br>
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <%= f.text_field :technician_rate, class:"form-control" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <%= f.fields_for(:loss_rates) do |l| %>
+        <%= render partial: 'loss_rate_fields', locals: {f: l} %>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-xs-12"><%= link_to_add_association 'Add Loss Rate', f, :loss_rates, class: 'btn btn-primary' %></div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <div class="actions">
+          <%= f.submit class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
 </div>

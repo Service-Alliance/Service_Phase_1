@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -15,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :phones, as: :phoneable
   has_one :rate, class_name: 'UserRate'
 
-  store_accessor :tsheets, :tsheets_id, :tsheets_first_name, :tsheets_last_name
+  store_accessor :tsheets, :tsheets_id
 
   delegate :name, to: :department, allow_nil: true, prefix: true
   delegate :display_with_period, :amount, :period, :salaried, :exempt, to: :rate, allow_nil: true, prefix: true
@@ -29,16 +31,23 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def tsheets_full_name
-    [tsheets_first_name, tsheets_last_name].delete_if(&:blank?).join(' ')
+  def tsheet_info
+    return {} if tsheets.blank?
+
+    Hash[tsheets.slice(
+      'tsheets_email',
+      'tsheets_email_verified',
+      'tsheets_username',
+      'tsheets_active',
+      'tsheets_last_name',
+      'tsheets_first_name',
+      'tsheets_company_name',
+      'tsheets_id'
+      ).map { |k,v| [k[8..(k.length)], v] }]
   end
 
   def admin?
     self.role_id == 1 ? true : false
-  end
-
-  def owner?
-    self.try(:role).try(:name) == 'Owner' ? true : false
   end
   def job_coordinator?
     self.role_id == 2 ? true : false
@@ -52,14 +61,17 @@ class User < ActiveRecord::Base
   def contractor?
     self.role_id == 5 ? true : false
   end
-  def technician?
-    self.try(:role).try(:name) == 'Technician' ? true : false
-  end
   def crew_chief?
-    self.try(:role).try(:name) == 'Crew Chief' ? true : false
+    self.role_id == 6 ? true : false
+  end
+  def technician?
+    self.role_id == 7 ? true : false
+  end
+  def owner?
+    self.role_id == 8 ? true : false
   end
   def collections?
-    self.try(:role).try(:name) == 'Collections Department' ? true : false
+    self.role_id == 9 ? true : false
   end
   def unassigned?
     self.role_id == 0 || self.role_id == nil  ? true : false

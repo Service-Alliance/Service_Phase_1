@@ -1,0 +1,23 @@
+.panel.panel-primary
+  .panel-heading
+    | TSheets
+  .panel-body
+    #tsheets_integration_container data-user-id="#{user.id}"
+      - if local_assigns.fetch(:error, nil).present?
+        .alert.alert-danger
+          i.fa.fa-times
+          = error
+      - if user.tsheets_id.present?
+        - user.tsheet_info.each_pair do |key, value|
+          .item
+            b #{key}:
+            |  #{value}
+
+        <br/><br/>
+        button#unlink_tsheets_user.btn.btn-primary type="button"  Unlink
+
+      - else
+        .item
+          | Link to TSheets user:
+          |  #{text_field_tag :tsheets_user, '', class: 'form-control with-status', data: {user_id: user.id}}
+          i.tsheets-user-status

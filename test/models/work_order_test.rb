@@ -43,7 +43,7 @@ class WorkOrderTest < ActiveSupport::TestCase
     assert_nil work_order.adjuster
     refute_nil work_order.claim_number
     assert_nil work_order.referral
-    assert_equal job.customer.full_address, work_order.job_location
+    assert_equal job.customer.address_without_county, work_order.job_location
   end
 
   test 'to returns SERVPRO plus all vendors if more than one vendor' do
@@ -52,5 +52,10 @@ class WorkOrderTest < ActiveSupport::TestCase
     assert_includes work_orders(:one).to, 'SERVPRO of FranchiseOne'
     assert_includes work_orders(:one).to, vendors(:one).name
     assert_includes work_orders(:one).to, vendors(:two).name
+  end
+
+  test '#location from customer address without county' do
+    assert_equal work_orders(:one).job_location, work_orders(:one).location
+    assert_equal work_orders(:without_location).customer_address_without_county, work_orders(:without_location).location
   end
 end

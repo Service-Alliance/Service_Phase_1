@@ -79,7 +79,7 @@ class WorkOrdersController < ApplicationController
 
   def list
     @work_orders = WorkOrder.includes(:job, :vendors, job: :franchise).limit(200)
-    @work_orders = @work_orders.where(jobs: {franchise_id: params[:franchise_id]}) if params[:franchise_id]
+    @work_orders = @work_orders.where(jobs: { franchise_id: params[:franchise_id] }) if params[:franchise_id]
   end
 
   def acknowledge
@@ -103,41 +103,40 @@ class WorkOrdersController < ApplicationController
     @job = Job.find(params[:job_id])
   end
 
-    def work_order_params
-      params.require(:work_order).permit(
-        :job_id,
-        :to,
-        :name,
-        :date,
-        :typed_by,
-        :job_start,
-        :job_name,
-        :job_location,
-        :telephone,
-        :contact,
-        :insurance,
-        :claim_number,
-        :crew,
-        :approx_time_on_loss,
-        :required,
-        :referral,
-        :franchise_location,
-        :scope_of_work,
-        :job_manager_contact_info,
-        :acknowledgement,
-        :acknowledged_by_id,
-        :vendor_id,
-        :hours_on_job,
-        :adjuster,
-        :number_of_crew_chiefs,
-        :number_of_technicians,
-        :estimated_hours,
-        technician_ids: [],
-        crew_chief_ids: [],
-        vendor_ids: [])
-    end
+  def work_order_params
+    params.require(:work_order).permit(
+      :job_id,
+      :to,
+      :name,
+      :typed_by,
+      :job_start,
+      :job_name,
+      :job_location,
+      :telephone,
+      :contact,
+      :insurance,
+      :claim_number,
+      :crew,
+      :approx_time_on_loss,
+      :required,
+      :referral,
+      :franchise_location,
+      :scope_of_work,
+      :job_manager_contact_info,
+      :acknowledgement,
+      :acknowledged_by_id,
+      :vendor_id,
+      :hours_on_job,
+      :adjuster,
+      :number_of_crew_chiefs,
+      :number_of_technicians,
+      :estimated_hours,
+      technician_ids: [],
+      crew_chief_ids: [],
+      vendor_ids: [])
+  end
 
-    def work_order_send_to_params
-      params.fetch(:work_order_send_to, {}).permit(send_to:[])
-    end
+  def work_order_send_to_params
+    params.fetch(:work_order_send_to, {}).permit(send_to: [])
+  end
 end

@@ -60,8 +60,9 @@
     <div class="row">
       <div class="col-xs-3">
         <div class="form-group">
+          <% require_relative '../../../lib/zipcode' %>
           <%= label_tag :zip %><br>
-          <%= text_field_tag "address[zip_code]", @caller.try(:address).try(:zip_code), class: "form-control"  %>
+          <%= text_field_tag "address[zip_code]", @caller.try(:address).try(:zip_code), class: "form-control", type:'text', pattern:"#{Servpro::Zipcode.regexp_string}", title:'5 digits required for Zip field' %>
         </div>
       </div>
       <div class="col-xs-3">
