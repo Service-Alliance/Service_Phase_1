@@ -28,9 +28,7 @@ class JobBuilder
     caller.address_id = address.id
     caller.add_company(company)
     caller.save!
-    
     caller.phones.destroy_all
-    
     phone_params.fetch('type_ids', []).count.times do |index|
       unless phone_params['numbers'][index] == ''
         caller.phones.create(type_id: phone_params['type_ids'][index],
@@ -38,6 +36,7 @@ class JobBuilder
                              extension: phone_params['extensions'][index])
       end
     end
+    
     job
   end
 end
