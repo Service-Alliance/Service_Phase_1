@@ -112,7 +112,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="bold">Crew Size:</span><br>
-                    <%= @work_order.display_crew %>
+                    <%= @work_order.display_total_crew %>
                   </div>
                 </div>
                 <div class="col-sm-3">
@@ -160,7 +160,6 @@
                     <%= render partial: 'job_managers', locals: {job_managers: @work_order.job_managers} %>
                   </div>
                 </div>
-
 
               </div>
             </div>

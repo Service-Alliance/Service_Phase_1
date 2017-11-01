@@ -75,11 +75,16 @@ group :development, :test do
   gem 'minitest-reporters'
   gem 'simplecov', :require => false
   gem 'single_test'
+  gem 'pry'
   gem 'pry-byebug'
+  gem 'pry-nav'
+  gem 'pry-rails', '~> 0.3.2'
   gem 'guard-minitest'
   gem 'guard-rails'
   gem 'guard-bundler'
   gem 'danger'
+  gem 'simple_bdd'
+  gem 'shoulda-matchers'
 end
 
 group :test do
@@ -92,9 +97,11 @@ group :test do
 end
 
 group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'guard-livereload', '~> 2.5', require: false
   gem 'rack-mini-profiler', require: false
   gem 'memory_profiler', require: false
-
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 

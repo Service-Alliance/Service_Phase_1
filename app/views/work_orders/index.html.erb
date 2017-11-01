@@ -40,7 +40,7 @@
                               <div class="col-sm-6">
                                   <div class="form-group">
                                       <span class="bold">Date:</span><br>
-                                        <%= work_order.date %>
+                                        <%= work_order.updated_at.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
                                   </div>
                               </div>
                               <div class="col-sm-6">
@@ -96,17 +96,7 @@
                                       <%= work_order.claim_number %>
                                   </div>
                               </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <span class="bold">Crew:</span><br>
-                                      <%= work_order.crew %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <span class="bold">Approx Time On Loss:</span><br>
-                                      <%= work_order.approx_time_on_loss.try(:strftime, "%l:%M:%S %p") %>
-                                  </div>
+
                               </div>
                               <div class="col-sm-12">
                                   <div class="form-group">
