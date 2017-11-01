@@ -40,6 +40,5 @@ class JobBuilder
     end
 
     job
-
   end
 end
