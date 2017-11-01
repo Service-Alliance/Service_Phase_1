@@ -645,8 +645,8 @@
                                         <%= tracker.try(:user).try(:full_name) %></h3>
                                 </div>
                                 <div class="panel-body">
-                                    <%= link_to "View Work Order", job_work_order_path(@job, call.id) %>
-                                    <%= link_to "Edit Work Order", job_work_order_edit_path(@job, call.id) %>
+                                    <%= link_to "View", job_work_order_path(@job, call.id) %>
+                                    <%= link_to 'Delete Draft',  tracker_path(tracker, job_id: @job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </div>
                             </div>
                         </div>

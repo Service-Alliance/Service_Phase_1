@@ -99,6 +99,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'puma'
   gem 'guard-livereload', '~> 2.5', require: false
   gem 'rack-mini-profiler', require: false
   gem 'memory_profiler', require: false

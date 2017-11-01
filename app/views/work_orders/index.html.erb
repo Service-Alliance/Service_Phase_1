@@ -6,7 +6,7 @@
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
             <div class="col-xs-12">
-                <h1 class="text-center">Work Orders</h1>
+                <h1 class="text-center">Listing Work Orders</h1>
                 <%= link_to "Add Work Order", new_job_work_order_path(@job), class:"btn btn-primary new-manager-button"%>
                 <% @job.work_orders.each do |work_order| %>
                 <div class="panel panel-info">
@@ -20,7 +20,7 @@
                             <div class="col-xs-12">
                               <hr/>
                               <div class="col-xs-12">
-                                <h2>SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
+                                <h2 class="text-center">SERVPRO of <%= @job.try(:franchise).try(:name) %></h2>
                                 <h2><%= @job.try(:franchise).try(:phone) %></h2>
                               </div>
 
