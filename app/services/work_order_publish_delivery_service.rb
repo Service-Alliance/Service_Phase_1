@@ -1,4 +1,4 @@
-class WorkOrderDeliveryService
+class WorkOrderPublishDeliveryService
   def initialize(work_order, current_user)
     @work_order = work_order
     @current_user = current_user

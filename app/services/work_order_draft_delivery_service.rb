@@ -1,4 +1,4 @@
-class WorkOrderDraftedNotification
+class WorkOrderDraftDeliveryService
   def initialize(work_order, current_user)
     @work_order = work_order
     @current_user = current_user
@@ -9,6 +9,7 @@ class WorkOrderDraftedNotification
     send_to_scheduling_manager1
     send_to_scheduling_manager2
     send_to_scheduling_manager3
+    send_to_loss_coordinator
   end
 
   private
@@ -35,17 +36,15 @@ class WorkOrderDraftedNotification
     deliver_user_email(sched_manager) if sched_manager.present?
   end
 
+  def send_to_loss_coordinator
+    job_coordinator = @work_order.job.job_coordinator
+    deliver_user_email(job_coordinator) if job_coordinator.present?
+  end
+
   def should_send_to_scheduling_manager?
     !(@current_user.department_name == 'Construction' && @work_order.vendors.count > 0)
   end
 
-
-
   def deliver_user_email(user)
     WorkOrderMailer.notification(user, @work_order.job, @work_order).deliver_later
   end
-
-  def deliver_vendor_email(contact, vendor = nil)
-    WorkOrderMailer.vendor_notification(contact, @work_order.job, @work_order, vendor).deliver_later
-  end
-end
