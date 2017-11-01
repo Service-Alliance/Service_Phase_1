@@ -24,11 +24,9 @@
         <%= f.input :referral, as: :string, label: 'Referral Source', wrapper_html: { class: 'col-sm-4' } %>
         <%= f.input :typed_by, as: :string, label: 'Typed By:', wrapper_html: { class: 'col-sm-4' } %>
         <%= f.input :name, as: :string, label: 'Loss Coordinator', wrapper_html: { class: 'col-sm-4' } %>
-
-
         <%= f.input :job_name, label: 'Job Chart Name', as: :string, wrapper_html: { class: 'col-sm-4' } %>
         <%= f.input :contact, label: 'Job Contact', as: :string, wrapper_html: { class: 'col-sm-4' } %>
-        <%= f.input :telephone, as: :string, label: 'Job Contact Phone #', wrapper_html: { class: 'col-sm-4' }, placeholder: "( ___ ) ___ - ____" %>
+        <%= f.input :telephone, as: :string, label: 'Job Contact Phone', wrapper_html: { class: 'col-sm-4' }, placeholder: "( ___ ) ___ - ____" %>
         <%= f.input :required, wrapper_html: { class: 'col-sm-12' }, label: 'Required', placeholder: "Examples: Customer requests notification 20 minutes prior to Arrival, Bring Extra-Long Ladder..." %>
         <%= f.input :scope_of_work, wrapper_html: { class: 'col-sm-12' }, placeholder: "What work needs to be done?" %>
         <%= f.input :job_location, label: 'Job Location', as: :string, wrapper_html: { class: 'col-sm-12' }, disabled: true %>
@@ -36,8 +34,8 @@
       </div>
 
       <div class="clearfix">
-        <%= f.input :number_of_crew_chiefs, label: '# Crew Chiefs', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
-        <%= f.input :number_of_technicians, label: '# Technicians', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
+        <%= f.input :number_of_crew_chiefs, label: 'Crew Chief(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
+        <%= f.input :number_of_technicians, label: 'Technician(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
         <%= f.input :estimated_hours, label: 'Estimated Labor Time', collection: @work_order.hours_for_collection, wrapper_html: { class: 'col-sm-6' }, selected: 2 %>
       </div>
 
@@ -54,10 +52,9 @@
         </div>
       </div>
 
-
       <div class="row">
         <div class="actions col-sm-12">
-          <%= f.button :submit, 'Publish Work Order Draft', class: "btn btn-success" %>
+          <%= f.button :submit, 'Publish Work Order Draft', class: "btn btn-primary" %>
         </div>
       </div>
     </div>
