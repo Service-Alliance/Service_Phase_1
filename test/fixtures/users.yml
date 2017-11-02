@@ -1,23 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  email: user1@servpro.com
+DEFAULTS: &DEFAULTS
   first_name: Dave
   last_name: Jones
   encrypted_password: <%= User.new.send(:password_digest, "password") %>
 
+one:
+  <<: *DEFAULTS
+  email: user1@servpro.com
+
 two:
+  <<: *DEFAULTS
   email: user2@servpro.com
   first_name: Barry
   last_name: Barnett
-  encrypted_password: <%= User.new.send(:password_digest, "password") %>
   tsheets: {tsheets_id: 123}
 
 with_tsheet:
+  <<: *DEFAULTS
   email: tsheets@servpro.com
-  first_name: Barry
-  last_name: Tsheet
-  encrypted_password: <%= User.new.send(:password_digest, "password") %>
   tsheets:
     :tsheets_id: 459375
     :tsheets_email: toneboneus@gmail.com
@@ -49,14 +49,33 @@ with_tsheet:
     :tsheets_profile_image_url: https://servpromedfordny.tsheets.com/vfs/images/clients/1a4c42370e6233bf/profile_images/459375-300px-A.jpg?v=1505738892
     :tsheets_manager_of_group_ids: []
     :tsheets_require_password_change: false
-
+  timesheets:
+    16342161:
+      'id': 16342161
+      "tz": -5
+      "end": "2017-02-06T14:17:00-05:00"
+      "date": "2017-02-06"
+      "type": "regular"
+      "notes": ""
+      :start: "2017-02-06T14:16:00-05:00"
+      "locked": 2
+      "tz_str": tsET
+      "user_id": 459423
+      "duration": 60
+      "location": "TSheets iPhone App"
+      "jobcode_id": 9285192
+      "on_the_clock": false
+      "last_modified": "2017-02-06T19:16:49+00:00"
+      "customfields":
+        "33849": "No"
+        "33851": "WATER RESTORATION"
+        "33853": "MEDFORD"
 
 job_manager:
+  <<: *DEFAULTS
   email: jobmanager@servpro.com
-  first_name: Jobby
   last_name: Manager
   role_id: 4
-  encrypted_password: <%= User.new.send(:password_digest, "password") %>
 
 scheduling_manager:
   email: kroggemann@servpro5933.com
