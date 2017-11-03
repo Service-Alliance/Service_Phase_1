@@ -19,6 +19,8 @@
     <% @franchise_zipcodes.each do |franchise_zipcode| %>
       <tr>
         <td><%= franchise_zipcode.franchise_id %></td>
+        <td><%= franchise_zipcode.zip_code %></td>
+        <td><%= link_to 'Show', franchise_zipcode %></td>
         <td><%= franchise_zipcode.franchise.name %></td>
         <td><%= franchise_zipcode.zip_code %></td>
         <td><%= franchise_zipcode.city %></td>
