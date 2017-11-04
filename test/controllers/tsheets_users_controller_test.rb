@@ -2,7 +2,7 @@ require 'test_helper'
 require_relative '../../app/controllers/tsheets/users_controller'
 
 class Tsheets::UsersControllerTest < ActionController::TestCase
-  setup do
+  def setup
     @user = users(:with_tsheet)
     sign_in(@user)
   end

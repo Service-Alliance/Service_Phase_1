@@ -3,14 +3,13 @@ class EventStore < ActiveRecord::Base
 
   TYPES = {
     SGE: 'sendgrid',
-    TSH: 'tsheets'
-  }
+    TSH: 'tsheets',
+    SSP: 'sharpspring'
+  }.freeze
 
-  def self.sendgrid(data)
-    create(event_type: :SGE, data: data)
-  end
-
-  def self.tsheets(data)
-    create(event_type: :TSH, data: data)
+  TYPES.each do |type, name|
+    define_singleton_method name do |data|
+      create(event_type: type, data: data)
+    end
   end
 end
