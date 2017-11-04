@@ -47,6 +47,29 @@
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <span class="bold">Emails:</span><br>
+                      <table class="table table-condensed">
+                        <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Subject</th>
+                          <th>Sent</th>
+                        </tr>
+                        <% @work_order.mail_logs.each do |log| %>
+                          <tr>
+                            <td><%= log.name %></td>
+                            <td><%= log.email %></td>
+                            <td><%= log.subject %></td>
+                            <td><%= log.created_at %></td>
+                          </tr>
+                        <% end %>
+                      </table>
+                    </div>
+                  </div>
+                </div>
                 <div class="col-xs-12">
                   <hr/>
                 </div>
