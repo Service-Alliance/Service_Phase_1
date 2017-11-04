@@ -27,6 +27,12 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :rate
 
+  TIMESHEETS_MAPPING = {
+    billable: '33849',
+    class: '33851',
+    service_item: '33853'
+  }
+
   def full_name
     "#{first_name} #{last_name}"
   end
