@@ -227,7 +227,6 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "category"
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
@@ -995,7 +994,6 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.time     "end"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.decimal  "total_time"
   end
 
   add_index "work_shift_breaks", ["work_shift_id"], name: "index_work_shift_breaks_on_work_shift_id", using: :btree
@@ -1008,7 +1006,6 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.time     "end"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.decimal  "total_time"
   end
 
   add_index "work_shifts", ["user_id"], name: "index_work_shifts_on_user_id", using: :btree
