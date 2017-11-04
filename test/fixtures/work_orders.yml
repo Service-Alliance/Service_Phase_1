@@ -1,5 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
- 
+
 DEFAULTS: &DEFAULTS
   to: MyText
   name: MyText
@@ -10,8 +10,6 @@ DEFAULTS: &DEFAULTS
   contact: MyText
   insurance: MyText
   claim_number: MyText
-  crew: MyText
-  approx_time_on_loss: 2017-03-08 08:56:46
   required: MyText
   referral: MyText
   franchise_location: MyText
