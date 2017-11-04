@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20171021070557) do
 
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -991,9 +990,6 @@ ActiveRecord::Schema.define(version: 20171021070557) do
     t.string   "events",                   default: [],                 array: true
   end
 
-  add_index "work_shifts", ["user_id"], name: "index_work_shifts_on_user_id", using: :btree
-  add_index "work_shifts", ["work_order_id"], name: "index_work_shifts_on_work_order_id", using: :btree
-
   add_foreign_key "caller_companies", "callers"
   add_foreign_key "caller_companies", "companies"
   add_foreign_key "franchise_work_order_distributions", "franchises", on_delete: :cascade
@@ -1005,7 +1001,4 @@ ActiveRecord::Schema.define(version: 20171021070557) do
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"
   add_foreign_key "work_order_vendors", "work_orders"
-  add_foreign_key "work_shift_breaks", "work_shifts", on_delete: :cascade
-  add_foreign_key "work_shifts", "users", on_delete: :cascade
-  add_foreign_key "work_shifts", "work_orders", on_delete: :cascade
 end
