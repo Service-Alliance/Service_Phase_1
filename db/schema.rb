@@ -1025,7 +1025,6 @@ ActiveRecord::Schema.define(version: 20180126021252) do
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
     t.string   "events",                   default: [],                 array: true
-<<<<<<< HEAD
     t.integer  "state",                    default: 0,     null: false
     t.boolean  "consumables_required?",    default: false, null: false
     t.boolean  "archived",                 default: false, null: false
@@ -1075,9 +1074,6 @@ ActiveRecord::Schema.define(version: 20180126021252) do
     t.decimal  "total_time"
   end
 
-  add_index "work_shifts", ["user_id"], name: "index_work_shifts_on_user_id", using: :btree
-  add_index "work_shifts", ["work_order_id"], name: "index_work_shifts_on_work_order_id", using: :btree
-
   add_foreign_key "caller_companies", "callers"
   add_foreign_key "caller_companies", "companies"
   add_foreign_key "franchise_scheduling_managers", "franchises", on_delete: :cascade
@@ -1097,7 +1093,4 @@ ActiveRecord::Schema.define(version: 20180126021252) do
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"
   add_foreign_key "work_order_vendors", "work_orders"
-  add_foreign_key "work_shift_breaks", "work_shifts", on_delete: :cascade
-  add_foreign_key "work_shifts", "users", on_delete: :cascade
-  add_foreign_key "work_shifts", "work_orders", on_delete: :cascade
 end
