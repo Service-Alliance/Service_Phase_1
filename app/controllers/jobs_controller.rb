@@ -45,7 +45,7 @@ class JobsController < ApplicationController
   def for_table
     sort_fields = {name: 'name', job_status_name: 'job_statuses.name', customer_full_name: ['customers.first_name', 'customers.last_name'], claim_number: "job_details.claim_number", job_loss_type_name: 'loss_types.name', insurance_company_name: 'insurance_companies.name', created_at: 'created_at'}
     sort_field = sort_fields[params[:sort].to_sym]
-    sort = Array.wrap(sort_field).map{|field| "#{field} #{params[:order]} NULLS LAST"}.join(', ')
+    sort = Array.wrap(sort_field).map{|field| "#{field} #{params[:order]} #{params[:order] == 'asc' ? 'NULLS FIRST' : 'NULLS LAST'}"}.join(', ')
     @jobs = Job.where.not(status_id: nil)
       .includes(job_associations)
       .order(sort)
