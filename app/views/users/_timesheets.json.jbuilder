@@ -1,3 +1,3 @@
-json.array! timesheets.values,:start, :end, :duration, :type, :location, :notes, :customfields
+json.array! timesheets.values,:start, :end, :date, :duration, :notes, :customfields
 
 
