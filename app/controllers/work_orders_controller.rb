@@ -23,9 +23,7 @@ class WorkOrdersController < ApplicationController
 
   # GET /work_orders/1/edit
   def edit
-    job = Job.find(params[:job_id])
     @work_order = WorkOrderPresenter.new(WorkOrder.find(params[:id]), view_context)
-
   end
 
   # POST /work_orders
