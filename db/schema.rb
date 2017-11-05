@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028102345) do
+ActiveRecord::Schema.define(version: 20171105024050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,15 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "consumables", force: :cascade do |t|
+    t.string   "name"
+    t.string   "purchase_unit"
+    t.decimal  "cost_per_purchase_unit"
+    t.decimal  "cost_per_unit"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "contact_assignments", force: :cascade do |t|
     t.integer  "contact_id"
     t.integer  "job_id"
@@ -227,6 +236,7 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "category"
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
@@ -971,7 +981,6 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.text     "insurance"
     t.text     "claim_number"
     t.text     "crew"
-    t.time     "approx_time_on_loss"
     t.text     "required"
     t.text     "referral"
     t.text     "franchise_location"
