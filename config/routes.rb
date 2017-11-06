@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :consumables
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
@@ -36,6 +35,7 @@ Rails.application.routes.draw do
   resources :phones
   resources :addresses
   resources :calls
+  resources :consumables
   post 'calls/precall-lookup' => 'calls#precall_lookup'
   post 'calls/precall-webhook' => 'calls#precall'
   post 'calls/postcall-webhook' => 'calls#postcall'
