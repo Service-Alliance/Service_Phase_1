@@ -5,16 +5,26 @@ br
   table.table.table.table-striped.table-condensed
     tbody
       tr
-        th Start
-        th End
-        th Location
+        th Date
+        th Day
+        th In
+        th Out
+        th Seconds
+        th Billable
+        th Class
+        th Service Item
         th Notes
 
       - Gon.timesheets.each do |row|
         tr
-          td = DateTime.parse(row['start'])
-          td = DateTime.parse(row['end'])
-          td =row['location']
-          td =row['notes']
+          td = Date.parse(row['date']).to_formatted_s(:rfc822)
+          td = Date.parse(row['date']).to_formatted_s(:day_of_week)
+          td = Time.parse(row['start']).to_formatted_s(:twelve_hour_time)
+          td = Time.parse(row['end']).to_formatted_s(:twelve_hour_time)
+          td = row['duration']
+          td = row['customfields'][User::TIMESHEETS_MAPPING[:billable]]
+          td = row['customfields'][User::TIMESHEETS_MAPPING[:class]]
+          td = row['customfields'][User::TIMESHEETS_MAPPING[:service_item]]
+          td = row['notes']
 
 
