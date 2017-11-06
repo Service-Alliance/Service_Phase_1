@@ -4,7 +4,7 @@ class ConsumablesController < ApplicationController
   # GET /consumables
   # GET /consumables.json
   def index
-    @consumables = Consumable.all
+    @consumables = Consumable.name_ordered
   end
 
   # GET /consumables/1
@@ -62,11 +62,12 @@ class ConsumablesController < ApplicationController
   end
 
   private
-    def set_consumable
-      @consumable = Consumable.find(params[:id])
-    end
 
-    def consumable_params
-      params.require(:consumable).permit(:name, :purchase_unit, :cost_per_purchase_unit, :cost_per_unit)
-    end
+  def set_consumable
+    @consumable = Consumable.find(params[:id])
+  end
+
+  def consumable_params
+    params.require(:consumable).permit(:name, :purchase_unit, :cost_per_purchase_unit, :cost_per_unit)
+  end
 end
