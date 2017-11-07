@@ -68,6 +68,10 @@ GEM
     best_in_place (3.0.3)
       actionpack (>= 3.2)
       railties (>= 3.2)
+    better_errors (2.4.0)
+      coderay (>= 1.0.0)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
     binding_of_caller (0.7.3)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.7)
@@ -141,9 +145,14 @@ GEM
     dotenv-rails (2.2.1)
       dotenv (= 2.2.1)
       railties (>= 3.2, < 5.2)
+    em-websocket (0.5.1)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0.6.0)
+    erubi (1.7.0)
     erubis (2.7.0)
     ethon (0.11.0)
       ffi (>= 1.3.0)
+    eventmachine (1.0.9.1)
     excon (0.59.0)
     execjs (2.7.0)
     faraday (0.13.1)
@@ -200,6 +209,11 @@ GEM
       guard (~> 2.2)
       guard-compat (~> 1.1)
     guard-compat (1.2.1)
+    guard-livereload (2.5.2)
+      em-websocket (~> 0.5)
+      guard (~> 2.8)
+      guard-compat (~> 1.0)
+      multi_json (~> 1.8)
     guard-minitest (2.4.6)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
@@ -211,6 +225,7 @@ GEM
       activesupport (>= 4.1, < 5.2)
     hashdiff (0.3.7)
     honeybadger (3.1.2)
+    http_parser.rb (0.6.0)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
     i18n (0.9.0)
@@ -270,7 +285,7 @@ GEM
       actionpack (>= 2.3)
       activerecord (>= 2.3)
     memory_profiler (0.9.8)
-    method_source (0.9.0)
+    method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
@@ -332,18 +347,24 @@ GEM
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
-    pry (0.11.2)
+    pry (0.10.4)
       coderay (~> 1.1.0)
-      method_source (~> 0.9.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     pry-byebug (3.5.0)
       byebug (~> 9.1)
       pry (~> 0.10)
+    pry-nav (0.2.4)
+      pry (>= 0.9.10, < 0.11.0)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
     public_activity (1.5.0)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
     public_suffix (3.0.0)
+    puma (3.10.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (1.6.8)
@@ -424,11 +445,14 @@ GEM
     select2-rails (4.0.3)
       thor (~> 0.14)
     shellany (0.0.1)
+    shoulda-matchers (3.1.2)
+      activesupport (>= 4.0.0)
     sidekiq (5.0.5)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (>= 3.3.4, < 5)
+    simple_bdd (0.1.0)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -446,6 +470,7 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (~> 3.0)
+    slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     sprockets (3.7.1)
@@ -502,6 +527,8 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 1.1)
   best_in_place (~> 3.0.1)
+  better_errors
+  binding_of_caller
   bootstrap-sass (~> 3.3)
   bullet
   carrierwave (~> 1.0)
@@ -520,6 +547,7 @@ DEPENDENCIES
   gridhook
   groupdate
   guard-bundler
+  guard-livereload (~> 2.5)
   guard-minitest
   guard-rails
   honeybadger (~> 3.1)
@@ -541,8 +569,12 @@ DEPENDENCIES
   pg_search
   poltergeist
   prawn
+  pry
   pry-byebug
+  pry-nav
+  pry-rails (~> 0.3.2)
   public_activity
+  puma
   pundit
   rack-mini-profiler
   rails (~> 4.2)
@@ -552,7 +584,9 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   seed_migration
   select2-rails
+  shoulda-matchers
   sidekiq
+  simple_bdd
   simple_form
   simplecov
   single_test

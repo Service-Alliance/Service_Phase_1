@@ -1,17 +1,12 @@
 class WorkOrderDeliveryService
+  SCHEDULING_MANAGERS = %w(dankluger@servpro5933.com edwinl411@aol.com zpisoni@servpro5933.com).freeze
+
   def initialize(work_order, current_user)
     @work_order = work_order
     @current_user = current_user
   end
 
   def deliver!
-    send_to_current_user
-    send_to_scheduling_manager
-    send_to_loss_coordinator
-    send_to_job_managers
-    send_to_vendors
-    send_to_crew
-    send_to_franchise_distribution
   end
 
   private
@@ -20,10 +15,16 @@ class WorkOrderDeliveryService
     deliver_user_email(@current_user)
   end
 
-  def send_to_scheduling_manager
+  def send_to_scheduling_managers
     return unless should_send_to_scheduling_manager?
-    sched_manager = User.find_by(email: 'dankluger@servpro5933.com')
-    deliver_user_email(sched_manager) if sched_manager.present?
+    SCHEDULING_MANAGERS.each do |manager|
+      send_to_scheduling_manager(manager)
+    end
+  end
+
+  def send_to_scheduling_manager(email)
+    user = User.find_by(email: email)
+    deliver_draft_email(user) if user.present?
   end
 
   def should_send_to_scheduling_manager?
@@ -66,6 +67,10 @@ class WorkOrderDeliveryService
 
   def deliver_user_email(user)
     WorkOrderMailer.notification(user, @work_order.job, @work_order).deliver_later
+  end
+
+  def deliver_draft_email(user)
+    WorkOrderMailer.draft(user, @work_order.job, @work_order).deliver_later
   end
 
   def deliver_vendor_email(contact, vendor = nil)

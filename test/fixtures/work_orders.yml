@@ -10,7 +10,6 @@ DEFAULTS: &DEFAULTS
   contact: MyText
   insurance: MyText
   claim_number: MyText
-  crew: MyText
   required: MyText
   referral: MyText
   franchise_location: MyText
