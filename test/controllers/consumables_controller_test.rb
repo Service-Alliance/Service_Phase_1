@@ -19,7 +19,7 @@ class ConsumablesControllerTest < ActionController::TestCase
 
   test "should create consumable" do
     assert_difference('Consumable.count') do
-      post :create, consumable: { cost_per_purchase_unit: @consumable.cost_per_purchase_unit, cost_per_unit: @consumable.cost_per_unit, name: @consumable.name, purchase_unit: @consumable.purchase_unit }
+      post :create, consumable: { cost_per_purchase_unit: @consumable.cost_per_purchase_unit, purchase_unit_quantity: @consumable.purchase_unit_quantity, name: @consumable.name, purchase_unit: @consumable.purchase_unit }
     end
 
     assert_redirected_to consumable_path(assigns(:consumable))
@@ -36,7 +36,7 @@ class ConsumablesControllerTest < ActionController::TestCase
   end
 
   test "should update consumable" do
-    patch :update, id: @consumable, consumable: { cost_per_purchase_unit: @consumable.cost_per_purchase_unit, cost_per_unit: @consumable.cost_per_unit, name: @consumable.name, purchase_unit: @consumable.purchase_unit }
+    patch :update, id: @consumable, consumable: { cost_per_purchase_unit: @consumable.cost_per_purchase_unit, purchase_unit_quantity: @consumable.purchase_unit_quantity, name: @consumable.name, purchase_unit: @consumable.purchase_unit }
     assert_redirected_to consumable_path(assigns(:consumable))
   end
 

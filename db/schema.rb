@@ -211,8 +211,8 @@ ActiveRecord::Schema.define(version: 20171105024050) do
   create_table "consumables", force: :cascade do |t|
     t.string   "name"
     t.string   "purchase_unit"
+    t.integer  "purchase_unit_quantity"
     t.decimal  "cost_per_purchase_unit"
-    t.decimal  "cost_per_unit"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end

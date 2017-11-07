@@ -12,7 +12,7 @@
           th Name
           th Purchase unit
           th Cost per purchase unit
-          th Cost per unit
+          th Purchase unit quantity
           th
 
       tbody
@@ -21,7 +21,7 @@
             td = consumable.name
             td = consumable.purchase_unit
             td = consumable.cost_per_purchase_unit
-            td = consumable.cost_per_unit
+            td = consumable.purchase_unit_quantity
             td.text-right
               = link_to 'Show', consumable, class: 'btn btn-xs btn-primary'
               = link_to 'Edit', edit_consumable_path(consumable), class: 'btn btn-xs btn-success'

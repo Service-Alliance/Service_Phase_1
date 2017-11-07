@@ -4,10 +4,10 @@ one:
   name: MyString
   purchase_unit: MyString
   cost_per_purchase_unit: 9.99
-  cost_per_unit: 9.99
+  purchase_unit_quantity: 10
 
 two:
   name: MyString
   purchase_unit: MyString
   cost_per_purchase_unit: 9.99
-  cost_per_unit: 9.99
+  purchase_unit_quantity: 10

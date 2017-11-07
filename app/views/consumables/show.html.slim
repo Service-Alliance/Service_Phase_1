@@ -20,9 +20,9 @@
       = @consumable.cost_per_purchase_unit
   .row
     .col-md-3.col-sm-3.col-xs-12.text-right
-      strong Cost per unit:
+      strong Purchase unit quantity:
     .col-md-6.col-sm-6.col-xs-12
-      = @consumable.cost_per_unit
+      = @consumable.purchase_unit_quantity
 
   .text-center
     => link_to 'Edit', edit_consumable_path(@consumable), class: 'btn btn-primary'

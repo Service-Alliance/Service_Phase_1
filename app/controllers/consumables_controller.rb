@@ -68,6 +68,6 @@ class ConsumablesController < ApplicationController
   end
 
   def consumable_params
-    params.require(:consumable).permit(:name, :purchase_unit, :cost_per_purchase_unit, :cost_per_unit)
+    params.require(:consumable).permit(:name, :purchase_unit, :cost_per_purchase_unit, :purchase_unit_quantity)
   end
 end

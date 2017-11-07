@@ -7,4 +7,7 @@ class PopulateConsumables < SeedMigration::Migration
       Consumable.create!(rowh) if consumable.nil?
     end
   end
+
+  def down
+  end
 end
