@@ -208,6 +208,15 @@ ActiveRecord::Schema.define(version: 20171107194659) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "consumables", force: :cascade do |t|
+    t.string   "name"
+    t.string   "purchase_unit"
+    t.integer  "purchase_unit_quantity"
+    t.decimal  "cost_per_purchase_unit"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "contact_assignments", force: :cascade do |t|
     t.integer  "contact_id"
     t.integer  "job_id"

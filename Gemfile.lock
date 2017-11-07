@@ -466,6 +466,10 @@ GEM
     slim (3.0.8)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
+    slim-rails (3.1.3)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (~> 3.0)
     slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -586,7 +590,7 @@ DEPENDENCIES
   simple_form
   simplecov
   single_test
-  slim
+  slim-rails
   spring
   tsheets!
   uglifier (>= 1.3.0)
