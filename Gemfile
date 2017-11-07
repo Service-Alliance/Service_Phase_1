@@ -70,6 +70,7 @@ gem 'marginalia'
 gem 'seed_migration'
 
 gem 'sidekiq'
+gem 'gon'
 
 group :development, :test do
   gem 'minitest-reporters'

@@ -1,5 +1,30 @@
 = form_for :TsheetTimesheet, remote: true, method: :patch, url: tsheets_user_path(user) do |f|
   = f.submit('Refresh Data', class:'btn btn-default')
-hr
+br
+#timesheets
+  table.table.table.table-striped.table-condensed
+    tbody
+      tr
+        th Date
+        th Day
+        th In
+        th Out
+        th Seconds
+        th Billable
+        th Class
+        th Service Item
+        th Notes
 
-#timesheets Loading timesheets...
+      - Gon.timesheets.each do |row|
+        tr
+          td = Date.parse(row['date']).to_formatted_s(:rfc822)
+          td = Date.parse(row['date']).to_formatted_s(:day_of_week)
+          td = Time.parse(row['start']).to_formatted_s(:twelve_hour_time)
+          td = Time.parse(row['end']).to_formatted_s(:twelve_hour_time)
+          td = row['duration']
+          td = row['customfields'][User::TIMESHEETS_MAPPING[:billable]]
+          td = row['customfields'][User::TIMESHEETS_MAPPING[:class]]
+          td = row['customfields'][User::TIMESHEETS_MAPPING[:service_item]]
+          td = row['notes']
+
+
