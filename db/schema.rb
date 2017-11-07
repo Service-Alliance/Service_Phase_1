@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028102345) do
+ActiveRecord::Schema.define(version: 20171107194659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "category"
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
@@ -986,6 +987,7 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
     t.string   "events",                   default: [],                 array: true
+    t.integer  "state"
   end
 
   create_table "work_shift_breaks", force: :cascade do |t|
@@ -994,6 +996,7 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.time     "end"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.decimal  "total_time"
   end
 
   add_index "work_shift_breaks", ["work_shift_id"], name: "index_work_shift_breaks_on_work_shift_id", using: :btree
@@ -1006,6 +1009,7 @@ ActiveRecord::Schema.define(version: 20171028102345) do
     t.time     "end"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.decimal  "total_time"
   end
 
   add_index "work_shifts", ["user_id"], name: "index_work_shifts_on_user_id", using: :btree
