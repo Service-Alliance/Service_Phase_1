@@ -117,7 +117,6 @@ class WorkOrdersController < ApplicationController
       :contact,
       :insurance,
       :claim_number,
-      :crew,
       :required,
       :referral,
       :franchise_location,

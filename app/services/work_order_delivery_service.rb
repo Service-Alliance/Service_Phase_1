@@ -24,7 +24,7 @@ class WorkOrderDeliveryService
 
   def send_to_scheduling_manager(email)
     user = User.find_by(email: email)
-    deliver_user_email(user) if user.present?
+    deliver_draft_email(user) if user.present?
   end
 
   def should_send_to_scheduling_manager?
@@ -67,6 +67,10 @@ class WorkOrderDeliveryService
 
   def deliver_user_email(user)
     WorkOrderMailer.notification(user, @work_order.job, @work_order).deliver_later
+  end
+
+  def deliver_draft_email(user)
+    WorkOrderMailer.draft(user, @work_order.job, @work_order).deliver_later
   end
 
   def deliver_vendor_email(contact, vendor = nil)
