@@ -8,7 +8,7 @@ class Tsheets::UsersControllerTest < ActionController::TestCase
   end
 
   test "#update" do
-    patch :update, format: :json, id: @user
+    patch :update, format: :json, id: @user.id
     assert_response :success
   end
 end

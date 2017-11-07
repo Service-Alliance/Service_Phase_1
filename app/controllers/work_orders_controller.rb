@@ -34,31 +34,32 @@ class WorkOrdersController < ApplicationController
 
     respond_to do |format|
       if @work_order.save
-        tracker_task = TrackerTask.find_by(name: "Work Order Created")
+        tracker_task = TrackerTask.find_by(name: "Work Order Drafted")
         @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
-
-        WorkOrderDeliveryService.new(@work_order, current_user).deliver!
-
+        WorkOrderDraftDeliveryService.new(@work_order, current_user).deliver!
         @job.pipeline_status_id = 8
         if @job.status_id == 1
           @job.status_id = 2
         end
         @job.save
-        format.html { redirect_to job_path(@job), notice: 'Work Order was successfully created.' }
+        format.html { redirect_to job_path(@job), notice: 'Work Order was Drafted and Scheduling Manager Notified.' }
         format.json { render :show, status: :created, location: @work_order }
       else
         format.html { render :new }
         format.json { render json: @work_order.errors, status: :unprocessable_entity }
       end
     end
-  end
+    end
 
   # PATCH/PUT /work_orders/1
   # PATCH/PUT /work_orders/1.json
   def update
     respond_to do |format|
       if @work_order.update(work_order_params)
-        format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order was successfully updated.' }
+        tracker_task = TrackerTask.find_by(name: "Work Order Updated")
+        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
+        WorkOrderPublishDeliveryService.new(@work_order, current_user).deliver!
+        format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order has been delivered successfully' }
         format.json { render :show, status: :ok, location: @work_order }
       else
         format.html { render :edit }
@@ -116,8 +117,6 @@ class WorkOrdersController < ApplicationController
       :contact,
       :insurance,
       :claim_number,
-      :crew,
-      :approx_time_on_loss,
       :required,
       :referral,
       :franchise_location,
