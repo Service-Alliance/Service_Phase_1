@@ -8,7 +8,9 @@ class Tsheets::UsersControllerTest < ActionController::TestCase
   end
 
   test "#update" do
-    patch :update, format: :json, id: @user.id
-    assert_response :success
+    VCR.use_cassette('timesheet request, with service') do
+      patch :update, format: :json, id: @user.id
+      assert_response :success
+    end
   end
 end
