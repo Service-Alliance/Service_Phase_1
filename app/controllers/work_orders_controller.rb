@@ -56,7 +56,7 @@ class WorkOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @work_order.update(work_order_params)
-        tracker_task = TrackerTask.find_by(name: "Work Order Updated")
+        tracker_task = TrackerTask.find_by(name: "Work Order Delivered")
         @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
         WorkOrderPublishDeliveryService.new(@work_order, current_user).deliver!
         format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order has been delivered successfully' }

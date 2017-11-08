@@ -97,6 +97,26 @@
       </div>
     </article>
 
+  <% elsif tracker.tracker_task.name == "Work Order Delivered" %>
+    <% call = WorkOrder.find(tracker.child_id) %>
+    <article data-status="work-order" class="timeline-entry">
+      <div class="timeline-entry-inner">
+        <div class="timeline-icon bg-success">
+          <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+        </div>
+        <div class="timeline-label">
+          <div class="panel-heading">
+            <h3 class="panel-title">Work Order Delivered &bull;
+              <%= tracker.created_at.strftime("%D %I:%M %p") %>
+              &bull;
+              <%= tracker.try(:user).try(:full_name) %></h3>
+          </div>
+          <div class="panel-body">
+            <%= link_to "View", job_work_order_path(job, call.id) %>
+          </div>
+        </div>
+      </div>
+    </article>
 
   <% elsif tracker.tracker_task.name == "Purchase Order Created" %>
     <% purchase_order = PurchaseOrderApproval.find(tracker.child_id) %>
