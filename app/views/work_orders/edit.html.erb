@@ -14,6 +14,16 @@
                         <div class="row content-box">
                             <%= render 'form' %>
                         </div>
+        <div class="row">
+        <%= f.input :crew_chief_ids, collection: User.with_role('Crew Chief'), label_method: :full_name, input_html: { multiple: true, class: 'select-control form-control', style: 'width: 100%' }, wrapper_html: { class: 'col-sm-6' }, label: 'Crew Chief(s)', hint: "Will Receive Email" %>
+        <%= f.input :technician_ids, collection: User.with_role('Technician'), label_method: :full_name, input_html: { multiple: true, class: 'select-control form-control', style: 'width: 100%' }, wrapper_html: { class: 'col-sm-6' }, label: 'Technician(s)', hint: "Will Receive Email" %>
+      </div>
+      <div class="row">
+      <%= f.input :vendor_ids, collection: Vendor.order(:name), label_method: :name, input_html: { multiple: true, class: 'select-control form-control', style: 'width: 100%' }, wrapper_html: { class: 'col-sm-12' }, label: 'Vendors/Sub-Contractor', hint: "Will Receive Email" %>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <hr/>
                 </div>
             </div>
         </div>
