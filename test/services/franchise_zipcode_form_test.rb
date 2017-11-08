@@ -5,6 +5,6 @@ class FranchiseZipcodeFormTest < ActiveSupport::TestCase
     object = FranchiseZipcodeForm.call({ franchise_id: '1', zip_code: '12345' })
     assert_equal 1, object.franchise_id
     assert_equal '12345', object.zip_code
-    assert_nil object.county
+    refute_nil object.county
   end
 end
