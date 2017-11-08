@@ -1,3 +1,5 @@
+- require_relative '../../../lib/servpro'
+
 = form_for :TsheetTimesheet, remote: true, method: :patch, url: tsheets_user_path(user) do |f|
   = f.submit('Refresh Data', class:'btn btn-default')
 br
@@ -9,7 +11,7 @@ br
         th Day
         th In
         th Out
-        th Seconds
+        th Hours
         th Billable
         th Class
         th Service Item
@@ -21,7 +23,7 @@ br
           td = Date.parse(row['date']).to_formatted_s(:day_of_week)
           td = Time.parse(row['start']).to_formatted_s(:twelve_hour_time)
           td = Time.parse(row['end']).to_formatted_s(:twelve_hour_time)
-          td = row['duration']
+          td = ServPro::Utils.seconds_to_hours(row['duration'])
           td = row['customfields'][User::TIMESHEETS_MAPPING[:billable]]
           td = row['customfields'][User::TIMESHEETS_MAPPING[:class]]
           td = row['customfields'][User::TIMESHEETS_MAPPING[:service_item]]
