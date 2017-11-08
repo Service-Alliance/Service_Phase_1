@@ -8,9 +8,9 @@ module ServPro
         end
 
       if secs.eql?(0)
-        "#{hours}:#{minutes}"
+        "#{hours}:#{'%02d' % minutes}"
       else
-        "#{hours}:#{minutes}:#{secs}"
+        "#{hours}:#{'%02d' % minutes}:#{'%02d' % secs}"
       end
     end
   end
