@@ -11,7 +11,7 @@ class WorkOrderDraftDeliveryServiceTest < ActiveSupport::TestCase
   end
 
   test "send out a lot of emails" do
-    assert_enqueued_jobs 0
+    assert_enqueued_jobs 1
     WorkOrderDraftDeliveryService.new(@work_order, @current_user).deliver!
     assert_enqueued_jobs 0
   end
