@@ -162,6 +162,7 @@ class Customer < ActiveRecord::Base
       @secretKey = ENV['CRANBURY_SHARPSPRING_SECRET']
     end
     response = HTTParty.post("https://api.sharpspring.com/pubapi/v1/?accountID=#{@accountId}&secretKey=#{@secretKey}", :headers => { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}, body: @json)
+    EventStore.sharpspring(franchise: franchise.name, sent: @json, received: response.parsed_response)
     self.sharp_spring_id = response.parsed_response['result']['creates'][0]['id']
     self.save
   end

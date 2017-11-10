@@ -1,0 +1,26 @@
+-content_for(:title, '<%= plural_table_name.capitalize %>')
+
+== render layout: 'layouts/content'
+  .text-right
+    = link_to 'New <%= human_name %>', new_<%= singular_table_name %>_path, class: 'btn btn-success'
+  br
+
+  .table-responsive
+    table.table.table-striped.jambo_table
+      thead
+        tr.headings
+<% attributes.each do |attribute| -%>
+          th <%= attribute.human_name %>
+<% end -%>
+          th
+
+      tbody
+        - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+          tr
+<% attributes.each do |attribute| -%>
+            td = <%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+            td.text-right
+              = link_to 'Show', <%= singular_table_name %>, class: 'btn btn-xs btn-primary'
+              = link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-xs btn-success'
+              = link_to 'Destroy', <%= singular_table_name %>, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'

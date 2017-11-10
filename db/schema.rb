@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023213737) do
+
+ActiveRecord::Schema.define(version: 20171107194659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +209,15 @@ ActiveRecord::Schema.define(version: 20171023213737) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "consumables", force: :cascade do |t|
+    t.string   "name"
+    t.string   "purchase_unit"
+    t.integer  "purchase_unit_quantity"
+    t.decimal  "cost_per_purchase_unit"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "contact_assignments", force: :cascade do |t|
     t.integer  "contact_id"
     t.integer  "job_id"
@@ -227,6 +237,7 @@ ActiveRecord::Schema.define(version: 20171023213737) do
     t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "category"
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
@@ -869,6 +880,7 @@ ActiveRecord::Schema.define(version: 20171023213737) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.jsonb    "tsheets",                default: {}, null: false
+    t.jsonb    "timesheets",             default: {}, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -969,8 +981,6 @@ ActiveRecord::Schema.define(version: 20171023213737) do
     t.text     "contact"
     t.text     "insurance"
     t.text     "claim_number"
-    t.text     "crew"
-    t.time     "approx_time_on_loss"
     t.text     "required"
     t.text     "referral"
     t.text     "franchise_location"
@@ -987,6 +997,29 @@ ActiveRecord::Schema.define(version: 20171023213737) do
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
     t.string   "events",                   default: [],                 array: true
+    t.integer  "state"
+  end
+
+  create_table "work_shift_breaks", force: :cascade do |t|
+    t.integer  "work_shift_id"
+    t.time     "start"
+    t.time     "end"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.decimal  "total_time"
+  end
+
+  add_index "work_shift_breaks", ["work_shift_id"], name: "index_work_shift_breaks_on_work_shift_id", using: :btree
+
+  create_table "work_shifts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "work_order_id"
+    t.date     "date"
+    t.time     "start"
+    t.time     "end"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.decimal  "total_time"
   end
 
   create_table "work_shift_breaks", force: :cascade do |t|

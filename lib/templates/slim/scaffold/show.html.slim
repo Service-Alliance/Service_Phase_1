@@ -1,0 +1,16 @@
+- content_for(:title, "<%= singular_table_name.capitalize %>")
+
+== render layout: 'layouts/content'
+  p#notice = notice
+
+<% attributes.each do |attribute| -%>
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong <%= attribute.human_name %>:
+    .col-md-6.col-sm-6.col-xs-12
+      = @<%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+
+  .text-center
+    => link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-primary'
+    =< link_to 'Back', <%= index_helper %>_path, class: 'btn btn-default'

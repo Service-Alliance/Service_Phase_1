@@ -1,0 +1,6 @@
+- content_for(:title, "New consumable")
+
+== render layout: 'layouts/content'
+  == render 'form'
+
+  = link_to 'Back', consumables_path, class: 'btn btn-default'

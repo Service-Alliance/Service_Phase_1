@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :phones, as: :phoneable
   has_one :rate, class_name: 'UserRate'
 
-  store_accessor :tsheets, :tsheets_id, :tsheets_first_name, :tsheets_last_name
+  store_accessor :tsheets, :tsheets_id
 
   delegate :name, to: :department, allow_nil: true, prefix: true
   delegate :display_with_period, :amount, :period, :salaried, :exempt, to: :rate, allow_nil: true, prefix: true
@@ -26,6 +26,12 @@ class User < ActiveRecord::Base
   scope :with_first_and_last_names, ->(first, last) { where('lower(first_name) = ? AND lower(last_name) = ?', first.try(:downcase), last.try(:downcase)) }
 
   accepts_nested_attributes_for :rate
+
+  TIMESHEETS_MAPPING = {
+    billable: '33849',
+    class: '33851',
+    service_item: '33853'
+  }
 
   def full_name
     "#{first_name} #{last_name}"

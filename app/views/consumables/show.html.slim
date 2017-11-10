@@ -1,0 +1,29 @@
+- content_for(:title, "Consumable")
+
+== render layout: 'layouts/content'
+  p#notice = notice
+
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Name:
+    .col-md-6.col-sm-6.col-xs-12
+      = @consumable.name
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Purchase unit:
+    .col-md-6.col-sm-6.col-xs-12
+      = @consumable.purchase_unit
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Cost per purchase unit:
+    .col-md-6.col-sm-6.col-xs-12
+      = @consumable.cost_per_purchase_unit
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Purchase unit quantity:
+    .col-md-6.col-sm-6.col-xs-12
+      = @consumable.purchase_unit_quantity
+
+  .text-center
+    => link_to 'Edit', edit_consumable_path(@consumable), class: 'btn btn-primary'
+    =< link_to 'Back', consumables_path, class: 'btn btn-default'

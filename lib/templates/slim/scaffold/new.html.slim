@@ -1,0 +1,6 @@
+- content_for(:title, "New <%= singular_table_name %>")
+
+== render layout: 'layouts/content'
+  == render 'form'
+
+  = link_to 'Back', <%= index_helper %>_path, class: 'btn btn-default'

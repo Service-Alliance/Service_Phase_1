@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :phones
   resources :addresses
   resources :calls
+  resources :consumables
   post 'calls/precall-lookup' => 'calls#precall_lookup'
   post 'calls/precall-webhook' => 'calls#precall'
   post 'calls/postcall-webhook' => 'calls#postcall'
@@ -129,7 +130,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   namespace :tsheets do
-    resources :users, only: :index
+    resources :users, only: [:index, :update]
   end
 
   require 'sidekiq/web'

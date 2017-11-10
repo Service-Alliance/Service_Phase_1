@@ -2,7 +2,7 @@ class WorkOrderPresenter < BasePresenter
   include ActionView::Helpers
 
   def display_crew
-    number_of_technicians.present? || number_of_crew_chiefs.present? ? display_total_crew : crew
+    display_total_crew
   end
 
   def hours_for_collection

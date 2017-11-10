@@ -1,24 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :new, :update, :destroy, :job_assignments_list]
 
-  # GET /users
-  # GET /users.json
-  def index
-  end
-
   def list
     @users = User.includes(:department)
     render :json => @users.to_json(include: [:department])
   end
 
-
-  # GET /users/1
-  # GET /users/1.json
   def show
-  end
-
-  # GET /users/new
-  def new
+    gon.jbuilder template: 'app/views/users/_timesheets.json.jbuilder', as: :timesheets, locals: {timesheets: HashWithIndifferentAccess.new(@user.timesheets)}
   end
 
   # GET /users/1/edit

@@ -19,9 +19,4 @@ class WorkOrderPresenterTest < ActiveSupport::TestCase
     @work_order.number_of_crew_chiefs = 3
     assert_equal("3 crew chiefs", @presenter.display_crew)
   end
-
-  test "#display_crew displays old crew field if none of the counts are present" do
-    @work_order.crew = "2 men"
-    assert_equal("2 men", @presenter.display_crew)
-  end
 end

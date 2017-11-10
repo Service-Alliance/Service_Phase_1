@@ -1,0 +1,11 @@
+= simple_form_for(@consumable) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :purchase_unit
+    = f.input :purchase_unit_quantity
+    = f.input :cost_per_purchase_unit
+
+  .form-actions
+    = f.button :submit

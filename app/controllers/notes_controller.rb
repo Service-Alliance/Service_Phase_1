@@ -29,7 +29,7 @@ class NotesController < ApplicationController
       @job = Job.find_by(id: job_params['job_id'])
       @note = @job.notes.new(note_params)
       @note.user_id = current_user.id
-
+# FIXME This does not work for User Id 43 { First Name: 'Juan Carlos Gutierrez'}
       if @note.content.include?("@")
         arr = @note.content.split(' ')
         mentions = arr.select { |str| str.include?('@') }
