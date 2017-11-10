@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20171107194659) do
+ActiveRecord::Schema.define(version: 20171110101535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -949,6 +948,18 @@ ActiveRecord::Schema.define(version: 20171107194659) do
     t.decimal  "technician_rate"
   end
 
+  create_table "work_crew_assignments", force: :cascade do |t|
+    t.integer  "work_order_id"
+    t.integer  "work_order_users_id"
+    t.integer  "user_id"
+    t.integer  "vendoor_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "work_crew_assignments", ["work_order_id"], name: "index_work_crew_assignments_on_work_order_id", using: :btree
+  add_index "work_crew_assignments", ["work_order_users_id"], name: "index_work_crew_assignments_on_work_order_users_id", using: :btree
+
   create_table "work_order_users", force: :cascade do |t|
     t.integer  "work_order_id"
     t.integer  "user_id"
@@ -1022,28 +1033,6 @@ ActiveRecord::Schema.define(version: 20171107194659) do
     t.decimal  "total_time"
   end
 
-  create_table "work_shift_breaks", force: :cascade do |t|
-    t.integer  "work_shift_id"
-    t.time     "start"
-    t.time     "end"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.decimal  "total_time"
-  end
-
-  add_index "work_shift_breaks", ["work_shift_id"], name: "index_work_shift_breaks_on_work_shift_id", using: :btree
-
-  create_table "work_shifts", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "work_order_id"
-    t.date     "date"
-    t.time     "start"
-    t.time     "end"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.decimal  "total_time"
-  end
-
   add_index "work_shifts", ["user_id"], name: "index_work_shifts_on_user_id", using: :btree
   add_index "work_shifts", ["work_order_id"], name: "index_work_shifts_on_work_order_id", using: :btree
 
@@ -1054,6 +1043,7 @@ ActiveRecord::Schema.define(version: 20171107194659) do
   add_foreign_key "user_rates", "users", on_delete: :cascade
   add_foreign_key "vendor_loss_rates", "loss_types", on_delete: :cascade
   add_foreign_key "vendor_loss_rates", "vendors", on_delete: :cascade
+  add_foreign_key "work_crew_assignments", "work_orders", on_delete: :cascade
   add_foreign_key "work_order_users", "users"
   add_foreign_key "work_order_users", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"

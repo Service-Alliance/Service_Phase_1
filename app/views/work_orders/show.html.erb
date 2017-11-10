@@ -22,10 +22,6 @@
                 <div class="clearfix">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <span class="bold">To:</span><br>
-                      <%= @work_order.to.join('<br />').html_safe %>
-                    </div>
-                    <div class="form-group">
                       <span class="bold">Crew Chief(s):</span><br>
                       <%= @work_order.crew_chief_names.join('<br />').html_safe %>
                     </div>
