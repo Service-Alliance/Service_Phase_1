@@ -100,8 +100,13 @@ class User < ActiveRecord::Base
     return array
   end
 
+  # FIXME: remove, replace with with_roles
   def self.with_role(role_name)
     joins(:role).where(roles: {name: role_name})
+  end
+
+  def self.with_roles(*roles)
+    joins(:role).where(roles: {name: roles})
   end
 
   def self.user_metrics(days)

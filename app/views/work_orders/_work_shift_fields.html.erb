@@ -1,0 +1,22 @@
+<div class="nested-fields">
+  <div class="row">
+    <%= f.input :user_id, label: "Technician/ Crew Chief",collection: User.with_roles("Technician", "Crew Chief").order(:first_name, :last_name), label_method: :full_name, wrapper_html: { class: 'col-sm-2' } %>
+    <%= f.input :date, label: "Date of Shift", as: :date_picker, wrapper_html: { class: 'col-sm-2' } %>
+    <%= f.input :start, label: "Shift Start", as: :time_picker, wrapper_html: { class: 'col-sm-2' } %>
+    <%= f.input :end, label: "Shift End", as: :time_picker, wrapper_html: { class: 'col-sm-2' } %>
+    <%= f.input :total_time, label: "Total Hours", wrapper_html:{ class: 'col-sm-2'} %>
+    <div class="col-sm-2">
+      <%= label_tag :delete %><br>
+      <%= link_to_remove_association 'Delete', f, class: 'btn btn-danger full-width' %>
+    </div>
+  </div>
+  <div class="row">
+    <%= f.simple_fields_for :breaks do |b| %>
+      <%= render partial: 'break_fields', locals: { f: b } %>
+    <% end %>
+    <div class="col-sm-12">
+      <%= link_to_add_association 'Add Break', f, :breaks, class: 'btn btn-primary btn-sm' %>
+    </div>
+  </div>
+  <hr />
+</div>

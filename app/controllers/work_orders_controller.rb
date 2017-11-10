@@ -23,7 +23,6 @@ class WorkOrdersController < ApplicationController
 
   # GET /work_orders/1/edit
   def edit
-    @work_order = WorkOrderPresenter.new(WorkOrder.find(params[:id]), view_context)
   end
 
   # POST /work_orders
@@ -132,7 +131,21 @@ class WorkOrdersController < ApplicationController
       :estimated_hours,
       technician_ids: [],
       crew_chief_ids: [],
-      vendor_ids: [])
+      vendor_ids: [],
+      work_shifts_attributes: [
+        :id,
+        :user_id,
+        :date,
+        :start,
+        :end,
+        :_destroy,
+        breaks_attributes: [
+          :id,
+          :start,
+          :end,
+          :_destroy
+        ]
+      ])
   end
 
   def work_order_send_to_params

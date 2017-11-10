@@ -32,21 +32,52 @@
         <%= f.input :job_location, label: 'Job Location', as: :string, wrapper_html: { class: 'col-sm-12' }, disabled: true %>
         <%= f.input :job_start, label: 'Job Start Time (Estimate)', as: :datetime, ampm: true, wrapper_html: { class: 'col-sm-12' } %>
       </div>
-
       <div class="clearfix">
         <%= f.input :number_of_crew_chiefs, label: 'Crew Chief(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
         <%= f.input :number_of_technicians, label: 'Technician(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
         <%= f.input :estimated_hours, label: 'Estimated Labor Time', collection: @work_order.hours_for_collection, wrapper_html: { class: 'col-sm-6' }, selected: 2 %>
       </div>
+      <hr/>
+      <div class="row">
+        <%= f.input :crew_chief_ids, collection: User.with_role('Crew Chief'), label_method: :full_name, input_html: { multiple: true, class: 'select-control form-control', style: 'width: 100%' }, wrapper_html: { class: 'col-sm-6' }, label: 'Crew Chief(s)', hint: "Will Receive Email" %>
+        <%= f.input :technician_ids, collection: User.with_role('Technician'), label_method: :full_name, input_html: { multiple: true, class: 'select-control form-control', style: 'width: 100%' }, wrapper_html: { class: 'col-sm-6' }, label: 'Technician(s)', hint: "Will Receive Email" %>
+      </div>
+      <div class="row">
+        <%= f.input :vendor_ids, collection: Vendor.order(:name), label_method: :name, input_html: { multiple: true, class: 'select-control form-control', style: 'width: 100%' }, wrapper_html: { class: 'col-sm-12' }, label: 'Vendors/Sub-Contractor', hint: "Will Receive Email" %>
+      </div>
 
+            
+      <div class="row">
+        <div class="col-xs-12">
+          <hr/>
+        </div>
+      </div>
       <div class="clearfix">
         <%= f.input :job_manager_contact_info, as: :string, wrapper_html: { class: 'col-sm-12' }, disabled: true %>
         <%= f.input :insurance, as: :string, label: 'Insurance Company', wrapper_html: { class: 'col-sm-4' } %>
         <%= f.input :claim_number, as: :string, label: 'Claim Number', wrapper_html: { class: 'col-sm-4' } %>
         <%= f.input :franchise_location, as: :string, wrapper_html: { class: 'col-sm-4' }, label: 'Franchise Assigned', disabled: false %>
       </div>
+      
+      <% if @work_order.persisted? %>
+        <div class="row">
+          <div class="col-sm-12">
+            <h4>Work Shifts</h4>
+          </div>
+        </div>
+        <div class="work-shift-fields">
+          <%= f.simple_fields_for :work_shifts do |ws| %>
+            <%= render partial: 'work_shift_fields', locals: {f: ws} %>
+          <% end %>
+          <%= link_to_add_association 'Add Shift', f, :work_shifts, class: 'btn btn-primary' %>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <hr/>
+          </div>
+        </div>
 
-
+      <% end %>
 
     <div class="clearfix">
       <div class="col-xs-12">
@@ -60,7 +91,6 @@
         </div>
       </div>
     </div>
-
       <div class="row">
         <div class="actions col-sm-12">
           <%= f.button :submit, 'Publish Work Order Draft', class: "btn btn-primary" %>

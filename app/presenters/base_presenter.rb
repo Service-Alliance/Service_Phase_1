@@ -1,6 +1,6 @@
 class BasePresenter < SimpleDelegator
   attr_reader :model
-  
+
   def initialize(model, view)
     @view = view
     @model = model

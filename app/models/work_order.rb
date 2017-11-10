@@ -4,6 +4,7 @@ class WorkOrder < ActiveRecord::Base
   has_many :work_order_vendors
   has_many :vendors, through: :work_order_vendors
   has_many :work_order_users
+  has_many :work_shifts
   has_many :users, through: :work_order_users
   has_many :technicians, -> { with_role('Technician') }, through: :work_order_users, class_name: 'User', source: :user
   has_many :crew_chiefs, -> { with_role('Crew Chief') }, through: :work_order_users, class_name: 'User', source: :user
@@ -13,6 +14,8 @@ class WorkOrder < ActiveRecord::Base
   delegate :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
   delegate :company_name, :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
   delegate :name, :full_address, :address_without_county, to: :franchise, allow_nil: true, prefix: true
+
+  accepts_nested_attributes_for :work_shifts, :reject_if => :all_blank, :allow_destroy => true
 
   alias_method :franchise_location, :franchise_name
   alias_method :job_location, :customer_address_without_county
