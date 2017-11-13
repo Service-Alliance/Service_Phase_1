@@ -56,7 +56,7 @@ class WorkOrdersController < ApplicationController
         tracker_task = TrackerTask.find_by(name: "Work Order Delivered")
         @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
         WorkOrderPublishDeliveryService.new(@work_order, current_user).deliver!
-        format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order has been delivered successfully.' }
+        format.html { redirect_to job_path(@job), notice: 'Work Order has been delivered successfully.' }
         format.json { render :show, status: :ok, location: @work_order }
       else
         format.html { render :edit }
