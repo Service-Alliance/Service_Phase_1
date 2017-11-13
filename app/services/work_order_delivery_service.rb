@@ -15,9 +15,11 @@ class WorkOrderDeliveryService
     deliver_user_email(@current_user)
   end
 
+
   def send_to_scheduling_managers
     SCHEDULING_MANAGERS.each do |manager|
       send_to_scheduling_manager(manager)
+
     end
   end
 
