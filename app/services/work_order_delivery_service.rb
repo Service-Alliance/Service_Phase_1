@@ -16,7 +16,6 @@ class WorkOrderDeliveryService
   end
 
   def send_to_schedulers
-    return unless should_send_to_scheduling_manager?
     SCHEDULERS.each do |scheduler|
     send_to_scheduler(scheduler)
     end
@@ -26,7 +25,6 @@ class WorkOrderDeliveryService
     user = User.find_by(email: email)
     deliver_draft_email(user) if user.present?
   end
-
 
 
   def send_to_loss_coordinator
