@@ -22,7 +22,7 @@ class WorkOrderDeliveryService
 
   def send_to_schedulers
     SCHEDULERS.each do |scheduler|
-    send_to_schedulers(scheduler) unless work_order = nil
+    send_to_schedulers(scheduler) unless work_order == nil
 
     end
   end
