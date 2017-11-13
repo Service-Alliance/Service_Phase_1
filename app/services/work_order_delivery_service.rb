@@ -42,7 +42,7 @@ class WorkOrderDeliveryService
   end
 
   def send_to_vendors
-    @work_order.vendors.each do |vendor|
+    @work_order.vendor do |vendor|
       vendor.customers.each do |contact|
         deliver_vendor_email(contact, vendor) if contact.email.present?
       end

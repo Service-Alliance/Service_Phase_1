@@ -32,6 +32,12 @@ class WorkOrder < ActiveRecord::Base
     job_managers.present? ? job_managers.map { |manager| manager.full_name } : ''
   end
 
+  def to
+    to = vendors.pluck(:name)
+    to.unshift(servpro_name) unless to.length == 1
+    to
+  end
+
   def servpro_name
     franchise_name.present? ? I18n.t('work_orders.servpro_of_franchise', franchise: franchise_name) : I18n.t('work_orders.servpro')
   end
