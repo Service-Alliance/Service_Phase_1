@@ -2,7 +2,7 @@ class WorkOrdersController < ApplicationController
 
   before_action :set_work_order, only: [:update, :destroy, :acknowledge]
   before_action :set_job, except: :list
-  before_action :set_presenter, only: [:show, :new, :edit]
+  before_action :set_presenter, only: [:show, :new, :edit, :index]
 
   # GET /work_orders
   # GET /work_orders.json
@@ -33,15 +33,13 @@ class WorkOrdersController < ApplicationController
 
     respond_to do |format|
       if @work_order.save
-        tracker_task = TrackerTask.find_by(name: "Work Order Drafted")
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
         WorkOrderDraftDeliveryService.new(@work_order, current_user).deliver!
         @job.pipeline_status_id = 8
         if @job.status_id == 1
           @job.status_id = 2
         end
         @job.save
-        format.html { redirect_to job_path(@job), notice: 'Work Order was Drafted and Scheduling Manager Notified.' }
+        format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order was Drafted and Scheduling Manager Notified.' }
         format.json { render :show, status: :created, location: @work_order }
       else
         format.html { render :new }
@@ -58,7 +56,7 @@ class WorkOrdersController < ApplicationController
         tracker_task = TrackerTask.find_by(name: "Work Order Delivered")
         @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
         WorkOrderPublishDeliveryService.new(@work_order, current_user).deliver!
-        format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order has been delivered successfully' }
+        format.html { redirect_to job_path(@job), notice: 'Work Order has been delivered successfully.' }
         format.json { render :show, status: :ok, location: @work_order }
       else
         format.html { render :edit }

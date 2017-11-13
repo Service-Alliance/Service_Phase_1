@@ -16,9 +16,8 @@ class WorkOrderDeliveryService
   end
 
   def send_to_scheduling_managers
-    return unless should_send_to_scheduling_manager?
     SCHEDULING_MANAGERS.each do |manager|
-      send_to_scheduling_manager(manager)
+      send_to_scheduling_manager(manager) if SCHEDULING_MANAGERS.present?
     end
   end
 
@@ -27,9 +26,6 @@ class WorkOrderDeliveryService
     deliver_draft_email(user) if user.present?
   end
 
-  def should_send_to_scheduling_manager?
-    !(@current_user.department_name == 'Construction' && @work_order.vendors.count > 0)
-  end
 
   def send_to_loss_coordinator
     job_coordinator = @work_order.job.job_coordinator
@@ -44,9 +40,9 @@ class WorkOrderDeliveryService
     end
   end
 
-  def send_to_vendor
+  def send_to_vendors
     @work_order.vendor do |vendor|
-       vendor.customers.each do |contact|
+      vendor.customers.each do |contact|
         deliver_vendor_email(contact, vendor) if contact.email.present?
       end
     end
