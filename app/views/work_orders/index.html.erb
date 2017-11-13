@@ -42,7 +42,7 @@
                               </div>
                               <div class="col-sm-6">
                                   <div class="form-group">
-                                      <span class="bold">Date:</span><br>
+                                      <span class="bold">Published Date:</span><br>
                                         <%= work_order.updated_at.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
                                   </div>
                               </div>
@@ -52,7 +52,6 @@
                                         <%= work_order.typed_by %>
                                   </div>
                               </div>
-
                             <div class="row">
                             <div class="col-sm-12">
                               <div class="form-group">
