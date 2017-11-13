@@ -236,7 +236,6 @@ ActiveRecord::Schema.define(version: 20171110101535) do
     t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "category"
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
@@ -1008,7 +1007,7 @@ ActiveRecord::Schema.define(version: 20171110101535) do
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
     t.string   "events",                   default: [],                 array: true
-    t.integer  "state"
+    t.integer  "status"
   end
 
   create_table "work_shift_breaks", force: :cascade do |t|
