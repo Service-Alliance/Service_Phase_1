@@ -33,7 +33,7 @@ class WorkOrder < ActiveRecord::Base
   end
 
   def to
-    to = vendors.pluck(:name)
+    to = vendor.pluck(:name)
     to.unshift(servpro_name) unless to.length == 1
     to
   end
