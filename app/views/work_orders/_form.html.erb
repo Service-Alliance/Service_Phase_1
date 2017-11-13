@@ -32,7 +32,6 @@
         <%= f.input :job_location, label: 'Job Location', as: :string, wrapper_html: { class: 'col-sm-12' }, disabled: true %>
         <%= f.input :job_start, label: 'Job Start Time (Estimate)', as: :datetime, ampm: true, wrapper_html: { class: 'col-sm-12' } %>
       </div>
-
       <div class="clearfix">
         <%= f.input :number_of_crew_chiefs, label: 'Crew Chief(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
         <%= f.input :number_of_technicians, label: 'Technician(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
@@ -51,7 +50,6 @@
         <%= f.input :claim_number, as: :string, label: 'Claim Number', wrapper_html: { class: 'col-sm-4' } %>
         <%= f.input :franchise_location, as: :string, wrapper_html: { class: 'col-sm-4' }, label: 'Franchise Assigned', disabled: false %>
       </div>
-
       <% if @work_order.persisted? %>
           <div class="clearfix">
           <h4>Assign Crew</h4>
@@ -62,7 +60,7 @@
             <%= render partial: 'work_crew_assignment_fields', locals: {f: ca} %>
           <% end %>
         </div>
-     <!--    <div class="row">
+        <div class="row">
           <div class="col-sm-12">
             <h4>Work Shifts</h4>
           </div>
@@ -72,7 +70,7 @@
             <%= render partial: 'work_shift_fields', locals: {f: ws} %>
           <% end %>
           <%= link_to_add_association 'Add Shift', f, :work_shifts, class: 'btn btn-primary' %>
-        </div>  -->
+        </div>
         <div class="row">
           <div class="col-xs-12">
             <hr/>
