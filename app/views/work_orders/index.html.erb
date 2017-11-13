@@ -9,11 +9,10 @@
                 <h1 class="text-center">Listing Work Orders</h1>
                 <%= link_to "Add Work Order", new_job_work_order_path(@job), class:"btn btn-primary new-manager-button"%>
                 <% @job.work_orders.each do |work_order| %>
-                <h2 class=text-center> SERVPRO of <%= @job.try(:franchise).try(:name).upcase %> W/O # <%= @work_order.id %>  </h2>
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h2 class="panel-title">
-                          Work Starts: <%= @work_order.job_start.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
+                          Created At: <%= @work_order.created_at.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
                         </h2>
                     </div>
                     <div class="panel-body">
@@ -24,15 +23,26 @@
                                 <h2 class="text-center">SERVPRO of <%= @job.try(:franchise).try(:name) %> Work Order </h2>
                                 <h2 class="text-center"><%= @job.try(:franchise).try(:phone) %></h2>
                               </div>
+                            <div class="clearfix">
+                            <div class="col-sm-6">
+                              <div class="form-group">
+                                <span class="bold">Crew Chief(s):</span><br>
+                                <%= @work_order.crew_chief_names.join('<br />').html_safe %>
+                              </div>
+                              <div class="form-group">
+                                <span class="bold">Technician(s):</span><br>
+                                <%= @work_order.technician_names.join('<br />').html_safe %>
+                              </div>
+                            </div>
                               <div class="col-sm-6">
                                   <div class="form-group">
-                                      <span class="bold">Name:</span><br>
+                                      <span class="bold"> Coordinator Name:</span><br>
                                       <%= work_order.name %>
                                   </div>
                               </div>
                               <div class="col-sm-6">
                                   <div class="form-group">
-                                      <span class="bold">Date:</span><br>
+                                      <span class="bold">Published Date:</span><br>
                                         <%= work_order.updated_at.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
                                   </div>
                               </div>
@@ -86,6 +96,7 @@
                                       <%= work_order.customer_address_without_county %>
                                   </div>
                               </div>
+
                               <div class="col-sm-12">
                                   <div class="form-group">
                                       <span class="bold">Telephone:</span><br>
@@ -144,7 +155,6 @@
                               </div>
 
 
-                            </div>
                         </div>
                     </div>
                     <div class="panel-footer">
