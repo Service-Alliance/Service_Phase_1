@@ -22,15 +22,15 @@ class WorkOrderDeliveryService
 
   def send_to_schedulers
     SCHEDULERS.each do |scheduler|
-    send_to_schedulers(scheduler) unless work_order == nil
-
+    send_to_scheduler(scheduler)
     end
   end
 
-  def send_to_schedulers(email)
+  def send_to_scheduler(email)
     user = User.find_by(email: email)
-    deliver_draft_email(user) if user.present?
+    deliver_draft_email(user) if user.email.present?
   end
+
 
 
   def send_to_loss_coordinator
@@ -41,7 +41,7 @@ class WorkOrderDeliveryService
   def send_to_job_managers
     @work_order.job.job_managers.each do |manager|
       if manager.job_manager && manager.job_manager.email != nil
-        deliver_vendor_email(manager.job_manager)
+        deliver_user_email(manager.job_manager)
       end
     end
   end
