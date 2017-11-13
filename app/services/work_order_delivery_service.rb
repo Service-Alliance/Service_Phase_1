@@ -15,12 +15,8 @@ class WorkOrderDeliveryService
     deliver_user_email(@current_user)
   end
 
-  def send_to_scheduling_manager
-    sched_manager = User.find_by(email: 'dankluger@servpro5933.com')
-    deliver_draft_email(sched_manager) if sched_manager.present?
-  end
-
   def send_to_schedulers
+    return unless should_send_to_scheduling_manager?
     SCHEDULERS.each do |scheduler|
     send_to_scheduler(scheduler)
     end
