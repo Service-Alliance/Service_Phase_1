@@ -28,7 +28,7 @@ class WorkOrderDeliveryService
 
   def send_to_scheduler(email)
     user = User.find_by(email: email)
-    deliver_draft_email(user) if user.email.present?
+    deliver_draft_email(user) if user.present?
   end
 
 
