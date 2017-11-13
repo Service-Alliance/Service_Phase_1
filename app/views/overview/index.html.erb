@@ -533,7 +533,8 @@
                                     <% end %>
                                 </ul>
                             </div>
-                            <%= link_to "Edit", new_or_view_job_detail_path(@job, @job.property), class: "btn btn-sm btn-warning", type: "button" %>
+                            <%= link_to "Edit", edit_job_job_detail_path(@job, @job.job_detail), class: "btn btn-sm btn-warning", type: "button" %>
+
                         </section>
                         <section id="agent-information">
                             <h2>Agent Information</h2>
