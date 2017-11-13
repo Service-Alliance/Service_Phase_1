@@ -15,15 +15,15 @@ class WorkOrderDeliveryService
     deliver_user_email(@current_user)
   end
 
-  def send_to_scheduler
-    SCHEDULERS.each do |scheduler|
-      send_to_scheduling()
-    end
-  end
-
   def send_to_scheduling_manager
     sched_manager = User.find_by(email: 'dankluger@servpro5933.com')
     deliver_draft_email(sched_manager) if sched_manager.present?
+  end
+
+  def send_to_schedulers
+    SCHEDULERS.each do |scheduler|
+    send_to_schedulers(scheduler) unless work_order = nil
+    end
   end
 
   def send_to_schedulers(email)
