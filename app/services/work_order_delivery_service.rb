@@ -18,8 +18,7 @@ class WorkOrderDeliveryService
 
   def send_to_scheduling_managers
     SCHEDULING_MANAGERS.each do |manager|
-      send_to_scheduling_manager(manager)
-
+      send_to_scheduling_manager(manager) if SCHEDULING_MANAGERS.present?
     end
   end
 
