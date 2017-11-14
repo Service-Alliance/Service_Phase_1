@@ -15,10 +15,9 @@ class WorkOrderDeliveryService
     deliver_user_email(@current_user)
   end
 
-
   def send_to_scheduling_managers
     SCHEDULING_MANAGERS.each do |manager|
-      send_to_scheduling_manager(manager) if SCHEDULING_MANAGERS.present?
+      send_to_scheduling_manager(manager)
     end
   end
 
@@ -42,7 +41,7 @@ class WorkOrderDeliveryService
 
   def send_to_vendors
     @work_order.vendor do |vendor|
-      vendor.customers.each do |contact|
+       vendor.customers.each do |contact|
         deliver_vendor_email(contact, vendor) if contact.email.present?
       end
     end

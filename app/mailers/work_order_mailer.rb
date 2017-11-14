@@ -47,7 +47,6 @@ class WorkOrderMailer < ApplicationMailer
     @job = job
     @work_order = work_order
     subject = "#{@user.full_name}, you have been sent a work order draft for job #{@job.id}, #{@job.name}. Franchise: #{@job.franchise.try(:name)}."
-    @to = @work_order.to.join(', ')
 
     mail.smtpapi.unique_args['origin_type'] = 'work_order'
     mail.smtpapi.unique_args['origin_id'] = @work_order.id
