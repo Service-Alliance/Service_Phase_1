@@ -16,12 +16,12 @@ class WorkOrderPublishDeliveryServiceTest < ActiveSupport::TestCase
     assert_enqueued_jobs 3
   end
 
-  test 'does not send to scheduling manager if dept Construction and vendor present' do
-    @work_order.vendor
-    @current_user.update_attribute :department_id, departments(:construction).id
-    WorkOrderPublishDeliveryService.new(@work_order, @current_user).deliver!
-    assert no_mail_enqueued_for_user(users(:scheduling_manager))
-  end
+  # test 'does not send to scheduling manager if dept Construction and vendor present' do
+  #   @work_order.vendor
+  #   @current_user.update_attribute :department_id, departments(:construction).id
+  #   WorkOrderPublishDeliveryService.new(@work_order, @current_user).deliver!
+  #   assert no_mail_enqueued_for_user(users(:scheduling_manager))
+  # end
 
   test 'delivers to user if in work order distribution for the franchise' do
     franchises(:one).work_order_distribution << users(:two)
