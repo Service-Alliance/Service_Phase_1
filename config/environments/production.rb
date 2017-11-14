@@ -16,6 +16,16 @@ Rails.application.configure do
 
 
   config.action_mailer.default_url_options = { :host => 'digitaljobchart.com' }
+  ActionMailer::Base.smtp_settings = {
+  user_name: ENV.fetch('SENDGRID_USERNAME'),
+  password: ENV.fetch('SENDGRID_PASSWORD'),
+  domain: 'heroku.com',
+  address: 'smtp.sendgrid.net',
+  port: 587,
+  authentication: :plain,
+  enable_starttls_auto: true
+}
+
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.

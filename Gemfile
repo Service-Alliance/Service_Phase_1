@@ -104,14 +104,12 @@ group :development do
   gem 'guard-livereload', '~> 2.5', require: false
   gem 'rack-mini-profiler', require: false
   gem 'memory_profiler', require: false
+  gem 'm'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  # Letter Opener for previewing emails in the browser https://github.com/fgrehm/letter_opener_web
-  gem 'letter_opener_web'
 
   # Bullet is used to detect N+1 queries and unused eager loading
   gem 'bullet'
