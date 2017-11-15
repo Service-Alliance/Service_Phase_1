@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171110101535) do
+ActiveRecord::Schema.define(version: 20171115210345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -949,35 +949,35 @@ ActiveRecord::Schema.define(version: 20171110101535) do
 
   create_table "work_crew_assignments", force: :cascade do |t|
     t.integer  "work_order_id"
-    t.integer  "work_order_users_id"
     t.integer  "user_id"
-    t.integer  "vendoor_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.integer  "vendor_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
+  add_index "work_crew_assignments", ["user_id"], name: "index_work_crew_assignments_on_user_id", using: :btree
+  add_index "work_crew_assignments", ["vendor_id"], name: "index_work_crew_assignments_on_vendor_id", using: :btree
   add_index "work_crew_assignments", ["work_order_id"], name: "index_work_crew_assignments_on_work_order_id", using: :btree
-  add_index "work_crew_assignments", ["work_order_users_id"], name: "index_work_crew_assignments_on_work_order_users_id", using: :btree
 
-  create_table "work_order_users", force: :cascade do |t|
+  create_table "work_order_crew_members", force: :cascade do |t|
     t.integer  "work_order_id"
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
-  add_index "work_order_users", ["user_id"], name: "index_work_order_users_on_user_id", using: :btree
-  add_index "work_order_users", ["work_order_id"], name: "index_work_order_users_on_work_order_id", using: :btree
+  add_index "work_order_crew_members", ["user_id"], name: "index_work_order_crew_members_on_user_id", using: :btree
+  add_index "work_order_crew_members", ["work_order_id"], name: "index_work_order_crew_members_on_work_order_id", using: :btree
 
-  create_table "work_order_vendors", force: :cascade do |t|
+  create_table "work_order_vendor_assignment", force: :cascade do |t|
     t.integer  "work_order_id"
     t.integer  "vendor_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
-  add_index "work_order_vendors", ["vendor_id"], name: "index_work_order_vendors_on_vendor_id", using: :btree
-  add_index "work_order_vendors", ["work_order_id"], name: "index_work_order_vendors_on_work_order_id", using: :btree
+  add_index "work_order_vendor_assignment", ["vendor_id"], name: "index_work_order_vendor_assignment_on_vendor_id", using: :btree
+  add_index "work_order_vendor_assignment", ["work_order_id"], name: "index_work_order_vendor_assignment_on_work_order_id", using: :btree
 
   create_table "work_orders", force: :cascade do |t|
     t.integer  "job_id"
@@ -1042,11 +1042,13 @@ ActiveRecord::Schema.define(version: 20171110101535) do
   add_foreign_key "user_rates", "users", on_delete: :cascade
   add_foreign_key "vendor_loss_rates", "loss_types", on_delete: :cascade
   add_foreign_key "vendor_loss_rates", "vendors", on_delete: :cascade
+  add_foreign_key "work_crew_assignments", "users", on_delete: :cascade
+  add_foreign_key "work_crew_assignments", "vendors", on_delete: :cascade
   add_foreign_key "work_crew_assignments", "work_orders", on_delete: :cascade
-  add_foreign_key "work_order_users", "users"
-  add_foreign_key "work_order_users", "work_orders"
-  add_foreign_key "work_order_vendors", "vendors"
-  add_foreign_key "work_order_vendors", "work_orders"
+  add_foreign_key "work_order_crew_members", "users"
+  add_foreign_key "work_order_crew_members", "work_orders"
+  add_foreign_key "work_order_vendor_assignment", "vendors"
+  add_foreign_key "work_order_vendor_assignment", "work_orders"
   add_foreign_key "work_shift_breaks", "work_shifts", on_delete: :cascade
   add_foreign_key "work_shifts", "users", on_delete: :cascade
   add_foreign_key "work_shifts", "work_orders", on_delete: :cascade

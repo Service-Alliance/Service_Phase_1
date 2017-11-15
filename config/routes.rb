@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Maily::Engine, at: '/maily'
   resources :customer_vendors
   resources :pricing_categories
   resources :customer_companies

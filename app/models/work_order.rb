@@ -1,13 +1,12 @@
 class WorkOrder < ActiveRecord::Base
   has_many :mail_logs, as: :mail_loggable
   belongs_to :job, required: true
-  has_one :work_order_vendor, required: false
-  has_one :vendor, through: :work_order_vendor, required: false
-  has_many :work_order_users
+  has_one :work_order_vendor_assignment, required: false
+  has_one :vendor, through: :work_order_vendor_assignment, class_name: 'Vendor', source: :vendor, required: false
+  has_many :work_order_crew_members
+  has_many :technicians, -> { with_role('Technician') }, through: :work_order_crew_members, class_name: 'User', source: :user
+  has_many :crew_chiefs, -> { with_role('Crew Chief') }, through: :work_order_crew_members, class_name: 'User', source: :user
   has_many :work_shifts
-  has_many :users, through: :work_order_users
-  has_many :technicians, -> { with_role('Technician') }, through: :work_order_users, class_name: 'User', source: :user
-  has_many :crew_chiefs, -> { with_role('Crew Chief') }, through: :work_order_users, class_name: 'User', source: :user
   has_many :work_crew_assignments
 
   enum category: { draft: 0, published: 1, audited: 2 }

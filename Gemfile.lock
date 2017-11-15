@@ -278,6 +278,8 @@ GEM
       mime-types (>= 1.16, < 4)
     mail-x_smtpapi (1.1.0)
       mail (> 2.6.0)
+    maily (0.6.3)
+      rails (>= 3.0.0)
     marginalia (1.5.0)
       actionpack (>= 2.3)
       activerecord (>= 2.3)
@@ -557,6 +559,7 @@ DEPENDENCIES
   launchy
   m
   mail-x_smtpapi
+  maily
   marginalia
   memory_profiler
   minitest-rails-capybara
