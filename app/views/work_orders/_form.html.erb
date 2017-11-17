@@ -58,7 +58,9 @@
         <div class="col-xs-12">
           <hr/>
           <div class="crew-assignments">
-            <%= render partial: 'work_order_crew_fields', locals: {f: f} %>
+            <%= f.simple_fields_for :work_crew_assignment do |ca| %>
+              <%= render partial: 'work_crew_assignment_fields', locals: {f: ca} %>
+            <% end %>
           </div>
           <div class="row">
             <div class="col-sm-12">
@@ -78,6 +80,7 @@
           </div>
         </div>
       </div>
+
     <% end %>
 
     <div class="row">
