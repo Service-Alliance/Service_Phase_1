@@ -17,7 +17,8 @@ class Job < ActiveRecord::Base
   has_one :job_detail, dependent: :destroy
   has_one :emergency_contact, dependent: :destroy
   has_many :uploads, as: :uploadable, dependent: :destroy
-  has_many :job_managers, dependent: :destroy
+  #FIXME: do not create job_managers with blank associated user ids, remove empty records
+  has_many :job_managers, -> {where.not(job_manager_id: nil)}, dependent: :destroy
   has_many :vendor_assignments
   has_many :contact_assignments
   has_many :job_forms, dependent: :destroy

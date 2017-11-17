@@ -8,8 +8,8 @@
   <tbody>
     <% job_managers.each do |manager| %>
       <tr>
-        <td><%= manager.job_manager.full_name %></td>
-        <td><%= manager.job_manager.phone_numbers.join('<br />').html_safe %></td>
+        <td><%= manager.full_name %></td>
+        <td><%= manager.phone_numbers.join('<br />').html_safe %></td>
       </tr>
     <% end %>
   </tbody>
