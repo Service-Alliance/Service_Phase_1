@@ -959,16 +959,6 @@ ActiveRecord::Schema.define(version: 20171115205222) do
   add_index "work_crew_assignments", ["vendor_id"], name: "index_work_crew_assignments_on_vendor_id", using: :btree
   add_index "work_crew_assignments", ["work_order_id"], name: "index_work_crew_assignments_on_work_order_id", using: :btree
 
-  create_table "work_order_crew_members", force: :cascade do |t|
-    t.integer  "work_order_id"
-    t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "work_order_crew_members", ["user_id"], name: "index_work_order_crew_members_on_user_id", using: :btree
-  add_index "work_order_crew_members", ["work_order_id"], name: "index_work_order_crew_members_on_work_order_id", using: :btree
-
   create_table "work_order_vendors", force: :cascade do |t|
     t.integer  "work_order_id"
     t.integer  "vendor_id"
@@ -1045,8 +1035,6 @@ ActiveRecord::Schema.define(version: 20171115205222) do
   add_foreign_key "work_crew_assignments", "users", on_delete: :cascade
   add_foreign_key "work_crew_assignments", "vendors", on_delete: :cascade
   add_foreign_key "work_crew_assignments", "work_orders", on_delete: :cascade
-  add_foreign_key "work_order_crew_members", "users"
-  add_foreign_key "work_order_crew_members", "work_orders"
   add_foreign_key "work_order_vendors", "vendors"
   add_foreign_key "work_order_vendors", "work_orders"
   add_foreign_key "work_shift_breaks", "work_shifts", on_delete: :cascade
