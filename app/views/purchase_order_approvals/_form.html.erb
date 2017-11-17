@@ -16,20 +16,21 @@
     <h1 class=text-center>
       <%= @job.try(:franchise).try(:name) %> Purchase Order
     </h1>
+  </div>
 
   <div class="clearfix"></div>
   <hr/>
-    <div class="row">
-      <%= f.input :date, label: 'Date of Purchase', wrapper_html: { class: 'col-sm-12' } %>
-      <%= f.input :vendor, label: 'Vendor', wrapper_html: { class: 'col-sm-12'} %>
-      <%= f.input :purchase_item, label: 'Purchase Item', wrapper_html: { class: 'col-sm-12' } %>
-      <%= f.input :amount, as: :string, label: 'Amount of Purchase', wrapper_html: { class: 'col-sm-12' } %>
-      <%= f.input :last_four_card, as: :string, label: 'Last 4 digits', wrapper_html: { class: 'col-sm-12' } %>
-    </div>
+  <div class="row">
+    <%= f.input :date, label: 'Date of Purchase', wrapper_html: { class: 'col-sm-12' } %>
+    <%= f.input :vendor, label: 'Vendor', wrapper_html: { class: 'col-sm-12'} %>
+    <%= f.input :purchase_item, label: 'Purchase Item', wrapper_html: { class: 'col-sm-12' } %>
+    <%= f.input :amount, as: :string, label: 'Amount of Purchase', wrapper_html: { class: 'col-sm-12' } %>
+    <%= f.input :last_four_card, as: :string, label: 'Last 4 digits', wrapper_html: { class: 'col-sm-12' } %>
+  </div>
 
-    <div class="row">
-      <div class="actions-col-sm-12">
-        <%= f.submit class: "btn btn-primary margin-top-2" %>
-      </div>
+  <div class="row">
+    <div class="actions-col-sm-12">
+      <%= f.submit class: "btn btn-primary margin-top-2" %>
     </div>
+  </div>
 <% end %>
