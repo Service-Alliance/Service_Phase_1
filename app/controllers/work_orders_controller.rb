@@ -128,9 +128,8 @@ class WorkOrdersController < ApplicationController
       :number_of_crew_chiefs,
       :number_of_technicians,
       :estimated_hours,
-      work_crew_assignments_attributes: [
+      work_order_crew_attributes: [
         :id,
-        :vendor_id,
         technician_ids: [],
         crew_chief_ids: [],
      ],
