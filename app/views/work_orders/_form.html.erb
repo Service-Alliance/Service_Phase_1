@@ -1,90 +1,91 @@
 <%= simple_form_for [@job, @work_order.model] do |f| %>
-    <% if @work_order.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@work_order.errors.count, "error") %>
-            prohibited this work_order from being saved:</h2>
-          <ul>
-            <% @work_order.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
+  <% if @work_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@work_order.errors.count, "error") %>
+        prohibited this work_order from being saved:</h2>
+      <ul>
+        <% @work_order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <hr/>
+  <% end %>
+  <div class="col-xs-12">
+    <h1 class=text-center>
+      SERVPRO of <%= @job.try(:franchise).try(:name) %> Work Order
+    </h1>
+    <h2 class=text-center>
+      <%= @job.try(:franchise).try(:phone) %>
+    </h2>
+    <div class="clearfix"></div>
+    <hr/>
+    <div class="row">
+      <%= f.input :referral, as: :string, label: 'Referral Source', wrapper_html: { class: 'col-sm-4' } %>
+      <%= f.input :typed_by, as: :string, label: 'Typed By:', wrapper_html: { class: 'col-sm-4' } %>
+      <%= f.input :name, as: :string, label: 'Loss Coordinator', wrapper_html: { class: 'col-sm-4' } %>
+      <%= f.input :job_name, label: 'Job Chart Name', as: :string, wrapper_html: { class: 'col-sm-4' } %>
+      <%= f.input :contact, label: 'Job Contact', as: :string, wrapper_html: { class: 'col-sm-4' } %>
+      <%= f.input :telephone, as: :string, label: 'Job Contact Phone', wrapper_html: { class: 'col-sm-4' }, placeholder: "( ___ ) ___ - ____" %>
+      <%= f.input :required, wrapper_html: { class: 'col-sm-12' }, label: 'Required', placeholder: "Examples: Customer requests notification 20 minutes prior to Arrival, Bring Extra-Long Ladder..." %>
+      <%= f.input :scope_of_work, wrapper_html: { class: 'col-sm-12' }, placeholder: "What work needs to be done?" %>
+      <%= f.input :job_location, label: 'Job Location', as: :string, wrapper_html: { class: 'col-sm-12' }, disabled: true %>
+      <%= f.input :job_start, label: 'Job Start Time (Estimate)', as: :datetime, ampm: true, wrapper_html: { class: 'col-sm-12' } %>
+    </div>
+
+    <div class="clearfix">
+      <%= f.input :number_of_crew_chiefs, label: 'Crew Chief(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
+      <%= f.input :number_of_technicians, label: 'Technician(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
+      <%= f.input :estimated_hours, label: 'Estimated Labor Time', collection: @work_order.hours_for_collection, wrapper_html: { class: 'col-sm-6' }, selected: 2 %>
+    </div>
+    <hr/>
+
+    <div class="row">
+      <div class="col-xs-12">
         <hr/>
-    <% end %>
-    <div class="col-xs-12">
-      <h1 class=text-center>
-        SERVPRO of <%= @job.try(:franchise).try(:name) %> Work Order
-      </h1>
-      <h2 class=text-center>
-        <%= @job.try(:franchise).try(:phone) %>
-      </h2>
-      <div class="clearfix"></div>
-      <hr/>
-      <div class="row">
-        <%= f.input :referral, as: :string, label: 'Referral Source', wrapper_html: { class: 'col-sm-4' } %>
-        <%= f.input :typed_by, as: :string, label: 'Typed By:', wrapper_html: { class: 'col-sm-4' } %>
-        <%= f.input :name, as: :string, label: 'Loss Coordinator', wrapper_html: { class: 'col-sm-4' } %>
-        <%= f.input :job_name, label: 'Job Chart Name', as: :string, wrapper_html: { class: 'col-sm-4' } %>
-        <%= f.input :contact, label: 'Job Contact', as: :string, wrapper_html: { class: 'col-sm-4' } %>
-        <%= f.input :telephone, as: :string, label: 'Job Contact Phone', wrapper_html: { class: 'col-sm-4' }, placeholder: "( ___ ) ___ - ____" %>
-        <%= f.input :required, wrapper_html: { class: 'col-sm-12' }, label: 'Required', placeholder: "Examples: Customer requests notification 20 minutes prior to Arrival, Bring Extra-Long Ladder..." %>
-        <%= f.input :scope_of_work, wrapper_html: { class: 'col-sm-12' }, placeholder: "What work needs to be done?" %>
-        <%= f.input :job_location, label: 'Job Location', as: :string, wrapper_html: { class: 'col-sm-12' }, disabled: true %>
-        <%= f.input :job_start, label: 'Job Start Time (Estimate)', as: :datetime, ampm: true, wrapper_html: { class: 'col-sm-12' } %>
       </div>
+    </div>
+    <div class="clearfix">
+      <%= f.input :job_manager_contact_info, as: :string, wrapper_html: { class: 'col-sm-12' }, disabled: true %>
+      <%= f.input :insurance, as: :string, label: 'Insurance Company', wrapper_html: { class: 'col-sm-4' } %>
+      <%= f.input :claim_number, as: :string, label: 'Claim Number', wrapper_html: { class: 'col-sm-4' } %>
+      <%= f.input :franchise_location, as: :string, wrapper_html: { class: 'col-sm-4' }, label: 'Franchise Assigned', disabled: false %>
+    </div>
 
+    <% if @work_order.persisted? %>
       <div class="clearfix">
-        <%= f.input :number_of_crew_chiefs, label: 'Crew Chief(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
-        <%= f.input :number_of_technicians, label: 'Technician(s)', wrapper_html: { class: 'col-sm-2' }, placeholder: "1" %>
-        <%= f.input :estimated_hours, label: 'Estimated Labor Time', collection: @work_order.hours_for_collection, wrapper_html: { class: 'col-sm-6' }, selected: 2 %>
-      </div>
-      <hr/>
-
-      <div class="row">
+        <h4>Assign Crew</h4>
         <div class="col-xs-12">
           <hr/>
-        </div>
-      </div>
-      <div class="clearfix">
-        <%= f.input :job_manager_contact_info, as: :string, wrapper_html: { class: 'col-sm-12' }, disabled: true %>
-        <%= f.input :insurance, as: :string, label: 'Insurance Company', wrapper_html: { class: 'col-sm-4' } %>
-        <%= f.input :claim_number, as: :string, label: 'Claim Number', wrapper_html: { class: 'col-sm-4' } %>
-        <%= f.input :franchise_location, as: :string, wrapper_html: { class: 'col-sm-4' }, label: 'Franchise Assigned', disabled: false %>
-      </div>
-
-      <% if @work_order.persisted? %>
-          <div class="clearfix">
-          <h4>Assign Crew</h4>
-      <div class="col-xs-12">
-          <hr/>
-        <div class="crew-assignments">
-          <%= f.simple_fields_for :work_crew_assignment do |ca| %>
-            <%= render partial: 'work_crew_assignment_fields', locals: {f: ca} %>
-          <% end %>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <h4>Work Shifts</h4>
+          <div class="crew-assignments">
+            <%= f.simple_fields_for :work_crew_assignment do |ca| %>
+              <%= render partial: 'work_crew_assignment_fields', locals: {f: ca} %>
+            <% end %>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <h4>Work Shifts</h4>
+            </div>
+          </div>
+          <div class="work-shift-fields">
+            <%= f.simple_fields_for :work_shifts do |ws| %>
+              <%= render partial: 'work_shift_fields', locals: {f: ws} %>
+            <% end %>
+            <%= link_to_add_association 'Add Shift', f, :work_shifts, class: 'btn btn-primary' %>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <hr/>
+            </div>
           </div>
         </div>
-       <div class="work-shift-fields">
-          <%= f.simple_fields_for :work_shifts do |ws| %>
-            <%= render partial: 'work_shift_fields', locals: {f: ws} %>
-          <% end %>
-          <%= link_to_add_association 'Add Shift', f, :work_shifts, class: 'btn btn-primary' %>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <hr/>
-          </div>
-        </div>
+      </div>
 
-      <% end %>
+    <% end %>
 
-      <div class="row">
-        <div class="actions col-sm-12">
-          <%= f.button :submit, 'Publish Work Order Draft', class: "btn btn-success" %>
-        </div>
+    <div class="row">
+      <div class="actions col-sm-12">
+        <%= f.button :submit, 'Publish Work Order Draft', class: "btn btn-success" %>
       </div>
     </div>
   </div>
