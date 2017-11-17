@@ -3,6 +3,7 @@ class WorkOrder < ActiveRecord::Base
   belongs_to :job, required: true
   belongs_to :vendor, required: false
   has_many :work_order_crew, dependent: :destroy
+  has_many :crew, through: :work_order_crew, class_name: 'User', source: :user
   has_many :technicians, -> { with_roles('Technician') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :crew_chiefs, -> { with_roles('Crew Chief') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :work_shifts, dependent: :destroy

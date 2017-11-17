@@ -48,7 +48,7 @@ class WorkOrderDeliveryService
   end
 
   def send_to_crew
-    @work_order.users.each do |crew|
+    @work_order.crew.each do |crew|
       deliver_user_email(crew)
     end
   end
