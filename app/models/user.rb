@@ -100,10 +100,10 @@ class User < ActiveRecord::Base
     return array
   end
 
-  # FIXME: remove, replace with with_roles
-  def self.with_role(role_name)
-    joins(:role).where(roles: {name: role_name})
-  end
+  # # FIXME: remove, replace with with_roles
+  # def self.with_role(role_name)
+  #   joins(:role).where(roles: {name: role_name})
+  # end
 
   def self.with_roles(*roles)
     joins(:role).where(roles: {name: roles})
@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
     metrics = ['Jobs', 'Notes', 'Pricings Created', 'Work Orders']
     # note = TrackerTask.find_by(name: "Note Created")
     estimate = TrackerTask.find_by(name: "Pricing Created")
-    work_order = TrackerTask.find_by(name: "Work Order Created")
+    work_order = TrackerTask.find_by(name: "Work Order Drafted")
 
     array = []
     metrics.each do |metric|
