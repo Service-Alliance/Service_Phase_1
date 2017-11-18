@@ -50,7 +50,7 @@ class JobsController < ApplicationController
     p @search = @first.order('created_at DESC').search(params[:q], franchise_id_in: [1,2,3,4], job_detail_insurance_company_id_eq: nil)
     @duct = Job.joins(:losses).merge(Loss.where(loss_type_id: duct.id))
     @state_farm = Job.joins(:job_detail).merge(JobDetail.where(insurance_company_id: state_farm.id))
-    @jim = Job.where(referral_employee_id: jim.id)
+    @jim = Job.joins(:referral).where(referral: {associated_record_id: jim.id, associated_record_type: 'User'})
 
     @jobs = @search.result.page(params[:page]).order('created_at DESC')
   end

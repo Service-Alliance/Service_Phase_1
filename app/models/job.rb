@@ -26,7 +26,6 @@ class Job < ActiveRecord::Base
   has_many :trackers, as: :trackable, dependent: :destroy
   has_many :work_orders
   has_many :schedulers
-  belongs_to :referral_employee, foreign_key: :referral_employee_id, class_name: 'User'
   has_many :subscriptions
   has_many :collection_subscriptions
   has_one :inspection_checklist
