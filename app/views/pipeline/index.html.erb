@@ -36,7 +36,7 @@
             </section>
             <section class="inline-form">
               <%= f.label :referral_type_id_eq, "Referral Type" %>
-              <%= f.select :referral_type_id_eq, options_from_collection_for_select(ReferralType.all, "id", "name"), { include_blank: true }, { class: "form-control select-control" } %>
+              <%= f.select :referral_type_id_eq, options_from_collection_for_select(ReferralType.root, "id", "name"), { include_blank: true }, { class: "form-control select-control" } %>
             </section>
             <section class="inline-form">
               <%= f.label :agent_id_eq, "Agent Name" %>

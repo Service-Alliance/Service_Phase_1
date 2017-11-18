@@ -19,7 +19,7 @@ class ReferralTypesControllerTest < ActionController::TestCase
 
   test "should create referral_type" do
     assert_difference('ReferralType.count') do
-      post :create, referral_type: { allows_notes: @referral_type.allows_notes, associated_record_type: @referral_type.associated_record_type, name: @referral_type.name, referral_type_id: @referral_type.referral_type_id, requires_associated_record: @referral_type.requires_associated_record, requires_notes: @referral_type.requires_notes, requires_subtype: @referral_type.requires_subtype }
+      post :create, referral_type: { allows_notes: @referral_type.allows_notes, associated_record_type: @referral_type.associated_record_type, name: @referral_type.name, parent_id: @referral_type.parent_id, requires_associated_record: @referral_type.requires_associated_record, requires_notes: @referral_type.requires_notes, requires_subtype: @referral_type.requires_subtype }
     end
 
     assert_redirected_to referral_type_path(assigns(:referral_type))
@@ -36,7 +36,7 @@ class ReferralTypesControllerTest < ActionController::TestCase
   end
 
   test "should update referral_type" do
-    patch :update, id: @referral_type, referral_type: { allows_notes: @referral_type.allows_notes, associated_record_type: @referral_type.associated_record_type, name: @referral_type.name, referral_type_id: @referral_type.referral_type_id, requires_associated_record: @referral_type.requires_associated_record, requires_notes: @referral_type.requires_notes, requires_subtype: @referral_type.requires_subtype }
+    patch :update, id: @referral_type, referral_type: { allows_notes: @referral_type.allows_notes, associated_record_type: @referral_type.associated_record_type, name: @referral_type.name, parent_id: @referral_type.parent_id, requires_associated_record: @referral_type.requires_associated_record, requires_notes: @referral_type.requires_notes, requires_subtype: @referral_type.requires_subtype }
     assert_redirected_to referral_type_path(assigns(:referral_type))
   end
 

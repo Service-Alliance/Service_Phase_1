@@ -39,7 +39,7 @@ class JobsPresenter < BasePresenter
   end
 
   def all_referral_types
-    @referral_types ||= ReferralType.all
+    @referral_types ||= ReferralType.root
     @referral_types
   end
 
@@ -69,7 +69,7 @@ class JobsPresenter < BasePresenter
 
   def set_up_relation(page)
     @all = @model
-    @paged = @model.includes(:referral_type, 
+    @paged = @model.includes(:referral_type,
                              :job_detail,
                              :job_coordinator,
                              :user,

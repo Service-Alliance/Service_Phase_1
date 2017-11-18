@@ -114,12 +114,12 @@
             <%= f.label :customer_address_state_id, "Customer State" %><br/>
             <%= f.select :customer_address_state_id_in, options_from_collection_for_select(State.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :referral_type_id_in, "Referral Type" %><br/>
-            <%= f.select :referral_type_id_in, options_from_collection_for_select(ReferralType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.select :referral_type_id_in, options_from_collection_for_select(ReferralType.root, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :agent_id_in, "Agent Name" %><br/>
             <%= f.select :agent_id_in, options_from_collection_for_select(Agent.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :adjuster_id_in, "Adjuster Name" %><br/>
             <%= f.select :adjuster_id_in, options_from_collection_for_select(Adjuster.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
-  
+
             <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-top-2" %></div>
 
             <% end %>
