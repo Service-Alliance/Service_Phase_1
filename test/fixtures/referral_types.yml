@@ -5,3 +5,10 @@ one:
 
 two:
   name: MyString
+
+parent:
+  name: Parent
+
+sub_type:
+  parent: parent
+  name: Sub Type

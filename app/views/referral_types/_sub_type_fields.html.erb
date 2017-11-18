@@ -1,0 +1,9 @@
+<div class="nested-fields">
+  <div class="row">
+    <%= f.input :name, wrapper_html: { class: 'col-sm-10' } %>
+    <div class="col-sm-2">
+      <%= label_tag :delete %><br>
+      <%= link_to_remove_association 'Delete', f, class: 'btn btn-danger full-width' %>
+    </div>
+  </div>
+</div>

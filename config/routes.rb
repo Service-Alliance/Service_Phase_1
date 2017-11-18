@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   mount Maily::Engine, at: '/maily'
+  ActiveAdmin.routes(self)
   resources :customer_vendors
   resources :pricing_categories
   resources :customer_companies
@@ -16,8 +17,8 @@ Rails.application.routes.draw do
   resources :tracker_tasks
   resources :trackers
   resources :assignment_types
+  resources :referral_types
   resources :corporate_referral_types
-  ActiveAdmin.routes(self)
   resources :contacts
   devise_for :users
   resources :articles
