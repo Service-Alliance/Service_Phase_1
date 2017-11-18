@@ -3,7 +3,7 @@ class Job < ActiveRecord::Base
   belongs_to :job_status, foreign_key: :status_id, class_name: 'JobStatus'
   belongs_to :job_type, foreign_key: :type_id, class_name: 'JobType'
   belongs_to :franchise
-  belongs_to :referral_type
+  belongs_to :referral
   belongs_to :customer
   has_one :customer_address, through: :customer, source: "address"
   has_many :calls
@@ -39,6 +39,7 @@ class Job < ActiveRecord::Base
   accepts_nested_attributes_for :job_detail
   accepts_nested_attributes_for :property
   accepts_nested_attributes_for :customer
+  accepts_nested_attributes_for :referral
 
   delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
   delegate :full_name, to: :user, allow_nil: true, prefix: true

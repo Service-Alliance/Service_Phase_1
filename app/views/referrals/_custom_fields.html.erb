@@ -1,0 +1,19 @@
+<div id="referral_vendor" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Vendor" %>">
+  <div class="form-group">
+    <%= f.label :referral_vendor_id %><br>
+    <%= f.collection_select :referral_vendor_id, Vendor.all, :id, :name, { prompt: true }, { class: 'form-control' } %>
+  </div>
+</div>
+<div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Servpro Employee" %>">
+  <div class="form-group">
+    <%= f.label :referral_employee_id %><br>
+
+    <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, { prompt: true }, { class: 'form-control' } %>
+  </div>
+</div>
+<div class="col-xs-12 margin-top-2">
+  <div class="form-group">
+    <%= f.label :referral_note %><br>
+    <%= f.text_field :referral_note, class: "form-control" %><br>
+  </div>
+</div>

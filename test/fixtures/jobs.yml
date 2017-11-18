@@ -3,7 +3,6 @@
 DEFAULTS: &DEFAULTS
   details: MyText
   customer: one
-  referral_type_id: 1
   job_status: active
 
 one:

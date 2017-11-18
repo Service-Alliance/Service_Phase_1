@@ -92,15 +92,9 @@
             Customer Information
           </button>
         </div>
-        <div class="col-xs-12 margin-top-2">
-          <div class="form-group referrals">
-            <%= f.label :referral_type_id %><br>
-            <%= f.collection_radio_buttons(:referral_type_id, ReferralType.root, :id, :name) do |b| %>
-                <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
-            <% end %> <br/>
-
-          </div>
-        </div>
+        <%= f.fields_for :referral, @job.referral || @job.referral.build do |referral| %>
+          <%= render partial: 'referral_types/referral_type_fields', locals: {f: referral} %>
+        <% end %>
         <% unless current_user.call_rep? %>
             <div class="col-xs-12 margin-top-2">
               <div class="form-group referrals">
@@ -114,25 +108,6 @@
             </div>
         <% end %>
 
-        <div id="referral_vendor" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Vendor" %>">
-          <div class="form-group">
-            <%= f.label :referral_vendor_id %><br>
-            <%= f.collection_select :referral_vendor_id, Vendor.all, :id, :name, { prompt: true }, { class: 'form-control' } %>
-          </div>
-        </div>
-        <div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Servpro Employee" %>">
-          <div class="form-group">
-            <%= f.label :referral_employee_id %><br>
-
-            <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, { prompt: true }, { class: 'form-control' } %>
-          </div>
-        </div>
-        <div class="col-xs-12 margin-top-2">
-          <div class="form-group">
-            <%= f.label :referral_note %><br>
-            <%= f.text_field :referral_note, class: "form-control" %><br>
-          </div>
-        </div>
         <div class="col-xs-12">
           <div class="form-group">
             <%= f.label :details %>
