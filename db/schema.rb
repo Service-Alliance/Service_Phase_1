@@ -236,6 +236,7 @@ ActiveRecord::Schema.define(version: 20171117063522) do
     t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "category"
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
@@ -969,6 +970,7 @@ ActiveRecord::Schema.define(version: 20171117063522) do
     t.text     "contact"
     t.text     "insurance"
     t.text     "claim_number"
+    t.text     "crew"
     t.text     "required"
     t.text     "referral"
     t.text     "franchise_location"
