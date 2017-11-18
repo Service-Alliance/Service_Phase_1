@@ -1,19 +1,19 @@
-<div id="referral_vendor" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Vendor" %>">
+<div id="referral_associated_record" class="col-xs-12 <%= "hidden" unless f.object.associated_record %>">
   <div class="form-group">
-    <%= f.label :referral_vendor_id %><br>
-    <%= f.collection_select :referral_vendor_id, Vendor.all, :id, :name, { prompt: true }, { class: 'form-control' } %>
+    <%= f.label :associated_record_id, f.object.associated_record_type %><br>
+    <%= f.collection_select :associated_record_id, f.object.associated_record_collection, :id, :name, { prompt: true }, { class: 'form-control' } %>
+    <%= f.hidden_field :associated_record_type, class: 'associated-record-type' %>
   </div>
 </div>
-<div id="referral_employee" class="col-xs-12 <%= " hidden" if @job.try(:referral_type).try(:name) != "Servpro Employee" %>">
+<div id="referral_sub_type" class="col-xs-12 <%= "hidden" unless f.object.referral_type_has_sub_types? %>">
   <div class="form-group">
-    <%= f.label :referral_employee_id %><br>
-
-    <%= f.collection_select :referral_employee_id, User.all, :id, :full_name, { prompt: true }, { class: 'form-control' } %>
+    <%= f.label :sub_referral_type_id, "Sub Type" %><br>
+    <%= f.collection_select :sub_referral_type_id, f.object.referral_type_sub_types, :id, :name, { prompt: true }, { class: 'form-control' } %>
   </div>
 </div>
-<div class="col-xs-12 margin-top-2">
+<div id="referral_notes" class="col-xs-12">
   <div class="form-group">
-    <%= f.label :referral_note %><br>
-    <%= f.text_field :referral_note, class: "form-control" %><br>
+    <%= f.label :notes %>
+    <%= f.text_area :notes, class: "form-control" %>
   </div>
 </div>

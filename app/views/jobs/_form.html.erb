@@ -92,8 +92,8 @@
             Customer Information
           </button>
         </div>
-        <%= f.fields_for :referral, @job.referral || @job.referral.build do |referral| %>
-          <%= render partial: 'referral_types/referral_type_fields', locals: {f: referral} %>
+        <%= f.fields_for :referral, @job.referral || @job.build_referral do |referral| %>
+          <%= render partial: 'referrals/referral_fields', locals: {f: referral} %>
         <% end %>
         <% unless current_user.call_rep? %>
             <div class="col-xs-12 margin-top-2">

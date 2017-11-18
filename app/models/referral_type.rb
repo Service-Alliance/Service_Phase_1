@@ -11,4 +11,12 @@ class ReferralType < ActiveRecord::Base
   ASSOCIATED_RECORD_TYPES = {user: 'User', vendor: 'Vendor'}.freeze
 
   accepts_nested_attributes_for :sub_types
+
+  def has_sub_types?
+    sub_types.any?
+  end
+
+  def associated_record_collection
+    associated_record_type.present? ? Object.const_get(associated_record_type).ordered : []
+  end
 end

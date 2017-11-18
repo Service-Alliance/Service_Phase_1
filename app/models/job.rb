@@ -26,7 +26,6 @@ class Job < ActiveRecord::Base
   has_many :trackers, as: :trackable, dependent: :destroy
   has_many :work_orders
   has_many :schedulers
-  belongs_to :referral_vendor, foreign_key: :referral_vendor_id, class_name: 'Vendor'
   belongs_to :referral_employee, foreign_key: :referral_employee_id, class_name: 'User'
   has_many :subscriptions
   has_many :collection_subscriptions
@@ -49,6 +48,7 @@ class Job < ActiveRecord::Base
   delegate :full_address, :format_address, to: :caller, allow_nil: true, prefix: true
   delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
   delegate :name, to: :insurance_company, allow_nil: true, prefix: true
+  delegate :referral_type, :referral_type_id, to: :referral, allow_nil: true
   delegate :name, to: :referral_type, allow_nil: true, prefix: true
 
   # Activity Tracking activated

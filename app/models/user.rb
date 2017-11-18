@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
   scope :with_tsheets_id, ->(tsheets_id) { where("tsheets->>'tsheets_id'='#{tsheets_id}'") }
   scope :with_first_and_last_names, ->(first, last) { where('lower(first_name) = ? AND lower(last_name) = ?', first.try(:downcase), last.try(:downcase)) }
 
+  scope :ordered, -> { order(:first_name, :last_name) }
+
   accepts_nested_attributes_for :rate
 
   TIMESHEETS_MAPPING = {
