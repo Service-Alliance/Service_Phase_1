@@ -35,13 +35,13 @@ class WorkOrder < ActiveRecord::Base
     franchise_name.present? ? I18n.t('work_orders.servpro_of_franchise', franchise: franchise_name) : I18n.t('work_orders.servpro')
   end
 
-  def technician_names		
-    technicians.map(&:full_name)		
-  end		
- 	
-  def crew_chief_names		
-    crew_chiefs.map(&:full_name)		
-  end		
+  def technician_names
+    technicians.map(&:full_name)
+  end
+
+  def crew_chief_names
+    crew_chiefs.map(&:full_name)
+  end
 
   def self.build_from_job(job, typed_by_full_name = nil)
     new(
