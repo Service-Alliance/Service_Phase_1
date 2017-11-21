@@ -1,5 +1,5 @@
 class WorkOrderDeliveryService
-  SCHEDULING_MANAGERS = %w(dankluger@servpro5933.com edwinl411@aol.com zpisoni@servpro5933.com).freeze
+  SCHEDULING_MANAGERS = %w(dankluger@servpro5933.com edwinl411@aol.com elachapelle@servpro5933.com zpisoni@servpro5933.com).freeze
 
   def initialize(work_order, current_user)
     @work_order = work_order
