@@ -50,7 +50,7 @@ class JobsController < ApplicationController
     p @search = @first.order('created_at DESC').search(params[:q], franchise_id_in: [1,2,3,4], job_detail_insurance_company_id_eq: nil)
     @duct = Job.joins(:losses).merge(Loss.where(loss_type_id: duct.id))
     @state_farm = Job.joins(:job_detail).merge(JobDetail.where(insurance_company_id: state_farm.id))
-    @jim = Job.where(referral_employee_id: jim.id)
+    @jim = Job.joins(:referral).where(referral: {associated_record_id: jim.id, associated_record_type: 'User'})
 
     @jobs = @search.result.page(params[:page]).order('created_at DESC')
   end
@@ -165,8 +165,6 @@ class JobsController < ApplicationController
       if @job.update(job_params)
         @job.franchise_id = FranchiseZipcode.detect_franchise(address_params['zip_code'])
         @job.update(job_params)
-        @job.referral_employee_id = nil if @job.try(:referral_type).try(:name) != 'Servpro Employee'
-        @job.referral_vendor_id = nil if @job.try(:referral_type).try(:name) != 'Vendor'
         @job.save
 
         @job.moving_to_invoiced(@previous_status.status_id, @job.status_id, @job)
@@ -497,7 +495,16 @@ class JobsController < ApplicationController
                                   :coverage_type,
                                   :deductible_amount,
                                   :emergency_service_amount
-                                ])
+                                ],
+                                referral_attributes: [
+                                  :id,
+                                  :referral_type_id,
+                                  :associated_record_id,
+                                  :associated_record_type,
+                                  :sub_referral_type_id,
+                                  :notes
+                                ]
+                               )
   end
 
   def new_params

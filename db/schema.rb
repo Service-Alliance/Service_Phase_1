@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117063522) do
+ActiveRecord::Schema.define(version: 20171118052600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,6 +236,7 @@ ActiveRecord::Schema.define(version: 20171117063522) do
     t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "category"
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
@@ -463,17 +464,13 @@ ActiveRecord::Schema.define(version: 20171117063522) do
     t.text     "details"
     t.text     "job_note"
     t.integer  "customer_id"
-    t.integer  "referral_type_id"
     t.boolean  "emergency"
-    t.integer  "referral_employee_id"
     t.integer  "corporate_referral_type_id"
     t.integer  "agent_id"
     t.integer  "adjuster_id"
     t.date     "recieved"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-    t.text     "referral_note"
-    t.integer  "referral_vendor_id"
     t.boolean  "estimate_created",           default: false
     t.date     "estimate_created_date"
     t.boolean  "estimate_sent",              default: false
@@ -487,6 +484,7 @@ ActiveRecord::Schema.define(version: 20171117063522) do
     t.text     "work_center_link"
     t.text     "xact_link"
     t.datetime "fnol_received"
+    t.integer  "referral_id"
   end
 
   add_index "jobs", ["adjuster_id"], name: "index_jobs_on_adjuster_id", using: :btree
@@ -498,8 +496,7 @@ ActiveRecord::Schema.define(version: 20171117063522) do
   add_index "jobs", ["entered_by_id"], name: "index_jobs_on_entered_by_id", using: :btree
   add_index "jobs", ["fnol_received"], name: "index_jobs_on_fnol_received", using: :btree
   add_index "jobs", ["franchise_id"], name: "index_jobs_on_franchise_id", using: :btree
-  add_index "jobs", ["referral_employee_id"], name: "index_jobs_on_referral_employee_id", using: :btree
-  add_index "jobs", ["referral_type_id"], name: "index_jobs_on_referral_type_id", using: :btree
+  add_index "jobs", ["referral_id"], name: "index_jobs_on_referral_id", using: :btree
   add_index "jobs", ["status_id"], name: "index_jobs_on_status_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
@@ -711,10 +708,28 @@ ActiveRecord::Schema.define(version: 20171117063522) do
   end
 
   create_table "referral_types", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                                       null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "parent_id"
+    t.string   "associated_record_type"
+    t.boolean  "allows_notes",               default: false, null: false
+    t.boolean  "requires_subtype",           default: false, null: false
+    t.boolean  "requires_associated_record", default: false, null: false
+    t.boolean  "requires_notes",             default: false, null: false
   end
+
+  create_table "referrals", force: :cascade do |t|
+    t.integer  "referral_type_id"
+    t.integer  "sub_referral_type_id"
+    t.text     "notes"
+    t.string   "associated_record_type"
+    t.integer  "associated_record_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "referrals", ["referral_type_id"], name: "index_referrals_on_referral_type_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",       null: false
@@ -969,6 +984,7 @@ ActiveRecord::Schema.define(version: 20171117063522) do
     t.text     "contact"
     t.text     "insurance"
     t.text     "claim_number"
+    t.text     "crew"
     t.text     "required"
     t.text     "referral"
     t.text     "franchise_location"
@@ -1017,6 +1033,9 @@ ActiveRecord::Schema.define(version: 20171117063522) do
   add_foreign_key "caller_companies", "companies"
   add_foreign_key "franchise_work_order_distributions", "franchises", on_delete: :cascade
   add_foreign_key "franchise_work_order_distributions", "users", on_delete: :cascade
+  add_foreign_key "jobs", "referrals", on_delete: :cascade
+  add_foreign_key "referral_types", "referral_types", column: "parent_id", on_delete: :cascade
+  add_foreign_key "referrals", "referral_types"
   add_foreign_key "user_rates", "users", on_delete: :cascade
   add_foreign_key "vendor_loss_rates", "loss_types", on_delete: :cascade
   add_foreign_key "vendor_loss_rates", "vendors", on_delete: :cascade

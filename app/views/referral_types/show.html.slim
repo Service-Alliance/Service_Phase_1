@@ -1,0 +1,44 @@
+- content_for(:title, "Referral type")
+
+== render layout: 'layouts/content'
+  p#notice = notice
+
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Name:
+    .col-md-6.col-sm-6.col-xs-12
+      = @referral_type.name
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Parent:
+    .col-md-6.col-sm-6.col-xs-12
+      = @referral_type.parent_name
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Associated record type:
+    .col-md-6.col-sm-6.col-xs-12
+      = @referral_type.associated_record_type
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Allows notes:
+    .col-md-6.col-sm-6.col-xs-12
+      = @referral_type.allows_notes
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Requires subtype:
+    .col-md-6.col-sm-6.col-xs-12
+      = @referral_type.requires_subtype
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Requires associated record:
+    .col-md-6.col-sm-6.col-xs-12
+      = @referral_type.requires_associated_record
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Requires notes:
+    .col-md-6.col-sm-6.col-xs-12
+      = @referral_type.requires_notes
+
+  .text-center
+    => link_to 'Edit', edit_referral_type_path(@referral_type), class: 'btn btn-primary'
+    =< link_to 'Back', referral_types_path, class: 'btn btn-default'

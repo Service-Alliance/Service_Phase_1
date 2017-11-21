@@ -4,7 +4,9 @@ class SendgridListenerTest < ActiveSupport::TestCase
   setup { @event = event_stores(:sendgrid) }
 
   test '#call should update events for WorkOrder' do
-    order = WorkOrder.create!(work_orders(:one).attributes.merge(id:@event.data['origin_id']))
+    attribs = work_orders(:one).attributes.merge('id' => @event.data['origin_id'])
+    attribs.delete('crew')
+    order = WorkOrder.create!(attribs)
 
     assert_difference "WorkOrder.find(#{@event.data['origin_id']}).events.count" do
       SendgridListener.call(@event.data)

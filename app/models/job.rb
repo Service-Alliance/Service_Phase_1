@@ -3,7 +3,7 @@ class Job < ActiveRecord::Base
   belongs_to :job_status, foreign_key: :status_id, class_name: 'JobStatus'
   belongs_to :job_type, foreign_key: :type_id, class_name: 'JobType'
   belongs_to :franchise
-  belongs_to :referral_type
+  belongs_to :referral
   belongs_to :customer
   has_one :customer_address, through: :customer, source: "address"
   has_many :calls
@@ -26,8 +26,6 @@ class Job < ActiveRecord::Base
   has_many :trackers, as: :trackable, dependent: :destroy
   has_many :work_orders
   has_many :schedulers
-  belongs_to :referral_vendor, foreign_key: :referral_vendor_id, class_name: 'Vendor'
-  belongs_to :referral_employee, foreign_key: :referral_employee_id, class_name: 'User'
   has_many :subscriptions
   has_many :collection_subscriptions
   has_one :inspection_checklist
@@ -39,6 +37,7 @@ class Job < ActiveRecord::Base
   accepts_nested_attributes_for :job_detail
   accepts_nested_attributes_for :property
   accepts_nested_attributes_for :customer
+  accepts_nested_attributes_for :referral
 
   delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
   delegate :full_name, to: :user, allow_nil: true, prefix: true
@@ -48,6 +47,7 @@ class Job < ActiveRecord::Base
   delegate :full_address, :format_address, to: :caller, allow_nil: true, prefix: true
   delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
   delegate :name, to: :insurance_company, allow_nil: true, prefix: true
+  delegate :referral_type, :referral_type_id, to: :referral, allow_nil: true
   delegate :name, to: :referral_type, allow_nil: true, prefix: true
 
   # Activity Tracking activated

@@ -39,7 +39,7 @@ class JobsPresenter < BasePresenter
   end
 
   def all_referral_types
-    @referral_types ||= ReferralType.all
+    @referral_types ||= ReferralType.root
     @referral_types
   end
 
@@ -69,19 +69,20 @@ class JobsPresenter < BasePresenter
 
   def set_up_relation(page)
     @all = @model
-    @paged = @model.includes(:referral_type, 
-                             :job_detail,
+    @paged = @model.includes(:job_detail,
                              :job_coordinator,
                              :user,
                              :franchise,
                              :job_status,
                              :subscriptions,
                              :losses,
-                             :pricings)
+                             :pricings,
+                             :referral)
                     .includes(customer: {address: :state})
                     .includes(customer: :phones)
                     .includes(subscriptions: :user)
                     .includes(losses: :loss_type)
+                    .includes(referral: :referral_type)
                     .page(page)
                     .order('fnol_received DESC')
   end

@@ -1,0 +1,31 @@
+-content_for(:title, 'Referral Types')
+
+== render layout: 'layouts/content'
+  .text-right
+    = link_to 'New Referral type', new_referral_type_path, class: 'btn btn-success'
+  br
+
+  .table-responsive
+    table.table.table-striped.jambo_table
+      thead
+        tr.headings
+          th Name
+          th Associated record type
+          th Allows notes
+          th Requires subtype
+          th Requires associated record
+          th Requires notes
+          th
+
+      tbody
+        - @referral_types.each do |referral_type|
+          tr
+            td = referral_type.name
+            td = referral_type.associated_record_type
+            td = referral_type.allows_notes
+            td = referral_type.requires_subtype
+            td = referral_type.requires_associated_record
+            td = referral_type.requires_notes
+            td.text-right
+              = link_to 'Edit', edit_referral_type_path(referral_type), class: 'btn btn-xs btn-success'
+              = link_to 'Destroy', referral_type, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'

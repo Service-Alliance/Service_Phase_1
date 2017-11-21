@@ -1,0 +1,7 @@
+- content_for(:title, "Editing referral type")
+
+== render layout: 'layouts/content'
+  == render 'form'
+
+  => link_to 'Show', @referral_type, class: 'btn btn-primary'
+  =< link_to 'Back', referral_types_path, class: 'btn btn-default'
