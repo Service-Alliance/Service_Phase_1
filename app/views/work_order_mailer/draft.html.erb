@@ -4,13 +4,13 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1><%= @user.full_name %>, you have been sent a work order. Franchise: <%= @job.franchise.try(:name) %></h1>
+    <h1><%= @user.full_name %>, you have been sent a Drafted Work Order for Franchise: <%= @job.franchise.try(:name) %></h1>
     <p>
       Click <a href="http://digitaljobchart.com/jobs/<%= @job.id %>/work_orders/<%= @work_order.id %>/edit">here</a> to assign the crew.
     </p>
     <p>
-      Name: <%= @work_order.name %><br />
-      Date: <%= @work_order.updated_at.try(:strftime, "%a, %D %I:%M %p") %><br />
+      Drafted At: <%= @work_order.updated_at.try(:strftime, "%a, %D %I:%M %p") %><br />
+      Coordinator Name: <%= @work_order.name %><br />
       Typed By: <%= @work_order.typed_by %><br />
       Job Start: <%= @work_order.job_start %><br />
       Job Name: <%= @work_order.job_name %><br />
