@@ -8,7 +8,6 @@ class ImportReferralTypes < SeedMigration::Migration
       referral.referral_type_id = rowh['referral_type_id']
       referral.save!
       job.save!
-      puts "Updated job #{job.id} with referral_type_id #{job.referral.referral_type_id}"
     end
   end
 
