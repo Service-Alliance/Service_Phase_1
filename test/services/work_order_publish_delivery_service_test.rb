@@ -41,4 +41,6 @@ class WorkOrderPublishDeliveryServiceTest < ActiveSupport::TestCase
     @work_order.job.update_attributes franchise_id: nil
     WorkOrderPublishDeliveryService.new(@work_order, @current_user).deliver!
   end
+
+  #TODO: make sure vendors and all other paths are covered
 end

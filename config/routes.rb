@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   resources :insurance_companies
   resources :notes
   get 'job_managers' => 'job_managers#list'
-  get 'work_orders' => 'work_orders#list', defaults: {format: :json}
+  get 'work_orders' => 'work_orders#list'
 
   get 'users/:id/job-assignments' => 'users#job_assignments', as: :user_job_assignents
   get 'users/:id/job-assignments/list' => 'users#job_assignments_list', as: :user_job_assignents_list
