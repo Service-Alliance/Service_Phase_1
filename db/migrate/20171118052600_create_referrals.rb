@@ -45,7 +45,7 @@ class CreateReferrals < ActiveRecord::Migration
         job.referral_note = ref.notes
         job.referral_type_id = ref.referral_type_id
         job.save!
-      end
+      end if ref.job
     end
 
     remove_column :jobs, :referral_id
