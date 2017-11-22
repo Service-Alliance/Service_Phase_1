@@ -7,7 +7,6 @@ class WorkOrdersController < ApplicationController
   # GET /work_orders
   # GET /work_orders.json
   def index
-    @work_orders = WorkOrder.all
   end
 
   # GET /work_orders/1
@@ -78,7 +77,7 @@ class WorkOrdersController < ApplicationController
   end
 
   def list
-    @work_orders = WorkOrder.includes(:job, :vendor, job: :franchise).limit(200)
+    @work_orders = WorkOrder.includes(:job, :vendor, :crew, job: [:franchise, :customer])
     @work_orders = @work_orders.where(jobs: { franchise_id: params[:franchise_id] }) if params[:franchise_id]
   end
 

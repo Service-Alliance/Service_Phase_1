@@ -14,9 +14,10 @@ class WorkOrder < ActiveRecord::Base
   delegate :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
   delegate :company_name, :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
   delegate :name, :full_address, :address_without_county, to: :franchise, allow_nil: true, prefix: true
+  delegate :name, to: :vendor, allow_nil: true, prefix: true
+
   accepts_nested_attributes_for :work_order_crew, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :work_shifts, :reject_if => :all_blank, :allow_destroy => true
-
 
   alias_method :franchise_location, :franchise_name
   alias_method :job_location, :customer_address_without_county
@@ -33,6 +34,10 @@ class WorkOrder < ActiveRecord::Base
 
   def servpro_name
     franchise_name.present? ? I18n.t('work_orders.servpro_of_franchise', franchise: franchise_name) : I18n.t('work_orders.servpro')
+  end
+
+  def crew_names
+    crew.map(&:full_name).join(', ')
   end
 
   def technician_names
