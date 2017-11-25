@@ -5,3 +5,9 @@ one:
 
 note_created:
   name: Note Created
+
+work_order_drafted:
+  name: Work Order Drafted
+
+work_order_deliverd:
+  name: Work Order Delivered
