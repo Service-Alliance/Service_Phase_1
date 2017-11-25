@@ -53,6 +53,7 @@ gem 'font-awesome-rails'
 gem 'cocoon'
 gem 'slim-rails'
 gem 'maily'
+gem 'aasm'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

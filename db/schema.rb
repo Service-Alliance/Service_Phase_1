@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171118052600) do
+ActiveRecord::Schema.define(version: 20171125065512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1011,7 +1011,7 @@ ActiveRecord::Schema.define(version: 20171118052600) do
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
     t.string   "events",                   default: [],                 array: true
-    t.integer  "state"
+    t.integer  "state",                    default: 0
   end
 
   create_table "work_shift_breaks", force: :cascade do |t|

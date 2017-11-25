@@ -54,9 +54,7 @@ class WorkOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @work_order.update(work_order_params)
-        tracker_task = TrackerTask.find_by(name: "Work Order Delivered")
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
-        WorkOrderPublishDeliveryService.new(@work_order, current_user).deliver!
+        @work_order.publish!(current_user) if params[:commit] == 'Publish Work Order'
         format.html { redirect_to job_path(@job), notice: 'Work Order has been delivered successfully.' }
         format.json { render :show, status: :ok, location: @work_order }
       else
