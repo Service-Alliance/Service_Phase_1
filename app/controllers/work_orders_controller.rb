@@ -127,11 +127,9 @@ class WorkOrdersController < ApplicationController
       :number_of_crew_chiefs,
       :number_of_technicians,
       :estimated_hours,
-      work_order_crew_attributes: [
-        :id,
-        technician_ids: [],
-        crew_chief_ids: [],
-     ],
+      :vendor_id,
+      technician_ids: [],
+      crew_chief_ids: [],
       work_shifts_attributes: [
         :id,
         :user_id,
