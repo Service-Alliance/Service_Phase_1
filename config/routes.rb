@@ -61,8 +61,8 @@ Rails.application.routes.draw do
   get 'job_managers' => 'job_managers#list'
   get 'work_orders' => 'work_orders#list'
 
-  get 'users/:id/job-assignments' => 'users#job_assignments', as: :user_job_assignents
-  get 'users/:id/job-assignments/list' => 'users#job_assignments_list', as: :user_job_assignents_list
+  get 'users/:id/job-assignments' => 'users#job_assignments', as: :user_job_assignments
+  get 'users/:id/job-assignments/list' => 'users#job_assignments_list', as: :user_job_assignments_list
   get 'jobs/:id/create_estimate' => 'jobs#create_estimate', as: :create_estimate
   get 'jobs/:id/create_estimate_sent' => 'jobs#create_estimate_sent', as: :create_estimate_sent
   get 'jobs/:id/create_contract' => 'jobs#create_contract', as: :create_contract
