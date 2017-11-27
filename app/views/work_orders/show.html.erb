@@ -7,7 +7,7 @@
       <% end %>
       <div class="col-xs-12">
         <div class="col-xs-12">
-          <h2 class=text-center> SERVPRO of <%= @job.try(:franchise).try(:name).upcase %> W/O # <%= @work_order.id %>  </h2>
+          <h2 class=text-center> SERVPRO of <%= @job.try(:franchise).try(:name).titleize.html_safe %> W/O # <%= @work_order.id %>  </h2>
         <div class="panel panel-info">
           <div class="panel-heading">
             <h2 class="panel-title clearfix">
@@ -18,6 +18,12 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-xs-12">
+               <div class="col-xs-12">
+                 <div class="form-group">
+                  <span class="bold">Assigned To:</span>
+                  <%= @work_order.to.html_safe %>
+                 </div>
+               </div>
                 <hr/>
                 <div class="clearfix">
                   <div class="col-sm-6">
@@ -32,11 +38,11 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <span class="bold">Coordinator Name:</span><br>
+                      <span class="bold">Coordinator:</span>
                       <%= @work_order.name %>
                     </div>
                     <div class="form-group">
-                      <span class="bold">Typed By:</span><br>
+                      <span class="bold">Typed By:</span>
                       <%= @work_order.typed_by %>
                     </div>
                   </div>
@@ -72,13 +78,13 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <h3>Work Order Details</h3><br>
-                        <span class="bold">Job Name:</span><br>
+                        <span class="bold">Job Name:</span>
                         <%= @work_order.job_name %>
                       </div>
                     </div>
                       <div class="col-sm-12">
                         <div class="form-group">
-                          <span class="bold">Job Start:</span><br>
+                          <span class="bold">Job Start:</span>
                           <%= @work_order.job_start.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
                         </div>
                       </div>
@@ -125,17 +131,18 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="bold">Crew Size:</span><br>
+                    <%= @work_order.display_crew%>
                   </div>
                 </div>
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <span class="bold">Estimated hours</span><br>
+                    <span class="bold">Estimated hours:</span><br>
                     <%= @work_order.estimated_hours %>
                   </div>
                 </div>
                 <div class="col-sm-3">
                   <div class="form-group">
-                    <span class="bold">Hours on Job:</span><br>
+                    <span class="bold">Actual Time on Job:</span><br>
                     <%= @work_order.hours_on_job %>
                   </div>
                 </div>

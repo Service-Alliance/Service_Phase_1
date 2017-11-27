@@ -32,6 +32,14 @@ class WorkOrder < ActiveRecord::Base
     job_managers.present? ? job_managers.map { |manager| manager.full_name } : ''
   end
 
+  def to
+    vendor_name || servpro_name
+  end
+
+  def vendor_name
+    vendor.present? ? I18n.t('work_orders.vendor', vendor: vendor_name) : servpro_name
+  end
+
   def servpro_name
     franchise_name.present? ? I18n.t('work_orders.servpro_of_franchise', franchise: franchise_name) : I18n.t('work_orders.servpro')
   end
