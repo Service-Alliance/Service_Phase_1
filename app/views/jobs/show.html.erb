@@ -37,6 +37,7 @@
                 </button>
 
 
+
                 <% if @job.customer %>
                 <% if @job.franchise && @job.customer.sharp_spring_id == nil && (current_user.admin? || current_user.owner?) %>
                   <%= link_to  "Send Customer To Sharpspring", customer_send_to_sharpspring_path(@job.customer, @job), method: :post,class:"btn btn-primary" %>
@@ -646,12 +647,14 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="row">
+
                               <div class="col-xs-4">
                                   <div class="form-group">
                                       <%= f.label :franchise_id %><br>
                                       <%= f.collection_select :franchise_id, Franchise.all, :id, :name, { :prompt => 'Select a Franchise', selected: @job.franchise_id }, { class: 'form-control' } %>
                                   </div>
                               </div>
+
                             </div>
                         </div>
                     </div>
@@ -659,6 +662,14 @@
                 <div class="modal-footer">
                     <%= f.submit "Update", class: "btn btn-primary" %>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+
 
                 </div>
             </div>
