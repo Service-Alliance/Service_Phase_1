@@ -16,10 +16,14 @@ class WorkOrderPresenter < BasePresenter
   end
 
   def display_number_of_technicians
-    number_of_technicians.nil? ? "" : pluralize(number_of_technicians, "technician")
+    number_of_technicians.nil? ? "" : pluralize(number_of_technicians, "Technician")
   end
 
   def display_number_of_crew_chiefs
-    number_of_crew_chiefs.nil? ? "" : pluralize(number_of_crew_chiefs, "crew chief")
+    number_of_crew_chiefs.nil? ? "" : pluralize(number_of_crew_chiefs, "Crew Chief")
+  end
+
+  def display_servpro_name
+
   end
 end
