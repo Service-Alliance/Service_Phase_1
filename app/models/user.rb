@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     service_item: '33853'
   }
 
+  def name
+    full_name.present? ? full_name : "N/A"
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
