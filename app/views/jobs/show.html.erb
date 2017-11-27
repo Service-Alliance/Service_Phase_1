@@ -29,6 +29,9 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeStatus">
                     Change Job Status
                 </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeFranchise">
+                    Change Franchise
+                </button>
 
 
                 <% if @job.customer %>
@@ -607,6 +610,45 @@
                                   <div class="form-group">
                                       <%= f.label :status_id %><br>
                                       <%= f.collection_select :status_id, JobStatus.all, :id, :name, {selected: @job.status_id},  { class: 'form-control'} %>
+                                  </div>
+                              </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%= f.submit "Update", class: "btn btn-primary" %>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+
+    <div id="changeFranchise" class="modal fade" tabindex="-1" role="dialog">
+        <%= form_for @job do |f|  %>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Update Franchise</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+
+
+                              <div class="col-xs-4">
+                                  <div class="form-group">
+                                      <%= f.label :franchise_id %><br>
+                                      <%= f.collection_select :franchise_id, Franchise.all, :id, :name, { :prompt => 'Select a Franchise', selected: @job.franchise_id }, { class: 'form-control' } %>
                                   </div>
                               </div>
 
