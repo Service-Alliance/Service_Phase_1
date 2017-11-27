@@ -37,7 +37,7 @@ class WorkOrder < ActiveRecord::Base
   end
 
   def vendor_name
-    vendor.present? ? I18n.t('work_orders.vendor', vendor: vendor_name) : servpro_name
+    vendor.present? ? vendor.try(:name) : servpro_name
   end
 
   def servpro_name
