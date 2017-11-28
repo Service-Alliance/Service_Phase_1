@@ -10,7 +10,7 @@
     </p>
     <p>
       To: <%= @work_order.to %><br />
-      Name: <%= @work_order.name %><br />
+      Job Coordinator: <%= @work_order.name %><br />
       Date: <%= @work_order.updated_at.try(:strftime, "%a, %D %I:%M %p") %><br />
       Typed By: <%= @work_order.typed_by %><br />
       Job Start: <%= @work_order.job_start %><br />
