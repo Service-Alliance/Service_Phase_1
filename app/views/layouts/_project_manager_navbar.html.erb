@@ -34,8 +34,10 @@
           <% end %>
 
         </li>
+        <li><%= link_to "Wiki", articles_path %></li>
         <li><%= link_to "My Job's", user_job_assignments_path(current_user) %></li>
         <li><%= link_to "New Job", new_job_path %></li>
+        <li> <%= link_to "Work Orders", work_orders_path%> </li>
         <li><%= link_to "Log Book", jobs_path %></li>
 
         <% if user_signed_in? %>
