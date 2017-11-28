@@ -83,7 +83,14 @@
 
     <div class="row">
       <div class="actions col-sm-12">
-        <%= f.button :submit, 'Publish Work Order Draft', class: "btn btn-success" %>
+        <% if @work_order.new_record? %>
+          <%= f.button :submit, 'Save Draft Work Order', class: "btn btn-success" %>
+        <% elsif @work_order.draft? %>
+          <%= f.button :submit, 'Save Without Publishing', class: "btn btn-primary" %>
+          <%= f.button :submit, 'Publish Work Order', class: "btn btn-success" %>
+        <% else %>
+          <%= f.button :submit, 'Save Changes', class: "btn btn-success" %>
+        <% end %>
       </div>
     </div>
   </div>

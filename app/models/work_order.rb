@@ -1,4 +1,6 @@
 class WorkOrder < ActiveRecord::Base
+  include AASM
+
   has_many :mail_logs, as: :mail_loggable
   belongs_to :job, required: true
   belongs_to :vendor, required: false
@@ -7,8 +9,6 @@ class WorkOrder < ActiveRecord::Base
   has_many :technicians, -> { with_roles('Technician') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :crew_chiefs, -> { with_roles('Crew Chief') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :work_shifts, dependent: :destroy
-
-  enum category: { draft: 0, published: 1, audited: 2 }
 
   delegate :customer, :franchise, :job_managers, to: :job, allow_nil: true
   delegate :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
@@ -23,6 +23,27 @@ class WorkOrder < ActiveRecord::Base
   alias_method :job_location, :customer_address_without_county
 
   scope :date_ordered, -> { order(:updated_at) }
+
+  enum state: {draft: 0, published: 1}
+
+  aasm :state do
+    state :draft, initial: true
+    state :published
+
+    event :publish do
+      transitions from: :draft, to: :published, :after => Proc.new {|user| self.publish_actions(user)  }
+    end
+  end
+
+  def draft_actions
+  end
+  
+  def publish_actions(user)
+    tracker_task = TrackerTask.find_by(name: "Work Order Delivered")
+    job.trackers.create(tracker_task_id: tracker_task.id, child_id: id, user_id: user.id)
+    WorkOrderPublishDeliveryService.new(self, user).deliver!
+    save
+  end
 
   def location
     job_location || customer_address_without_county

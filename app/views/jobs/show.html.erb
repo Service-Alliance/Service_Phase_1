@@ -76,7 +76,7 @@
 
                  </div>
                 <% if  @job.inspection_checklist == nil && @job.job_managers.pluck(:job_manager_id).include?(current_user.id) %>
-                <div class="panel with-nav-tabs panel-primary margin-top-2">
+                <div id="job_navigation" class="panel with-nav-tabs panel-primary margin-top-2">
                     <div class="panel-heading">
                       Checklist For Initial Inspection
                     </div>
@@ -143,7 +143,7 @@
                                 <a href="#call" aria-controls="call" role="tab" data-toggle="tab">Calls</a>
                             </li>
                             <li>
-                                <a href="#work_order" aria-controls="work_order" role="tab" data-toggle="tab">Work Order</a>
+                                <a href="#work_order" id="work_order_link" aria-controls="work_order" role="tab" data-toggle="tab">Work Order</a>
                             </li>
                             <li>
                                 <a href="#purchase_order_approval" aria-controls="purchase_order_approval" role="tab" data-toggle="tab">Purchase Order Approval</a>
