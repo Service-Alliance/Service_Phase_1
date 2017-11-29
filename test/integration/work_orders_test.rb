@@ -15,13 +15,14 @@ class WorkOrdersTest < Capybara::Rails::TestCase
       end
     end
     wo = WorkOrder.last
-    assert wo.draft?
+    assert wo.draft?, "work order has been created in published state"
   end
 
   test 'can publish work order' do
-    visit edit_job_work_order_path(job_id: work_orders(:draft).job, id: work_orders(:draft))
+    work_order = work_orders(:draft)
+    visit edit_job_work_order_path(job_id: work_order.job, id: work_order)
     find('input[name="commit"][value="Publish Work Order"]').click
-    work_orders(:draft).reload
-    assert work_orders(:draft).published?
+    work_order.reload
+    assert work_order.published?, "work order is draft when it should be published"
   end
 end
