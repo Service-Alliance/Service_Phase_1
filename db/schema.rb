@@ -988,6 +988,7 @@ ActiveRecord::Schema.define(version: 20171129015718) do
     t.text     "franchise_location"
     t.text     "scope_of_work"
     t.text     "job_manager_contact_info"
+    t.integer  "state",                    default: 0,     null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.boolean  "acknowledgement",          default: false
@@ -1000,7 +1001,6 @@ ActiveRecord::Schema.define(version: 20171129015718) do
     t.integer  "estimated_hours"
     t.string   "events",                   default: [],                 array: true
     t.integer  "status"
-    t.integer  "state",                    default: 0,     null: false
   end
 
   create_table "work_shift_breaks", force: :cascade do |t|

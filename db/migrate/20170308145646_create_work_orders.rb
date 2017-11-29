@@ -20,6 +20,7 @@ class CreateWorkOrders < ActiveRecord::Migration
       t.text :franchise_location
       t.text :scope_of_work
       t.text :job_manager_contact_info
+      t.integer :state
 
       t.timestamps null: false
     end
