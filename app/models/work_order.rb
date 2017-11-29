@@ -7,7 +7,7 @@ class WorkOrder < ActiveRecord::Base
   has_many :work_order_crew, dependent: :destroy
   has_many :crew, through: :work_order_crew, class_name: 'User', source: :user
   has_many :technicians, -> { with_roles('Technician') }, through: :work_order_crew, class_name: 'User', source: :user
-  has_many :crew_chiefs, -> { with_roles('Crew Chief') }, through: :work_order_crew, class_name: 'User', source: :user
+  has_many :crew_chiefs, -> { with_roles('Crew Chief', 'Project Manager') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :work_shifts, dependent: :destroy
 
   delegate :customer, :franchise, :job_managers, to: :job, allow_nil: true
@@ -37,7 +37,7 @@ class WorkOrder < ActiveRecord::Base
 
   def draft_actions
   end
-  
+
   def publish_actions(user)
     tracker_task = TrackerTask.find_by(name: "Work Order Delivered")
     job.trackers.create(tracker_task_id: tracker_task.id, child_id: id, user_id: user.id)

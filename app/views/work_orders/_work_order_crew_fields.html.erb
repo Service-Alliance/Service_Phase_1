@@ -1,6 +1,6 @@
 <div class="nested-fields">
   <div class="row">
-    <%= f.input :crew_chief_ids, collection: User.with_roles('Crew Chief'), label_method: :full_name, input_html: { multiple: true, class: 'select-control form-control', style: 'width: 100%' }, wrapper_html: { class: 'col-sm-6' }, label: 'Crew Chief(s)' %>
+    <%= f.input :crew_chief_ids, collection: User.with_roles('Crew Chief', 'Project Manager'), label_method: :full_name, input_html: { multiple: true, class: 'select-control form-control', style: 'width: 100%' }, wrapper_html: { class: 'col-sm-6' }, label: 'Crew Chief(s)' %>
     <%= f.input :technician_ids, collection: User.with_roles('Technician'), label_method: :full_name, input_html: { multiple: true, class: 'select-control form-control', style: 'width: 100%' }, wrapper_html: { class: 'col-sm-6' }, label: 'Technician(s)' %>
   </div>
   <div class="row">
