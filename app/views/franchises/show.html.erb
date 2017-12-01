@@ -149,32 +149,18 @@
       <div class="panel panel-default">
         <div class="panel-heading">Jobs</div>
         <div class="panel-body">
-          <table
-            class="table-responsive"
-            data-toggle="table"
-            data-url="/api/v1/datatables/jobs?franchise_id=<%= @franchise.id %>"
-            data-show-refresh="true"
-            data-show-toggle="true"
-            data-show-columns="true"
-            data-search="true"
-            data-flat="true"
-            data-select-item-name="toolbar1"
-            data-pagination="true"
-            data-side-pagination="server"
-            data-sort-name="created_at"
-            data-sort-order="desc">
-            <thead>
-              <tr>
-                <th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="JobLinkFormatter">Job Name</th>
-                <th data-field="job_status_name" data-sortable="true">Status</th>
-                <th data-field="customer_full_name" data-sortable="true">Customer Name</th>
-                <th data-field="claim_number" data-sortable="true">Claim Number</th>
-                <th data-field="job_loss_type_name" data-sortable="true">Job Loss Type</th>
-                <th data-field="insurance_company_name" data-sortable="true">Insurance Carrier</th>
-                <th data-field="created_at" data-sortable="true">Date Received</th>
-              </tr>
-            </thead>
-          </table>
+          <%= render partial: 'datatables/jobs', locals: {
+            filter: "franchise_id=#{@franchise.id}", 
+            columns: [
+              :name, 
+              :job_status_name, 
+              :customer_full_name, 
+              :claim_number, 
+              :job_loss_type_name, 
+              :insurance_company_name, 
+              :created_at
+            ]}
+          %>
         </div>
       </div>
     </div>

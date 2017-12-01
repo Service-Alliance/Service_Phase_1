@@ -4,6 +4,15 @@ class ApplicationDatatable
 
   delegate :count, to: :model
 
+  def initialize
+    @model = initialize_relation
+  end
+
+  def initialize_relation
+    initial_relation
+      .includes(included_associations)
+  end
+
   def query(params)
     self.params = params
     model.order(build_sort)

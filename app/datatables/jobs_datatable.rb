@@ -1,11 +1,6 @@
 class JobsDatatable < ApplicationDatatable
-  def initialize
-    @model = initialize_relation
-  end
-
-  def initialize_relation
+  def initial_relation
     Job.where.not(status_id: nil)
-      .includes(included_associations)
   end
 
   def included_associations

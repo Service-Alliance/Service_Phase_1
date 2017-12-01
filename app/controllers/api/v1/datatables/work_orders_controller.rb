@@ -1,7 +1,13 @@
-class Api::V1::Datatables::WorkOrdersController < DatatablesController
-  private
+module Api
+  module V1
+    module Datatables
+      class WorkOrdersController < DatatablesController
+        private
 
-  def set_datatable
-    @dt = WorkOrdersDatatable.new
+        def set_datatable
+          @dt = WorkOrdersDatatable.new
+        end
+      end
+    end
   end
 end

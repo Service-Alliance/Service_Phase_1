@@ -10,7 +10,7 @@ class WorkOrder < ActiveRecord::Base
   has_many :crew_chiefs, -> { with_roles('Crew Chief', 'Project Manager') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :work_shifts, dependent: :destroy
 
-  delegate :customer, :franchise, :job_managers, to: :job, allow_nil: true
+  delegate :customer, :franchise, :job_managers, :status_name, :name, to: :job, allow_nil: true
   delegate :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
   delegate :company_name, :full_address, :address_without_county, to: :customer, allow_nil: true, prefix: true
   delegate :name, :full_address, :address_without_county, to: :franchise, allow_nil: true, prefix: true
