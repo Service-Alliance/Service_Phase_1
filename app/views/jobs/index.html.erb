@@ -72,7 +72,7 @@
         </div>
       </div>
 
-      <%= link_to "Export As CSV (Work In Progress)", jobs_path(params.merge(format: "csv")), class: "btn btn-primary margin-bottom-2" %>
+      <%= link_to "Export As CSV (Work In Progress)", jobs_path(params.merge(format: :csv)), class: "btn btn-primary margin-bottom-2" %>
       <br/>
       Total:
       <%= @jobs.total_count %>
@@ -176,8 +176,8 @@
           <%= f.label :entered_by_id_in, "Entered By" %><br/>
           <%= f.select :entered_by_id_in, options_from_collection_for_select(@jobs.all_users, "id", "full_name"), { include_blank: true }, { class: "form-control select-control", multiple: "multiple" } %>
           <br/>
-          <%= f.label :referral_employee_id_in, "Referred By" %><br/>
-          <%= f.select :referral_employee_id_in, options_from_collection_for_select(@jobs.all_users, "id", "full_name"), { include_blank: true }, { class: "form-control select-control", multiple: "multiple" } %>
+          <%= f.label :referral_associated_record_id_in, "Referred By" %><br/>
+          <%= f.select :referral_associated_record_id_in, options_from_collection_for_select(@jobs.all_users, "id", "full_name"), { include_blank: true }, { class: "form-control select-control", multiple: "multiple" } %>
           <br/>
 
           <%= f.label :losses_loss_type_id_in, "Loss Type" %><br/>
@@ -187,8 +187,8 @@
           <%= f.label :customer_address_state_id, "Customer State" %><br/>
           <%= f.select :customer_address_state_id_in, options_from_collection_for_select(@jobs.all_states, "id", "name"), { include_blank: true }, { class: "form-control select-control", multiple: "multiple" } %>
           <br/>
-          <%= f.label :referral_type_id_in, "Referral Type" %><br/>
-          <%= f.select :referral_type_id_in, options_from_collection_for_select(@jobs.all_referral_types, "id", "name"), { include_blank: true }, { class: "form-control select-control", multiple: "multiple" } %>
+          <%= f.label :referral_referral_type_id, "Referral Type" %><br/>
+          <%= f.select :referral_referral_type_id_in, options_from_collection_for_select(@jobs.all_referral_types, "id", "name"), { include_blank: true }, { class: "form-control select-control", multiple: "multiple" } %>
           <br/>
           <%= f.label :agent_id_in, "Agent Name" %><br/>
           <%= f.select :agent_id_in, options_from_collection_for_select(@jobs.all_agents, "id", "full_name"), { include_blank: true }, { class: "form-control select-control", multiple: "multiple" } %>

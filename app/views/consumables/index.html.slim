@@ -1,0 +1,28 @@
+-content_for(:title, 'Consumables')
+
+== render layout: 'layouts/content'
+  .text-right
+    = link_to 'New Consumable', new_consumable_path, class: 'btn btn-success'
+  br
+
+  .table-responsive
+    table.table.table-striped.jambo_table
+      thead
+        tr.headings
+          th Name
+          th Purchase unit
+          th Cost per purchase unit
+          th Purchase unit quantity
+          th
+
+      tbody
+        - @consumables.each do |consumable|
+          tr
+            td = consumable.name
+            td = consumable.purchase_unit
+            td = consumable.cost_per_purchase_unit
+            td = consumable.purchase_unit_quantity
+            td.text-right
+              = link_to 'Show', consumable, class: 'btn btn-xs btn-primary'
+              = link_to 'Edit', edit_consumable_path(consumable), class: 'btn btn-xs btn-success'
+              = link_to 'Destroy', consumable, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'

@@ -1,0 +1,11 @@
+<div class="col-xs-12 margin-top-2">
+  <div class="form-group referrals referral-type">
+    <%= f.label :referral_type_id %><br>
+    <%= f.collection_radio_buttons(:referral_type_id, ReferralType.root, :id, :name) do |b| %>
+        <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
+    <% end %> <br/>
+
+  </div>
+</div>
+
+<%= render partial: 'referrals/custom_fields', locals: {f: f} %>

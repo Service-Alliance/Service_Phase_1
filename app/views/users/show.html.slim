@@ -18,16 +18,18 @@
             a aria-controls="entered" data-toggle="tab" href="#entered" role="tab"  Recent Jobs Entered
           li
             a aria-controls="assigned" data-toggle="tab" href="#assigned" role="tab"  Recent Jobs Assigned
-          li
-            a aria-controls="tsheets" data-toggle="tab" href="#tsheets" role="tab"  Timesheet
+          - if @user.tsheets_id
+            li
+              a aria-controls="tsheets" data-toggle="tab" href="#tsheets" role="tab"  Timesheet
       .panel-body
         .tab-content
           #entered.tab-pane.fade.in.active
             = render partial: 'jobs', locals: {jobs: @user.jobs_entered_by_user}
           #assigned.tab-pane.fade
             = render partial: 'jobs', locals: {jobs: @user.jobs_owned_by_user}
-          #tsheets.tab-pane.fade
-            = render partial: 'tsheets_timesheet'
+          - if @user.tsheets_id
+            #tsheets.tab-pane.fade
+              = render partial: 'tsheets_timesheet', locals: { user: @user }
   javascript:
     | $("#menu-toggle").click(function (e) {
       | e.preventDefault();

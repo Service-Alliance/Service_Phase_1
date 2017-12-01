@@ -27,7 +27,6 @@
           <hr />
           <table class="table table-striped">
             <tr>
-              <th>Vendor / Supplier</th>
               <th>Date</th>
               <th>W/O#</th>
               <th>P/O#</th>
@@ -39,7 +38,6 @@
             </tr>
             <% @job.work_orders.each do |work_order| %>
               <tr>
-                <td><%= work_order.to.join('<br />') %></td>
                 <td><%= work_order.created_at.try(:strftime, "%a, %D %I:%M %p") %></td>
                 <td><%= link_to work_order.id, job_work_order_path(work_order.job, work_order) %></td>
                 <td class="text-muted">P/O#</td>

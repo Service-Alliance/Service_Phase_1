@@ -33,10 +33,11 @@
             <% end %>
           <% end %>
         </li>
+        <li> <%= link_to "Work Orders", work_orders_path%> </li>
         <li><%= link_to "New Job", new_job_path %></li>
-        <li><%= link_to "My Jobs", user_job_assignents_path(current_user) %></li>
-        <li><%= link_to "Schedule", oncalls_path %></li>
+        <li><%= link_to "Wiki", articles_path %></li>
         <li><%= link_to "Calls", calls_path %></li>
+        <li> <%= link_to "Consumables", consumables_path %> </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contacts <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -57,7 +58,6 @@
             <li><a href="/franchises/4"> SERVPRO of Oakdale/North Bay Shore </a></li>
             <li><a href="/franchises/5"> SERVPRO of Old Bridge/Cranbury </a></li>
             <li><a href="/franchises/6"> SERVPRO of Southwest Brooklyn </a></li>
-
         </ul>
       </li>
 

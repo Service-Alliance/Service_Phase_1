@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id:
+  work_order_id:
+  date: 2017-10-12
+  start: 2017-10-12 15:20:34
+  end: 2017-10-12 15:20:34
+  total_time:
+
+two:
+  user_id:
+  work_order_id:
+  date: 2017-10-12
+  start: 2017-10-12 15:20:34
+  end: 2017-10-12 15:20:34
+  total_time:

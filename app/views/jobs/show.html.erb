@@ -29,6 +29,13 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeStatus">
                     Change Job Status
                 </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeFranchise">
+                    Change Franchise
+                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeReferral">
+                    Change Referral
+                </button>
+
 
 
                 <% if @job.customer %>
@@ -69,7 +76,7 @@
 
                  </div>
                 <% if  @job.inspection_checklist == nil && @job.job_managers.pluck(:job_manager_id).include?(current_user.id) %>
-                <div class="panel with-nav-tabs panel-primary margin-top-2">
+                <div id="job_navigation" class="panel with-nav-tabs panel-primary margin-top-2">
                     <div class="panel-heading">
                       Checklist For Initial Inspection
                     </div>
@@ -136,7 +143,7 @@
                                 <a href="#call" aria-controls="call" role="tab" data-toggle="tab">Calls</a>
                             </li>
                             <li>
-                                <a href="#work_order" aria-controls="work_order" role="tab" data-toggle="tab">Work Order</a>
+                                <a href="#work_order" id="work_order_link" aria-controls="work_order" role="tab" data-toggle="tab">Work Order</a>
                             </li>
                             <li>
                                 <a href="#purchase_order_approval" aria-controls="purchase_order_approval" role="tab" data-toggle="tab">Purchase Order Approval</a>
@@ -410,53 +417,7 @@
                             </div>
 
                             <div class="tab-pane fade" id="purchase_order_approval">
-                              <%= form_for [@job, @purchase_order_approval] do |f| %>
-
-                                <% if @purchase_order_approval.errors.any? %>
-                                  <div id="error_explanation">
-                                    <h2><%= pluralize(@purchase_order_approval.errors.count, "error") %> prohibited this purchase_order_approval from being saved:</h2>
-
-                                    <ul>
-                                    <% @purchase_order_approval.errors.full_messages.each do |message| %>
-                                      <li><%= message %></li>
-                                    <% end %>
-                                    </ul>
-                                  </div>
-                                <% end %>
-
-                                <div class="col-xs-12">
-                                  <%= f.label :date %><br>
-                                  <%= f.date_select :date %>
-                                </div>
-                                <div class="col-xs-12">
-                                  <%= f.label :job_name %><br>
-                                  <%= f.text_field :job_name, class: "form-control" %>
-                                </div>
-                                <div class="col-xs-12">
-                                  <%= f.label :vendor %><br>
-                                  <%= f.text_field :vendor, class: "form-control" %>
-                                </div>
-                                <div class="col-xs-12">
-                                  <%= f.label :purchase_item %><br>
-                                  <%= f.text_field :purchase_item, class: "form-control" %>
-                                </div>
-                                <div class="col-xs-12">
-                                  <%= f.label :amount %><br>
-                                  <%= f.text_field :amount, class: "form-control" %>
-                                </div>
-                                <div class="col-xs-12">
-                                  <%= f.label :description %><br>
-                                  <%= f.text_field :description, class: "form-control" %>
-                                </div>
-                                <div class="col-xs-12">
-                                  <%= f.label :last_four_card %><br>
-                                  <%= f.text_field :last_four_card, class: "form-control" %>
-                                </div>
-                                <div class="col-xs-12 margin-top-2">
-                                  <%= f.submit  class: "btn btn-primary" %>
-                                </div>
-                              <% end %>
-
+                              <%= render partial: 'purchase_order_approvals/form' %>
                             </div>
 
                             <div class="tab-pane fade" id="pricing">
@@ -553,235 +514,7 @@
                 </div>
                 <div class="timeline-centered">
 
-
-                    <% @job.trackers.order('created_at DESC').each do |tracker| %>
-                    <% if tracker.tracker_task.name == "Note Created" %>
-                    <% noted = Note.find(tracker.child_id) %>
-                    <article data-status="note" class="timeline-entry">
-                        <div class="timeline-entry-inner">
-                            <div class="timeline-icon bg-success">
-                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            </div>
-                            <div class="timeline-label">
-
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Note Created &bull;
-                                        <%= noted.created_at.strftime("%D %I:%M %p") %>
-                                        &bull;
-                                        <%= noted.try(:user).try(:full_name) %></h3>
-                                </div>
-                                <div class="panel-body">
-                                    <%= best_in_place noted, :content, :as => :textarea %>
-                                    <br />
-                                    <%= link_to 'Delete Note',  tracker_path(tracker, job_id: @job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <% elsif tracker.tracker_task.name == "File Uploaded" %>
-                    <% upload = Upload.find(tracker.child_id) %>
-                    <article data-status="file-uploaded" class="timeline-entry">
-                        <div class="timeline-entry-inner">
-                            <div class="timeline-icon bg-success">
-                                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-                            </div>
-                            <div class="timeline-label">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Upload &bull;
-                                        <%= upload.try(:created_at).strftime("%D %I:%M %p") %>
-                                        &bull;
-                                        <%= tracker.user.try(:full_name) %>
-                                    </h3>
-                                </div>
-                                <div class="panel-body">
-                                  <% upload.uploads.each_with_index do |file, index| %>
-                                    <%= upload.description  %> <br />
-                                    <%= upload.uploads[index].file.filename  %> -
-                                    <a target="_blank" href="<%= file.try(:url) %>">View/Download</a><br />
-                                  <% end %>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <% elsif tracker.tracker_task.name == "Call Assigned" %>
-                    <% call = Call.find(tracker.child_id) %>
-                    <article data-status="call-assigned" class="timeline-entry">
-                        <div class="timeline-entry-inner">
-                            <div class="timeline-icon bg-success">
-                                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-                            </div>
-                            <div class="timeline-label">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Call Assigned &bull;
-                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
-                                        &bull;
-                                        <%= tracker.try(:user).try(:full_name) %></h3>
-                                </div>
-                                <div class="panel-body">
-                                    <% if tracker.note %>
-                                      <span class="bold">Note: </span><%= tracker.note %> <br />
-                                    <% end %>
-                                    <a class="btn btn-primary margin-top-1" target="_blank" href="https://app.callrail.com/calls/<%= call.callrail_id %>">View Call</a> <br />
-                                    <%= link_to "View Details", call_path(call.id), class: "btn btn-primary margin-top-1" %>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <% elsif tracker.tracker_task.name == "Work Order Created" %>
-                    <% call = WorkOrder.find(tracker.child_id) %>
-                    <article data-status="work-order" class="timeline-entry">
-                        <div class="timeline-entry-inner">
-                            <div class="timeline-icon bg-success">
-                                <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
-                            </div>
-                            <div class="timeline-label">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Work Order Created &bull;
-                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
-                                        &bull;
-                                        <%= tracker.try(:user).try(:full_name) %></h3>
-                                </div>
-                                <div class="panel-body">
-                                    <%= link_to "View Work Order", job_work_order_path(@job, call.id) %>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-
-                    <% elsif tracker.tracker_task.name == "Purchase Order Created" %>
-                    <% purchase_order = PurchaseOrderApproval.find(tracker.child_id) %>
-                    <article data-status="purchase-order" class="timeline-entry">
-                        <div class="timeline-entry-inner">
-                            <div class="timeline-icon bg-success">
-                                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-                            </div>
-                            <div class="timeline-label">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Purchase Order Approval Created &bull;
-                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
-                                        &bull;
-                                        <%= tracker.try(:user).try(:full_name) %></h3>
-                                </div>
-                                <div class="panel-body">
-                                    <%= link_to "View Work Order", job_purchase_order_approval_path(@job, purchase_order.id) %>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <% elsif tracker.tracker_task.name == "Inspection Checklist Created" %>
-                    <% checklist = InspectionChecklist.find(tracker.child_id) %>
-                    <article data-status="inspection-checklist" class="timeline-entry">
-                        <div class="timeline-entry-inner">
-                            <div class="timeline-icon bg-success">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            </div>
-                            <div class="timeline-label">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Inspection Checklist Created &bull;
-                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
-                                        &bull;
-                                        <%= tracker.try(:user).try(:full_name) %></h3>
-                                </div>
-                                <div class="panel-body">
-                                    Estimate Will Be Sent: <%= checklist.estimate_will_be_sent %> <br />
-                                    Estimate Given Verbally: <%= checklist.estimate_given_verbally ? "Yes" : "No" %> <br />
-                                    Estimate Range: $<%= checklist.estimate_range %><br />
-                                    Notes: <%= checklist.notes %><br />
-                                    Next Steps: <%= checklist.next_steps %><br />
-                                    Estimate will be prepared and sent within 1 business day?: <%= checklist.send_within_one_day ? "Yes" : "No" %><br />
-                                    Will we be bringing in another Vendor?: <%= checklist.additional_vendor ? "Yes" : "No" %><br />
-                                    Verify all the basic information, and update the customer information if necessary?: <%= checklist.verify_information  ? "Yes" : "No"%><br />
-                                    Does the job have potential for construction?:<%= checklist.potential_construction ? "Yes" : "No" %><br />
-
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <% elsif tracker.tracker_task.name == "Pricing Created" %>
-                    <% pricing = Pricing.find(tracker.child_id) %>
-                    <article data-status="pricing" class="timeline-entry">
-                        <div class="timeline-entry-inner">
-                            <div class="timeline-icon bg-success">
-                                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-                            </div>
-                            <div class="timeline-label">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Pricing Created &bull;
-                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
-                                        &bull;
-                                        <%= tracker.try(:user).try(:full_name) %></h3>
-                                </div>
-                                <div class="panel-body">
-                                    <span class="bold">Pricing:</span> $<%= pricing.price %> <br />
-                                    <span class="bold">Category:</span> <%= pricing.try(:pricing_category).try(:name) %> <br />
-                                    <span class="bold">Description:</span> <%= pricing.description%> <br />
-                                    <span class="bold">Job Status (At time of Pricing):</span> <%= pricing.job_status.name %><br />
-                                    <% unless pricing.uploads.empty? %>
-                                    <% pricing.uploads.first.uploads.each_with_index do |file, index| %>
-                                      <%= pricing.uploads.first.uploads[index].file.filename  %> -
-                                      <a target="_blank" href="<%= file.try(:url) %>">View/Download</a><br />
-                                    <% end %>
-                                    <% end %>
-                                    <% if @job.pricings.last == pricing %>
-                                    <% unless pricing.try(:pricing_category).try(:name) == "Final Estimate" %>
-                                    <%= link_to  "Move Pricing to Next Category", move_to_next_path(job_id: @job, pricing_id: pricing.id),class:"btn btn-primary" %>
-                                    <% end %>
-                                    <% end %>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </article>
-
-                    <% elsif tracker.tracker_task.name == "Scheduler Created" %>
-                    <% scheduler = Scheduler.find(tracker.child_id) %>
-                    <% if scheduler.event_date.past? %>
-                    <article data-status="scheduler" class="timeline-entry">
-                        <div class="timeline-entry-inner">
-                            <div class="timeline-icon bg-success">
-                                <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
-                            </div>
-                            <div class="timeline-label">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><%= scheduler.title %>
-                                        &bull;
-                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
-                                        &bull;
-                                        <%= tracker.try(:user).try(:full_name) %></h3>
-                                </div>
-                                <div class="panel-body">
-                                    Date:
-                                    <%= scheduler.event_date %><br/>
-                                    Event Type:
-                                    <%= scheduler.scheduler_event %><br/>
-                                    Start Time:
-                                    <%= scheduler.start_time.strftime("%I:%M %p") unless scheduler.start_time == nil %><br/>
-                                    End Time:
-                                    <%= scheduler.end_time.strftime("%I:%M %p") unless scheduler.end_time == nil %><br/>
-                                    Notes:
-                                    <%= scheduler.notes %>
-                                    <br/>
-                                    <%= scheduler.assigned_to_user.try(:full_name) %>
-
-                                    <br />
-                                    <%= link_to 'Delete Scheduled Event',  tracker_path(tracker, job_id: @job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
-                                </div>
-
-                            </div>
-                        </div>
-                    </article>
-                    <% end %>
-                    <% end %>
-
-                    <% end %>
+                    <%= render partial: 'jobs/trackers', locals: { trackers: @job.trackers.order('created_at DESC'), job: @job } %>
 
                     <% if @job.job_note && @job.job_note != "" %>
                     <article data-status="note" class="timeline-entry">
@@ -900,7 +633,83 @@
         <% end %>
     </div>
 
+    <div id="changeFranchise" class="modal fade" tabindex="-1" role="dialog">
+        <%= form_for @job do |f|  %>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Update Franchise</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
 
+                              <div class="col-xs-4">
+                                  <div class="form-group">
+                                      <%= f.label :franchise_id %><br>
+                                      <%= f.collection_select :franchise_id, Franchise.all, :id, :name, { :prompt => 'Select a Franchise', selected: @job.franchise_id }, { class: 'form-control' } %>
+                                  </div>
+                              </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%= f.submit "Update", class: "btn btn-primary" %>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+
+    <div id="changeReferral" class="modal fade" tabindex="-1" role="dialog">
+        <%= form_for @job do |f|  %>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Update Referral</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+                              <div class="col-xs-4">
+                                <div class="form-group">
+                                      <%= f.fields_for :referral, @job.referral || @job.build_referral do |referral| %>
+                                        <%= render partial: 'referrals/referral_fields', locals: {f: referral} %>
+                                      <% end %>
+                                </div>
+                              </div>
+                                <div class="col-xs-12 margin-top-2">
+                                  <div class="form-group referrals">
+                                    <%= f.label :corporate_referral_type_id %><br>
+                                    <% f.collection_select :corporate_referral_type_id, CorporateReferralType.all, :id, :name, { prompt: true }, { class: 'form-control' } %>
+                                    <%= f.collection_radio_buttons(:corporate_referral_type_id, CorporateReferralType.all, :id, :name) do |b| %>
+                                        <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
+                                    <% end %> <br/>
+                                  </div>
+                                 </div>
+                            </div>
+                      </div>
+                    </div>
+                  </div>
+                <div class="modal-footer">
+                    <%= f.submit "Update Referral", class: "btn btn-primary" %>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+          </div>
+      </div>
+       <% end %>
+    </div>
 
 
 

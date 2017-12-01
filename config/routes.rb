@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
+  mount Maily::Engine, at: '/maily'
+  ActiveAdmin.routes(self)
   resources :customer_vendors
   resources :pricing_categories
   resources :customer_companies
@@ -18,8 +17,8 @@ Rails.application.routes.draw do
   resources :tracker_tasks
   resources :trackers
   resources :assignment_types
+  resources :referral_types
   resources :corporate_referral_types
-  ActiveAdmin.routes(self)
   resources :contacts
   devise_for :users
   resources :articles
@@ -35,6 +34,7 @@ Rails.application.routes.draw do
   resources :phones
   resources :addresses
   resources :calls
+  resources :consumables
   post 'calls/precall-lookup' => 'calls#precall_lookup'
   post 'calls/precall-webhook' => 'calls#precall'
   post 'calls/postcall-webhook' => 'calls#postcall'
@@ -60,10 +60,10 @@ Rails.application.routes.draw do
   resources :insurance_companies
   resources :notes
   get 'job_managers' => 'job_managers#list'
-  get 'work_orders' => 'work_orders#list', defaults: {format: :json}
+  get 'work_orders' => 'work_orders#list'
 
-  get 'users/:id/job-assignments' => 'users#job_assignments', as: :user_job_assignents
-  get 'users/:id/job-assignments/list' => 'users#job_assignments_list', as: :user_job_assignents_list
+  get 'users/:id/job-assignments' => 'users#job_assignments', as: :user_job_assignments
+  get 'users/:id/job-assignments/list' => 'users#job_assignments_list', as: :user_job_assignments_list
   get 'jobs/:id/create_estimate' => 'jobs#create_estimate', as: :create_estimate
   get 'jobs/:id/create_estimate_sent' => 'jobs#create_estimate_sent', as: :create_estimate_sent
   get 'jobs/:id/create_contract' => 'jobs#create_contract', as: :create_contract
@@ -128,7 +128,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   namespace :tsheets do
-    resources :users, only: :index
+    resources :users, only: [:index, :update]
   end
 
   require 'sidekiq/web'

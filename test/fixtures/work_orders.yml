@@ -6,11 +6,11 @@ DEFAULTS: &DEFAULTS
   typed_by: MyText
   job_start: 2017-03-08 08:56:46
   job_name:
+  job: one
   telephone: MyText
   contact: MyText
   insurance: MyText
   claim_number: MyText
-  crew: MyText
   required: MyText
   referral: MyText
   franchise_location: MyText
@@ -26,3 +26,11 @@ one:
 without_location:
   <<: *DEFAULTS
   job: two
+
+draft:
+  <<: *DEFAULTS
+  state: 0
+
+published:
+  <<: *DEFAULTS
+  state: 1

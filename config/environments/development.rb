@@ -15,11 +15,14 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
+  # Trying to configure mailcatcher.
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'localhost',
+    port:                 1025,
+    enable_starttls_auto: true  }
   config.action_mailer.raise_delivery_errors = false
 
-  # Use letter_opener for email previewing in development
-  config.action_mailer.delivery_method = :letter_opener
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -43,13 +46,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-
+BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
   config.after_initialize do
     Bullet.enable = true
     Bullet.console = true
     Bullet.rails_logger = true
   end
-
-config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = { :address => 'localhost', :port => 1025 }
 end

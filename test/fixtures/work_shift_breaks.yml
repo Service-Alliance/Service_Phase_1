@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  work_shift_id:
+  start: 2017-10-21 16:55:56
+  end: 2017-10-21 16:55:56
+  total_time:
+
+two:
+  work_shift_id:
+  start: 2017-10-21 16:55:56
+  end: 2017-10-21 16:55:56
+  total_time:

@@ -1,4 +1,4 @@
-<%= form_for [@job, @purchase_order_approval] do |f| %>
+<%= simple_form_for [@job, @purchase_order_approval] do |f| %>
   <% if @purchase_order_approval.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@purchase_order_approval.errors.count, "error") %> prohibited this purchase_order_approval from being saved:</h2>
@@ -9,29 +9,28 @@
       <% end %>
       </ul>
     </div>
+    <hr/>
   <% end %>
 
   <div class="col-xs-12">
-    <%= f.label :date %><br>
-    <%= f.date_select :date %>
+    <h1 class=text-center>
+      <%= @job.try(:franchise).try(:name) %> Purchase Order
+    </h1>
   </div>
-  <div class="col-xs-12">
-    <%= f.label :vendor %><br>
-    <%= f.text_field :vendor, class: "form-control" %>
+
+  <div class="clearfix"></div>
+  <hr/>
+  <div class="row">
+    <%= f.input :date, label: 'Date of Purchase', wrapper_html: { class: 'col-sm-12' } %>
+    <%= f.input :vendor, label: 'Vendor', wrapper_html: { class: 'col-sm-12'} %>
+    <%= f.input :purchase_item, label: 'Purchase Item', wrapper_html: { class: 'col-sm-12' } %>
+    <%= f.input :amount, as: :string, label: 'Amount of Purchase', wrapper_html: { class: 'col-sm-12' } %>
+    <%= f.input :last_four_card, as: :string, label: 'Last 4 digits', wrapper_html: { class: 'col-sm-12' } %>
   </div>
-  <div class="col-xs-12">
-    <%= f.label :purchase_item %><br>
-    <%= f.text_field :purchase_item, class: "form-control" %>
-  </div>
-  <div class="col-xs-12">
-    <%= f.label :amount %><br>
-    <%= f.text_field :amount, class: "form-control" %>
-  </div>
-  <div class="col-xs-12">
-    <%= f.label :last_four_card %><br>
-    <%= f.text_field :last_four_card, class: "form-control" %>
-  </div>
-  <div class="col-xs-12">
-    <%= f.submit class: "btn btn-primary margin-top-2" %>
+
+  <div class="row">
+    <div class="actions-col-sm-12">
+      <%= f.submit class: "btn btn-primary margin-top-2" %>
+    </div>
   </div>
 <% end %>

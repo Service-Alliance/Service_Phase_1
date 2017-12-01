@@ -1,0 +1,25 @@
+= simple_form_for(@referral_type) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :associated_record_type, as: :select, collection: ReferralType::ASSOCIATED_RECORD_TYPES
+    = f.input :allows_notes
+    = f.input :requires_subtype
+    = f.input :requires_associated_record
+    = f.input :requires_notes
+
+    .row
+      .col-sm-12
+        h4 Sub Types
+    .sub-type-fields
+      = f.simple_fields_for :sub_types do |st|
+        == render partial: 'sub_type_fields', locals: {f: st}
+      = link_to_add_association 'Add Sub Type', f, :sub_types, class: 'btn btn-primary'
+
+  .row
+    .col-sm-12
+      hr
+
+  .form-actions
+    = f.button :submit

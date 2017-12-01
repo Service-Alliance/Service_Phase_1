@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :phones, as: :phoneable
   has_one :rate, class_name: 'UserRate'
 
-  store_accessor :tsheets, :tsheets_id, :tsheets_first_name, :tsheets_last_name
+  store_accessor :tsheets, :tsheets_id
 
   delegate :name, to: :department, allow_nil: true, prefix: true
   delegate :display_with_period, :amount, :period, :salaried, :exempt, to: :rate, allow_nil: true, prefix: true
@@ -25,7 +25,19 @@ class User < ActiveRecord::Base
   scope :with_tsheets_id, ->(tsheets_id) { where("tsheets->>'tsheets_id'='#{tsheets_id}'") }
   scope :with_first_and_last_names, ->(first, last) { where('lower(first_name) = ? AND lower(last_name) = ?', first.try(:downcase), last.try(:downcase)) }
 
+  scope :ordered, -> { order(:first_name, :last_name) }
+
   accepts_nested_attributes_for :rate
+
+  TIMESHEETS_MAPPING = {
+    billable: '33849',
+    class: '33851',
+    service_item: '33853'
+  }
+
+  def name
+    full_name.present? ? full_name : "N/A"
+  end
 
   def full_name
     "#{first_name} #{last_name}"
@@ -94,15 +106,20 @@ class User < ActiveRecord::Base
     return array
   end
 
-  def self.with_role(role_name)
-    joins(:role).where(roles: {name: role_name})
+  # # FIXME: remove, replace with with_roles
+  # def self.with_role(role_name)
+  #   joins(:role).where(roles: {name: role_name})
+  # end
+
+  def self.with_roles(*roles)
+    joins(:role).where(roles: {name: roles})
   end
 
   def self.user_metrics(days)
     metrics = ['Jobs', 'Notes', 'Pricings Created', 'Work Orders']
     # note = TrackerTask.find_by(name: "Note Created")
     estimate = TrackerTask.find_by(name: "Pricing Created")
-    work_order = TrackerTask.find_by(name: "Work Order Created")
+    work_order = TrackerTask.find_by(name: "Work Order Drafted")
 
     array = []
     metrics.each do |metric|

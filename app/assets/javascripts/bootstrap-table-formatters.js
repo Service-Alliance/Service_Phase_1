@@ -26,13 +26,14 @@ function CallLinkFormatter(value, row, index) {
   return "<a target='_blank' href='/calls/" + row.id + "'>" + value + "</a>";
 }
 function JobLinkFormatter(value, row, index) {
+  var job_id = row.job_id === undefined ? row.id : row.job_id;
   var val = "";
   if (value) {
     val = value;
   } else {
-    val = row.id;
+    val = job_id;
   }
-  return "<a href='/jobs/" + row.job_id +"'>" + val + "</a>";
+  return "<a href='/jobs/" + job_id +"'>" + val + "</a>";
 }
 function WorkOrderAcknowledge(value, row, index) {
   if (row.acknowledgement == true) {

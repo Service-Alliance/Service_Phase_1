@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  referral_type_id: 
+  sub_referral_type_id: 1
+  notes: MyText
+  associated_record_type: MyString
+  associated_record_id: 1
+
+two:
+  referral_type_id: 
+  sub_referral_type_id: 1
+  notes: MyText
+  associated_record_type: MyString
+  associated_record_id: 1

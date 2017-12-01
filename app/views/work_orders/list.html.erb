@@ -1,0 +1,52 @@
+<div class="container-fluid">
+
+	<section id="home">
+			<div class="row">
+
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Work Orders Created</div>
+					<div class="panel-body">
+						<table
+							data-toggle="table"
+							data-url="/work_orders.json"
+							data-show-refresh="true"
+							data-show-toggle="true"
+							data-show-columns="true"
+							data-search="true"
+							data-flat="true"
+							data-select-item-name="toolbar1"
+							data-pagination="true"
+							data-sort-name="id"
+							data-sort-order="desc">
+							<thead>
+								<tr>
+									<th data-field="created_at"  data-sortable="true">Created At</th>
+                  <th data-field="updated_at" data-sortable="true">Updated At</th>
+									<th data-field="id" data-formatter="WorkOrderLinkFormatter" data-sort-order='desc' data-sortable="true">Word Order ID</th>
+									<th data-field="state"  data-sortable="true">Status</th>
+									<th data-field="job_start" data-sortable="true"> Job Start</th>
+									<th data-field="job_id" data-formatter="JobLinkFormatter" data-sortable="true">Job ID</th>
+									<th data-field="job_name" data-sortable="false"> Job Name</th>
+                  <th data-field="typed_by" data-sortable="true">Typed By</th>
+                  <th data-field="contact" data-sortable="true">Job Contact</th>
+                  <th data-field="telephone" data-sortable="true">Contact #</th>
+                  <th data-field="job_location" data-sortable="true">Job Location</th>
+									<th data-field="vendor_name" data-sortable="true">Vendor</th>
+									<th data-field="crew_names" data-sortable="true">Crew</th>
+									<th data-field="referral"	data-sortable="true">Referral</th>
+									<th data-field="required" data-sortable="true">Required</th>
+									<th data-field="scope_of_work" data-sortable="true">Scope</th>
+									<th data-field="estimated_hours" data-sortable="true">Estimated Hours</th>
+									<th data-field="number_of_crew_chiefs" data-sortable="true"># Supervisors</th>
+									<th data-field="number_of_technicians" data-sortable="true"># Technicians </th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</div>

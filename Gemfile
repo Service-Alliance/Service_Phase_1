@@ -51,7 +51,9 @@ gem 'simple_form'
 gem 'tsheets', github: 'tsheets/api_ruby'
 gem 'font-awesome-rails'
 gem 'cocoon'
-gem 'slim'
+gem 'slim-rails'
+gem 'maily'
+gem 'aasm'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -70,16 +72,22 @@ gem 'marginalia'
 gem 'seed_migration'
 
 gem 'sidekiq'
+gem 'gon'
 
 group :development, :test do
   gem 'minitest-reporters'
   gem 'simplecov', :require => false
   gem 'single_test'
+  gem 'pry'
   gem 'pry-byebug'
+  gem 'pry-nav'
+  gem 'pry-rails', '~> 0.3.2'
   gem 'guard-minitest'
   gem 'guard-rails'
   gem 'guard-bundler'
   gem 'danger'
+  gem 'simple_bdd'
+  gem 'shoulda-matchers'
 end
 
 group :test do
@@ -92,17 +100,18 @@ group :test do
 end
 
 group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'puma'
+  gem 'guard-livereload', '~> 2.5', require: false
   gem 'rack-mini-profiler', require: false
   gem 'memory_profiler', require: false
-
+  gem 'm'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  # Letter Opener for previewing emails in the browser https://github.com/fgrehm/letter_opener_web
-  gem 'letter_opener_web'
 
   # Bullet is used to detect N+1 queries and unused eager loading
   gem 'bullet'

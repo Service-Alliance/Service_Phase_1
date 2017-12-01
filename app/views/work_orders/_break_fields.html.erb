@@ -1,0 +1,12 @@
+<div class="col-sm-12">
+  <div class="row nested-fields">
+    <div class="col-sm-2"><%= label_tag :break %></div>
+    <%= f.input :start, as: :time_picker, wrapper_html: { class: 'col-sm-2' }, input_html: { data: { interval: 5 } } %>
+    <%= f.input :end, as: :time_picker, wrapper_html: { class: 'col-sm-2' }, input_html: { data: { interval: 5 } } %>
+    <%= f.input :total_time, label: "Break Length", wrapper_html:{ class: 'col-sm-2'} %>
+    <div class="col-sm-2">
+      <%= label_tag :delete %><br>
+      <%= link_to_remove_association 'Delete', f, class: 'btn btn-danger full-width' %>
+    </div>
+  </div>
+</div>

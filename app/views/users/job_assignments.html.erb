@@ -7,17 +7,6 @@
 
             <!-- <%= select_tag("filter", options_for_select(JobStatus.all.map{|p| [p.name, p.id]}, class: "form-control")) %> -->
             <!-- comment -->
-            <div class="row">
-                <div class="col-xs-12">
-                    <!-- <a
-                        href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=32&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search"
-                        class="btn btn-primary">New York Data</a>
-
-                    <a
-                        class="btn btn-primary"
-                        href="/jobs?utf8=%E2%9C%93&q%5Bcaller_full_name_cont%5D=&q%5Bcustomer_full_name_cont%5D=&q%5Bfranchise_id_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=&q%5Bjob_detail_insurance_company_id_not_in%5D%5B%5D=234&q%5Bstatus_id_in%5D%5B%5D=&q%5Bentered_by_id_in%5D%5B%5D=&q%5Breferral_employee_id_in%5D%5B%5D=&q%5Breferral_employee_id_not_in%5D%5B%5D=47&q%5Blosses_loss_type_id_in%5D%5B%5D=&q%5Blosses_loss_type_id_not_in%5D%5B%5D=16&q%5Bcustomer_address_state_id_in%5D%5B%5D=&q%5Bcustomer_address_state_id_in%5D%5B%5D=30&q%5Breferral_type_id_in%5D%5B%5D=&q%5Bagent_id_in%5D%5B%5D=&q%5Badjuster_id_in%5D%5B%5D=&q%5Bjob_managers_job_manager_id_in%5D%5B%5D=&commit=Search">New Jersey Data</a> -->
-                </div>
-            </div>
 
             <%= link_to "Export As CSV (Work In Progress)", jobs_path(params.merge(format: "csv")), class: "btn btn-primary margin-bottom-2" %>
 
@@ -105,21 +94,15 @@
             <%= f.select :status_id_in, options_from_collection_for_select(JobStatus.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
             <%= f.label :entered_by_id_in, "Entered By" %><br/>
             <%= f.select :entered_by_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
-            <%= f.label :referral_employee_id_in, "Referred By" %><br/>
-            <%= f.select :referral_employee_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
+            <%= f.label :referral_associated_record_id_in, "Referred By" %><br/>
+            <%= f.select :referral_associated_record_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
             <%= f.label :losses_loss_type_id_in, "Loss Type" %><br/>
             <%= f.select :losses_loss_type_id_in, options_from_collection_for_select(LossType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
             <%= f.label :customer_address_state_id, "Customer State" %><br/>
             <%= f.select :customer_address_state_id_in, options_from_collection_for_select(State.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
-            <%= f.label :referral_type_id_in, "Referral Type" %><br/>
-            <%= f.select :referral_type_id_in, options_from_collection_for_select(ReferralType.all, "id", "name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
-            <%= f.label :agent_id_in, "Agent Name" %><br/>
-            <%= f.select :agent_id_in, options_from_collection_for_select(Agent.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
-            <%= f.label :adjuster_id_in, "Adjuster Name" %><br/>
-            <%= f.select :adjuster_id_in, options_from_collection_for_select(Adjuster.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
-  
+
             <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-top-2" %></div>
 
             <% end %>

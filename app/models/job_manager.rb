@@ -4,5 +4,5 @@ class JobManager < ActiveRecord::Base
 
   include PublicActivity::Model
 
-  delegate :full_name, to: :job_manager, allow_nil: true
+  delegate :full_name, :phone_numbers, to: :job_manager, allow_nil: true
 end
