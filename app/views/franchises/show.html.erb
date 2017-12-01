@@ -150,14 +150,14 @@
         <div class="panel-heading">Jobs</div>
         <div class="panel-body">
           <%= render partial: 'datatables/jobs', locals: {
-            filter: "franchise_id=#{@franchise.id}", 
+            filter: "franchise_id=#{@franchise.id}",
             columns: [
-              :name, 
-              :job_status_name, 
-              :customer_full_name, 
-              :claim_number, 
-              :job_loss_type_name, 
-              :insurance_company_name, 
+              :name,
+              :job_status_name,
+              :customer_full_name,
+              :claim_number,
+              :job_loss_type_name,
+              :insurance_company_name,
               :created_at
             ]}
           %>
@@ -168,27 +168,16 @@
       <div class="panel panel-default">
         <div class="panel-heading">Work Orders</div>
         <div class="panel-body">
-          <table
-            data-toggle="table"
-            data-url="/api/v1/datatables/work_orders?franchise_id=<%= @franchise.id %>"
-            data-show-refresh="true"
-            data-show-toggle="true"
-            data-show-columns="true"
-            data-search="true"
-            data-flat="true"
-            data-select-item-name="toolbar1"
-            data-pagination="true"
-            data-side-pagination="server"
-            data-sort-name="id"
-            data-sort-order="desc">
-            <thead>
-              <tr>
-                <th data-field="id" data-formatter="WorkOrderLinkFormatter" data-sort-order='desc' data-sortable="true">Word Order ID</th>
-                <th data-field="name" data-formatter="JobLinkFormatter" data-sortable="true">Job Name</th>
-                <th data-field="created_at"  data-sortable="true">Created At<th>
-              </tr>
-            </thead>
-          </table>
+          <%= render partial: 'datatables/work_orders', locals: {
+            filter: "franchise_id=#{@franchise.id}",
+            columns: [
+              :created_at,
+              :id,
+              :state,
+              :job_name,
+              :job_location,
+            ]}
+          %>
         </div>
       </div>
     </div>

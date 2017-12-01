@@ -2,8 +2,6 @@ class ApplicationDatatable
   attr_reader :sort_fields, :sort_field, :model
   attr_accessor :count, :params
 
-  delegate :count, to: :model
-
   def initialize
     @model = initialize_relation
   end
@@ -15,9 +13,9 @@ class ApplicationDatatable
 
   def query(params)
     self.params = params
-    model.order(build_sort)
+    @model = model.order(build_sort)
     filter_model
-    count = model.count
+    @count = model.count
     page_model
   end
 

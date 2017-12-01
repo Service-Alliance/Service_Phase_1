@@ -1,8 +1,8 @@
-<% filter = local_assigns.fetch(:filter, '') %>
+<% filter = local_assigns.fetch(:filter) ? "?#{filter}" : "" %>
 <table
   class="table-responsive"
   data-toggle="table"
-  data-url="/api/v1/datatables/jobs?<%= filter %>"
+  data-url="/api/v1/datatables/jobs<%= filter %>"
   data-show-refresh="true"
   data-show-toggle="true"
   data-show-columns="true"
@@ -16,12 +16,12 @@
   <thead>
     <tr>
       <%= datatable_column :name, "Job Name", columns, formatter: 'JobLinkFormatter' %>
-      <th data-field="job_status_name" data-sortable="true">Status</th>
-      <th data-field="customer_full_name" data-sortable="true">Customer Name</th>
-      <th data-field="claim_number" data-sortable="true" data-visible="false">Claim Number</th>
-      <th data-field="job_loss_type_name" data-sortable="true">Job Loss Type</th>
-      <th data-field="insurance_company_name" data-sortable="true">Insurance Carrier</th>
-      <th data-field="created_at" data-sortable="true">Date Received</th>
+      <%= datatable_column :job_status_name, 'Status', columns %>
+      <%= datatable_column :customer_full_name, 'Customer Name', columns %>
+      <%= datatable_column :claim_number, 'Claim Number', columns %>
+      <%= datatable_column :job_loss_type_name, 'Job Loss Type', columns %>
+      <%= datatable_column :insurance_company_name, 'Insurance Carrier', columns %>
+      <%= datatable_column :created_at, 'Date Received', columns %>
     </tr>
   </thead>
 </table>
