@@ -1,6 +1,7 @@
-class Api::V1::Datatables::JobsController < Api::V1::ApiController
-  def index
+class Api::V1::Datatables::JobsController < DatatablesController
+  private
+
+  def set_datatable
     @dt = JobsDatatable.new
-    @dt.query(params)
   end
 end
