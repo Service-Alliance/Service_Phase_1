@@ -131,6 +131,14 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :update]
   end
 
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      namespace :datatables do
+        resources :jobs, only: :index
+      end
+    end
+  end
+
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
   require 'sidekiq/api'

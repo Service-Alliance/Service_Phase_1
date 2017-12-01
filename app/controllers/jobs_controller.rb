@@ -42,18 +42,6 @@ class JobsController < ApplicationController
     render json: @jobs.to_json(include: job_json_includes)
   end
 
-  def for_table
-    sort_fields = {name: 'name', job_status_name: 'job_statuses.name', customer_full_name: ['customers.first_name', 'customers.last_name'], claim_number: "job_details.claim_number", job_loss_type_name: 'loss_types.name', insurance_company_name: 'insurance_companies.name', created_at: 'created_at'}
-    sort_field = sort_fields[params[:sort].to_sym]
-    sort = Array.wrap(sort_field).map{|field| "#{field} #{params[:order]} #{params[:order] == 'asc' ? 'NULLS FIRST' : 'NULLS LAST'}"}.join(', ')
-    @jobs = Job.where.not(status_id: nil)
-      .includes(job_associations)
-      .order(sort)
-    @jobs = @jobs.where(franchise_id: params[:franchise_id]) if params[:franchise_id]
-    @count = @jobs.count
-    @jobs = @jobs.limit(params[:limit]).offset(params[:offset])
-  end
-
   def new_york_datasheet
     jim = User.find_by(email: 'jbertini@servpro5933.com')
     duct = LossType.find_by(name: "Duct Cleaning")
