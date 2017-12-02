@@ -1,0 +1,23 @@
+<% filter = local_assigns[:filter] ? "?#{filter}" : "" %>
+<table
+  data-toggle="table"
+  data-url="/api/v1/datatables/users<%= filter %>"
+  data-show-refresh="true"
+  data-show-toggle="true"
+  data-show-columns="true"
+  data-search="true"
+  data-flat="true"
+  data-select-item-name="toolbar1"
+  data-pagination="true"
+  data-side-pagination="server"
+  data-sort-name="id"
+  data-sort-order="asc">
+  <thead>
+    <tr>
+      <%= datatable_column :id, 'User ID', columns, formatter: 'UserLinkFormatter' %>
+      <%= datatable_column :first_name, 'First Name', columns %>
+      <%= datatable_column :last_name, 'Last Name', columns %>
+      <%= datatable_column :department_name, 'Department', columns %>
+    </tr>
+  </thead>
+</table>

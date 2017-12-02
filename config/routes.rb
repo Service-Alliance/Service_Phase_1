@@ -137,6 +137,8 @@ Rails.application.routes.draw do
         resources :jobs, only: :index
         resources :work_orders, only: :index
         resources :calls, only: :index
+        resources :users, only: :index
+        resources :job_managers, only: :index
       end
     end
   end

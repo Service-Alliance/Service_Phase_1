@@ -1,0 +1,26 @@
+<% filter = local_assigns[:filter] ? "?#{filter}" : "" %>
+<table
+  data-toggle="table"
+  data-url="/api/v1/datatables/job_managers<%= filter %>"
+  data-show-refresh="true"
+  data-show-toggle="true"
+  data-show-columns="true"
+  data-search="true"
+  data-flat="true"
+  data-select-item-name="toolbar1"
+  data-pagination="true"
+  data-side-pagination="server"
+  data-sort-name="id"
+  data-sort-order="desc">
+  <thead>
+    <tr>
+      <%= datatable_column :user_id, 'User ID', columns, formatter: 'UserLinkFormatter' %>
+      <%= datatable_column :first_name, 'First Name', columns %>
+      <%= datatable_column :last_name, 'Last Name', columns %>
+      <%= datatable_column :job_id, 'Job ID', columns, formatter: 'JobLinkFormatter' %>
+      <%= datatable_column :job_name, 'Job Name', columns %>
+      <%= datatable_column :schedule_date, 'Scheduled On', columns %>
+      <%= datatable_column :manager_confirmation, 'Confirmed', columns %>
+    </tr>
+  </thead>
+</table>

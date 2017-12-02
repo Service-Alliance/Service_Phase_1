@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
+  include PgSearch
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -28,6 +30,11 @@ class User < ActiveRecord::Base
   scope :ordered, -> { order(:first_name, :last_name) }
 
   accepts_nested_attributes_for :rate
+
+  pg_search_scope :text_search,
+    against: [:first_name, :last_name],
+    associated_against: {department: :name},
+    using: {tsearch: {prefix: true}}
 
   TIMESHEETS_MAPPING = {
     billable: '33849',

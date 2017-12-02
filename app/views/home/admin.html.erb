@@ -69,33 +69,17 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Jobs</div>
 					<div class="panel-body">
-						<table
-							class="table-responsive"
-							data-toggle="table"
-							data-url="/jobs/list"
-							data-show-refresh="true"
-							data-show-toggle="true"
-							data-show-columns="true"
-							data-search="true"
-							data-flat="true"
-							data-select-item-name="toolbar1"
-							data-pagination="true"
-							data-sort-name="id"
-							data-sort-order="desc">
-							<thead>
-								<tr>
-									<th data-field="name" data-sort-order='desc' data-sortable="true" data-formatter="JobLinkFormatter">Job Name</th>
-									<th data-field="job_status.name" data-sortable="true">Status</th>
-									<th data-field="customer.last_name" data-sortable="true">Last Name</th>
-									<th data-field="customer.first_name" data-sortable="true">First Name</th>
-									<th data-field="job_detail.claim_number" data-sortable="true">Claim Number</th>
-									<th data-field="job_loss_type.name" data-sortable="true">Job Loss Type</th>
-									<th data-field="insurance_details.name" data-sortable="true">Insurance Carrier</th>
-									<th data-field="created_at" data-sortable="true">Date Received</th>
-
-								</tr>
-							</thead>
-						</table>
+            <%= render partial: 'datatables/jobs', locals: {
+              columns: [
+                :name,
+                :job_status_name,
+                :customer_full_name,
+                :claim_number,
+                :job_loss_type_name,
+                :insurance_company_name,
+                :created_at
+              ]}
+            %>
 					</div>
 				</div>
 			</div>
@@ -104,27 +88,14 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Users</div>
 					<div class="panel-body">
-						<table
-							data-toggle="table"
-							data-url="users/list"
-							data-show-refresh="true"
-							data-show-toggle="true"
-							data-show-columns="true"
-							data-search="true"
-							data-flat="true"
-							data-select-item-name="toolbar1"
-							data-pagination="true"
-							data-sort-name="id"
-							data-sort-order="asc">
-							<thead>
-								<tr>
-									<th data-field="id" data-sortable="true" data-formatter="UserLinkFormatter">User ID</th>
-									<th data-field="first_name" data-sortable="true">First Name</th>
-									<th data-field="last_name" data-sortable="true">Last Name</th>
-									<th data-field="department.name" data-sortable="true">Department</th>
-								</tr>
-							</thead>
-						</table>
+            <%= render partial: 'datatables/users', locals: {
+              columns: [
+                :id,
+                :first_name,
+                :last_name,
+                :department_name
+              ]}
+            %>
 					</div>
 				</div>
 			</div>
@@ -133,28 +104,17 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">Job Manager Assignments</div>
 					<div class="panel-body">
-						<table
-							data-toggle="table"
-							data-url="job_managers"
-							data-show-refresh="true"
-							data-show-toggle="true"
-							data-show-columns="true"
-							data-search="true"
-							data-flat="true"
-							data-select-item-name="toolbar1"
-							data-pagination="true"
-							data-sort-name="id"
-							data-sort-order="desc">
-							<thead>
-								<tr>
-									<th data-field="id" data-sort-order='desc' data-sortable="true" data-formatter="UserLinkFormatter">Scheulded ID</th>
-									<th data-field="job_manager.first_name" data-sortable="true">First Name</th>
-									<th data-field="job_manager.last_name" data-sortable="true">Last Name</th>
-									<th data-field="schedule_datetime" data-sortable="true">Scheduled On</th>
-									<th data-field="manager_confirmation" data-sortable="true">Confirmed</th>
-								</tr>
-							</thead>
-						</table>
+            <%= render partial: 'datatables/job_managers', locals: {
+              columns: [
+                :user_id,
+                :first_name,
+                :last_name,
+                :job_id,
+                :job_name,
+                :schedule_date,
+                :manager_confirmation
+              ]}
+            %>
 					</div>
 				</div>
 			</div>
