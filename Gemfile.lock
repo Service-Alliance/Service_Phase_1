@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/cheeseweasel/pg_search.git
+  revision: e597b7863b5d969541788a7b68286393b8f9cb00
+  specs:
+    pg_search (2.1.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      arel (>= 6)
+
+GIT
   remote: git://github.com/tsheets/api_ruby.git
   revision: bb2b5089aa62707338d727f896f6c300d6698f23
   specs:
@@ -335,10 +344,6 @@ GEM
     orm_adapter (0.5.0)
     pdf-core (0.7.0)
     pg (0.21.0)
-    pg_search (2.1.1)
-      activerecord (>= 4.2)
-      activesupport (>= 4.2)
-      arel (>= 6)
     poltergeist (1.16.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -569,7 +574,7 @@ DEPENDENCIES
   minitest-reporters
   minitest-vcr
   pg (~> 0.20)
-  pg_search
+  pg_search!
   poltergeist
   prawn
   pry

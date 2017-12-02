@@ -8,12 +8,13 @@ class ApplicationDatatable
 
   def initialize_relation
     initial_relation
-      .includes(included_associations)
   end
 
   def query(params)
     self.params = params
+    @model = model.includes(included_associations)
     @model = model.order(build_sort)
+    @model = model.where(id: source.text_search(params[:search]).select(:id)) if params[:search].present?
     filter_model
     @count = model.count
     page_model

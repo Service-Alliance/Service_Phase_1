@@ -29,14 +29,14 @@ class Customer < ActiveRecord::Base
   end
 
   pg_search_scope :full_search,
-  against: [:first_name, :last_name],
-  associated_against: {
-    :address => [:address_1, :address_2, :city],
-    :phones => [:number]
-  },
-  using: {
-    tsearch: {dictionary: 'english'}
-  }
+    against: [:first_name, :last_name],
+    associated_against: {
+      :address => [:address_1, :address_2, :city],
+      :phones => [:number]
+    },
+    using: {
+      tsearch: {dictionary: 'english'}
+    }
 
   def self.search_suggestions(param)
     results = full_search(param)

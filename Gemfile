@@ -42,7 +42,7 @@ gem 'kaminari'
 gem 'activeadmin', '~> 1.1'
 gem 'chartkick'
 gem 'groupdate'
-gem 'pg_search'
+gem 'pg_search', github: 'cheeseweasel/pg_search'
 gem 'whenever', :require => false
 gem 'best_in_place', '~> 3.0.1'
 gem 'jquery-atwho-rails'

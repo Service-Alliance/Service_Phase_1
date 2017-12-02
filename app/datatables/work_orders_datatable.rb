@@ -1,4 +1,8 @@
 class WorkOrdersDatatable < ApplicationDatatable
+  def source
+    WorkOrder
+  end
+
   def initial_relation
     WorkOrder.joins(:job).where.not(jobs: {status_id: nil})
   end

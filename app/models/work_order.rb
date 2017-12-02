@@ -1,6 +1,8 @@
 class WorkOrder < ActiveRecord::Base
   include AASM
 
+  include PgSearch
+
   has_many :mail_logs, as: :mail_loggable
   belongs_to :job, required: true
   belongs_to :vendor, required: false
@@ -34,6 +36,16 @@ class WorkOrder < ActiveRecord::Base
       transitions from: :draft, to: :published, :after => Proc.new {|user| self.publish_actions(user)  }
     end
   end
+
+  pg_search_scope :text_search,
+    against: [:contact, :telephone, :referral, :required, :scope_of_work, :id, :state],
+    associated_against: {
+      job: [:name],
+      vendor: [:name]
+    },
+    using: {
+      tsearch: {prefix: true}
+    }
 
   def draft_actions
   end

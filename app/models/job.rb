@@ -1,5 +1,7 @@
 # Job
 class Job < ActiveRecord::Base
+  include PgSearch
+
   belongs_to :job_status, foreign_key: :status_id, class_name: 'JobStatus'
   belongs_to :job_type, foreign_key: :type_id, class_name: 'JobType'
   belongs_to :franchise
@@ -59,6 +61,16 @@ class Job < ActiveRecord::Base
   scope :with_manager_id, -> (user_id) { joins(:job_managers).merge(JobManager.where(:job_manager_id => user_id)) }
 
   scope :latest_first, -> {order(created_at: :desc)}
+
+  pg_search_scope :text_search,
+    against: [:name, :id],
+    associated_against: {
+      customer: [:first_name, :last_name],
+      vendors: [:name]
+    },
+    using: {
+      tsearch: {prefix: true}
+    }
 
   def self.with_status(status)
     joins(:job_status)

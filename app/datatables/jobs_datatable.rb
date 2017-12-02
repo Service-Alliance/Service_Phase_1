@@ -1,4 +1,8 @@
 class JobsDatatable < ApplicationDatatable
+  def source
+    Job
+  end
+
   def initial_relation
     Job.where.not(status_id: nil)
   end
