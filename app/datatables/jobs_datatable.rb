@@ -16,17 +16,19 @@ class JobsDatatable < ApplicationDatatable
     @model = model.no_activity if params[:no_activity].present?
     @model = model.call_rep_jobs if params[:call_rep_jobs].present?
     @model = model.unassigned if params[:unassigned].present?
+    @model = model.invoiced_collections_unassigned if params[:invoiced_collections_unassigned].present?
+    @model = model.collections(params[:collections]) if params[:collections].present?
   end
 
   def sort_fields
     {
-      name: 'name',
+      name: 'jobs.name',
       job_status_name: 'job_statuses.name',
       customer_full_name: ['customers.first_name', 'customers.last_name'],
       claim_number: "job_details.claim_number",
       job_loss_type_name: 'loss_types.name',
       insurance_company_name: 'insurance_companies.name',
-      created_at: 'created_at'
+      created_at: 'jobs.created_at'
     }
   end
 end

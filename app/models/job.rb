@@ -71,6 +71,17 @@ class Job < ActiveRecord::Base
 
   scope :unassigned, -> {where(coordinator_id: nil)}
 
+  scope :invoiced_collections_unassigned, -> {
+    includes(:collection_subscriptions, :job_status)
+      .where(collection_subscriptions: {id: nil})
+      .where(job_statuses: {name: 'Invoiced'})
+  }
+
+  scope :collections, -> (user_id) {
+    joins(:collection_subscriptions)
+      .where(collection_subscriptions: {user_id: user_id})
+  }
+
   pg_search_scope :text_search,
     against: [:name, :id],
     associated_against: {

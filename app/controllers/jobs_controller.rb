@@ -55,13 +55,6 @@ class JobsController < ApplicationController
     @jobs = @search.result.page(params[:page]).order('created_at DESC')
   end
 
-  #def no_activity
-  #  @jobs = Job.where('updated_at < ? AND status_id = ?', 7.days.ago, 1)
-  #    .includes(job_associations)
-  #    .limit(75)
-  #  render json: @jobs.to_json(include: job_json_includes)
-  #end
-
   # GET /jobs/1
   # GET /jobs/1.json
   def show
@@ -344,40 +337,6 @@ class JobsController < ApplicationController
     @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @call.id, user_id: current_user.id, note: call_params[:note])
 
     redirect_to job_path(@job), notice: 'Call was successfully added to Job.'
-  end
-
-  def unassigned_job
-    @jobs = Job.where.not(status_id: nil)
-      .includes(job_associations)
-      .where(coordinator_id: nil).limit(200)
-    render json: @jobs.to_json(include: job_json_includes)
-  end
-
-  def call_rep_jobs
-    @jobs = Job.joins(:user)
-      .merge(User.where(role_id: 3))
-      .includes(job_associations)
-      .where.not(status_id: nil)
-      .limit(200)
-    render json: @jobs.to_json(include: job_json_includes)
-  end
-
-  def invoiced_collections_unassigned
-    invoiced = JobStatus.find_by(name: "Invoiced")
-    jobs = Job.includes(:collection_subscriptions)
-      .includes(job_associations)
-      .where(status_id: invoiced.id)
-      .where(collection_subscriptions: {id: nil})
-      .order(created_at: :desc)
-      .limit(200)
-    render json: jobs.to_json(include: job_json_includes)
-  end
-
-  def collections
-    jobs = Job.joins(:collection_subscriptions)
-      .includes(job_associations)
-      .where(collection_subscriptions: {user_id: current_user.id}).limit(200)
-    render json: jobs.to_json(include: job_json_includes)
   end
 
   private

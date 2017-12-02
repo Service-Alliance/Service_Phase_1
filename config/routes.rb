@@ -48,11 +48,6 @@ Rails.application.routes.draw do
   get 'jobs/list' => 'jobs#list'
   get 'jobs/for_table' => 'jobs#for_table'
   get 'jobs/index_search' => 'jobs#index_search'
-  get 'jobs/unassigned_job' => 'jobs#unassigned_job'
-  get 'jobs/invoiced_collections_unassigned' => 'jobs#invoiced_collections_unassigned'
-  get 'jobs/collections' => 'jobs#collections'
-  get 'jobs/call_rep_jobs' => 'jobs#call_rep_jobs'
-  get 'jobs/no-activity' => 'jobs#no_activity', as: :jobs_no_activity
   get 'jobs/search' => 'jobs#search', as: :job_search
   get 'jobs/:id/calls' => 'jobs#calls', as: :job_calls
   get 'jobs/:id/calls/new' => 'jobs#add_call', as: :new_job_call
