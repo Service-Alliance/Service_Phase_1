@@ -1,0 +1,31 @@
+<% filter = local_assigns[:filter] ? "?#{filter}" : "" %>
+<table
+  data-toggle="table"
+  data-url="/api/v1/datatables/calls<%= filter %>"
+  data-show-refresh="true"
+  data-show-toggle="true"
+  data-show-columns="true"
+  data-search="true"
+  data-flat="true"
+  data-select-item-name="toolbar1"
+  data-pagination="true"
+  data-side-pagination="server"
+  data-sort-name="id"
+  data-sort-order="desc">
+  <thead>
+    <tr>
+      <%= datatable_column :return_callrail, 'Return Call', columns, formatter: 'ReturnCallRail', field: :callrail_id %>
+      <%= datatable_column :add_to_job, '', columns, formatter: 'AddVendor', field: :id %>
+      <%= datatable_column :id, 'Call ID', columns, formatter: 'CallLinkFormatter' %>
+      <%= datatable_column :callrail_id, 'CallRail ID', columns %>
+      <%= datatable_column :datetime, 'Call Date', columns %>
+      <%= datatable_column :customer_phone_number, 'Customer Phone Number', columns %>
+      <%= datatable_column :customer_name, 'Customer Name', columns %>
+      <%= datatable_column :customer_city, 'City', columns %>
+      <%= datatable_column :utm_campaign, 'UTM Campaign', columns %>
+      <%= datatable_column :duration, 'Duration', columns %>
+      <%= datatable_column :job_id, 'Associated Job ID', columns, formatter: 'JobLinkFormatter' %>
+      <%= datatable_column :callrail_timeline, 'CallRail Timeline', columns, formatter: 'CallRailTimeline', field: :callrail_id %>
+    </tr>
+  </thead>
+</table>

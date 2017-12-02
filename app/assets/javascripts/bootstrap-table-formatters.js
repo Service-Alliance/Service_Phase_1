@@ -27,6 +27,7 @@ function CallLinkFormatter(value, row, index) {
 }
 function JobLinkFormatter(value, row, index) {
   var job_id = row.job_id === undefined ? row.id : row.job_id;
+  if(job_id === null || job_id === undefined){ return ''; }
   var val = "";
   if (value) {
     val = value;

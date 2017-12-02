@@ -136,6 +136,7 @@ Rails.application.routes.draw do
       namespace :datatables do
         resources :jobs, only: :index
         resources :work_orders, only: :index
+        resources :calls, only: :index
       end
     end
   end

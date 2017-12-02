@@ -344,30 +344,17 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">Added Calls</div>
                                             <div class="panel-body table-responsive">
-                                                <table
-                                                    class="resp"
-                                                    data-toggle="table"
-                                                    data-url="<%=@job.id %>/calls.json"
-                                                    data-show-refresh="true"
-                                                    data-show-toggle="true"
-                                                    data-show-columns="true"
-                                                    data-search="true"
-                                                    data-flat="true"
-                                                    data-select-item-name="toolbar1"
-                                                    data-pagination="true"
-                                                    data-sort-name="id"
-                                                    data-sort-order="desc">
-                                                    <thead>
-                                                        <tr>
-                                                          <th data-field="callrail_id" data-sortable="true" data-formatter="ReturnCallRail">CallRail Timeline</th>
-                                                            <th data-field="id" data-sortable="true" data-formatter="CallLinkFormatter">Call Link</th>
-                                                            <th data-field="callrail_id" data-sortable="true">CallRail ID</th>
-                                                            <th data-field="datetime" data-sortable="true">Call Date/Time</th>
-                                                            <th data-field="customer_phone_number" data-sortable="true">Phone Number</th>
-                                                            <th data-field="customer_city" data-sortable="true">City</th>
-                                                        </tr>
-                                                    </thead>
-                                                </table>
+                                                <%= render partial: 'datatables/calls', locals: {
+                                                  filter: "job_id=#{@job.id}",
+                                                  columns: [
+                                                    :return_callrail,
+                                                    :id,
+                                                    :callrail_id,
+                                                    :datetime,
+                                                    :customer_phone_number,
+                                                    :customer_city
+                                                  ]}
+                                                %>
                                             </div>
                                         </div>
                                     </div>
@@ -400,10 +387,20 @@
                                                             <th data-field="customer_phone_number" data-sortable="true">Phone Number</th>
                                                             <th data-field="customer_city" data-sortable="true">City</th>
                                                             <th data-field="callrail_id" data-sortable="true" data-formatter="CallRailTimeline">CallRail Timeline</th>
-
                                                         </tr>
                                                     </thead>
                                                 </table>
+                                                <%= render partial: 'datatables/calls', locals: {
+                                                  columns: [
+                                                    :add_to_job,
+                                                    :id,
+                                                    :callrail_id,
+                                                    :datetime,
+                                                    :customer_phone_number,
+                                                    :customer_city,
+                                                    :callrail_timeline
+                                                  ]}
+                                                %>
                                             </div>
                                         </div>
                                     </div>
