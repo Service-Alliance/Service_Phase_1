@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Api::V1::Datatables::JobsControllerTest < ActionController::TestCase
+class Api::V1::Datatables::CallsControllerTest < ActionController::TestCase
   def setup
     sign_in(users(:one))
   end

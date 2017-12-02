@@ -64,19 +64,9 @@ class JobsControllerTest < ActionController::TestCase
     assert_equal 'Job was successfully updated.', flash[:notice]
   end
 
-  test '#collections' do
-    get :collections
-    assert_equal [], JSON.parse(response.body)
-  end
-
   test '#reconciliation_form' do
     job = jobs(:one)
     get :reconciliation_form, job_id: job.id
-    assert_response :success
-  end
-
-  test '#no-activity' do
-    get :no_activity
     assert_response :success
   end
 end
