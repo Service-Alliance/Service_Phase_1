@@ -62,6 +62,15 @@ class Job < ActiveRecord::Base
 
   scope :latest_first, -> {order(created_at: :desc)}
 
+  scope :no_activity, -> {where('updated_at < ? AND status_id = ?', 7.days.ago, 1)}
+
+  scope :call_rep_jobs, -> {
+    joins(:user)
+      .where(users: {role_id: 3})
+  }
+
+  scope :unassigned, -> {where(coordinator_id: nil)}
+
   pg_search_scope :text_search,
     against: [:name, :id],
     associated_against: {

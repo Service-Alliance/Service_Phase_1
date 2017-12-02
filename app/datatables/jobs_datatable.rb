@@ -12,7 +12,10 @@ class JobsDatatable < ApplicationDatatable
   end
 
   def filter_model
-    @model = model.where(franchise_id: params[:franchise_id]) if params[:franchise_id]
+    @model = model.where(franchise_id: params[:franchise_id]) if params[:franchise_id].present?
+    @model = model.no_activity if params[:no_activity].present?
+    @model = model.call_rep_jobs if params[:call_rep_jobs].present?
+    @model = model.unassigned if params[:unassigned].present?
   end
 
   def sort_fields
