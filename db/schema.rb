@@ -961,6 +961,18 @@ ActiveRecord::Schema.define(version: 20171129015718) do
     t.decimal  "technician_rate"
   end
 
+  create_table "work_crew_assignments", force: :cascade do |t|
+    t.integer  "work_order_id"
+    t.integer  "work_order_users_id"
+    t.integer  "user_id"
+    t.integer  "vendoor_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "work_crew_assignments", ["work_order_id"], name: "index_work_crew_assignments_on_work_order_id", using: :btree
+  add_index "work_crew_assignments", ["work_order_users_id"], name: "index_work_crew_assignments_on_work_order_users_id", using: :btree
+
   create_table "work_order_crew", force: :cascade do |t|
     t.integer  "work_order_id"
     t.integer  "user_id"
@@ -988,7 +1000,6 @@ ActiveRecord::Schema.define(version: 20171129015718) do
     t.text     "franchise_location"
     t.text     "scope_of_work"
     t.text     "job_manager_contact_info"
-    t.integer  "state",                    default: 0,     null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.boolean  "acknowledgement",          default: false
@@ -1000,7 +1011,7 @@ ActiveRecord::Schema.define(version: 20171129015718) do
     t.integer  "number_of_crew_chiefs"
     t.integer  "estimated_hours"
     t.string   "events",                   default: [],                 array: true
-    t.integer  "status"
+    t.integer  "state",                    default: 0,     null: false
   end
 
   create_table "work_shift_breaks", force: :cascade do |t|
@@ -1038,6 +1049,7 @@ ActiveRecord::Schema.define(version: 20171129015718) do
   add_foreign_key "user_rates", "users", on_delete: :cascade
   add_foreign_key "vendor_loss_rates", "loss_types", on_delete: :cascade
   add_foreign_key "vendor_loss_rates", "vendors", on_delete: :cascade
+  add_foreign_key "work_crew_assignments", "work_orders", on_delete: :cascade
   add_foreign_key "work_order_crew", "users"
   add_foreign_key "work_order_crew", "work_orders"
   add_foreign_key "work_shift_breaks", "work_shifts", on_delete: :cascade

@@ -1,0 +1,27 @@
+<% filter = local_assigns[:filter] ? "?#{filter}" : "" %>
+<table
+  class="table-responsive"
+  data-toggle="table"
+  data-url="/api/v1/datatables/jobs<%= filter %>"
+  data-show-refresh="true"
+  data-show-toggle="true"
+  data-show-columns="true"
+  data-search="true"
+  data-flat="true"
+  data-select-item-name="toolbar1"
+  data-pagination="true"
+  data-side-pagination="server"
+  data-sort-name="created_at"
+  data-sort-order="desc">
+  <thead>
+    <tr>
+      <%= datatable_column :name, "Job Name", columns, formatter: 'JobLinkFormatter' %>
+      <%= datatable_column :job_status_name, 'Status', columns %>
+      <%= datatable_column :customer_full_name, 'Customer Name', columns %>
+      <%= datatable_column :claim_number, 'Claim Number', columns %>
+      <%= datatable_column :job_loss_type_name, 'Job Loss Type', columns %>
+      <%= datatable_column :insurance_company_name, 'Insurance Carrier', columns %>
+      <%= datatable_column :created_at, 'Date Received', columns %>
+    </tr>
+  </thead>
+</table>

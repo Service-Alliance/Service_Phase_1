@@ -1,5 +1,7 @@
 # Job
 class Job < ActiveRecord::Base
+  include PgSearch
+
   belongs_to :job_status, foreign_key: :status_id, class_name: 'JobStatus'
   belongs_to :job_type, foreign_key: :type_id, class_name: 'JobType'
   belongs_to :franchise
@@ -39,16 +41,18 @@ class Job < ActiveRecord::Base
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :referral
 
-  delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
-  delegate :full_name, to: :user, allow_nil: true, prefix: true
-  delegate :full_name, :address_without_county, :format_address, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true
-  delegate :name, to: :job_status, allow_nil: true, prefix: true
-  delegate :name, to: :franchise, allow_nil: true, prefix: true
   delegate :full_address, :format_address, to: :caller, allow_nil: true, prefix: true
-  delegate :insurance_company, to: :job_detail, allow_nil: true, prefix: false
+  delegate :full_name, :address_without_county, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true
+  delegate :name, to: :franchise, allow_nil: true, prefix: true
+  delegate :full_name, :address_without_county, :format_address, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true
   delegate :name, to: :insurance_company, allow_nil: true, prefix: true
+  delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
+  delegate :insurance_company, :claim_number, to: :job_detail, allow_nil: true, prefix: false
+  delegate :name, to: :job_loss_type, allow_nil: true, prefix: true
+  delegate :name, to: :job_status, allow_nil: true, prefix: true
   delegate :referral_type, :referral_type_id, to: :referral, allow_nil: true
   delegate :name, to: :referral_type, allow_nil: true, prefix: true
+  delegate :full_name, to: :user, allow_nil: true, prefix: true
 
   # Activity Tracking activated
   include PublicActivity::Model
@@ -57,6 +61,36 @@ class Job < ActiveRecord::Base
   scope :with_manager_id, -> (user_id) { joins(:job_managers).merge(JobManager.where(:job_manager_id => user_id)) }
 
   scope :latest_first, -> {order(created_at: :desc)}
+
+  scope :no_activity, -> {where('updated_at < ? AND status_id = ?', 7.days.ago, 1)}
+
+  scope :call_rep_jobs, -> {
+    joins(:user)
+      .where(users: {role_id: 3})
+  }
+
+  scope :unassigned, -> {where(coordinator_id: nil)}
+
+  scope :invoiced_collections_unassigned, -> {
+    includes(:collection_subscriptions, :job_status)
+      .where(collection_subscriptions: {id: nil})
+      .where(job_statuses: {name: 'Invoiced'})
+  }
+
+  scope :collections, -> (user_id) {
+    joins(:collection_subscriptions)
+      .where(collection_subscriptions: {user_id: user_id})
+  }
+
+  pg_search_scope :text_search,
+    against: [:name, :id],
+    associated_against: {
+      customer: [:first_name, :last_name],
+      vendors: [:name]
+    },
+    using: {
+      tsearch: {prefix: true}
+    }
 
   def self.with_status(status)
     joins(:job_status)

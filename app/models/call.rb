@@ -1,4 +1,6 @@
 class Call < ActiveRecord::Base
+  include PgSearch
+
   belongs_to :job
   belongs_to :vendor
   has_many :notes, as: :noteable, dependent: :destroy

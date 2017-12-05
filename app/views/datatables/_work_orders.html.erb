@@ -1,0 +1,38 @@
+<% filter = local_assigns[:filter] ? "?#{filter}" : "" %>
+<table
+  data-toggle="table"
+  data-url="/api/v1/datatables/work_orders<%= filter %>"
+  data-show-refresh="true"
+  data-show-toggle="true"
+  data-show-columns="true"
+  data-search="true"
+  data-flat="true"
+  data-select-item-name="toolbar1"
+  data-pagination="true"
+  data-side-pagination="server"
+  data-sort-name="id"
+  data-sort-order="desc">
+  <thead>
+    <tr>
+      <%= datatable_column :created_at, 'Created At', columns %>
+      <%= datatable_column :updated_at, 'Updated At', columns %>
+      <%= datatable_column :id, 'Work Order ID', columns, formatter: 'WorkOrderLinkFormatter' %>
+      <%= datatable_column :state, 'Status', columns %>
+      <%= datatable_column :job_start, 'Job Start', columns %>
+      <%= datatable_column :job_id, 'Job ID', columns, formatter: 'JobLinkFormatter' %>
+      <%= datatable_column :job_name, 'Job Name', columns %>
+      <%= datatable_column :typed_by, 'Typed By', columns %>
+      <%= datatable_column :contact, 'Job Contact', columns %>
+      <%= datatable_column :telephone, 'Contact #', columns, sortable: false %>
+      <%= datatable_column :job_location, 'Job Location', columns %>
+      <%= datatable_column :vendor_name, 'Vendor', columns, sortable: false %>
+      <%= datatable_column :crew_names, 'Crew', columns, sortable: false %>
+      <%= datatable_column :referral, 'Referral', columns %>
+      <%= datatable_column :required, 'Required', columns %>
+      <%= datatable_column :scope_of_work, 'Scope', columns %>
+      <%= datatable_column :estimated_hours, 'Estimated Hours', columns, sortable: false %>
+      <%= datatable_column :number_of_crew_chiefs, '# Supervisors', columns, sortable: false %>
+      <%= datatable_column :number_of_technicians, '# Technicians', columns, sortable: false %>
+    </tr>
+  </thead>
+</table>

@@ -46,12 +46,8 @@ Rails.application.routes.draw do
   resources :agents
   resources :adjusters
   get 'jobs/list' => 'jobs#list'
+  get 'jobs/for_table' => 'jobs#for_table'
   get 'jobs/index_search' => 'jobs#index_search'
-  get 'jobs/unassigned_job' => 'jobs#unassigned_job'
-  get 'jobs/invoiced_collections_unassigned' => 'jobs#invoiced_collections_unassigned'
-  get 'jobs/collections' => 'jobs#collections'
-  get 'jobs/call_rep_jobs' => 'jobs#call_rep_jobs'
-  get 'jobs/no-activity' => 'jobs#no_activity', as: :jobs_no_activity
   get 'jobs/search' => 'jobs#search', as: :job_search
   get 'jobs/:id/calls' => 'jobs#calls', as: :job_calls
   get 'jobs/:id/calls/new' => 'jobs#add_call', as: :new_job_call
@@ -109,8 +105,6 @@ Rails.application.routes.draw do
     resources :collection_subscriptions, only: [:create, :update, :destroy]
     resources :purchase_order_approvals
     resources :inspection_checklists
-
-
   end
   get "move-pricing" => 'pricings#move_to_next', as: :move_to_next
 
@@ -130,6 +124,18 @@ Rails.application.routes.draw do
 
   namespace :tsheets do
     resources :users, only: [:index, :update]
+  end
+
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      namespace :datatables do
+        resources :jobs, only: :index
+        resources :work_orders, only: :index
+        resources :calls, only: :index
+        resources :users, only: :index
+        resources :job_managers, only: :index
+      end
+    end
   end
 
   require 'sidekiq/web'
