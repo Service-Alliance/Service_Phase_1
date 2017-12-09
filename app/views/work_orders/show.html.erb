@@ -187,6 +187,7 @@
             <%= link_to edit_job_work_order_path(@job, @work_order), class: "btn btn-sm btn-warning", type: "button" do %>
               <i class="glyphicon glyphicon-edit"></i> Edit
             <% end %>
+            <td><%= link_to 'Destroy',  job_work_order_path(@job, @work_order), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </div>
         </div>
       </div>

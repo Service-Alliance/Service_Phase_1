@@ -69,7 +69,7 @@ class WorkOrdersController < ApplicationController
   def destroy
     @work_order.destroy
     respond_to do |format|
-      format.html { redirect_to work_orders_url, notice: 'Work Order was successfully destroyed.' }
+      format.html { redirect_to work_orders_path, notice: 'Work Order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -121,6 +121,7 @@ class WorkOrdersController < ApplicationController
       :acknowledgement,
       :acknowledged_by_id,
       :hours_on_job,
+      :consumables_required?,
       :adjuster,
       :number_of_crew_chiefs,
       :number_of_technicians,

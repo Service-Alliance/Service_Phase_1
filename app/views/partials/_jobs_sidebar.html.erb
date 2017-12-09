@@ -340,7 +340,7 @@
           <div class="modal-body">
             <div class="field">
               <%= f.label :user_id %><br>
-              <%= f.collection_select :user_id, User.order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
+              <%= f.collection_select :user_id, User.order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select A Sales Rep' }, { class: 'form-control' } %>
             </div>
 
 
@@ -366,7 +366,7 @@
           <div class="modal-body">
             <div class="field">
               <%= f.label :user_id %><br>
-              <%= f.collection_select :user_id, User.where(role_id: collection_role.id).order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
+              <%= f.collection_select :user_id, User.where(role_id: collection_role.id).order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select Collections Department' }, { class: 'form-control' } %>
             </div>
 
           </div>
@@ -392,7 +392,7 @@
             <% coordinator = Role.find_by(name: "Job Coordinator") %>
             <div class="field">
               <%= f.label :coordinator_id %><br>
-              <%= f.collection_select :coordinator_id, User.where("role_id= ? OR id= ? OR id= ?", coordinator.id, 28, 60).order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select a User' }, { class: 'form-control' } %>
+              <%= f.collection_select :coordinator_id, User.where("role_id= ? OR id= ? OR id= ? OR id= ?", coordinator.id, 28, 60, 13,).order(:first_name, :last_name), :id, :full_name, { :prompt => 'Select a Coordinator' }, { class: 'form-control' } %>
             </div>
 
 

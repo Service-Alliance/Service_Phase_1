@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129015718) do
+ActiveRecord::Schema.define(version: 20171209102326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1012,6 +1012,7 @@ ActiveRecord::Schema.define(version: 20171129015718) do
     t.integer  "estimated_hours"
     t.string   "events",                   default: [],                 array: true
     t.integer  "state",                    default: 0,     null: false
+    t.boolean  "consumables_required?",    default: false, null: false
   end
 
   create_table "work_shift_breaks", force: :cascade do |t|
