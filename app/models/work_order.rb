@@ -96,7 +96,7 @@ class WorkOrder < ActiveRecord::Base
       name: job.try(:job_coordinator).try(:full_name),
       job_name: job.name,
       job_location: job.customer_address_without_county,
-      telephone: job.customer.try(:phones).try(:number),
+      telephone: job.customer_first_phone_number,
       contact: job.try(:customer).try(:full_name),
       insurance: job.try(:job_detail).try(:insurance_company).try(:name),
       adjuster: job.try(:adjuster).try(:full_name),

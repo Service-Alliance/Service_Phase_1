@@ -161,10 +161,13 @@
                             <%= link_to edit_job_work_order_path(@job, work_order), class: "btn btn-sm btn-warning", type: "button" do %>
                             <i class="glyphicon glyphicon-edit"></i>
                             <% end %>
+                            <% if current_user.admin? %>
+                            <td><%= link_to 'Destroy',  job_work_order_path(@job, work_order), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                            <% end %>
                     </div>
                 </div>
                 <% end %>
             </div>
         </div>
     </div>
-</div>
+</div>>
