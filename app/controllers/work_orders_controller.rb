@@ -121,6 +121,7 @@ class WorkOrdersController < ApplicationController
       :acknowledgement,
       :acknowledged_by_id,
       :hours_on_job,
+      :consumables_required?,
       :adjuster,
       :number_of_crew_chiefs,
       :number_of_technicians,
