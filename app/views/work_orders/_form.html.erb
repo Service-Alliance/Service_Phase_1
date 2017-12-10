@@ -27,11 +27,10 @@
       <%= f.input :job_name, label: 'Job Chart Name', as: :string, wrapper_html: { class: 'col-sm-4' } %>
       <%= f.input :contact, label: 'Job Contact', as: :string, wrapper_html: { class: 'col-sm-4' } %>
       <%= f.input :telephone, as: :string, label: 'Job Contact Phone', wrapper_html: { class: 'col-sm-4' }, placeholder: "( ___ ) ___ - ____" %>
-      <%= f.input :required, wrapper_html: { class: 'col-sm-12' }, label: 'Required', placeholder: "Examples: Customer requests notification 20 minutes prior to Arrival, Bring Extra-Long Ladder..." %>
-      <%= f.input :scope_of_work, wrapper_html: { class: 'col-sm-12' }, placeholder: "What work needs to be done?" %>
+      <%= f.input :required, as: :text, wrapper_html: { class: 'col-sm-12' }, label: 'Required', placeholder: "Examples: Customer requests notification 20 minutes prior to Arrival, Bring Extra-Long Ladder..." %>
+      <%= f.input :scope_of_work, as: :text, wrapper_html: { class: 'col-sm-12' }, placeholder: "What work needs to be done?" %>
       <%= f.input :job_location, label: 'Job Location', as: :string, wrapper_html: { class: 'col-sm-12' }, disabled: true %>
       <%= f.input :job_start, label: 'Job Start Time (Estimate)', as: :datetime, ampm: true, wrapper_html: { class: 'col-sm-6' } %>
-      <%= f.input :consumables_required?, label: 'Consumables Required?', as: :boolean, wrapper_html: { class: 'checkbox' } %>
     </div>
 
     <div class="clearfix">
