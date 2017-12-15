@@ -8,6 +8,8 @@ class JobDetail < ActiveRecord::Base
   belongs_to :billing_address, foreign_key: :billing_address_id,
                                class_name: 'Address'
 
+  delegate :name, to: :self_pay, allow_nil: true, prefix: true
+
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
@@ -15,5 +17,13 @@ class JobDetail < ActiveRecord::Base
     first = billing_address_first_name || " "
     last = billing_address_last_name || " "
     return "#{first+ " " + last}"
+  end
+
+  def self_pay?
+    self_pay_name == 'Yes'
+  end
+
+  def self_pay_unknown?
+    self_pay_name.nil? || self_pay_name == 'Unknown'
   end
 end

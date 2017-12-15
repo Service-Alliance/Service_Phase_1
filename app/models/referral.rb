@@ -1,5 +1,6 @@
 class Referral < ActiveRecord::Base
-  belongs_to :referral_type
+  belongs_to :referral_type, required: false
+  belongs_to :sub_referral_type, required: false, class_name: 'ReferralType'
   belongs_to :associated_record, polymorphic: true
   belongs_to :employee, -> {where(associated_record_type: 'User')}, class_name: 'User', foreign_key: :associated_record_id
   has_one :job

@@ -65,25 +65,33 @@ class JobsPresenter < BasePresenter
     end
   end
 
+  def with_includes
+    @model.includes(:job_detail,
+                    :job_coordinator,
+                    :user,
+                    :franchise,
+                    :job_status,
+                    :subscriptions,
+                    :losses,
+                    :pricings,
+                    :referral)
+          .includes(customer: {address: :state})
+          .includes(customer: :phones)
+          .includes(subscriptions: :user)
+          .includes(losses: :loss_type)
+          .includes(referral: [:referral_type, :sub_referral_type])
+          .includes(job_detail: [:self_pay, :insurance_company])
+          .order('jobs.fnol_received DESC')
+  end
+
+  def for_csv
+    with_includes.open_status
+  end
+
   private
 
   def set_up_relation(page)
     @all = @model
-    @paged = @model.includes(:job_detail,
-                             :job_coordinator,
-                             :user,
-                             :franchise,
-                             :job_status,
-                             :subscriptions,
-                             :losses,
-                             :pricings,
-                             :referral)
-                    .includes(customer: {address: :state})
-                    .includes(customer: :phones)
-                    .includes(subscriptions: :user)
-                    .includes(losses: :loss_type)
-                    .includes(referral: :referral_type)
-                    .page(page)
-                    .order('fnol_received DESC')
+    @paged = with_includes.page(page)
   end
 end

@@ -47,11 +47,13 @@ class Job < ActiveRecord::Base
   delegate :full_name, :address_without_county, :format_address, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true
   delegate :name, to: :insurance_company, allow_nil: true, prefix: true
   delegate :full_name, to: :job_coordinator, allow_nil: true, prefix: true
-  delegate :insurance_company, :claim_number, to: :job_detail, allow_nil: true, prefix: false
+  delegate :insurance_company, :claim_number, :self_pay?, :self_pay_unknown?, to: :job_detail, allow_nil: true, prefix: false
   delegate :name, to: :job_loss_type, allow_nil: true, prefix: true
   delegate :name, to: :job_status, allow_nil: true, prefix: true
   delegate :referral_type, :referral_type_id, to: :referral, allow_nil: true
+  delegate :sub_referral_type, :sub_referral_type_id, to: :referral, allow_nil: true
   delegate :name, to: :referral_type, allow_nil: true, prefix: true
+  delegate :name, to: :sub_referral_type, allow_nil: true, prefix: true
   delegate :full_name, to: :user, allow_nil: true, prefix: true
 
   # Activity Tracking activated
@@ -93,8 +95,12 @@ class Job < ActiveRecord::Base
     }
 
   def self.with_status(status)
-    joins(:job_status)
-      .where(job_status: {name: status})
+    statuses = JobStatus.where(name: status).uniq
+    where(status_id: statuses)
+  end
+
+  def self.open_status
+    with_status(['Pending', 'Active', 'Invoiced'])
   end
 
   def self.owned_by(user)

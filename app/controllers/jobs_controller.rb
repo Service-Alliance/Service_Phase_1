@@ -30,7 +30,9 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { render text: @jobs.all.to_csv }
+      format.csv do
+        @jobs = @jobs.for_csv
+      end
     end
   end
 
@@ -143,7 +145,7 @@ class JobsController < ApplicationController
       redirect_to job, notice: 'Job was successfully created.'
     end
 
-  rescue JobBuilder::SaveError
+  rescue JobBuilder::SaveError => e
     Honeybadger.notify(e)
     render :new
   end
