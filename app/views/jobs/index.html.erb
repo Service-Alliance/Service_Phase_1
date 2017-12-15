@@ -190,7 +190,10 @@
           <%= f.select :job_managers_job_manager_id_in, options_from_collection_for_select(@jobs.all_users, "id", "full_name"), { include_blank: true }, { class: "form-control select-control", multiple: "multiple" } %>
           <br/>
 
-          <div class="actions"><%= f.submit "Search", class: "btn btn-primary margin-top-2" %></div>
+          <div class="actions">
+            <%= f.submit "Search", class: "btn btn-primary margin-top-2" %>
+            <%= f.submit 'Export', class: 'btn btn-primary margin-top-2', id: 'export_csv' %>
+          </div>
 
       <% end %>
     </div>
@@ -203,6 +206,11 @@
         altInput: true,
         altFormat: "F j, Y"
     });
+$(document).ready(function() {
+  $('#export_csv').on('click', function() {
+    $(this).parents('form').attr('action', '/jobs.csv');
+  });
+});
 
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
