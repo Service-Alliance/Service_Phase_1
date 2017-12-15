@@ -11,4 +11,8 @@ module JobsHelper
     return 'TBD/Unknown' if job.self_pay_unknown?
     ''
   end
+
+  def job_link(job)
+    link_to job.name.present? ? job.name : 'Show', job
+  end
 end
