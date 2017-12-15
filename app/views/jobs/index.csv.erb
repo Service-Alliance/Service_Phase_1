@@ -1,4 +1,4 @@
-<%= CSV.generate_line (['Job Received',
+<%= raw CSV.generate_line (['Job Received',
                         'Loss Type',
                         'Sales Rep',
                         'Customer Name',
@@ -13,8 +13,8 @@
                         'Job Status',
                         'Last Estimate',
                         'Job Name']) -%>
-<% @jobs.with_includes.each do |job| %>
-<%= CSV.generate_line([job.fnol_received.try(:strftime, "%D %I:%M %p"),
+<% @jobs.each do |job| %>
+<%= raw CSV.generate_line([job.fnol_received.try(:strftime, "%D %I:%M %p"),
                        job.loss_type_names.join(', '),
                        display_subscriptions(job),
                        job.customer_full_name,
@@ -28,5 +28,5 @@
                        job.franchise_name,
                        job.job_status_name,
                        job.try(:pricings).try(:last).try(:price),
-                       job.name]) -%>
+                       job.name], force_quotes: true) -%>
 <% end %>

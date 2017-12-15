@@ -81,7 +81,11 @@ class JobsPresenter < BasePresenter
           .includes(losses: :loss_type)
           .includes(referral: [:referral_type, :sub_referral_type])
           .includes(job_detail: [:self_pay, :insurance_company])
-          .order('fnol_received DESC')
+          .order('jobs.fnol_received DESC')
+  end
+
+  def for_csv
+    with_includes.open_status
   end
 
   private

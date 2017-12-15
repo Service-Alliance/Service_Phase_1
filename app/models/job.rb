@@ -95,8 +95,12 @@ class Job < ActiveRecord::Base
     }
 
   def self.with_status(status)
-    joins(:job_status)
-      .where(job_status: {name: status})
+    statuses = JobStatus.where(name: status).uniq
+    where(status_id: statuses)
+  end
+
+  def self.open_status
+    with_status(['Pending', 'Active', 'Invoiced'])
   end
 
   def self.owned_by(user)
