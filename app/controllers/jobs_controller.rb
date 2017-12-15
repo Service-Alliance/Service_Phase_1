@@ -30,7 +30,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { render text: @jobs.all.to_csv }
+      format.csv
     end
   end
 
