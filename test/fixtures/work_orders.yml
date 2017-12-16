@@ -22,15 +22,19 @@ one:
   <<: *DEFAULTS
   job: one
   job_location: MyText
+  name: Work Order One
 
 without_location:
   <<: *DEFAULTS
   job: two
+  name: Work Order Two
 
 draft:
   <<: *DEFAULTS
   state: 0
+  name: Work Order Draft
 
 published:
   <<: *DEFAULTS
   state: 1
+  name: Work Order Published
