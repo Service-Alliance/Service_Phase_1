@@ -1,14 +1,14 @@
 <div id="referral_associated_record" class="col-xs-12 <%= "hidden" unless f.object.associated_record %>">
   <div class="form-group">
     <%= f.label :associated_record_id, f.object.associated_record_type %><br>
-    <%= f.collection_select :associated_record_id, f.object.associated_record_collection, :id, :name, { prompt: true }, { class: 'form-control' } %>
+    <%= f.collection_select :associated_record_id, f.object.associated_record_collection, :id, :name, { prompt: true }, { class: 'form-control referral-associated-record' } %>
     <%= f.hidden_field :associated_record_type, class: 'associated-record-type' %>
   </div>
 </div>
 <div id="referral_sub_type" class="col-xs-12 <%= "hidden" unless f.object.referral_type_has_sub_types? %>">
   <div class="form-group">
     <%= f.label :sub_referral_type_id, "Sub Type" %><br>
-    <%= f.collection_select :sub_referral_type_id, f.object.referral_type_sub_types, :id, :name, { prompt: true }, { class: 'form-control' } %>
+    <%= f.collection_select :sub_referral_type_id, f.object.referral_type_sub_types, :id, :name, { prompt: true }, { class: 'form-control referral-sub-type' } %>
   </div>
 </div>
 <div id="referral_notes" class="col-xs-12">

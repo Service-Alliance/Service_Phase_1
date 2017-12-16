@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: One
 
 two:
-  name: MyString
+  name: Two
 
 parent:
   name: Parent
@@ -12,3 +12,11 @@ parent:
 sub_type:
   parent: parent
   name: Sub Type
+
+user:
+  name: User
+  associated_record_type: User
+
+vendor:
+  name: Vendor
+  associated_record_type: Vendor

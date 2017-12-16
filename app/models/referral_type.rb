@@ -17,6 +17,6 @@ class ReferralType < ActiveRecord::Base
   end
 
   def associated_record_collection
-    associated_record_type.present? ? Object.const_get(associated_record_type).ordered : []
+    associated_record_type.present? ? Object.const_get(associated_record_type).ordered.distinct : []
   end
 end
