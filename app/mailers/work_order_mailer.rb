@@ -3,7 +3,7 @@ class WorkOrderMailer < ApplicationMailer
     @customer = customer
     @job = job
     @work_order = work_order
-    subject = "#{@customer.full_name}, you have been sent a work order from Service Alliance for job,#{@job.name}. Franchise: #{@job.franchise.try(:name)}."
+    subject = "#{@customer.full_name}, you have been sent a work order from Service Alliance for job, #{@job.name}. Franchise: #{@job.franchise.try(:name)}."
 
 
     mail.smtpapi.unique_args['origin_type'] = 'work_order'

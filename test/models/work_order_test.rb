@@ -21,7 +21,7 @@ class WorkOrderTest < ActiveSupport::TestCase
     assert_equal job, work_order.job
     assert_equal users(:one).full_name, work_order.typed_by
     assert_nil work_order.name
-    assert_nil work_order.job_name
+    assert_equal job.name, work_order.job_name
     assert_nil work_order.telephone
     assert_equal job.customer_full_name, work_order.contact
     assert_nil work_order.insurance

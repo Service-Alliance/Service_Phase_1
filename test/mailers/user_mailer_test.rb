@@ -10,7 +10,7 @@ class UserMailerTest < ActiveSupport::TestCase
     email = UserMailer.collections_user_added_to_job(@user, @job).deliver_now
 
     assert_equal ["user1@servpro.com"], email.to
-    assert_equal "Dave Jones, you have been added as a subscriber to .", email.subject
+    assert_equal "Dave Jones, you have been added as a subscriber to #{@job.name}.", email.subject
   end
 
 
@@ -18,7 +18,7 @@ class UserMailerTest < ActiveSupport::TestCase
     email = UserMailer.job_moved_to_invoiced(@user, @job).deliver_now
 
     assert_equal ["user1@servpro.com"], email.to
-    assert_equal "Dave Jones, has moved to invoiced.", email.subject
+    assert_equal "Dave Jones, #{@job.name} has moved to invoiced.", email.subject
   end
 
 
@@ -26,6 +26,6 @@ class UserMailerTest < ActiveSupport::TestCase
     email = UserMailer.mention_notification(@user, @job).deliver_now
 
     assert_equal ["user1@servpro.com"], email.to
-    assert_equal "Dave Jones, you have been mentioned on #{@job.id}, ", email.subject
+    assert_equal "Dave Jones, you have been mentioned on #{@job.id}, #{@job.name}", email.subject
   end
 end

@@ -10,6 +10,7 @@ one:
   type_id: 1
   entered_by_id: 1
   franchise: one
+  name: 'Job One'
 
 no_caller:
   <<: *DEFAULTS

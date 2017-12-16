@@ -29,4 +29,8 @@ class JobTest < ActiveSupport::TestCase
     jobs(:pending).pricings.create!(price: 15)
     assert_equal 15, Job.where(job_status: job_statuses(:pending)).value
   end
+
+  test '#text_search searches name' do
+    assert_includes Job.text_search('One'), jobs(:one)
+  end
 end

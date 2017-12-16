@@ -21,7 +21,6 @@ class Job < ActiveRecord::Base
   has_many :uploads, as: :uploadable, dependent: :destroy
   #FIXME: do not create job_managers with blank associated user ids, remove empty records
   has_many :job_managers, -> {where.not(job_manager_id: nil)}, dependent: :destroy
-  has_many :vendor_assignments
   has_many :contact_assignments
   has_many :job_forms, dependent: :destroy
   has_many :notes, as: :noteable, dependent: :destroy
@@ -33,6 +32,7 @@ class Job < ActiveRecord::Base
   has_one :inspection_checklist
   has_many :pricings, dependent: :destroy
   has_many :vendor_assignments, dependent: :destroy
+  has_many :vendors, through: :vendor_assignments
   has_many :occupants
 
   accepts_nested_attributes_for :losses
