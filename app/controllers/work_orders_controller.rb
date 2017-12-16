@@ -54,7 +54,7 @@ class WorkOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @work_order.update(work_order_params)
-        @work_order.publish!(current_user) if params[:commit] == 'Publish Work Order'
+        @work_order.publish!(current_user) if params[:commit] == 'Publish Work Order' && !@work_order.published?
         format.html { redirect_to job_path(@job), notice: 'Work Order has been delivered successfully.' }
         format.json { render :show, status: :ok, location: @work_order }
       else
