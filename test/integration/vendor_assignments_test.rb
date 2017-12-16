@@ -1,6 +1,6 @@
 require 'integration_helper'
 
-class WorkOrdersTest < Capybara::Rails::TestCase
+class VendorAssignmentsTest < Capybara::Rails::TestCase
   def setup
     set_up_js_test
     sign_in users(:one)
