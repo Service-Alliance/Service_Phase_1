@@ -15,4 +15,10 @@ class WorkOrdersControllerTest < ActionController::TestCase
     get :show, id: @work_order.id, job_id: @work_order.job.id
     assert_response :success
   end
+
+  test '#show works with no franchise on job' do
+    @work_order.job.update_attributes franchise_id: nil
+    get :show, id: @work_order.id, job_id: @work_order.job.id
+    assert_response :success
+  end
 end
