@@ -5,7 +5,6 @@ class VendorAssignmentsController < ApplicationController
   # GET /vendor_assignments
   # GET /vendor_assignments.json
   def index
-    @vendor_assignments = VendorAssignment.all
   end
 
   # GET /vendor_assignments/1

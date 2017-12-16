@@ -623,7 +623,7 @@
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Vendor</h4>
       </div>
-      <%= form_for [@job, @job.vendor_assignments.new] do |f| %>
+      <%= form_for [@job, VendorAssignment.new(job_id: @job.id)] do |f| %>
           <div class="modal-body">
             <div class="field">
               <%= f.label :vendor_id %><br>

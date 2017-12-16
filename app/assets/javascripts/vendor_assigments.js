@@ -4,7 +4,7 @@ $(function() {
       var assignments = getUrlParameter(this);
 
       $("#vendor_name").html(assignments.name);
-      $("#vendor_assignment_vendor_id").val(assignments.id);
+      $("[name='vendor_assignment[vendor_id]']").val(assignments.id);
     });
 });
 
