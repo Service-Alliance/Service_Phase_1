@@ -22,6 +22,7 @@ with_note:
   <<: *DEFAULTS
   job_note: just a note
   franchise: 2
+  name: Job With Note
 
 pending:
   <<: *DEFAULTS
