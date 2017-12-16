@@ -31,7 +31,10 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        @jobs = @jobs.for_csv
+        @jobs = @jobs.with_includes
+      end
+      format.xlsx do
+        @jobs = @jobs.with_includes
       end
     end
   end

@@ -54,6 +54,9 @@ gem 'cocoon'
 gem 'slim-rails'
 gem 'maily'
 gem 'aasm'
+gem 'rubyzip', '~> 1.1.0'
+gem 'axlsx', '2.1.0.pre'
+gem 'axlsx_rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
