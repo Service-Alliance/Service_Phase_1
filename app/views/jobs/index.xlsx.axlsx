@@ -1,0 +1,36 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Jobs') do |sheet|
+  sheet.add_row(['Job Received',
+                 'Loss Type',
+                 'Sales Rep',
+                 'Customer Name',
+                 'Customer Address',
+                 'Phone',
+                 'Referred By',
+                 'Referred Detail',
+                 'Insurance Company',
+                 'Coordinator',
+                 'Entered By',
+                 'Franchise',
+                 'Job Status',
+                 'Last Estimate',
+                 'Job Name'])
+  @jobs.each do |job|
+    sheet.add_row([job.fnol_received.try(:strftime, "%D %I:%M %p"),
+                   job.loss_type_names.join(', '),
+                   display_subscriptions(job),
+                   job.customer_full_name,
+                   job.customer_format_address(:oneline),
+                   job.customer_first_phone_number,
+                   job.referral_type_name,
+                   job.sub_referral_type_name,
+                   display_insurance(job),
+                   job.job_coordinator_full_name,
+                   job.user_full_name,
+                   job.franchise_name,
+                   job.job_status_name,
+                   job.try(:pricings).try(:last).try(:price),
+                   job.name])
+  end
+end

@@ -65,6 +65,13 @@ GEM
     arel (6.0.4)
     autoprefixer-rails (7.1.6)
       execjs
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.1.7)
+    axlsx_rails (0.5.1)
+      actionpack (>= 3.1)
+      axlsx (>= 2.0.1)
     backports (3.10.3)
     bcrypt (3.1.11)
     best_in_place (3.0.3)
@@ -227,6 +234,7 @@ GEM
       activesupport (>= 4.1, < 5.2)
     hashdiff (0.3.7)
     honeybadger (3.1.2)
+    htmlentities (4.3.4)
     http_parser.rb (0.6.0)
     httparty (0.15.6)
       multi_xml (>= 0.5.2)
@@ -424,6 +432,7 @@ GEM
     ruby-progressbar (1.9.0)
     ruby-rc4 (0.1.5)
     ruby_dep (1.5.0)
+    rubyzip (1.1.7)
     safe_yaml (1.0.4)
     sass (3.5.3)
       sass-listen (~> 4.0.0)
@@ -528,6 +537,8 @@ PLATFORMS
 DEPENDENCIES
   aasm
   activeadmin (~> 1.1)
+  axlsx (= 2.1.0.pre)
+  axlsx_rails
   best_in_place (~> 3.0.1)
   better_errors
   binding_of_caller
@@ -583,6 +594,7 @@ DEPENDENCIES
   rails (~> 4.2)
   rails_12factor
   ransack
+  rubyzip (~> 1.1.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   seed_migration

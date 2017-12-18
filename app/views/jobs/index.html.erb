@@ -72,7 +72,16 @@
         </div>
       </div>
 
-      <%= link_to "Export As CSV (Work In Progress)", jobs_path(format: :csv), class: "btn btn-primary margin-bottom-2" %>
+      <%= link_to "Export As CSV", jobs_path(format: :csv, status_id: [1, 2, 3]), class: "btn btn-primary margin-bottom-2" %>
+      <div class="btn-group margin-bottom-2">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="export_main" data-toggle="dropdown">
+          Export &nbsp; <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="export_main">
+          <li><a class="dropdown-item" href="<%= jobs_path(format: :csv, status_id: [1, 2, 3]) %>">As CSV</a></li>
+          <li><a class="dropdown-item" href="<%= jobs_path(format: :xlsx, status_id: [1, 2, 3]) %>">As Excel</a></li>
+        </ul>
+      </div>
       <br/>
       Total:
       <%= @jobs.total_count %>
@@ -191,8 +200,16 @@
           <br/>
 
           <div class="actions">
-            <%= f.submit "Search", class: "btn btn-primary margin-top-2" %>
-            <%= f.submit 'Export', class: 'btn btn-primary margin-top-2', id: 'export_csv' %>
+            <%= f.submit "Search", class: "btn btn-primary margin-top-2 search-button", data: {action: jobs_path} %>
+            <div class="btn-group margin-top-2">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="search_export" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Export &nbsp; <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="search_export">
+                <li><a class="dropdown-item search-button" href="#" data-action="<%= jobs_path(format: :csv) %>">As CSV</a></li>
+                <li><a class="dropdown-item search-button" href="#" data-action="<%= jobs_path(format: :xlsx) %>">As Excel</a></li>
+              </ul>
+            </div>
           </div>
 
       <% end %>
@@ -207,8 +224,12 @@
         altFormat: "F j, Y"
     });
 $(document).ready(function() {
-  $('#export_csv').on('click', function() {
-    $(this).parents('form').attr('action', '/jobs.csv');
+  $('.search-button').on('click', function(e) {
+    var action = $(this).data('action');
+    var form = $(this).parents('form');
+    form.attr('action', action);
+    form.submit();
+    return e.preventDefault();
   });
 });
 
