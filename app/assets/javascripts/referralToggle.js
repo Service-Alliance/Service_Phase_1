@@ -4,7 +4,7 @@ $(function() {
     $.getJSON('/referral_types/' + $(this).val() + '.json', function(data) {
       // Associated Record
       $('#referral_associated_record').find('select').empty();
-      if(data.associated_record_collection.length > 0) {
+      if(data.associated_record_collection && data.associated_record_collection.length > 0) {
         var select = $('#referral_associated_record').find('select');
         $('#referral_associated_record').removeClass('hidden');
         select.append('<option value="">-- ' + data.associated_record_type + ' --</option>');

@@ -106,6 +106,55 @@ class JobsTest < Capybara::Rails::TestCase
     end
   end
 
+  test 'can select standard referral types' do
+    visit new_job_path
+    select_referral_type(referral_types(:one))
+    click_button 'Create Job'
+    assert Job.last.referral_type.name, 'One'
+  end
+
+  test 'can select sub referral types' do
+    visit new_job_path
+    select_referral_type(referral_types(:parent))
+    wait_for_ajax
+    within '#referral_sub_type' do
+      select 'Sub Type', from: :job_referral_attributes_sub_referral_type_id
+    end
+    click_button 'Create Job'
+    assert Job.last.referral_type.name, 'Parent'
+    assert Job.last.sub_referral_type.name, 'Sub Type'
+  end
+
+  test 'can select user referral types' do
+    visit new_job_path
+    select_referral_type(referral_types(:user))
+    wait_for_ajax
+    within '#referral_associated_record' do
+      select 'Barry Barnett', from: :job_referral_attributes_associated_record_id
+    end
+    click_button 'Create Job'
+    assert Job.last.referral_type.name, 'User'
+    assert Job.last.referral.associated_record.name, 'Barry Barnett'
+  end
+
+  test 'can select vendor referral types' do
+    visit new_job_path
+    select_referral_type(referral_types(:vendor))
+    wait_for_ajax
+    within '#referral_associated_record' do
+      select 'VendorOne', from: :job_referral_attributes_associated_record_id
+    end
+    click_button 'Create Job'
+    assert Job.last.referral_type.name, 'Vendor'
+    assert Job.last.referral.associated_record.name, 'VendorOne'
+  end
+
+  def select_referral_type(referral_type)
+    within '.referral-type' do
+      all(:xpath, ".//input[@value='#{referral_type.id}']").first.click
+    end
+  end
+
   def edit_job_franchise
     click_link 'Edit Job'
     find('#job_franchise_id').find(:xpath, 'option[2]').select_option
