@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  callrail_id: MyString
+  callrail_id: callrailcallone
   recording: MyString
   user_id: 1
   datetime: 2016-12-21 11:09:10
-  customer_phone_number: MyString
+  customer_phone_number: +78123456
   duration: 1
 
 two:
-  callrail_id: MyString
+  callrail_id: callrailcalltwo
   recording: MyString
   user_id: 1
   datetime: 2016-12-21 11:09:10
-  customer_phone_number: MyString
+  customer_phone_number: +012345678
   duration: 1

@@ -48,4 +48,10 @@ class UserTest < ActiveSupport::TestCase
     assert_equal ({}), users(:one).tsheet_info
     assert_equal EXPECTED, users(:with_tsheet).tsheet_info
   end
+
+  test '#text_search searches user name' do
+    results = User.text_search('dave')
+    assert_includes results, users(:one)
+    refute_includes results, users(:two)
+  end
 end

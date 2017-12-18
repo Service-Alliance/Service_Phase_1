@@ -10,7 +10,7 @@ class JobManager < ActiveRecord::Base
   delegate :id, :name, to: :job, allow_nil: true, prefix: true
 
   pg_search_scope :text_search,
-    associated_against: {users: [:first_name, :last_name]},
+    associated_against: {job_manager: [:first_name, :last_name]},
     using: {tsearch: {prefix: true}}
 
   def user_id

@@ -10,6 +10,7 @@ one:
   type_id: 1
   entered_by_id: 1
   franchise: one
+  name: 'Job One'
 
 no_caller:
   <<: *DEFAULTS
@@ -21,6 +22,7 @@ with_note:
   <<: *DEFAULTS
   job_note: just a note
   franchise: 2
+  name: Job With Note
 
 pending:
   <<: *DEFAULTS
