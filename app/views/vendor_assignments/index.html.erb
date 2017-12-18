@@ -1,48 +1,48 @@
 <div class="container-fluid">
-    <div class="container-fluid">
-        <div id="wrapper">
-            <%= render partial: "partials/jobs_sidebar" %>
-            <div id="page-content-wrapper">
-                <% if notice %>
-                <div class="alert alert-success" role="alert"><%= notice %></div>
-                <% end %>
-                <div class="col-xs12">
-                    <h1 class="text-center">Job Vendor Assignments</h1>
-                    <%= link_to "Add Vendor", new_job_vendor_assignment_path(@job), class:"btn btn-primary new-manager-button"%>
-                    <% @job.vendor_assignments.each do |vendor_assignment| %>
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"></h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>Name:</td>
-                                                <td><%= vendor_assignment.vendor_name %></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Note:</td>
-                                                <td><%= vendor_assignment.note %></td>
-                                            </tr>
+  <div class="container-fluid">
+    <div id="wrapper">
+      <%= render partial: "partials/jobs_sidebar" %>
+      <div id="page-content-wrapper">
+        <% if notice %>
+          <div class="alert alert-success" role="alert"><%= notice %></div>
+        <% end %>
+        <div class="col-xs12">
+          <h1 class="text-center">Job Vendor Assignments</h1>
+          <%= link_to "Add Vendor", new_job_vendor_assignment_path(@job), class:"btn btn-primary new-manager-button"%>
+          <% @job.vendor_assignments.each do |vendor_assignment| %>
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title"></h3>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td>Name:</td>
+                          <td><%= vendor_assignment.vendor_name %></td>
+                        </tr>
+                        <tr>
+                          <td>Note:</td>
+                          <td><%= vendor_assignment.note %></td>
+                        </tr>
 
-                                        </tbody>
-                                    </table>
+                      </tbody>
+                    </table>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-footer">
-                            <%= link_to edit_job_vendor_assignment_path(@job, vendor_assignment), class: "btn btn-sm btn-warning", type: "button" do %>
-                            <i class="glyphicon glyphicon-edit"></i>
-                            <% end %>
-                        </div>
-                    </div>
-                    <% end %>
+                  </div>
                 </div>
+              </div>
+              <div class="panel-footer">
+                <%= link_to edit_job_vendor_assignment_path(@job, vendor_assignment), class: "btn btn-sm btn-warning", type: "button" do %>
+                  <i class="glyphicon glyphicon-edit"></i>
+                <% end %>
+              </div>
             </div>
+          <% end %>
         </div>
+      </div>
     </div>
+  </div>
 </div>
