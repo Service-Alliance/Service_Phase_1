@@ -60,7 +60,6 @@ class AdwordsApiAdapter
     adwords_api.include_zero_impressions = true
 
     result = report_utils.download_report_with_awql(query, 'CSV')
-    pp result
     CSV.new(result, headers: true)
   end
 
