@@ -1,0 +1,25 @@
+- content_for :title, 'Adwords Summary'
+== render layout: 'layouts/content'
+  - @franchises.each do |franchise|
+    h3 Adwords Summary for #{franchise.name}
+    table.table.table-striped
+      tr
+        th Network Type
+        th.text-right Impressions
+        th.text-right Clicks
+        th.text-right CTR
+        th.text-right Cost
+        th.text-right Average CPC
+        th.text-right Conversions
+        th.text-right ConversionRate
+      - franchise.adwords_account_performance_report.each do |row|
+        tr
+          td = row['Network']
+          td.text-right = row['Impressions']
+          td.text-right = row['Clicks']
+          td.text-right = row['CTR']
+          td.text-right = number_to_currency(row['Cost'].to_f/1000000)
+          td.text-right = number_to_currency(row['Avg. CPC'].to_f/1000000)
+          td.text-right = row['Conversions']
+          td.text-right = row['Conv. rate']
+
