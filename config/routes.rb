@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   resources :states
   resources :agents
   resources :adjusters
+  get 'adwords' => 'adwords#index'
   get 'jobs/list' => 'jobs#list'
   get 'jobs/for_table' => 'jobs#for_table'
   get 'jobs/index_search' => 'jobs#index_search'

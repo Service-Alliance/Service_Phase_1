@@ -108,6 +108,7 @@ class FranchisesController < ApplicationController
       :residential_license,
       :commercial_license,
       :mold_remediation_license,
+      :adwords_client_id,
       uploads_attributes: [
         :upload_category_id,
         :description,
