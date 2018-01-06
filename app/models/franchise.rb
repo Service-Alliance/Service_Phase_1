@@ -12,4 +12,9 @@ class Franchise < ActiveRecord::Base
   accepts_nested_attributes_for :notes
 
   delegate :full_address, :address_without_county, to: :address, allow_nil: true
+
+  def adwords_account_performance_report
+    service = AdwordsApiAdapter.new
+    service.account_performance_report(adwords_client_id)
+  end
 end

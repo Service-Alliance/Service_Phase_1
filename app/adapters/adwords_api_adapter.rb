@@ -2,9 +2,19 @@ class AdwordsApiAdapter
   require 'adwords_api'
 
   API_VERSION = :v201710.freeze
+  ADWORDS_CLIENT_ID = ENV.fetch('ADWORDS_CLIENT_ID')
+  ADWORDS_CLIENT_SECRET = ENV.fetch('ADWORDS_CLIENT_SECRET')
+  ADWORDS_DEVELOPER_TOKEN = ENV.fetch('ADWORDS_DEVELOPER_TOKEN')
 
   def query_campaigns(customer_id, fields = ['Id', 'Name', 'Status', 'budget'])
     campaign_service(customer_id).get({:fields => fields})
+  end
+
+  def account_performance_report(customer_id)
+    query = "SELECT AccountDescriptiveName, AdNetworkType1, Impressions, Ctr, Clicks, Cost, AverageCpc, Conversions, ConversionRate "
+    query = query + "FROM ACCOUNT_PERFORMANCE_REPORT "
+    query = query + "DURING #{date_range}"
+    generate_report(customer_id, query)
   end
 
   private
@@ -21,9 +31,9 @@ class AdwordsApiAdapter
     {
       :authentication => {
         method: 'OAuth2',
-        oauth2_client_id: '285881768207-5mutuapstmnhaeuqiffpmetjbrd2td59.apps.googleusercontent.com',
-        oauth2_client_secret: 'V796ZFiIpofaXIq-j_oDHqcq',
-        developer_token: 'UihCBT9tJ_lOHfcEfhTyaA',
+        oauth2_client_id: ADWORDS_CLIENT_ID,
+        oauth2_client_secret: ADWORDS_CLIENT_SECRET,
+        developer_token: ADWORDS_DEVELOPER_TOKEN,
         client_customer_id: customer_id,
         user_agent: 'ServproApplication',
         oauth2_token: {
@@ -38,5 +48,26 @@ class AdwordsApiAdapter
         :environment => 'PRODUCTION'
       }
     }
+  end
+
+  def generate_report(customer_id, query)
+    adwords_api = adwords_api(customer_id)
+    report_utils = adwords_api.report_utils(API_VERSION)
+
+    adwords_api.skip_report_header = true
+    adwords_api.skip_column_header = false
+    adwords_api.skip_report_summary = false
+    adwords_api.include_zero_impressions = true
+
+    result = report_utils.download_report_with_awql(query, 'CSV')
+    pp result
+    CSV.new(result, headers: true)
+  end
+
+  def date_range
+    '%s,%s' % [
+      (Date.today - 7).to_datetime.strftime('%Y%m%d'),
+      (Date.today - 1).to_datetime.strftime('%Y%m%d')
+    ]
   end
 end
