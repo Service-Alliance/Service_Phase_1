@@ -27,12 +27,9 @@ class InspectionChecklistsController < ApplicationController
     @inpsection_checklist = InspectionChecklist.new(inspection_checklist_params)
     @inpsection_checklist.job_id = @job.id
 
-    tracker_task = TrackerTask.find_by(name: "Inspection Checklist Created")
-
-
     respond_to do |format|
       if @inpsection_checklist.save
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @inpsection_checklist.id, user_id: current_user.id)
+        @job.track('Inspection Checklist Created', current_user, @inspection_checklist)
 
         format.html { redirect_to job_path(@job), notice: 'InspectionChecklist was successfully created.' }
         format.json { render :show, status: :created, location: @inpsection_checklist }

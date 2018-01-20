@@ -25,7 +25,6 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     unless job_params.empty?
-      tracker_task = TrackerTask.find_by(name: "Note Created")
       @job = Job.find_by(id: job_params['job_id'])
       @note = @job.notes.new(note_params)
       @note.user_id = current_user.id
@@ -55,7 +54,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id) unless job_params.empty?
+        @job.track('Note Created', current_user, @note) unless job_params.empty?
         format.html { redirect_to job_path(@job), notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
       else

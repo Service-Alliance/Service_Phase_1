@@ -1,6 +1,7 @@
 # Job
 class Job < ActiveRecord::Base
   include PgSearch
+  include Trackable
 
   belongs_to :job_status, foreign_key: :status_id, class_name: 'JobStatus'
   belongs_to :job_type, foreign_key: :type_id, class_name: 'JobType'
@@ -24,7 +25,6 @@ class Job < ActiveRecord::Base
   has_many :contact_assignments
   has_many :job_forms, dependent: :destroy
   has_many :notes, as: :noteable, dependent: :destroy
-  has_many :trackers, as: :trackable, dependent: :destroy
   has_many :work_orders
   has_many :schedulers
   has_many :subscriptions

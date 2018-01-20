@@ -33,7 +33,7 @@ class JobManagersController < ApplicationController
         @job.pipeline_status_id = 2
         @job.save
         @user = @job_manager.job_manager
-        @job.trackers.create(tracker_task_id: 2, child_id: @job_manager.id)
+        @job.track 'Manager Assigned', current_user, @job_manager
         if @user.email
           UserMailer.manager_assignment(@user, @job_manager).deliver_later
         end

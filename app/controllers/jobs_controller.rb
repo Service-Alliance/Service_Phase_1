@@ -243,7 +243,7 @@ class JobsController < ApplicationController
   def create_estimate
     @job.estimate_created = true
     @job.estimate_created_date = Date.today
-    @job.trackers.create(tracker_task_id: 3, child_id: @job_id)
+    @job.track('Estimate Created', current_user, @job)
     @job.pipeline_status_id = 4
     @job.save
     redirect_to '/', notice: 'Job Estimate Created.'
@@ -252,7 +252,7 @@ class JobsController < ApplicationController
   def create_estimate_sent
     @job.estimate_sent = true
     @job.estimate_sent_date = Date.today
-    @job.trackers.create(tracker_task_id: 4, child_id: @job_id)
+    @job.track('Estimate Sent', current_user, @job)
     @job.pipeline_status_id = 5
     @job.save
     redirect_to '/', notice: 'Job Estimate Sent.'
@@ -261,7 +261,7 @@ class JobsController < ApplicationController
   def create_contract
     @job.contract_created = true
     @job.contract_created_date = Date.today
-    @job.trackers.create(tracker_task_id: 5, child_id: @job_id)
+    @job.track('Contract Created', current_user, @job)
     @job.pipeline_status_id = 6
     @job.save
     redirect_to '/', notice: 'Job contract Created.'
@@ -270,7 +270,7 @@ class JobsController < ApplicationController
   def create_contract_sent
     @job.contract_sent = true
     @job.contract_sent_date = Date.today
-    @job.trackers.create(tracker_task_id: 6, child_id: @job_id)
+    @job.track('Contract Sent', current_user, @job)
     @job.pipeline_status_id = 7
     @job.save
     redirect_to '/', notice: 'Job contract Sent.'
@@ -305,7 +305,7 @@ class JobsController < ApplicationController
       @job.pipeline_status_id = 2
       @job.save
 
-      @job.trackers.create(tracker_task_id: 2, child_id: @job_manager.id)
+      @job.track('Manager Assigned', current_user, @job_manager)
       if @user.email
         UserMailer.manager_assignment(@user, @job_manager).deliver_later
       end
@@ -338,8 +338,7 @@ class JobsController < ApplicationController
     @job =  Job.find_by(id: call_params[:job_id])
     @call.job_id = @job.id
     @call.save
-    tracker_task = TrackerTask.find_by(name: "Call Assigned")
-    @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @call.id, user_id: current_user.id, note: call_params[:note])
+    @job.track('Call Assigned', current_user, @call, call_params[:note])
 
     redirect_to job_path(@job), notice: 'Call was successfully added to Job.'
   end

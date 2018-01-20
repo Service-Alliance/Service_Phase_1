@@ -21,4 +21,28 @@ class WorkOrdersControllerTest < ActionController::TestCase
     get :show, id: @work_order.id, job_id: @work_order.job.id
     assert_response :success
   end
+
+  test "#update updates work order and saves 'published' tracker" do
+    assert_difference('Tracker.count', 1) do
+      patch :update, commit: 'Publish Work Order', id: @work_order.id, job_id: @work_order.job_id, work_order: @work_order.attributes
+    end
+    Tracker.last.tap do |t|
+      assert_equal t.user, users(:one)
+      assert_equal t.tracker_task, tracker_tasks(:work_order_delivered)
+      assert_equal t.child_trackable, WorkOrder.last
+    end
+  end
+
+  test "#create creates work order and 'drafted' tracker" do
+    assert_difference('WorkOrder.count', 1) do
+      assert_difference('Tracker.count', 1) do
+        post :create, job_id: @work_order.job_id, work_order: @work_order.attributes
+      end
+    end
+    Tracker.last.tap do |t|
+      assert_equal t.user, users(:one)
+      assert_equal t.tracker_task, tracker_tasks(:work_order_drafted)
+      assert_equal t.child_trackable, WorkOrder.last
+    end
+  end
 end

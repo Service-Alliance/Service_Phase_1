@@ -51,8 +51,7 @@ class WorkOrder < ActiveRecord::Base
   end
 
   def publish_actions(user)
-    tracker_task = TrackerTask.find_by(name: "Work Order Delivered")
-    job.trackers.create(tracker_task_id: tracker_task.id, child_id: id, user_id: user.id)
+    job.track 'Work Order Delivered', user, self
     WorkOrderPublishDeliveryService.new(self, user).deliver!
     save
   end

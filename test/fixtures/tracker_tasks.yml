@@ -1,13 +1,43 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyText
+job_created:
+  name: Job Created
+
+manager_assigned:
+  name: Manager Assigned
+
+estimate_created:
+  name: Estimate Created
+
+estimate_sent:
+  name: Estimate Sent
+
+contract_created:
+  name: Contract Created
+
+contract_sent:
+  name: Contract Sent
+
+purchase_order_created:
+  name: Purchase Order Created
+
+call_assigned:
+  name: Call Assigned
+
+inspection_checklist_created:
+  name: Inspection Checklist Created
 
 note_created:
   name: Note Created
 
+file_uploaded:
+  name: File Uploaded
+
+scheduler_created:
+  name: Scheduler Created
+
 work_order_drafted:
   name: Work Order Drafted
 
-work_order_deliverd:
+work_order_delivered:
   name: Work Order Delivered

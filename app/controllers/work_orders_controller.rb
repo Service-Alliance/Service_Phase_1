@@ -33,8 +33,7 @@ class WorkOrdersController < ApplicationController
     respond_to do |format|
       if @work_order.save
         WorkOrderDraftDeliveryService.new(@work_order, current_user).deliver!
-        tracker_task = TrackerTask.find_by(name: 'Work Order Drafted')
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
+        @job.track 'Work Order Drafted', current_user, @work_order
         @job.pipeline_status_id = 8
         if @job.status_id == 1
           @job.status_id = 2

@@ -48,16 +48,8 @@ class VendorsController < ApplicationController
   def update
     respond_to do |format|
       if @vendor.update(vendor_params)
-        if vendor_params[:notes_attributes]
-          @note = @vendor.notes.last
-          tracker_task = TrackerTask.find_by(name: "Note Created")
-          @vendor.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
-        end
-        if vendor_params[:uploads_attributes]
-          @upload = @vendor.uploads.last
-          tracker_task = TrackerTask.find_by(name: "File Uploaded")
-          @vendor.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
-        end
+        @vendor.track 'Note Created', current_user, @vendor.notes.last if vendor_params[:notes_attributes]
+        @vendor.track 'File Uploaded', current_user, @vendor.uploads.last if vendor_params[:uploads_attributes]
         format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
         format.json { render :show, status: :ok, location: @vendor }
       else

@@ -26,11 +26,10 @@ class TrackersController < ApplicationController
   def create
     @tracker = Tracker.new(tracker_params)
     @tracker.job_id = @job.id
-    tracker_task = TrackerTask.find_by(name: "Tracker Created")
 
     respond_to do |format|
       if @tracker.save
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @tracker.id, user_id: current_user.id)
+        @job.track 'Tracker Created', current_user, @tracker
         format.html { redirect_to job_path(@job), notice: 'Tracker was successfully created.' }
         format.json { render :show, status: :created, location: @tracker }
       else
