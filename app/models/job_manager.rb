@@ -3,6 +3,7 @@ class JobManager < ActiveRecord::Base
 
   belongs_to :job_manager, class_name: "User"
   belongs_to :job
+  has_many :trackers_as_child, as: :child_trackable, dependent: :destroy, class_name: 'Tracker'
 
   include PublicActivity::Model
 

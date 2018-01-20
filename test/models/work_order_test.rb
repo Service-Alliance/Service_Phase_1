@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class WorkOrderTest < ActiveSupport::TestCase
-  setup do
+  def setup
     @work_order = work_orders(:one)
   end
 

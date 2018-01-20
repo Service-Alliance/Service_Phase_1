@@ -4,6 +4,7 @@ class Pricing < ActiveRecord::Base
   belongs_to :job
   has_many :uploads, as: :uploadable, dependent: :destroy
   has_many :trackers, as: :trackable, dependent: :destroy
+  has_many :trackers_as_child, as: :child_trackable, dependent: :destroy, class_name: 'Tracker'
   accepts_nested_attributes_for :uploads
 
   scope :latest_per_job, -> {

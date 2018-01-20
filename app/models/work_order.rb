@@ -11,6 +11,7 @@ class WorkOrder < ActiveRecord::Base
   has_many :technicians, -> { with_roles('Technician') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :crew_chiefs, -> { with_roles('Crew Chief', 'Project Manager') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :work_shifts, dependent: :destroy
+  has_many :trackers_as_child, as: :child_trackable, dependent: :destroy, class_name: 'Tracker'
 
   delegate :customer, :franchise, :job_managers, :status_name, to: :job, allow_nil: true
   delegate :name, to: :job, allow_nil: true, prefix: true
