@@ -127,7 +127,7 @@
                     <% @company.trackers.each do |tracker| %>
 
                     <% if tracker.tracker_task.name == "Note Created" %>
-                    <% noted = Note.find(tracker.child_id) %>
+                    <% noted = tracker.child_trackable %>
                     <article class="timeline-entry">
                         <div class="timeline-entry-inner">
                             <div class="timeline-icon bg-success">
@@ -156,7 +156,7 @@
                     </article>
 
                     <% elsif tracker.tracker_task.name == "File Uploaded" %>
-                    <% upload = Upload.find(tracker.child_id) %>
+                    <% upload = tracker.child_trackable %>
                     <article class="timeline-entry">
                         <div class="timeline-entry-inner">
                             <div class="timeline-icon bg-success">
@@ -182,7 +182,7 @@
                     </article>
 
                     <% elsif tracker.tracker_task.name == "Call Assigned" %>
-                    <% call = Call.find(tracker.child_id) %>
+                    <% call = tracker.child_trackable %>
                     <article class="timeline-entry">
                         <div class="timeline-entry-inner">
                             <div class="timeline-icon bg-success">
@@ -203,7 +203,7 @@
                     </article>
 
                     <% elsif tracker.tracker_task.name == "Scheduler Created" %>
-                    <% scheduler = Scheduler.find(tracker.child_id) %>
+                    <% scheduler = tracker.child_trackable %>
                     <% if scheduler.event_date.past? %>
                     <article class="timeline-entry">
                         <div class="timeline-entry-inner">
