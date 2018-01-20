@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180106041026) do
+ActiveRecord::Schema.define(version: 20180119062413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -800,13 +800,16 @@ ActiveRecord::Schema.define(version: 20180106041026) do
     t.integer  "trackable_id"
     t.string   "trackable_type"
     t.integer  "tracker_task_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "child_id"
     t.integer  "user_id"
     t.text     "note"
+    t.integer  "child_trackable_id"
+    t.string   "child_trackable_type"
   end
 
+  add_index "trackers", ["child_trackable_id", "child_trackable_type"], name: "index_trackers_on_child_trackable_id_and_child_trackable_type", using: :btree
   add_index "trackers", ["trackable_type", "trackable_id"], name: "index_trackers_on_trackable_type_and_trackable_id", using: :btree
 
   create_table "upload_categories", force: :cascade do |t|
