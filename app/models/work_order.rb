@@ -27,6 +27,8 @@ class WorkOrder < ActiveRecord::Base
 
   scope :date_ordered, -> { order(:updated_at) }
 
+  scope :active, -> { where(archived: false) }
+
   enum state: {draft: 0, published: 1}
 
   aasm :state do
@@ -49,6 +51,18 @@ class WorkOrder < ActiveRecord::Base
     }
 
   def draft_actions
+  end
+
+  def active?
+    !archived?
+  end
+
+  def archive!
+    update_attribute :archived, true
+  end
+
+  def unarchive!
+    update_attribute :archived, false
   end
 
   def publish_actions(user)

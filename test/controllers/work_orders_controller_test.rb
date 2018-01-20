@@ -22,6 +22,17 @@ class WorkOrdersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test '#edit' do
+    get :edit, id: @work_order.id, job_id: @work_order.job.id
+    assert_response :success
+  end
+
+  test '#edit archived work order redirects to show' do
+    @work_order.archive!
+    get :edit, id: @work_order.id, job_id: @work_order.job.id
+    assert_redirected_to job_work_order_path(@work_order.job, @work_order)
+  end
+
   test "#update updates work order and saves 'published' tracker" do
     assert_difference('Tracker.count', 1) do
       patch :update, commit: 'Publish Work Order', id: @work_order.id, job_id: @work_order.job_id, work_order: @work_order.attributes

@@ -38,3 +38,9 @@ published:
   <<: *DEFAULTS
   state: 1
   name: Work Order Published
+  
+archived:
+  <<: *DEFAULTS
+  state: 0
+  archived: true
+  name: Work Order Archived

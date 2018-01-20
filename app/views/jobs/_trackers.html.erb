@@ -76,7 +76,7 @@
     </article>
 
   <% elsif tracker.tracker_task.name == "Work Order Drafted" %>
-    <% call = tracker.child_trackable %>
+    <% work_order = tracker.child_trackable %>
     <article data-status="work-order" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -90,15 +90,17 @@
               <%= tracker.try(:user).try(:full_name) %></h3>
           </div>
           <div class="panel-body">
-            <%= link_to "View", job_work_order_path(job, call.id) %>
-            <%= link_to 'Delete Draft', tracker_path(tracker, job_id: job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% if work_order.archived? %>
+              <div class="text-muted"><em>Work Order is archived</em></div>
+            <% end %>
+            <%= link_to "View", job_work_order_path(job, work_order) %>
           </div>
         </div>
       </div>
     </article>
 
   <% elsif tracker.tracker_task.name == "Work Order Delivered" %>
-    <% call = tracker.child_trackable %>
+    <% work_order = tracker.child_trackable %>
     <article data-status="work-order" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -112,7 +114,10 @@
               <%= tracker.try(:user).try(:full_name) %></h3>
           </div>
           <div class="panel-body">
-            <%= link_to "View", job_work_order_path(job, call.id) %>
+            <% if work_order.archived? %>
+              <div class="text-muted"><em>Work Order is archived</em></div>
+            <% end %>
+            <%= link_to "View", job_work_order_path(job, work_order) %>
           </div>
         </div>
       </div>

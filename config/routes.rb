@@ -100,7 +100,10 @@ Rails.application.routes.draw do
     get 'job_forms/dowload/:id' => 'job_forms#download'
     resources :job_forms
     get 'job_forms/new/:id' => 'job_forms#new_form', as: :create_form
-    resources :work_orders
+    resources :work_orders do
+      get 'archive', on: :member
+      get 'unarchive', on: :member
+    end
     resources :schedulers
     resources :subscriptions
     resources :collection_subscriptions, only: [:create, :update, :destroy]
