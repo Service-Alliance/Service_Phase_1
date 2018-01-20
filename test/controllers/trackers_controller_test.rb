@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TrackersControllerTest < ActionController::TestCase
   setup do
-    @tracker = trackers(:job_created)
+    @tracker = trackers(:one)
     sign_in(users(:one))
   end
 
