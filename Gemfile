@@ -92,7 +92,6 @@ group :development, :test do
   gem 'danger'
   gem 'simple_bdd'
   gem 'shoulda-matchers'
-  gem 'spring'
 end
 
 group :test do
