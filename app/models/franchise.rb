@@ -1,7 +1,8 @@
 class Franchise < ActiveRecord::Base
+  include Trackable
+
   belongs_to :address
   has_many :notes, as: :noteable, dependent: :destroy
-  has_many :trackers, as: :trackable, dependent: :destroy
   has_many :uploads, as: :uploadable, dependent: :destroy
   has_many :jobs
   has_many :franchise_work_order_distributions

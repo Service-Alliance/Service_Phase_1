@@ -58,13 +58,11 @@ class FranchisesController < ApplicationController
       if @franchise.update(franchise_params)
         if franchise_params[:notes_attributes]
           @note = @franchise.notes.last
-          tracker_task = TrackerTask.find_by(name: "Note Created")
-          @franchise.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
+          @franchise.track 'Note Created', current_user, @note
         end
         if franchise_params[:uploads_attributes]
           @upload = @franchise.uploads.last
-          tracker_task = TrackerTask.find_by(name: "File Uploaded")
-          @franchise.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
+          @franchise.track 'File Uploaded', current_user, @upload
         end
         format.html { redirect_to @franchise, notice: 'Franchise was successfully updated.' }
         format.json { render :show, status: :ok, location: @franchise }

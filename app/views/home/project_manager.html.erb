@@ -36,7 +36,7 @@
 									</span>
 								</h2>
 								<% if tracker.tracker_task_id == 2 %>
-									<% @job_manager = JobManager.find_by(id: tracker.child_id) %>
+									<% @job_manager = tracker.child_trackable %>
 										Manager: <%= @job_manager.try(:job_manager).try(:full_name) %><br />
 										Scheduled Date: <%= @job_manager.try(:schedule_date) %>
 								<% end %>

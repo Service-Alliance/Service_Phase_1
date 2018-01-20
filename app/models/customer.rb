@@ -1,10 +1,11 @@
 class Customer < ActiveRecord::Base
+  include Trackable
+
   has_many :phones, as: :phoneable
   accepts_nested_attributes_for :phones, reject_if: :all_blank, allow_destroy: true
   belongs_to :address
   accepts_nested_attributes_for :address
   has_many :notes, as: :noteable, dependent: :destroy
-  has_many :trackers, as: :trackable, dependent: :destroy
   has_many :uploads, as: :uploadable, dependent: :destroy
   belongs_to :owner, class_name: "User"
   has_many :jobs
@@ -15,6 +16,7 @@ class Customer < ActiveRecord::Base
   accepts_nested_attributes_for :customer_companies
   has_many :customer_vendors
   has_many :vendors, through: :customer_vendors
+  has_many :calls
   accepts_nested_attributes_for :customer_vendors
 
   delegate :full_address, :address_without_county, :format_address, to: :address, allow_nil: true

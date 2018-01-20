@@ -48,19 +48,11 @@ class CompaniesController < ApplicationController
   # PATCH/PUT /companies/1
   # PATCH/PUT /companies/1.json
   def update
-    if company_params[:notes_attributes]
-      @note = @company.notes.last
-      tracker_task = TrackerTask.find_by(name: "Note Created")
-      @company.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
-    end
-    if company_params[:uploads_attributes]
-      @upload = @company.uploads.last
-      tracker_task = TrackerTask.find_by(name: "File Uploaded")
-      @company.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
-    end
     respond_to do |format|
       @company.address.update(address_params)
       if @company.update(company_params)
+        @company.track 'Note Created', current_user, @company.notes.last if company_params[:notes_attributes]
+        @company.track 'File Uploaded', current_user, @company.uploads.last if company_params[:uploads_attributes]
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @company }
       else

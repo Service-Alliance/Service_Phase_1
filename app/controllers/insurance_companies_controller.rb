@@ -43,16 +43,8 @@ class InsuranceCompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @insurance_company.update(insurance_company_params)
-        if insurance_company_params[:notes_attributes]
-          @note = @insurance_company.notes.last
-          tracker_task = TrackerTask.find_by(name: "Note Created")
-          @insurance_company.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
-        end
-        if insurance_company_params[:uploads_attributes]
-          @upload = @insurance_company.uploads.last
-          tracker_task = TrackerTask.find_by(name: "File Uploaded")
-          @insurance_company.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
-        end
+        @insurance_company.track 'Note Created', current_user, @insurance_company.notes.last if insurance_company_params[:notes_attributes]
+        @insurance_company.track 'File Uploaded', current_user, @insurance_company.uploads.last if insurance_company_params[:uploads_attributes]
         format.html {  redirect_to insurance_company_path(@insurance_company), notice: 'Insurance Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @insurance_company }
       else

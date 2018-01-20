@@ -1,7 +1,7 @@
 <% # FIXME: move trackers into inidvidual partials, make sure each are at least tested enough that they display without error %>
 <% trackers.each do |tracker| %>
   <% if tracker.tracker_task.name == "Note Created" %>
-    <% noted = Note.find(tracker.child_id) %>
+    <% noted = tracker.child_trackable %>
     <article data-status="note" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -25,7 +25,7 @@
     </article>
 
   <% elsif tracker.tracker_task.name == "File Uploaded" %>
-    <% upload = Upload.find(tracker.child_id) %>
+    <% upload = tracker.child_trackable %>
     <article data-status="file-uploaded" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -51,7 +51,7 @@
     </article>
 
   <% elsif tracker.tracker_task.name == "Call Assigned" %>
-    <% call = Call.find(tracker.child_id) %>
+    <% call = tracker.child_trackable %>
     <article data-status="call-assigned" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -76,7 +76,7 @@
     </article>
 
   <% elsif tracker.tracker_task.name == "Work Order Drafted" %>
-    <% call = WorkOrder.find(tracker.child_id) %>
+    <% work_order = tracker.child_trackable %>
     <article data-status="work-order" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -90,15 +90,17 @@
               <%= tracker.try(:user).try(:full_name) %></h3>
           </div>
           <div class="panel-body">
-            <%= link_to "View", job_work_order_path(job, call.id) %>
-            <%= link_to 'Delete Draft', tracker_path(tracker, job_id: job.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% if work_order.archived? %>
+              <div class="text-muted"><em>Work Order is archived</em></div>
+            <% end %>
+            <%= link_to "View", job_work_order_path(job, work_order) %>
           </div>
         </div>
       </div>
     </article>
 
   <% elsif tracker.tracker_task.name == "Work Order Delivered" %>
-    <% call = WorkOrder.find(tracker.child_id) %>
+    <% work_order = tracker.child_trackable %>
     <article data-status="work-order" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -112,14 +114,17 @@
               <%= tracker.try(:user).try(:full_name) %></h3>
           </div>
           <div class="panel-body">
-            <%= link_to "View", job_work_order_path(job, call.id) %>
+            <% if work_order.archived? %>
+              <div class="text-muted"><em>Work Order is archived</em></div>
+            <% end %>
+            <%= link_to "View", job_work_order_path(job, work_order) %>
           </div>
         </div>
       </div>
     </article>
 
   <% elsif tracker.tracker_task.name == "Purchase Order Created" %>
-    <% purchase_order = PurchaseOrderApproval.find(tracker.child_id) %>
+    <% purchase_order = tracker.child_trackable %>
     <article data-status="purchase-order" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -140,7 +145,7 @@
     </article>
 
   <% elsif tracker.tracker_task.name == "Inspection Checklist Created" %>
-    <% checklist = InspectionChecklist.find(tracker.child_id) %>
+    <% checklist = tracker.child_trackable %>
     <article data-status="inspection-checklist" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -170,7 +175,7 @@
     </article>
 
   <% elsif tracker.tracker_task.name == "Pricing Created" %>
-    <% pricing = Pricing.find(tracker.child_id) %>
+    <% pricing = tracker.child_trackable %>
     <article data-status="pricing" class="timeline-entry">
       <div class="timeline-entry-inner">
         <div class="timeline-icon bg-success">
@@ -208,7 +213,7 @@
     </article>
 
   <% elsif tracker.tracker_task.name == "Scheduler Created" %>
-    <% scheduler = Scheduler.find(tracker.child_id) %>
+    <% scheduler = tracker.child_trackable %>
     <% if scheduler.event_date.past? %>
       <article data-status="scheduler" class="timeline-entry">
         <div class="timeline-entry-inner">

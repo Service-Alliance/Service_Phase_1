@@ -31,8 +31,7 @@ class PurchaseOrderApprovalsController < ApplicationController
 
     respond_to do |format|
       if @purchase_order_approval.save
-        tracker_task = TrackerTask.find_by(name: "Purchase Order Created")
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @purchase_order_approval.id, user_id: current_user.id)
+        @job.track('Purchase Order Created', current_user, @purchase_order_approval)
 
         format.html { redirect_to @job, notice: 'Purchase Order Approval was successfully created.' }
         format.json { render :show, status: :created, location: @job }

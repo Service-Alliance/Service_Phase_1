@@ -1,6 +1,6 @@
 class WorkOrdersController < ApplicationController
 
-  before_action :set_work_order, only: [:update, :destroy, :acknowledge]
+  before_action :set_work_order, only: [:update, :destroy, :acknowledge, :archive, :unarchive]
   before_action :set_job, except: :list
   before_action :set_presenter, only: [:show, :new, :index, :edit]
 
@@ -22,6 +22,7 @@ class WorkOrdersController < ApplicationController
 
   # GET /work_orders/1/edit
   def edit
+    redirect_to job_work_order_path(@work_order.job, @work_order) and return if @work_order.archived?
   end
 
   # POST /work_orders
@@ -33,8 +34,7 @@ class WorkOrdersController < ApplicationController
     respond_to do |format|
       if @work_order.save
         WorkOrderDraftDeliveryService.new(@work_order, current_user).deliver!
-        tracker_task = TrackerTask.find_by(name: 'Work Order Drafted')
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @work_order.id, user_id: current_user.id)
+        @job.track 'Work Order Drafted', current_user, @work_order
         @job.pipeline_status_id = 8
         if @job.status_id == 1
           @job.status_id = 2
@@ -47,7 +47,7 @@ class WorkOrdersController < ApplicationController
         format.json { render json: @work_order.errors, status: :unprocessable_entity }
       end
     end
-    end
+  end
 
   # PATCH/PUT /work_orders/1
   # PATCH/PUT /work_orders/1.json
@@ -67,9 +67,26 @@ class WorkOrdersController < ApplicationController
   # DELETE /work_orders/1
   # DELETE /work_orders/1.json
   def destroy
+    job = @work_order.job
     @work_order.destroy
     respond_to do |format|
-      format.html { redirect_to work_orders_path, notice: 'Work Order was successfully destroyed.' }
+      format.html { redirect_to job, notice: 'Work Order has been deleted.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def archive
+    @work_order.archive!
+    respond_to do |format|
+      format.html { redirect_to job_work_order_path(@work_order.job, @work_order), notice: 'Work Order has been archived.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def unarchive
+    @work_order.unarchive!
+    respond_to do |format|
+      format.html { redirect_to job_work_order_path(@work_order.job, @work_order), notice: 'Work Order has been unarchived.' }
       format.json { head :no_content }
     end
   end

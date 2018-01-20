@@ -2,6 +2,7 @@ class PricingsController < ApplicationController
   before_action :set_pricing, only: [:show, :edit, :update, :destroy]
   before_action :set_job
 
+  # FIXME: Can we delete this controller? Seems like it's not used...
 
   # GET /pricings
   # GET /pricings.json
@@ -29,16 +30,13 @@ class PricingsController < ApplicationController
     @category_id = 0
     if  @pricing.pricing_category_id &&  @pricing.pricing_category_id < 4
       @category_id = @pricing.pricing_category_id + 1
-      p @category_id
     else
       @category_id = 3
     end
 
-    tracker_task = TrackerTask.find_by(name: "Pricing Created")
-
     @new_pricing = Pricing.create(job_id: @job.id, current_status_id: @job.status_id, pricing_category_id: @category_id, description: "Moved to next category" )
 
-    @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @new_pricing.id, user_id: current_user.id)
+    @job.track 'Pricing Created', current_user, @new_pricing
     redirect_to @job, notice: 'Pricing was successfully created.'
   end
 
@@ -49,12 +47,9 @@ class PricingsController < ApplicationController
     @pricing.job_id = @job.id
     @pricing.current_status_id = @job.status_id
 
-    tracker_task = TrackerTask.find_by(name: "Pricing Created")
-
-
     respond_to do |format|
       if @pricing.save
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @pricing.id, user_id: current_user.id)
+        @job.track 'Pricing Created', current_user, @pricing
         format.html { redirect_to @job, notice: 'Pricing was successfully created.' }
         format.json { render :show, status: :created, location: @pricing }
       else
@@ -83,7 +78,7 @@ class PricingsController < ApplicationController
   def destroy
     @pricing.destroy
     respond_to do |format|
-      format.html { redirect_to pricings_url, notice: 'Pricing was successfully destroyed.' }
+      format.html { redirect_to job_pricings_url(params[:job_id]), notice: 'Pricing was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

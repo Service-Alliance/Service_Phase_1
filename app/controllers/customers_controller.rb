@@ -118,15 +118,12 @@ class CustomersController < ApplicationController
         end
         if customer_params[:notes_attributes]
           @note = @customer.notes.last
-          tracker_task = TrackerTask.find_by(name: "Note Created")
-          @customer.trackers.create(tracker_task_id: tracker_task.id, child_id: @note.id)
+          @customer.track 'Note Created', current_user, @note
         end
         if customer_params[:uploads_attributes]
           @upload = @customer.uploads.last
-          tracker_task = TrackerTask.find_by(name: "File Uploaded")
-          @customer.trackers.create(tracker_task_id: tracker_task.id, child_id: @upload.id)
+          @customer.track 'File Uploaded', current_user, @upload
         end
-
 
         format.html {
           unless job_param.empty?
@@ -181,10 +178,9 @@ class CustomersController < ApplicationController
 
   def create_call
     # FIXME: this is almost exact copy of jobs_controller#create_call
-    tracker_task = TrackerTask.find_by(name: "Call Assigned")
     @call = Call.find(call_params[:call_id])
     @call.customer_id = @customer.id
-    @customer.trackers.create(tracker_task_id: tracker_task.id, child_id: @call.id, user_id: current_user.id)
+    @customer.track 'Call Assigned', current_user, @call
     @call.save
     redirect_to @customer
   end

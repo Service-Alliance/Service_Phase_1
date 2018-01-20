@@ -77,6 +77,12 @@ job_manager:
   last_name: Manager
   role_id: 4
 
+admin:
+  <<: *DEFAULTS
+  email: admin@servpro.com
+  last_name: Admin
+  role_id: 1
+
 scheduling_manager:
   email: dankluger@servpro5933.com
   first_name: Scheduling

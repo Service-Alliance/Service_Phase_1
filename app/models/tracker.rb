@@ -1,5 +1,6 @@
 class Tracker < ActiveRecord::Base
   belongs_to :trackable, polymorphic: true
+  belongs_to :child_trackable, polymorphic: true
   belongs_to :tracker_task
   belongs_to :user
 

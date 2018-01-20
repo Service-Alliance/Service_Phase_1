@@ -69,4 +69,66 @@ class JobsControllerTest < ActionController::TestCase
     get :reconciliation_form, job_id: job.id
     assert_response :success
   end
+
+  test '#create_call creates call and tracker' do
+    call = calls(:one)
+    job = jobs(:one)
+    assert_difference 'Tracker.count', 1 do
+      post :create_call, id: job.id, call: {id: call.id, job_id: job.id, note: 'note'}
+    end
+    job.reload
+    assert_includes job.calls, call
+  end
+
+  test '#manager_assignment creates assignment and tracker' do
+    user = users(:one)
+    job = jobs(:no_manager)
+    assert_difference 'JobManager.count', 1 do
+      assert_difference 'Tracker.count', 1 do
+        get :manager_assignment, job_id: job.id, job_manager_id: user.id
+      end
+    end
+    job.reload
+    assert_equal job.job_managers.last.job_manager, user
+  end
+
+  test '#create_estimate creates estimate and tracker' do
+    job = jobs(:no_manager)
+    assert_difference 'Tracker.count', 1 do
+      get :create_estimate, id: job.id
+    end
+    job.reload
+    assert_equal job.estimate_created, true
+    assert_equal Tracker.last.tracker_task.name, 'Estimate Created'
+  end
+
+  test '#create_estimate_sent sets estimate_sent and creates tracker' do
+    job = jobs(:no_manager)
+    assert_difference 'Tracker.count', 1 do
+      get :create_estimate_sent, id: job.id
+    end
+    job.reload
+    assert_equal job.estimate_sent, true
+    assert_equal Tracker.last.tracker_task.name, 'Estimate Sent'
+  end
+
+  test '#create_contract creates contract and tracker' do
+    job = jobs(:no_manager)
+    assert_difference 'Tracker.count', 1 do
+      get :create_contract, id: job.id
+    end
+    job.reload
+    assert_equal job.contract_created, true
+    assert_equal Tracker.last.tracker_task.name, 'Contract Created'
+  end
+
+  test '#create_contract_sent sets contract_sent and creates tracker' do
+    job = jobs(:no_manager)
+    assert_difference 'Tracker.count', 1 do
+      get :create_contract_sent, id: job.id
+    end
+    job.reload
+    assert_equal job.contract_sent, true
+    assert_equal Tracker.last.tracker_task.name, 'Contract Sent'
+  end
 end

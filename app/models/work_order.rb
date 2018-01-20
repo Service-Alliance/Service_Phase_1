@@ -11,6 +11,7 @@ class WorkOrder < ActiveRecord::Base
   has_many :technicians, -> { with_roles('Technician') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :crew_chiefs, -> { with_roles('Crew Chief', 'Project Manager') }, through: :work_order_crew, class_name: 'User', source: :user
   has_many :work_shifts, dependent: :destroy
+  has_many :trackers_as_child, as: :child_trackable, dependent: :destroy, class_name: 'Tracker'
 
   delegate :customer, :franchise, :job_managers, :status_name, to: :job, allow_nil: true
   delegate :name, to: :job, allow_nil: true, prefix: true
@@ -25,6 +26,8 @@ class WorkOrder < ActiveRecord::Base
   alias_method :job_location, :customer_address_without_county
 
   scope :date_ordered, -> { order(:updated_at) }
+
+  scope :active, -> { where(archived: false) }
 
   enum state: {draft: 0, published: 1}
 
@@ -50,9 +53,20 @@ class WorkOrder < ActiveRecord::Base
   def draft_actions
   end
 
+  def active?
+    !archived?
+  end
+
+  def archive!
+    update_attribute :archived, true
+  end
+
+  def unarchive!
+    update_attribute :archived, false
+  end
+
   def publish_actions(user)
-    tracker_task = TrackerTask.find_by(name: "Work Order Delivered")
-    job.trackers.create(tracker_task_id: tracker_task.id, child_id: id, user_id: user.id)
+    job.track 'Work Order Delivered', user, self
     WorkOrderPublishDeliveryService.new(self, user).deliver!
     save
   end

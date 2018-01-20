@@ -19,7 +19,7 @@ class CompaniesControllerTest < ActionController::TestCase
 
   test "should create company" do
     assert_difference('Company.count') do
-      post :create, company: { address_id: @company.address_id, name: @company.name }
+      post :create, company: @company.attributes
     end
 
     assert_redirected_to company_path(assigns(:company))
@@ -36,8 +36,28 @@ class CompaniesControllerTest < ActionController::TestCase
   end
 
   test "should update company" do
-    patch :update, id: @company, company: { address_id: @company.address_id, name: @company.name }
+    patch :update, id: @company, company: @company.attributes
     assert_redirected_to company_path(assigns(:company))
+  end
+
+  test "should save a tracker when updating company with note" do
+    assert_difference 'Tracker.count', 1 do
+      patch :update, id: @company, company: company_params_with_note(@company.attributes)
+    end
+    Tracker.last.tap do |t|
+      assert_equal t.tracker_task.name, 'Note Created'
+      assert_equal t.trackable, @company
+    end
+  end
+
+  test "should save a tracker when updating company with attachment" do
+    assert_difference 'Tracker.count', 1 do
+      patch :update, id: @company, company: company_params_with_attachment(@company.attributes)
+    end
+    Tracker.last.tap do |t|
+      assert_equal t.tracker_task.name, 'File Uploaded'
+      assert_equal t.trackable, @company
+    end
   end
 
   test "should destroy company" do
@@ -46,5 +66,13 @@ class CompaniesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to companies_path
+  end
+
+  def company_params_with_note(attribs)
+    attribs.merge(notes_attributes: [{content: 'note'}])
+  end
+
+  def company_params_with_attachment(attribs)
+    attribs.merge(uploads_attributes: [{description: 'desc'}])
   end
 end

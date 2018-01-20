@@ -27,14 +27,13 @@ class SchedulersController < ApplicationController
   def create
     @scheduler = Scheduler.new(scheduler_params)
     @scheduler.job_id = @job.id
-    tracker_task = TrackerTask.find_by(name: "Scheduler Created")
     if @scheduler.scheduler_event_type_id == 5
       @scheduler.check_manager(@job)
     end
 
     respond_to do |format|
       if @scheduler.save
-        @job.trackers.create(tracker_task_id: tracker_task.id, child_id: @scheduler.id, user_id: current_user.id)
+        @job.track 'Scheduler Created', current_user, @scheduler
         format.html { redirect_to job_path(@job), notice: 'Scheduler was successfully created.' }
         format.json { render :show, status: :created, location: @scheduler }
       else
