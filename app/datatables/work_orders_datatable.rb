@@ -13,6 +13,7 @@ class WorkOrdersDatatable < ApplicationDatatable
 
   def filter_model
     @model = model.where(jobs: { franchise_id: params[:franchise_id] }) if params[:franchise_id]
+    @model = model.where(job_id: params[:job_id]) if params[:job_id]
   end
 
   def sort_fields

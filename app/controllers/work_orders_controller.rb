@@ -1,12 +1,13 @@
 class WorkOrdersController < ApplicationController
 
-  before_action :set_work_order, only: [:update, :destroy, :acknowledge, :archive, :unarchive]
+  before_action :set_presenter, only: %i(show new edit)
+  before_action :set_work_order, only: %i(show new edit update destroy acknowledge archive unarchive)
   before_action :set_job, except: :list
-  before_action :set_presenter, only: [:show, :new, :index, :edit]
 
   # GET /work_orders
   # GET /work_orders.json
   def index
+    @work_orders = @job.work_orders
   end
 
   # GET /work_orders/1
@@ -43,6 +44,7 @@ class WorkOrdersController < ApplicationController
         format.html { redirect_to job_work_order_path(@job, @work_order), notice: 'Work Order was Drafted and Scheduling Manager Notified.' }
         format.json { render :show, status: :created, location: @work_order }
       else
+        set_presenter
         format.html { render :new }
         format.json { render json: @work_order.errors, status: :unprocessable_entity }
       end
@@ -58,6 +60,7 @@ class WorkOrdersController < ApplicationController
         format.html { redirect_to job_path(@job), notice: 'Work Order has been delivered successfully.' }
         format.json { render :show, status: :ok, location: @work_order }
       else
+        set_presenter
         format.html { render :edit }
         format.json { render json: @work_order.errors, status: :unprocessable_entity }
       end
@@ -110,7 +113,7 @@ class WorkOrdersController < ApplicationController
 
   def set_presenter
     work_order = params[:id].present? ? WorkOrder.find(params[:id]) : WorkOrder.new
-    @work_order = WorkOrderPresenter.new(work_order, view_context)
+    @work_order_presenter = WorkOrderPresenter.new(work_order, view_context)
   end
 
   def set_job
