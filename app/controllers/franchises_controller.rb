@@ -113,7 +113,8 @@ class FranchisesController < ApplicationController
         uploads: []
       ],
       notes_attributes: [:content],
-      work_order_distribution_ids: []
+      work_order_distribution_ids: [],
+      scheduling_manager_ids: []
     )
   end
 end

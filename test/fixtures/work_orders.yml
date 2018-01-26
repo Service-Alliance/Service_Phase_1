@@ -24,6 +24,12 @@ one:
   job_location: MyText
   name: Work Order One
 
+two:
+  <<: *DEFAULTS
+  job: two
+  job_location: MyText
+  name: Work Order Two
+
 without_location:
   <<: *DEFAULTS
   job: two
@@ -38,7 +44,7 @@ published:
   <<: *DEFAULTS
   state: 1
   name: Work Order Published
-  
+
 archived:
   <<: *DEFAULTS
   state: 0

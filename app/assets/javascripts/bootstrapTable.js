@@ -85,6 +85,10 @@ var $table = $('#table'),
                 });
             }
         });
+        $table.on('post-body.bs.table', function() {
+          // Add any tooltips:
+          $table.find('.has-tooltip').tooltip();
+        });
         $remove.click(function () {
             var ids = getIdSelections();
             $table.bootstrapTable('remove', {
