@@ -4,7 +4,7 @@ class FranchisesController < ApplicationController
   # GET /franchises
   # GET /franchises.json
   def index
-    @franchises = Franchise.all.includes(:scheduling_managers)
+    @franchises = Franchise.all
   end
 
   # GET /franchises/1
