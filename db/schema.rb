@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126021252) do
+ActiveRecord::Schema.define(version: 20180126190724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -234,9 +234,14 @@ ActiveRecord::Schema.define(version: 20180126021252) do
     t.string   "email"
     t.integer  "owner_id"
     t.integer  "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "category"
+    t.text     "sharp_spring_id"
+    t.text     "company_name"
+    t.text     "title"
+    t.text     "website"
+    t.text     "sub_category"
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
