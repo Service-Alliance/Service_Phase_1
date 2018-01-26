@@ -1,7 +1,7 @@
 class WorkOrdersController < ApplicationController
 
-  before_action :set_presenter, only: %i(show new edit)
-  before_action :set_work_order, only: %i(show new edit update destroy acknowledge archive unarchive)
+  before_action :set_presenter, only: %i(show edit)
+  before_action :set_work_order, only: %i(show edit update destroy acknowledge archive unarchive)
   before_action :set_job, except: :list
 
   # GET /work_orders
@@ -18,7 +18,8 @@ class WorkOrdersController < ApplicationController
   # GET /work_orders/new
   def new
     job = Job.find(params[:job_id])
-    @work_order = WorkOrderPresenter.new(WorkOrder.build_from_job(job, current_user.full_name), view_context)
+    @work_order = WorkOrder.build_from_job(job, current_user.full_name)
+    @work_order_presenter = WorkOrderPresenter.new(@work_order, view_context)
   end
 
   # GET /work_orders/1/edit
