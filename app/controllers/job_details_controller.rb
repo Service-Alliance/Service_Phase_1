@@ -29,7 +29,6 @@ class JobDetailsController < ApplicationController
   def create
     @job_detail = JobDetail.new(job_detail_params)
     @job_detail.job_id = @job.id
-
     respond_to do |format|
       if @job_detail.save
         if billing_params != {}

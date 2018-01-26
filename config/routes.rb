@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   resources :assignment_types
   resources :referral_types
   resources :corporate_referral_types
-  resources :contacts
+  resources :contacts do
+    post '/jobs/:job_id' => 'customers#send_to_sharpspring', as: :send_to_sharpspring
+  end
   devise_for :users
   resources :articles
   resources :franchise_zipcodes
@@ -115,6 +117,7 @@ Rails.application.routes.draw do
   resources :customers do
     post '/jobs/:job_id' => 'customers#send_to_sharpspring', as: :send_to_sharpspring
   end
+
   get 'customer_search_suggestions' => 'customers#search_suggestions'
   get 'caller_search_suggestions' => 'callers#search_suggestions'
   post 'customers/:id/calls' => 'customers#create_call', as: :create_customer_call
