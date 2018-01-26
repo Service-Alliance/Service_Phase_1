@@ -1,6 +1,4 @@
 class WorkOrderDeliveryService
-  SCHEDULING_MANAGERS = %w(sgreer@servpro5933.com aott@servpro5933.com zpisoni@servpro5933.com).freeze
-
   def initialize(work_order, current_user)
     @work_order = work_order
     @current_user = current_user
@@ -16,13 +14,12 @@ class WorkOrderDeliveryService
   end
 
   def send_to_scheduling_managers
-    SCHEDULING_MANAGERS.each do |manager|
+    @work_order.scheduling_managers.each do |manager|
       send_to_scheduling_manager(manager)
     end
   end
 
-  def send_to_scheduling_manager(email)
-    user = User.find_by(email: email)
+  def send_to_scheduling_manager(user)
     deliver_draft_email(user) if user.present?
   end
 

@@ -8,7 +8,7 @@ class JobsPresenterTest < ActiveSupport::TestCase
 
   test 'it returns counts for each status' do
     assert_equal 1, @presenter.pending_count
-    assert_equal 4, @presenter.active_count
+    assert_equal 5, @presenter.active_count
     assert_equal 1, @presenter.invoiced_count
     assert_equal 1, @presenter.dead_count
     assert_equal 0, @presenter.closed_count

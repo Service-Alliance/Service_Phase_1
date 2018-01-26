@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120075023) do
+ActiveRecord::Schema.define(version: 20180126021252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -320,6 +320,16 @@ ActiveRecord::Schema.define(version: 20180120075023) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  create_table "franchise_scheduling_managers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "franchise_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "franchise_scheduling_managers", ["franchise_id"], name: "index_franchise_scheduling_managers_on_franchise_id", using: :btree
+  add_index "franchise_scheduling_managers", ["user_id"], name: "index_franchise_scheduling_managers_on_user_id", using: :btree
 
   create_table "franchise_users", force: :cascade do |t|
     t.integer  "user_id"
@@ -1047,6 +1057,8 @@ ActiveRecord::Schema.define(version: 20180120075023) do
 
   add_foreign_key "caller_companies", "callers"
   add_foreign_key "caller_companies", "companies"
+  add_foreign_key "franchise_scheduling_managers", "franchises", on_delete: :cascade
+  add_foreign_key "franchise_scheduling_managers", "users", on_delete: :cascade
   add_foreign_key "franchise_work_order_distributions", "franchises", on_delete: :cascade
   add_foreign_key "franchise_work_order_distributions", "users", on_delete: :cascade
   add_foreign_key "jobs", "referrals", on_delete: :cascade
