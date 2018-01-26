@@ -3,6 +3,9 @@
   <% if notice %>
     <div class="alert alert-success" role="alert"><%= notice %></div>
   <% end %>
+  <% if @franchise.scheduling_managers.empty? %>
+    <div class="alert alert-warning"><%= @franchise.name %> does not have any scheduling mangers set up</div>
+  <% end %>
 
   <div class="row">
     <div class="col-xs-12">

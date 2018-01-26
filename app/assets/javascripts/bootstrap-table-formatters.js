@@ -2,7 +2,10 @@ function ContactLinkFormatter(value, row, index) {
   return "<a href='/contacts/" + row.id + "'>" + value + "</a>";
 }
 function FranchiseLinkFormatter(value, row, index) {
-  return "<a href='/franchises/" + row.id + "'>" + value + "</a>";
+  var schedulingManagers = row.scheduling_managers_count > 0;
+  var res = "<a href='/franchises/" + row.id + "'>" + value + "</a>";
+  if(!schedulingManagers) { res += "&nbsp; <span class='has-tooltip text-warning' title='Franchise does not have any scheduling managers'><i class='fa fa-warning muted'></i></span>"; }
+  return res;
 }
 function InsuranceCompanyLinkFormatter(value, row, index) {
   return "<a href='/insurance_companies/" + row.id + "'>" + value + "</a>";
