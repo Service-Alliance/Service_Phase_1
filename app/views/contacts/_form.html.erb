@@ -79,3 +79,74 @@
         <% end %>
     </div>
 </div>
+<div class="col-xs-12">
+    <div class="row content-box">
+        <%= form_for(@contact) do |f| %>
+        <% if @contact.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@contact.errors.count, "error") %>
+                prohibited this contact from being saved:</h2>
+
+            <ul>
+                <% @contact.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+
+        <% if @job %>
+        <%= hidden_field_tag "job[job_id]", @job.id %>
+        <% end %>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :first_name %><br>
+                <%= f.text_field :first_name, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :last_name %><br>
+                <%= f.text_field :last_name, class:"form-control" %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :email %><br>
+                <%= f.text_field :email, class:"form-control" %>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="form-group">
+              <%= f.fields_for :contact_companies do |g| %>
+                <%= g.label :company_id %><br>
+                <%= g.collection_select :company_id, Company.all, :id, :name, {prompt: true},  { class: 'form-control'} %>
+              <% end %>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group">
+              <%= label_tag "company[company_name]", "Create New Company" %><br />
+              <%= text_field_tag "company[company_name]", nil, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="form-group">
+                <%= f.label :owner, "Sales Rep" %><br>
+                <%= f.collection_select :owner_id, User.all, :id, :full_name, {:prompt => 'Select a User'},  { class: 'form-control'} %>
+            </div>
+        </div>
+
+        <%= render 'address_form', f: f %>
+        <%= render 'partials/phone_form', f: f, locals: {phone_for: 'contact'}  %>
+
+        <div class="col-xs-12 text-center">
+            <div class="actions">
+                <%= f.submit class:"btn btn-primary" %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>

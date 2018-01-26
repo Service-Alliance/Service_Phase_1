@@ -1,95 +1,473 @@
-
 <div class="container-fluid">
-    <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-    <% end %>
-    <h1 class="text-center">Contact:</h1>
-    <div class="col-xs-8 col-xs-offset-2">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Contact
-                </h3>
+
+            <% if notice %>
+            <div class="alert alert-success" role="alert"><%= notice %></div>
+            <% end %>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="well">
+                  <div class="inline">
+                    <%= @contact.full_name %>
+                  </div>
+                  <div class="inline pull-right">
+                    <%= @contact.try(:owner).try(:full_name) %><br />
+                    <span class="owner">Sales Rep</span>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  Details
+                </div>
+                <div class="panel-body">
+                  <div class="item">
+                    Name: <%= @contact.full_name %>
+                  </div>
+                  <div class="item">
+                    Email: <%= @contact.email %>
+                  </div>
+                  <div class="item">
+                    Company: <%= @contact.company_name %>
+                  </div>
+                  <div class="item">
+                    Address: <%= @contact.try(:address).try(:address_1) %>
+                  </div>
+                  <div class="item">
+                    Address 2: <%= @contact.try(:address).try(:address_2) %>
+                  </div>
+                  <div class="item">
+                    City: <%= @contact.try(:address).try(:city) %>
+                  </div>
+                  <div class="item">
+                    State: <%= @contact.try(:address).try(:state).try(:name) %>
+                  </div>
+                  <div class="item">
+                    Zip: <%= @contact.try(:address).try(:zip_code) %>
+                  </div>
+                  <div class="item">
+                    County: <%= @contact.try(:address).try(:county) %>
+                  </div>
+                  <% @contact.phones.each do |phone| %>
+                  <div class="item">
+                    Phone: <%= phone.number %> (<%= phone.type.name %>)
+                  </div>
+                  <% end %>
+                </div>
+                <div class="panel-footer">
+                  <%= link_to edit_contact_path(@contact), class: "btn btn-sm btn-warning", type: "button" do %>
+                  <i class="glyphicon glyphicon-edit"></i>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="panel panel-primary margin-top-2">
+                <div class="panel-heading">
+                  Jobs
+                </div>
+                <div class="panel-body">
+                  <% @contact.jobs.each do |job| %>
+                  <% if job.name && job.name != "" %>
+                    <%= link_to job.name, job %>
+                  <% else %>
+                    <%= link_to job.id, job %>
+                  <% end %>
+                  <br /><br />
+                  <% end %>
+
+                </div>
+
+              </div>
+
+              <div class="panel panel-primary margin-top-2">
+                <div class="panel-heading">
+                  Associated Companies
+                </div>
+                <div class="panel-body">
+                  <% @contact.companies.each do |company| %>
+                  <% if company.name && company.name != "" %>
+                    <%= link_to company.name, company %>
+                  <% else %>
+                    <%= link_to company.id, company %>
+                  <% end %>
+                  <br /><br />
+                  <% end %>
+
+                </div>
+
+              </div>
+
+              <div class="panel panel-primary margin-top-2">
+                <div class="panel-heading">
+                  Associated Vendors <a class="inline" data-toggle="modal" data-target="#vendors"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></a>
+                </div>
+                <div class="panel-body">
+                  <% @contact.vendors.each do |vendor| %>
+                  <% if vendor.name && vendor.name != "" %>
+                    <%= link_to vendor.name, vendor %>
+                  <% else %>
+                    <%= link_to vendor.id, vendor %>
+                  <% end %>
+                  <br /><br />
+                  <% end %>
+
+
+
+                </div>
+
+              </div>
             </div>
 
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>ID:</td>
-                                    <td><%= @contact.id %></td>
-                                </tr>
-                                <tr>
-                                    <td>Company:</td>
-                                    <td><%= @contact.company %></td>
-                                </tr>
-                                <tr>
-                                    <td>First Name:</td>
-                                    <td><%= @contact.first_name %></td>
-                                </tr>
-                                <tr>
-                                    <td>Last Name:</td>
-                                    <td><%= @contact.last_name %></td>
-                                </tr>
-                                <tr>
-                                    <td>Email:</td>
-                                    <td><%= @contact.email %></td>
-                                </tr>
-                                <tr>
-                                    <td>Owner:</td>
-                                    <td><%= @contact.try(:user).try(:full_name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Address 1:</td>
-                                    <td><%= @contact.try(:address).try(:address_1) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Address 2</td>
-                                    <td><%= @contact.try(:address).try(:address_2) %></td>
-                                </tr>
-                                <tr>
-                                    <td>City</td>
-                                    <td><%= @contact.try(:address).try(:city) %></td>
-                                </tr>
-                                <tr>
-                                    <td>Zip</td>
-                                    <td><%= @contact.try(:address).try(:zip_code) %></td>
-                                </tr>
-                                <tr>
-                                    <td>State</td>
-                                    <td><%= @contact.try(:address).try(:state).try(:name) %></td>
-                                </tr>
-                                <tr>
-                                    <td>County</td>
-                                    <td><%= @contact.try(:address).try(:county) %></td>
-                                </tr>
-                                <tr>
-                                  <% @contact.phones.each do |phone| %>
-                                  <tr>
-                                      <td>Phone -
-                                          <%= phone.try(:type).try(:name) %></td>
-                                      <td>Number:
-                                          <%= phone.number %>, Ext:
-                                          <%= phone.extension %></td>
-                                  </tr>
-                                  <% end %>
-                                </tr>
+
+            <div class="col-sm-8">
 
 
-                            </tbody>
-                        </table>
+                <div class="panel with-nav-tabs panel-primary">
+                    <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Take Notes</a>
+                            </li>
+                            <li>
+                                <a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Files</a>
+                            </li>
+                            <li>
+                                <a href="#call" aria-controls="call" role="tab" data-toggle="tab">Calls</a>
+                            </li>
 
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="notes">
+                                <%= form_for @contact do |f| %>
+                                <%= f.fields_for :notes, @contact.notes.build do |g|%>
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <div class="field">
+                                            <%= g.text_area :content, class: 'form-control' %>
+                                        </div>
+                                    </div>
+                                    <div class="actions">
+                                        <%= f.submit class: "btn btn-primary" %>
+                                    </div>
+                                </div>
+                                <% end %>
+                                <% end %>
+                            </div>
+                            <div class="tab-pane fade" id="upload">
+                                <%= form_for @contact do |f| %>
+                                <%= f.fields_for :uploads, @contact.uploads.build do |g|%>
+
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <div class="form-group">
+                                        <%= g.label :upload_category_id %><br>
+                                        <%= g.collection_select :upload_category_id, UploadCategory.all, :id, :name, {:prompt => 'Select an Upload Type'},  { class: 'form-control'} %>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <%= g.label :description %><br>
+                                    <%= g.text_area :description, class: 'form-control' %>
+                                </div>
+
+                                <div class="col-sm-6 col-sm-offset-3">
+                                    <%= g.label :upload %><br>
+                                    <%= g.file_field :uploads, multiple: true %>
+                                </div>
+                                <br>
+                                <div class="col-sm-6 col-sm-offset-3 text-center margin-top-3">
+                                    <%= f.submit class: "btn btn-primary" %>
+                                </div>
+                                <% end %>
+                                <% end %>
+                            </div>
+
+
+                            <div class="tab-pane fade" id="call">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class=" ">
+                                                <%= form_tag create_customer_call_path(@contact), method: :post do  %>
+                                                <%= hidden_field_tag "call[id]", @contact.id %>
+
+                                                <div class="col-xs-6 col-xs-offset-3">
+                                                    <div class="form-group">
+                                                        <label for="call_id">Call ID</label><br/>
+                                                        <input id="id" name="call[call_id]" type="number" class="form-control"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 text-center">
+                                                    <div class="form-group">
+                                                        <div class="actions">
+                                                            <%= submit_tag "Add Call to Job", class: "btn btn-primary" %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Calls</div>
+                                            <div class="panel-body table-responsive">
+                                                <table
+                                                    class="resp"
+                                                    data-toggle="table"
+                                                    data-url="/calls"
+                                                    data-show-refresh="true"
+                                                    data-show-toggle="true"
+                                                    data-show-columns="true"
+                                                    data-search="true"
+                                                    data-flat="true"
+                                                    data-select-item-name="toolbar1"
+                                                    data-pagination="true"
+                                                    data-sort-name="id"
+                                                    data-sort-order="desc">
+                                                    <thead>
+                                                        <tr>
+                                                            <th data-field="id" data-sortable="true" data-formatter="AddVendor"></th>
+                                                            <th data-field="id" data-sortable="true" data-formatter="CallLinkFormatter">Call Link</th>
+                                                            <th data-field="callrail_id" data-sortable="true">CallRail ID</th>
+                                                            <th data-field="datetime" data-sortable="true">Call Date/Time</th>
+                                                            <th data-field="contact_phone_number" data-sortable="true">Phone Number</th>
+                                                            <th data-field="contact_city" data-sortable="true">City</th>
+                                                            <th data-field="callrail_id" data-sortable="true" data-formatter="CallRailTimeline">CallRail Timeline</th>
+                                                            <th data-field="contact_id" data-sortable="true">Already Assigned?</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="panel-footer">
 
-                <%= link_to edit_contact_path(@contact), class: "btn btn-sm btn-warning", type: "button" do %>
-                <i class="glyphicon glyphicon-edit"></i>
-                <% end %>
+
+            <div class="col-sm-8 margin-top-5">
+                <h3 class="text-center">Past</h3>
+                <div class="timeline-centered">
+                    <% @contact.trackers.each do |tracker| %>
+
+                    <% if tracker.tracker_task.name == "Note Created" %>
+                    <% noted = tracker.child_trackable %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Note Created &bull;
+                                        <%= noted.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= noted.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= noted.content %>
+                                    <br />
+                                    <%= link_to 'Delete Note',  tracker_path(tracker, contact_id: @contact.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "File Uploaded" %>
+                    <% upload = tracker.child_trackable %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Upload &bull;
+                                        <%= upload.try(:created_at).strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.user.try(:full_name) %>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                  <% upload.uploads.each_with_index do |file, index| %>
+                                    <%= upload.description  %> <br />
+                                    <%= upload.uploads[index].file.filename  %> -
+                                    <a target="_blank" href="<%= file.try(:url) %>">View/Download</a><br />
+                                  <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "Call Assigned" %>
+                    <% call = tracker.child_trackable %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Call Assigned &bull;
+                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <%= link_to "View Call", call_path(call.id) %>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <% elsif tracker.tracker_task.name == "Scheduler Created" %>
+                    <% scheduler = tracker.child_trackable %>
+                    <% if scheduler.event_date.past? %>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+                            </div>
+                            <div class="timeline-label">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><%= scheduler.title %>
+                                        &bull;
+                                        <%= tracker.created_at.strftime("%D %I:%M %p") %>
+                                        &bull;
+                                        <%= tracker.try(:user).try(:full_name) %></h3>
+                                </div>
+                                <div class="panel-body">
+                                    Date:
+                                    <%= scheduler.event_date %><br/>
+                                    Event Type:
+                                    <%= scheduler.scheduler_event %><br/>
+                                    Start Time:
+                                    <%= scheduler.start_time.strftime("%I:%M %p") unless scheduler.start_time == nil %><br/>
+                                    End Time:
+                                    <%= scheduler.end_time.strftime("%I:%M %p") unless scheduler.end_time == nil %><br/>
+                                    Notes:
+                                    <%= scheduler.notes %>
+                                    <br/>
+                                    <%= scheduler.assigned_to_user.try(:full_name) %>
+
+                                    <br />
+                                    <%= link_to 'Delete Scheduled Event',  tracker_path(tracker, contact_id: @contact.id),  method: :delete, data: { confirm: 'Are you sure?' } %>
+                                </div>
+
+                            </div>
+                        </div>
+                    </article>
+                    <% end %>
+                    <% end %>
+
+                    <% end %>
+                </div>
+
+            </div>
+
+
+    <div id="currentCallsModal" class="modal fade" tabindex="-1" role="dialog">
+        <%= form_for :call, url: create_customer_call_url(@contact), method: :post do |f|  %>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Add Current Call</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+
+
+                              <%= hidden_field_tag "call[contact_id]", @contact.id %>
+
+                              <div class="col-xs-6 col-xs-offset-3">
+                                  <div class="form-group">
+                                      <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, {prompt: true},  { class: 'form-control'} %>
+                                  </div>
+                              </div>
+
+                              <div class="col-xs-12 text-center">
+                                  <div class="form-group">
+                                      <div class="actions">
+
+                                      </div>
+                                  </div>
+                              </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <%= f.submit "Add Call to Job", class: "btn btn-primary" %>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
             </div>
         </div>
+        <% end %>
     </div>
-</div>
+
+
+    <div class="modal fade" id="vendors" tabindex="-1" role="dialog" aria-labelledby="vendors">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Add a Vendor</h4>
+          </div>
+          <%= form_for @contact do |f| %>
+          <div class="modal-body">
+              <div class="field">
+                <%= f.fields_for :contact_vendors, @contact.contact_vendors.build do |g| %>
+                  <%= g.label :vendor_id %><br>
+                  <%= g.collection_select :vendor_id, Vendor.all, :id, :name, {:prompt => 'Select a Vendor'},  { class: 'form-control'} %>
+                <% end %>
+              </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <%= f.submit "Save Changes", class: "btn btn-primary" %>
+          </div>
+          <% end %>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        flatpickr(".datePicker", {
+            enableTime: false,
+            // create an extra input solely for display purposes
+            altInput: true,
+            altFormat: "F j, Y"
+        });
+        $('[data-toggle=tab]').click(function () {
+            if ($(this).parent().hasClass('active')) {
+                $($(this).attr("href")).toggleClass('active');
+            }
+        })
+    </script>

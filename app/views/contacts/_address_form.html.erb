@@ -1,49 +1,19 @@
-<%= f.fields_for(@address) do |g| %>
-
-<div class="col-xs-6">
-    <div class="form-group">
-        <%= label_tag :address_1 %><br>
-        <%= text_field_tag "address[address_1]", @address.try(:address_1), class: "form-control"  %>
-    </div>
-</div>
-<div class="col-xs-6">
-    <div class="form-group">
-        <%= label_tag :address_2 %><br>
-        <%= text_field_tag "address[address_2]", @address.try(:address_2), class: "form-control" %>
-    </div>
-</div>
-
-
-<div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-3">
-          <div class="form-group">
-              <%= label_tag :zip %><br>
-              <%= number_field_tag "address[zip_code]", @address.try(:zip_code), class: "form-control"  %>
-          </div>
-      </div>
+<div class="contact-address">
+  <% @contact_address = (@contact.try(:address) || Address.new) unless @contact_address %>
+  <%= f.simple_fields_for(:address, @contact_address) do |a| %>
+    <%= a.input :address_1, wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'address-1' } %>
+    <%= a.input :address_2, wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'address-2' } %>
+    <div class="col-xs-12">
+      <div class="row">
+        <%= a.input :zip_code, label: 'Zip', wrapper_html: { class: 'col-xs-3' }, input_html: { class: 'zip-code' } %>
         <div class="col-xs-3">
             <label>Zip Code Lookup</label><br>
-            <button id="zipLookup" type="button" class="btn btn-primary">Lookup</button>
+            <button id="contactZipLookup" type="button" class="btn btn-primary">Lookup</button>
         </div>
+      </div>
     </div>
+    <%= a.input :city, wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'city' } %>
+    <%= a.input :state_id, collection: State.order(:name).pluck(:name, :id), wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'state-id' } %>
+    <%= a.input :county, wrapper_html: { class: 'col-xs-6' }, input_html: { class: 'county' } %>
+  <% end %>
 </div>
-<div class="col-xs-6">
-    <div class="form-group">
-        <%= label_tag :city %><br>
-        <%= text_field_tag "address[city]", @address.try(:city), class: "form-control"  %>
-    </div>
-</div>
-<div class="col-xs-6">
-    <div class="form-group">
-        <%= label_tag :state_id %><br>
-        <%= select_tag("address[state_id]", options_for_select(State.all.map{|p| [p.name, p.id]}, selected: @address.try(:state).try(:id)), class: "form-control") %>
-    </div>
-</div>
-<div class="col-xs-6">
-    <div class="form-group">
-        <%= label_tag :county %><br>
-        <%= text_field_tag "address[county]", @address.try(:county), class: "form-control"  %>
-    </div>
-</div>
-<% end %>

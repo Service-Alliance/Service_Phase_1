@@ -19,8 +19,8 @@ class Contact < ActiveRecord::Base
   has_many :vendors, through: :contact_vendors
   has_many :calls
   accepts_nested_attributes_for :contact_vendors
+ 
 
-  # delegate :full_address, :address_without_county, :format_address, to: :address, allow_nil: true
 
   include PgSearch
   include PublicActivity::Model
@@ -30,6 +30,8 @@ class Contact < ActiveRecord::Base
   Arel::Nodes::InfixOperation.new('||',
     parent.table[:first_name], parent.table[:last_name])
   end
+
+  # delegate :full_address, :address_without_county, :format_address, to: :address, allow_nil: true
 
   pg_search_scope :full_search,
     against: [:first_name, :last_name],
@@ -95,6 +97,15 @@ class Contact < ActiveRecord::Base
 
   def first_phone_number
     phones.first.try(:number)
+  end
+
+  def company_name
+    companies.count == 1 ? companies.first.name : ''
+  end
+
+  def add_company(company)
+    return if company.nil?
+    companies << company unless companies.include?(company)
   end
 
   # FIXME: this should be move to Job model
@@ -170,3 +181,5 @@ class Contact < ActiveRecord::Base
     self.save
   end
 end
+
+

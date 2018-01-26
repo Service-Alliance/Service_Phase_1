@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126194026) do
+ActiveRecord::Schema.define(version: 20180126203458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -524,6 +524,7 @@ ActiveRecord::Schema.define(version: 20180126194026) do
     t.text     "xact_link"
     t.datetime "fnol_received"
     t.integer  "referral_id"
+    t.integer  "contact_id"
   end
 
   add_index "jobs", ["adjuster_id"], name: "index_jobs_on_adjuster_id", using: :btree
