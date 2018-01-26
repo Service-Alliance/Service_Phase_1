@@ -93,7 +93,6 @@ class ContactsController < ApplicationController
       if @contact.update(contact_params)
         @contact.phones.destroy_all
         phone_count = phone_params["type_ids"].count
-
         phone_count.times do |index|
           unless phone_params["numbers"][index] == ""
             @contact.phones.create(type_id: phone_params["type_ids"][index], number: phone_params["numbers"][index], extension: phone_params["extensions"][index])

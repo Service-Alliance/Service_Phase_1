@@ -162,6 +162,8 @@ class JobsController < ApplicationController
     @previous_status = Job.find(params[:id])
     respond_to do |format|
       if @job.update(job_params)
+        franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
+        @job.franchise_id = franchise.franchise_id if franchise
         @job.franchise_id = FranchiseZipcode.detect_franchise(address_params['zip_code'])
         @job.update(job_params)
         franchise = FranchiseZipcode.find_by(zip_code: address_params['zip_code'])
