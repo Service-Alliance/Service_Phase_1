@@ -50,6 +50,7 @@ class PricingsController < ApplicationController
     respond_to do |format|
       if @pricing.save
         @job.track 'Pricing Created', current_user, @pricing
+        JobMailer.pricing_created(@job.job_coordinator, current_user, @pricing, @job).deliver if @job.job_coordinator.present?
         format.html { redirect_to @job, notice: 'Pricing was successfully created.' }
         format.json { render :show, status: :created, location: @pricing }
       else

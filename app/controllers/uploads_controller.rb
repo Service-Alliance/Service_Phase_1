@@ -37,8 +37,9 @@ class UploadsController < ApplicationController
     respond_to do |format|
       if @upload.save
         @job.track 'File Uploaded', current_user, @upload
+        JobMailer.files_uploaded(@job.job_coordinator, current_user, @upload, @job).deliver if @job.job_coordinator.present?
 
-        format.html { redirect_to job_path(@job), notice: 'Upload was successfully uploaded.' }
+        format.html { redirect_to job_path(@job), notice: 'Files were successfully uploaded.' }
         format.json { render :show, status: :created, location: @upload }
       else
         format.html { redirect_to job_path(@job) }
