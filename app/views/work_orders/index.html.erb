@@ -10,6 +10,11 @@
             <div class="alert alert-info">
               <%= link_to "Click here", @job %> to return to the job
             </div>
+            <div>
+              <%= link_to new_job_work_order_path(@job), class: 'btn btn-primary' do %>
+                <i class="fa fa-plus"></i> New Work Order
+              <% end %>
+            </div>
             <%= render partial: 'datatables/work_orders', locals: {
               filter: "job_id=#{@job.id}",
               columns: [
