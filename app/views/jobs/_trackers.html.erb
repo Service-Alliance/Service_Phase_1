@@ -34,7 +34,7 @@
         <div class="timeline-label">
           <div class="panel-heading">
             <h3 class="panel-title">Upload &bull;
-              <%= upload.try(:created_at).strftime("%D %I:%M %p") %>
+              <%= upload.try(:created_at).try(:strftime, "%D %I:%M %p") %>
               &bull;
               <%= tracker.user.try(:full_name) %>
             </h3>
