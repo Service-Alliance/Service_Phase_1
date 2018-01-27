@@ -7,14 +7,14 @@
       <% end %>
       <div class="col-xs-12">
         <div class="col-xs-12">
-          <h2 class=text-center> SERVPRO of <%= @job.try(:franchise).try(:name) %> W/O # <%= @work_order.id %>  </h2>
-          <% if @work_order.archived? %>
+          <h2 class=text-center> SERVPRO of <%= @job.try(:franchise).try(:name) %> W/O # <%= @work_order_presenter.id %>  </h2>
+          <% if @work_order_presenter.archived? %>
             <div class="alert alert-warning">This work order has been <strong>archived</strong></div>
           <% end %>
-          <div class="panel <%= @work_order.archived? ? 'panel-default archived' : 'panel-info' %>">
+          <div class="panel <%= @work_order_presenter.archived? ? 'panel-default archived' : 'panel-info' %>">
           <div class="panel-heading">
             <h2 class="panel-title clearfix">
-              Work Starts: <%= @work_order.job_start.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
+              Work Starts: <%= @work_order_presenter.job_start.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
               <button type="button" data-toggle="modal" data-target="#work_order_tsheets_modal" class="hidden pull-right btn btn-success">Send to TSheets</button>
             </h2>
           </div>
@@ -24,7 +24,7 @@
                <div class="col-xs-12">
                  <div class="form-group">
                   <span class="bold">Assigned To:</span>
-                  <%= @work_order.to.html_safe %>
+                  <%= @work_order_presenter.to.html_safe %>
                  </div>
                </div>
                 <hr/>
@@ -32,21 +32,21 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <span class="bold">Crew Chief(s):</span><br>
-                      <%= @work_order.crew_chief_names.join('<br />').html_safe %>
+                      <%= @work_order_presenter.crew_chief_names.join('<br />').html_safe %>
                     </div>
                     <div class="form-group">
                       <span class="bold">Technician(s):</span><br>
-                      <%= @work_order.technician_names.join('<br />').html_safe %>
+                      <%= @work_order_presenter.technician_names.join('<br />').html_safe %>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
                       <span class="bold">Coordinator:</span>
-                      <%= @work_order.name %>
+                      <%= @work_order_presenter.name %>
                     </div>
                     <div class="form-group">
                       <span class="bold">Typed By:</span>
-                      <%= @work_order.typed_by %>
+                      <%= @work_order_presenter.typed_by %>
                     </div>
                   </div>
                 </div>
@@ -61,7 +61,7 @@
                           <th>Subject</th>
                           <th>Sent</th>
                         </tr>
-                        <% @work_order.mail_logs.each do |log| %>
+                        <% @work_order_presenter.mail_logs.each do |log| %>
                           <tr>
                             <td><%= log.name %></td>
                             <td><%= log.email %></td>
@@ -82,50 +82,50 @@
                       <div class="form-group">
                         <h3>Work Order Details</h3><br>
                         <span class="bold">Job Name:</span>
-                        <%= @work_order.job_name %>
+                        <%= @work_order_presenter.job_name %>
                       </div>
                     </div>
                       <div class="col-sm-12">
                         <div class="form-group">
                           <span class="bold">Job Start:</span>
-                          <%= @work_order.job_start.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
+                          <%= @work_order_presenter.job_start.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
                         </div>
                       </div>
 
                       <div class="col-sm-12">
                         <div class="form-group">
                           <span class="bold">Job Location:</span><br>
-                          <%= @work_order.customer_address_without_county %>
+                          <%= @work_order_presenter.customer_address_without_county %>
                         </div>
                       </div>
                       <div class="col-sm-12">
                         <div class="form-group">
                           <span class="bold">Contact:</span><br>
-                          <%= @work_order.contact %>
+                          <%= @work_order_presenter.contact %>
                         </div>
                       </div>
                       <div class="col-sm-12">
                         <div class="form-group">
                           <span class="bold">Telephone:</span><br>
-                          <%= @work_order.telephone %>
+                          <%= @work_order_presenter.telephone %>
                         </div>
                       </div>
                   </div>
                   <div class="col-sm-6">
-                    <%= render partial: 'partials/google_map', locals: {map_id: 'map', address: @work_order.customer_full_address} %>
+                    <%= render partial: 'partials/google_map', locals: {map_id: 'map', address: @work_order_presenter.customer_full_address} %>
                   </div>
                 </div>
                 <hr />
                 <div class="col-sm-12">
                   <div class="form-group">
                     <span class="bold">Scope of Work:</span><br>
-                    <%= @work_order.scope_of_work %>
+                    <%= @work_order_presenter.scope_of_work %>
                   </div>
                 </div>
               <div class="col-sm-12">
                 <div class="form-group">
                   <span class="bold">Required:</span><br>
-                  <%= @work_order.required %>
+                  <%= @work_order_presenter.required %>
                 </div>
               </div>
             </div>
@@ -134,19 +134,19 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <span class="bold">Crew Size:</span><br>
-                    <%= @work_order.display_crew%>
+                    <%= @work_order_presenter.display_crew%>
                   </div>
                 </div>
                 <div class="col-sm-3">
                   <div class="form-group">
                     <span class="bold">Estimated hours:</span><br>
-                    <%= @work_order.estimated_hours %>
+                    <%= @work_order_presenter.estimated_hours %>
                   </div>
                 </div>
                 <div class="col-sm-3">
                   <div class="form-group">
                     <span class="bold">Actual Time on Job:</span><br>
-                    <%= @work_order.hours_on_job %>
+                    <%= @work_order_presenter.hours_on_job %>
                   </div>
                 </div>
               </div>
@@ -156,32 +156,32 @@
                 <div class="col-sm-3">
                   <div class="form-group">
                     <span class="bold">Referral:</span><br>
-                    <%= @work_order.referral %>
+                    <%= @work_order_presenter.referral %>
                   </div>
                 </div>
                 <div class="col-sm-3">
                   <div class="form-group">
                     <span class="bold">Insurance:</span><br>
-                    <%= @work_order.insurance %>
+                    <%= @work_order_presenter.insurance %>
                   </div>
                 </div>
                 <div class="col-sm-3">
                   <div class="form-group">
                     <span class="bold">Claim Number:</span><br>
-                    <%= @work_order.claim_number %>
+                    <%= @work_order_presenter.claim_number %>
                   </div>
                 </div>
                 </div>
                 <div class="col-sm-12">
                   <div class="form-group">
                     <span class="bold">Job Manager Contact:</span><br>
-                    <%= render partial: 'job_managers', locals: {job_managers: @work_order.job_managers} %>
+                    <%= render partial: 'job_managers', locals: {job_managers: @work_order_presenter.job_managers} %>
                   </div>
                 </div>
                 <div class="col-sm-12">
                   <div class="form-group">
                     <span class="bold">Adjuster:</span><br>
-                    <%= @work_order.adjuster %>
+                    <%= @work_order_presenter.adjuster %>
                   </div>
                 </div>
               </div>

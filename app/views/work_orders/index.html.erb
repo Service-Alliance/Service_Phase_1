@@ -1,173 +1,39 @@
 <div class="container-fluid">
-    <div id="wrapper">
-        <%= render partial: "partials/jobs_sidebar" %>
-        <div id="page-content-wrapper">
-            <% if notice %>
-            <div class="alert alert-success" role="alert"><%= notice %></div>
-            <% end %>
-            <div class="col-xs-12">
-                <h1 class="text-center">Listing Work Orders</h1>
-                <%= link_to "Add Work Order", new_job_work_order_path(@job), class:"btn btn-primary new-manager-button"%>
-                <% @job.work_orders.each do |work_order| %>
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">
-                          Created At: <%= @work_order.created_at.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
-                        </h2>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12">
-                              <hr/>
-                              <div class="col-xs-12">
-                                <h2 class="text-center">SERVPRO of <%= @job.try(:franchise).try(:name) %> Work Order </h2>
-                                <h2 class="text-center"><%= @job.try(:franchise).try(:phone) %></h2>
-                              </div>
-                            <div class="clearfix">
-                            <div class="col-sm-6">
-                              <div class="form-group">
-                                <span class="bold">Crew Chief(s):</span><br>
-                                <%= @work_order.crew_chief_names.join('<br />').html_safe %>
-                              </div>
-                              <div class="form-group">
-                                <span class="bold">Technician(s):</span><br>
-                                <%= @work_order.technician_names.join('<br />').html_safe %>
-                              </div>
-                            </div>
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <span class="bold"> Coordinator Name:</span><br>
-                                      <%= work_order.name %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <span class="bold">Published Date:</span><br>
-                                        <%= work_order.updated_at.try(:strftime, "%A, %B %d, %Y %l:%M %p") %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-6">
-                                  <div class="form-group">
-                                      <span class="bold">Typed By:</span><br>
-                                        <%= work_order.typed_by %>
-                                  </div>
-                              </div>
-                            <div class="row">
-                            <div class="col-sm-12">
-                              <div class="form-group">
-                              <span class="bold">Email Log</span><br>
-                                <table class="table table-condensed">
-                                  <tr>
-                                  <th>Name</th>
-                                  <th>Email</th>
-                                  <th>Subject</th>
-                                  <th>Sent</th>
-                                 </tr>
-                                 <% @work_order.mail_logs.each do |log| %>
-                                 <tr>
-                                <td><%= log.name %></td>
-                                <td><%= log.email %></td>
-                                <td><%= log.subject %></td>
-                                <td><%= log.created_at %></td>
-                              </tr>
-                            <% end %>
-                          </table>
-                    </div>
-                  </div>
-                </div>
-                              <div class="col-xs-12">
-                                <hr/>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Job Start:</span><br>
-                                      <%= work_order.job_start.try(:strftime, "%A, %B %d, %Y %l:%M:%S %p") %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Job Name:</span><br>
-                                        <%= work_order.job_name %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Job Location:</span><br>
-                                      <%= work_order.customer_address_without_county %>
-                                  </div>
-                              </div>
 
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Telephone:</span><br>
-                                      <%= work_order.telephone %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Contact:</span><br>
-                                      <%= work_order.contact %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <span class="bold">Insurance:</span><br>
-                                      <%= work_order.insurance %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                                  <div class="form-group">
-                                      <span class="bold">Claim Number:</span><br>
-                                      <%= work_order.claim_number %>
-                                  </div>
-                              </div>
+  <section id="home">
+    <div class="row">
 
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Required:</span><br>
-                                      <%= work_order.required %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Referral:</span><br>
-                                      <%= work_order.referral %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Franchise Location:</span><br>
-                                      <%= work_order.franchise_location %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Scope of Work:</span><br>
-                                      <%= work_order.scope_of_work %>
-                                  </div>
-                              </div>
-                              <div class="col-sm-12">
-                                  <div class="form-group">
-                                      <span class="bold">Job Manager Contact Info:</span><br>
-                                      <%= work_order.job_manager_contact_info %>
-                                  </div>
-                              </div>
-
-
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                            <%= link_to edit_job_work_order_path(@job, work_order), class: "btn btn-sm btn-warning", type: "button" do %>
-                            <i class="glyphicon glyphicon-edit"></i>
-                            <% end %>
-                            <% if current_user.admin? %>
-                            <td><%= link_to 'Destroy',  job_work_order_path(@job, work_order), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                            <% end %>
-                    </div>
-                </div>
-                <% end %>
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Work Orders for Job <%= @job.name || @job.id %></div>
+          <div class="panel-body">
+            <div class="alert alert-info">
+              <%= link_to "Click here", @job %> to return to the job
             </div>
+            <%= render partial: 'datatables/work_orders', locals: {
+              filter: "job_id=#{@job.id}",
+              columns: [
+                :created_at,
+                :updated_at,
+                :id,
+                :state,
+                :job_start,
+                :job_id,
+                :job_name,
+                :typed_by,
+                :contact,
+                :telephone,
+                :job_location,
+                :vendor_name,
+                :crew_names,
+                :referral,
+                :estimated_hours,
+                :number_of_crew_chiefs,
+                :number_of_technicians
+              ]}
+            %>
         </div>
+      </div>
     </div>
-</div>>
+  </section>
+</div>

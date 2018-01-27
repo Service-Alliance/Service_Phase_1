@@ -81,7 +81,8 @@ class JobsController < ApplicationController
     @past_schedules = []
     @note = @job.notes.new
 
-    @work_order = WorkOrderPresenter.new(WorkOrder.build_from_job(@job, current_user.full_name), view_context)
+    @work_order = WorkOrder.build_from_job(@job, current_user.full_name)
+    @work_order_presenter = WorkOrderPresenter.new(@work_order, view_context)
 
     @inspection_checklist = InspectionChecklist.new
     @job.schedulers.each do |scheduler|
