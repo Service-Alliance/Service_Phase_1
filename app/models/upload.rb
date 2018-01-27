@@ -8,6 +8,6 @@ class Upload < ActiveRecord::Base
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   def file_name
-    return self.upload.file.path.split("/").last
+    return upload.file.present? ? upload.file.path.split("/").last : ''
   end
 end

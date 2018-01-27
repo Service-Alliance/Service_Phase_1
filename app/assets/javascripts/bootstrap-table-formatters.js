@@ -22,6 +22,14 @@ function VendorLinkFormatter(value, row, index) {
 function UploadLinkFormatter(value, row, index) {
   return "<a href='" + value + "'>View/Download</a>";
 }
+function UploadCategoryFormatter(value, row, index) {
+  var description = '';
+  if(row.pricing !== '-' && row.pricing !== '') { description += row.pricing + '<br>'; }
+  if(row.description !== '' && row.description !== null) { description += row.description; }
+  var res = row.category;
+  if(description != '') { res += "&nbsp; <span class='has-tooltip text-info' title='" + description + "'><i class='fa fa-exclamation-circle muted'></i></span>"; }
+  return res;
+}
 function DeleteUpload(value, row, index) {
   return "<a data-method='delete' data-confirm='Are you sure?' href='/jobs/<%= @job.id %>/uploads/" + row.id + "'>Delete</a>";
 }
@@ -57,4 +65,14 @@ function CallRailTimeline(value, row, index) {
 }
 function ReturnCallRail(value, row, index){
   return "<a class='btn btn-primary' href='https://app.callrail.com/a/686639065/leadcenter/#/calls/" + value + "'>Return Call</a>";
+}
+function UploadsFormatter(value, row, index) {
+  var res = "";
+  for(var i = 0; row['uploads.' + i + '.filename'] !== undefined; i++){
+    var linkText = row['uploads.' + i + '.filename'];
+    var linkUrl = row['uploads.' + i + '.url'];
+
+    res += '<a href="' + linkUrl + '" target="_blank">' + linkText + '<br />';
+  }
+  return res;
 }

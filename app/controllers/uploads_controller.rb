@@ -2,10 +2,17 @@ class UploadsController < ApplicationController
   before_action :set_upload, only: [:show, :edit, :update, :destroy]
   before_action :set_job
 
+  Struct.new("Attachment", :category, :uploads, :created_at, :description, :pricing)
+
   # GET /uploads
   # GET /uploads.json
   def index
-    @uploads = @job.uploads
+    @uploads = @job.uploads.flat_map{ |u| Struct::Attachment.new(u.upload_category.name, u.uploads, u.created_at, u.description, '-') }
+    @uploads << @job.pricings.to_a
+      .reject{ |p| p.uploads.empty? }
+      .flat_map{ |p| p.uploads.flat_map{ |u| Struct::Attachment.new(p.pricing_category.name, u.uploads, u.created_at, p.description, p.price) } }
+    @uploads.flatten!
+    @uploads.sort{ |x, y| x.created_at <=> y.created_at }
   end
 
   # GET /uploads/1
@@ -30,8 +37,9 @@ class UploadsController < ApplicationController
     respond_to do |format|
       if @upload.save
         @job.track 'File Uploaded', current_user, @upload
+        JobMailer.files_uploaded(@job.job_coordinator, current_user, @upload, @job).deliver if @job.job_coordinator.present?
 
-        format.html { redirect_to job_path(@job), notice: 'Upload was successfully uploaded.' }
+        format.html { redirect_to job_path(@job), notice: 'Files were successfully uploaded.' }
         format.json { render :show, status: :created, location: @upload }
       else
         format.html { redirect_to job_path(@job) }

@@ -1,0 +1,22 @@
+<h1><%= @user.name %> has just uploaded files for job <%= @job.name || @job.id %></h1>
+
+<p><%= link_to "Click here", @job %> to view the job</p>
+
+<p>
+  Category: <%= @upload.upload_category.name %><br />
+  Description: <%= simple_format(@upload.description) %>
+</p>
+
+<% if @upload.uploads.any? %>
+  <table style="width:100%">
+    <tr>
+      <td>Attachment</td>
+    </tr>
+    <% @upload.uploads.each do |u| %>
+      <tr>
+        <td><%= link_to u.file.filename, u.url %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+

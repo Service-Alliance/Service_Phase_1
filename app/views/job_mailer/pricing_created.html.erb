@@ -1,0 +1,24 @@
+<h1><%= @user.name %> has just created a pricing estimate for job <%= @job.name || @job.id %></h1>
+
+<p><%= link_to "Click here", @job %> to view the job</p>
+
+<p>
+  Price: <%= @pricing.price %><br />
+  Category: <%= @pricing.pricing_category.name %><br />
+  Description: <%= @pricing.description %>
+</p>
+
+<% if @pricing.uploads.any? %>
+  <table style="width:100%">
+    <tr>
+      <td>Attachment</td>
+    </tr>
+    <% @pricing.uploads.each do |upload| %>
+      <% upload.uploads.each do |u| %>
+        <tr>
+          <td><%= link_to u.file.filename, u.url %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+<% end %>
