@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :customer_vendors
   resources :pricing_categories
   resources :customer_companies
+  resources :vehicles
   resources :companies do
     get 'search_suggestions', on: :collection
   end

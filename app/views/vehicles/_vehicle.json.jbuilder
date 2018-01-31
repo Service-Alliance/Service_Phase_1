@@ -1,0 +1,2 @@
+json.extract! vehicle, :id, :year, :name, :state, :brand, :license_plate, :mileage, :registration_date, :insurance_date, :inspection_date, :oil_change, :brakes, :battery, :filters, :tires, :transmission, :fluids, :miscellaneous, :created_at, :updated_at
+json.url vehicle_url(vehicle, format: :json)

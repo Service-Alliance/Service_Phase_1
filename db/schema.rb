@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126021252) do
+ActiveRecord::Schema.define(version: 20180131185433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 20180126021252) do
     t.text     "transcription"
     t.integer  "vendor_id"
     t.integer  "customer_id"
+    t.integer  "contact_id"
   end
 
   add_index "calls", ["created_at"], name: "index_calls_on_created_at", using: :btree
@@ -217,6 +218,14 @@ ActiveRecord::Schema.define(version: 20180126021252) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "contact_addresses", force: :cascade do |t|
+    t.integer  "address_id"
+    t.integer  "contact_id"
+    t.integer  "address_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "contact_assignments", force: :cascade do |t|
     t.integer  "contact_id"
     t.integer  "job_id"
@@ -227,6 +236,20 @@ ActiveRecord::Schema.define(version: 20180126021252) do
 
   add_index "contact_assignments", ["job_id"], name: "index_contact_assignments_on_job_id", using: :btree
 
+  create_table "contact_companies", force: :cascade do |t|
+    t.integer  "company_id"
+    t.integer  "contact_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contact_vendors", force: :cascade do |t|
+    t.integer  "contact_id"
+    t.integer  "vendor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "contacts", force: :cascade do |t|
     t.string   "company"
     t.string   "first_name"
@@ -234,8 +257,14 @@ ActiveRecord::Schema.define(version: 20180126021252) do
     t.string   "email"
     t.integer  "owner_id"
     t.integer  "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "category"
+    t.text     "sharp_spring_id"
+    t.text     "company_name"
+    t.text     "title"
+    t.text     "website"
+    t.text     "sub_category"
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
@@ -495,6 +524,7 @@ ActiveRecord::Schema.define(version: 20180126021252) do
     t.text     "xact_link"
     t.datetime "fnol_received"
     t.integer  "referral_id"
+    t.integer  "contact_id"
   end
 
   add_index "jobs", ["adjuster_id"], name: "index_jobs_on_adjuster_id", using: :btree
@@ -913,6 +943,28 @@ ActiveRecord::Schema.define(version: 20180126021252) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
   add_index "users", ["tsheets"], name: "index_users_on_tsheets", using: :gin
+
+  create_table "vehicles", force: :cascade do |t|
+    t.integer  "year"
+    t.string   "name"
+    t.string   "state"
+    t.string   "brand"
+    t.string   "license_plate"
+    t.integer  "mileage"
+    t.date     "registration_date"
+    t.date     "insurance_date"
+    t.date     "inspection_date"
+    t.integer  "oil_change"
+    t.integer  "brakes"
+    t.integer  "battery"
+    t.integer  "filters"
+    t.integer  "tires"
+    t.integer  "transmission"
+    t.integer  "fluids"
+    t.string   "miscellaneous"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
   create_table "vendor_assignments", force: :cascade do |t|
     t.integer  "vendor_id"
