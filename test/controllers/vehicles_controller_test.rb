@@ -18,7 +18,7 @@ class VehiclesControllerTest < ActionController::TestCase
   end
 
   test "should create vehicle" do
-    assert_difference('vehicle.count') do
+    assert_difference('Vehicle.count') do
       post :create, vehicle: { year: @vehicle.year, state: @vehicle.state, name: @vehicle.name, brand: @vehicle.brand, license_plate: @vehicle.license_plate, mileage: @vehicle.mileage,
       registration_date: @vehicle.registration_date, insurance_date: @vehicle.insurance_date, inspection_date: @vehicle.inspection_date, oil_change: @vehicle.oil_change, 
       brakes: @vehicle.brakes, battery: @vehicle.battery, filters: @vehicle.filters, tires: @vehicle.tires, transmission: @vehicle.transmission, fluids: @vehcile.fluids, miscellaneous: @vehicle.miscellaneous}
@@ -45,7 +45,7 @@ class VehiclesControllerTest < ActionController::TestCase
   end
 
   test "should destroy vehicle" do
-    assert_difference('vehicle.count', -1) do
+    assert_difference('Vehicle.count', -1) do
       delete :destroy, id: @vehicle
     end
 
