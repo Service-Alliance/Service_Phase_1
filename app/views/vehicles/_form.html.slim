@@ -1,0 +1,24 @@
+= simple_form_for(@vehicle) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :year
+    = f.input :name
+    = f.input :state
+    = f.input :brand
+    = f.input :license_plate
+    = f.input :mileage
+    = f.input :registration_date
+    = f.input :insurance_date
+    = f.input :inspection_date
+    = f.input :oil_change
+    = f.input :brakes
+    = f.input :battery
+    = f.input :filters
+    = f.input :tires
+    = f.input :transmission
+    = f.input :fluids
+    = f.input :miscellaneous
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,93 @@
+- content_for(:title, "Vehicle")
+ 
+== render layout: 'layouts/content'
+  p#notice = notice
+ 
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Year:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.year
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Name:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.name
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong State:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.state
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Brand:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.brand
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong License Plate:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.license_plate
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Mileage:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.mileage
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Registration:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.registration_date
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Insurance:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.insurance_date
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Inspection:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.inspection_date
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Oil Change:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.oil_change
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Brakes:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.brakes
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Battery:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.battery
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Filters:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.filters
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Tires:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.tires
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Transmission:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.transmission
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Fluids:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.fluids
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Miscellaneous:
+    .col-md-6.col-sm-6.col-xs-12
+      = @vehicle.miscellaneous
+  .text-center
+     => link_to 'Edit', edit_vehicle_path(@vehicle), class: 'btn btn-primary'
+     =< link_to 'Back', vehicles_path, class: 'btn btn-default'

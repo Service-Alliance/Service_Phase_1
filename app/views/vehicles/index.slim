@@ -1,0 +1,54 @@
+-content_for(:title, 'Vehicles')
+
+== render layout: 'layouts/content'
+  .text-right
+    = link_to 'New Vehicle', new_vehicle_path, class: 'btn btn-success'
+  br
+
+  .table-responsive
+    table.table.table-striped.jambo_table
+      thead
+        tr.headings
+          th Year
+          th Name
+          th State
+          th Brand
+          th License Plate
+          th Mileage
+          th Registration
+          th Insurance
+          th Inspection
+          th Oil Change
+          th Brakes
+          th Battery
+          th Filters
+          th Tires
+          th Transmission
+          th Fluids
+          th :miscellaneous
+
+
+      tbody
+        - @vehicles.each do |vehicle|
+          tr
+            td = vehicle.year
+            td = vehicle.name
+            td = vehicle.state
+            td = vehicle.brand
+            td = vehicle.license_plate
+            td = vehicle.mileage
+            td = vehicle.registration_date
+            td = vehicle.insurance_date
+            td = vehicle.inspection_date
+            td = vehicle.oil_change
+            td = vehicle.brakes
+            td = vehicle.battery
+            td = vehicle.filters
+            td = vehicle.tires
+            td = vehicle.transmission
+            td = vehicle.fluids
+            td = vehicle.miscellaneous
+            td.text-right
+              = link_to 'Show', vehicle, class: 'btn btn-xs btn-primary'
+              = link_to 'Edit', edit_vehicle_path(vehicle), class: 'btn btn-xs btn-success'
+              = link_to 'Destroy', vehicle, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'

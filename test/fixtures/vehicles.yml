@@ -1,0 +1,42 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  year: 2010
+  name: Hino
+  state: NY
+  brand: Chevrolet
+  license_plate: MyString
+  mileage: 216903
+  registration_date: Thu, 03/01/18 12:00 AM
+  insurance_date: Thu, 03/01/18 12:00 AM
+  inspection_date: Thu, 03/01/18 12:00 AM
+  oil_change: 216903
+  brakes: 216903
+  filters: 216903
+  tires: 216903
+  transmission: 12345
+  fluids: 216903
+  miscellaneous: MyString
+#
+two:
+  year: 2006
+  name: MyString
+  state: NY
+  brand: MyString
+  license_plate: MyString
+  mileage: 123456
+  registration_date: Thu, 03/01/18 12:00 AM
+  insurance_date: Thu, 03/01/18 12:00 AM
+  inspection_date: Thu, 03/01/18 12:00 AM
+  oil_change: 12345
+  brakes: 12345
+  battery: 12345
+  filters: 12345
+  tires: 12345
+  transmission: 12345
+  fluids: 12345
+  miscellaneous: MyString
