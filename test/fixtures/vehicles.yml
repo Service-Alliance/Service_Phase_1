@@ -9,10 +9,11 @@ one:
   name: Hino
   state: NY
   brand: Chevrolet
-  license_plate: 48908MG
+  license_plate: MyString
   mileage: 216903
-  registration_date: August-2019
-  inspection_date: October-2018
+  registration_date: Thu, 03/01/18 12:00 AM
+  insurance_date: Thu, 03/01/18 12:00 AM
+  inspection_date: Thu, 03/01/18 12:00 AM
   oil_change: 216903
   brakes: 216903
   filters: 216903
@@ -23,13 +24,14 @@ one:
 #
 two:
   year: 2006
-  name: Chevrolet Van
+  name: MyString
   state: NY
-  brand: Chevrolet
-  license_plate: 66607JY
+  brand: MyString
+  license_plate: MyString
   mileage: 123456
-  registration_date: Aug-19
-  inspection_date: 
+  registration_date: Thu, 03/01/18 12:00 AM
+  insurance_date: Thu, 03/01/18 12:00 AM
+  inspection_date: Thu, 03/01/18 12:00 AM
   oil_change: 12345
   brakes: 12345
   battery: 12345
