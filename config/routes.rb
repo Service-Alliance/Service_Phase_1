@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :chemicals
   mount Maily::Engine, at: '/maily'
   ActiveAdmin.routes(self)
   resources :customer_vendors
@@ -37,6 +36,7 @@ Rails.application.routes.draw do
   resources :addresses
   resources :calls
   resources :consumables
+  resources :chemicals
   post 'calls/precall-lookup' => 'calls#precall_lookup'
   post 'calls/precall-webhook' => 'calls#precall'
   post 'calls/postcall-webhook' => 'calls#postcall'
@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   resources :states
   resources :agents
   resources :adjusters
+
   get 'adwords' => 'adwords#index'
   get 'jobs/list' => 'jobs#list'
   get 'jobs/for_table' => 'jobs#for_table'
