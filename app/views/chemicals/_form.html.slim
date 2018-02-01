@@ -1,0 +1,12 @@
+= simple_form_for(@chemical) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :sp_number
+    = f.input :name
+    = f.input :purchase_unit
+    = f.input :cost_per_purchase_unit
+    = f.input :quantity
+
+  .form-actions
+    = f.button :submit

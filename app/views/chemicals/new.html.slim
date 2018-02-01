@@ -1,0 +1,6 @@
+- content_for(:title, "New Chemical")
+
+== render layout: 'layouts/content'
+  == render 'form'
+
+  = link_to 'Back', chemicals_path, class: 'btn btn-default'

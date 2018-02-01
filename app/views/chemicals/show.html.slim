@@ -1,0 +1,38 @@
+- content_for(:title, "Chemical")
+
+== render layout: 'layouts/content'
+  p#notice = notice
+
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Sp number:
+    .col-md-6.col-sm-6.col-xs-12
+      = @chemical.sp_number
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Name:
+    .col-md-6.col-sm-6.col-xs-12
+      = @chemical.name
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Purchase unit:
+    .col-md-6.col-sm-6.col-xs-12
+      = @chemical.purchase_unit
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Cost per purchase unit:
+    .col-md-6.col-sm-6.col-xs-12
+      = @chemical.cost_per_purchase_unit
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Purchase Unit Quantity:
+    .col-md-6.col-sm-6.col-xs-12
+      = @chemical.purchase_unit_quantity
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Quantity:
+    .col-md-6.col-sm-6.col-xs-12
+      = @chemical.quantity
+  .text-center
+    => link_to 'Edit', edit_chemical_path(@chemical), class: 'btn btn-primary'
+    =< link_to 'Back', chemicals_path, class: 'btn btn-default'

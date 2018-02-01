@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sp_number: 100
+  name: MyString
+  purchase_unit: MyString
+  cost_per_purchase_unit: 9.99
+  purchase_unit_quantity: 100
+  quantity: 100
+
+two:
+  sp_number: 100
+  name: MyString
+  purchase_unit: MyString
+  cost_per_purchase_unit: 9.99
+  purchase_unit_quantity: 100
+  quantity: 100
