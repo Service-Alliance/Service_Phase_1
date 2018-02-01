@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :chemicals
   mount Maily::Engine, at: '/maily'
   ActiveAdmin.routes(self)
   resources :customer_vendors
