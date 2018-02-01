@@ -1,0 +1,32 @@
+-content_for(:title, 'Chemicals')
+
+== render layout: 'layouts/content'
+  .text-right
+    = link_to 'New Chemical', new_chemical_path, class: 'btn btn-success'
+  br
+
+  .table-responsive
+    table.table.table-striped.jambo_table
+      thead
+        tr.headings
+          th Sp number
+          th Name
+          th Purchase unit
+          th Cost per purchase unit
+          th Purchase Unit Quantity
+          th Quantity
+          th
+
+      tbody
+        - @chemicals.each do |chemical|
+          tr
+            td = chemical.sp_number
+            td = chemical.name
+            td = chemical.purchase_unit
+            td = chemical.cost_per_purchase_unit
+            td = chemical.purchase_unit_quantity
+            td = chemical.quantity
+            td.text-right
+              = link_to 'Show', chemical, class: 'btn btn-xs btn-primary'
+              = link_to 'Edit', edit_chemical_path(chemical), class: 'btn btn-xs btn-success'
+              = link_to 'Destroy', chemical, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180131185433) do
+ActiveRecord::Schema.define(version: 20180201184748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,6 +194,17 @@ ActiveRecord::Schema.define(version: 20180131185433) do
 
   add_index "calls", ["created_at"], name: "index_calls_on_created_at", using: :btree
   add_index "calls", ["inprogress"], name: "index_calls_on_inprogress", using: :btree
+
+  create_table "chemicals", force: :cascade do |t|
+    t.integer  "sp_number"
+    t.string   "name"
+    t.string   "purchase_unit"
+    t.integer  "cost_per_purchase_unit"
+    t.integer  "purchase_unit_quantity"
+    t.integer  "quantity"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "collection_subscriptions", force: :cascade do |t|
     t.integer  "user_id"
