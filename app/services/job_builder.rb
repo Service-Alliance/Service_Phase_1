@@ -22,7 +22,7 @@ class JobBuilder
     end
 
     if call
-      call.save
+      job.calls << call
     end
     caller.job_id = job.id
     caller.address_id = address.id

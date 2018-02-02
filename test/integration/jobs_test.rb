@@ -110,7 +110,7 @@ class JobsTest < Capybara::Rails::TestCase
     visit new_job_path
     select_referral_type(referral_types(:one))
     click_button 'Create Job'
-    assert Job.last.referral_type.name, 'One'
+    assert_equal Job.last.referral_type.name, 'One'
   end
 
   test 'can select sub referral types' do
@@ -121,8 +121,8 @@ class JobsTest < Capybara::Rails::TestCase
       select 'Sub Type', from: :job_referral_attributes_sub_referral_type_id
     end
     click_button 'Create Job'
-    assert Job.last.referral_type.name, 'Parent'
-    assert Job.last.sub_referral_type.name, 'Sub Type'
+    assert_equal Job.last.referral_type.name, 'Parent'
+    assert_equal Job.last.sub_referral_type.name, 'Sub Type'
   end
 
   test 'can select user referral types' do
@@ -133,8 +133,8 @@ class JobsTest < Capybara::Rails::TestCase
       select 'Barry Barnett', from: :job_referral_attributes_associated_record_id
     end
     click_button 'Create Job'
-    assert Job.last.referral_type.name, 'User'
-    assert Job.last.referral.associated_record.name, 'Barry Barnett'
+    assert_equal Job.last.referral_type.name, 'User'
+    assert_equal Job.last.referral.associated_record.name, 'Barry Barnett'
   end
 
   test 'can select vendor referral types' do
@@ -145,8 +145,26 @@ class JobsTest < Capybara::Rails::TestCase
       select 'VendorOne', from: :job_referral_attributes_associated_record_id
     end
     click_button 'Create Job'
-    assert Job.last.referral_type.name, 'Vendor'
-    assert Job.last.referral.associated_record.name, 'VendorOne'
+    assert_equal Job.last.referral_type.name, 'Vendor'
+    assert_equal Job.last.referral.associated_record.name, 'VendorOne'
+  end
+
+  test 'can link call to job' do
+    visit new_job_path
+    call = calls(:one)
+    select2(call.customer_phone_number, css: '#call_find_call')
+    click_button 'Create Job'
+    Job.last.tap do |job|
+      assert_includes job.calls, call
+      assert_equal call.customer_phone_number, job.caller.phones.first.number
+      assert_equal call.customer_city, job.caller.address.city
+      assert_equal call.customer_state, job.caller.address.state.name
+      assert_equal 'Jimmy', job.caller.first_name
+      assert_equal 'Jones', job.caller.last_name
+    end
+  end
+
+  test 'allows call linking from customer phone' do
   end
 
   def select_referral_type(referral_type)

@@ -23,9 +23,11 @@ class CallsDatatable < ApplicationDatatable
       customer_phone_number: 'customer_phone_number',
       customer_name: 'customer_name',
       customer_city: 'customer_city',
+      customer_state: 'customer_state',
       utm_campaign: 'utm_campaign',
       duration: 'duration',
-      job_id: 'job_id'
+      job_id: 'job_id',
+      created_at: 'created_at'
     }
   end
 end
