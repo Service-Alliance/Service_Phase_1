@@ -1,8 +1,8 @@
 <%= form_for(@job) do |f| %>
     <div class="col-xs-12 margin-top-3">
       <%= fields_for(:call) do |f| %>
-          <%= f.label :current_active_calls, "Select Current Active Call" %>
-          <%= f.collection_select :id, Call.where(inprogress: "true"), :id, :customer_phone_number, { prompt: true }, { class: 'form-control' } %>
+          <%= f.label :find_call, "Find Call" %>
+          <%= f.select :id, [], {}, id: 'call_find_call', class: 'form-control', style: 'width: 100%' %>
       <% end %>
       <div class="row content-box margin-top-3">
         <% if @job.errors.any? %>

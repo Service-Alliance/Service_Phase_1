@@ -37,6 +37,49 @@ var newJobCallers = (function($) {
     } );
   }
 
+  var initialiseCallrailIntegration = function() {
+    $('#call_find_call').select2({
+      ajax: {
+        url: "/api/v1/datatables/calls",
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            search: params.term,
+            sort: 'created_at',
+            order: 'desc',
+            limit: '10'
+          };
+        },
+        processResults: function (data, page) {
+          if(data === undefined || data.rows.undefined) { return {};}
+          return { results: $.map( data.rows, function(call, i) {
+            var display = call.customer_phone_number + ' - ' + call.datetime + ' - ' + call.customer_name
+            return { id: call.id, text: display }
+          } ) };
+        },
+        cache: true
+      },
+      escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+      placeholder: "Search for a call (phone number or customer name)"
+    });
+    $('.phone-number').on('change', loadCalls);
+  }
+
+  var loadCalls = function(event) {
+    var number = $(this).val();
+    $.getJSON("/api/v1/datatables/calls", {
+      search: number,
+      sort: 'created_at',
+      order: 'desc',
+      limit: '10'
+    }).then(loadCallsTable);
+  }
+
+  var loadCallsTable = function(data){
+
+  }
+
   var selectFromAutocomplete = function(event, ui) {
     event.preventDefault();
     var record = ui.item.record;
@@ -90,6 +133,7 @@ var newJobCallers = (function($) {
 
       initialiseCallerSearch();
       initialiseCompanySearch();
+      initialiseCallrailIntegration();
     });
   }
 

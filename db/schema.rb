@@ -189,7 +189,6 @@ ActiveRecord::Schema.define(version: 20180201184748) do
     t.text     "transcription"
     t.integer  "vendor_id"
     t.integer  "customer_id"
-    t.integer  "contact_id"
   end
 
   add_index "calls", ["created_at"], name: "index_calls_on_created_at", using: :btree
@@ -229,14 +228,6 @@ ActiveRecord::Schema.define(version: 20180201184748) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "contact_addresses", force: :cascade do |t|
-    t.integer  "address_id"
-    t.integer  "contact_id"
-    t.integer  "address_type_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
   create_table "contact_assignments", force: :cascade do |t|
     t.integer  "contact_id"
     t.integer  "job_id"
@@ -247,20 +238,6 @@ ActiveRecord::Schema.define(version: 20180201184748) do
 
   add_index "contact_assignments", ["job_id"], name: "index_contact_assignments_on_job_id", using: :btree
 
-  create_table "contact_companies", force: :cascade do |t|
-    t.integer  "company_id"
-    t.integer  "contact_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "contact_vendors", force: :cascade do |t|
-    t.integer  "contact_id"
-    t.integer  "vendor_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "contacts", force: :cascade do |t|
     t.string   "company"
     t.string   "first_name"
@@ -268,14 +245,8 @@ ActiveRecord::Schema.define(version: 20180201184748) do
     t.string   "email"
     t.integer  "owner_id"
     t.integer  "address_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "category"
-    t.text     "sharp_spring_id"
-    t.text     "company_name"
-    t.text     "title"
-    t.text     "website"
-    t.text     "sub_category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "corporate_referral_types", force: :cascade do |t|
@@ -535,7 +506,6 @@ ActiveRecord::Schema.define(version: 20180201184748) do
     t.text     "xact_link"
     t.datetime "fnol_received"
     t.integer  "referral_id"
-    t.integer  "contact_id"
   end
 
   add_index "jobs", ["adjuster_id"], name: "index_jobs_on_adjuster_id", using: :btree

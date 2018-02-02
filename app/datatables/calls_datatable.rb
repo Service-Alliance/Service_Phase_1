@@ -25,7 +25,8 @@ class CallsDatatable < ApplicationDatatable
       customer_city: 'customer_city',
       utm_campaign: 'utm_campaign',
       duration: 'duration',
-      job_id: 'job_id'
+      job_id: 'job_id',
+      created_at: 'created_at'
     }
   end
 end

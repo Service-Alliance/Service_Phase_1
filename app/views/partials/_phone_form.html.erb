@@ -15,7 +15,7 @@
           <div class="col-xs-3">
               <div class="form-group">
                   <%= label_tag :number %><br>
-                  <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-format", id: "phone_format_#{idx}"  %>
+                  <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-format phone-number", id: "phone_format_#{idx}"  %>
               </div>
           </div>
           <div class="col-xs-3">
@@ -45,7 +45,7 @@
             <div class="col-xs-3">
                 <div class="form-group">
                     <%= label_tag :number %><br>
-                    <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-format"  %>
+                    <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-format phone-number"  %>
                 </div>
             </div>
             <div class="col-xs-3">
@@ -75,7 +75,7 @@
               <div class="col-xs-3">
                   <div class="form-group">
                       <%= label_tag :number %><br>
-                      <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+                      <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-number"  %>
                   </div>
               </div>
               <div class="col-xs-3">
@@ -107,7 +107,7 @@
               <div class="col-xs-3">
                   <div class="form-group">
                       <%= label_tag :number %><br>
-                      <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+                      <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-number"  %>
                   </div>
               </div>
               <div class="col-xs-3">
@@ -137,7 +137,7 @@
                 <div class="col-xs-3">
                     <div class="form-group">
                         <%= label_tag :number %><br>
-                        <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+                        <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-number"  %>
                     </div>
                 </div>
                 <div class="col-xs-3">
@@ -167,7 +167,7 @@
                   <div class="col-xs-3">
                       <div class="form-group">
                           <%= label_tag :number %><br>
-                          <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control"  %>
+                          <%= text_field_tag "phones[numbers][]", phone.try(:number), class: "form-control phone-number"  %>
                       </div>
                   </div>
                   <div class="col-xs-3">
@@ -198,7 +198,7 @@
             <div class="col-xs-3">
                 <div class="form-group">
                     <%= label_tag :number %><br>
-                    <%= text_field_tag "phones[numbers][]",nil, class: "form-control phone-format", id: 'new_phone_number'  %>
+                    <%= text_field_tag "phones[numbers][]",nil, class: "form-control phone-format phone-number", id: 'new_phone_number'  %>
                 </div>
             </div>
             <div class="col-xs-3">
