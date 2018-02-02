@@ -55,15 +55,41 @@ var newJobCallers = (function($) {
           if(data === undefined || data.rows.undefined) { return {};}
           return { results: $.map( data.rows, function(call, i) {
             var display = call.customer_phone_number + ' - ' + call.datetime + ' - ' + call.customer_name
-            return { id: call.id, text: display }
+            return { id: call.id, text: display, raw: call }
           } ) };
         },
         cache: true
       },
       escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
       placeholder: "Search for a call (phone number or customer name)"
-    });
+    }).on('select2:select', selectCall);
     $('.phone-number').on('change', loadCalls);
+  }
+
+  var selectCall = function(e) {
+    if(e.params && e.params.data){
+      var call = e.params.data.raw;
+      var spaceIndex = call.customer_name.indexOf(' ');
+      var fname = call.customer_name.slice(0, spaceIndex).trim();
+      var lname = call.customer_name.slice(spaceIndex + 1, call.customer_name.length).trim();
+      setFieldIfEmpty('.phone-number', call.customer_phone_number);
+      setFieldIfEmpty('#address_city', call.customer_city);
+      setFieldIfEmpty('#address_state_id', call.customer_state);
+      setFieldIfEmpty('#caller_first_name', fname);
+      setFieldIfEmpty('#caller_last_name', lname);
+    }
+  }
+
+  var setFieldIfEmpty = function(field_selector, val) {
+    var field = $(field_selector);
+    if(field.val() === '') {
+      if(field.is('select')) {
+        field.find('option:contains(' + val + ')').prop("selected", true);
+      }
+      else {
+        field.val(val);
+      }
+    }
   }
 
   var loadCalls = function(event) {

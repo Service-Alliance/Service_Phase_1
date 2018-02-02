@@ -6,6 +6,9 @@ one:
   user_id: 1
   datetime: 2016-12-21 11:09:10
   customer_phone_number: +78123456
+  customer_name: Jimmy Jones
+  customer_city: New York
+  customer_state: NY
   duration: 1
 
 two:

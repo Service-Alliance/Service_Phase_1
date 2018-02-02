@@ -154,7 +154,17 @@ class JobsTest < Capybara::Rails::TestCase
     call = calls(:one)
     select2(call.customer_phone_number, css: '#call_find_call')
     click_button 'Create Job'
-    assert_includes Job.last.calls, call
+    Job.last.tap do |job|
+      assert_includes job.calls, call
+      assert_equal call.customer_phone_number, job.caller.phones.first.number
+      assert_equal call.customer_city, job.caller.address.city
+      assert_equal call.customer_state, job.caller.address.state.name
+      assert_equal 'Jimmy', job.caller.first_name
+      assert_equal 'Jones', job.caller.last_name
+    end
+  end
+
+  test 'allows call linking from customer phone' do
   end
 
   def select_referral_type(referral_type)
