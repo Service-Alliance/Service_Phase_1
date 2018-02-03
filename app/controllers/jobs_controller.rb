@@ -380,6 +380,7 @@ class JobsController < ApplicationController
                                 :details,
                                 :job_note,
                                 :customer_id,
+                                :priority_id,
                                 :referral_type_id,
                                 :referral_note,
                                 :corporate_referral_type_id,

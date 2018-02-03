@@ -17,8 +17,7 @@
       tbody
         - @priorities.each do |priority|
           tr
-            td 
-              span[class="label label-#{priority.context}"] = priority.name
+            td = display_priority(priority)
             td = priority.priority
             td = priority.context
             td.text-right

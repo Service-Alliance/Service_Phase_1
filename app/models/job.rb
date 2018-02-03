@@ -8,6 +8,7 @@ class Job < ActiveRecord::Base
   belongs_to :franchise
   belongs_to :referral
   belongs_to :customer
+  belongs_to :priority
   has_one :customer_address, through: :customer, source: "address"
   has_many :calls
   belongs_to :user, foreign_key: :entered_by_id
