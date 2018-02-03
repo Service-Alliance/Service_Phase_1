@@ -21,9 +21,9 @@
             td = adjuster.first_name
             td = adjuster.last_name
             td = adjuster.email
-            td = adjuster.address_id
-            td = adjuster.insurance_company_id
-            td =
+            td = adjuster.format_address(:oneline)
+            td = adjuster.insurance_company_name
+            td = adjuster.first_phone_number
 
             	
             td.text-right
