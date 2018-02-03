@@ -1,0 +1,24 @@
+- content_for(:title, "Priority")
+
+== render layout: 'layouts/content'
+  p#notice = notice
+
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Name:
+    .col-md-6.col-sm-6.col-xs-12
+      = @priority.name
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Priority:
+    .col-md-6.col-sm-6.col-xs-12
+      = @priority.priority
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Context:
+    .col-md-6.col-sm-6.col-xs-12
+      = @priority.context
+
+  .text-center
+    => link_to 'Edit', edit_priority_path(@priority), class: 'btn btn-primary'
+    =< link_to 'Back', priorities_path, class: 'btn btn-default'

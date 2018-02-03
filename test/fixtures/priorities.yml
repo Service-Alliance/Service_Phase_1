@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: High
+  priority: 1
+  context: danger
+
+two:
+  name: Medium
+  priority: 2
+  context: warning
+
+three:
+  name: Low
+  priority: 2
+  context: default

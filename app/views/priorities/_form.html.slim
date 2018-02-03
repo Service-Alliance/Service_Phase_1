@@ -1,0 +1,10 @@
+= simple_form_for(@priority) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :priority
+    = f.input :context
+
+  .form-actions
+    = f.button :submit
