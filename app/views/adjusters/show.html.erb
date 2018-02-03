@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <div id="wrapper">
+        <%= render partial: "partials/jobs_sidebar" if @job.present? %>
         <div id="page-content-wrapper">
             <% if notice %>
             <div class="alert alert-success" role="alert"><%= notice %></div>
@@ -10,6 +11,10 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             Adjuster Information:
+
+                            <% link_to job_adjusters_samecaller_path(@job.id), method: :post, class: "pull-right margin-right-25px" do %>
+                            Same As Caller
+                            <% end if @job.present? %>
                         </h3>
                     </div>
                     <% if @adjuster %>
@@ -73,9 +78,14 @@
                     <div class="panel-footer">
 
                         <span>
-                            <%= link_to edit_adjuster_path(@adjuster), class: "btn btn-sm btn-warning", type: "button" do %>
-                            <i class="glyphicon glyphicon-edit"></i>
+                          <%= link_to edit_adjuster_path(@adjuster, @job.present? ? {job_id: @job.id} : {}), class: "btn btn-sm btn-warning", type: "button" do %>
+                            <i class="glyphicon glyphicon-edit"></i> Edit
                             <% end %>
+                        </span>
+                        <span>
+                            <%= link_to job_remove_adjuster_path(@job.id), method: :post, class: "btn btn-sm btn-warning", type: "button" do %>
+                            <i class="glyphicon glyphicon-minus"></i>
+                            <% end if @job.present? %>
                         </span>
                     </div>
                     <% end %>
