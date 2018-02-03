@@ -1,0 +1,32 @@
+-content_for(:title, 'Adjusters')
+
+== render layout: 'layouts/content'
+  .text-right
+    = link_to 'New Adjuster', new_adjuster_path, class: 'btn btn-success'
+  br
+  	
+  .table-responsice
+    table.table.table-striped.jumbo-table
+      thead.headings
+        th First Name
+        th Last Name
+        th Email Address
+        th Address
+        th Insurance Company
+        th Phone Number
+
+      tbody
+        - @adjusters.each do |adjuster|
+          tr
+            td = adjuster.first_name
+            td = adjuster.last_name
+            td = adjuster.email
+            td = adjuster.format_address(:oneline)
+            td = adjuster.insurance_company_name
+            td = adjuster.first_phone_number
+
+            	
+            td.text-right
+              = link_to 'Show', adjuster, class: 'btn btn-xs btn-primary'
+              = link_to 'Edit', edit_adjuster_path(adjuster), class: 'btn btn-xs btn-success'
+              = link_to 'Destroy', adjuster, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'
