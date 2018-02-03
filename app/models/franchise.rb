@@ -7,7 +7,7 @@ class Franchise < ActiveRecord::Base
   has_many :jobs
   has_many :franchise_work_order_distributions
   has_many :work_order_distribution, through: :franchise_work_order_distributions, source: :user
-  has_many :franchise_zipcodes
+  has_many :franchise_zipcodes, dependent: :destroy
   has_many :franchise_scheduling_managers
   has_many :scheduling_managers, through: :franchise_scheduling_managers, source: :user
 

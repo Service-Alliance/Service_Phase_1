@@ -1,5 +1,5 @@
 class FranchiseZipcode < ActiveRecord::Base
-  belongs_to :franchise
+  belongs_to :franchise, required: true
 
   validates_uniqueness_of :zip_code, conditions: -> { assigned }
 

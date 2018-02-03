@@ -1,0 +1,12 @@
+= simple_form_for(@franchise_zipcode) do |f|
+  = render partial: 'partials/model_errors', locals: {model: @franchise_zipcode}
+
+  .form-inputs
+    = f.input :franchise_id, type: :select, collection: Franchise.order(:name)
+    = f.input :zip_code
+    = f.input :city
+    = f.input :county
+    = f.input :assigned
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-primary'

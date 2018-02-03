@@ -4,7 +4,7 @@ class FranchiseZipcodesController < ApplicationController
   # GET /franchise_zipcodes
   # GET /franchise_zipcodes.json
   def index
-    @franchise_zipcodes = FranchiseZipcode.includes(:franchise).all
+    @franchise_zipcodes = FranchiseZipcode.includes(:franchise).order('franchises.name, zip_code').all
   end
 
   # GET /franchise_zipcodes/1
@@ -69,6 +69,6 @@ class FranchiseZipcodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def franchise_zipcode_params
-      params.require(:franchise_zipcode).permit(:franchise_id, :zip_code)
+      params.require(:franchise_zipcode).permit(:franchise_id, :zip_code, :city, :county, :assigned)
     end
 end

@@ -1,0 +1,34 @@
+- content_for(:title, "Franchise Zipcode")
+
+== render layout: 'layouts/content'
+  p#notice = notice
+
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Franchise Assigned:
+    .col-md-6.col-sm-6.col-xs-12
+      = @franchise_zipcode.franchise_id
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Zipcode:
+    .col-md-6.col-sm-6.col-xs-12
+      = @franchise_zipcode.zip_code
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong City:
+    .col-md-6.col-sm-6.col-xs-12
+      = @franchise_zipcode.city
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong County:
+    .col-md-6.col-sm-6.col-xs-12
+      = @franchise_zipcode.county
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Assigned:
+    .col-md-6.col-sm-6.col-xs-12
+      = @franchise_zipcode.assigned
+
+  .text-center
+    => link_to 'Edit', edit_franchise_zipcode_path(@franchise_zipcode), class: 'btn btn-primary'
+    =< link_to 'Back', franchise_zipcodes_path, class: 'btn btn-default'

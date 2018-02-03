@@ -167,6 +167,15 @@ class JobsTest < Capybara::Rails::TestCase
   test 'allows call linking from customer phone' do
   end
 
+  test 'franchise gets assigned by the zip code entered' do
+    visit new_job_path
+    fill_in :address_zip_code, with: franchise_zipcodes(:one).zip_code
+    click_button 'Create Job'
+    Job.last.tap do |job|
+      assert_equal franchises(:one), job.franchise
+    end
+  end
+
   def select_referral_type(referral_type)
     within '.referral-type' do
       all(:xpath, ".//input[@value='#{referral_type.id}']").first.click

@@ -1,0 +1,31 @@
+
+-content_for(:title, 'franchise_zipcodes')
+
+== render layout: 'layouts/content'
+  .text-right
+    = link_to 'New Franchise Zipcode', new_franchise_zipcode_path, class: 'btn btn-success'
+  br
+
+  .table-responsive
+    table.table.table-striped.jambo_table
+      thead
+        tr.headings
+          th Franchise Assigned
+          th Zipcode
+          th City
+          th County
+          th Assigned
+          th
+
+      tbody
+        - @franchise_zipcodes.each do |franchise_zipcode|
+          tr
+            td = franchise_zipcode.franchise.name
+            td = franchise_zipcode.zip_code
+            td = franchise_zipcode.city
+            td = franchise_zipcode.county
+            td = franchise_zipcode.assigned
+            td.text-right
+              = link_to 'Show', franchise_zipcode, class: 'btn btn-xs btn-primary'
+              = link_to 'Edit', edit_franchise_zipcode_path(franchise_zipcode), class: 'btn btn-xs btn-success'
+              = link_to 'Destroy', franchise_zipcode, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'
