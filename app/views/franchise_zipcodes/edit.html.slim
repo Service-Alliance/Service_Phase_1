@@ -1,0 +1,7 @@
+- content_for(:title, "Editing Franchise Zip Code")
+
+== render layout: 'layouts/content'
+  == render 'form'
+
+  => link_to 'Show', @franchise_zipcode, class: 'btn btn-primary'
+  =< link_to 'Back', franchise_zipcode_path, class: 'btn btn-default'
