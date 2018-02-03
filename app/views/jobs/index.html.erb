@@ -90,6 +90,7 @@
         <thead>
         <tr>
           <th>Job Recieved</th>
+          <th>Priority</th>
           <th>Loss Type</th>
           <th>Sales Rep</th>
           <th>Customer Name</th>
@@ -112,6 +113,7 @@
         <% @jobs.paged.each do |job| %>
             <tr>
               <td><%= job.fnol_received.try(:strftime, "%D %I:%M %p") %></td>
+              <th><%= display_priority(job.priority) %></td>
               <td><%= job.loss_type_names.join('<br />').html_safe %></td>
               <td><%= display_subscriptions(job) %></td>
               <td><%= job.customer_full_name %></td>

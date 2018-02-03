@@ -1,0 +1,26 @@
+-content_for(:title, 'Priorities')
+
+== render layout: 'layouts/content'
+  .text-right
+    = link_to 'New Priority', new_priority_path, class: 'btn btn-success'
+  br
+
+  .table-responsive
+    table.table.table-striped.jambo_table
+      thead
+        tr.headings
+          th Name
+          th Priority
+          th Context
+          th
+
+      tbody
+        - @priorities.each do |priority|
+          tr
+            td = display_priority(priority)
+            td = priority.priority
+            td = priority.context
+            td.text-right
+              = link_to 'Show', priority, class: 'btn btn-xs btn-primary'
+              = link_to 'Edit', edit_priority_path(priority), class: 'btn btn-xs btn-success'
+              = link_to 'Destroy', priority, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'

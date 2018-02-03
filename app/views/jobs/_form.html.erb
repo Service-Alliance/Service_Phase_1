@@ -18,6 +18,12 @@
         <% end %>
         <div class="col-xs-12">
           <div class="form-group">
+            <label for="job_priority_id">Priority</label><br>
+            <%= f.collection_select :priority_id, Priority.all, :id, :name, { prompt: 'Select priority' }, {class: 'form-control'} %>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="form-group">
             <label for="job_emergency">Is this an emergency?</label><br>
             Check if yes
             <%= f.check_box :emergency %>

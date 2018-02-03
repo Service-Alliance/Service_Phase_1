@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180201184748) do
+ActiveRecord::Schema.define(version: 20180203091807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -506,6 +506,7 @@ ActiveRecord::Schema.define(version: 20180201184748) do
     t.text     "xact_link"
     t.datetime "fnol_received"
     t.integer  "referral_id"
+    t.integer  "priority_id"
   end
 
   add_index "jobs", ["adjuster_id"], name: "index_jobs_on_adjuster_id", using: :btree
@@ -517,6 +518,7 @@ ActiveRecord::Schema.define(version: 20180201184748) do
   add_index "jobs", ["entered_by_id"], name: "index_jobs_on_entered_by_id", using: :btree
   add_index "jobs", ["fnol_received"], name: "index_jobs_on_fnol_received", using: :btree
   add_index "jobs", ["franchise_id"], name: "index_jobs_on_franchise_id", using: :btree
+  add_index "jobs", ["priority_id"], name: "index_jobs_on_priority_id", using: :btree
   add_index "jobs", ["referral_id"], name: "index_jobs_on_referral_id", using: :btree
   add_index "jobs", ["status_id"], name: "index_jobs_on_status_id", using: :btree
 
@@ -678,6 +680,14 @@ ActiveRecord::Schema.define(version: 20180201184748) do
     t.datetime "updated_at",                                  null: false
     t.integer  "current_status_id"
     t.integer  "job_id"
+  end
+
+  create_table "priorities", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "priority"
+    t.string   "context"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "properties", force: :cascade do |t|

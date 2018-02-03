@@ -1,0 +1,7 @@
+- content_for(:title, "Editing priority")
+
+== render layout: 'layouts/content'
+  == render 'form'
+
+  => link_to 'Show', @priority, class: 'btn btn-primary'
+  =< link_to 'Back', priorities_path, class: 'btn btn-default'
