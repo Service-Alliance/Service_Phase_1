@@ -1,0 +1,12 @@
+= simple_form_for(@franchise_zipcode) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :franchise_id
+    = f.input :zip_code
+    = f.input :city
+    = f.input :county
+    = f.input :assigned
+
+  .form-actions
+    = f.button :submit
