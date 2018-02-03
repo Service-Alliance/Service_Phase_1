@@ -1,5 +1,5 @@
 = simple_form_for(@franchise_zipcode) do |f|
-  = f.error_notification
+  = render partial: 'partials/model_errors', locals: {model: @franchise_zipcode}
 
   .form-inputs
     = f.input :franchise_id, type: :select, collection: Franchise.order(:name)
