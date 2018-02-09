@@ -42,7 +42,7 @@ class Job < ActiveRecord::Base
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :referral
 
-  delegate :full_address, :format_address, to: :caller, allow_nil: true, prefix: true
+  delegate :full_address, :format_address, :address, to: :caller, allow_nil: true, prefix: true
   delegate :full_name, :address_without_county, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true
   delegate :name, to: :franchise, allow_nil: true, prefix: true
   delegate :full_name, :address_without_county, :format_address, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true

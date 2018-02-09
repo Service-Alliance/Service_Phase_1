@@ -17,7 +17,8 @@ class PricingsController < ApplicationController
 
   # GET /pricings/new
   def new
-    @pricing = Pricing.new
+    @pricing = @job.pricings.build
+    @pricing.uploads.build
   end
 
   # GET /pricings/1/edit
@@ -95,6 +96,12 @@ class PricingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pricing_params
-      params.require(:pricing).permit(:price, :pricing_category_id, :description, uploads_attributes: [:upload_category_id, :description, {uploads: []}])
+      params.require(:pricing).permit(
+        :non_taxable_amount,
+        :taxable_amount,
+        :tax_amount,
+        :pricing_category_id,
+        :description,
+        uploads_attributes: [:upload_category_id, :description, {uploads: []}])
     end
 end

@@ -2,6 +2,8 @@
 
 one:
   name: NY
+  tax_rate: 5
 
 two:
   name: CT
+  tax_rate: 10

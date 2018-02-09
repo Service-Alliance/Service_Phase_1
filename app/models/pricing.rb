@@ -19,6 +19,10 @@ class Pricing < ActiveRecord::Base
   def total
     subtotal + tax_amount
   end
-
   alias_method :price, :total
+
+  def tax_rate
+    rate = job.try(:caller).try(:address).try(:state).try(:tax_rate)
+    rate || 0
+  end
 end
