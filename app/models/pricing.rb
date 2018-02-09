@@ -13,4 +13,18 @@ class Pricing < ActiveRecord::Base
     select('DISTINCT on (job_id) *')
       .order('job_id, created_at DESC')
   }
+
+  def subtotal
+    non_taxable_amount + taxable_amount
+  end
+
+  def total
+    subtotal + tax_amount
+  end
+  alias_method :price, :total
+
+  def tax_rate
+    rate = job.try(:caller).try(:address).try(:state).try(:tax_rate)
+    rate || 0
+  end
 end

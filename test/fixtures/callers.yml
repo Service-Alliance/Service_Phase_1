@@ -12,4 +12,4 @@ two:
   last_name: MyString
   email: MyString
   address: one
-  job: 1
+  job: two

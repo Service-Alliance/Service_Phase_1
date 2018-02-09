@@ -90,7 +90,8 @@ class JobsController < ApplicationController
         @future_schedules << scheduler
       end
     end
-    @pricing = Pricing.new
+    @pricing = @job.pricings.build
+    @pricing.uploads.build
   end
 
   # GET /jobs/new

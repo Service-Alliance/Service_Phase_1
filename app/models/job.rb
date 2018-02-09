@@ -42,7 +42,7 @@ class Job < ActiveRecord::Base
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :referral
 
-  delegate :full_address, :format_address, to: :caller, allow_nil: true, prefix: true
+  delegate :full_address, :format_address, :address, to: :caller, allow_nil: true, prefix: true
   delegate :full_name, :address_without_county, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true
   delegate :name, to: :franchise, allow_nil: true, prefix: true
   delegate :full_name, :address_without_county, :format_address, :full_address, :first_phone_number, to: :customer, allow_nil: true, prefix: true
@@ -133,7 +133,7 @@ class Job < ActiveRecord::Base
           .where(job_id: all)
           .latest_per_job
       )
-      .sum('subquery.price')
+      .sum('subquery.non_taxable_amount + subquery.taxable_amount')
   end
 
   def progress

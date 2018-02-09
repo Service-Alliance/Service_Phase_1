@@ -3,8 +3,12 @@
 <p><%= link_to "Click here", @job %> to view the job</p>
 
 <p>
-  Price: <%= @pricing.price %><br />
-  Category: <%= @pricing.pricing_category_name %><br />
+  Non Taxable Amount: <%= @pricing.non_taxable_amount %><br />
+  Taxable Amount: <%= @pricing.taxable_amount %><br />
+  Subtotal: <%= @pricing.subtotal %><br />
+  Tax Amount: <%= @pricing.tax_amount %><br />
+  Total: <%= @pricing.total %><br />
+  Category: <%= @pricing.pricing_category.name %><br />
   Description: <%= @pricing.description %>
 </p>
 

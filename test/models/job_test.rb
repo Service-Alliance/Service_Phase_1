@@ -6,11 +6,11 @@ class JobTest < ActiveSupport::TestCase
   end
 
   test "#customer_full_address" do
-    assert_equal "MyString MyString MyString 12345 MyString", @job.customer_full_address
+    assert_equal "MyString MyString MyString NY 12345 MyString", @job.customer_full_address
   end
 
   test "#customer_address_without_county" do
-    assert_equal "MyString MyString MyString 12345", @job.customer_address_without_county
+    assert_equal "MyString MyString MyString NY 12345", @job.customer_address_without_county
   end
 
   test "Job#with_manager_id" do
@@ -26,7 +26,7 @@ class JobTest < ActiveSupport::TestCase
   end
 
   test 'Job#value only takes the latest pricing for each job' do
-    jobs(:pending).pricings.create!(price: 15)
+    jobs(:pending).pricings.create!(non_taxable_amount: 15)
     assert_equal 15, Job.where(job_status: job_statuses(:pending)).value
   end
 
