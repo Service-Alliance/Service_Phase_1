@@ -7,6 +7,8 @@ class Upload < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
+  delegate :name, to: :upload_category, allow_nil: true, prefix: true
+
   def file_name
     return upload.file.present? ? upload.file.path.split("/").last : ''
   end
