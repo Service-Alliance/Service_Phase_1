@@ -7,6 +7,8 @@ class Pricing < ActiveRecord::Base
   has_many :trackers_as_child, as: :child_trackable, dependent: :destroy, class_name: 'Tracker'
   accepts_nested_attributes_for :uploads
 
+  delegate :name, to: :pricing_category, allow_nil: true, prefix: true
+
   scope :latest_per_job, -> {
     select('DISTINCT on (job_id) *')
       .order('job_id, created_at DESC')

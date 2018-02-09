@@ -7,7 +7,7 @@ class PricingsController < ApplicationController
   # GET /pricings
   # GET /pricings.json
   def index
-    @pricings = Pricing.all
+    @pricings = @job.pricings
   end
 
   # GET /pricings/1

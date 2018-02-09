@@ -1,31 +1,47 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div id="wrapper">
+    <%= render partial: "partials/jobs_sidebar" %>
+    <div id="page-content-wrapper">
+      <div class="panel panel-default">
+        <div class="panel-heading">Job Pricings</div>
+        <div class="panel-body">
+          <p id="notice"><%= notice %></p>
 
-<h1>Listing Pricings</h1>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Pricing category</th>
+                <th>Non Taxable</th>
+                <th>Taxable</th>
+                <th>Total</th>
+                <th>Description</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Price</th>
-      <th>Pricing category</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+            <tbody>
+              <% @pricings.each do |pricing| %>
+                <tr>
+                  <td><%= pricing.pricing_category_name %></td>
+                  <td><%= pricing.non_taxable_amount %></td>
+                  <td><%= pricing.taxable_amount %></td>
+                  <td><%= pricing.total %></td>
+                  <td><%= pricing.description %></td>
+                  <td>
+                    <%= link_to 'Show', job_pricing_path(@job, pricing), class: "btn btn-xs btn-primary" %>
+                    <%= link_to 'Edit', edit_job_pricing_path(@job, pricing), class: 'btn btn-xs btn-primary' %>
+                    <%= link_to 'Destroy', job_pricing_path(@job, pricing), class: 'btn btn-xs btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
 
-  <tbody>
-    <% @pricings.each do |pricing| %>
-      <tr>
-        <td><%= pricing.price %></td>
-        <td><%= pricing.pricing_category_id %></td>
-        <td><%= pricing.description %></td>
-        <td><%= link_to 'Show', pricing %></td>
-        <td><%= link_to 'Edit', edit_pricing_path(pricing) %></td>
-        <td><%= link_to 'Destroy', pricing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <br>
 
-<br>
-
-<%= link_to 'New Pricing', new_pricing_path %>
+          <%= link_to 'New Pricing', new_job_pricing_path(@job), class: 'btn btn-success' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
