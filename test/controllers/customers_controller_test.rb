@@ -77,6 +77,6 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
   def customer_params_with_attachment
-    {first_name: 'First', last_name:'Last', email: 'test@example.com', uploads_attributes:[{description: 'desc'}]}
+    {first_name: 'First', last_name:'Last', email: 'test@example.com', uploads_attributes:[{description: 'desc', upload_category_id: upload_categories(:one).id}]}
   end
 end

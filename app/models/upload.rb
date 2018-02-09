@@ -1,6 +1,6 @@
 class Upload < ActiveRecord::Base
   belongs_to :uploadable, polymorphic: true
-  belongs_to :upload_category
+  belongs_to :upload_category, required: true
   mount_uploader :upload, UploadUploader
   mount_uploaders :uploads, UploadUploader
 
