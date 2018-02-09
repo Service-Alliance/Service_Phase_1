@@ -70,6 +70,6 @@ class StatesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def state_params
-    params.require(:state).permit(:name, :tax_rate, :city_name, :county_name, :county_rate, :city_rate, :special_rate, :local_tax_total)
+    params.require(:state).permit(:name, :tax_rate)
   end
 end
