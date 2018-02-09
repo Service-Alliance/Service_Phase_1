@@ -73,6 +73,6 @@ class VendorsControllerTest < ActionController::TestCase
   end
 
   def vendor_params_with_attachment(attribs)
-    attribs.merge(uploads_attributes: [{description: 'desc'}])
+    attribs.merge(uploads_attributes: [{description: 'desc', upload_category_id: upload_categories(:one).id}])
   end
 end
