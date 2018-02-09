@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209033105) do
+ActiveRecord::Schema.define(version: 20180209041600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -673,13 +673,15 @@ ActiveRecord::Schema.define(version: 20180209033105) do
   end
 
   create_table "pricings", force: :cascade do |t|
-    t.decimal  "price",               precision: 8, scale: 2
+    t.decimal  "non_taxable_amount",  precision: 8, scale: 2, default: 0.0, null: false
     t.integer  "pricing_category_id"
     t.text     "description"
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
     t.integer  "current_status_id"
     t.integer  "job_id"
+    t.decimal  "taxable_amount",                              default: 0.0, null: false
+    t.decimal  "tax_amount",                                  default: 0.0, null: false
   end
 
   create_table "priorities", force: :cascade do |t|
