@@ -10,7 +10,7 @@ class UploadsController < ApplicationController
     @uploads = @job.uploads.flat_map{ |u| Struct::Attachment.new(u.upload_category.name, u.uploads, u.created_at, u.description, '-') }
     @uploads << @job.pricings.to_a
       .reject{ |p| p.uploads.empty? }
-      .flat_map{ |p| p.uploads.flat_map{ |u| Struct::Attachment.new(p.pricing_category.name, u.uploads, u.created_at, p.description, p.price) } }
+      .flat_map{ |p| p.uploads.flat_map{ |u| Struct::Attachment.new(p.pricing_category_name, u.uploads, u.created_at, p.description, p.price) } }
     @uploads.flatten!
     @uploads.sort{ |x, y| x.created_at <=> y.created_at }
   end
