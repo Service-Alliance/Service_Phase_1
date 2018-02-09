@@ -19,7 +19,7 @@ class TrackerTest < ActiveSupport::TestCase
 
   test 'deleting pricing with associated trackers also deletes trackers' do
     job = jobs(:one)
-    pr = job.pricings.create!()
+    pr = job.pricings.create!(pricing_category_id: pricing_categories(:one).id)
     test_deleting_child_cascades_to_tracker(job, 'Manager Assigned', pr)
   end
 
