@@ -1,0 +1,18 @@
+- content_for(:title, "State: #{@state.name}")
+
+== render layout: 'layouts/content'
+  p#notice = notice
+
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Name
+    .col-md-6.col-sm-6.col-xs-12
+      = @state.name
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Tax Rate
+    .col-md-6.col-sm-6.col-xs-12
+    = "#{@state.tax_rate}%"
+  .text-center
+    => link_to 'Edit', edit_state_path(@state), class: 'btn btn-primary'
+    =< link_to 'Back', states_path, class: 'btn btn-default'

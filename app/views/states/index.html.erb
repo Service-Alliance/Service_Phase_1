@@ -13,11 +13,13 @@
           <table class="table table-striped">
             <tr>
               <th>State</th>
+              <th>Tax Rate</th>
               <th></th>
             </tr>
             <% @states.each do |state| %>
               <tr>
                 <th><%= state.name %></th>
+                <th><%= state.tax_rate %>%</th>
                 <th>
                   <%= link_to "Edit", edit_state_path(state), class: 'btn btn-xs btn-primary' %>
                   <%= link_to "Delete", state, method: :delete, class: 'btn btn-xs btn-danger' %>

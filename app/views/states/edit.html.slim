@@ -1,0 +1,9 @@
+- content_for(:title, "Editing State")
+
+.row
+  .col-sm-6.col-sm-offset-3
+    == render layout: 'layouts/content'
+      == render 'form'
+
+      => link_to 'Show', @state, class: 'btn btn-primary'
+      =< link_to 'Back', states_path, class: 'btn btn-default'
