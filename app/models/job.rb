@@ -133,7 +133,7 @@ class Job < ActiveRecord::Base
           .where(job_id: all)
           .latest_per_job
       )
-      .sum('subquery.price')
+      .sum('subquery.non_taxable_amount + subquery.taxable_amount')
   end
 
   def progress
