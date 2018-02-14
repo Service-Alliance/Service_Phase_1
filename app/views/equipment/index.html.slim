@@ -1,0 +1,36 @@
+-content_for(:title, 'Equipment')
+
+== render layout: 'layouts/content'
+  .text-right
+    = link_to 'New Equipment', new_equipment_path, class: 'btn btn-success'
+  br
+
+  .table-responsive
+    table.table.table-striped.jambo_table
+      thead
+        tr.headings
+          th Name
+          th RFID
+          th Equipment Type
+          th Asset Cost
+          th Rental Cost
+          th Location
+          th Purchase Date
+          th Notes
+          th
+
+      tbody
+        - @equipment.each do |equipment|
+          tr
+            td = equipment.name
+            td = equipment.rfid
+            td = equipment.equipment_type
+            td = equipment.asset_cost
+            td = equipment.rental_cost
+            td = equipment.location
+            td = equipment.purchased
+            td = equipment.notes
+            td.text-right
+              = link_to 'Show', equipment, class: 'btn btn-xs btn-primary'
+              = link_to 'Edit', edit_equipment_path(equipment), class: 'btn btn-xs btn-success'
+              = link_to 'Destroy', equipment, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'

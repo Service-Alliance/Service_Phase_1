@@ -1,0 +1,48 @@
+- content_for(:title, "Equipment")
+
+== render layout: 'layouts/content'
+  p#notice = notice
+ 
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Name:
+    .col-md-6.col-sm-6.col-xs-12
+      = @equipment.name
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong RFID:
+    .col-md-6.col-sm-6.col-xs-12
+      = @equipment.rfid
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Equipment Type:
+    .col-md-6.col-sm-6.col-xs-12
+      = @equipment.equipment_type
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Asset Cost:
+    .col-md-6.col-sm-6.col-xs-12
+      = @equipment.asset_cost
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Rental Cost:
+    .col-md-6.col-sm-6.col-xs-12
+      = @equipment.rental_cost
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Location:
+    .col-md-6.col-sm-6.col-xs-12
+      = @equipment.location
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Date Purchased:
+    .col-md-6.col-sm-6.col-xs-12
+      = @equipment.purchased
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Notes:
+    .col-md-6.col-sm-6.col-xs-12
+      = @equipment.notes
+  .text-center
+    => link_to 'Edit', edit_equipment_path(@equipment), class: 'btn btn-primary'
+    =< link_to 'Back', equipment_index_path, class: 'btn btn-default'

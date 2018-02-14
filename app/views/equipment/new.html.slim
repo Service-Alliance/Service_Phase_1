@@ -1,0 +1,6 @@
+- content_for(:title, "New equipment")
+
+== render layout: 'layouts/content'
+  == render 'form'
+
+  = link_to 'Back', equipment_index_path, class: 'btn btn-default'
