@@ -62,13 +62,11 @@ class EquipmentController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_equipment
       @equipment = Equipment.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def equipment_params
-      params.fetch(:equipment, {})
+      params.require(:equipment).permit(:name, :rfid, :equipment_type, :asset_cost, :rental_cost, :location, :purchased, :notes)
     end
 end
