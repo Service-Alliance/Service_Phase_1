@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209041600) do
+ActiveRecord::Schema.define(version: 20180214074052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -310,6 +310,17 @@ ActiveRecord::Schema.define(version: 20180209041600) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "equipment", force: :cascade do |t|
+    t.string  "name"
+    t.string  "rfid"
+    t.string  "equipment_type"
+    t.decimal "asset_cost"
+    t.decimal "rental_cost"
+    t.string  "location"
+    t.date    "purchased"
+    t.text    "notes"
+  end
+
   create_table "event_stores", force: :cascade do |t|
     t.string   "event_type", null: false
     t.json     "data",       null: false
@@ -362,11 +373,15 @@ ActiveRecord::Schema.define(version: 20180209041600) do
   create_table "franchise_zipcodes", force: :cascade do |t|
     t.integer  "franchise_id"
     t.string   "zip_code"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "city"
     t.string   "county"
-    t.boolean  "assigned",     default: true, null: false
+    t.boolean  "assigned",        default: true, null: false
+    t.decimal  "county_rate",     default: 0.0,  null: false
+    t.decimal  "city_rate",       default: 0.0,  null: false
+    t.decimal  "special_rate",    default: 0.0,  null: false
+    t.decimal  "local_tax_total", default: 0.0,  null: false
   end
 
   create_table "franchises", force: :cascade do |t|
