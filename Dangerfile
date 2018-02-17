@@ -28,11 +28,6 @@ if git.modified_files.include?("Gemfile") && !git.modified_files.include?("Gemfi
   warn("`Gemfile` was modified but `Gemfile.lock` was not")
 end
 
-# Ensure a clean commits history
-if git.commits.any? { |c| c.message =~ /^Merge branch/ }
-  fail('Please rebase to get rid of the merge commits in this PR')
-end
-
 # Look for GIT merge conflicts
 if `grep -r ">>>>\|=======\|<<<<<<<" app spec lib`.length > 1
   fail "Merge conflicts found"
