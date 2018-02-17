@@ -14,7 +14,7 @@ var pricings = (function($) {
 
   var addChangeHandlers = function() {
     $('#pricing_tax_amount').on('change', updateTaxAmount);
-    $('#pricing_non_taxable_amount, #pricing_taxable_amount, #pricing_tax_amount').on('change', updateTotals);
+    $('#pricing_non_taxable_amount, #pricing_taxable_amount, #pricing_tax_amount, #pricing_tax_rate').on('change', updateTotals);
   }
 
   var updateTaxAmount = function() {
@@ -26,7 +26,7 @@ var pricings = (function($) {
     var taxable = $('#pricing_taxable_amount').val()-0;
     var subtotal = nonTaxable + taxable;
     $('#pricing_subtotal').val(subtotal);
-    if(!_taxEdited) {
+    if(!_taxEdited || this.id === 'pricing_tax_rate') {
       var taxRate = ($('#pricing_tax_rate').val()-0);
       taxRate /= 100;
       $('#pricing_tax_amount').val((taxRate * taxable).toFixed(2));
