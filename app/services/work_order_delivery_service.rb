@@ -14,6 +14,7 @@ class WorkOrderDeliveryService
   end
 
   def send_to_scheduling_managers
+    return if @work_order.scheduling_managers.nil?
     @work_order.scheduling_managers.each do |manager|
       send_to_scheduling_manager(manager)
     end

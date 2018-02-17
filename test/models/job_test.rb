@@ -26,7 +26,7 @@ class JobTest < ActiveSupport::TestCase
   end
 
   test 'Job#value only takes the latest pricing for each job' do
-    jobs(:pending).pricings.create!(non_taxable_amount: 15)
+    jobs(:pending).pricings.create!(non_taxable_amount: 15, pricing_category: pricing_categories(:one))
     assert_equal 15, Job.where(job_status: job_statuses(:pending)).value
   end
 

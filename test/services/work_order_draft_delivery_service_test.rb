@@ -22,6 +22,13 @@ class WorkOrderDraftDeliveryServiceTest < ActiveSupport::TestCase
     assert no_mail_enqueued_for_user(users(:fr2_scheduling_manager))
   end
 
+  test 'it handles a work order without franchise' do
+    @work_order.job.update_attribute :franchise_id, nil
+    WorkOrderDraftDeliveryService.new(@work_order, @current_user).deliver!
+    assert no_mail_enqueued_for_user(users(:fr1_scheduling_manager))
+    assert no_mail_enqueued_for_user(users(:fr2_scheduling_manager))
+  end
+
   # test 'does not send to scheduling manager if dept Construction and vendors present' do
   #   @work_order.vendor << vendor(:one)
   #   @current_user.update_attribute :department_id, departments(:construction).id
