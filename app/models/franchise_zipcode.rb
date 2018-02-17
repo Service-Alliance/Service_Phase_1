@@ -5,6 +5,8 @@ class FranchiseZipcode < ActiveRecord::Base
 
   scope :assigned, -> { where(assigned: true) }
 
+  delegate :name, to: :franchise, allow_nil: true, prefix: true
+
   def self.detect_franchise(zipcode)
     assigned.where(zip_code: zipcode).pluck(:franchise_id).first
   end

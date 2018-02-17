@@ -20,7 +20,7 @@
       tbody
         - @franchise_zipcodes.each do |franchise_zipcode|
           tr
-            td = franchise_zipcode.franchise.name
+            td = franchise_zipcode.franchise_name
             td = franchise_zipcode.zip_code
             td = franchise_zipcode.city
             td = franchise_zipcode.county
