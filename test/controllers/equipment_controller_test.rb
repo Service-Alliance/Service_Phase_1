@@ -2,6 +2,7 @@ require 'test_helper'
 
 class EquipmentControllerTest < ActionController::TestCase
   setup do
+    sign_in users(:one)
     @equipment = equipment(:one)
   end
 
@@ -18,7 +19,7 @@ class EquipmentControllerTest < ActionController::TestCase
 
   test "should create equipment" do
     assert_difference('Equipment.count') do
-      post :create, equipment: {  }
+      post :create, equipment: @equipment.attributes
     end
 
     assert_redirected_to equipment_path(assigns(:equipment))
@@ -35,7 +36,7 @@ class EquipmentControllerTest < ActionController::TestCase
   end
 
   test "should update equipment" do
-    patch :update, id: @equipment, equipment: {  }
+    patch :update, id: @equipment, equipment: @equipment.attributes
     assert_redirected_to equipment_path(assigns(:equipment))
   end
 
