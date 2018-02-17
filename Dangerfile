@@ -8,10 +8,10 @@ fail("fit left in tests") if `grep -r fit specs/ `.length > 1
 added_lines = github.pr_diff.split("\n").select{ |line| line =~ /^\+/ }.join("\n")
 
 # We don't need any debugging code in our codebase
-warn "Debugging code found - puts" if added_lines =~ /^.\s*puts\b/
+warn "Debugging code found - puts" if added_lines =~ /^.\s*puts\s/
 fail "Debugging code found - binding.pry" if `grep -r binding.pry lib/ app/ spec/`.length > 1
-fail "Debugging code found - p" if added_lines =~ /^.\s*p\b/
-fail "Debugging code found - pp" if added_lines =~ /^.\s*pp\b/
+fail "Debugging code found - p" if added_lines =~ /^.\s*p\s/
+fail "Debugging code found - pp" if added_lines =~ /^.\s*pp\s/
 fail "Debugging code found - debugger" if `grep -r debugger lib/ app/ spec/`.length > 1
 fail "Debugging code found - console.log" if `grep -r console.log lib/ app/ spec/`.length > 1
 fail "Debugging code found - require 'debug'" if `grep -r "require \'debug\'" lib/ app/ spec/`.length > 1
