@@ -1,0 +1,8 @@
+.container-fluid
+  #wrapper
+    == render partial: 'partials/jobs_sidebar'
+    #page-content-wrapper
+      .panel.panel-default
+        .panel-heading = content_for :title
+        .panel-body
+          == yield

@@ -1,0 +1,31 @@
+- content_for(:title, "Pricing for job: #{@pricing.job.name || @pricing.job.id}")
+
+== render layout: 'layouts/content_with_jobs_sidebar'
+  p#notice = notice
+
+  .section
+    = display_money_attribute 'Non Taxable', @pricing.non_taxable_amount
+    = display_money_attribute 'Taxable', @pricing.taxable_amount
+    = display_money_attribute 'Subtotal', @pricing.subtotal
+    = display_money_attribute 'Tax', @pricing.tax_amount
+    = display_money_attribute 'Total', @pricing.total
+    = display_attribute 'Category', @pricing.pricing_category_name
+    = display_attribute 'Description', @pricing.description
+
+  - unless @pricing.uploads.empty?
+    .section
+      h4 Uploads
+      - @pricing.uploads.first.uploads.each do |file|
+        .upload
+          = file.file.filename
+          '-
+          = link_to('View/Download', file.try(:url), target: '_blank')
+
+  .section
+    .move-to-next
+      - unless @pricing.pricing_category_name == 'Final Estimate'
+        = link_to 'Move to Next Category', move_to_next_path(job_id: @job, pricing_id: @pricing), class: 'btn btn-primary btn-sm'
+
+
+  => link_to 'Edit', edit_job_pricing_path(@job, @pricing), class: 'btn btn-primary btn-sm'
+  =< link_to 'Back', job_pricings_path(@job), class: 'btn btn-default btn-sm'

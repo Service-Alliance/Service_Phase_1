@@ -9,16 +9,20 @@ class Pricing < ActiveRecord::Base
 
   delegate :name, to: :pricing_category, allow_nil: true, prefix: true
 
+  validates :non_taxable_amount, :taxable_amount, :tax_amount, presence: true
+
   scope :latest_per_job, -> {
     select('DISTINCT on (job_id) *')
       .order('job_id, created_at DESC')
   }
 
   def subtotal
+    return 0 if non_taxable_amount.nil? || taxable_amount.nil?
     non_taxable_amount + taxable_amount
   end
 
   def total
+    return 0 if subtotal.nil? || tax_amount.nil?
     subtotal + tax_amount
   end
   alias_method :price, :total

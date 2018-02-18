@@ -13,6 +13,6 @@
       strong Tax Rate
     .col-md-6.col-sm-6.col-xs-12
     = "#{@state.tax_rate}%"
-  .text-center
+  .text-center.action-buttons
     => link_to 'Edit', edit_state_path(@state), class: 'btn btn-primary'
     =< link_to 'Back', states_path, class: 'btn btn-default'

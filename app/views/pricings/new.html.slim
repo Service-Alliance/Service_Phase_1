@@ -1,0 +1,7 @@
+- content_for(:title, 'New Pricing')
+
+== render layout: 'layouts/content_with_jobs_sidebar' do
+  == render 'form'
+
+  .col-xs-12.action-buttons
+    = link_to 'Back', job_pricings_path(@job), class: 'btn btn-default'

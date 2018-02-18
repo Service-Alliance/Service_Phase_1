@@ -373,15 +373,11 @@ ActiveRecord::Schema.define(version: 20180214074052) do
   create_table "franchise_zipcodes", force: :cascade do |t|
     t.integer  "franchise_id"
     t.string   "zip_code"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "city"
     t.string   "county"
-    t.boolean  "assigned",        default: true, null: false
-    t.decimal  "county_rate",     default: 0.0,  null: false
-    t.decimal  "city_rate",       default: 0.0,  null: false
-    t.decimal  "special_rate",    default: 0.0,  null: false
-    t.decimal  "local_tax_total", default: 0.0,  null: false
+    t.boolean  "assigned",     default: true, null: false
   end
 
   create_table "franchises", force: :cascade do |t|
