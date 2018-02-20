@@ -1,0 +1,32 @@
+-content_for(:title, 'Job Pricings')
+
+== render layout: 'layouts/content_with_jobs_sidebar'
+  .text-right
+   = link_to 'New Estimate', new_job_pricing_path(@job), class: 'btn btn-success'
+  br
+ 
+  .table-responsive
+    table.table.table-striped.jambo_table
+     thead
+      tr.headings
+        th Pricing category
+        th Non Taxable
+        th Taxable
+        th Tax Amount
+        th Total
+        th Description
+        th 
+     tbody
+       - @pricings.each do |pricing|
+        tr
+          td = pricing.pricing_category_name
+          td = pricing.non_taxable_amount
+          td = pricing.taxable_amount
+          td = pricing.tax_amount
+          td = pricing.total
+          td = pricing.description
+          td.text-right
+            = link_to 'View', job_pricing_path(@job, pricing), class: "btn btn-xs btn-primary"
+            = link_to 'Edit', edit_job_pricing_path(@job, pricing), class: 'btn btn-xs btn-success'
+            = link_to 'Delete', job_pricing_path(@job, pricing), data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-xs btn-danger'
+
