@@ -6,7 +6,7 @@
             <% if notice %>
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
-            <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> <strong>Job Status:</strong> <%= @job.job_status.try(:name) %>, <strong>Franchise:</strong> <%= @job.franchise.try(:name) %>, <strong>Name:</strong> <%= @job.name %>, <strong>Latest Estimate:</strong> <%= @job.pricings.try(:last).try(:price) %> </div>
+            <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> <strong>Job Status:</strong> <%= @job.job_status.try(:name) %>, <strong>Franchise:</strong> <%= @job.franchise.try(:name) %>, <strong>Name:</strong> <%= @job.name %>, <strong>Latest Estimate:</strong> <%= @job.latest_estimate %> </div>
             <% unless @job.coordinator_id %>
               <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <strong>Job Coordinator</strong> has not been assigned</div>
             <% end %>
