@@ -90,7 +90,7 @@ class JobsController < ApplicationController
         @future_schedules << scheduler
       end
     end
-    @pricing = @job.pricings.build
+    @pricing = Pricing.new(job_id: @job.id)
     @pricing.uploads.build
   end
 

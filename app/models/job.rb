@@ -126,6 +126,10 @@ class Job < ActiveRecord::Base
     job_managers.map(&:full_name)
   end
 
+  def latest_estimate
+    pricings.last.try(:total)
+  end
+
   def self.value
     Pricing
       .from(
