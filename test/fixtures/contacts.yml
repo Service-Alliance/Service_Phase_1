@@ -3,13 +3,13 @@
 one:
   first_name: MyString
   last_name: MyString
-  email: MyString
+  email: contact@test.com
   owner_id: 1
   address_id: 1
 
 two:
   first_name: MyString
   last_name: MyString
-  email: MyString
+  email: contact@test.com
   owner_id: 1
   address_id: 1
