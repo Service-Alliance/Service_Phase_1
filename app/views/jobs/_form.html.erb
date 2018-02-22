@@ -101,18 +101,6 @@
         <%= f.fields_for :referral, @job.referral || @job.build_referral do |referral| %>
           <%= render partial: 'referrals/referral_fields', locals: {f: referral} %>
         <% end %>
-        <% unless current_user.call_rep? %>
-            <div class="col-xs-12 margin-top-2">
-              <div class="form-group referrals">
-                <%= f.label :corporate_referral_type_id %><br>
-                <% f.collection_select :corporate_referral_type_id, CorporateReferralType.all, :id, :name, { prompt: true }, { class: 'form-control' } %>
-                <%= f.collection_radio_buttons(:corporate_referral_type_id, CorporateReferralType.all, :id, :name) do |b| %>
-                    <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
-                <% end %> <br/>
-
-              </div>
-            </div>
-        <% end %>
 
         <div class="col-xs-12">
           <div class="form-group">
