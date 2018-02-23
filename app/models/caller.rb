@@ -4,7 +4,9 @@ class Caller < ActiveRecord::Base
   has_many :phones, as: :phoneable
   has_many :caller_companies, dependent: :destroy
   has_many :companies, through: :caller_companies
-
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, allow_blank: true
+  validates_length_of :email, maximum: 60, allow_nil: true
+  
   include PgSearch
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
