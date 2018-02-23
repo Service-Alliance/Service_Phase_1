@@ -7,7 +7,8 @@ class Adjuster < ActiveRecord::Base
 
   delegate :format_address, to: :address, allow_nil: true
   delegate :name, to: :insurance_company, allow_nil: true, prefix: true
-  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, allow_blank: true
+  validates_length_of :email, maximum: 60, allow_nil: true
   def full_name
     first = first_name || " "
     last = last_name || " "
