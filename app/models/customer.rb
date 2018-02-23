@@ -20,7 +20,6 @@ class Customer < ActiveRecord::Base
   accepts_nested_attributes_for :customer_vendors
 
   delegate :full_address, :address_without_county, :format_address, to: :address, allow_nil: true
-  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   include PgSearch
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
