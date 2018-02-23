@@ -11,23 +11,22 @@ class JobBuilder
     job.franchise_id = FranchiseZipcode.detect_franchise(address_params['zip_code'])
     job.pipeline_status_id = 1
 
-    raise SaveError unless caller.save
-    address.save
-    raise SaveError unless job.save
+    job.caller = caller
+    caller.address = address
+    job.save
 
     if company_name.present?
       company = Company.find_or_create_by(name: company_name) if company_name.present?
       company.address = address if company.address.blank?
-      company.save!
+      company.save
     end
 
     if call
       job.calls << call
     end
-    caller.job_id = job.id
-    caller.address_id = address.id
     caller.add_company(company)
-    caller.save!
+    caller.save
+    pp caller.companies
 
     caller.phones.destroy_all
 

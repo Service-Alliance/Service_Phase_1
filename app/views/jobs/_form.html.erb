@@ -5,17 +5,7 @@
           <%= f.select :id, [], {}, id: 'call_find_call', class: 'form-control', style: 'width: 100%' %>
       <% end %>
       <div class="row content-box margin-top-3">
-        <% if @job.errors.any? %>
-            <div id="error_explanation">
-              <h3><%= pluralize(@job.errors.count, "error") %>
-                prohibited this job from being saved:</h3>
-              <ul>
-                <% @job.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
+        <%= render partial: 'partials/model_errors', locals: {model: @job} %>
         <div class="col-xs-12">
           <div class="form-group">
             <label for="job_priority_id">Priority</label><br>

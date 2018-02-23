@@ -85,6 +85,10 @@ class Caller < ActiveRecord::Base
     phones.first.try(:number)
   end
 
+  def company 
+    companies.first
+  end
+
   def company_name
     companies.count == 1 ? companies.first.name : ''
   end

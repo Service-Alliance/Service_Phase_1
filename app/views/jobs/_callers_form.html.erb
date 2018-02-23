@@ -13,7 +13,7 @@
   <div class="col-xs-12">
     <div class="form-group">
       <%= label_tag :company_name %><br>
-      <%= text_field_tag "company[name]", '', class: "form-control autocomplete"  %>
+      <%= text_field_tag "company[name]", @caller.try(:company).try(:name), class: "form-control autocomplete"  %>
     </div>
   </div>
   <div class="col-xs-4">

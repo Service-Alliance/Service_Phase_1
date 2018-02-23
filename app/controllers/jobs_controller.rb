@@ -96,13 +96,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.new
-    @loss = @job.losses.build
-    @caller = Caller.new
-    @property = @job.build_property
-    @job_detail = @job.build_job_detail
-    @customer = @job.build_customer
-    @customer.phones.build
+    setup_new_job
     render :new
   end
 
@@ -130,7 +124,7 @@ class JobsController < ApplicationController
   end
 
   def create
-    job = JobBuilder.call(
+    @job = JobBuilder.call(
       job_params,
       caller_params,
       address_params,
@@ -140,19 +134,20 @@ class JobsController < ApplicationController
       current_user.id
     )
 
-    Customer.same_as_caller(job) if same_caller_params[:same_indicator] == "1"
+    if @job.valid?
+      Customer.same_as_caller(@job) if same_caller_params[:same_indicator] == "1"
 
-    if params[:commit] == 'Save and Move to Job Loss'
-      redirect_to new_job_loss_path(job), notice: 'Job was successfully created.'
-    elsif params[:commit] == 'Save'
-      redirect_to edit_job_path(job), notice: 'Job was saved successfully.'
+      if params[:commit] == 'Save and Move to Job Loss'
+        redirect_to new_job_loss_path(@job), notice: 'Job was successfully created.'
+      elsif params[:commit] == 'Save'
+        redirect_to edit_job_path(@job), notice: 'Job was saved successfully.'
+      else
+        redirect_to @job, notice: 'Job was successfully created.'
+      end
     else
-      redirect_to job, notice: 'Job was successfully created.'
+      setup_new_job(@job)
+      render :new
     end
-
-  rescue JobBuilder::SaveError => e
-    Honeybadger.notify(e)
-    render :new
   end
 
   # PATCH/PUT /jobs/1
@@ -358,6 +353,16 @@ class JobsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_job
     @job = Job.find(params[:id])
+  end
+
+  def setup_new_job(job = Job.new)
+    @job = job
+    @job.losses.build
+    @caller = @job.caller || Caller.new
+    @property = @job.property || @job.build_property
+    @job_detail = @job.job_detail || @job.build_job_detail
+    @customer = @job.customer || @job.build_customer
+    @customer.phones.build unless @customer.phones.any?
   end
 
   def verify_user
