@@ -12,6 +12,7 @@ class JobsTest < Capybara::Rails::TestCase
     fill_in :company_name, with: 'Company Name'
     fill_in :caller_first_name, with: 'Callerfname'
     fill_in :caller_last_name, with: 'Callerlname'
+    fill_in :caller_email, with: 'caller@caller.com'
     fill_in :address_address_1, with: 'Caller Address 1'
     within '.new-number' do
       fill_in :new_phone_number, with: '0011223344'
@@ -90,6 +91,7 @@ class JobsTest < Capybara::Rails::TestCase
     fill_in :company_name, with: 'Company Name'
     fill_in :caller_first_name, with: 'Callerfname'
     fill_in :caller_last_name, with: 'Callerlname'
+    fill_in :caller_email, with: 'caller@caller.com'
 
     customer_checkbox = find('#same_caller_same_indicator')
     assert customer_checkbox.checked?, 'Customer is caller checkbox not checked by default'
@@ -108,43 +110,51 @@ class JobsTest < Capybara::Rails::TestCase
 
   test 'can select standard referral types' do
     visit new_job_path
+    fill_in :caller_email, with: 'caller@caller.com'
     select_referral_type(referral_types(:one))
     click_button 'Create Job'
+    assert_content 'Job was successfully created'
     assert_equal Job.last.referral_type.name, 'One'
   end
 
   test 'can select sub referral types' do
     visit new_job_path
+    fill_in :caller_email, with: 'caller@caller.com'
     select_referral_type(referral_types(:parent))
     wait_for_ajax
     within '#referral_sub_type' do
       select 'Sub Type', from: :job_referral_attributes_sub_referral_type_id
     end
     click_button 'Create Job'
+    assert_content 'Job was successfully created'
     assert_equal Job.last.referral_type.name, 'Parent'
     assert_equal Job.last.sub_referral_type.name, 'Sub Type'
   end
 
   test 'can select user referral types' do
     visit new_job_path
+    fill_in :caller_email, with: 'caller@caller.com'
     select_referral_type(referral_types(:user))
     wait_for_ajax
     within '#referral_associated_record' do
       select 'Barry Barnett', from: :job_referral_attributes_associated_record_id
     end
     click_button 'Create Job'
+    assert_content 'Job was successfully created'
     assert_equal Job.last.referral_type.name, 'User'
     assert_equal Job.last.referral.associated_record.name, 'Barry Barnett'
   end
 
   test 'can select vendor referral types' do
     visit new_job_path
+    fill_in :caller_email, with: 'caller@caller.com'
     select_referral_type(referral_types(:vendor))
     wait_for_ajax
     within '#referral_associated_record' do
       select 'VendorOne', from: :job_referral_attributes_associated_record_id
     end
     click_button 'Create Job'
+    assert_content 'Job was successfully created'
     assert_equal Job.last.referral_type.name, 'Vendor'
     assert_equal Job.last.referral.associated_record.name, 'VendorOne'
   end
@@ -153,7 +163,9 @@ class JobsTest < Capybara::Rails::TestCase
     visit new_job_path
     call = calls(:one)
     select2(call.customer_phone_number, css: '#call_find_call')
+    fill_in :caller_email, with: 'caller@caller.com'
     click_button 'Create Job'
+    assert_content 'Job was successfully created'
     Job.last.tap do |job|
       assert_includes job.calls, call
       assert_equal call.customer_phone_number, job.caller.phones.first.number
@@ -169,8 +181,10 @@ class JobsTest < Capybara::Rails::TestCase
 
   test 'franchise gets assigned by the zip code entered' do
     visit new_job_path
+    fill_in :caller_email, with: 'caller@caller.com'
     fill_in :address_zip_code, with: franchise_zipcodes(:one).zip_code
     click_button 'Create Job'
+    assert_content 'Job was successfully created'
     Job.last.tap do |job|
       assert_equal franchises(:one), job.franchise
     end
@@ -230,6 +244,7 @@ class JobsTest < Capybara::Rails::TestCase
     within '.modal-body' do
       fill_in 'First name', with: 'Customerfname'
       fill_in 'Last name', with: 'Customerlname'
+      fill_in 'Email', with: 'customer@customer.com'
       fill_in :job_customer_attributes_phones_attributes_0_number, with: '00000000'
       fill_in :job_customer_attributes_address_attributes_address_1, with: 'Customer Address 1'
     end

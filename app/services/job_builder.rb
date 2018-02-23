@@ -1,7 +1,7 @@
 class JobBuilder
   class SaveError < StandardError; end
 
-  def self.call(job_params, caller_params, address_params, phone_params, company_name, call_id, current_user_id)
+  def self.call(job_params, caller_params, address_params, phone_params, company_name, call_id, current_user_id, customer_same_as_caller)
     job = Job.new(job_params)
     job.entered_by_id = current_user_id
     caller = Caller.new(caller_params)
@@ -13,10 +13,9 @@ class JobBuilder
 
     job.caller = caller
     caller.address = address
-    job.save
 
     if company_name.present?
-      company = Company.find_or_create_by(name: company_name) if company_name.present?
+      company = Company.find_or_initialize_by(name: company_name) if company_name.present?
       company.address = address if company.address.blank?
       company.save
     end
@@ -25,19 +24,20 @@ class JobBuilder
       job.calls << call
     end
     caller.add_company(company)
-    caller.save
-    pp caller.companies
 
     caller.phones.destroy_all
 
     phone_params.fetch('type_ids', []).count.times do |index|
       unless phone_params['numbers'][index] == ''
-        caller.phones.create(type_id: phone_params['type_ids'][index],
+        caller.phones.build(type_id: phone_params['type_ids'][index],
                              number: phone_params['numbers'][index],
                              extension: phone_params['extensions'][index])
       end
     end
 
+    Customer.same_as_caller(job) if customer_same_as_caller
+
+    job.save
     job
   end
 end

@@ -131,11 +131,11 @@ class JobsController < ApplicationController
       phone_params,
       company_params[:name],
       call_params[:id],
-      current_user.id
+      current_user.id,
+      same_caller_params[:same_indicator] == "1"
     )
 
     if @job.valid?
-      Customer.same_as_caller(@job) if same_caller_params[:same_indicator] == "1"
 
       if params[:commit] == 'Save and Move to Job Loss'
         redirect_to new_job_loss_path(@job), notice: 'Job was successfully created.'
