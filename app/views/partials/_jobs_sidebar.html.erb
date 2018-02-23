@@ -420,10 +420,11 @@
       </div>
       <%= form_for @job, url: job_manager_assignment_url(@job), method: :post do |f| %>
           <div class="modal-body">
+            <% manager = Role.find_by(name: "Project Manager") %>
             <div class="field">
               <%= label_tag :job_manager_id, "Add a Job Manager" %><br>
-              <% role = Role.find_by(name: "Project Manager") %>
-              <%= select_tag 'job_manager_id', options_from_collection_for_select(User.where(role_id: role.id).order(:first_name, :last_name), "id", "full_name"), class: "form-control" %>
+
+              <%= select_tag 'job_manager_id', options_from_collection_for_select(User.where("role_id= ? OR id= ?", manager.id, 42).order(:first_name, :last_name), "id", "full_name"), class: "form-control" %>
             </div>
           </div>
           <div class="modal-footer">

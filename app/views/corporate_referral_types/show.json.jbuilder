@@ -1,1 +1,0 @@
-json.partial! "corporate_referral_types/corporate_referral_type", corporate_referral_type: @corporate_referral_type

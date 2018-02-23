@@ -3,13 +3,13 @@
 one:
   first_name: MyString
   last_name: MyString
-  email: MyString
+  email: caller@test.com
   address: one
   job: one
 
 two:
   first_name: MyString
   last_name: MyString
-  email: MyString
+  email: caller@test.com
   address: one
   job: two

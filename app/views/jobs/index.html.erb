@@ -13,7 +13,7 @@
               </div>
               <div class="col-sm-9 col-lg-7 widget-right">
                 <div class="large"><%= @jobs.pending_count %></div>
-                <div class="text-muted">Pending Jobs ($<%= @jobs.pending_value %>)</div>
+                <div class="text-muted">Pending Jobs <%= number_to_currency(@jobs.pending_value) %></div>
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@
               </div>
               <div class="col-sm-9 col-lg-7 widget-right">
                 <div class="large"><%= @jobs.active_count %></div>
-                <div class="text-muted">Active Jobs ($<%= @jobs.active_value %>)</div>
+                <div class="text-muted">Active Jobs <%= number_to_currency(@jobs.active_value) %></div>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
               </div>
               <div class="col-sm-9 col-lg-7 widget-right">
                 <div class="large"><%= @jobs.invoiced_count %></div>
-                <div class="text-muted">Invoiced Jobs ($<%= @jobs.invoiced_value %>)</div>
+                <div class="text-muted">Invoiced Jobs <%= number_to_currency(@jobs.invoiced_value) %></div>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@
               </div>
               <div class="col-sm-9 col-lg-7 widget-right">
                 <div class="large"><%= @jobs.dead_count %></div>
-                <div class="text-muted">Dead Jobs ($<%= @jobs.dead_value %>)</div>
+                <div class="text-muted">Dead Jobs <%= number_to_currency(@jobs.dead_value) %></div>
               </div>
             </div>
           </div>
@@ -65,7 +65,7 @@
               </div>
               <div class="col-sm-9 col-lg-7 widget-right">
                 <div class="large"><%= @jobs.closed_count %></div>
-                <div class="text-muted">Closed Jobs ($<%= @jobs.closed_value %>)</div>
+                <div class="text-muted">Closed Jobs <%= number_to_currency(@jobs.closed_value) %></div>
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@
               <td><%= job.user_full_name %></td>
               <td><%= link_to job.franchise_name, job.franchise if job.franchise.present? %></td>
               <td><%= job.job_status_name %></td>
-              <td><%= job.try(:pricings).try(:last).try(:price) %></td>
+              <td><%= number_to_currency(job.try(:pricings).try(:last).try(:price)) %></td>
               <td><%= job_link(job) %></td>
 
               <% if current_user.admin? %>

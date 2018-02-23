@@ -5,17 +5,7 @@
           <%= f.select :id, [], {}, id: 'call_find_call', class: 'form-control', style: 'width: 100%' %>
       <% end %>
       <div class="row content-box margin-top-3">
-        <% if @job.errors.any? %>
-            <div id="error_explanation">
-              <h3><%= pluralize(@job.errors.count, "error") %>
-                prohibited this job from being saved:</h3>
-              <ul>
-                <% @job.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
+        <%= render partial: 'partials/model_errors', locals: {model: @job} %>
         <div class="col-xs-12">
           <div class="form-group">
             <label for="job_priority_id">Priority</label><br>
@@ -59,7 +49,7 @@
           </div>
         </div>
         <!-- FIXME: This code in template tightly couples to implementation on back-end -->
-        <% if current_page?(controller: 'jobs', action: 'new') %>
+        <% if current_page?(controller: 'jobs', action: 'new' ) %>
             <div class="col-xs-12">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lossModal">
                 Loss Information
@@ -101,18 +91,6 @@
         <%= f.fields_for :referral, @job.referral || @job.build_referral do |referral| %>
           <%= render partial: 'referrals/referral_fields', locals: {f: referral} %>
         <% end %>
-        <% unless current_user.call_rep? %>
-            <div class="col-xs-12 margin-top-2">
-              <div class="form-group referrals">
-                <%= f.label :corporate_referral_type_id %><br>
-                <% f.collection_select :corporate_referral_type_id, CorporateReferralType.all, :id, :name, { prompt: true }, { class: 'form-control' } %>
-                <%= f.collection_radio_buttons(:corporate_referral_type_id, CorporateReferralType.all, :id, :name) do |b| %>
-                    <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
-                <% end %> <br/>
-
-              </div>
-            </div>
-        <% end %>
 
         <div class="col-xs-12">
           <div class="form-group">
@@ -144,7 +122,7 @@
 
         <div class="col-xs-12 text-center">
           <div class="actions">
-            <%= f.submit class: "btn btn-primary", id: "submit-job" %>
+            <%= f.submit class: "btn btn-success", id: "submit-job" %>
             <% f.submit "Save", class: "btn btn-primary" %>
             <% f.submit "Save and Move to Job Loss", class: "btn btn-primary" %>
           </div>

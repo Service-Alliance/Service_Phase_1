@@ -20,7 +20,7 @@ class Customer < ActiveRecord::Base
   accepts_nested_attributes_for :customer_vendors
 
   delegate :full_address, :address_without_county, :format_address, to: :address, allow_nil: true
-
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   include PgSearch
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
@@ -98,33 +98,29 @@ class Customer < ActiveRecord::Base
 
   # FIXME: this should be move to Job model
   def self.same_as_caller(job)
-    @job = Job.find_by(id: job)
-    @caller = Caller.find_by(job_id: @job.id)
+    caller = job.caller
+
+    return if caller.nil?
 
     # check if old customer exists
-    if @job.customer_id
+    if job.customer_id
       # FIXME: it's not a good idea to destroy object from database. Maybe just inactive?
-      Customer.find_by(id: @job.customer_id).destroy
+      Customer.find_by(id: job.customer_id).destroy
     end
 
-    @caller_phones = @caller.phones
+    caller_phones = caller.phones
+    caller_address = Address.find_by(id: caller.address_id)
 
-    @caller_address = Address.find_by(id: @caller.address_id)
+    customer = Customer.new(first_name: caller.first_name, last_name: caller.last_name, email: caller.email)
+    customer.address = Address.new(address_1: caller_address.address_1, address_2: caller_address.address_2, zip_code: caller_address.zip_code, city: caller_address.city, county: caller_address.county, state_id: caller_address.state_id) if caller_address.present?
 
-    @address = Address.new(address_1: @caller_address.address_1, address_2: @caller_address.address_2, zip_code: @caller_address.zip_code, city: @caller_address.city, county: @caller_address.county, state_id: @caller_address.state_id)
+    job.customer = customer
 
-    @address.save
-
-    @customer = Customer.new(first_name: @caller.first_name, last_name: @caller.last_name, email: @caller.email, address_id: @address.id)
-    @customer.save
-
-    @job.customer_id = @customer.id
-
-    @caller_phones.each do |phone|
-      @customer.phones.create(number: phone.number, extension: phone.extension, type_id: phone.type_id)
+    caller_phones.each do |phone|
+      customer.phones.build(number: phone.number, extension: phone.extension, type_id: phone.type_id)
     end
 
-    @job.save
+    job.save
   end
 
   def add_owner_as_subscriber

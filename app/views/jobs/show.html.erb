@@ -6,7 +6,7 @@
             <% if notice %>
             <div class="alert alert-success" role="alert"><%= notice %></div>
             <% end %>
-            <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> <strong>Job Status:</strong> <%= @job.job_status.try(:name) %>, <strong>Franchise:</strong> <%= @job.franchise.try(:name) %>, <strong>Name:</strong> <%= @job.name %>, <strong>Latest Estimate:</strong> <%= @job.latest_estimate %> </div>
+            <div class="alert alert-info" role="alert"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> <strong>Job Status:</strong> <%= @job.job_status.try(:name) %>, <strong>Franchise:</strong> <%= @job.franchise.try(:name) %>, <strong>Loss Type:</strong> <%= @job.loss_type_names.join('<br />').html_safe %>, <strong>Name:</strong> <%= @job.name %>, <strong>Latest Estimate:</strong> <%= number_to_currency(@job.latest_estimate) %> </div>
             <% unless @job.coordinator_id %>
               <div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <strong>Job Coordinator</strong> has not been assigned</div>
             <% end %>
@@ -646,15 +646,6 @@
                                       <% end %>
                                 </div>
                               </div>
-                                <div class="col-xs-12 margin-top-2">
-                                  <div class="form-group referrals">
-                                    <%= f.label :corporate_referral_type_id %><br>
-                                    <% f.collection_select :corporate_referral_type_id, CorporateReferralType.all, :id, :name, { prompt: true }, { class: 'form-control' } %>
-                                    <%= f.collection_radio_buttons(:corporate_referral_type_id, CorporateReferralType.all, :id, :name) do |b| %>
-                                        <%= b.label(:"data-value" => b.value) { b.radio_button + b.text } %>
-                                    <% end %> <br/>
-                                  </div>
-                                 </div>
                             </div>
                       </div>
                     </div>

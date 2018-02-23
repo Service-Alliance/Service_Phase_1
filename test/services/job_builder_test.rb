@@ -9,7 +9,8 @@ class JobBuilderTest < ActiveSupport::TestCase
       {},
       'test_company',
       11,
-      1
+      1,
+      false
     )
 
     assert job.persisted?
@@ -22,7 +23,7 @@ class JobBuilderTest < ActiveSupport::TestCase
     mapping = franchise_zipcodes(:one)
 
     [mapping.zip_code, " #{mapping.zip_code} "].each do |zip|
-      job = JobBuilder.call({},{},  {'zip_code' => mapping.zip_code}, {}, 'test_company', 11, 1)
+      job = JobBuilder.call({},{},  {'zip_code' => mapping.zip_code}, {}, 'test_company', 11, 1, false)
 
       assert_equal mapping.franchise, job.franchise
     end
