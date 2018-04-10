@@ -1,0 +1,12 @@
+<%= CSV.generate_line (['Name',
+	                    'Email',
+	                    'Phone',
+	                    'Address',
+	                    'Sales Rep']) -%>
+<% @customers.each do |customer| %>
+<%= CSV.generate_line([customer.try(:full_name),
+                       customer.try(:email),
+                       customer.try.first_phone_number,
+                       customer.format_address(:oneline),
+                       customer.try(:owner).try(:full_name)]) -%>
+<% end %>                  

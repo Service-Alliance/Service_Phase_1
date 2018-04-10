@@ -10,6 +10,16 @@ class CustomersController < ApplicationController
     # @jobs = @search.result
     @customers = @search.result.page(params[:page]).order('created_at DESC')
     @all_results = @search.result
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        @customers = @customers.all
+      end
+      format.xlsx do
+        @customers = @customers.all
+      end
+    end
   end
 
   # GET /customers/1

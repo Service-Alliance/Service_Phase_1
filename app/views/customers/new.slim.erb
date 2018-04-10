@@ -1,0 +1,11 @@
+.container-fluid
+  |  <% if notice %> 
+  .alert.alert-success[role="alert"]
+    | <%= notice %>
+  |  <% end %> 
+  .col-xs-12
+    .row
+      .col-xs-12.text-center
+        h1
+          | New Customer
+      |  <%= render 'form' %> 
