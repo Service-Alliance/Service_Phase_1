@@ -6,7 +6,7 @@
   <body>
     <h1><%= @user.full_name %>, you have been sent a Drafted Work Order for Franchise: <%= @job.franchise.try(:name) %></h1>
     <p>
-      Click <a href="http://digitaljobchart.com/jobs/<%= @job.id %>/work_orders/<%= @work_order.id %>/edit">here</a> to assign the crew.
+      Click <a href="http://digitaljobchart.net/jobs/<%= @job.id %>/work_orders/<%= @work_order.id %>/edit">here</a> to assign the crew.
     </p>
     <p>
       Drafted At: <%= @work_order.updated_at.try(:strftime, "%a, %D %I:%M %p") %><br />
