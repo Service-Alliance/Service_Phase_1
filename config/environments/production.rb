@@ -15,8 +15,8 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
 
-  config.action_mailer.default_url_options = { :host => 'digitaljobchart.com' }
-  config.asset_host = 'http://digitaljobchart.com'
+  config.action_mailer.default_url_options = { :host => 'digitaljobchart.net' }
+  config.asset_host = 'http://digitaljobchart.net'
   ActionMailer::Base.smtp_settings = {
   user_name: ENV.fetch('SENDGRID_USERNAME'),
   password: ENV.fetch('SENDGRID_PASSWORD'),

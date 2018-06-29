@@ -54,12 +54,12 @@ Server needs to be properly configured for deployment to work.
 |Keypair| servicealliance-ops-key|
 
 ## Production
-- hostname: [http://www.digitaljobchart.com]('http://www.digitaljobchart.com')
+- hostname: [http://www.digitaljobchart.net]('http://www.digitaljobchart.net')
 - cloud66: https://app.cloud66.com/stacks/47322
 - needs to be deployed manually
 ?? how to access database
 
 ## Staging
-- hostname : [http://staging.digitaljobchart.com]('http://staging.digitaljobchart.com')
+- hostname : [http://staging.digitaljobchart.net]('http://staging.digitaljobchart.net')
 - auto deployed from master
 ?? how to access database
