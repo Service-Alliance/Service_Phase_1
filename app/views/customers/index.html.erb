@@ -8,10 +8,11 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>Address</th>
                         <th>City</th>
+                        <th>State</th>                        
                         <th>Zip</th>
-                        <th>State</th>
                         <th>County</th>
                         <th>Sales Rep</th>
                     </tr>
@@ -27,10 +28,11 @@
                     <tr>
                         <td><%= customer.try(:full_name) %></td>
                         <td><%= customer.try(:email) %></td>
+                        <td><%= customer.try(:first_phone_number) %></td>
                         <td><%= customer.try(:address).try(:address_1) %></td>
                         <td><%= customer.try(:address).try(:city) %></td>
-                        <td><%= customer.try(:address).try(:zip_code) %></td>
                         <td><%= customer.try(:address).try(:state).try(:name) %></td>
+                        <td><%= customer.try(:address).try(:zip_code) %></td>
                         <td><%= customer.try(:address).try(:county) %></td>
                         <td><%= customer.try(:owner).try(:full_name) %></td>
                         <td><%= link_to 'Show', customer %></td>
@@ -57,16 +59,24 @@
             <%= f.search_field :address_address_1_cont, {class: "form-control"} %>
             <%= f.label :address_city, "City" %><br/>
             <%= f.search_field :address_city_cont, {class: "form-control"} %>
-            <%= f.label :address_zip_code, "Zip Code" %><br/>
-            <%= f.search_field :address_zip_code_cont, {class: "form-control"} %>
             <%= f.label :address_state_name, "State" %><br/>
             <%= f.search_field :address_city_cont, {class: "form-control"} %>
+            <%= f.label :address_zip_code, "Zip Code" %><br/>
+            <%= f.search_field :address_zip_code_cont, {class: "form-control"} %>
             <%= f.label :address_county, "County" %><br/>
             <%= f.search_field :address_county_cont, {class: "form-control"} %>
             <%= f.label :owner_id_in, "Sales Rep" %><br/>
             <%= f.select :owner_id_in, options_from_collection_for_select(User.all, "id", "full_name"), {include_blank: true}, {class: "form-control select-control", multiple: "multiple"} %><br/>
 
             <div class="actions"><%= f.submit "Search", class:"btn btn-primary margin-top-2" %></div>
+            <div class="btn-group margin-top-2">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="search_export" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Export &nbsp; <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="search_export">
+                <li><a class="dropdown-item search-button" href="#" data-action="<%= jobs_path(format: :csv) %>">As CSV</a></li>
+                <li><a class="dropdown-item search-button" href="#" data-action="<%= jobs_path(format: :xlsx) %>">As Excel</a></li>
+              </ul>
 
             <% end %>
         </div>
