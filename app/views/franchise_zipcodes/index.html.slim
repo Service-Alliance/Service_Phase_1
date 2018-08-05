@@ -15,6 +15,10 @@
           th City
           th County
           th Assigned
+          th County Rate
+          th City Rate
+          th Special Rate
+          th Local Tax Total
           th
 
       tbody
@@ -25,6 +29,10 @@
             td = franchise_zipcode.city
             td = franchise_zipcode.county
             td = franchise_zipcode.assigned
+            td = franchise_zipcode.county_rate
+            td = franchise_zipcode.city_rate
+            td = franchise_zipcode.special_rate
+            td = franchise_zipcode.local_tax_total
             td.text-right
               = link_to 'Show', franchise_zipcode, class: 'btn btn-xs btn-primary'
               = link_to 'Edit', edit_franchise_zipcode_path(franchise_zipcode), class: 'btn btn-xs btn-success'

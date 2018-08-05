@@ -69,6 +69,6 @@ class FranchiseZipcodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def franchise_zipcode_params
-      params.require(:franchise_zipcode).permit(:franchise_id, :zip_code, :city, :county, :assigned)
+      params.require(:franchise_zipcode).permit(:franchise_id, :zip_code, :city, :county, :assigned, :county_rate, :city_rate, :special_rate, :local_tax_total) 
     end
 end

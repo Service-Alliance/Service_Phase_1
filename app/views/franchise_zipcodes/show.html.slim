@@ -28,6 +28,26 @@
       strong Assigned:
     .col-md-6.col-sm-6.col-xs-12
       = @franchise_zipcode.assigned
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong County Rate:
+    .col-md-6.col-sm-6.col-xs-12
+      = @franchise_zipcodes.county_rate
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong City Rate:
+    .col-md-6.col-sm-6.col-xs-12
+      = @franchise_zipcodes.city_rate
+  .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Special Rate:
+    .col-md-6.col-sm-6.col-xs-12
+      = @franchise_zipcodes.special_rate
+    .row
+    .col-md-3.col-sm-3.col-xs-12.text-right
+      strong Local Tax Total:
+    .col-md-6.col-sm-6.col-xs-12
+      = @franchise_zipcodes.local_tax_total
 
   .text-center
     => link_to 'Edit', edit_franchise_zipcode_path(@franchise_zipcode), class: 'btn btn-primary'
